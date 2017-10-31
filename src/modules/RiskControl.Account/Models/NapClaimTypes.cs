@@ -6,6 +6,8 @@
 
         public const string UserId = "userid";
 
+        public const string OnUserId = "onuserid";
+
         public const string Username = "username";
     }
 }

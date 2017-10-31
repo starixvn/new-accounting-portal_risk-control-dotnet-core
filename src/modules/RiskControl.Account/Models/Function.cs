@@ -1,8 +1,8 @@
 ﻿namespace RiskControl.Account.Models
 {
-    public class Function
+    public class FunctionLite
     {
-        public Function(string key, int policy)
+        public FunctionLite(string key, int policy)
         {
             Key = key;
             Policy = policy;

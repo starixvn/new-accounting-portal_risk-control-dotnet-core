@@ -1,4 +1,5 @@
-﻿using RiskControl.Account.Models;
+﻿using Olympus.DotNetCore.NapApiClient.Models;
+using RiskControl.Account.Models;
 
 namespace RiskControl.Account.MediatRModels
 {
@@ -8,8 +9,8 @@ namespace RiskControl.Account.MediatRModels
 
         public string Username { get; set; }
 
-        public Menu[] Menus { get; set; }
+        public MenuItem[] Menus { get; set; }
 
-        public Function[] Functions { get; set; }
+        public FunctionLite[] Functions { get; set; }
     }
 }

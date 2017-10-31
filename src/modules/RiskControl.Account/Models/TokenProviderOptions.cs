@@ -4,25 +4,24 @@ using System.Text;
 
 namespace RiskControl.Account.Models
 {
-    public static class TokenProviderOptions
+    public class TokenProviderOptions
     {
-        static TokenProviderOptions()
-        {
-            Issuer = "NAP-Risk-Control";
-            Audience = "NAP-Risk-Control-API";
-            Expiration = TimeSpan.FromHours(24);
+        public string Issuer { get; set; }
 
-            const string SecretKey = "NAP-Risk-Control-Secret-Key";
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
-            SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+        public string Audience { get; set; }
+
+        public int ExpirationInMinute { get; set; }
+
+        public TimeSpan Expiration
+        {
+            get
+            {
+                return TimeSpan.FromMinutes(ExpirationInMinute);
+            }
         }
 
-        public static string Issuer { get; }
+        public string SecretKey { get; set; }
 
-        public static string Audience { get; }
-
-        public static TimeSpan Expiration { get; }
-
-        public static SigningCredentials SigningCredentials { get; }
+        public SigningCredentials SigningCredentials { get; set; }
     }
 }

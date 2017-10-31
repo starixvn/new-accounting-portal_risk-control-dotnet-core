@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RiskControl.Account.MediatRModels;
 using System.Net;
 using System.Threading.Tasks;
+using Olympus.DotNetCore.NapApiClient.Exceptions;
 
 namespace RiskControl.Account.Controllers
 {
@@ -17,20 +18,39 @@ namespace RiskControl.Account.Controllers
             this.mediator = mediator;
         }
 
-        [HttpGet]
         [HttpPost]
         [Route("api/[controller]/login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-            return await Action(request);
-        }       
+            return await LoginAction(request).ConfigureAwait(false);
+        }
+        
+        [HttpPost]
+        [Route("api/[controller]/sso")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Sso( SsoRequest request)
+        {
+            return await LoginAction(request).ConfigureAwait(false);
+        }
 
         [HttpPost]
         [Route("api/[controller]/password")]
         public async Task<IActionResult> Password(PasswordRequest request)
         {
-            return await Action(request);
+            return await LoginAction(request).ConfigureAwait(false);
+        }
+
+        private async Task<IActionResult> LoginAction<T>(IRequest<T> request)
+        {
+            try
+            {
+                return await Action(request).ConfigureAwait(false);
+            }
+            catch (LoginException loginException)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, loginException.Message);
+            }
         }
 
         [HttpPost]
@@ -38,7 +58,7 @@ namespace RiskControl.Account.Controllers
         [Authorize]
         public async Task<IActionResult> Refresh()
         {
-            return await Action(new RefreshRequest());
+            return await Action(new RefreshRequest()).ConfigureAwait(false);
         }
 
         private async Task<IActionResult> Action<T>(IRequest<T> request)

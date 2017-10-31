@@ -1,72 +1,60 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
+using Olympus.DotNetCore.NapApiClient.Configuration;
+using Olympus.DotNetCore.NapApiClient.Models.ParameterObject;
+using Olympus.DotNetCore.NapApiClient.Models;
+using Olympus.DotNetCore.NapApiClient.Service;
 using RiskControl.Account.MediatRModels;
 using RiskControl.Account.Models;
-using System;
+using RiskControl.Account.Services;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System;
 
 namespace RiskControl.Account.Handlers
 {
-    public class LoginHandler : IAsyncRequestHandler<LoginRequest, LoginResponse>
+    public class LoginHandler : LoginHandlerBase, IAsyncRequestHandler<LoginRequest, LoginResponse>
     {
-        public Task<LoginResponse> Handle(LoginRequest message)
+        private readonly GroupService groupService;
+
+        private readonly CurrentContextService currentContextService;
+
+        private readonly SecurityService securityService;
+
+        public LoginHandler(UserService userService, GroupService groupService, CurrentContextService currentContextService, SecurityService securityService, TokenGenerator tokenGenerator)
+        : base(userService, tokenGenerator)
         {
-            var token = GetToken(message.Username);
-            var response = new LoginResponse
+            this.groupService = groupService;
+            this.currentContextService = currentContextService;
+            this.securityService = securityService;
+        }
+
+        public async Task<LoginResponse> Handle(LoginRequest message)
+        {
+            var user = await userService.Get(message.Username, message.Password).ConfigureAwait(false);
+
+            var onUserId = await CheckIn(user).ConfigureAwait(false);
+
+            return await GetLoggedInInformation(onUserId, user).ConfigureAwait(false);
+        }
+
+        private async Task<int> CheckIn(User user)
+        {
+            var loginParameter = new LoginParameter
             {
-                Username = message.Username,
-                Token = token,
+                UserId = user.Id,
+                NetSessionId = Guid.NewGuid().ToString(),
+                Ip = currentContextService.GetIP(),
+                LoginDate = DateTime.Now,
+                BrowserName = currentContextService.GetBrowserName(),
+                CountryCode = currentContextService.GetCountryCode(),
+                Domain = currentContextService.GetDomainName(),
+                Platform = currentContextService.GetPlatform()
             };
 
-            return Task.FromResult(response);
-        }
-
-        private static string GetToken(string username)
-        {
-            var claims = GetClaims(username);
-            return GetJwtToken(claims);
-        }
-
-        private static Claim[] GetClaims(string username)
-        {
-            var now = DateTime.UtcNow;
-            var claims = new Claim[]
-            {
-                new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(now).ToString(), ClaimValueTypes.Integer64),
-                new Claim(JwtRegisteredClaimNames.UniqueName, username),
-                new Claim(NapClaimTypes.Username, username),
-                new Claim(NapClaimTypes.UserId, "15", ClaimValueTypes.Integer),
-                new Claim(NapClaimTypes.Functions, GetClaimedFunctions())
-            };
-
-            return claims;
-        }
-
-        private static string GetJwtToken(Claim[] claims)
-        {
-            var jwt = new JwtSecurityToken(
-                issuer: TokenProviderOptions.Issuer,
-                audience: TokenProviderOptions.Audience,
-                claims: claims,
-                notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.Add(TokenProviderOptions.Expiration),
-                signingCredentials: TokenProviderOptions.SigningCredentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(jwt);
-        }
-
-        private static long ToUnixEpochDate(DateTime date) => new DateTimeOffset(date).ToUniversalTime().ToUnixTimeSeconds();
-
-        private static string GetClaimedFunctions()
-        {
-            var functions = new Function[] 
-            {
-                new Function("CWL", 2)
-            };
-
-            return JsonConvert.SerializeObject(functions);
+            return await securityService.Login(loginParameter).ConfigureAwait(false);
         }
     }
 }

@@ -1,16 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using RiskControl.Account.Extensions;
+using RiskControl.Account;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
+using Olympus.DotNetCore.NapApiClient.Configuration;
+using RiskControl.Account.Models;
 
 namespace RiskControl.Sites
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -22,7 +28,19 @@ namespace RiskControl.Sites
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureSettings(services);
+            ConfigureAuth(services);
+
+            services.AddMediatR(typeof(IAccountMarker).Assembly);
+            services.AddOptions();
+            services.AddAccountModule();
             services.AddMvc();
+        }
+
+        private void ConfigureSettings(IServiceCollection services)
+        {
+            services.Configure<NapApiOptions>(Configuration.GetSection("NapApiOptions"));
+            services.Configure<TokenProviderOptions>(Configuration.GetSection("TokenProviderOptions"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,8 +59,9 @@ namespace RiskControl.Sites
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.ConfigureAccountModule();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
