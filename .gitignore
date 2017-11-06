@@ -45,4 +45,3 @@ Sources/Sites/app/*concat.js
 *.BASE
 *.LOCAL
 *.REMOTE
-**/package-lock.json

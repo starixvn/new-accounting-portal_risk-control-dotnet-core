@@ -8,19 +8,40 @@ module.exports = (env) => {
     // Configuration in common to both client-side and server-side bundles
     const isDevBuild = !(env && env.prod);
     const sharedConfig = {
-        stats: { modules: false },
+        stats: {
+            modules: false
+        },
         context: __dirname,
-        resolve: { extensions: [ '.js', '.ts' ] },
+        resolve: {
+            extensions: ['.js', '.ts']
+        },
         output: {
             filename: '[name].js',
             publicPath: 'dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
         },
         module: {
-            rules: [
-                { test: /\.ts$/, include: /ClientApp/, use: isDevBuild ? ['awesome-typescript-loader?silent=true', 'angular2-template-loader'] : '@ngtools/webpack' },
-                { test: /\.html$/, use: 'html-loader?minimize=false' },
-                { test: /\.css$/, use: [ 'to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize' ] },
-                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
+            rules: [{
+                    test: /\.ts$/,
+                    include: /ClientApp/,
+                    use: isDevBuild ? ['awesome-typescript-loader?silent=true', 'angular2-template-loader'] : '@ngtools/webpack'
+                },
+                {
+                    test: /\.html$/,
+                    use: 'html-loader?minimize=false'
+                },
+                {
+                    test: /\.css$/,
+                    use: ['to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize']
+                },
+                {
+                    test: /\.scss$/,
+                    exclude: /node_modules/,
+                    use: ['to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize', 'sass-loader']
+                },
+                {
+                    test: /\.(png|jpg|jpeg|gif|woff|woff2|eot|ttf|svg)(\?|$)/,
+                    use: 'url-loader?limit=100000'
+                }
             ]
         },
         plugins: [new CheckerPlugin()]
@@ -29,8 +50,12 @@ module.exports = (env) => {
     // Configuration for client-side bundle suitable for running in browsers
     const clientBundleOutputDir = './wwwroot/dist';
     const clientBundleConfig = merge(sharedConfig, {
-        entry: { 'main-client': './ClientApp/boot.browser.ts' },
-        output: { path: path.join(__dirname, clientBundleOutputDir) },
+        entry: {
+            'main-client': './ClientApp/boot.browser.ts'
+        },
+        output: {
+            path: path.join(__dirname, clientBundleOutputDir)
+        },
         plugins: [
             new webpack.DllReferencePlugin({
                 context: __dirname,
@@ -55,8 +80,12 @@ module.exports = (env) => {
 
     // Configuration for server-side (prerendering) bundle suitable for running in Node
     const serverBundleConfig = merge(sharedConfig, {
-        resolve: { mainFields: ['main'] },
-        entry: { 'main-server': './ClientApp/boot.server.ts' },
+        resolve: {
+            mainFields: ['main']
+        },
+        entry: {
+            'main-server': './ClientApp/boot.server.ts'
+        },
         plugins: [
             new webpack.DllReferencePlugin({
                 context: __dirname,

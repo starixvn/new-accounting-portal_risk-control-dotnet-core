@@ -1,0 +1,46 @@
+.login-box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -225px;
+    margin-top: -160px;
+    width: 450px;
+    color: #fff;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3);
+    .header {
+        background: #6c8ccd;
+        font-size: 1.5rem;
+        font-weight: 600;
+        padding: 0.5rem 2rem;
+        border-radius: 5px 5px 0 0;
+    }
+    form {
+        background: #3b5998;
+        padding: 2rem;
+        border-radius: 0 0 5px 5px;
+        .input-group-addon {
+            width: 2.4rem;
+        }
+        button {
+            font-weight: 600;
+            cursor: pointer;
+            background-color: #E7EAEB;
+            border-color: #B5B6B3;
+        }
+        .btn[disabled] {
+            cursor: not-allowed;
+        }
+        [class*="icon-"] {
+            display: inline-block;
+            vertical-align: text-top;
+            width: 16px;
+            height: 16px;
+        }
+        .icon-chrome {
+            background-image: url("images/chrome.png");
+        }
+        .icon-firefox {
+            background-image: url("images/firefox.png");
+        }
+    }
+}
