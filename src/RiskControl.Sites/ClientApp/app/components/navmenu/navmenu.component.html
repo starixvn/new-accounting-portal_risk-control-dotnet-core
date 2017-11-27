@@ -1,27 +1,41 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+<nav class="navbar navbar-expand-lg fixed-top navbar-toggleable">
+    <a class="navbar-brand" [routerLink]="['/home']">
+        <img src="/images/logo.png" alt="brand">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
-            <li [routerLinkActive]="['link-active']">
-                <a [routerLink]="['/home']">
-                    <span class='glyphicon glyphicon-home'></span> Home
-                </a>
-            </li>
-            <li [routerLinkActive]="['link-active']">
-                <a [routerLink]="['/login']">
-                    <span class='glyphicon glyphicon-education'></span> Login
-                </a>
-            </li>
-            <li [routerLinkActive]="['link-active']">
-                <a [routerLink]="['/counter']">
-                    <span class='glyphicon glyphicon-education'></span> Counter
-                </a>
-            </li>
-            <li [routerLinkActive]="['link-active']">
-                <a [routerLink]="['/fetch-data']">
-                    <span class='glyphicon glyphicon-th-list'></span> Fetch data
-                </a>
+            <li *ngFor="let item of menus; let isLast = last" class="nav-item" [class.item-last]="isLast" [ngSwitch]="item.children === null">
+                <a *ngSwitchCase="true" class="nav-link" [href]="item.url">{{item.name}}</a>
+                <div *ngSwitchCase="false" class="nav-sub">
+                    <div class="nav-link">{{item.name}}</div>
+                    <ul class="navbar-nav-sub">
+                        <li *ngFor="let childItem of item.children" class="nav-item">
+                            <a class="nav-link" [href]="childItem.url">{{childItem.name}}</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ul>
+        <div class="user-container">
+            <div class="user-info">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span class="greeting">Welcome
+                    <span class="user-name">{{username}}</span>
+                </span>
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </div>
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/password']">Change Password</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/login']">Sign Out</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>

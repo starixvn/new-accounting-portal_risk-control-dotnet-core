@@ -4,21 +4,30 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from 'nap-components/http';
 
+import { LocalStorageService } from './services/local-storage.service';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthGuard } from './guards/auth.guard';
+
 import { AppComponent } from './components/app/app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
+import { PasswordComponent } from './components/password/password.component';
+import { NonSportGameStatisticsComponent } from './components/non-sport-game-statistics/non-sport-game-statistics.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
+        LoginComponent,
         HomeComponent,
-        LoginComponent
+        PasswordComponent,
+        NonSportGameStatisticsComponent
+    ],
+    providers: [
+        LocalStorageService,
+        AuthenticationService,
+        AuthGuard
     ],
     imports: [
         CommonModule,
@@ -28,9 +37,9 @@ import { CounterComponent } from './components/counter/counter.component';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'login', component: LoginComponent },
-            { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+            { path: 'password', component: PasswordComponent, canActivate: [AuthGuard] },
+            { path: 'NonSportGameStatistics/Main/Index', component: NonSportGameStatisticsComponent, canActivate: [AuthGuard] },
             { path: '**', redirectTo: 'home' }
         ])
     ]

@@ -21,7 +21,7 @@ namespace RiskControl.Account.Controllers
         [HttpPost]
         [Route("api/[controller]/login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             return await LoginAction(request).ConfigureAwait(false);
         }

@@ -35,8 +35,7 @@ module.exports = (env) => {
                 },
                 {
                     test: /\.scss$/,
-                    exclude: /node_modules/,
-                    use: ['to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize', 'sass-loader']
+                    use: ['to-string-loader', 'css-loader', 'sass-loader']
                 },
                 {
                     test: /\.(png|jpg|jpeg|gif|woff|woff2|eot|ttf|svg)(\?|$)/,

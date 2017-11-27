@@ -20,7 +20,7 @@ namespace RiskControl.Account.Extensions
             services.AddSingleton<CurrentContextService, CurrentContextServiceImp>();
             services.AddSingleton<StateService, StateServiceImp>();
             services.AddSingleton<TokenGenerator, TokenGeneratorImp>();
-            services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
     }
 }

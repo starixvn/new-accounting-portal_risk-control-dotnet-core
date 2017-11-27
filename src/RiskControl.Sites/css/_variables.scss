@@ -1,0 +1,40 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+$font-size-base: 0.8125rem;
+$body-color: #000;
+$line-height-base: 1.5;
+$input-line-height: 1.5;
+$input-height: 1.487rem;
+$btn-padding-x: 1rem;
+$btn-padding-y: .244rem;
+$input-padding-x: .3rem;
+$input-padding-y: .15rem;
+$border-radius: .2rem;
+$font-family-base: Tahoma,
+Arial,
+Helvetica,
+sans-serif;
+$font-family-sans-serif: $font-family-base;
+$font-family-serif: $font-family-base;
+$form-check-margin-bottom: .2rem;
+$dropdown-padding-y: .25rem;
+$dropdown-item-padding-x: .5rem;
+$pagination-padding-y: .25rem;
+$pagination-padding-x: .5rem;
+$spacer: .5rem;
+$spacer-x: $spacer;
+$spacer-y: $spacer;
+$alert-margin-bottom: $spacer;
+$alert-padding-y: .25rem;
+$alert-padding-x: .5rem;
+$modal-header-padding: 8px;
+$modal-inner-padding: 10px;
+$breadcrumb-padding-y: .2rem;
+$breadcrumb-padding-x: .4rem;
+$breadcrumb-divider: ">";
+$breadcrumb-active-color: #000;
+$link-color: #00f;
+$grid-gutter-width-base: 16px;
+$grid-gutter-widths: ( xs: $grid-gutter-width-base, sm: $grid-gutter-width-base, md: $grid-gutter-width-base, lg: $grid-gutter-width-base, xl: $grid-gutter-width-base);
+$table-cell-padding: .25rem;
+$close-font-size: 1.2rem;

@@ -6,7 +6,10 @@
     margin-top: -160px;
     width: 450px;
     color: #fff;
-    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3);
+    .alert {
+        font-weight: bold;
+        text-align: center;
+    }
     .header {
         background: #6c8ccd;
         font-size: 1.5rem;
@@ -15,6 +18,7 @@
         border-radius: 5px 5px 0 0;
     }
     form {
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.3);
         background: #3b5998;
         padding: 2rem;
         border-radius: 0 0 5px 5px;
