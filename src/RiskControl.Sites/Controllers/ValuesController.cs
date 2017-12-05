@@ -10,7 +10,7 @@ namespace RiskControl.Sites.Controllers
     {
         // GET: api/values
         [HttpGet]
-        [Function("Non_SportGameStatistics", 1)]
+        [Function("Non_SportGameStatistics", Policy.Write)]
         [Authorize]
         public IEnumerable<string> Get()
         {

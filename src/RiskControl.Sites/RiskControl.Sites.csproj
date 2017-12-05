@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="Olympus.DotNetCore.Authentication" Version="1.0.0.1" />
+    <PackageReference Include="Olympus.DotNetCore.Authentication" Version="1.0.0.2" />
     <PackageReference Include="Olympus.DotNetCore.Cryptography" Version="1.0.0.1" />
     <PackageReference Include="Olympus.DotNetCore.NapApiClient" Version="1.0.0.7" />
     <PackageReference Include="Olympus.MediatR.Extensions.DependencyInjection" Version="3.0.0" />
