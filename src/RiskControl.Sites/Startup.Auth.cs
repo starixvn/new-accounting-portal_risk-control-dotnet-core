@@ -19,8 +19,8 @@ namespace RiskControl.Sites
     {
         private void ConfigureAuth(IServiceCollection services)
         {
+            var issuer = Configuration["TokenProviderOptions:Issuer"]; 
             var secretKey = Configuration["TokenProviderOptions:SecretKey"];
-            var issuer = Configuration["TokenProviderOptions:Issuer"]; ;
             var audience = Configuration["TokenProviderOptions:Audience"];
 
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
@@ -54,12 +54,7 @@ namespace RiskControl.Sites
 
                         c.Response.StatusCode = 500;
                         c.Response.ContentType = "text/plain";
-                        // if (Environment.IsDevelopment())
-                        // {
-                        //     return c.Response.WriteAsync(c.Exception.ToString());
-                        // }
-                        // return c.Response.WriteAsync("An error occurred processing your authentication.");
-                        return c.Response.WriteAsync(c.Exception.ToString() + "Jacob");
+                        return c.Response.WriteAsync("An error occurred processing your authentication.");
                     }
                 };
             });

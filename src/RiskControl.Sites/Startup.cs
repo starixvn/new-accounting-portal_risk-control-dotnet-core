@@ -1,18 +1,19 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Olympus.DotNetCore.NapApiClient.Configuration;
 using RiskControl.Account.Extensions;
+using RiskControl.Account.Models;
 using RiskControl.Account;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
-using Olympus.DotNetCore.NapApiClient.Configuration;
-using RiskControl.Account.Models;
 
 namespace RiskControl.Sites
 {
@@ -35,6 +36,7 @@ namespace RiskControl.Sites
             services.AddOptions();
             services.AddAccountModule();
             services.AddMvc();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         private void ConfigureSettings(IServiceCollection services)

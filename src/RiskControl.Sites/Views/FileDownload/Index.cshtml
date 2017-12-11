@@ -1,0 +1,9 @@
+﻿@{
+    @model RiskControl.WinLossLimitControl.FileDownload.FileDownloadModel
+    ViewData["Title"] = "Download File";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    @Html.ActionLink(@Model.FileName, "Excel", new { FileName = Model.FileName })
+</div>
