@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using RiskControl.WinLossLimitControl.Constants;
+using RiskControl.WinLossLimitControl.Configurations;
 using RiskControl.WinLossLimitControl.Models;
 
 namespace RiskControl.WinLossLimitControl.Services

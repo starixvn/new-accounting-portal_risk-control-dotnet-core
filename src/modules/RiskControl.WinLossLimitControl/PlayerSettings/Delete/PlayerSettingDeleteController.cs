@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Olympus.DotNetCore.Authentication;
-using RiskControl.WinLossLimitControl.Constants;
+using RiskControl.WinLossLimitControl.Configurations;
 
 namespace RiskControl.WinLossLimitControl.PlayerSettings.Delete
 {

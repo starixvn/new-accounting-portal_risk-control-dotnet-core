@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Olympus.DotNetCore.Authentication;
-using RiskControl.WinLossLimitControl.Constants;
+using RiskControl.WinLossLimitControl.Configurations;
 using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.WinLossLimitControl.Filter

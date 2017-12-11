@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using RiskControl.WinLossLimitControl.Constants;
+using RiskControl.WinLossLimitControl.Configurations;
 using Olympus.DotNetCore.Authentication;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Search

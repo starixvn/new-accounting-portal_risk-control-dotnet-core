@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using Olympus.DotNetCore.WebApiClient;
+using RiskControl.WinLossLimitControl.Configurations;
 using RiskControl.WinLossLimitControl.Filter.Model;
 
-namespace RiskControl.WinLossLimitControl.Filter
-{
+namespace RiskControl.WinLossLimitControl.Filter {
     public interface CacheRefService {
         BaseEntityGroup BaseEntityGroup { get; }
 
@@ -29,10 +30,17 @@ namespace RiskControl.WinLossLimitControl.Filter
 
         private readonly RichHttpClient richHttpClient;
 
-        public CacheRefServiceImp (BaseEntityGroupLoaderService baseEntityGroupLoaderService, IMemoryCache memoryCache, RichHttpClient richHttpClient) {
+        private readonly IOptions<WinLossLimitControlOptions> winLossLimitControlOptions;
+
+        public CacheRefServiceImp (
+            BaseEntityGroupLoaderService baseEntityGroupLoaderService,
+            IMemoryCache memoryCache,
+            RichHttpClient richHttpClient,
+            IOptions<WinLossLimitControlOptions> winLossLimitControlOptions) {
             this.baseEntityGroupLoaderService = baseEntityGroupLoaderService;
             this.memoryCache = memoryCache;
             this.richHttpClient = richHttpClient;
+            this.winLossLimitControlOptions = winLossLimitControlOptions;
         }
 
         public BaseEntityGroup BaseEntityGroup {
@@ -69,7 +77,7 @@ namespace RiskControl.WinLossLimitControl.Filter
         }
 
         public string GetBetTypeName (int betTypeId) {
-            const string url = "Franklin";
+            var url = $"{winLossLimitControlOptions.Value.LegacyWebApi}/api/RemotingRef/BetType/{betTypeId}";
             return richHttpClient.Get<string> (url).Result;
         }
     }

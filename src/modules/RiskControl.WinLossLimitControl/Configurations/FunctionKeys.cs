@@ -1,4 +1,4 @@
-namespace RiskControl.WinLossLimitControl.Constants {
+namespace RiskControl.WinLossLimitControl.Configurations {
     public class FunctionKeys {
         public const string WinLimitControl = "WinLimitControl";
 

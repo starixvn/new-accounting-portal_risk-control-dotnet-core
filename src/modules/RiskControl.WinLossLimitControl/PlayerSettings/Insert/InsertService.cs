@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Fanex.Data.Repository;
-using RiskControl.WinLossLimitControl.Constants;
+using RiskControl.WinLossLimitControl.Configurations;
 using RiskControl.WinLossLimitControl.Models;
 using RiskControl.WinLossLimitControl.PlayerSettings.Insert.Criteria;
 

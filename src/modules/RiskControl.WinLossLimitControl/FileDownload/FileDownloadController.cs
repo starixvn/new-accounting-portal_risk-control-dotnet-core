@@ -2,9 +2,10 @@
 using System.IO;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Olympus.DotNetCore.Authentication;
 using Olympus.DotNetCore.WebApiClient;
-using RiskControl.WinLossLimitControl.Constants;
+using RiskControl.WinLossLimitControl.Configurations;
 
 namespace RiskControl.WinLossLimitControl.FileDownload {
     [Route ("WinLimitControl/FileDownload")]
@@ -27,8 +28,8 @@ namespace RiskControl.WinLossLimitControl.FileDownload {
 
         [Function (FunctionKeys.WinLimitControl, Policy.Read)]
         [Route ("Excel")]
-        public ActionResult Excel (string filename) {
-            const string url = "Franklin";
+        public ActionResult Excel ([FromServices] IOptions<WinLossLimitControlOptions> winLossLimitControlOptions, string filename) {
+            var url = $"{winLossLimitControlOptions.Value.FileServiceApi}?site={winLossLimitControlOptions.Value.SiteName}&name={filename}";
             var fileApiResult = richHttpClient.Get<ReadResult> (url).Result;
             if (fileApiResult.Result.ErrorCode == 0) {
                 return File (fileApiResult.Content, "application/vnd.ms-excel", $"{filename}");

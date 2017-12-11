@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Olympus.DotNetCore.Authentication;
-using RiskControl.WinLossLimitControl.Constants;
+using RiskControl.WinLossLimitControl.Configurations;
 using System.Threading.Tasks;
 
 namespace RiskControl.WinLossLimitControl.CurrencySettings.Update

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Fanex.Data.Repository;
 using MediatR;
-using RiskControl.WinLossLimitControl.Constants;
+using RiskControl.WinLossLimitControl.Configurations;
 using RiskControl.WinLossLimitControl.CurrencySettings.Model;
 using RiskControl.WinLossLimitControl.Filter;
 using RiskControl.WinLossLimitControl.Models;

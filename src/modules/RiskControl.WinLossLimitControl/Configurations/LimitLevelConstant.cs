@@ -1,4 +1,4 @@
-﻿namespace RiskControl.WinLossLimitControl.Constants
+﻿namespace RiskControl.WinLossLimitControl.Configurations
 {
     public static class LimitLevelConstant
     {
