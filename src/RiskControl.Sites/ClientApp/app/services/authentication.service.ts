@@ -1,9 +1,13 @@
+const CryptoJS = require('../../../js/CryptoJS') as CryptoJSInterface;
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { LocalStorageService } from './local-storage.service';
 
 const sessionName = 'loginTicket';
+interface CryptoJSInterface {
+    CfsEnCode(input: string): string;
+}
 
 @Injectable()
 export class AuthenticationService {
@@ -23,6 +27,10 @@ export class AuthenticationService {
 
     get isLoggedIn(): boolean {
         return this.loginTicket !== null;
+    }
+
+    encryptPassword(password: string): string {
+        return CryptoJS.CfsEnCode(password.trim());
     }
 
     logIn(username: string, password: string): Observable<any> {

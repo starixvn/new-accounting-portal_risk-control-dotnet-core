@@ -55,7 +55,6 @@ namespace RiskControl.Account.Controllers
 
         [HttpPost]
         [Route("api/[controller]/refresh")]
-        [Authorize]
         public async Task<IActionResult> Refresh()
         {
             return await Action(new RefreshRequest()).ConfigureAwait(false);

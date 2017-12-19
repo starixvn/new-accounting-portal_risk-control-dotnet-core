@@ -3,12 +3,18 @@
     left: 50%;
     top: 50%;
     margin-left: -225px;
-    margin-top: -160px;
+    margin-top: -150px;
     width: 450px;
     color: #fff;
+    .fa {
+        width: 100%;
+        text-align: center;
+    }
     .alert {
         font-weight: bold;
         text-align: center;
+        font-size: 1rem;
+        padding: 8px 0;
     }
     .header {
         background: #6c8ccd;

@@ -1,4 +1,3 @@
-const CryptoJS = require('./libs/CryptoJS') as CryptoJSInterface;
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,10 +5,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { LoginModel, LoginTicket } from './login.model';
 import { CustomValidators } from './custom-validators';
 import { Observable } from 'rxjs/Observable';
-
-interface CryptoJSInterface {
-    CfsEnCode(input: string): string;
-}
 
 @Component({
     selector: 'login',
@@ -53,7 +48,7 @@ export class LoginComponent implements OnInit {
     logIn() {
         this.loading = true;
         const username = this.username.value.trim();
-        const password = CryptoJS.CfsEnCode(this.password.value.trim());
+        const password = this.authenticationService.encryptPassword(this.password.value);
         this.authenticationService.logIn(username, password)
             .subscribe(
             data => {
