@@ -43,6 +43,7 @@ namespace RiskControl.Sites
         {
             services.Configure<NapApiOptions>(Configuration.GetSection("NapApiOptions"));
             services.Configure<TokenProviderOptions>(Configuration.GetSection("TokenProviderOptions"));
+            services.Configure<WinLossLimitControlOptions>(Configuration.GetSection("WinLossLimitControlOptions"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
