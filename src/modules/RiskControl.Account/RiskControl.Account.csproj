@@ -1,16 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="3.0.1" />
+    <PackageReference Include="MediatR" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="Olympus.DotNetCore.Authentication" Version="1.0.0.2" />
+    <PackageReference Include="Olympus.DotNetCore.Authentication" Version="1.0.0.7" />
     <PackageReference Include="Olympus.DotNetCore.Cryptography" Version="1.0.0.1" />
+    <PackageReference Include="Olympus.DotNetCore.Maintenance" Version="1.0.0.3" />
     <PackageReference Include="Olympus.DotNetCore.NapApiClient" Version="1.0.0.7" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.1.4" />
     <PackageReference Include="System.Security.Claims" Version="4.3.0" />

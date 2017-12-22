@@ -4,15 +4,15 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.1" />
-    <PackageReference Include="Fanex.Data" Version="3.0.0-beta2" />
-    <PackageReference Include="Fanex.Data.Repository" Version="3.0.0-beta2" />
-    <PackageReference Include="MediatR" Version="3.0.1" />
+    <PackageReference Include="Fanex.Data" Version="2.1.0.1" />
+    <PackageReference Include="Fanex.Data.Repository" Version="1.0.2.1" />
+    <PackageReference Include="MediatR" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="Olympus.DotNetCore.Authentication" Version="1.0.0.2" />
+    <PackageReference Include="Olympus.DotNetCore.Authentication" Version="1.0.0.7" />
     <PackageReference Include="Olympus.DotNetCore.Cryptography" Version="1.0.0.1" />
     <PackageReference Include="Olympus.DotNetCore.FPSApiClient" Version="1.0.0.1" />
     <PackageReference Include="Olympus.DotNetCore.NapApiClient" Version="1.0.0.7" />

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Fanex.Data.Repository;
 using MediatR;
@@ -7,7 +8,7 @@ using RiskControl.WinLossLimitControl.Filter;
 
 namespace RiskControl.WinLossLimitControl.Groups
 {
-    public class Handler : IAsyncRequestHandler<Request, List<ProductGroupSetting>>
+    public class Handler : IRequestHandler<Request, List<ProductGroupSetting>>
     {
         private readonly IDynamicRepository repository;
 
@@ -19,7 +20,7 @@ namespace RiskControl.WinLossLimitControl.Groups
             this.cacheRefService = cacheRefService;
         }
 
-        public async Task<List<ProductGroupSetting>> Handle(Request message)
+        public async Task<List<ProductGroupSetting>> Handle(Request request, CancellationToken cancellationToken)
         {
             var criteria = new ReadCriteria();
             var settings = await repository.FetchAsync<GroupSetting>(criteria).ConfigureAwait(false);

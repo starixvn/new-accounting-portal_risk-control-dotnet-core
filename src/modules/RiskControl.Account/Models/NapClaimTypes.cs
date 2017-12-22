@@ -9,5 +9,7 @@
         public const string OnUserId = "onuserid";
 
         public const string Username = "username";
+
+        public const string MaintenanceToken ="maintenancetoken";
     }
 }

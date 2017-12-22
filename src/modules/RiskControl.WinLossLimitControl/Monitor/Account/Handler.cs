@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Fanex.Data.Repository;
 using MediatR;
@@ -9,7 +10,7 @@ using RiskControl.WinLossLimitControl.Monitor.Account.Criteria;
 using RiskControl.WinLossLimitControl.Monitor.Account.Model;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Account {
-    public class Handler : IAsyncRequestHandler<Request, AccountModel> {
+    public class Handler : IRequestHandler<Request, AccountModel> {
         private readonly IDynamicRepository repository;
 
         private readonly FraudService fraudService;
@@ -33,10 +34,10 @@ namespace RiskControl.WinLossLimitControl.Monitor.Account {
             this.winLossLimitControlOptions = winLossLimitControlOptions;
         }
 
-        public async Task<AccountModel> Handle (Request message) {
-            var customer = await GetCustomer (message.CustId).ConfigureAwait (false);
+        public async Task<AccountModel> Handle (Request request, CancellationToken cancellationToken) {
+            var customer = await GetCustomer (request.CustId).ConfigureAwait (false);
             var accountsByDevice = await GetAssociatedAccountsByDevice (customer.Username, customer.SiteName, customer.IsCreditUser).ConfigureAwait (false);
-            var accountsByIP = await GetAssociatedAccountsByIP (message.CustId, customer.Username, customer.SiteName, customer.IsCreditUser).ConfigureAwait (false);
+            var accountsByIP = await GetAssociatedAccountsByIP (request.CustId, customer.Username, customer.SiteName, customer.IsCreditUser).ConfigureAwait (false);
             return new AccountModel {
                 Customer = customer,
                 UsersByDevice = accountsByDevice,

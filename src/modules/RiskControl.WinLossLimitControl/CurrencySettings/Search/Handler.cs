@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Fanex.Data.Repository;
@@ -12,7 +13,7 @@ using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.WinLossLimitControl.CurrencySettings.Search
 {
-    public class Handler : IAsyncRequestHandler<Request, List<SettingSite>>
+    public class Handler : IRequestHandler<Request, List<SettingSite>>
     {
         private readonly CacheRefService cacheRefService;
 
@@ -28,9 +29,9 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Search
             this.dataTransformService = dataTransformService;
         }
 
-        public async Task<List<SettingSite>> Handle(Request message)
+        public async Task<List<SettingSite>> Handle(Request request, CancellationToken cancellationToken)
         {
-            var rawCurerncySettings = await QueryFromDatabase(message).ConfigureAwait(false);
+            var rawCurerncySettings = await QueryFromDatabase(request).ConfigureAwait(false);
             var currencySettings = FromRawCurrencySetting(rawCurerncySettings);
 
             return GroupBySite(currencySettings)

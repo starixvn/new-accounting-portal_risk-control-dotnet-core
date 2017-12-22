@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Olympus.DotNetCore.Authentication;
@@ -7,7 +8,7 @@ using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Unblock
 {
-    public class HandlerUnblockTransfer : IAsyncRequestHandler<RequestUnblockTransfer, ExecuteResult>
+    public class HandlerUnblockTransfer : IRequestHandler<RequestUnblockTransfer, ExecuteResult>
     {
         private readonly StateService stateService;
 
@@ -19,9 +20,9 @@ namespace RiskControl.WinLossLimitControl.Monitor.Unblock
             this.stateService = stateService;
         }
 
-        public async Task<ExecuteResult> Handle(RequestUnblockTransfer message)
+        public async Task<ExecuteResult> Handle(RequestUnblockTransfer request, CancellationToken cancellationToken)
         {
-            var parameter = Mapper.Map<ServiceParameter>(message);
+            var parameter = Mapper.Map<ServiceParameter>(request);
             parameter.UserId = stateService.UserId;
             parameter.IP = stateService.IP;
 

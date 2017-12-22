@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
 using Fanex.Data.Repository;
 using MediatR;
@@ -8,7 +9,7 @@ using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.WinLossLimitControl.PlayerSettings.Update
 {
-    public class Handler : IAsyncRequestHandler<Request, ExecuteResult>
+    public class Handler : IRequestHandler<Request, ExecuteResult>
     {
         private readonly ValidationService validationService;
 
@@ -23,14 +24,14 @@ namespace RiskControl.WinLossLimitControl.PlayerSettings.Update
             this.repository = repository;
         }
 
-        public async Task<ExecuteResult> Handle(Request message)
+        public async Task<ExecuteResult> Handle(Request request, CancellationToken cancellationToken)
         {
-            var criteria = Mapper.Map<UpdateCriteria>(message);
+            var criteria = Mapper.Map<UpdateCriteria>(request);
             criteria.UserId = stateService.UserId;
             criteria.IP = stateService.IP;
-            criteria.MaxWinLimit = message.Limit;
+            criteria.MaxWinLimit = request.Limit;
 
-            var valid = await validationService.Execute(message).ConfigureAwait(false);
+            var valid = await validationService.Execute(request).ConfigureAwait(false);
             if (!valid)
             {
                 return new ExecuteResult(1);

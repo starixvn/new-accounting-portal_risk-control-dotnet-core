@@ -4,10 +4,11 @@ using Olympus.DotNetCore.Authentication;
 using RiskControl.WinLossLimitControl.Models;
 using RiskControl.WinLossLimitControl.Services;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Unblock
 {
-    public class HandlerUnblockPlaceBet : IAsyncRequestHandler<RequestUnblockPlaceBet, ExecuteResult>
+    public class HandlerUnblockPlaceBet : IRequestHandler<RequestUnblockPlaceBet, ExecuteResult>
     {
         private readonly StateService stateService;
 
@@ -19,9 +20,9 @@ namespace RiskControl.WinLossLimitControl.Monitor.Unblock
             this.stateService = stateService;
         }
 
-        public async Task<ExecuteResult> Handle(RequestUnblockPlaceBet message)
+        public async Task<ExecuteResult> Handle(RequestUnblockPlaceBet request, CancellationToken cancellationToken)
         {
-            var parameter = Mapper.Map<ServiceParameter>(message);
+            var parameter = Mapper.Map<ServiceParameter>(request);
             parameter.UserId = stateService.UserId;
             parameter.IP = stateService.IP;
 

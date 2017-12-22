@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Fanex.Data.Repository;
@@ -9,7 +10,7 @@ using RiskControl.WinLossLimitControl.Monitor.Parser;
 
 namespace RiskControl.WinLossLimitControl.Monitor.History
 {
-    public class Handler : IAsyncRequestHandler<Request, List<WinLimitHistory>>
+    public class Handler : IRequestHandler<Request, List<WinLimitHistory>>
     {
         private readonly IDynamicRepository repository;
 
@@ -24,9 +25,9 @@ namespace RiskControl.WinLossLimitControl.Monitor.History
             this.winLimitSettingXmlParser = winLimitSettingXmlParser;
         }
 
-        public async Task<List<WinLimitHistory>> Handle(Request message)
+        public async Task<List<WinLimitHistory>> Handle(Request request, CancellationToken cancellationToken)
         {
-            var criteria = Mapper.Map<HistoryCriteria>(message);
+            var criteria = Mapper.Map<HistoryCriteria>(request);
             var rawData = await repository.FetchAsync<WinLimitHistoryRaw>(criteria).ConfigureAwait(false);
             return FromRawWinLimitHistory(rawData).ToList();
         }

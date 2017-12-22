@@ -5,75 +5,69 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+using Olympus.DotNetCore.Authentication;
+using Olympus.DotNetCore.Maintenance;
 using Olympus.DotNetCore.NapApiClient.Configuration;
 using RiskControl.Account.Extensions;
 using RiskControl.Account.Models;
 using RiskControl.Account;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System;
+using RiskControl.WinLossLimitControl.Configurations;
+using RiskControl.WinLossLimitControl;
 
-namespace RiskControl.Sites
-{
-    public partial class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
+namespace RiskControl.Sites {
+    public partial class Startup {
+        public Startup (IConfiguration configuration) {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            ConfigureSettings(services);
-            ConfigureAuth(services);
+        public void ConfigureServices (IServiceCollection services) {
+            ConfigureSettings (services);
+            ConfigureAuth (services);
 
-            services.AddMediatR(typeof(IAccountMarker).Assembly);
-            services.AddOptions();
-            services.AddAccountModule();
-            services.AddMvc();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddMediatR (
+                typeof (IAccountMarker).Assembly,
+                typeof (IWinLossLimitControlMarker).Assembly
+            );
+            services.AddOptions ();
+            services.AddAccountModule ();
+            services.AddMvc (options => {
+                options.Filters.Add (typeof (MaintenanceFilter));
+            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor> ();
         }
 
-        private void ConfigureSettings(IServiceCollection services)
-        {
-            services.Configure<NapApiOptions>(Configuration.GetSection("NapApiOptions"));
-            services.Configure<TokenProviderOptions>(Configuration.GetSection("TokenProviderOptions"));
-            services.Configure<WinLossLimitControlOptions>(Configuration.GetSection("WinLossLimitControlOptions"));
+        private void ConfigureSettings (IServiceCollection services) {
+            services.Configure<NapApiOptions> (Configuration.GetSection ("NapApiOptions"));
+            services.Configure<TokenProviderOptions> (Configuration.GetSection ("TokenProviderOptions"));
+            services.Configure<WinLossLimitControlOptions> (Configuration.GetSection ("WinLossLimitControlOptions"));
+            services.Configure<MaintenanceOptions> (Configuration.GetSection ("MaintenanceOptions"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                {
+        public void Configure (IApplicationBuilder app, IHostingEnvironment env) {
+            if (env.IsDevelopment ()) {
+                app.UseDeveloperExceptionPage ();
+                app.UseWebpackDevMiddleware (new WebpackDevMiddlewareOptions {
                     HotModuleReplacement = true
                 });
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
+            } else {
+                app.UseExceptionHandler ("/Home/Error");
             }
 
-            app.ConfigureAccountModule();
-            app.UseStaticFiles();
-            app.UseAuthentication();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
+            app.ConfigureAccountModule ();
+            app.UseStaticFiles ();
+            app.UseAuthentication ();
+            app.UseMvc (routes => {
+                routes.MapRoute (
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
-                routes.MapSpaFallbackRoute(
+                routes.MapSpaFallbackRoute (
                     name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+                    defaults : new { controller = "Home", action = "Index" });
             });
         }
     }

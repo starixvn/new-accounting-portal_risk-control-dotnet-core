@@ -4,9 +4,11 @@ using MediatR;
 using Olympus.DotNetCore.Authentication;
 using RiskControl.WinLossLimitControl.Models;
 using System.Threading.Tasks;
+using System.Threading;
+
 namespace RiskControl.WinLossLimitControl.PlayerSettings.Delete
 {
-    public class Handler : IAsyncRequestHandler<Request, ExecuteResult>
+    public class Handler : IRequestHandler<Request, ExecuteResult>
     {
         private readonly StateService stateService;
 
@@ -18,9 +20,9 @@ namespace RiskControl.WinLossLimitControl.PlayerSettings.Delete
             this.repository = repository;
         }
 
-        public async Task<ExecuteResult> Handle(Request message)
+        public async Task<ExecuteResult> Handle(Request request, CancellationToken cancellationToken)
         {
-            var criteria = Mapper.Map<DeleteCriteria>(message);
+            var criteria = Mapper.Map<DeleteCriteria>(request);
             criteria.UserId = stateService.UserId;
             criteria.IP = stateService.IP;
 

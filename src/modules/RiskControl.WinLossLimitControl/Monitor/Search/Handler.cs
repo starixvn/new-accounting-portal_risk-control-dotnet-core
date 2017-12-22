@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Fanex.Data.Repository;
@@ -9,7 +10,7 @@ using RiskControl.WinLossLimitControl.Monitor.Parser;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Search
 {
-    public class Handler : IAsyncRequestHandler<Request, List<MonitorModel>>
+    public class Handler : IRequestHandler<Request, List<MonitorModel>>
     {
         private readonly IDynamicRepository repository;
 
@@ -24,9 +25,9 @@ namespace RiskControl.WinLossLimitControl.Monitor.Search
             this.winLimitSettingXmlParser = winLimitSettingXmlParser;
         }
 
-        public async Task<List<MonitorModel>> Handle(Request message)
+        public async Task<List<MonitorModel>> Handle(Request request, CancellationToken cancellationToken)
         {
-            var criteria = Mapper.Map<MonitorSearchCriteria>(message);
+            var criteria = Mapper.Map<MonitorSearchCriteria>(request);
             criteria.ToDate = criteria.ToDate.AddDays(1).AddSeconds(-1);
             var rawData = await repository.FetchAsync<MonitorModelRaw>(criteria).ConfigureAwait(false);
             return FromRawWinLimitMonitor(rawData).ToList();

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Fanex.Data.Repository;
@@ -11,7 +12,7 @@ using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.WinLossLimitControl.PlayerSettings.SearchForInserting
 {
-    public class HandlerSearch : HandlerBase, IAsyncRequestHandler<RequestSearch, List<PlayerSettingCurrency>>
+    public class HandlerSearch : HandlerBase, IRequestHandler<RequestSearch, List<PlayerSettingCurrency>>
     {
         private readonly IDynamicRepository dynamicRepository;
 
@@ -21,9 +22,9 @@ namespace RiskControl.WinLossLimitControl.PlayerSettings.SearchForInserting
             this.dynamicRepository = dynamicRepository;
         }
 
-        public async Task<List<PlayerSettingCurrency>> Handle(RequestSearch message)
+        public async Task<List<PlayerSettingCurrency>> Handle(RequestSearch request, CancellationToken cancellationToken)
         {
-            var criteria = Mapper.Map<SearchCriteria>(message);
+            var criteria = Mapper.Map<SearchCriteria>(request);
             var rawSettings = await dynamicRepository.FetchAsync<PlayerSettingRaw>(criteria).ConfigureAwait(false);
 
             var settings = FromRawPlayerSetting(rawSettings);
