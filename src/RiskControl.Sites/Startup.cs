@@ -14,6 +14,8 @@ using RiskControl.Account.Models;
 using RiskControl.Account;
 using RiskControl.WinLossLimitControl.Configurations;
 using RiskControl.WinLossLimitControl;
+using RiskControl.WinLossLimitControl.Configurations;
+using RiskControl.WinLossLimitControl.Extensions;
 
 namespace RiskControl.Sites {
     public partial class Startup {
@@ -34,6 +36,7 @@ namespace RiskControl.Sites {
             );
             services.AddOptions ();
             services.AddAccountModule ();
+            services.AddWinLossLimitControlModule();
             services.AddMvc (options => {
                 options.Filters.Add (typeof (MaintenanceFilter));
             });

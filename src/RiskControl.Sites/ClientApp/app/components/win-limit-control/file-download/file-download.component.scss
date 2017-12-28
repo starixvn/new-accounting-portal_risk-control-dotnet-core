@@ -1,0 +1,10 @@
+.file-download{
+    .nav-link{
+        color: blue;
+        &:hover {
+           color: red;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    }
+}

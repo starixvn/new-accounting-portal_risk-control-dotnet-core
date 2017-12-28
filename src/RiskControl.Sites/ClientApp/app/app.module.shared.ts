@@ -14,6 +14,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { PasswordComponent } from './components/password/password.component';
 import { NonSportGameStatisticsComponent } from './components/non-sport-game-statistics/non-sport-game-statistics.component';
+import { WinLimitControlFileDownLoadComponent } from './components/win-limit-control/file-download/file-download.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { NonSportGameStatisticsComponent } from './components/non-sport-game-sta
         LoginComponent,
         HomeComponent,
         PasswordComponent,
-        NonSportGameStatisticsComponent
+        NonSportGameStatisticsComponent,
+        WinLimitControlFileDownLoadComponent
     ],
     providers: [
         LocalStorageService,
@@ -40,6 +42,7 @@ import { NonSportGameStatisticsComponent } from './components/non-sport-game-sta
             { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
             { path: 'password', component: PasswordComponent, canActivate: [AuthGuard] },
             { path: 'NonSportGameStatistics/Main/Index', component: NonSportGameStatisticsComponent, canActivate: [AuthGuard] },
+            { path: 'WinLimitControl/FileDownLoad/Index', component: WinLimitControlFileDownLoadComponent, canActivate: [AuthGuard] },
             { path: '**', redirectTo: 'home' }
         ])
     ]
