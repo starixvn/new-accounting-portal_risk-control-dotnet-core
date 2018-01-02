@@ -45,7 +45,7 @@ namespace RiskControl.WinLossLimitControl.Filter
         {
             var criteria = new CustomerSuggestionCriteria { CustomerName = term.Trim() };
             var customers = await filterService.SearchUsers(criteria).ConfigureAwait(false);
-            var userNames = customers.Select(customer => customer.Username);
+            var userNames = customers.Select(customer => customer.Username).ToList();
             return Json(userNames);
         }
     }

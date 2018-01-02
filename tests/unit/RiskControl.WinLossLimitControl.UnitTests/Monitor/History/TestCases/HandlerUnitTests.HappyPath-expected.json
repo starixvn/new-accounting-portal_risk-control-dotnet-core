@@ -1,0 +1,38 @@
+﻿[
+  {
+    "GroupId": 1,
+    "GroupName": "G1",
+    "BetTypeId": 2001,
+    "BetTypeName": "B2001",
+    "Currency": null,
+    "ModifiedDate": "08/5/2016 4:35:05 AM",
+    "BlackLimit": -10000,
+    "GreyLimit": -5000,
+    "OrangeLimit": 5000,
+    "YellowLimit": 10000,
+    "RedLimit": 50000,
+    "WinningAmount": 9999000,
+    "WinningAmountRM": 8888000,
+    "ReachedLimitLevel": 3,
+    "ActionName": "Blocked Placebet and Blocked Transfer/Withdraw",
+    "ProceededBy": "sa"
+  },
+  {
+    "GroupId": 2,
+    "GroupName": "G2",
+    "BetTypeId": 2001,
+    "BetTypeName": "B2001",
+    "Currency": null,
+    "ModifiedDate": "08/5/2016 4:32:44 AM",
+    "BlackLimit": -10000,
+    "GreyLimit": -5000,
+    "OrangeLimit": 5000,
+    "YellowLimit": 10000,
+    "RedLimit": 30000,
+    "WinningAmount": 9999000,
+    "WinningAmountRM": 7777000,
+    "ReachedLimitLevel": 3,
+    "ActionName": "Blocked Placebet and Blocked Transfer/Withdraw",
+    "ProceededBy": "System"
+  }
+]

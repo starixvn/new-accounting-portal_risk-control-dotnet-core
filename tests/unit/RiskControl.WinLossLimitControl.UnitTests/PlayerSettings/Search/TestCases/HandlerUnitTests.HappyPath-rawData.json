@@ -1,0 +1,112 @@
+﻿[
+  {
+    "CustId": 18766106,
+    "Username": "12Bet30ChargesLB03INR",
+    "SiteId": 30,
+    "CurrencyId": 61,
+    "ProductId": 13,
+    "GroupId": 1,
+    "LevelId": 1,
+    "MaxWinLimit": 6,
+    "HasCurrencySetting": false
+  },
+  {
+    "CustId": 18766106,
+    "Username": "12Bet30ChargesLB03INR",
+    "SiteId": 30,
+    "CurrencyId": 61,
+    "ProductId": 13,
+    "GroupId": 1,
+    "LevelId": 2,
+    "MaxWinLimit": 7,
+    "HasCurrencySetting": false
+  },
+  {
+    "CustId": 18766106,
+    "Username": "12Bet30ChargesLB03INR",
+    "SiteId": 30,
+    "CurrencyId": 61,
+    "ProductId": 13,
+    "GroupId": 1,
+    "LevelId": 3,
+    "MaxWinLimit": 8,
+    "HasCurrencySetting": false
+  },
+  {
+    "CustId": 18766106,
+    "Username": "12Bet30ChargesLB03INR",
+    "SiteId": 30,
+    "CurrencyId": 61,
+    "ProductId": 13,
+    "GroupId": 1,
+    "LevelId": 101,
+    "MaxWinLimit": -6,
+    "HasCurrencySetting": false
+  },
+  {
+    "CustId": 18766106,
+    "Username": "12Bet30ChargesLB03INR",
+    "SiteId": 30,
+    "CurrencyId": 61,
+    "ProductId": 13,
+    "GroupId": 1,
+    "LevelId": 102,
+    "MaxWinLimit": -7,
+    "HasCurrencySetting": false
+  },
+  {
+    "CustId": 18766106,
+    "Username": "12Bet30ChargesLB03INR",
+    "SiteId": 30,
+    "CurrencyId": 61,
+    "ProductId": 17,
+    "GroupId": 1,
+    "LevelId": 1,
+    "MaxWinLimit": 9,
+    "HasCurrencySetting": false
+  },
+  {
+    "CustId": 18766106,
+    "Username": "12Bet30ChargesLB03INR",
+    "SiteId": 30,
+    "CurrencyId": 61,
+    "ProductId": 17,
+    "GroupId": 1,
+    "LevelId": 2,
+    "MaxWinLimit": 10,
+    "HasCurrencySetting": false
+  },
+  {
+    "CustId": 18766106,
+    "Username": "12Bet30ChargesLB03INR",
+    "SiteId": 30,
+    "CurrencyId": 61,
+    "ProductId": 17,
+    "GroupId": 1,
+    "LevelId": 3,
+    "MaxWinLimit": 0,
+    "HasCurrencySetting": false
+  },
+  {
+    "CustId": 18766106,
+    "Username": "12Bet30ChargesLB03INR",
+    "SiteId": 30,
+    "CurrencyId": 61,
+    "ProductId": 17,
+    "GroupId": 1,
+    "LevelId": 101,
+    "MaxWinLimit": -6,
+    "HasCurrencySetting": false
+  },
+  {
+    "CustId": 18766106,
+    "Username": "12Bet30ChargesLB03INR",
+    "SiteId": 30,
+    "CurrencyId": 61,
+    "ProductId": 17,
+    "GroupId": 1,
+    "LevelId": 102,
+    "MaxWinLimit": -7,
+    "HasCurrencySetting": false
+  }
+]

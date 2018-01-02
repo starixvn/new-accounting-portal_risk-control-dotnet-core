@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0"/>
+    <PackageReference Include="Olympus.DotNetCore.Authentication" Version="1.0.0.7"/>
+    <PackageReference Include="Olympus.DotNetCore.FPSApiClient" Version="1.0.0.1"/>
+    <PackageReference Include="xunit" Version="2.3.1"/>
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0"/>
+    <PackageReference Include="xUnit.Asserts.Compare" Version="1.0.0.3"/>
+    <PackageReference Include="NSubstitute" Version="3.1.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1"/>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.3"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\modules\RiskControl.WinLossLimitControl\RiskControl.WinLossLimitControl.csproj"/>
+  </ItemGroup>
+</Project>

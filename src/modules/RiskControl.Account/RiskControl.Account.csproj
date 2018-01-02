@@ -3,6 +3,7 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
   </PropertyGroup>
+  <ItemGroup> <Reference Include="netstandard" /> </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.0.0" />

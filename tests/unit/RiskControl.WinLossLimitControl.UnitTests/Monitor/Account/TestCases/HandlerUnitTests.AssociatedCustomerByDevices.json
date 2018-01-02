@@ -1,0 +1,20 @@
+[
+  {
+    "Username": "12BETEURO01",
+    "SiteName": "12Bet",
+    "Evidence": "FakeDevice1",
+    "LastAccessedDate": "2016-10-17T00:00:00.511Z"
+  },
+  {
+    "Username": "12BETEURO01001",
+    "SiteName": "12Bet",
+    "Evidence": "FakeDevice1",
+    "LastAccessedDate": "2016-10-16T00:00:00.511Z"
+  },
+  {
+    "Username": "12BETEURO01002",
+    "SiteName": "12Bet",
+    "Evidence": "FakeDevice1",
+    "LastAccessedDate": "2016-10-17T00:00:00.511Z"
+  }
+]

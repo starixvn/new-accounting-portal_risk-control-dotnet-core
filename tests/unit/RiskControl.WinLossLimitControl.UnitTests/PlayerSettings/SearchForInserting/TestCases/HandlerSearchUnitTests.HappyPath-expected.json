@@ -1,0 +1,32 @@
+﻿[
+  {
+    "Username": "12Bet30ChargesLB04INR",
+    "SiteName": "S30",
+    "CurrencyName": "C61",
+    "Products": [
+      {
+        "ProductName": "P13",
+        "PlayerSettings": [
+          {
+            "CustId": 18766114,
+            "Username": "12Bet30ChargesLB04INR",
+            "SiteId": 30,
+            "SiteName": "S30",
+            "CurrencyId": 61,
+            "CurrencyName": "C61",
+            "ProductId": 13,
+            "ProductName": "P13",
+            "GroupId": 1,
+            "GroupName": "G1",
+            "BlackLimit": 0,
+            "GreyLimit": 0,
+            "OrangeLimit": 0,
+            "YellowLimit": 0,
+            "RedLimit": 0,
+            "HasCurrencySetting": false
+          }
+        ]
+      }
+    ]
+  }
+]
