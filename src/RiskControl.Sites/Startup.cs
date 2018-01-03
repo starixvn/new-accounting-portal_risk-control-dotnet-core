@@ -1,3 +1,4 @@
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,10 @@ namespace RiskControl.Sites {
                 options.Filters.Add (typeof (MaintenanceFilter));
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor> ();
+
+            Mapper.Initialize (cfg => {
+                cfg.InitializeWinLossLimitControl ();
+            });
         }
 
         private void ConfigureSettings (IServiceCollection services) {
