@@ -47,7 +47,7 @@ namespace RiskControl.WinLossLimitControl.UnitTests.CurrencySettings.Update
             var result = await handler.Handle(new Request(), CancellationToken.None);
 
             // Assert
-            Assert.Equal(result.ErrorCode, 0);
+            Assert.Equal(0, result.ErrorCode);
         }
     }
 }

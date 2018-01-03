@@ -13,9 +13,8 @@ using RiskControl.Account.Extensions;
 using RiskControl.Account.Models;
 using RiskControl.Account;
 using RiskControl.WinLossLimitControl.Configurations;
-using RiskControl.WinLossLimitControl;
-using RiskControl.WinLossLimitControl.Configurations;
 using RiskControl.WinLossLimitControl.Extensions;
+using RiskControl.WinLossLimitControl;
 
 namespace RiskControl.Sites {
     public partial class Startup {
