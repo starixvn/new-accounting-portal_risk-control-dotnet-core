@@ -38,16 +38,12 @@ export class PasswordComponent implements OnInit {
     }
 
     save() {
-        const loginTicket = this.authenticationService.loginTicket;
-        if (loginTicket) {
-            const token = loginTicket.token;
-            const oldPassword = this.authenticationService.encryptPassword(this.oldPassword.value);
-            const newPassword = this.authenticationService.encryptPassword(this.newPassword.value);
-            this.passwordService.save(oldPassword, newPassword, token)
-                .subscribe(response => {
-                    console.log(response);
-                });;
-        }
+        const oldPassword = this.authenticationService.encryptPassword(this.oldPassword.value);
+        const newPassword = this.authenticationService.encryptPassword(this.newPassword.value);
+        this.passwordService.save(oldPassword, newPassword)
+            .subscribe(response => {
+                console.log(response);
+            });;
     }
 
     ngOnInit() {

@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from 'nap-components/http';
 
 import { LocalStorageService } from './services/local-storage.service';
 import { AuthenticationService } from './services/authentication.service';
+import { TokenInterceptor } from './services/token-interceptor';
 import { AuthGuard } from './guards/auth.guard';
 
 import { AppComponent } from './components/app/app.component';
@@ -15,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PasswordComponent } from './components/password/password.component';
 import { NonSportGameStatisticsComponent } from './components/non-sport-game-statistics/non-sport-game-statistics.component';
 import { WinLimitControlFileDownLoadComponent } from './components/win-limit-control/file-download/file-download.component';
+import { CurrencySettingComponent, CurrencySettingModule } from './components/currency-setting';
 
 @NgModule({
     declarations: [
@@ -29,13 +31,19 @@ import { WinLimitControlFileDownLoadComponent } from './components/win-limit-con
     providers: [
         LocalStorageService,
         AuthenticationService,
-        AuthGuard
+        AuthGuard,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        }
     ],
     imports: [
         CommonModule,
-        HttpModule.forRoot(),
+        HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
+        CurrencySettingModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'login', component: LoginComponent },
@@ -43,9 +51,9 @@ import { WinLimitControlFileDownLoadComponent } from './components/win-limit-con
             { path: 'password', component: PasswordComponent, canActivate: [AuthGuard] },
             { path: 'NonSportGameStatistics/Main/Index', component: NonSportGameStatisticsComponent, canActivate: [AuthGuard] },
             { path: 'WinLimitControl/FileDownLoad/Index', component: WinLimitControlFileDownLoadComponent, canActivate: [AuthGuard] },
+            { path: 'WinLimitControl/CurrencySetting/Index', component: CurrencySettingComponent, canActivate: [AuthGuard] },
             { path: '**', redirectTo: 'home' }
         ])
     ]
 })
-export class AppModuleShared {
-}
+export class AppModuleShared { }

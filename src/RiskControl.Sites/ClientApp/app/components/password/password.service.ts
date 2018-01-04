@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PasswordService {
     constructor(
-        private http: Http
+        private httpClient: HttpClient
     ) { }
 
-    save(oldPassword: string, newPassword: string, token: string): Observable<any> {
-        const authHeader = `Bearer ${token}`;
-        return this.http.post(
+    save(oldPassword: string, newPassword: string): Observable<any> {
+        return this.httpClient.post<any>(
             'api/account/password',
-            { oldPassword: oldPassword, password: newPassword },
-            {
-                headers: new Headers({ Authorization: authHeader })
-            }
+            { oldPassword: oldPassword, password: newPassword }
         );
     }
 }

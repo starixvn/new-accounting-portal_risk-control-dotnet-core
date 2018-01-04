@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, ResponseContentType } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
 @Injectable()
 export class FileDownloadService {
     constructor(
-        private http: Http
+        private http: HttpClient
     ) { }
 
-    getFile(fileName: string, token: string) {
-        const authHeader = `Bearer ${token}`;
-        let fileUrl = `api/filedownload/excel?filename=${fileName}`;
-        let header = new Headers({ Authorization: authHeader });
-
-        return this.http.get(fileUrl, { headers: header, responseType: ResponseContentType.Blob })
-            .map(response => response.blob());
+    getFile(fileName: string): Observable<Blob> {
+        const fileUrl = `api/filedownload/excel?filename=${fileName}`;
+        return this.http.get(fileUrl, {
+            responseType: 'blob'
+        });
     }
 }

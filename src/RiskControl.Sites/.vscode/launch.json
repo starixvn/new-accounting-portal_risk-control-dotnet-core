@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceRoot}/bin/Debug/net461/RiskControl.Sites.exe",
+            "program": "${workspaceRoot}/bin/Debug/net461/win10-x64/RiskControl.Sites.exe",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,

@@ -1,46 +1,5 @@
-@import 'variables';
-@import "~bootstrap/scss/bootstrap";
+@import "~nap-theme/scss/theme";
+@import "~nap-theme/scss/header";
 body {
     padding-top: 2.5rem;
-}
-
-.header-container {
-    padding: 8px 0;
-    display: flex;
-    .header-title {
-        font-size: 1rem;
-        margin-right: auto;
-        text-shadow: 0 1px rgba(0, 0, 0, 0.25);
-        .active {
-            color: #0136ac;
-        }
-        .nap-icon {
-            margin-left: 5px;
-        }
-    }
-}
-
-.filter-container {
-    padding: .3rem;
-    margin-bottom: .5rem;
-    border: solid 1px #cecccd;
-    border-radius: 0.3rem;
-    background-color: #eceeef;
-    @include box-shadow(0 0 4px 1px rgba(0, 0, 0, .1));
-    .row {
-        margin-top: 3px;
-    }
-    .col-nap {
-        /* padding-left: $grid-gutter-width-base / 2;
-        padding-right: $grid-gutter-width-base / 2; */
-    }
-    .group-nap {
-        label {
-            margin-right: .5em;
-            text-align: right;
-        }
-        .control-nap {
-            display: inline-block;
-        }
-    }
 }

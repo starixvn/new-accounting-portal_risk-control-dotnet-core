@@ -1,6 +1,7 @@
 const CryptoJS = require('../../../js/CryptoJS') as CryptoJSInterface;
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { LocalStorageService } from './local-storage.service';
 
@@ -12,7 +13,7 @@ interface CryptoJSInterface {
 @Injectable()
 export class AuthenticationService {
     constructor(
-        private http: Http,
+        private http: HttpClient,
         private localStorageService: LocalStorageService
     ) { }
 
@@ -33,17 +34,16 @@ export class AuthenticationService {
         return CryptoJS.CfsEnCode(password.trim());
     }
 
-    logIn(username: string, password: string): Observable<any> {
-        const options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }) });
-        return this.http.post(
+    logIn(username: string, password: string): Observable<LoginTicket> {
+        return this.http.post<LoginTicket>(
             'api/account/login',
-            JSON.stringify({ username: username, password: password }),
-            options)
-            .map(response => {
-                const loginTicket = response.json();
+            { username: username, password: password })
+            .map(loginTicket => {
                 if (loginTicket && loginTicket.token) {
                     this.localStorageService.setItem(sessionName, JSON.stringify(loginTicket));
                 }
+
+                return loginTicket;
             });
     }
 

@@ -45,7 +45,7 @@ describe('File download - FileDownloadSevice', () => {
             connection.mockRespond(new Response(options));
         });
 
-        service.getFile(fileName, "token").subscribe((data) => {
+        service.getFile(fileName).subscribe((data) => {
             expect(data).toBeDefined();
             expect(data).toEqual(blob);
             done();
