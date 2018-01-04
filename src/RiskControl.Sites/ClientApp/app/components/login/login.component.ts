@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { LoginModel, LoginTicket } from './login.model';
-import { CustomValidators } from './custom-validators';
+import { CustomValidators } from '../common/custom-validators';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
