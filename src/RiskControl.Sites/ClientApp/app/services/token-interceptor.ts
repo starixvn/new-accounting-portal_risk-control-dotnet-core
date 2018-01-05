@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/retry';
@@ -30,7 +30,7 @@ export class TokenInterceptor implements HttpInterceptor {
         return next.handle(req)
             .do((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    console.log("Response intercepted");
+                    console.log('Response intercepted');
                 }
             }).catch((err: any) => {
                 if (err instanceof HttpErrorResponse) {
@@ -40,7 +40,7 @@ export class TokenInterceptor implements HttpInterceptor {
                     console.log(err.error);
 
                     if (err.status === 401) {
-                        console.log("Status (" + err.status + ") => " + err.error.reason + ": " + err.error.body);
+                        console.log('Status (' + err.status + ') => ' + err.error.reason + ': ' + err.error.body);
                         router.navigate(['/login']);
                     }
                 }

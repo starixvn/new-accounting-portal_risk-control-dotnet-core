@@ -6,7 +6,7 @@ import { AuthenticationService, LoginTicket } from '../../../services/authentica
 import { FileDownloadService } from './file-download.service';
 
 @Component({
-    selector: 'win-limit-control/file-download',
+    selector: 'nap-file-download',
     templateUrl: './file-download.component.html',
     styleUrls: ['./file-download.component.scss'],
     providers: [
@@ -23,17 +23,17 @@ export class WinLimitControlFileDownLoadComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        let hash = this.activatedRoute.snapshot.queryParams["hash"];
+        const hash = this.activatedRoute.snapshot.queryParams['hash'];
         this.fileName = atob(hash);
     }
 
     download() {
         this.fileDownloadService.getFile(this.fileName)
             .subscribe(response => {
-                saveAs(response, this.fileName)
+                saveAs(response, this.fileName);
             },
             error => {
-                console.log("Error downloading the file.")
+                console.log('Error downloading the file.');
             });
     }
 }

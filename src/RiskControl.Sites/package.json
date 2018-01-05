@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "lint": "tslint \"ClientApp/**/*.ts\"",
     "start": "webpack --watch",
     "test": "karma start ClientApp/test/karma.conf.js",
     "build": "webpack --config webpack.config.vendor.js && webpack"
@@ -29,6 +30,7 @@
     "aspnet-webpack": "^2.0.1",
     "awesome-typescript-loader": "^3.4.1",
     "bootstrap": "^4.0.0-beta.2",
+    "codelyzer": "^4.0.2",
     "css": "2.2.1",
     "css-loader": "0.28.4",
     "es6-shim": "0.35.3",
@@ -58,6 +60,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "0.18.2",
     "to-string-loader": "1.1.5",
+    "tslint": "^5.8.0",
     "typescript": "^2.4.2",
     "url-loader": "0.5.9",
     "webpack": "2.5.1",

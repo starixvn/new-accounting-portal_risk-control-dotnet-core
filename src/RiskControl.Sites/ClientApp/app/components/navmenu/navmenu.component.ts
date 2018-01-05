@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
-    selector: 'nav-menu',
+    selector: 'nap-nav-menu',
     templateUrl: './navmenu.component.html',
     styleUrls: ['./navmenu.component.scss']
 })

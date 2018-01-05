@@ -17,6 +17,8 @@ import { PasswordComponent } from './components/password/password.component';
 import { NonSportGameStatisticsComponent } from './components/non-sport-game-statistics/non-sport-game-statistics.component';
 import { WinLimitControlFileDownLoadComponent } from './components/win-limit-control/file-download/file-download.component';
 import { CurrencySettingComponent, CurrencySettingModule } from './components/currency-setting';
+import { PlayerSettingModule, PlayerSettingComponent } from './components/player-setting';
+import { MonitorModule, MonitorComponent } from './components/monitor';
 
 @NgModule({
     declarations: [
@@ -44,6 +46,8 @@ import { CurrencySettingComponent, CurrencySettingModule } from './components/cu
         FormsModule,
         ReactiveFormsModule,
         CurrencySettingModule,
+        PlayerSettingModule,
+        MonitorModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'login', component: LoginComponent },
@@ -52,6 +56,8 @@ import { CurrencySettingComponent, CurrencySettingModule } from './components/cu
             { path: 'NonSportGameStatistics/Main/Index', component: NonSportGameStatisticsComponent, canActivate: [AuthGuard] },
             { path: 'WinLimitControl/FileDownLoad/Index', component: WinLimitControlFileDownLoadComponent, canActivate: [AuthGuard] },
             { path: 'WinLimitControl/CurrencySetting/Index', component: CurrencySettingComponent, canActivate: [AuthGuard] },
+            { path: 'WinLimitControl/PlayerSetting/Index', component: PlayerSettingComponent, canActivate: [AuthGuard] },
+            { path: 'WinLimitControl/WinLimitMonitor/Index', component: MonitorComponent, canActivate: [AuthGuard] },
             { path: '**', redirectTo: 'home' }
         ])
     ]

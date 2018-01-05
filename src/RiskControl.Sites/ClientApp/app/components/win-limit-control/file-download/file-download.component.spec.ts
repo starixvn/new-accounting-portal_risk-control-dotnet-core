@@ -1,7 +1,7 @@
 import { } from 'jasmine';
 import { Routes, RouterModule, PreloadAllModules, ActivatedRoute, Data } from '@angular/router';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { DebugElement, ElementRef } from "@angular/core";
+import { DebugElement, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { WinLimitControlFileDownLoadComponent } from './file-download.component';
 import { NavMenuComponent } from '../../navmenu/navmenu.component';
@@ -15,9 +15,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 describe('Component: WinLimitControlFileDownLoad', () => {
     let component: WinLimitControlFileDownLoadComponent;
     let fixture: ComponentFixture<WinLimitControlFileDownLoadComponent>;
-    let el: DebugElement;
     let mockActiveRoute: any;
-    let hash: string = "W0NXTF9PbmVSTkdfR3JleV9DcmVkaXRfQWxlcnRdLVJOR19DYXNpbm8tU0pLNjdEMTAxMDAxLTEyXzIwXzIwMTdfOV80M18wOV9QTS54bHN4";
+    const hash = 'W0NXTF9PbmVSTkdfR3JleV9DcmVkaXRfQWxlcnRdLVJOR19DYXNpbm8tU0pLNjdEMTAxMDAxLTEyXzIwXzIwMTdfOV80M18wOV9QTS54bHN4';
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -62,8 +61,8 @@ describe('Component: WinLimitControlFileDownLoad', () => {
 
     it('should return right file name expected', () => {
         fixture.detectChanges();
-        let fileName = component.fileName;
-        let expectedFileName = "[CWL_OneRNG_Grey_Credit_Alert]-RNG_Casino-SJK67D101001-12_20_2017_9_43_09_PM.xlsx";
+        const fileName = component.fileName;
+        const expectedFileName = '[CWL_OneRNG_Grey_Credit_Alert]-RNG_Casino-SJK67D101001-12_20_2017_9_43_09_PM.xlsx';
         expect(fileName).toEqual(expectedFileName);
     });
 });

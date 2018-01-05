@@ -6,7 +6,6 @@ import { MockBackend, MockConnection } from '@angular/http/testing';
 describe('File download - FileDownloadSevice', () => {
     let service: FileDownloadService;
     let backend: MockBackend;
-    let response = null;
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
@@ -14,7 +13,8 @@ describe('File download - FileDownloadSevice', () => {
                 BaseRequestOptions,
                 {
                     provide: Http,
-                    useFactory: (backendInstance: MockBackend, defaultOptions: BaseRequestOptions) => new Http(backendInstance, defaultOptions),
+                    useFactory: (backendInstance: MockBackend, defaultOptions: BaseRequestOptions) =>
+                        new Http(backendInstance, defaultOptions),
                     deps: [MockBackend, BaseRequestOptions]
                 },
                 FileDownloadService
@@ -32,13 +32,13 @@ describe('File download - FileDownloadSevice', () => {
     });
 
     it('should successfully get file', (done) => {
-        let fileName = "winlimit-control";
-        let blob = new Blob();
+        const fileName = 'winlimit-control';
+        const blob = new Blob();
 
         backend.connections.subscribe((connection: MockConnection) => {
             expect(connection.request.method).toEqual(RequestMethod.Get);
             expect(connection.request.url).toEqual('api/filedownload/excel?filename=' + fileName);
-            let options = new ResponseOptions({
+            const options = new ResponseOptions({
                 status: 200,
                 body: blob
             });

@@ -1,0 +1,142 @@
+<ng-template #colgroup>
+    <colgroup>
+        <col style="width: 60px" />
+        <col style="width: 180px" />
+        <col style="width: 110px" />
+        <col style="width: 90px" />
+        <col style="width: 105px" />
+        <col style="width: 105px" />
+        <col style="width: 140px" />
+        <col style="width: 140px" />
+        <col style="width: 140px" />
+        <col style="width: 140px" />
+        <col style="width: 140px" />
+        <col *ngIf="hasHostPermission" style="width: 70px" />
+    </colgroup>
+</ng-template>
+<ng-template #breadcrumbToolboxTemplate>
+    <div class="breadcrumb-toolbox">
+        <div class="toolbox-item">
+            <div (click)="addPlayer()">Add Player <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i></div>
+        </div>
+    </div>
+</ng-template>
+<div *ngIf="playerCurrencySettings" [ngSwitch]="playerCurrencySettings.length > 0">
+    <div class="grid">
+        <div [ngStyle]="{'width.px': (hasHostPermission ? 1440 : 1370)}">
+            <nap-breadcrumb *ngIf="hasHostPermission" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
+            <div class="header">
+                <table>
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">#</th>
+                            <th rowspan="2">Username</th>
+                            <th rowspan="2">Site / Licensee</th>
+                            <th rowspan="2">Currency</th>
+                            <th rowspan="2">Product</th>
+                            <th rowspan="2">Setting Group</th>
+                            <th colspan="2">Player Loss Limit</th>
+                            <th colspan="3">Player Win Limit</th>
+                            <th *ngIf="hasHostPermission" rowspan="2">Delete</th>
+                        </tr>
+                        <tr>
+                            <th>Black level <i class="fa fa-flag text-black" aria-hidden="true"></i></th>
+                            <th>Grey level <i class="fa fa-flag text-grey" aria-hidden="true"></i></th>
+                            <th>Orange level <i class="fa fa-flag text-orange" aria-hidden="true"></i></th>
+                            <th>Yellow level <i class="fa fa-flag text-yellow" aria-hidden="true"></i></th>
+                            <th>Red level <i class="fa fa-flag text-red" aria-hidden="true"></i></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div *ngSwitchCase="true" class="body">
+                <table class="table-striped">
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <tbody>
+                        <ng-template ngFor let-currencySetting [ngForOf]="playerCurrencySettings" let-i="index">
+                            <ng-template ngFor let-productSetting [ngForOf]="currencySetting.Products" let-isFirstCurrencySetting="first">
+                                <ng-template ngFor let-playerSetting [ngForOf]="productSetting.PlayerSettings" let-isFirstProductSetting="first">
+                                    <tr napLossLimitValidator napWinLimitValidator #lossValidator="napLossLimitValidator" #winValidator="napWinLimitValidator">
+                                        <td *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.SettingCount" class="text-center">
+                                            {{ i + 1 }}
+                                        </td>
+                                        <td class="word-break-all" *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.SettingCount">{{ currencySetting.Username }}</td>
+                                        <td class="word-break-all" *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.SettingCount">{{ currencySetting.SiteName }}</td>
+                                        <td class="word-break-all" *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.SettingCount">{{ currencySetting.CurrencyName }}</td>
+                                        <td class="word-break-all" *ngIf="isFirstProductSetting" [attr.rowspan]="productSetting.PlayerSettings.length">{{ productSetting.ProductName }}</td>
+                                        <td class="word-break-all"><span class="nap-link" (click)="showGroupSetting(productSetting.ProductName)"> {{ playerSetting.GroupName }}</span></td>
+                                        <td>
+                                            <div class="limit-row">
+                                                <nap-editable-loss-limit #blackLossLimitTextbox [value]="playerSetting.BlackLimit" [editable]="hasHostPermission" (edit)="onEditLimit(blackLossLimitTextbox)"
+                                                    (complete)="saveBlackLimit(lossValidator.isValid, playerSetting, $event)">
+                                                </nap-editable-loss-limit>
+                                                <nap-exclamation #blackExclamation></nap-exclamation>
+                                                <span>(RM)</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="limit-row">
+                                                <nap-editable-loss-limit #greyLossLimitTextbox [value]="playerSetting.GreyLimit" [editable]="hasHostPermission" (edit)="onEditLimit(greyLossLimitTextbox)"
+                                                    (complete)="saveGreyLimit(lossValidator.isValid, playerSetting, $event)">
+                                                </nap-editable-loss-limit>
+                                                <nap-exclamation #greyExclamation></nap-exclamation>
+                                                <span>(RM)</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="limit-row">
+                                                <nap-editable-win-limit #orangeWinLimitTextbox [value]="playerSetting.OrangeLimit" [editable]="hasHostPermission" (edit)="onEditLimit(orangeWinLimitTextbox)"
+                                                    (complete)="saveOrangeLimit(winValidator.isValid, playerSetting, $event)">
+                                                </nap-editable-win-limit>
+                                                <nap-exclamation #orangeExclamation></nap-exclamation>
+                                                <span>(RM)</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="limit-row">
+                                                <nap-editable-win-limit #yellowWinLimitTextbox [value]="playerSetting.YellowLimit" [editable]="hasHostPermission" (edit)="onEditLimit(yellowWinLimitTextbox)"
+                                                    (complete)="saveYellowLimit(winValidator.isValid, playerSetting, $event)">
+                                                </nap-editable-win-limit>
+                                                <nap-exclamation #yellowExclamation></nap-exclamation>
+                                                <span>(RM)</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="limit-row">
+                                                <nap-editable-win-limit #redWinLimitTextbox [value]="playerSetting.RedLimit" [editable]="hasHostPermission" (edit)="onEditLimit(redWinLimitTextbox)"
+                                                    (complete)="saveRedLimit(winValidator.isValid, playerSetting, $event)">
+                                                </nap-editable-win-limit>
+                                                <nap-exclamation #redExclamation></nap-exclamation>
+                                                <span>(RM)</span>
+                                            </div>
+                                        </td>
+                                        <td *ngIf="hasHostPermission" class="text-center">
+                                            <i class="fa fa-times fa-lg" aria-hidden="true" (click)="deletePlayer(playerSetting)"></i>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </ng-template>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngSwitchCase="false" class="body stretch">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th class="no-data" [attr.colspan]="hasHostPermission ? 12 : 11">
+                                There is no data
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div *ngSwitchCase="true">
+        <nap-note>
+            <span class="text-danger">- Limit Setting = 0: Unlimited.</span>
+        </nap-note>
+    </div>
+</div>

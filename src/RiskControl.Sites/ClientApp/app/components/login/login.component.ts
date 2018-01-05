@@ -7,7 +7,7 @@ import { CustomValidators } from '../common/custom-validators';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-    selector: 'login',
+    selector: 'nap-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })

@@ -29,5 +29,5 @@ export interface Currency {
 export interface QueryCurrencyModel {
     excludeTestCurrency?: boolean;
     isCreditSite: boolean;
-    siteId: number;
+    siteId: number | undefined;
 }

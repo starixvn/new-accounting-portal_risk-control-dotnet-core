@@ -3,10 +3,7 @@ import { FilterModel } from './filter';
 
 @Component({
   selector: 'nap-currency-setting',
-  templateUrl: './currency-setting.component.html',
-  styleUrls: [
-    './currency-setting.component.scss'
-  ]
+  templateUrl: './currency-setting.component.html'
 })
 export class CurrencySettingComponent {
   filterModel: FilterModel;

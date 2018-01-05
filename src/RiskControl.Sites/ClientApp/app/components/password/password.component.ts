@@ -4,7 +4,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { PasswordService } from './password.service';
 
 @Component({
-    selector: 'password',
+    selector: 'nap-password',
     templateUrl: './password.component.html',
     styleUrls: ['./password.component.scss'],
     providers: [
@@ -54,7 +54,7 @@ export class PasswordComponent implements OnInit {
             this.passwordService.save(oldPassword, newPassword)
                 .subscribe(response => {
                     this.message = 'Your changes were saved!';
-                });;
+                });
         } else {
             if (this.oldPassword.errors) {
                 if (this.oldPassword.errors.required) {
