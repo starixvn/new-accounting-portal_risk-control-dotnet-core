@@ -28,6 +28,7 @@ namespace RiskControl.Sites {
         public void ConfigureServices (IServiceCollection services) {
             ConfigureSettings (services);
             ConfigureAuth (services);
+            ConfigureGlobalServices(services);
 
             services.AddMediatR (
                 typeof (IAccountMarker).Assembly,
@@ -36,6 +37,7 @@ namespace RiskControl.Sites {
             services.AddOptions ();
             services.AddAccountModule ();
             services.AddWinLossLimitControlModule();
+            
             services.AddMvc (options => {
                 options.Filters.Add (typeof (MaintenanceFilter));
             });
@@ -64,6 +66,9 @@ namespace RiskControl.Sites {
                 app.UseExceptionHandler ("/Home/Error");
             }
 
+            // TODO: Add Fanex.Data
+            // ConfigureFanexData(app);
+            // TODO
             app.ConfigureAccountModule ();
             app.UseStaticFiles ();
             app.UseAuthentication ();

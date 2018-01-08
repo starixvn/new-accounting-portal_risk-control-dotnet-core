@@ -8,6 +8,11 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="Fanex.Data" Version="2.1.0.1" />
+    <PackageReference Include="Fanex.Data.CrossCutting.WrappingException" Version="1.0.0.3" />
+    <PackageReference Include="Fanex.Data.DbSettingProviderExtension" Version="1.0.0.1" />
+    <PackageReference Include="Fanex.Data.OldConnectionStringProvider" Version="1.0.1" />
+    <PackageReference Include="Fanex.Data.Repository" Version="1.0.2.1" />
     <PackageReference Include="MediatR" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.0" />

@@ -46,17 +46,6 @@ namespace RiskControl.Sites
             {
                 o.Audience = Configuration["TokenProviderOptions:Audience"];
                 o.TokenValidationParameters = tokenValidationParameters;
-                o.Events = new JwtBearerEvents()
-                {
-                    OnAuthenticationFailed = c =>
-                    {
-                        c.NoResult();
-
-                        c.Response.StatusCode = 500;
-                        c.Response.ContentType = "text/plain";
-                        return c.Response.WriteAsync("An error occurred processing your authentication.");
-                    }
-                };
             });
         }
     }
