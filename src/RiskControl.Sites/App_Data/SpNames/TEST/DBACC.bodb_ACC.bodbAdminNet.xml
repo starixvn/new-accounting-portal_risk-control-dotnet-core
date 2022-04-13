@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Functions SiteName="NAP - Risk &amp; Control">
-  <Function Name="Betting Monitoring">
-    <Setting Key="NAP_BetMonitoring_SettingSel" SpName="NAP_BetMonitoring_SettingSel" DbName="DBACC.bodb_ACC.bodbAdminNet" />
-    <Setting Key="NAP_BetMonitoring_SettingUpd" SpName="NAP_BettingMonitor_SettingUpd" DbName="DBACC.bodb_ACC.bodbAdminNet" />
-  </Function>
-</Functions>

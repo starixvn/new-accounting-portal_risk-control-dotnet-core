@@ -1,2 +1,0 @@
-<span [hidden]="isEdit" [ngClass]="{'nap-link': editable, 'text-red': value === 0}" [napIntegerFormat]="value" (click)="openEdit()"></span>
-<nap-loss-limit-textbox #lossLimitTextbox [hidden]="!isEdit" [(value)]="value" (valueChange)="onModelChange($event)" (blur)="onBlur()"></nap-loss-limit-textbox>
