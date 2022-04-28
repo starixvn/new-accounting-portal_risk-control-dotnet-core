@@ -7,9 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5186ACE3-6F8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.Application", "src\RiskControl.Application\RiskControl.Application.csproj", "{F84D3609-C56F-4C65-8A9A-B69883506F0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskControl.BettingMonitoring", "src\RiskControl.BettingMonitoring\RiskControl.BettingMonitoring.csproj", "{F99230C7-EE20-4FC5-B0C1-A5E7EC0FDBEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.BettingMonitoring", "src\RiskControl.BettingMonitoring\RiskControl.BettingMonitoring.csproj", "{F99230C7-EE20-4FC5-B0C1-A5E7EC0FDBEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskControl.Dashboard", "src\RiskControl.Dashboard\RiskControl.Dashboard.csproj", "{300A5326-ED97-4870-95E7-54B7ED7E71DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.Dashboard", "src\RiskControl.Dashboard\RiskControl.Dashboard.csproj", "{300A5326-ED97-4870-95E7-54B7ED7E71DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskControl.NonSportsGamesStatistics", "src\RiskControl.NonSportsGamesStatistics\RiskControl.NonSportsGamesStatistics.csproj", "{B8B3341A-A309-4940-AB11-AFCF095721E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{300A5326-ED97-4870-95E7-54B7ED7E71DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{300A5326-ED97-4870-95E7-54B7ED7E71DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{300A5326-ED97-4870-95E7-54B7ED7E71DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B3341A-A309-4940-AB11-AFCF095721E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B3341A-A309-4940-AB11-AFCF095721E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B3341A-A309-4940-AB11-AFCF095721E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B3341A-A309-4940-AB11-AFCF095721E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 		{F84D3609-C56F-4C65-8A9A-B69883506F0A} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
 		{F99230C7-EE20-4FC5-B0C1-A5E7EC0FDBEC} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
 		{300A5326-ED97-4870-95E7-54B7ED7E71DB} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
+		{B8B3341A-A309-4940-AB11-AFCF095721E9} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FBF92E47-50E6-4A60-AEB9-7251A38B2985}
