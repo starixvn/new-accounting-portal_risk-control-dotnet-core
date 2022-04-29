@@ -1,7 +1,7 @@
 ﻿using Fanex.Data.Repository;
 using Olympus.FPSAPI.Client;
-using RiskControl.CoreNew.AssociatedAcccount;
-using RiskControl.CoreNew.Configuration;
+using RiskControl.Core.AssociatedAcccount;
+using RiskControl.Core.Configuration;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.RawData;

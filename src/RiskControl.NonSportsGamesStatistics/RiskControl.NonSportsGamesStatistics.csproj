@@ -29,4 +29,8 @@
     <Folder Include="RawData\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RiskControl.Core\RiskControl.Core.csproj" />
+  </ItemGroup>
+
 </Project>

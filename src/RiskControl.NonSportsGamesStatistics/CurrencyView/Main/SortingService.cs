@@ -1,4 +1,4 @@
-﻿using RiskControl.CoreNew.Sort;
+﻿using RiskControl.Core.Sort;
 using RiskControl.NonSportsGamesStatistics.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Main

@@ -2,7 +2,7 @@
 using System.IO;
 using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
-using RiskControl.CoreNew.Configuration;
+using RiskControl.Core.Configuration;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 

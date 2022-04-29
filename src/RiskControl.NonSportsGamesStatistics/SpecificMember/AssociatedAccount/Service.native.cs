@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using RiskControl.CoreNew.AssociatedAcccount;
+using RiskControl.Core.AssociatedAcccount;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.SpecificMember.Common;

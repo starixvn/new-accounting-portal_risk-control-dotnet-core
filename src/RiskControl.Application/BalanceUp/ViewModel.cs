@@ -1,4 +1,5 @@
 ﻿using System;
+using RiskControl.Core.BalanceUp;
 
 namespace RiskControl.Application.BalanceUp
 {
@@ -6,6 +7,6 @@ namespace RiskControl.Application.BalanceUp
     {
         public DateTime Today { get; set; }
 
-        //public BalanceUpRange BalanceUpRange { get; set; }
+        public BalanceUpRange BalanceUpRange { get; set; }
     }
 }

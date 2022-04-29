@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="ApiModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="6.0.3" />
+    <PackageReference Include="Epplus.Mapper" Version="1.0.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Olympus.WebApi.Epplus.AspNetCore" Version="1.0.0" />
+    <PackageReference Include="Olympus.WebApiClient.AspNetCore" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RiskControl.Core\RiskControl.Core.csproj" />
+  </ItemGroup>
+
+</Project>
