@@ -1,0 +1,292 @@
+﻿[
+  {
+    "exchangeId": 0,
+    "currency": "All",
+    "isTest": false
+  },
+  {
+    "exchangeId": -1,
+    "currency": "Base RM",
+    "isTest": false
+  },
+  {
+    "exchangeId": 35,
+    "currency": "$US",
+    "isTest": false
+  },
+  {
+    "exchangeId": 9,
+    "currency": "AUD",
+    "isTest": false
+  },
+  {
+    "exchangeId": 46,
+    "currency": "BND",
+    "isTest": false
+  },
+  {
+    "exchangeId": 28,
+    "currency": "C",
+    "isTest": true
+  },
+  {
+    "exchangeId": 21,
+    "currency": "CAD",
+    "isTest": false
+  },
+  {
+    "exchangeId": 50,
+    "currency": "CAN",
+    "isTest": false
+  },
+  {
+    "exchangeId": 41,
+    "currency": "CHF",
+    "isTest": false
+  },
+  {
+    "exchangeId": 57,
+    "currency": "CZK",
+    "isTest": false
+  },
+  {
+    "exchangeId": 47,
+    "currency": "DDD",
+    "isTest": false
+  },
+  {
+    "exchangeId": 52,
+    "currency": "DKK",
+    "isTest": false
+  },
+  {
+    "exchangeId": 6,
+    "currency": "EURO",
+    "isTest": false
+  },
+  {
+    "exchangeId": 12,
+    "currency": "GBP",
+    "isTest": false
+  },
+  {
+    "exchangeId": 27,
+    "currency": "H",
+    "isTest": true
+  },
+  {
+    "exchangeId": 5,
+    "currency": "HK$",
+    "isTest": false
+  },
+  {
+    "exchangeId": 67,
+    "currency": "HKK",
+    "isTest": false
+  },
+  {
+    "exchangeId": 33,
+    "currency": "IDD",
+    "isTest": false
+  },
+  {
+    "exchangeId": 34,
+    "currency": "IDR",
+    "isTest": false
+  },
+  {
+    "exchangeId": 15,
+    "currency": "IN",
+    "isTest": false
+  },
+  {
+    "exchangeId": 22,
+    "currency": "IND",
+    "isTest": false
+  },
+  {
+    "exchangeId": 51,
+    "currency": "INH",
+    "isTest": false
+  },
+  {
+    "exchangeId": 61,
+    "currency": "INR",
+    "isTest": false
+  },
+  {
+    "exchangeId": 40,
+    "currency": "IRR",
+    "isTest": false
+  },
+  {
+    "exchangeId": 32,
+    "currency": "JPY",
+    "isTest": false
+  },
+  {
+    "exchangeId": 71,
+    "currency": "KHR",
+    "isTest": false
+  },
+  {
+    "exchangeId": 62,
+    "currency": "KW",
+    "isTest": false
+  },
+  {
+    "exchangeId": 70,
+    "currency": "MKK",
+    "isTest": false
+  },
+  {
+    "exchangeId": 69,
+    "currency": "MMK",
+    "isTest": false
+  },
+  {
+    "exchangeId": 49,
+    "currency": "MXN",
+    "isTest": false
+  },
+  {
+    "exchangeId": 54,
+    "currency": "NOK",
+    "isTest": false
+  },
+  {
+    "exchangeId": 30,
+    "currency": "NT",
+    "isTest": false
+  },
+  {
+    "exchangeId": 17,
+    "currency": "NTD",
+    "isTest": false
+  },
+  {
+    "exchangeId": 63,
+    "currency": "NZD",
+    "isTest": false
+  },
+  {
+    "exchangeId": 37,
+    "currency": "P",
+    "isTest": false
+  },
+  {
+    "exchangeId": 42,
+    "currency": "PE",
+    "isTest": false
+  },
+  {
+    "exchangeId": 56,
+    "currency": "PLN",
+    "isTest": false
+  },
+  {
+    "exchangeId": 68,
+    "currency": "POS",
+    "isTest": false
+  },
+  {
+    "exchangeId": 44,
+    "currency": "PT",
+    "isTest": false
+  },
+  {
+    "exchangeId": 31,
+    "currency": "Pts",
+    "isTest": false
+  },
+  {
+    "exchangeId": 2,
+    "currency": "RM",
+    "isTest": false
+  },
+  {
+    "exchangeId": 13,
+    "currency": "RMB",
+    "isTest": false
+  },
+  {
+    "exchangeId": 58,
+    "currency": "RON",
+    "isTest": false
+  },
+  {
+    "exchangeId": 55,
+    "currency": "RUB",
+    "isTest": false
+  },
+  {
+    "exchangeId": 1,
+    "currency": "SD$",
+    "isTest": false
+  },
+  {
+    "exchangeId": 53,
+    "currency": "SEK",
+    "isTest": false
+  },
+  {
+    "exchangeId": 4,
+    "currency": "TB",
+    "isTest": false
+  },
+  {
+    "exchangeId": 43,
+    "currency": "THB",
+    "isTest": false
+  },
+  {
+    "exchangeId": 65,
+    "currency": "UDI",
+    "isTest": false
+  },
+  {
+    "exchangeId": 3,
+    "currency": "US$",
+    "isTest": false
+  },
+  {
+    "exchangeId": 64,
+    "currency": "UT",
+    "isTest": false
+  },
+  {
+    "exchangeId": 20,
+    "currency": "UUS",
+    "isTest": true
+  },
+  {
+    "exchangeId": 45,
+    "currency": "Won",
+    "isTest": false
+  },
+  {
+    "exchangeId": 36,
+    "currency": "Y$US",
+    "isTest": false
+  },
+  {
+    "exchangeId": 16,
+    "currency": "Yen",
+    "isTest": false
+  },
+  {
+    "exchangeId": 72,
+    "currency": "YNG",
+    "isTest": false
+  },
+  {
+    "exchangeId": 66,
+    "currency": "YUN",
+    "isTest": false
+  },
+  {
+    "exchangeId": 48,
+    "currency": "ZAR",
+    "isTest": false
+  }
+]

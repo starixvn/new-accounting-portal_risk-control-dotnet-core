@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Functions>
+  <Function Name="Core - Configuration">
+    <Setting Key="GetBalanceUpRange" SpName="Age_SelBalanceUpDay" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="300" />
+  </Function>
+  <Function Name="Non Sports Games Statistic">
+    <Setting Key="NonSportsProductStatistics_UserNameSuggestion" SpName="Acc_CustomerSelUserSearch" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="300" />
+  </Function>
+</Functions>

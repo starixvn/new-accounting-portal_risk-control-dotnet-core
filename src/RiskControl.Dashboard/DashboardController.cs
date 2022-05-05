@@ -18,6 +18,7 @@ namespace RiskControl.Dashboard
 
         [Route("currency-netincome")]
         [HttpGet]
+        [ResponseCache(Duration = 86400)]
         public async Task<IActionResult> CurrencyNetIncome()
         {
             var criteria = new CurrencyNetIncomeCriteria();
@@ -28,6 +29,7 @@ namespace RiskControl.Dashboard
 
         [Route("monthly-turnover-netincome")]
         [HttpGet]
+        [ResponseCache(Duration = 86400)]
         public async Task<IActionResult> MonthlyTurnoverAndNetIncome()
         {
             var criteria = new MonthlyTurnoverAndNetIncomeCriteria();
@@ -37,6 +39,7 @@ namespace RiskControl.Dashboard
 
         [Route("product-turnover")]
         [HttpGet]
+        [ResponseCache(Duration = 86400)]
         public async Task<IActionResult> ProductTurnover()
         {
             var criteria = new ProductTurnoverCriteria();
@@ -46,6 +49,7 @@ namespace RiskControl.Dashboard
 
         [Route("top-gametype-winning")]
         [HttpGet]
+        [ResponseCache(Duration = 86400)]
         public async Task<IActionResult> TopGameTypeWinning()
         {
             var criteria = new TopGameTypeWinningCriteria();
@@ -55,6 +59,7 @@ namespace RiskControl.Dashboard
 
         [Route("top-member-winning")]
         [HttpGet]
+        [ResponseCache(Duration = 86400)]
         public async Task<IActionResult> TopMemberWinning()
         {
             var criteria = new TopMemberWinningCriteria();

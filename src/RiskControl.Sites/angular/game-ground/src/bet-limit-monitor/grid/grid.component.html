@@ -1,0 +1,117 @@
+<ng-template #colgroup>
+  <colgroup>
+    <col style="width: 60px" />
+    <col style="width: 90px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+    <col style="width: 180px" />
+    <col style="width: 90px" />
+    <col style="width: 90px" />
+    <col style="width: 120px" />
+    <col style="width: 160px" />
+  </colgroup>
+</ng-template>
+<ng-template #thead>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Product</th>
+      <th>Game Type</th>
+      <th>Game Round ID</th>
+      <th>Game Round Bet Limit (RM)</th>
+      <th>Bet Count</th>
+      <th>Total Players</th>
+      <th>Total Stake (RM)</th>
+      <th>Reached Limit Time</th>
+    </tr>
+  </thead>
+</ng-template>
+<ng-template #breadcrumbToolboxTemplate>
+  <div *ngIf="hasData" class="breadcrumb-toolbox">
+    <div class="toolbox-item">
+      <i
+        class="nap-icon nap-icon-breadcrumb-excel"
+        aria-hidden="true"
+        title="Export excel"
+        (click)="exportExcel()"
+      ></i>
+    </div>
+  </div>
+</ng-template>
+<div class="d-inline-block">
+  <nap-breadcrumb
+    *ngIf="displayedModels"
+    [items]="breadcrumbItems"
+    [toolboxTemplate]="breadcrumbToolboxTemplate"
+  >
+  </nap-breadcrumb>
+  <div *ngIf="displayedModels" class="nap-grid" [ngSwitch]="hasData">
+    <div style="width: 1048px;">
+      <div class="header">
+        <table>
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <ng-template [ngTemplateOutlet]="thead"></ng-template>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="body">
+        <table class="table-striped">
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <tbody>
+            <tr *ngFor="let item of displayedModels">
+              <td class="text-center">
+                {{ item.Index }}
+              </td>
+              <td class="text-center">
+                {{ item.ProductName }}
+              </td>
+              <td class="text-center">
+                {{ item.BetTypeName }}
+              </td>
+              <td class="text-center">
+                {{ item.GameRound }}
+              </td>
+              <td
+                class="text-right"
+                [napIntegerFormat]="item.GameRoundBetLimit"
+              ></td>
+              <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
+              <td class="text-right" [napIntegerFormat]="item.NoOfPlayers"></td>
+              <td class="text-right" [napIntegerFormat]="item.TotalStake"></td>
+              <td class="text-center">
+                {{ item.ReachedLimitTime | date: "MM/dd/yyyy hh:mm:ss aa" }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngSwitchCase="false" class="body stretch">
+        <table>
+          <tbody>
+            <tr>
+              <th class="no-data" colspan="9">
+                There is no data
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="footer">
+        <table>
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <tfoot>
+            <tr>
+              <td colspan="9">
+                <nap-pagination
+                  [config]="paginationInstance"
+                  (pageChange)="onPageChange($event)"
+                  class="test-pagination"
+                ></nap-pagination>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

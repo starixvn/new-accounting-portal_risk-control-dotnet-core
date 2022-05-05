@@ -1,0 +1,24 @@
+﻿<div class="modal-header">
+    <p class="modal-title">House Position Taking ({{model.userName}})</p>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <table class="table table-bordered table-nap">
+        <thead>
+            <tr>
+                <th class="text-xs-center">No</th>
+                <th class="text-xs-center">Product</th>
+                <th class="text-xs-center">House PT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of model.housePositionTakings; let i = index">
+                <td class="text-xs-center">{{i+1}}</td>
+                <td>{{item.product}}</td>
+                <td class="text-xs-center">{{item.housePositionTaking | percent:'1.2-2'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,132 @@
+<ng-template #colgroup>
+    <colgroup>
+        <col *ngIf="columns.no.checked" [ngStyle]="{'width.px': columns.no.width}" />
+        <col *ngIf="columns.username.checked" [ngStyle]="{'width.px': columns.username.width}" />
+        <col *ngIf="columns.siteLicensee.checked" [ngStyle]="{'width.px': columns.siteLicensee.width}" />
+        <col *ngIf="columns.currency.checked" [ngStyle]="{'width.px': columns.currency.width}" />
+        <col *ngIf="columns.product.checked" [ngStyle]="{'width.px': columns.product.width}" />
+        <col *ngIf="columns.settingGroup.checked" [ngStyle]="{'width.px': columns.settingGroup.width}" />
+        <col *ngIf="columns.lossLimitLevel.checked" [ngStyle]="{'width.px': columns.lossLimitLevel.width/2}" />
+        <col *ngIf="columns.lossLimitLevel.checked" [ngStyle]="{'width.px': columns.lossLimitLevel.width/2}" />
+        <col *ngIf="columns.winLimitLevel.checked" [ngStyle]="{'width.px': columns.winLimitLevel.width/3}" />
+        <col *ngIf="columns.winLimitLevel.checked" [ngStyle]="{'width.px': columns.winLimitLevel.width/3}" />
+        <col *ngIf="columns.winLimitLevel.checked" [ngStyle]="{'width.px': columns.winLimitLevel.width/3}" />
+        <col *ngIf="columns.winningLosingAmountRM.checked" [ngStyle]="{'width.px': columns.winningLosingAmountRM.width}" />
+        <col *ngIf="columns.winningLosingAmountInPlayerCurrency.checked" [ngStyle]="{'width.px': columns.winningLosingAmountInPlayerCurrency.width}"
+        />
+        <col *ngIf="columns.reachedLimitTime.checked" [ngStyle]="{'width.px': columns.reachedLimitTime.width}" />
+        <col *ngIf="columns.reachedLimitLevel.checked" [ngStyle]="{'width.px': columns.reachedLimitLevel.width}" />
+        <col *ngIf="columns.blockPlaceBet.checked" [ngStyle]="{'width.px': columns.blockPlaceBet.width}" />
+        <col *ngIf="columns.blockTransferWithdraw.checked" [ngStyle]="{'width.px': columns.blockTransferWithdraw.width}" />
+        <col *ngIf="columns.history.checked" [ngStyle]="{'width.px': columns.history.width}" />
+    </colgroup>
+</ng-template>
+<ng-template #breadcrumbToolboxTemplate>
+    <div class="breadcrumb-toolbox">
+        <div class="toolbox-item">
+            <nap-countdown-timer (callback)="countdownCallback()"></nap-countdown-timer>
+        </div>
+        <div class="toolbox-item">
+            <i class="fa" [ngClass]="{'fa-volume-up': volumnOn, 'fa-volume-off': !volumnOn}" aria-hidden="true" (click)="toggleVolume()"></i>
+        </div>
+    </div>
+</ng-template>
+<div *ngIf="displayedModels" [ngSwitch]="displayedModels.length > 0">
+    <div class="grid">
+        <div [ngStyle]="{'width.px': width}">
+            <nap-breadcrumb [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
+            <div class="header">
+                <table>
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <thead>
+                        <tr>
+                            <th *ngIf="columns.no.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.no.text"></th>
+                            <th *ngIf="columns.username.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.username.text"></th>
+                            <th *ngIf="columns.siteLicensee.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.siteLicensee.text"></th>
+                            <th *ngIf="columns.currency.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.currency.text"></th>
+                            <th *ngIf="columns.product.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.product.text"></th>
+                            <th *ngIf="columns.settingGroup.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.settingGroup.text"></th>
+                            <th *ngIf="columns.lossLimitLevel.checked" colspan="2" [innerHTML]="columns.lossLimitLevel.text"></th>
+                            <th *ngIf="columns.winLimitLevel.checked" colspan="3" [innerHTML]="columns.winLimitLevel.text"></th>
+                            <th *ngIf="columns.winningLosingAmountRM.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.winningLosingAmountRM.text"></th>
+                            <th *ngIf="columns.winningLosingAmountInPlayerCurrency.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.winningLosingAmountInPlayerCurrency.text"></th>
+                            <th *ngIf="columns.reachedLimitTime.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.reachedLimitTime.text"></th>
+                            <th *ngIf="columns.reachedLimitLevel.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.reachedLimitLevel.text"></th>
+                            <th *ngIf="columns.blockPlaceBet.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.blockPlaceBet.text"></th>
+                            <th *ngIf="columns.blockTransferWithdraw.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.blockTransferWithdraw.text"></th>
+                            <th *ngIf="columns.history.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.history.text"></th>
+                        </tr>
+                        <tr *ngIf="columns.lossLimitLevel.checked || columns.winLimitLevel.checked">
+                            <th *ngIf="columns.lossLimitLevel.checked">Black level <i class="fa fa-flag text-black" aria-hidden="true"></i></th>
+                            <th *ngIf="columns.lossLimitLevel.checked">Grey level <i class="fa fa-flag text-grey" aria-hidden="true"></i></th>
+                            <th *ngIf="columns.winLimitLevel.checked">Orange level <i class="fa fa-flag text-orange" aria-hidden="true"></i></th>
+                            <th *ngIf="columns.winLimitLevel.checked">Yellow level <i class="fa fa-flag text-yellow" aria-hidden="true"></i></th>
+                            <th *ngIf="columns.winLimitLevel.checked">Red level <i class="fa fa-flag text-red" aria-hidden="true"></i></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div *ngSwitchCase="true" class="body">
+                <table class="table-striped">
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <tbody>
+                        <tr *ngFor="let item of displayedModels; let i = index" [napHighlight]="!item.IsNotified" class="test-data-row">
+                            <td *ngIf="columns.no.checked" class="text-center">
+                                {{ paginationInstance.itemsPerPage * (paginationInstance.currentPage - 1) + i + 1 }}
+                            </td>
+                            <td *ngIf="columns.username.checked" class="word-break-all"><span (click)="onShowAccount(item)" class="nap-link test-account-link"> {{ item.UserName }}</span></td>
+                            <td *ngIf="columns.siteLicensee.checked" class="word-break-all">{{item.SiteName}}</td>
+                            <td *ngIf="columns.currency.checked" class="word-break-all">{{item.CurrencyName}}</td>
+                            <td *ngIf="columns.product.checked" class="word-break-all">{{item.ProductName}}</td>
+                            <td *ngIf="columns.settingGroup.checked" class="word-break-all">{{item.GroupName}}</td>
+                            <td *ngIf="columns.lossLimitLevel.checked" class="number number-limit" [napIntegerFormat]="item.BlackLimit"></td>
+                            <td *ngIf="columns.lossLimitLevel.checked" class="number number-limit" [napIntegerFormat]="item.GreyLimit"></td>
+                            <td *ngIf="columns.winLimitLevel.checked" class="number number-limit" [napIntegerFormat]="item.OrangeLimit"></td>
+                            <td *ngIf="columns.winLimitLevel.checked" class="number number-limit" [napIntegerFormat]="item.YellowLimit"></td>
+                            <td *ngIf="columns.winLimitLevel.checked" class="number number-limit" [napIntegerFormat]="item.RedLimit"></td>
+                            <td *ngIf="columns.winningLosingAmountRM.checked" class="number" [napIntegerFormat]="item.WinningAmountRM | napFloorPipe"></td>
+                            <td *ngIf="columns.winningLosingAmountInPlayerCurrency.checked" class="number" [napIntegerFormat]="item.WinningAmount | napFloorPipe"></td>
+                            <td *ngIf="columns.reachedLimitTime.checked" class="text-center">{{item.ReachedLimitTime}}</td>
+                            <td *ngIf="columns.reachedLimitLevel.checked" class="text-center">
+                                <i class="fa fa-flag fa-lg" [ngClass]="item.ReachedLimitLevel | napFlagPipe" aria-hidden="true"></i>
+                                <span>{{item.NumberReachedLimit | napReachedLimitCountPipe }}</span>
+                            </td>
+                            <td *ngIf="columns.blockPlaceBet.checked" class="text-center">
+                                <input class="test-unblock-place-bet" type="checkbox" [disabled]="!hostPermission.WinLimitMonitor || !(item.IsEnableUnblock && item.IsBlockedPlaceBet)"
+                                    [checked]="item.IsBlockedPlaceBet" (click)="onUnblockPlaceBet(item)" /></td>
+                            <td *ngIf="columns.blockTransferWithdraw.checked" class="text-center">
+                                <input class="test-unblock-transfer" type="checkbox" [disabled]="!hostPermission.WinLimitMonitor || !(item.IsEnableUnblock && item.IsBlockedTransfer)"
+                                    [checked]="item.IsBlockedTransfer" (click)="onUnblockTransfer(item)" /></td>
+                            <td *ngIf="columns.history.checked" class="text-center">
+                                <i class="fa fa-history fa-2x test-history-link" title="View History" aria-hidden="true" (click)="onShowHistory(item, hostPermission.WinLimitMonitor)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngSwitchCase="false" class="body stretch">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th [attr.colspan]="colspan" class="no-data">
+                                There is no data
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngSwitchCase="true" class="footer">
+                <table>
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <tfoot>
+                        <tr>
+                            <td [attr.colspan]="colspan">
+                                <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange($event)" class="test-pagination"></nap-pagination>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

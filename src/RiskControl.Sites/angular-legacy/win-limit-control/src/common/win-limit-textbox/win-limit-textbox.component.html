@@ -1,0 +1,3 @@
+<ngx-numeric-textbox [class.win-limit-unlimited]="value === 0" [class.invalid]="invalid" [min]="0" [max]="1000000000" [decimals]="0"
+    [autoCorrect]="true" [format]="'0,0'" [disabled]="disabled" [(ngModel)]="value" (ngModelChange)="onModelChange($event)" (blur)="onBlur()">
+</ngx-numeric-textbox>

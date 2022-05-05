@@ -1,0 +1,51 @@
+<div class="filter-container">
+    <div class="row">
+        <div class="col-nap col-nap-1">
+            <div class="group-nap">
+                <label>Username</label>
+                <div class="control-nap">
+                    <nap-dropdown-typeahead [query]="userNameTypeaheadQuery" [minLengthHasSuggestion]="3" [(text)]="userName"></nap-dropdown-typeahead>
+                </div>
+            </div>
+        </div>
+        <div class="col-nap col-nap-2">
+            <div class="group-nap">
+                <label for="select-product">Product</label>
+                <div class="control-nap">
+                    <select class="form-control" id="select-product" [(ngModel)]="productId" (ngModelChange)="onProductChange()">
+                        <option *ngFor="let product of products" [ngValue]="product.Id">
+                            {{product.Name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-nap col-nap-1">
+            <div class="group-nap">
+                <label for="select-site">Site / Licensee</label>
+                <div class="control-nap">
+                    <nap-dropdown-treeview-select [items]="sites" [(value)]="siteId" (valueChange)="onSiteSelectedChange()"></nap-dropdown-treeview-select>
+                </div>
+            </div>
+        </div>
+        <div class="col-nap col-nap-2">
+            <div class="group-nap">
+                <label for="select-currency">Currency</label>
+                <div class="control-nap">
+                    <select class="form-control" id="select-currency" [(ngModel)]="currencyId">
+                        <option *ngFor="let currency of currencies" [ngValue]="currency.Id">
+                            {{currency.Name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-nap">
+            <button type="button" class="btn btn-primary" (click)="search()">
+                Search
+            </button>
+        </div>
+    </div>
+</div>

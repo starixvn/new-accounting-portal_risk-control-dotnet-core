@@ -1,0 +1,16 @@
+﻿@import '~nap-theme/scss/mixins';
+:host {
+    position: relative;
+    overflow: hidden;
+    z-index: 3;
+}
+
+nap-user-name-suggestion {
+    position: absolute;
+    width: 800px;
+    // background-color: $input-bg-focus;
+    padding: .3rem;
+    // border: $input-btn-border-width solid $input-border-focus;
+    // @include border-radius($input-border-radius);
+    // @include box-shadow($input-box-shadow-focus);
+}

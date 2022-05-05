@@ -1,0 +1,21 @@
+<div class="nap-filter">
+  <div class="row">
+    <div class="nap-col nap-col-3">
+      <div class="nap-group">
+        <label for="select-product">Product</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview [items]="allProductGameTypes | napProductTreeview: allProductGameTypes"
+            [config]="treeviewConfig"
+            (selectedChange)="onProductChange($event)"
+          ></ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+
+    <div class="nap-col nap-col-5">
+      <button type="button" class="btn btn-primary" (click)="search()">
+        Search
+      </button>
+    </div>
+  </div>
+</div>

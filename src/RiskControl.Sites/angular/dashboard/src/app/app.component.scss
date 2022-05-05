@@ -1,0 +1,36 @@
+@import '~nap-theme/scss/header.scss';
+.performance-block {
+    background-color: #C2DFF9;
+}
+
+.card-header {
+    background-color: #93C7F4;
+    font-weight: bold;
+    color: #000000;
+    font-size: 0.95rem;
+}
+
+.card-body {
+    label {
+        color: #63B6FE;
+        font-weight: bold;
+    }
+    .text-orrange {
+        color: orange;
+    }
+    .text-yellow {
+        color: yellow;
+    }
+    .text-red, .number-negative {
+        color: red;
+    }
+    .text-grey {
+        color: gray;
+    }
+    .text-black {
+        color: black;
+    }
+}
+.chart-block {
+    background-color: #ffffff;
+}

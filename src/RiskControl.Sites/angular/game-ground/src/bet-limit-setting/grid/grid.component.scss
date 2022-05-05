@@ -1,0 +1,19 @@
+@import '~nap-theme/scss/breadcrumb';
+@import '~nap-theme/scss/grid';
+button {
+    margin-right: 5px
+}
+
+.game-round-bet-limit {
+    ngx-numeric-textbox {
+        float: left;
+        width: 195px;
+    }
+    span {
+        display: block;
+        float: left;
+        width: 40px;
+        padding-left: 10px;
+        line-height: 25px;
+    }
+}

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Functions>
+  <Function Name="Game Ground Bet Limit Control">
+    <Setting Key="NAP_GameRoundBetLimitMonitorSel" SpName="NAP_GameRoundBetLimitMonitorSel" DbName="DBTXN.bodb02.bodbAdminNet" TimeOut="300" />
+  </Function>
+</Functions>

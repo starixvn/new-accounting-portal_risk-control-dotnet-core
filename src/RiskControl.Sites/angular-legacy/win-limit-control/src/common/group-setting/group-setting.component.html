@@ -1,0 +1,59 @@
+<ng-template #colgroup>
+    <colgroup>
+        <col style="width: 250px" />
+        <col style="width: 250px" />
+    </colgroup>
+</ng-template>
+<div class="modal-header">
+    <p class="modal-title">Setting Group - Game Type Information</p>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+<div class="modal-body">
+    <ng-template ngFor let-hiddenSetting [ngForOf]="hiddenSettings">
+        <div style="width: 520px">
+            <div class="grid">
+                <div class="header stretch">
+                    <table>
+                        <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                        <thead>
+                            <tr>
+                                <td colspan="2">
+                                    <i (click)="toggleHidden(hiddenSetting)" aria-hidden="true" class="fa" [ngClass]="{'fa-plus-square': hiddenSetting.hidden, 'fa-minus-square': !hiddenSetting.hidden}"></i>
+                                    <strong>{{ hiddenSetting.setting.ProductName }}</strong>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div *ngIf="!hiddenSetting.hidden" class="body no-scroll">
+                    <table>
+                        <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                        <tbody>
+                            <tr>
+                                <th>Setting Group</th>
+                                <th>Game Type</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="!hiddenSetting.hidden" class="body">
+                    <table>
+                        <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                        <tbody>
+                            <ng-template ngFor let-group [ngForOf]="hiddenSetting.setting.Groups">
+                                <ng-template ngFor let-betType [ngForOf]="group.BetTypes" let-isFirst="first">
+                                    <tr>
+                                        <td *ngIf="isFirst" class="text-center group-name" [attr.rowspan]="group.BetTypes.length">{{ group.GroupName }}</td>
+                                        <td>{{ betType }}</td>
+                                    </tr>
+                                </ng-template>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

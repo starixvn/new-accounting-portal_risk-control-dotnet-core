@@ -1,0 +1,6 @@
+﻿<div class="modal-dialog" role="document"
+     [ngStyle]="width && {'max-width': '100%', 'width.px': width}">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <ng-content></ng-content>
+    </div>
+</div>

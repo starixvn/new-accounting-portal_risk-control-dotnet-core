@@ -1,0 +1,15 @@
+:host /deep/ {
+    ngx-numeric-textbox {
+        input {
+            color: red;
+            &:focus {
+                color: red;
+            }
+        }
+        &.invalid {
+            input {
+                border-color: red;
+            }
+        }
+    }
+}

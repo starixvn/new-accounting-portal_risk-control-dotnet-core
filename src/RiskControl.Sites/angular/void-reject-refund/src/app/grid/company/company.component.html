@@ -1,0 +1,125 @@
+<ng-template #colgroup>
+    <colgroup>
+        <col style="width: 200px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+    </colgroup>
+</ng-template>
+<ng-template #thead>
+    <thead>
+        <tr>
+            <th (click)="sort('ReportBy')">Company
+                <i class="fa" [ngClass]="{'fa-sort': sortColumnName != 'ReportBy', 
+                'fa-sort-asc': (sortColumnName == 'ReportBy' && sortDirection == 'desc'), 
+                'fa-sort-desc': (sortColumnName == 'ReportBy' && sortDirection == 'asc')}"></i>
+            </th>
+            <th (click)="sort('Currency')">Currency
+                <i class="fa" [ngClass]="{'fa-sort': sortColumnName != 'Currency', 
+                'fa-sort-asc': (sortColumnName == 'Currency' && sortDirection == 'desc'), 
+                'fa-sort-desc': (sortColumnName == 'Currency' && sortDirection == 'asc')}"></i>
+            </th>
+            <th (click)="sort('NoOfPlayers')">No. Players
+                <i class="fa" [ngClass]="{'fa-sort': sortColumnName != 'NoOfPlayers', 
+                    'fa-sort-asc': (sortColumnName == 'NoOfPlayers' && sortDirection == 'desc'), 
+                    'fa-sort-desc': (sortColumnName == 'NoOfPlayers' && sortDirection == 'asc')}"></i>
+            </th>
+            <th (click)="sort('BetCount')">BetCount
+                <i class="fa" [ngClass]="{'fa-sort': sortColumnName != 'BetCount', 
+                        'fa-sort-asc': (sortColumnName == 'BetCount' && sortDirection == 'desc'), 
+                        'fa-sort-desc': (sortColumnName == 'BetCount' && sortDirection == 'asc')}"></i>
+            </th>
+            <th colspan="2">Reject</th>
+            <th colspan="2">Void</th>
+            <th colspan="2">Refund</th>
+        </tr>
+    </thead>
+</ng-template>
+
+<div *ngIf="reportData" class="nap-grid" [ngSwitch]="hasData">
+    <div style="width: 1300px;">
+        <div class="header">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <ng-template [ngTemplateOutlet]="thead"></ng-template>
+            </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <tbody>
+                    <ng-template ngFor let-parentItem [ngForOf]="reportData.Statistics" let-i="index">
+                        <tr class="sub-total-row font-weight-bold">
+                            <td class="text-left" (click)="parentItem.collapsed=!parentItem.collapsed">
+                                <i [ngClass]="{'fa-caret-right': parentItem.collapsed, 'fa-caret-down': !parentItem.collapsed}"
+                                    class="fa"></i>
+                                {{parentItem.Total.ReportBy }} </td>
+                            <td class="text-left">{{parentItem.Total.Currency}}</td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.Total.NoOfPlayers"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.Total.BetCount"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.Total.Reject"></td>
+                            <td class="text-right" [napPercentFormat]="parentItem.Total.RejectPecentage"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.Total.Void"></td>
+                            <td class="text-right" [napPercentFormat]="parentItem.Total.VoidPecentage"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.Total.Refund"></td>
+                            <td class="text-right" [napPercentFormat]="parentItem.Total.RefundPecentage"></td>
+                        </tr>
+                        <ng-template *ngIf="!parentItem.collapsed" ngFor let-childItem [ngForOf]="parentItem.Statistics">
+                            <tr *ngFor="let item of childItem.Statistics; let i = index">
+                                <td *ngIf="i === 0" class="text-left" [attr.rowspan]="childItem.Statistics.length">
+                                    {{childItem.GroupName }}
+                                </td>
+                                <td class="text-right">{{item.Currency}}</td>
+                                <td class="text-right" [napIntegerFormat]="item.NoOfPlayers"></td>
+                                <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
+                                <td class="text-right" [napIntegerFormat]="item.Reject"></td>
+                                <td class="text-right" [napPercentFormat]="item.RejectPecentage"></td>
+                                <td class="text-right" [napIntegerFormat]="item.Void"></td>
+                                <td class="text-right" [napPercentFormat]="item.VoidPecentage"></td>
+                                <td class="text-right" [napIntegerFormat]="item.Refund"></td>
+                                <td class="text-right" [napPercentFormat]="item.RefundPecentage"></td>
+                            </tr>
+                        </ng-template>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
+
+        <div *ngSwitchCase="false" class="body stretch">
+            <table>
+                <tbody>
+                    <tr>
+                        <th class="no-data" colspan="9">
+                            There is no data
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngSwitchCase="true" class="footer">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <tfoot>
+                    <tr class="font-weight-bold">
+                        <td class="text-right">{{reportData.GrandTotal.ReportBy}}</td>
+                        <td class="text-right">{{reportData.GrandTotal.Currency}}</td>
+                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.NoOfPlayers"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.BetCount"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.Reject"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.GrandTotal.RejectPecentage"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.Void"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.GrandTotal.VoidPecentage"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.Refund"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.GrandTotal.RefundPecentage"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

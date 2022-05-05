@@ -1,0 +1,1070 @@
+﻿[
+  {
+    "productId": 3,
+    "typeId": 15223,
+    "typeName": "Number Game",
+    "isTest": false
+  },
+  {
+    "productId": 3,
+    "typeId": 14404,
+    "typeName": "TESTING (Betting Prohibited Area!!) - Number Game",
+    "isTest": true
+  },
+  {
+    "productId": 3,
+    "typeId": 15228,
+    "typeName": "TESTING (Betting Prohibited Area!!) - Traditional Bingo",
+    "isTest": true
+  },
+  {
+    "productId": 3,
+    "typeId": 50760,
+    "typeName": "TESTING (Betting Prohibited Area!!) - Turbo Number Game",
+    "isTest": true
+  },
+  {
+    "productId": 3,
+    "typeId": 50717,
+    "typeName": "Turbo Number Game",
+    "isTest": false
+  },
+  {
+    "productId": 4,
+    "typeId": 1103,
+    "typeName": "Live Baccarat",
+    "isTest": false
+  },
+  {
+    "productId": 4,
+    "typeId": 1104,
+    "typeName": "Live Roulette",
+    "isTest": false
+  },
+  {
+    "productId": 4,
+    "typeId": 1101,
+    "typeName": "Party Baccarat",
+    "isTest": false
+  },
+  {
+    "productId": 4,
+    "typeId": 1102,
+    "typeName": "Party Roulette",
+    "isTest": false
+  },
+  {
+    "productId": 5,
+    "typeId": 185,
+    "typeName": "Virtual Cycling",
+    "isTest": false
+  },
+  {
+    "productId": 5,
+    "typeId": 182,
+    "typeName": "Virtual Greyhounds",
+    "isTest": false
+  },
+  {
+    "productId": 5,
+    "typeId": 181,
+    "typeName": "Virtual Horse Racing",
+    "isTest": false
+  },
+  {
+    "productId": 5,
+    "typeId": 184,
+    "typeName": "Virtual Motorsports",
+    "isTest": false
+  },
+  {
+    "productId": 5,
+    "typeId": 180,
+    "typeName": "Virtual Soccer",
+    "isTest": false
+  },
+  {
+    "productId": 5,
+    "typeId": 183,
+    "typeName": "Virtual Speedway",
+    "isTest": false
+  },
+  {
+    "productId": 5,
+    "typeId": 186,
+    "typeName": "Virtual Tennis",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2201,
+    "typeName": "(Mini) Baccarat",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2203,
+    "typeName": "(Mini) BlackJack",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2202,
+    "typeName": "(Mini) Casino Hold'em",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2204,
+    "typeName": "(Mini) Jacks or Better",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2206,
+    "typeName": "(Mini) Money Slot",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2205,
+    "typeName": "(Mini) Sic Bo",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2301,
+    "typeName": "(Mobile)Baccarat",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2303,
+    "typeName": "(Mobile)Blackjack",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2302,
+    "typeName": "(Mobile)Casino Hold' em",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2305,
+    "typeName": "(Mobile)God of Prosperity",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2304,
+    "typeName": "(Mobile)Jungle Wild",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2308,
+    "typeName": "(Mobile)Magician",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2310,
+    "typeName": "(Mobile)Mini Roulette",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2307,
+    "typeName": "(Mobile)Oriental Beauty",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2306,
+    "typeName": "(Mobile)Sic Bo",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2309,
+    "typeName": "(Mobile)Tales of Brothel",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2143,
+    "typeName": "10's or Better",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2145,
+    "typeName": "25-Line Jacks or Better",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2144,
+    "typeName": "4-Line Jacks or Better",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2146,
+    "typeName": "50-Line Jacks or Better",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2101,
+    "typeName": "Baccarat",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2113,
+    "typeName": "Baccarat Super 6",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2142,
+    "typeName": "Baseball Battle",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2102,
+    "typeName": "Battle War",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2103,
+    "typeName": "Blackjack",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2112,
+    "typeName": "Blackjack Perfect Pair",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2119,
+    "typeName": "Card Wheel",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2177,
+    "typeName": "Cash Out",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 71,
+    "typeName": "Casino Games",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2105,
+    "typeName": "Casino Hold'em",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 72,
+    "typeName": "Casino Progressive Bonus",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2157,
+    "typeName": "Champions",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2155,
+    "typeName": "Chinese Zodiac",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2172,
+    "typeName": "Cowboy Fever",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2158,
+    "typeName": "Crazy Hospital",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2173,
+    "typeName": "Dino Camp",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2171,
+    "typeName": "Dragon Slot",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2115,
+    "typeName": "Dragon Tiger",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2148,
+    "typeName": "Engagement",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2121,
+    "typeName": "Face Up 21",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2118,
+    "typeName": "Fan Tan",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2139,
+    "typeName": "Fancy Scratch",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2114,
+    "typeName": "Fish Prawn Crab",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2140,
+    "typeName": "Flames of Olympics",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2162,
+    "typeName": "Football Fans",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2166,
+    "typeName": "Fortune Gods",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2151,
+    "typeName": "Fox Force 5",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2135,
+    "typeName": "Fruit Scratch",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2149,
+    "typeName": "God of Prosperity",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2132,
+    "typeName": "Gong Xi Fa Chai",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2168,
+    "typeName": "GOP(both way)",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2160,
+    "typeName": "Halloween",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2161,
+    "typeName": "Happy Vampire",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2136,
+    "typeName": "Ho Ho Ho",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2169,
+    "typeName": "Iron Fist",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2110,
+    "typeName": "Jacks or Better",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2152,
+    "typeName": "Journey to the West",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2147,
+    "typeName": "Jungle Wild",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2170,
+    "typeName": "Jungle Wild(Both Way)",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2127,
+    "typeName": "Keno Camera",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2128,
+    "typeName": "Keno Chinese",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2137,
+    "typeName": "Knock2 Eggs",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2133,
+    "typeName": "Love Story",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2167,
+    "typeName": "Magician",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2126,
+    "typeName": "Mahjong HiLo",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2159,
+    "typeName": "Mahjong Legend",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2175,
+    "typeName": "Mamak Corner",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2131,
+    "typeName": "Maya Push",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2107,
+    "typeName": "Mini Roulette",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2150,
+    "typeName": "Money Slot",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2117,
+    "typeName": "Money Wheel",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2125,
+    "typeName": "Monkey HiLo",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2124,
+    "typeName": "Multi Wheel Roulette",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2164,
+    "typeName": "Ninja Hero",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2163,
+    "typeName": "Oriental Beauty",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2106,
+    "typeName": "Pai Gow Poker",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2134,
+    "typeName": "Penalty Hat-Trick",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2138,
+    "typeName": "Poke Mole",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2104,
+    "typeName": "Poker Tri",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2123,
+    "typeName": "Red Dog",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2108,
+    "typeName": "Roulette Pro",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2111,
+    "typeName": "Roulette Pro (Fast)",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2176,
+    "typeName": "Sea Orchestra",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2109,
+    "typeName": "Sic Bo",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2130,
+    "typeName": "SpaKz",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2141,
+    "typeName": "Sushi Bar",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2165,
+    "typeName": "Tales of Brothel",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2174,
+    "typeName": "Tattoo Art",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2120,
+    "typeName": "Texas Hold'em",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2122,
+    "typeName": "Three Cards Rummy",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2116,
+    "typeName": "Three Knights",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2129,
+    "typeName": "Turf King",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2156,
+    "typeName": "Water Margin",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2154,
+    "typeName": "Western Zodiac",
+    "isTest": false
+  },
+  {
+    "productId": 6,
+    "typeId": 2153,
+    "typeName": "Winter Slot",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1501,
+    "typeName": "Australia",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1502,
+    "typeName": "Bejing",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1504,
+    "typeName": "Canada",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1511,
+    "typeName": "Kentucky",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1514,
+    "typeName": "Korea",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1509,
+    "typeName": "Malta",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1507,
+    "typeName": "Massachusetts",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1515,
+    "typeName": "Max Keno",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1513,
+    "typeName": "Michigan",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1508,
+    "typeName": "Ohio",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1503,
+    "typeName": "Slovakia",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1506,
+    "typeName": "Taiwan",
+    "isTest": false
+  },
+  {
+    "productId": 8,
+    "typeId": 1505,
+    "typeName": "West Canada ",
+    "isTest": false
+  },
+  {
+    "productId": 11,
+    "typeId": 1800,
+    "typeName": "AG Casino - Deposit",
+    "isTest": false
+  },
+  {
+    "productId": 11,
+    "typeId": 1801,
+    "typeName": "Baccarat",
+    "isTest": false
+  },
+  {
+    "productId": 11,
+    "typeId": 1803,
+    "typeName": "Dragon Tiger",
+    "isTest": false
+  },
+  {
+    "productId": 11,
+    "typeId": 1802,
+    "typeName": "Roulette",
+    "isTest": false
+  },
+  {
+    "productId": 11,
+    "typeId": 1804,
+    "typeName": "Sic Bo",
+    "isTest": false
+  },
+  {
+    "productId": 12,
+    "typeId": 1701,
+    "typeName": "Baccarat",
+    "isTest": false
+  },
+  {
+    "productId": 12,
+    "typeId": 1700,
+    "typeName": "Gold Deluxe - Deposit",
+    "isTest": false
+  },
+  {
+    "productId": 12,
+    "typeId": 1703,
+    "typeName": "Parlay Baccarat",
+    "isTest": false
+  },
+  {
+    "productId": 12,
+    "typeId": 1702,
+    "typeName": "Roulette",
+    "isTest": false
+  },
+  {
+    "productId": 13,
+    "typeId": 2001,
+    "typeName": "Baccarat",
+    "isTest": false
+  },
+  {
+    "productId": 13,
+    "typeId": 2005,
+    "typeName": "Baccarat - Playboy",
+    "isTest": false
+  },
+  {
+    "productId": 13,
+    "typeId": 2003,
+    "typeName": "Blackjack",
+    "isTest": false
+  },
+  {
+    "productId": 13,
+    "typeId": 2007,
+    "typeName": "Blackjack - Playboy",
+    "isTest": false
+  },
+  {
+    "productId": 13,
+    "typeId": 2004,
+    "typeName": "Casino Hold'em",
+    "isTest": false
+  },
+  {
+    "productId": 13,
+    "typeId": 2002,
+    "typeName": "Roulette",
+    "isTest": false
+  },
+  {
+    "productId": 13,
+    "typeId": 2006,
+    "typeName": "Roulette - Playboy",
+    "isTest": false
+  },
+  {
+    "productId": 14,
+    "typeId": 1900,
+    "typeName": "Macau - Deposit",
+    "isTest": false
+  },
+  {
+    "productId": 17,
+    "typeId": 2009,
+    "typeName": "RNG Game",
+    "isTest": false
+  },
+  {
+    "productId": 17,
+    "typeId": 2008,
+    "typeName": "RNG Game *",
+    "isTest": false
+  },
+  {
+    "productId": 21,
+    "typeId": 2401,
+    "typeName": "Baccarat",
+    "isTest": false
+  },
+  {
+    "productId": 21,
+    "typeId": 2405,
+    "typeName": "Dragon Tiger",
+    "isTest": false
+  },
+  {
+    "productId": 21,
+    "typeId": 2403,
+    "typeName": "Roulette",
+    "isTest": false
+  },
+  {
+    "productId": 21,
+    "typeId": 2404,
+    "typeName": "Sic Bo",
+    "isTest": false
+  },
+  {
+    "productId": 21,
+    "typeId": 2402,
+    "typeName": "VIP Baccarat",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4001,
+    "typeName": "Amazon",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4002,
+    "typeName": "Big Haul",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4003,
+    "typeName": "Bushido Code",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4004,
+    "typeName": "Casino Stud Poker",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4005,
+    "typeName": "Catch the Waves",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4006,
+    "typeName": "Chinese Treasure",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4007,
+    "typeName": "Chinese Zodiac",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4008,
+    "typeName": "Dancing Lions",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4009,
+    "typeName": "Dragon King",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4010,
+    "typeName": "Dragons and Pearls",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4011,
+    "typeName": "Fish 'O' Mania",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4012,
+    "typeName": "Fortune Panda",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4013,
+    "typeName": "God of Wealth",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4014,
+    "typeName": "Gold of Ra",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4015,
+    "typeName": "Guardian Lion",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4016,
+    "typeName": "Ice World",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4017,
+    "typeName": "Infinite Turbo",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4018,
+    "typeName": "King of Time",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4019,
+    "typeName": "Lady Luck",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4020,
+    "typeName": "Mystic Riches",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4021,
+    "typeName": "Phoenix Princess",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4022,
+    "typeName": "Roulette",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4023,
+    "typeName": "Temple Treasures",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4024,
+    "typeName": "Thai Dragon",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4025,
+    "typeName": "Treasure Reef",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4026,
+    "typeName": "Venetia",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4027,
+    "typeName": "Weber Cup",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4028,
+    "typeName": "Wild Dolphin",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4029,
+    "typeName": "Wolf Quest",
+    "isTest": false
+  },
+  {
+    "productId": 22,
+    "typeId": 4030,
+    "typeName": "World Snooker Masters",
+    "isTest": false
+  }
+]

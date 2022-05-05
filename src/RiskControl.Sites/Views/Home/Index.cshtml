@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Risk &#38; Control";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head
+{
+    <style type="text/css">
+        .alert-browser {
+            clear: both;
+            display: none;
+            margin-top: 100px;
+            text-align: center;
+            color: red;
+            font-size: 1rem;
+        }
+    </style>
+}
+@section Headline
+{
+    <div class="title">
+        <div>
+            <span class="curr">Welcome to Risk &#38; Control!</span>
+        </div>
+    </div>
+    <div class="alert-browser">
+        You are using a browser that is not supported by this site.
+        <br />
+        Please upgrade your browser now to Firefox 49+ or Chrome 54+ by openning the following link <a href="http://outdatedbrowser.com/en" target="_blank">http://outdatedbrowser.com/en</a>
+    </div>
+}
+@section Foot
+{
+    <script type="text/javascript">
+        (function () {
+            function isBrowserSupported() {
+                try {
+                    var matches = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+                    if (matches[1] === 'Firefox') {
+                        return parseInt(matches[2]) >= 49;
+                    }
+
+                    if (matches[1] === 'Chrome') {
+                        return parseInt(matches[2]) >= 54;
+                    }
+                }
+                finally { }
+                return false;
+            }
+
+            if (!isBrowserSupported()) {
+                $('.alert-browser').show();
+            }
+        }());
+    </script>
+}

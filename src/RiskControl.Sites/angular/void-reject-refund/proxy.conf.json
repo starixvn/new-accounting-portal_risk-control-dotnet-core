@@ -1,0 +1,22 @@
+{
+    "/NonSportsGamesStatistics": {
+        "target": "http://localhost:60809/",
+        "secure": false
+    },
+    "/Login": {
+        "target": "http://localhost:60809/",
+        "secure": false
+    },
+    "/Entities": {
+        "target": "http://localhost:60809/",
+        "secure": false
+    },
+    "/api": {
+        "target": "http://localhost:60809/",
+        "secure": false
+    },
+    "/state-api": {
+        "target": "http://localhost:60809/",
+        "secure": false
+    }
+}

@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~font-awesome/css/font-awesome.min.css";
+@import "~nap-theme/css/theme.css";
+body {
+  padding-top: 2.5rem;
+}
+
+.spinner-loading {
+  background-image: url("assets/spinner.gif");
+}
+
+.navbar-brand .logo {
+  background-image: url("assets/logo.png");
+  width: 113px;
+  height: 24px;
+}
+
+.input-group-addon {
+  padding: 0.15rem 0.3rem;
+  margin-bottom: 0;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #464a4c;
+  text-align: center;
+  background-color: #eceeef;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.2rem;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.form-control:focus {
+  color: #464a4c;
+  background-color: #fff;
+  border-color: #5cb3fd;
+  outline: 0;
+  box-shadow: 0 0 0 2px hsla(0, 0%, 80%, 0.5);
+}
+
+.nap-control .dropdown-menu {
+  .ngb-dp-arrow,
+  .ngb-dp-day,
+  .ngb-dp-weekday,
+  .ngb-dp-week-number,
+  .btn-light {
+    width: 2rem !important;
+    height: 2rem !important;
+    line-height: 1.6rem !important;
+  }
+}

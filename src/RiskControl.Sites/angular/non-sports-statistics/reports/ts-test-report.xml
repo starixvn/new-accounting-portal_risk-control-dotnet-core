@@ -1,0 +1,267 @@
+<testExecutions version="1">
+  <file path="MonthlyComponent">
+    <testCase name="MonthlyComponent forward gridOptions drill-down currency should have 2 currency elements" duration="102"/>
+    <testCase name="MonthlyComponent forward gridOptions drill-down currency should drill down to currency on &quot;05/2017&quot; when click on first element" duration="49"/>
+    <testCase name="MonthlyComponent forward gridOptions should update gridOptions after querying" duration="35"/>
+    <testCase name="MonthlyComponent forward gridOptions drill-down daily should have 2 daily elements" duration="33"/>
+    <testCase name="MonthlyComponent forward gridOptions drill-down daily should drill down to daily on &quot;05/2017&quot; when click on first element" duration="50"/>
+    <testCase name="MonthlyComponent forward should invoke query when going forward" duration="21"/>
+    <testCase name="MonthlyComponent back should not invoke query when going back" duration="26"/>
+    <testCase name="MonthlyComponent back rendering grid excel should invoke excel when clicking button" duration="37"/>
+    <testCase name="MonthlyComponent back rendering grid sort should invoke query when clicking on sort column" duration="37"/>
+    <testCase name="MonthlyComponent back rendering grid sort should support sorting on all columns" duration="37"/>
+    <testCase name="MonthlyComponent back rendering grid grand-total should invoke queryGrandTotal when clicking element" duration="40"/>
+    <testCase name="MonthlyComponent back rendering grid grand-total should have 1 grand-total elements" duration="34"/>
+    <testCase name="MonthlyComponent back generateTitle should return &quot;Monthly&quot; if not last" duration="23"/>
+    <testCase name="MonthlyComponent back generateTitle should return &quot;Monthly Game Statistics Report From Nov 22, 2016 To Nov 22, 2016 (Base RM)&quot; if last" duration="21"/>
+  </file>
+  <file path="CurrencyComponent">
+    <testCase name="CurrencyComponent back generateTitle should return &quot;Currency Game Statistics Report From Nov 22, 2016 To Nov 22, 2016 (Base RM)&quot; if last" duration="27"/>
+    <testCase name="CurrencyComponent back generateTitle should return &quot;Currency&quot; if not last" duration="23"/>
+    <testCase name="CurrencyComponent back rendering grid sort should invoke query when clicking on sort column" duration="43"/>
+    <testCase name="CurrencyComponent back rendering grid sort should support sorting on all columns" duration="41"/>
+    <testCase name="CurrencyComponent back rendering grid grand-total should have 1 grand-total elements" duration="39"/>
+    <testCase name="CurrencyComponent back rendering grid grand-total should invoke queryGrandTotal when clicking element" duration="37"/>
+    <testCase name="CurrencyComponent back rendering grid excel should invoke excel when clicking button" duration="47"/>
+    <testCase name="CurrencyComponent back should not invoke query when going back" duration="20"/>
+    <testCase name="CurrencyComponent CurrencyGridModel should update gridOptions after querying" duration="33"/>
+    <testCase name="CurrencyComponent forward should invoke query when going forward" duration="17"/>
+    <testCase name="CurrencyComponent forward gridOptions drill-down company should drill down to CHF when click on first element" duration="39"/>
+    <testCase name="CurrencyComponent forward gridOptions drill-down company should have 3 currency elements" duration="28"/>
+    <testCase name="CurrencyComponent forward gridOptions should update gridOptions after querying" duration="33"/>
+  </file>
+  <file path="DeviceComponent">
+    <testCase name="DeviceComponent back generateTitle should return &quot;Device&quot; if not last" duration="26"/>
+    <testCase name="DeviceComponent back generateTitle should return &quot;Device Game Statistics Report From Nov 22, 2016 To Nov 22, 2016 (Base RM)&quot; if last" duration="21"/>
+    <testCase name="DeviceComponent back should not invoke query when going back" duration="20"/>
+    <testCase name="DeviceComponent back rendering grid excel should invoke excel when clicking button" duration="44"/>
+    <testCase name="DeviceComponent back rendering grid sort should support sorting on all columns" duration="61"/>
+    <testCase name="DeviceComponent back rendering grid sort should invoke query when clicking on sort column" duration="35"/>
+    <testCase name="DeviceComponent back rendering grid grand-total should invoke queryGrandTotal when clicking element" duration="38"/>
+    <testCase name="DeviceComponent back rendering grid grand-total should have 1 grand-total elements" duration="39"/>
+    <testCase name="DeviceComponent forward gridOptions drill-down currency should drill down to currency when click on first element" duration="42"/>
+    <testCase name="DeviceComponent forward gridOptions drill-down currency should have 2 currency elements" duration="36"/>
+    <testCase name="DeviceComponent forward gridOptions should update gridOptions after querying" duration="40"/>
+    <testCase name="DeviceComponent forward should invoke query when going forward" duration="24"/>
+  </file>
+  <file path="DailyService">
+    <testCase name="DailyService query should invoke post method with exact parameters exactly" duration="9"/>
+    <testCase name="DailyService excel should invoke download method with parameters exactly" duration="10"/>
+  </file>
+  <file path="ProductTreeviewPipe">
+    <testCase name="ProductTreeviewPipe should transform exactly" duration="1"/>
+    <testCase name="ProductTreeviewPipe should transform to undefined if gameTypes is null or undefined" duration="1"/>
+  </file>
+  <file path="ExcludeTest2Pipe">
+    <testCase name="ExcludeTest2Pipe should transform null or undefined to undefined" duration="1"/>
+    <testCase name="ExcludeTest2Pipe transform a list of objects should remove test objects if second param is true &amp; unkeep object references" duration="1"/>
+    <testCase name="ExcludeTest2Pipe transform a list of objects should keep test objects if second param is false" duration="1"/>
+  </file>
+  <file path="CompanyService">
+    <testCase name="CompanyService excel should invoke download method with parameters exactly" duration="7"/>
+    <testCase name="CompanyService query should invoke post method with exact parameters exactly" duration="9"/>
+  </file>
+  <file path="UserNameSuggestionComponent">
+    <testCase name="UserNameSuggestionComponent default template component without input should focus on input after click on host" duration="36"/>
+    <testCase name="UserNameSuggestionComponent default template component without input should have 2 inputs" duration="31"/>
+    <testCase name="UserNameSuggestionComponent default template component without input should not invoke getUsernameSuggestion when input a text = 1 character" duration="27"/>
+    <testCase name="UserNameSuggestionComponent default template component without input should hide dropdown by default" duration="26"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown should be shown" duration="29"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown press key ArrowDown press key ArrowDown the second time should keep the second item is actived when press key ArrowDown" duration="25"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown press key ArrowDown press key ArrowDown the second time should active the second item" duration="28"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown press key ArrowDown press key ArrowDown the second time press key ArrowUp should keep activating the first item when press key ArrowUp" duration="31"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown press key ArrowDown press key ArrowDown the second time press key ArrowUp should active the first item" duration="29"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown press key ArrowDown should select the first item when press &quot;Enter&quot;" duration="30"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown press key ArrowDown should active the first item" duration="26"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown should have 2 suggested elements but not be actived" duration="25"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown selected userNames should accept input value by Tab, Enter, Comma keys" duration="26"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown selected userNames select &quot;aa1&quot; should remove &quot;aa1&quot; when clicking close icon" duration="27"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown selected userNames select &quot;aa1&quot; should clear input after selecting" duration="25"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown selected userNames select &quot;aa1&quot; select &quot;aa2&quot; &amp; &quot;aa3&quot; should support to select multiple items by Ctrl" duration="29"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown selected userNames select &quot;aa1&quot; select &quot;aa2&quot; &amp; &quot;aa3&quot; should support to select multiple items by Shift" duration="26"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown selected userNames select &quot;aa1&quot; select &quot;aa2&quot; &amp; &quot;aa3&quot; should display &quot;aa1&quot;, &quot;aa2&quot; &amp; &quot;aa3&quot; as selected userNames" duration="28"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown selected userNames select &quot;aa1&quot; should remove &quot;aa1&quot; when press key Backspace on input" duration="24"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown selected userNames select &quot;aa1&quot; should remove active item when press key Delete on hidden input" duration="31"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown selected userNames select &quot;aa1&quot; should display &quot;aa1&quot; as selected userNames" duration="26"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown should be hidden when click out of host component" duration="26"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters dropdown should be hidden when press key Esc" duration="28"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters should invoke getUsernameSuggestion with default roleId=Member" duration="24"/>
+    <testCase name="UserNameSuggestionComponent default template input a text >=2 characters should invoke getUsernameSuggestion with input roleId" duration="28"/>
+  </file>
+  <file path="ColumnService">
+    <testCase name="ColumnService Group1 should return list of columns in history mode" duration="5"/>
+    <testCase name="ColumnService Group1 should return list of columns in normal mode" duration="4"/>
+    <testCase name="ColumnService Group3 should return list of columns in normal mode" duration="3"/>
+    <testCase name="ColumnService Group3 should return list of columns in history mode" duration="4"/>
+    <testCase name="ColumnService Group2 should return list of columns in history mode" duration="3"/>
+    <testCase name="ColumnService Group2 should return list of columns in normal mode" duration="5"/>
+  </file>
+  <file path="HourlyComponent">
+    <testCase name="HourlyComponent tables accumulated statistics records second row should display content as expected" duration="81"/>
+    <testCase name="HourlyComponent tables accumulated statistics records should display 3 rows" duration="78"/>
+    <testCase name="HourlyComponent tables accumulated statistics records should display 13 columns" duration="68"/>
+    <testCase name="HourlyComponent tables accumulated statistics records should display average &quot;1,211&quot;" duration="71"/>
+    <testCase name="HourlyComponent tables accumulated statistics records third row should display class &quot;number-positive&quot; on column &quot;Comm&quot;" duration="72"/>
+    <testCase name="HourlyComponent tables accumulated statistics records third row should display content as expected" duration="78"/>
+    <testCase name="HourlyComponent tables accumulated statistics records third row should display class &quot;highlight&quot; &amp; &quot;number-positive&quot; on column &quot;Game Payout&quot;" duration="65"/>
+    <testCase name="HourlyComponent tables accumulated statistics records third row should display class &quot;number-negative&quot; on column indexes 5, 9, 12" duration="66"/>
+    <testCase name="HourlyComponent tables accumulated statistics records first row should display content as expected" duration="72"/>
+    <testCase name="HourlyComponent tables accumulated statistics records first row should display class &quot;number-positive&quot; on column &quot;Comm&quot;" duration="67"/>
+    <testCase name="HourlyComponent tables hourly statistics records should display 13 columns" duration="66"/>
+    <testCase name="HourlyComponent tables hourly statistics records should display 2 rows" duration="68"/>
+    <testCase name="HourlyComponent tables should display 2 tables" duration="67"/>
+    <testCase name="HourlyComponent breadcrumb should invoke goBack when clicking on first item of first breadcrumb" duration="73"/>
+    <testCase name="HourlyComponent breadcrumb should have 2 breadcrumbs" duration="72"/>
+    <testCase name="HourlyComponent breadcrumb should invoke export excel when clicking on icon" duration="83"/>
+    <testCase name="HourlyComponent breadcrumb should display only one item in second breadcrumb with content &quot;Hourly Statistics Record on Nov 22, 2016 (GMT+8)&quot;" duration="65"/>
+    <testCase name="HourlyComponent should return &quot;Accumulated Hourly Statistics Record on Nov 22, 2016 (GMT+8)&quot; when invoking generateTitle" duration="59"/>
+    <testCase name="HourlyComponent should invoke query when initialzing" duration="56"/>
+  </file>
+  <file path="DeviceService">
+    <testCase name="DeviceService excel should invoke download method with parameters exactly" duration="17"/>
+    <testCase name="DeviceService query should invoke post method with exact parameters exactly" duration="15"/>
+  </file>
+  <file path="CompanyComponent">
+    <testCase name="CompanyComponent back rendering grid drill-down currency should append &quot;Licensee Group&quot; when filterred sites are not All if drill down to Licensee Group" duration="86"/>
+    <testCase name="CompanyComponent back rendering grid excel should invoke excel when clicking button" duration="88"/>
+    <testCase name="CompanyComponent back rendering grid grand-total should invoke queryGrandTotal when clicking element" duration="73"/>
+    <testCase name="CompanyComponent back rendering grid grand-total should have 1 grand-total elements" duration="72"/>
+    <testCase name="CompanyComponent back rendering grid sort should support sorting on all columns" duration="74"/>
+    <testCase name="CompanyComponent back rendering grid sort should invoke query when clicking on sort column" duration="72"/>
+    <testCase name="CompanyComponent back generateTitle should return &quot;Company&quot; if not last" duration="24"/>
+    <testCase name="CompanyComponent back generateTitle should return &quot;Company Game Statistics Report From Nov 22, 2016 To Nov 22, 2016 (Base RM)&quot; if last" duration="21"/>
+    <testCase name="CompanyComponent back should not invoke query when going back" duration="21"/>
+    <testCase name="CompanyComponent forward gridOptions should update gridOptions after querying" duration="69"/>
+    <testCase name="CompanyComponent forward gridOptions drill-down currency should drill down to MBC Group when click on first element" duration="66"/>
+    <testCase name="CompanyComponent forward gridOptions drill-down currency should drill down to MBC site when click on second element" duration="66"/>
+    <testCase name="CompanyComponent forward gridOptions drill-down currency should have 30 currency elements" duration="68"/>
+    <testCase name="CompanyComponent forward gridOptions drill-down currency should drill down to Licensee Group when click on eleventh element" duration="70"/>
+    <testCase name="CompanyComponent forward should invoke query when going forward" duration="17"/>
+  </file>
+  <file path="DeviceTreeviewPipe">
+    <testCase name="DeviceTreeviewPipe should transform to undefined if gameTypes is null or undefined" duration="1"/>
+    <testCase name="DeviceTreeviewPipe should transform exactly" duration="1"/>
+  </file>
+  <file path="HourlyService">
+    <testCase name="HourlyService excel should invoke download method with parameters exactly" duration="7"/>
+    <testCase name="HourlyService query should invoke post method with exact parameters exactly" duration="7"/>
+  </file>
+  <file path="CasinoProductService">
+    <testCase name="CasinoProductService excelGrandTotal should invoke download method with parameters exactly" duration="6"/>
+    <testCase name="CasinoProductService query should invoke post method with exact parameters exactly" duration="7"/>
+    <testCase name="CasinoProductService excel should invoke download method with parameters exactly" duration="6"/>
+    <testCase name="CasinoProductService queryGrandTotal should invoke post method with exact parameters exactly" duration="7"/>
+  </file>
+  <file path="UserNameService">
+    <testCase name="UserNameService excel should invoke download method with parameters exactly" duration="7"/>
+    <testCase name="UserNameService query should invoke post method with exact parameters exactly" duration="10"/>
+    <testCase name="UserNameService excelGrandTotal should invoke download method with parameters exactly" duration="6"/>
+    <testCase name="UserNameService queryGrandTotal should invoke post method with exact parameters exactly" duration="7"/>
+  </file>
+  <file path="ExcludeTestPipe">
+    <testCase name="ExcludeTestPipe transform a list of objects should remove test objects if second param is true &amp; keep object references" duration="1"/>
+    <testCase name="ExcludeTestPipe transform a list of objects should keep test objects if second param is false" duration="1"/>
+    <testCase name="ExcludeTestPipe should transform null or undefined to undefined" duration="1"/>
+  </file>
+  <file path="Top20Component">
+    <testCase name="Top20Component normal mode Member filter with single wallet product drill-down user-name should have 1 user-name elements" duration="61"/>
+    <testCase name="Top20Component normal mode Member filter with single wallet product drill-down user-name should drill down to Hourly" duration="56"/>
+    <testCase name="Top20Component normal mode Member filter with multiple products drill-down user-name should have no user-name elements" duration="72"/>
+    <testCase name="Top20Component normal mode Super associated account should show associated-account when click on first element" duration="49"/>
+    <testCase name="Top20Component normal mode Super associated account should have 1 associated-account elements" duration="38"/>
+    <testCase name="Top20Component normal mode Super gridOptions should update gridOptions after querying" duration="38"/>
+    <testCase name="Top20Component normal mode Super house position taking should have 1 house-position-taking elements" duration="36"/>
+    <testCase name="Top20Component normal mode Super house position taking should show house-position-taking when click on first element" duration="35"/>
+    <testCase name="Top20Component history mode drill-down from Top 20 Winner should invoke query when going forward" duration="55"/>
+    <testCase name="Top20Component history mode drill-down from Top 20 Winner should have no associated-account elements" duration="56"/>
+    <testCase name="Top20Component history mode Member excel should show error message when export excel" duration="57"/>
+    <testCase name="Top20Component history mode Member drill-down user-name should drill down to Daily" duration="55"/>
+    <testCase name="Top20Component history mode Super back generateTitle should return &quot;Top 20 Super&quot; if not last" duration="22"/>
+    <testCase name="Top20Component history mode Super back generateTitle should return &quot;Top 20 Super Game Statistics Report From Nov 22, 2016 To Nov 22, 2016 (Base RM)&quot; if last" duration="23"/>
+    <testCase name="Top20Component history mode Super back rendering grid sort should support sorting on the following columns" duration="38"/>
+    <testCase name="Top20Component history mode Super back rendering grid sort should invoke query when clicking on sort column" duration="40"/>
+    <testCase name="Top20Component history mode Super back rendering grid excel should invoke excel when clicking button" duration="53"/>
+    <testCase name="Top20Component history mode Super back should not invoke query when going back" duration="22"/>
+    <testCase name="Top20Component history mode Super forward should invoke query when going forward" duration="24"/>
+    <testCase name="Top20Component history mode Super forward gridOptions should update gridOptions after querying" duration="35"/>
+    <testCase name="Top20Component history mode Super forward gridOptions associated account should show associated-account when click on first element" duration="39"/>
+    <testCase name="Top20Component history mode Super forward gridOptions associated account should have 2 associated-account elements" duration="46"/>
+    <testCase name="Top20Component history mode Super forward gridOptions drill-down username should drill down to level Master" duration="41"/>
+    <testCase name="Top20Component history mode Super forward gridOptions drill-down username should have 2 user-name elements" duration="37"/>
+    <testCase name="Top20Component history mode Super forward gridOptions drill-down currency should have 2 currency elements" duration="35"/>
+    <testCase name="Top20Component history mode Super forward gridOptions drill-down currency should drill down to currency RM of &quot;Bottom 20&quot; when click on second element" duration="38"/>
+    <testCase name="Top20Component history mode Super forward gridOptions drill-down currency should drill down to currency RM of &quot;Top 20&quot; when click on first element" duration="39"/>
+    <testCase name="Top20Component history mode Agent drill-down user-name should drill down to level Member" duration="58"/>
+    <testCase name="Top20Component history mode Master drill-down user-name should drill down to level Agent" duration="54"/>
+  </file>
+  <file path="CompanyService">
+    <testCase name="CompanyService excel should invoke download method with parameters exactly" duration="7"/>
+    <testCase name="CompanyService query should invoke post method with exact parameters exactly" duration="7"/>
+  </file>
+  <file path="ProductService">
+    <testCase name="ProductService query should invoke post method with exact parameters exactly" duration="8"/>
+    <testCase name="ProductService excel should invoke download method with parameters exactly" duration="9"/>
+  </file>
+  <file path="Top20Service">
+    <testCase name="Top20Service query should invoke post method with parameters exactly" duration="6"/>
+  </file>
+  <file path="CurrencyService">
+    <testCase name="CurrencyService queryGrandTotal should invoke post method with exact parameters exactly" duration="20"/>
+    <testCase name="CurrencyService excelGrandTotal should invoke download method with parameters exactly" duration="9"/>
+    <testCase name="CurrencyService excel should invoke download method with parameters exactly" duration="10"/>
+    <testCase name="CurrencyService query should invoke post method with exact parameters exactly" duration="7"/>
+  </file>
+  <file path="GametypeTreeviewPipe">
+    <testCase name="GametypeTreeviewPipe should transform to empty list if product is null or empty" duration="1"/>
+    <testCase name="GametypeTreeviewPipe should transform to undefined if gameTypes is null or undefined" duration="2"/>
+    <testCase name="GametypeTreeviewPipe should transform exactly" duration="1"/>
+  </file>
+  <file path="DailyComponent">
+    <testCase name="DailyComponent filter with single wallet product drill-down hourly should have 2 hourly elements" duration="68"/>
+    <testCase name="DailyComponent filter with single wallet product drill-down hourly should drill down to hourly on &quot;Jun 13, 2017&quot; when click on first element" duration="87"/>
+    <testCase name="DailyComponent drill-down from user-name should allow to drill-down to currency" duration="42"/>
+    <testCase name="DailyComponent drill-down from user-name should allown to drill-down on grand total" duration="42"/>
+    <testCase name="DailyComponent drill-down from user-name should have query model with field usernameDrillDown=true" duration="39"/>
+    <testCase name="DailyComponent back should not invoke query when going back" duration="17"/>
+    <testCase name="DailyComponent back generateTitle should return &quot;Daily Game Statistics Report On Nov 22, 2016 (Base RM)&quot; if last" duration="18"/>
+    <testCase name="DailyComponent back generateTitle should return &quot;Daily&quot; if not last" duration="13"/>
+    <testCase name="DailyComponent back rendering grid grand-total should have 1 grand-total elements" duration="30"/>
+    <testCase name="DailyComponent back rendering grid grand-total should invoke queryGrandTotal when clicking element" duration="47"/>
+    <testCase name="DailyComponent back rendering grid excel should invoke excel when clicking button" duration="32"/>
+    <testCase name="DailyComponent back rendering grid sort should support sorting on all columns" duration="45"/>
+    <testCase name="DailyComponent back rendering grid sort should invoke query when clicking on sort column" duration="35"/>
+    <testCase name="DailyComponent drill-down from daily should have query model with field usernameDrillDown=false" duration="51"/>
+    <testCase name="DailyComponent drill-down from daily should not have drill-down on grand total" duration="41"/>
+    <testCase name="DailyComponent forward should invoke query when going forward" duration="14"/>
+    <testCase name="DailyComponent forward gridOptions drill-down hourly should have no hourly elements" duration="29"/>
+    <testCase name="DailyComponent forward gridOptions should update gridOptions after querying" duration="32"/>
+    <testCase name="DailyComponent forward gridOptions drill-down currency should have no currency elements" duration="28"/>
+    <testCase name="DailyComponent forward gridOptions drill-down currency should drill down to currency on &quot;Jun 13, 2017&quot; when click on first element" duration="29"/>
+  </file>
+  <file path="UserNameComponent">
+    <testCase name="UserNameComponent history mode Master back generateTitle should return &quot;Master Game Statistics Report From Nov 22, 2016 To Nov 22, 2016 (Base RM)&quot; if last" duration="23"/>
+    <testCase name="UserNameComponent history mode Master back generateTitle should return &quot;Master&quot; if not last" duration="23"/>
+    <testCase name="UserNameComponent history mode Master back should not invoke query when going back" duration="25"/>
+    <testCase name="UserNameComponent history mode Master back rendering grid excel should invoke excel when clicking button" duration="42"/>
+    <testCase name="UserNameComponent history mode Master back rendering grid sort should support sorting on the following columns" duration="55"/>
+    <testCase name="UserNameComponent history mode Master back rendering grid sort should invoke query when clicking on sort column" duration="43"/>
+    <testCase name="UserNameComponent history mode Master forward should invoke query when going forward" duration="22"/>
+    <testCase name="UserNameComponent history mode Master forward gridOptions should update gridOptions after querying" duration="40"/>
+    <testCase name="UserNameComponent history mode Master forward gridOptions grand-total should have 1 grand-total elements" duration="41"/>
+    <testCase name="UserNameComponent history mode Master forward gridOptions grand-total should invoke queryGrandTotal when clicking element" duration="44"/>
+    <testCase name="UserNameComponent history mode Master forward gridOptions drill-down username should drill down to Agent" duration="41"/>
+    <testCase name="UserNameComponent history mode Master forward gridOptions drill-down username should have 2 user-name elements" duration="39"/>
+    <testCase name="UserNameComponent history mode Master forward gridOptions associated account should have 2 associated-account elements" duration="40"/>
+    <testCase name="UserNameComponent history mode Master forward gridOptions associated account should show associated-account when click on first element" duration="40"/>
+    <testCase name="UserNameComponent history mode Agent drill-down user-name should drill down to Member" duration="62"/>
+    <testCase name="UserNameComponent history mode Member drill-down user-name should drill down to Daily mode when click on user name" duration="64"/>
+    <testCase name="UserNameComponent normal mode Member filter with single wallet product should have 2 user-name elements" duration="59"/>
+    <testCase name="UserNameComponent normal mode Member filter with single wallet product should drill down to Hourly mode when click on user name" duration="70"/>
+    <testCase name="UserNameComponent normal mode Member filter with multiple products should have no user-name elements" duration="61"/>
+    <testCase name="UserNameComponent normal mode Master associated account should have 2 associated-account elements" duration="49"/>
+    <testCase name="UserNameComponent normal mode Master associated account should show associated-account when click on first element" duration="42"/>
+    <testCase name="UserNameComponent normal mode Master gridOptions should update gridOptions after querying" duration="42"/>
+    <testCase name="UserNameComponent normal mode Master house position taking should have 2 house-position-taking elements" duration="44"/>
+    <testCase name="UserNameComponent normal mode Master house position taking should show house-position-taking when click on first element" duration="44"/>
+  </file>
+</testExecutions>

@@ -1,0 +1,149 @@
+<ng-template #colgroup>
+    <colgroup>
+        <col style="width: 130px" />
+        <col style="width: 170px" />
+        <col style="width: 240px" />
+    </colgroup>
+</ng-template>
+<ng-template #headerRowOfAssociatedAccounts>
+    <tr>
+        <th>Site</th>
+        <th>Account</th>
+        <th>Last Betting Date</th>
+    </tr>
+</ng-template>
+<ng-template #noData>
+    <div class="body stretch">
+        <table>
+            <tbody>
+                <tr>
+                    <th class="no-data" colspan="3">
+                        There is no data
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-template>
+<ng-template #tbody let-users="users">
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td class="word-break-all">{{user.Site}}</td>
+            <td class="word-break-all">{{user.Username}}</td>
+            <td class="text-center">{{user.LastBettingDate | date:'MM/dd/yyyy HH:mm:ss a'}}</td>
+        </tr>
+    </tbody>
+</ng-template>
+<div class="modal-header">
+    <p class="modal-title">Account Information</p>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="account-information">
+        <table>
+            <colgroup>
+                <col style="width: 200px" />
+                <col style="width: auto" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td>CUSTOMER</td>
+                    <td>{{accountModel.Customer.Username}} ({{accountModel.Customer.CustId}})</td>
+                </tr>
+                <tr *ngIf="accountModel.Customer.IsCreditUser">
+                    <td>AGENT</td>
+                    <td>{{accountModel.Customer.Agent}} ({{accountModel.Customer.AgentId}})</td>
+                </tr>
+                <tr *ngIf="accountModel.Customer.IsCreditUser">
+                    <td>MASTER</td>
+                    <td>{{accountModel.Customer.Master}} ({{accountModel.Customer.MasterId}})</td>
+                </tr>
+                <tr *ngIf="accountModel.Customer.IsCreditUser">
+                    <td>SUPER</td>
+                    <td>{{accountModel.Customer.Super}} ({{accountModel.Customer.SuperId}})</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="grid">
+        <div style="width: 560px">
+            <div class="header">
+                <table>
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <thead>
+                        <tr>
+                            <td colspan="4" class="title">
+                                <i class="fa test-toggle-user-by-device" [ngClass]="{'fa-plus-square': !userByDeviceIsExpanded, 'fa-minus-square': userByDeviceIsExpanded}"
+                                    (click)="toggleUserByDevice()">&nbsp;</i>
+                                <strong>Associated Account by Device</strong>
+                            </td>
+                        </tr>
+                        <ng-template *ngIf="userByDeviceIsExpanded" [ngTemplateOutlet]="headerRowOfAssociatedAccounts"></ng-template>
+                    </thead>
+                </table>
+            </div>
+            <div *ngIf="userByDeviceIsExpanded && accountModel.UsersByDevice.length > 0" class="body">
+                <table class="table-striped test-associated-users-by-device">
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.UsersByDevice}"></ng-template>
+                </table>
+            </div>
+            <ng-template *ngIf="userByDeviceIsExpanded && accountModel.UsersByDevice.length === 0" [ngTemplateOutlet]="noData"></ng-template>
+        </div>
+    </div>
+    <div class="grid">
+        <div style="width: 560px">
+            <div class="header">
+                <table>
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <thead>
+                        <tr>
+                            <td colspan="4" class="title">
+                                <i class="fa test-toggle-user-by-ip" [ngClass]="{'fa-plus-square': !userByIPIsExpanded, 'fa-minus-square': userByIPIsExpanded}"
+                                    (click)="toggleUserByIP()">&nbsp;</i>
+                                <strong>Associated Account by IP</strong>
+                            </td>
+                        </tr>
+                        <ng-template *ngIf="userByIPIsExpanded" [ngTemplateOutlet]="headerRowOfAssociatedAccounts"></ng-template>
+                    </thead>
+                </table>
+            </div>
+            <div *ngIf="userByIPIsExpanded && accountModel.UsersByIP.length > 0" class="body">
+                <table class="table-striped test-associated-users-by-ip">
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.UsersByIP}"></ng-template>
+                </table>
+            </div>
+            <ng-template *ngIf="userByIPIsExpanded && accountModel.UsersByIP.length === 0" [ngTemplateOutlet]="noData"></ng-template>
+        </div>
+    </div>
+
+    <div class="grid">
+      <div style="width: 560px">
+          <div class="header">
+              <table>
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <thead>
+                      <tr>
+                          <td colspan="4" class="title">
+                              <i class="fa test-toggle-user-by-ip" [ngClass]="{'fa-plus-square': !userByManualIsExpanded, 'fa-minus-square': userByManualIsExpanded}"
+                                  (click)="toggleUserByManual()">&nbsp;</i>
+                              <strong>Associated Account by Manual Detection</strong>
+                          </td>
+                      </tr>
+                      <ng-template *ngIf="userByManualIsExpanded" [ngTemplateOutlet]="headerRowOfAssociatedAccounts"></ng-template>
+                  </thead>
+              </table>
+          </div>
+          <div *ngIf="userByManualIsExpanded && accountModel.UsersByManual.length > 0" class="body">
+              <table class="table-striped test-associated-users-by-ip">
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.UsersByManual}"></ng-template>
+              </table>
+          </div>
+          <ng-template *ngIf="userByManualIsExpanded && accountModel.UsersByManual.length === 0" [ngTemplateOutlet]="noData"></ng-template>
+      </div>
+  </div>
+</div>

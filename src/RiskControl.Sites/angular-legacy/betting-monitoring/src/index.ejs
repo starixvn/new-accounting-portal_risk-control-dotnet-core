@@ -1,0 +1,11 @@
+@{
+    Layout = "~/Views/Shared/_AngularLayout.cshtml";
+    ViewBag.Title = "<%= title %>";
+}
+@section Head {
+    <% files.css.forEach(function(css){ %>
+    <link href="<%= css%>" rel="stylesheet"/><% }) %>
+}
+<nap-app>Loading...</nap-app>
+<% files.js.forEach(function(js){ %>
+<script src="<%= js%>"></script><% }) %>

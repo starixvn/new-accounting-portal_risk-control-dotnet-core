@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Functions>
+  <Function Name="Win Limit Control">
+    <Setting Key="NAP_Winlimit_UserByIPSel_Old" SpName="NAP_Winlimit_UserByIPSel_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+  </Function>
+  <Function Name="Non Sports Games Statistic">
+    <Setting Key="Acc_Rpt_NonSportsStatistics_DeviceSel" SpName="Acc_Rpt_NonSportsStatistics_DeviceSel" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Daily_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Daily" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Monthly_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Monthly" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Company_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Company" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Currency_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Currency" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Product_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_ProductGroup" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSubProduct_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Product" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSportType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_SportType" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductLeague_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_League" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductBetType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Bettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductGameType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Bettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductGameTable_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_League" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductCasinoGameGroup_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_SportType" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductCasinoGameType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Bettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Device_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Device" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_DailyViewGrandTotal_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Daily_Total" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Username_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Username" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Super_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Username" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Master_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Username" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Agent_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Username" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_UserNameViewGrandTotal_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Username" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Top20_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Top20" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Hourly_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Hourly" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsStatistic_ProductSel" SpName="Acc_Rpt_NonSportsStatistic_ProductSel" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="BI_GetDWStatusByCube" SpName="BI_GetDWStatusByCube" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMember_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Username" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberDaily_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Daily" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_CustomerSelCustByUsername" SpName="Acc_CustomerSelCustByUsername" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProduct_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_ProductGroup" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductSubProduct_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Product" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductSportType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_SportType" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductLeague_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_League" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductBetType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Bettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductGameType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Bettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductGameTable_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_League" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductCasinoGameGroup_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_SportType" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductCasinoGameType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Bettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberMonthly_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Monthly" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsStatistics_TopAssociatedAccount_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_TopAssociatedAccount" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+  </Function>
+  <Function Name="Void Reject Refund">
+    <Setting Key="Void_Recject_Refund_Daily" SpName="Acc_Rpt_NonSportVoidRejectRefund_Daily" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Void_Recject_Refund_Monthly" SpName="Acc_Rpt_NonSportVoidRejectRefund_Monthly" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Void_Recject_Refund_Product" SpName="Acc_Rpt_NonSportVoidRejectRefund_Product" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Void_Recject_Refund_Currency" SpName="Acc_Rpt_NonSportVoidRejectRefund_Currency" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Void_Recject_Refund_Company" SpName="Acc_Rpt_NonSportVoidRejectRefund_Company" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Void_Recject_Refund_Device" SpName="Acc_Rpt_NonSportVoidRejectRefund_Device" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+  </Function>
+  <Function Name="Dashboard">
+    <Setting Key="RiskControl_Dashboard_Currency" SpName="Acc_Rpt_NonSports_Dashboard_Currency" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="RiskControl_Dashboard_Monthly" SpName="Acc_Rpt_NonSports_Dashboard_Monthly" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="RiskControl_Dashboard_Product" SpName="Acc_Rpt_NonSports_Dashboard_Product" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="RiskControl_Dashboard_TopGameTypeWinning" SpName="Acc_Rpt_NonSports_Dashboard_TopGameTypeWinning" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+    <Setting Key="RiskControl_Dashboard_TopMemberWinning" SpName="Acc_Rpt_NonSports_Dashboard_TopMemberWinning" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+  </Function>
+</Functions>

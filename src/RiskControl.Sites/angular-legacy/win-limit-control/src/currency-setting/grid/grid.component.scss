@@ -1,0 +1,12 @@
+@import '~nap-theme/scss/grid';
+.header {
+    .btn-secondary {
+        margin-left: 3px;
+    }
+}
+
+.limit-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}

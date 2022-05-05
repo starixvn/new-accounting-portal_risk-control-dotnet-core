@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Functions>
+  <Function Name="Non Sports Games Statistic">
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_GameTypeSel" SpName="Acc_Rpt_NonSportsProductStatistics_GameTypeSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_GameTableSel" SpName="Acc_Rpt_NonSportsProductStatistics_GameTableSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SiteSel" SpName="Acc_Rpt_NonSportsProductStatistic_SiteSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Daily_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Daily" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Company_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Company" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Currency_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Currency" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Product_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSubProduct_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSportType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductLeague_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductBetType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_BettypeGameTable" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductGameType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductGameTable_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_BettypeGameTable" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductCasinoGameGroup_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductCasinoGameType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_BettypeGameTable" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Device_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Device" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Username_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Customer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Super_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Customer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Master_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Customer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Agent_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Customer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_UserNameViewGrandTotal_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Customer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_HousePositionTaking_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Customer_HousePT" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Top20_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Top20" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="NonSportsProductStatistics_GetValidUsername" SpName="Acc_CustomerUsernameSelByList" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_Hourly_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Hourly" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMember_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Customer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberDaily_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Daily" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProduct_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductSubProduct_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductSportType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductLeague_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductBetType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_BettypeGameTable" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductGameType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductGameTable_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_BettypeGameTable" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductCasinoGameGroup_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberProductCasinoGameType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_BettypeGameTable" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberMonthly_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Daily" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="Acc_Rpt_NonSportsProductStatistic_CurrencySel" SpName="Acc_Rpt_NonSportsProductStatistic_CurrencySel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+  </Function>
+  <Function Name="Win Limit Control">
+    <Setting Key="NAP_Winlimit_UserByIPSel" SpName="NAP_Winlimit_UserByIPSel" DbName="DBACC.bodb02.bodbAdminNet" />
+  </Function>
+  <Function Name="Game Round Bet Limit Control">
+    <Setting Key="NAP_GameRoundBetLimitMonitorProductGameTypeSel" SpName="NAP_GameRoundBetLimitMonitorProductGameTypeSel" DbName="DBACC.bodb02.bodbAdminNet" />
+  </Function>
+  <Function Name="Betting Monitoring">
+    <Setting Key="NAP_BetMonitoring_SettingSel" SpName="NAP_BetMonitoring_SettingSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+    <Setting Key="NAP_BetMonitoring_SettingUpd" SpName="NAP_BettingMonitor_SettingUpd" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="300" />
+  </Function>
+</Functions>

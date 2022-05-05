@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~font-awesome/css/font-awesome.min.css';
+@import '~nap-theme/css/theme.css';
+.spinner-loading {
+    background-image: url("assets/spinner.gif");
+}
+
+.navbar-brand {
+    .logo {
+        background-image: url("assets/logo.png");
+        width: 113px;
+        height: 24px;
+    }
+}
+
+.text-black {
+    color: black;
+}
+
+.text-grey {
+    color: grey;
+}
+
+.text-orange {
+    color: orange;
+}
+
+.text-yellow {
+    color: yellow;
+}
+
+.text-red {
+    color: red;
+}
+
+.number-negative {
+    color: red;
+}
+
+.number-limit {
+    &.number-zero {
+        color: red;
+    }
+}
+
+.modal-auto-size {
+    display: flex !important;
+    .modal-dialog {
+        display: inline-block;
+        max-width: initial;
+    }
+}
+
+.treeview-button-ellipsis {
+    button {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

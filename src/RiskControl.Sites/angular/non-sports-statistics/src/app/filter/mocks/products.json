@@ -1,0 +1,62 @@
+﻿[
+  {
+    "productId": 11,
+    "productName": "AG Casino",
+    "casinoType": 2
+  },
+  {
+    "productId": 21,
+    "productName": "Allbet",
+    "casinoType": 2
+  },
+  {
+    "productId": 12,
+    "productName": "Gold Deluxe",
+    "casinoType": 2
+  },
+  {
+    "productId": 8,
+    "productName": "Keno",
+    "casinoType": 0
+  },
+  {
+    "productId": 14,
+    "productName": "Macau",
+    "casinoType": 1
+  },
+  {
+    "productId": 22,
+    "productName": "Macau Games",
+    "casinoType": 1
+  },
+  {
+    "productId": 13,
+    "productName": "Microgaming - Live Casino",
+    "casinoType": 2
+  },
+  {
+    "productId": 17,
+    "productName": "Microgaming - RNG Casino",
+    "casinoType": 1
+  },
+  {
+    "productId": 3,
+    "productName": "Number Game",
+    "casinoType": 0
+  },
+  {
+    "productId": 6,
+    "productName": "RNG Casino",
+    "casinoType": 1
+  },
+  {
+    "productId": 4,
+    "productName": "SLI",
+    "casinoType": 2
+  },
+  {
+    "productId": 5,
+    "productName": "Virtual Sports",
+    "casinoType": 0
+  }
+]

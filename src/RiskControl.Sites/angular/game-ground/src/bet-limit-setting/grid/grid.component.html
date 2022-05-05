@@ -1,0 +1,96 @@
+<ng-template #colgroup>
+  <colgroup>
+    <col style="width: 60px" />
+    <col style="width: 90px" />
+    <col style="width: 120px" />
+    <col style="width: 250px" />
+  </colgroup>
+</ng-template>
+<ng-template #thead>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Product</th>
+      <th>Game Type</th>
+      <th>Game Round Bet Limit (RM)</th>
+    </tr>
+  </thead>
+</ng-template>
+<div class="d-inline-block">
+  <nap-breadcrumb *ngIf="displayModels" [items]="breadcrumbItems">
+  </nap-breadcrumb>
+  <div *ngIf="displayModels" class="nap-grid" [ngSwitch]="hasData">
+    <div style="width: 541px;">
+      <div class="header">
+        <table>
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <ng-template [ngTemplateOutlet]="thead"></ng-template>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="body">
+        <table class="table-striped">
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <tbody>
+            <tr *ngFor="let item of displayModels; let i = index">
+              <td class="text-center">
+                {{ i + 1 }}
+              </td>
+              <td class="text-center">
+                {{ item.ProductName }}
+              </td>
+              <td class="text-center">
+                {{ item.BetTypeName }}
+              </td>
+              <td class="game-round-bet-limit">
+                <ngx-numeric-textbox
+                  [min]="0"
+                  [max]="1000000000"
+                  [decimals]="0"
+                  [autoCorrect]="true"
+                  [format]="'0,0'"
+                  [disabled]="!hasHostPermission"
+                  [(ngModel)]="item.GameRoundBetLimit"
+                >
+                </ngx-numeric-textbox>
+                <span>(RM)</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngSwitchCase="false" class="body stretch">
+        <table>
+          <tbody>
+            <tr>
+              <th class="no-data" colspan="4">
+                There is no data
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="true">
+        <nap-note>
+          <span class="text-danger">- Limit Setting = 0: Unlimited.</span>
+        </nap-note>
+        <button
+          *ngIf="hasHostPermission"
+          type="button"
+          class="btn btn-primary"
+          (click)="save()"
+        >
+          Save
+        </button>
+        <button
+          *ngIf="hasHostPermission"
+          type="button"
+          class="btn btn-danger"
+          (click)="cancel()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
