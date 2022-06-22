@@ -38,6 +38,7 @@ namespace RiskControl.Sites.DependencyInjections
 
             service.AddTransient<FraudServiceWrapper, FraudServiceWrapperImp>();
             service.AddTransient<AssociatedAccountService, AssociatedAccountServiceImp>();
+            service.AddSingleton<ICacheService>(new CacheService());
         }
     }
 }

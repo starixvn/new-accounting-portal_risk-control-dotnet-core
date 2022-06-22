@@ -1,5 +1,5 @@
-﻿using System;
-using System.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 
 namespace RiskControl.Core.Configuration
 {
@@ -20,16 +20,23 @@ namespace RiskControl.Core.Configuration
 
     public class ConfigurationServiceImp : ConfigurationService
     {
-        public string FraudSystemAPI => ConfigurationManager.AppSettings["FraudSystemAPI"];
+        private readonly IConfiguration configuration;
+
+        public ConfigurationServiceImp(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
+        public string FraudSystemAPI => configuration["FraudSystemAPI"];
 
         public string CurrentDirectory => AppDomain.CurrentDomain.BaseDirectory;
 
-        public string FileServerDirectory => ConfigurationManager.AppSettings["FileServerDirectory"];
+        public string FileServerDirectory => configuration["FileServerDirectory"];
 
-        public string FileServerUsername => ConfigurationManager.AppSettings["FileServerUserName"];
+        public string FileServerUsername => configuration["FileServerUserName"];
 
-        public string ProgressiveJackpotAPI => ConfigurationManager.AppSettings["ProgressiveJackpotAPI"];
+        public string ProgressiveJackpotAPI => configuration["ProgressiveJackpotAPI"];
 
-        public string FraudSystemCTSAPI => ConfigurationManager.AppSettings["FraudSystemCTSAPI"];
+        public string FraudSystemCTSAPI => configuration["FraudSystemCTSAPI"];
     }
 }

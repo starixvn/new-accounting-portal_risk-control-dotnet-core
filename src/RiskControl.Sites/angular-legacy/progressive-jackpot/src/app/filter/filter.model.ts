@@ -1,19 +1,19 @@
 export interface GameGroup {
-  GameGroupId: number;
-  GameGroupNameAlias: string;
+  gameGroupId: number;
+  gameGroupNameAlias: string;
 }
 
 export interface GameType {
-  GameTypeId: number;
-  GameTypeNo: string;
-  GameTypeNameAlias: string;
+  gameTypeId: number;
+  gameTypeNo: string;
+  gameTypeNameAlias: string;
 }
 
 export interface JackpotType {
-  JackpotTypeId: number;
-  JackpotTypeNameAlias: string;
-  GameTypeId: number;
-  GameGroupId: number;
+  jackpotTypeId: number;
+  jackpotTypeNameAlias: string;
+  gameTypeId: number;
+  gameGroupId: number;
 }
 
 export enum SearchType {

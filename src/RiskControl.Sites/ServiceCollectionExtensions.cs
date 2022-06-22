@@ -4,6 +4,8 @@ using Fanex.Data.SqlServer;
 using Fanex.Logging;
 using Fanex.Logging.Sentry;
 using Fanex.RemotingRef;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -18,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RiskControl.Sites
 {
@@ -56,10 +59,10 @@ namespace RiskControl.Sites
 
         public static void LoadConfig(this IServiceCollection services)
         {
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 
-            var text = File.ReadAllText("appsettings.json");
-            AppConfigService.AppConfig = JsonConvert.DeserializeObject<ConfigSettingModel>(text);
+            //var text = File.ReadAllText("appsettings.json");
+            //AppConfigService.AppConfig = JsonConvert.DeserializeObject<ConfigSettingModel>(text);
         }
 
         public static void RegisterRemotingRef(this IServiceCollection services, IConfiguration configuration)
@@ -92,7 +95,7 @@ namespace RiskControl.Sites
             }
         }
 
-        public static void RegisterInternalServices(this IServiceCollection services)
+        public static void RegisterInternalServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.RegisterGlobalServices();
             services.RegisterNonSportsServices();
@@ -101,8 +104,37 @@ namespace RiskControl.Sites
             services.RegisterVoidRejectRefundService();
             services.RegisterWinLimitControlServices();
             services.AddSingleton(CreateMapper);
+            OnebookUMInitializer.RegisterServiceCollection(services, configuration);
             OnebookUMInitializer.InitializeUMClientManager();
-            OnebookUMInitializer.RegisterServiceCollection(services);
+        }
+
+        public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = configuration.GetSection("AuthSettings:LoginPath").Value;
+                    options.LogoutPath = configuration.GetSection("AuthSettings:LogoutPath").Value;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(int.Parse(configuration.GetSection("AuthSettings:CookieTimeOut").Value));
+                    options.Cookie = new CookieBuilder
+                    {
+                        Name = "RiskControl.Cookie",
+                        SecurePolicy = CookieSecurePolicy.SameAsRequest
+                    };
+
+                    options.Events.OnSigningOut = context =>
+                    {
+                        context.Response.Redirect(options.LoginPath);
+                        return Task.CompletedTask;
+                    };
+                });
+
+            services.AddSession(options =>
+            {
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(int.Parse(configuration.GetSection("AuthSettings:SessionTimeOut").Value));
+                options.Cookie.Name = "RiskControl.Session";
+            });
         }
     }
 }

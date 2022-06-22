@@ -21,6 +21,7 @@ namespace RiskControl.Sites
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    
                 });
     }
 }

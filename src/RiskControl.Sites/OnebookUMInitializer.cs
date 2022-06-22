@@ -1,35 +1,39 @@
 ﻿using Fanex.Caching;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ONEbook.UM;
+using ONEbook.UM.AspNetCore;
+using ONEbook.UM.AspNetCore.Filters;
+using ONEbook.UM.Configurations;
 using ONEbook.UM.Helpers;
 using ONEbook.UM.Services;
 using ONEbook.UM.Transport;
-using RiskControl.Sites.Services;
 
 namespace RiskControl.Sites
 {
     public static class OnebookUMInitializer
     {
+        private static UMClientConfiguration umConfig;
         public static void InitializeUMClientManager()
         {
-            var umConfig = AppConfigService.AppConfig.UMConfig;
-
             UMClientManager
               .UseConfig(umConfig)
               .UseCacheService(new UMCacheService(new CacheService()))
               .UseRestClient(new UMRestClient(umConfig));
         }
 
-        public static void RegisterServiceCollection(IServiceCollection services)
+        public static void RegisterServiceCollection(IServiceCollection services, IConfiguration configuration)
         {
-            var umConfig = AppConfigService.AppConfig.UMConfig;
-            services.AddSingleton(umConfig);
-            services.AddSingleton<IHttpContextHelper, HttpContextHelper>();
-            services.AddSingleton<ICacheService>(new CacheService());
+            umConfig = new UMClientConfiguration();
+            services.AddSingleton(umConfig.Initialize(configuration));
+            services.AddSingleton<CheckUMFilterAttribute>();
             services.AddSingleton<IUMCacheService, UMCacheService>();
-            services.AddSingleton<IPHelper, IPHelperImpl>();
             services.AddSingleton<IUMRestClient, UMRestClient>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); 
+            services.AddSingleton<IHttpContextHelper, HttpContextHelper>();
             services.AddSingleton<IMaintenanceService, MaintenanceService>();
+
         }
     }
 

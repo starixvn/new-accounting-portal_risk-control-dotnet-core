@@ -11,8 +11,8 @@ export class FilterService {
 
   getGameGroups(): Observable<GameGroup[]> {
     const allGameGroup: GameGroup = {
-      GameGroupId: 0,
-      GameGroupNameAlias: 'All'
+      gameGroupId: 0,
+      gameGroupNameAlias: 'All'
     };
     const url = 'api/progressive-jackpot/game-group';
     return this.httpService.post<GameGroup[]>(url).map(result => {
@@ -23,9 +23,9 @@ export class FilterService {
 
   getGameTypes(gameGroupId: number): Observable<GameType[]> {
     const allGameType: GameType = {
-      GameTypeId: 0,
-      GameTypeNo: 'All',
-      GameTypeNameAlias: 'All'
+      gameTypeId: 0,
+      gameTypeNo: 'All',
+      gameTypeNameAlias: 'All'
     };
     const url = 'api/progressive-jackpot/game-type';
     const data = {
@@ -39,10 +39,10 @@ export class FilterService {
 
   getJackpotTypes(gameGroupId: number, gameTypeId: number): Observable<JackpotType[]> {
     const allJackpotType: JackpotType = {
-      JackpotTypeId: 0,
-      JackpotTypeNameAlias: 'All',
-      GameTypeId: 0,
-      GameGroupId: 0
+      jackpotTypeId: 0,
+      jackpotTypeNameAlias: 'All',
+      gameTypeId: 0,
+      gameGroupId: 0
     };
     const url = 'api/progressive-jackpot/jackpot-type';
     const data = {
