@@ -2,19 +2,13 @@ using Fanex.NAP.Client;
 using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Signin.AspNetCore.Attribute;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using ONEbook.UM.AspNetCore.Filters;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace RiskControl.Sites
 {

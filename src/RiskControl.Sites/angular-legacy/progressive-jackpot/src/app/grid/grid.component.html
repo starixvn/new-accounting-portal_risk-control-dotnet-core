@@ -20,7 +20,7 @@
   </colgroup>
 </ng-template>
 <div *ngIf="gridType === GridType.RealTime && realTimeRecords" [ngSwitch]="realTimeRecords.length > 0">
-  <div class="grid">
+  <div class="nap-grid">
     <div style="width: 1420px">
       <nap-breadcrumb [items]="breadcrumbItems" (itemClick)="breadcrumbItemClick($event)" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
       <div class="header">
@@ -47,18 +47,18 @@
           <ng-template [ngTemplateOutlet]="realTimeColgroup"></ng-template>
           <tbody>
             <tr *ngFor="let record of realTimeRecords">
-              <td>{{record.GameGroupNameAlias}}</td>
-              <td>{{record.GameTypeNameAlias}}</td>
-              <td>{{record.JackpotTypeNameAlias}}</td>
+              <td>{{record.gameGroupNameAlias}}</td>
+              <td>{{record.gameTypeNameAlias}}</td>
+              <td>{{record.jackpotTypeNameAlias}}</td>
               <td class="text-center">
-                <span class="nap-link" (click)="drillDownMonthly(record)">{{record.JackpotStartDate | napDate:'MM-dd-yyyy'}}</span>
+                <span class="nap-link" (click)="drillDownMonthly(record)">{{record.jackpotStartDate | napDate:'MM-dd-yyyy'}}</span>
               </td>
-              <td class="number" [napIntegerFormat]="record.PlayerCount"></td>
-              <td class="number" [napIntegerFormat]="record.BetCount"></td>
-              <td class="number" [napDecimalFormat]="record.TotalBet"></td>
-              <td class="number" [napDecimalFormat]="record.CurrentRefundPool"></td>
-              <td class="number" [napDecimalFormat]="record.CurrentReservePool"></td>
-              <td class="number" [napDecimalFormat]="record.CurrentJackpotPool"></td>
+              <td class="number" [napIntegerFormat]="record.playerCount"></td>
+              <td class="number" [napIntegerFormat]="record.betCount"></td>
+              <td class="number" [napDecimalFormat]="record.totalBet"></td>
+              <td class="number" [napDecimalFormat]="record.currentRefundPool"></td>
+              <td class="number" [napDecimalFormat]="record.currentReservePool"></td>
+              <td class="number" [napDecimalFormat]="record.currentJackpotPool"></td>
             </tr>
           </tbody>
         </table>
@@ -90,7 +90,7 @@
   </colgroup>
 </ng-template>
 <div *ngIf="gridType === GridType.Monthly && monthlyRecords" [ngSwitch]="monthlyRecords.length > 0">
-  <div class="grid">
+  <div class="nap-grid">
     <div style="width: 1060px">
       <nap-breadcrumb [items]="breadcrumbItems" (itemClick)="breadcrumbItemClick($event)" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
       <div class="header">
@@ -114,15 +114,15 @@
           <ng-template [ngTemplateOutlet]="monthlyColgroup"></ng-template>
           <tbody>
             <tr *ngFor="let record of monthlyRecords">
-              <td>{{record.GameGroupNameAlias}}</td>
-              <td>{{record.GameTypeNameAlias}}</td>
-              <td>{{record.JackpotTypeNameAlias}}</td>
+              <td>{{record.gameGroupNameAlias}}</td>
+              <td>{{record.gameTypeNameAlias}}</td>
+              <td>{{record.jackpotTypeNameAlias}}</td>
               <td class="text-center">
-                <span class="nap-link" (click)="drillDownDaily(record)">{{record.Month | napDate:'MM-yyyy'}}</span>
+                <span class="nap-link" (click)="drillDownDaily(record)">{{record.month | napDate:'MM-yyyy'}}</span>
               </td>
-              <td class="number" [napIntegerFormat]="record.PlayerCount"></td>
-              <td class="number" [napIntegerFormat]="record.BetCount"></td>
-              <td class="number" [napDecimalFormat]="record.TotalBet"></td>
+              <td class="number" [napIntegerFormat]="record.playerCount"></td>
+              <td class="number" [napIntegerFormat]="record.betCount"></td>
+              <td class="number" [napDecimalFormat]="record.totalBet"></td>
             </tr>
           </tbody>
         </table>
@@ -154,7 +154,7 @@
   </colgroup>
 </ng-template>
 <div *ngIf="gridType === GridType.Daily && dailyRecords" [ngSwitch]="dailyRecords.length > 0">
-  <div class="grid">
+  <div class="nap-grid">
     <div style="width: 1060px">
       <nap-breadcrumb [items]="breadcrumbItems" (itemClick)="breadcrumbItemClick($event)" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
       <div class="header">
@@ -178,13 +178,13 @@
           <ng-template [ngTemplateOutlet]="dailyColgroup"></ng-template>
           <tbody>
             <tr *ngFor="let record of dailyRecords">
-              <td>{{record.GameGroupNameAlias}}</td>
-              <td>{{record.GameTypeNameAlias}}</td>
-              <td>{{record.JackpotTypeNameAlias}}</td>
-              <td class="text-center"> {{record.Date | napDate:'MM-dd-yyyy'}} </td>
-              <td class="number" [napIntegerFormat]="record.PlayerCount"></td>
-              <td class="number" [napIntegerFormat]="record.BetCount"></td>
-              <td class="number" [napDecimalFormat]="record.TotalBet"></td>
+              <td>{{record.gameGroupNameAlias}}</td>
+              <td>{{record.gameTypeNameAlias}}</td>
+              <td>{{record.jackpotTypeNameAlias}}</td>
+              <td class="text-center"> {{record.date | napDate:'MM-dd-yyyy'}} </td>
+              <td class="number" [napIntegerFormat]="record.playerCount"></td>
+              <td class="number" [napIntegerFormat]="record.betCount"></td>
+              <td class="number" [napDecimalFormat]="record.totalBet"></td>
             </tr>
           </tbody>
         </table>
@@ -216,7 +216,7 @@
   </colgroup>
 </ng-template>
 <div *ngIf="gridType === GridType.Winner && winnerRecords" [ngSwitch]="winnerRecords.length > 0">
-  <div class="grid">
+  <div class="nap-grid">
     <div style="width: 1220px">
       <nap-breadcrumb [items]="breadcrumbItems" (itemClick)="breadcrumbItemClick($event)" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
       <div class="header">
@@ -240,17 +240,17 @@
           <ng-template [ngTemplateOutlet]="winnerColgroup"></ng-template>
           <tbody>
             <tr *ngFor="let record of winnerRecords">
-              <td>{{record.GameGroupNameAlias}}</td>
-              <td>{{record.GameTypeNameAlias}}</td>
-              <td>{{record.JackpotTypeNameAlias}}</td>
+              <td>{{record.gameGroupNameAlias}}</td>
+              <td>{{record.gameTypeNameAlias}}</td>
+              <td>{{record.jackpotTypeNameAlias}}</td>
               <td class="text-center">
-                {{record.JackpotStartDate | napDate:'MM-dd-yyyy'}}
+                {{record.jackpotStartDate | napDate:'MM-dd-yyyy'}}
               </td>
               <td class="text-center">
-                {{record.JackpotHitDate | napDate:'MM-dd-yyyy'}}
+                {{record.jackpotHitDate | napDate:'MM-dd-yyyy'}}
               </td>
-              <td>{{record.UserName}}</td>
-              <td class="number" [napDecimalFormat]="record.WinningAmt"></td>
+              <td>{{record.userName}}</td>
+              <td class="number" [napDecimalFormat]="record.winningAmt"></td>
             </tr>
           </tbody>
         </table>

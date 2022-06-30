@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { HttpService, HttpOptions, DefaultHttpOptions } from 'nap-components/http';
 import { Helper } from 'nap-components/helper';
@@ -21,7 +21,7 @@ export class GridService {
     const url = 'api/progressive-jackpot/real-time-excel';
     return this.httpService.download(url, model).subscribe(response => {
       const fileName = `ProgressiveJackpotMonitoring_${this.getExportedDateString()}.xlsx`;
-      Helper.saveExcel(response, fileName);
+      Helper.downloadFile(response, fileName);
     });
   }
 
@@ -34,7 +34,7 @@ export class GridService {
     const url = 'api/progressive-jackpot/win-record-excel';
     return this.httpService.download(url, model).subscribe(response => {
       const fileName = `WinRecord_${this.getExportedDateString()}.xlsx`;
-      Helper.saveExcel(response, fileName);
+      Helper.downloadFile(response, fileName);
     });
   }
 
@@ -47,7 +47,7 @@ export class GridService {
     const url = 'api/progressive-jackpot/monthly-excel';
     return this.httpService.download(url, model).subscribe(response => {
       const fileName = `ProgressiveJackpotMonitoring_${this.getExportedDateString()}.xlsx`;
-      Helper.saveExcel(response, fileName);
+      Helper.downloadFile(response, fileName);
     });
   }
 
@@ -60,7 +60,7 @@ export class GridService {
     const url = 'api/progressive-jackpot/daily-excel';
     return this.httpService.download(url, model).subscribe(response => {
       const fileName = `ProgressiveJackpotMonitoring_${this.getExportedDateString()}.xlsx`;
-      Helper.saveExcel(response, fileName);
+      Helper.downloadFile(response, fileName);
     });
   }
 

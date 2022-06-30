@@ -1,46 +1,46 @@
 export interface Record {
-  GameGroupNameAlias: string;
-  GameTypeNameAlias: string;
-  JackpotTypeNameAlias: string;
-  PlayerCount: number;
-  BetCount: number;
-  TotalBet: number;
+  gameGroupNameAlias: string;
+  gameTypeNameAlias: string;
+  jackpotTypeNameAlias: string;
+  playerCount: number;
+  betCount: number;
+  totalBet: number;
 }
 
 export interface RealTimeRecord extends Record {
-  JackpotStartDate: string;
-  CurrentRefundPool: number;
-  CurrentReservePool: number;
-  CurrentJackpotPool: number;
-  PJMainId: number;
-  Level: number;
+  jackpotStartDate: string;
+  currentRefundPool: number;
+  currentReservePool: number;
+  currentJackpotPool: number;
+  pjMainId: number;
+  level: number;
 }
 
 export interface WinnerRecord {
-  GameGroupNameAlias: string;
-  GameTypeNameAlias: string;
-  JackpotTypeNameAlias: string;
-  JackpotStartDate: string;
-  JackpotHitDate: string;
-  UserName: string;
-  WinningAmt: number;
+  gameGroupNameAlias: string;
+  gameTypeNameAlias: string;
+  jackpotTypeNameAlias: string;
+  jackpotStartDate: string;
+  jackpotHitDate: string;
+  userName: string;
+  winningAmt: number;
 }
 
 export interface MonthlyQueryModel {
-  PJMainId: number;
-  Level: number;
+  pjMainId: number;
+  level: number;
 }
 
 export interface MonthlyRecord extends Record {
-  Month: string;
+  month: string;
 }
 
 export interface DailyQueryModel extends MonthlyQueryModel {
-  Month: string;
+  month: string;
 }
 
 export interface DailyRecord extends Record {
-  Date: string;
+  date: string;
 }
 
 export enum GridType {

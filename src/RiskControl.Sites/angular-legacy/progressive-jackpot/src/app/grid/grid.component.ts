@@ -1,9 +1,6 @@
 import { Component, Input, OnChanges, OnInit, ViewChildren, QueryList } from '@angular/core';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastService, MessageType } from 'nap-components/toast';
-import { ConfirmationService } from 'nap-components/confirmation';
 import { FilterModel, SearchType } from '../filter';
 import { RealTimeRecord, MonthlyQueryModel, DailyQueryModel, WinnerRecord, GridType, MonthlyRecord, DailyRecord } from './grid.model';
 import { GridService } from './grid.service';
@@ -51,8 +48,8 @@ export class GridComponent implements OnChanges {
     this.gridType = GridType.Monthly;
     this.breadcrumbItems.push('Monthly');
     this.monthlyQueryModel = {
-      Level: record.Level,
-      PJMainId: record.PJMainId
+      level: record.level,
+      pjMainId: record.pjMainId
     };
     this.monthlyRecords = undefined;
     this.gridService.queryMonthly(this.monthlyQueryModel).subscribe(records => {
@@ -65,9 +62,9 @@ export class GridComponent implements OnChanges {
     this.gridType = GridType.Daily;
     this.breadcrumbItems.push('Daily');
     this.dailyQueryModel = {
-      Level: this.monthlyQueryModel.Level,
-      PJMainId: this.monthlyQueryModel.PJMainId,
-      Month: moment(record.Month).format('MM-YYYY')
+      level: this.monthlyQueryModel.level,
+      pjMainId: this.monthlyQueryModel.pjMainId,
+      month: moment(record.month).format('MM-YYYY')
     };
     this.dailyRecords = undefined;
     this.gridService.queryDaily(this.dailyQueryModel).subscribe(records => {

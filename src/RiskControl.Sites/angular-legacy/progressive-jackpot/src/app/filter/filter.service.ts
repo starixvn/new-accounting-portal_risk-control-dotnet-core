@@ -1,5 +1,7 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpService, HttpOptions, DefaultHttpOptions } from 'nap-components/http';
 import { FilterModel, GameType, JackpotType, GameGroup } from './filter.model';
 
@@ -15,10 +17,10 @@ export class FilterService {
       gameGroupNameAlias: 'All'
     };
     const url = 'api/progressive-jackpot/game-group';
-    return this.httpService.post<GameGroup[]>(url).map(result => {
+    return this.httpService.post<GameGroup[]>(url).pipe(map(result => {
       result.unshift(allGameGroup);
       return result;
-    });
+    }));
   }
 
   getGameTypes(gameGroupId: number): Observable<GameType[]> {
@@ -31,10 +33,10 @@ export class FilterService {
     const data = {
       gameGroupId: gameGroupId
     };
-    return this.httpService.post<GameType[]>(url, data).map(result => {
+    return this.httpService.post<GameType[]>(url, data).pipe(map(result => {
       result.unshift(allGameType);
       return result;
-    });
+    }));
   }
 
   getJackpotTypes(gameGroupId: number, gameTypeId: number): Observable<JackpotType[]> {
@@ -49,9 +51,9 @@ export class FilterService {
       gameGroupId: gameGroupId,
       gameTypeId: gameTypeId
     };
-    return this.httpService.post<JackpotType[]>(url, data).map(result => {
+    return this.httpService.post<JackpotType[]>(url, data).pipe(map(result => {
       result.unshift(allJackpotType);
       return result;
-    });
+    }));
   }
 }

@@ -2,11 +2,17 @@
 .col-title {
   width: 100px;
   font-weight: 700;
-  padding-left: 15px;
+  padding-left: 15px !important;
 }
 
-.col-nap-1 {
+.nap-col-1 {
   label {
     width: 100px;
+  }
+}
+
+.nap-control {
+  button {
+    padding: .244rem 1rem;
   }
 }

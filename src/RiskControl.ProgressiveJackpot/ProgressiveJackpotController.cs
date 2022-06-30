@@ -7,6 +7,7 @@ using RiskControl.ProgressiveJackpot.Model;
 
 namespace RiskControl.ProgressiveJackpot
 {
+    [ApiController]
     [Route("api/progressive-jackpot")]
     public class ProgressiveJackpotController : ControllerBase
     {

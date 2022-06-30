@@ -21,6 +21,21 @@
     <None Remove="App_Data\DBCust.CustDB.bodbAdminNet.xml" />
     <None Remove="App_Data\DBTXT.bodb02.bodbAdminNet.xml" />
     <None Remove="App_Data\DBWH.bodb_dwrs.bodbAdminNet.xml" />
+    <None Remove="Templates\GameRound\Monitor.xlsx" />
+    <None Remove="Templates\NonSport\HourlyTemplate.xlsx" />
+    <None Remove="Templates\NonSport\Template.xlsx" />
+    <None Remove="Templates\NonSport\ViewByIntegerHourlyTemplate.xlsx" />
+    <None Remove="Templates\NonSport\ViewByIntegerTemplate.xlsx" />
+    <None Remove="Templates\ProgressiveJackpot\Daily.xlsx" />
+    <None Remove="Templates\ProgressiveJackpot\Monthly.xlsx" />
+    <None Remove="Templates\ProgressiveJackpot\RealTime.xlsx" />
+    <None Remove="Templates\ProgressiveJackpot\WinRecord.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Company.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Currency.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Daily.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Device.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Monthly.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Product.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +54,29 @@
     <Content Include="App_Data\DBWH.bodb_dwrs.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\GameRound\Monitor.xlsx" />
+    <Content Include="Templates\NonSport\HourlyTemplate.xlsx" />
+    <Content Include="Templates\NonSport\Template.xlsx" />
+    <Content Include="Templates\NonSport\ViewByIntegerHourlyTemplate.xlsx" />
+    <Content Include="Templates\NonSport\ViewByIntegerTemplate.xlsx" />
+    <Content Include="Templates\ProgressiveJackpot\Daily.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\ProgressiveJackpot\Monthly.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\ProgressiveJackpot\RealTime.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\ProgressiveJackpot\WinRecord.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\VoidRejectRefund\Company.xlsx" />
+    <Content Include="Templates\VoidRejectRefund\Currency.xlsx" />
+    <Content Include="Templates\VoidRejectRefund\Daily.xlsx" />
+    <Content Include="Templates\VoidRejectRefund\Device.xlsx" />
+    <Content Include="Templates\VoidRejectRefund\Monthly.xlsx" />
+    <Content Include="Templates\VoidRejectRefund\Product.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
