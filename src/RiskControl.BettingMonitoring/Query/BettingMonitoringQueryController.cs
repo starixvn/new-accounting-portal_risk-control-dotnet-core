@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.BettingMonitoring.Query
 {
+    [ApiController]
     [Route("api/betting-monitoring")]
     public class BettingMonitoringQueryController : ControllerBase
     {

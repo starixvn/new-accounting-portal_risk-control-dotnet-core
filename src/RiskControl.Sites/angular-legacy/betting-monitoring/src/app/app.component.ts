@@ -7,15 +7,14 @@ import { ToastService, MessageType } from 'nap-components/toast';
   selector: 'nap-app',
   templateUrl: './app.component.html',
   styleUrls: [
-    './app.component.scss',
-    '../../node_modules/nap-theme/scss/header.scss'
+    './app.component.scss'
   ],
   providers: [AppService]
 })
 
 export class AppComponent implements OnInit {
 
-  model: BettingMonitoringModel = { MinimumTickets: 0, Threshold: 0 };
+  model: BettingMonitoringModel = { minimumTickets: 0, threshold: 0 };
   constructor(
     private appService: AppService,
     private toastService: ToastService

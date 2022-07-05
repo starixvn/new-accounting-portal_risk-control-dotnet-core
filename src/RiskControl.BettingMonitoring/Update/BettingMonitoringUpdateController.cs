@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.BettingMonitoring.Update
 {
+    [ApiController]
     [Route("state-api/betting-monitoring")]
     public class BettingMonitoringUpdateController : ControllerBase
     {

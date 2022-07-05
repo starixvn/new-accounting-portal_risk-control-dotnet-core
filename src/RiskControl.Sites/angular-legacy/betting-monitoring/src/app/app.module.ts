@@ -8,7 +8,7 @@ import { ToastModule } from 'nap-components/toast';
 import { SpinnerModule } from 'nap-components/spinner';
 import { AppComponent } from './app.component';
 import { CustomNavbarService } from './custom-navbar.service';
-import { NumericTextboxModule } from 'ngx-numeric-textbox';
+import { NumericTextboxModule } from 'nap-components/numeric-textbox';
 @NgModule({
   imports: [
     BrowserModule,

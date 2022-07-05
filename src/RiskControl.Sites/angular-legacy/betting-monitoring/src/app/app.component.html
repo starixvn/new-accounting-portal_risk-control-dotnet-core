@@ -11,8 +11,8 @@
         <div class="nap-group">
           <label>Minimum Tickets</label>
           <div class="nap-control">
-            <ngx-numeric-textbox [min]="25" [max]="32000" [decimals]="0" format="0,0" [autoCorrect]="false" [(ngModel)]="model.MinimumTickets">
-            </ngx-numeric-textbox>
+            <nap-ngx-numeric-textbox [min]="25" [max]="32000" [decimals]="0" format="0,0" [autoCorrect]="false" [(ngModel)]="model.minimumTickets">
+            </nap-ngx-numeric-textbox>
           </div>
         </div>
       </div>
@@ -22,8 +22,8 @@
         <div class="nap-group">
           <label>Threshold</label>
           <div class="nap-control">
-            <ngx-numeric-textbox [min]="25" [max]="100" [decimals]="0" format="0,0" [autoCorrect]="false" [(ngModel)]="model.Threshold">
-            </ngx-numeric-textbox>
+            <nap-ngx-numeric-textbox [min]="25" [max]="100" [decimals]="0" format="0,0" [autoCorrect]="false" [(ngModel)]="model.threshold">
+            </nap-ngx-numeric-textbox>
           </div>
           <span>&nbsp;%</span>
         </div>
