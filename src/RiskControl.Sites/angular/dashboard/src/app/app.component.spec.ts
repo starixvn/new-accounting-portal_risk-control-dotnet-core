@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { HttpModule } from 'nap-components/http';
@@ -86,7 +86,7 @@ describe('AppComponent', () => {
     balanceUpSpy = spyOn(appService, 'getBalanceup').and.returnValue(of(balanceUpModel));
   }
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -114,7 +114,7 @@ describe('AppComponent', () => {
   }));
 
   describe('Win Loss Limit', () => {
-    it('title should be Win Loss Limit Monitor', async(() => {
+    it('title should be Win Loss Limit Monitor', waitForAsync(() => {
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();        // update view with quote
         const debugElement: DebugElement = fixture.debugElement;
@@ -124,7 +124,7 @@ describe('AppComponent', () => {
       });
     }));
 
-    it('header shoud render  UserName, Currency, Product, Limit Level', async(() => {
+    it('header shoud render  UserName, Currency, Product, Limit Level', waitForAsync(() => {
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();
         const debugElement: DebugElement = fixture.debugElement;
@@ -136,7 +136,7 @@ describe('AppComponent', () => {
       });
     }));
 
-    it('body shoud render  3 rows', async(() => {
+    it('body shoud render  3 rows', waitForAsync(() => {
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();
         const debugElement: DebugElement = fixture.debugElement;
@@ -145,7 +145,7 @@ describe('AppComponent', () => {
       });
     }));
 
-    it('body shoud render right data', async(() => {
+    it('body shoud render right data', waitForAsync(() => {
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();
         const debugElement: DebugElement = fixture.debugElement;
@@ -164,7 +164,7 @@ describe('AppComponent', () => {
       });
     }));
 
-    it('body shoud render right limit css class', async(() => {
+    it('body shoud render right limit css class', waitForAsync(() => {
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();
         const debugElement: DebugElement = fixture.debugElement;
@@ -177,7 +177,7 @@ describe('AppComponent', () => {
   });
 
   describe('Top Members with High Winning (RM)', () => {
-    it('title should be Top Members with High Winning (RM)', async(() => {
+    it('title should be Top Members with High Winning (RM)', waitForAsync(() => {
       // fixture.detectChanges(); // update view
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();
@@ -188,7 +188,7 @@ describe('AppComponent', () => {
       });
     }));
 
-    it('header shoud render  UserName, Currency, Game Income', async(() => {
+    it('header shoud render  UserName, Currency, Game Income', waitForAsync(() => {
       //fixture.detectChanges(); // update view
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();
@@ -200,7 +200,7 @@ describe('AppComponent', () => {
       });
     }));
 
-    it('body shoud render  3 rows', async(() => {
+    it('body shoud render  3 rows', waitForAsync(() => {
       // fixture.detectChanges(); // update view
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();
@@ -210,7 +210,7 @@ describe('AppComponent', () => {
       });
     }));
 
-    it('body shoud render right data', async(() => {
+    it('body shoud render right data', waitForAsync(() => {
       //fixture.detectChanges(); // update view
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();
@@ -232,7 +232,7 @@ describe('AppComponent', () => {
   });
 
   describe('Top Game Types with High Winning (RM)', () => {
-    it('title should be Top Game Types with High Winning (RM)', async(() => {
+    it('title should be Top Game Types with High Winning (RM)', waitForAsync(() => {
       //  fixture.detectChanges(); // update view
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();
@@ -243,7 +243,7 @@ describe('AppComponent', () => {
       });
     }));
 
-    it('header shoud render  Game Type, Product, Game Income', async(() => {
+    it('header shoud render  Game Type, Product, Game Income', waitForAsync(() => {
       // fixture.detectChanges(); // update view
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();
@@ -255,7 +255,7 @@ describe('AppComponent', () => {
       });
     }));
 
-    it('body shoud render  3 rows', async(() => {
+    it('body shoud render  3 rows', waitForAsync(() => {
       // fixture.detectChanges(); // update view
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();
@@ -265,7 +265,7 @@ describe('AppComponent', () => {
       });
     }));
 
-    it('body shoud render right data', async(() => {
+    it('body shoud render right data', waitForAsync(() => {
       // fixture.detectChanges(); // update view
       fixture.whenStable().then(() => { // wait for async getQuote
         fixture.detectChanges();

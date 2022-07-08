@@ -119,11 +119,11 @@ export class AppComponent implements OnInit {
   }
 
   private createMonthlyTurnoverAndNetIncome() {
-    this.monthLabels = this.monthlyTurnoverAndNetIncome.map(item => item.Month);
+    this.monthLabels = this.monthlyTurnoverAndNetIncome.map(item => item.month);
 
     this.netIncomeDatasets = [{
       label: 'NetIncome',
-      data: this.monthlyTurnoverAndNetIncome.map(item => item.NetIncome)
+      data: this.monthlyTurnoverAndNetIncome.map(item => item.netIncome)
     }];
 
     this.netIncomeOptions = {
@@ -156,7 +156,7 @@ export class AppComponent implements OnInit {
 
     this.turnoverDatasets = [{
       label: 'Turnover',
-      data: this.monthlyTurnoverAndNetIncome.map(item => item.Turnover)
+      data: this.monthlyTurnoverAndNetIncome.map(item => item.turnover)
     }];
 
     this.turnoverOptions = {
@@ -189,11 +189,11 @@ export class AppComponent implements OnInit {
   }
 
   private createCurrencyNetIncome() {
-    this.currencyLabels = this.currencyNetIncome.map(item => item.Currency);
+    this.currencyLabels = this.currencyNetIncome.map(item => item.currency);
 
     this.currencyDatasets = [{
       label: 'Net Income By Currency',
-      data: this.currencyNetIncome.map(item => item.NetIncome)
+      data: this.currencyNetIncome.map(item => item.netIncome)
     }];
 
     this.currencyOptions = {
@@ -226,11 +226,11 @@ export class AppComponent implements OnInit {
   }
 
   private createProductTurnover() {
-    this.productLabels = this.productTurnover.map(item => item.Product);
+    this.productLabels = this.productTurnover.map(item => item.product);
 
     this.productDatasets = [{
       label: '',
-      data: this.productTurnover.map(item => item.Turnover)
+      data: this.productTurnover.map(item => item.turnover)
     }];
 
     this.productOptions = {

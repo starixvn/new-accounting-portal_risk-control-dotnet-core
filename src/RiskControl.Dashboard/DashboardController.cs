@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.Dashboard
 {
+    [ApiController]
     [Route("api/dashboard")]
     public class DashboardController : ControllerBase
     {

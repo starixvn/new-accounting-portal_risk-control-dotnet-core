@@ -61,21 +61,21 @@
             </div>
             <div *ngFor="let item of winlossLimit" class="row mt-1">
               <div class="col-4 col-sm-4 col-md-4">
-                {{item.UserName}}
+                {{item.userName}}
               </div>
               <div class="col-2 col-sm-4 col-md-2">
-                {{item.Currency}}
+                {{item.currency}}
               </div>
               <div class="col-4 col-sm-4 col-md-4">
-                {{item.Product}}
+                {{item.product}}
               </div>
               <div class="col-2 col-sm-2 col-md-2">
                 <i class="fa fa-flag" [ngClass]="{
-                'text-orrange': (item.LimitLevel == 1), 
-                'text-yellow': (item.LimitLevel == 2),
-                'text-red': (item.LimitLevel == 3),
-                'text-grey': (item.LimitLevel == 101),
-                'text-black': (item.LimitLevel == 102)}"></i>
+                'text-orrange': (item.limitLevel == 1), 
+                'text-yellow': (item.limitLevel == 2),
+                'text-red': (item.limitLevel == 3),
+                'text-grey': (item.limitLevel == 101),
+                'text-black': (item.limitLevel == 102)}"></i>
               </div>
             </div>
           </div>
@@ -105,12 +105,12 @@
           </div>
           <div *ngFor="let item of topMemberWinning" class="row mt-1">
             <div class="col-5 col-sm-5 col-md-5">
-              {{item.Username}}
+              {{item.username}}
             </div>
             <div class="col-3 col-sm-3 col-md-3">
-              {{item.Currency}}
+              {{item.currency}}
             </div>
-            <div class="col-4 col-sm-4 col-md-4 text-right" [napIntegerFormat]="item.GameIncome">
+            <div class="col-4 col-sm-4 col-md-4 text-right" [napIntegerFormat]="item.gameIncome">
             </div>
           </div>
         </div>
@@ -134,12 +134,12 @@
           </div>
           <div *ngFor="let item of topGameTypeWinning" class="row mt-1">
             <div class="col-5 col-sm-5 col-md-5">
-              {{item.Bettype}}
+              {{item.bettype}}
             </div>
             <div class="col-3 col-sm-3 col-md-3">
-              {{item.Product}}
+              {{item.product}}
             </div>
-            <div class="col-4 col-sm-4 col-md-4 text-right" [napIntegerFormat]="item.GameIncome">
+            <div class="col-4 col-sm-4 col-md-4 text-right" [napIntegerFormat]="item.gameIncome">
             </div>
           </div>
         </div>
