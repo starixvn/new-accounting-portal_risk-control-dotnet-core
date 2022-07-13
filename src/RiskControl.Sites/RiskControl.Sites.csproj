@@ -71,12 +71,24 @@
     <Content Include="Templates\ProgressiveJackpot\WinRecord.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\VoidRejectRefund\Company.xlsx" />
-    <Content Include="Templates\VoidRejectRefund\Currency.xlsx" />
-    <Content Include="Templates\VoidRejectRefund\Daily.xlsx" />
-    <Content Include="Templates\VoidRejectRefund\Device.xlsx" />
-    <Content Include="Templates\VoidRejectRefund\Monthly.xlsx" />
-    <Content Include="Templates\VoidRejectRefund\Product.xlsx" />
+    <Content Include="Templates\VoidRejectRefund\Company.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\VoidRejectRefund\Currency.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\VoidRejectRefund\Daily.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\VoidRejectRefund\Device.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\VoidRejectRefund\Monthly.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\VoidRejectRefund\Product.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

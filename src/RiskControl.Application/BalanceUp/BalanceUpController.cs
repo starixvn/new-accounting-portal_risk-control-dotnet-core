@@ -5,6 +5,7 @@ using RiskControl.Core.BalanceUp;
 
 namespace RiskControl.Application.BalanceUp
 {
+    [ApiController]
     public class BalanceUpController : ControllerBase
     {
         private readonly BalanceUpService balanceUpService;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.VoidRejectRefund.Monthly
 {
+    [ApiController]
     [Route("api/void-reject-refund/monthly")]
     public class MonthlyModeController : ControllerBase
     {

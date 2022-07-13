@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.VoidRejectRefund.Daily
 {
+    [ApiController]
     [Route("api/void-reject-refund/daily")]
     public class DailyModeController : ControllerBase
     {

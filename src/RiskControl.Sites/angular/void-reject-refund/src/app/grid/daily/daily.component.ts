@@ -5,6 +5,8 @@ import { DailyService } from './daily.service';
 import { GridService } from '../grid.service';
 import { FilterModel, ReportType } from 'src/app/filter/filter.model';
 import { Observable } from 'rxjs';
+import { DATE_CONFIG } from 'src/app/common/date-config';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-daily',
@@ -47,13 +49,14 @@ export class DailyComponent implements Grid {
   }
 
   get hasData(): boolean {
-    return !_.isNil(this.reportData) && this.reportData.Statistics.length > 0;
+    return !_.isNil(this.reportData) && this.reportData.statistics.length > 0;
   }
 
   showProductReport(date: string) {
     const filterModel: FilterModel = _.cloneDeep(this.gridService.filterModel);
-    filterModel.fromDate = date;
-    filterModel.toDate = date;
+    const formatedDate = moment(date).format(DATE_CONFIG.dateFormatYYYY_MM_DD);
+    filterModel.fromDate = formatedDate;
+    filterModel.toDate = formatedDate;
     filterModel.reportType = ReportType.Product;
     this.gridService.generate(filterModel);
   }

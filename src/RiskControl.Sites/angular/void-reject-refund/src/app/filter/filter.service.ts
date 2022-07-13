@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { URLSearchParams } from '@angular/http';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { SelectItem } from 'nap-components/dropdown-select';

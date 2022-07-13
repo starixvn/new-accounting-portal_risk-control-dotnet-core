@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using RiskControl.Sites.AutoMapperProfiles.BettingMonitoring;
 using RiskControl.Sites.AutoMapperProfiles.NonSports;
+using RiskControl.Sites.AutoMapperProfiles.VoidRejectRefund;
 using RiskControl.Sites.AutoMapperProfiles.WinLossLimitControl;
 using RiskControl.Sites.DependencyInjections;
 using RiskControl.Sites.Models;
@@ -89,6 +90,7 @@ namespace RiskControl.Sites
                     mc.AddProfile(new GameRoundProfile());
                     mc.AddProfile(new MonitorProfile());
                     mc.AddProfile(new PlayerSettingProfile());
+                    mc.AddProfile(new VoidRejectRefundProfile());
                 });
 
                 return mapperConfig.CreateMapper();

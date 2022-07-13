@@ -50,7 +50,7 @@ export class MonthlyComponent implements Grid {
   }
 
   get hasData(): boolean {
-    return !_.isNil(this.reportData) && this.reportData.Statistics.length > 0;
+    return !_.isNil(this.reportData) && this.reportData.statistics.length > 0;
   }
 
   showDailyReport(monthText: string) {
@@ -59,8 +59,8 @@ export class MonthlyComponent implements Grid {
     const fromDate =  moment.max(moment.utc(month).startOf('month'), moment.utc(filterModel.fromDate));
     const toDate = moment.min(moment.utc(month).endOf('month'), moment.utc(filterModel.toDate));
     filterModel.reportType = ReportType.Daily;
-    filterModel.fromDate =  DateHelper.formatMomentDate(fromDate, DateFormat.Date);
-    filterModel.toDate = DateHelper.formatMomentDate(toDate, DateFormat.Date);
+    filterModel.fromDate =  fromDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD);
+    filterModel.toDate = toDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD);
     this.gridService.generate(filterModel);
   }
 

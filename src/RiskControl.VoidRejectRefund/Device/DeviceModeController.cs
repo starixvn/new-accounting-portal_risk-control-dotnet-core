@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.VoidRejectRefund.Device
 {
+    [ApiController]
     [Route("api/void-reject-refund/device")]
     public class DeviceModeController : ControllerBase
     {

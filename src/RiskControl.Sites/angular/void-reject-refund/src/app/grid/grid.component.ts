@@ -37,7 +37,7 @@ import { ProductComponent } from './product/product.component';
 })
 export class GridComponent implements OnInit, OnChanges, OnDestroy {
   @Input() filterModel: FilterModel;
-  @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
+  @ViewChild('container', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
   breadcrumbItems: string[];
   hasExcel: boolean;
   private components: ComponentRef<Grid>[] = [];

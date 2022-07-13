@@ -48,20 +48,20 @@
             <table class="table-striped">
                 <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                 <tbody>
-                    <tr *ngFor="let item of reportData.Statistics">
+                    <tr *ngFor="let item of reportData.statistics">
                         <td class="text-left">
-                            <a href="javascript:;" (click)="showCompanyReport(item.ReportById)">
-                                {{item.ReportBy }}
+                            <a href="javascript:;" (click)="showCompanyReport(item.reportById)">
+                                {{item.reportBy }}
                             </a>
                         </td>
-                        <td class="text-right" [napIntegerFormat]="item.NoOfPlayers"></td>
-                        <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
-                        <td class="text-right" [napIntegerFormat]="item.Reject"></td>
-                        <td class="text-right" [napPercentFormat]="item.RejectPecentage"></td>
-                        <td class="text-right" [napIntegerFormat]="item.Void"></td>
-                        <td class="text-right" [napPercentFormat]="item.VoidPecentage"></td>
-                        <td class="text-right" [napIntegerFormat]="item.Refund"></td>
-                        <td class="text-right" [napPercentFormat]="item.RefundPecentage"></td>
+                        <td class="text-right" [napIntegerFormat]="item.noOfPlayers"></td>
+                        <td class="text-right" [napIntegerFormat]="item.betCount"></td>
+                        <td class="text-right" [napIntegerFormat]="item.reject"></td>
+                        <td class="text-right" [napPercentFormat]="item.rejectPecentage"></td>
+                        <td class="text-right" [napIntegerFormat]="item.void"></td>
+                        <td class="text-right" [napPercentFormat]="item.voidPecentage"></td>
+                        <td class="text-right" [napIntegerFormat]="item.refund"></td>
+                        <td class="text-right" [napPercentFormat]="item.refundPecentage"></td>
                     </tr>
                 </tbody>
             </table>
@@ -83,15 +83,15 @@
                 <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                 <tfoot>
                     <tr class="font-weight-bold">
-                        <td class="text-right">{{reportData.GrandTotal.ReportBy}}</td>
-                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.NoOfPlayers"></td>
-                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.BetCount"></td>
-                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.Reject"></td>
-                        <td class="text-right" [napPercentFormat]="reportData.GrandTotal.RejectPecentage"></td>
-                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.Void"></td>
-                        <td class="text-right" [napPercentFormat]="reportData.GrandTotal.VoidPecentage"></td>
-                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.Refund"></td>
-                        <td class="text-right" [napPercentFormat]="reportData.GrandTotal.RefundPecentage"></td>
+                        <td class="text-right">{{reportData.grandTotal.reportBy}}</td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.noOfPlayers"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.betCount"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.reject"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.grandTotal.rejectPecentage"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.void"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.grandTotal.voidPecentage"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.refund"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.grandTotal.refundPecentage"></td>
                     </tr>
                 </tfoot>
             </table>

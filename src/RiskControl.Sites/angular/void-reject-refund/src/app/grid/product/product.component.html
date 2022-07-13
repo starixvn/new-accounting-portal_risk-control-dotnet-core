@@ -47,44 +47,44 @@
             <table>
                 <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                 <tbody>
-                    <ng-template ngFor let-parentItem [ngForOf]="reportData.ProductStatistics">
+                    <ng-template ngFor let-parentItem [ngForOf]="reportData.productStatistics">
                         <tr class="total-row font-weight-bold">
                             <td class="text-left" (click)="parentItem.isCollapse=!parentItem.isCollapse">
                                 <i [ngClass]="{'fa-caret-right': parentItem.isCollapse, 'fa-caret-down': !parentItem.isCollapse}"
                                     class="fa"></i>
-                                {{parentItem.Total.ReportBy }} </td>
-                            <td class="text-right" [napIntegerFormat]="parentItem.Total.NoOfPlayers"></td>
-                            <td class="text-right" [napIntegerFormat]="parentItem.Total.BetCount"></td>
-                            <td class="text-right" [napIntegerFormat]="parentItem.Total.Reject"></td>
-                            <td class="text-right" [napPercentFormat]="parentItem.Total.RejectPecentage"></td>
-                            <td class="text-right" [napIntegerFormat]="parentItem.Total.Void"></td>
-                            <td class="text-right" [napPercentFormat]="parentItem.Total.VoidPecentage"></td>
-                            <td class="text-right" [napIntegerFormat]="parentItem.Total.Refund"></td>
-                            <td class="text-right" [napPercentFormat]="parentItem.Total.RefundPecentage"></td>
+                                {{parentItem.total.reportBy }} </td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.total.noOfPlayers"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.total.betCount"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.total.reject"></td>
+                            <td class="text-right" [napPercentFormat]="parentItem.total.rejectPecentage"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.total.void"></td>
+                            <td class="text-right" [napPercentFormat]="parentItem.total.voidPecentage"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.total.refund"></td>
+                            <td class="text-right" [napPercentFormat]="parentItem.total.refundPecentage"></td>
                         </tr>
-                        <ng-template *ngIf="!parentItem.isCollapse" ngFor let-childItem [ngForOf]="parentItem.LeagueSportBettypes">
-                            <tr [ngClass]="{'total-row': childItem.Bettypes.length > 0}">
-                                <td class="text-left">{{childItem.Total.ReportBy}}</td>
-                                <td class="text-right" [napIntegerFormat]="childItem.Total.NoOfPlayers"></td>
-                                <td class="text-right" [napIntegerFormat]="childItem.Total.BetCount"></td>
-                                <td class="text-right" [napIntegerFormat]="childItem.Total.Reject"></td>
-                                <td class="text-right" [napPercentFormat]="childItem.Total.RejectPecentage"></td>
-                                <td class="text-right" [napIntegerFormat]="childItem.Total.Void"></td>
-                                <td class="text-right" [napPercentFormat]="childItem.Total.VoidPecentage"></td>
-                                <td class="text-right" [napIntegerFormat]="childItem.Total.Refund"></td>
-                                <td class="text-right" [napPercentFormat]="childItem.Total.RefundPecentage"></td>
+                        <ng-template *ngIf="!parentItem.isCollapse" ngFor let-childItem [ngForOf]="parentItem.leagueSportBettypes">
+                            <tr [ngClass]="{'total-row': childItem.bettypes.length > 0}">
+                                <td class="text-left">{{childItem.total.reportBy}}</td>
+                                <td class="text-right" [napIntegerFormat]="childItem.total.noOfPlayers"></td>
+                                <td class="text-right" [napIntegerFormat]="childItem.total.betCount"></td>
+                                <td class="text-right" [napIntegerFormat]="childItem.total.reject"></td>
+                                <td class="text-right" [napPercentFormat]="childItem.total.rejectPecentage"></td>
+                                <td class="text-right" [napIntegerFormat]="childItem.total.void"></td>
+                                <td class="text-right" [napPercentFormat]="childItem.total.voidPecentage"></td>
+                                <td class="text-right" [napIntegerFormat]="childItem.total.refund"></td>
+                                <td class="text-right" [napPercentFormat]="childItem.total.refundPecentage"></td>
                             </tr>
                             <ng-template *ngIf="!parentItem.isCollapse" ngFor let-item [ngForOf]="childItem.Bettypes">
                                 <tr>
                                     <td class="text-left">{{item.ReportBy }}</td>
-                                    <td class="text-right" [napIntegerFormat]="item.NoOfPlayers"></td>
-                                    <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
-                                    <td class="text-right" [napIntegerFormat]="item.Reject"></td>
-                                    <td class="text-right" [napPercentFormat]="item.RejectPecentage"></td>
-                                    <td class="text-right" [napIntegerFormat]="item.Void"></td>
-                                    <td class="text-right" [napPercentFormat]="item.VoidPecentage"></td>
-                                    <td class="text-right" [napIntegerFormat]="item.Refund"></td>
-                                    <td class="text-right" [napPercentFormat]="item.RefundPecentage"></td>
+                                    <td class="text-right" [napIntegerFormat]="item.noOfPlayers"></td>
+                                    <td class="text-right" [napIntegerFormat]="item.betCount"></td>
+                                    <td class="text-right" [napIntegerFormat]="item.reject"></td>
+                                    <td class="text-right" [napPercentFormat]="item.rejectPecentage"></td>
+                                    <td class="text-right" [napIntegerFormat]="item.void"></td>
+                                    <td class="text-right" [napPercentFormat]="item.voidPecentage"></td>
+                                    <td class="text-right" [napIntegerFormat]="item.refund"></td>
+                                    <td class="text-right" [napPercentFormat]="item.refundPecentage"></td>
                                 </tr>
                             </ng-template>
                         </ng-template>
@@ -109,15 +109,15 @@
                 <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                 <tfoot>
                     <tr class="font-weight-bold">
-                        <td class="text-right">{{reportData.GrandTotal.ReportBy}}</td>
-                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.NoOfPlayers"></td>
-                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.BetCount"></td>
-                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.Reject"></td>
-                        <td class="text-right" [napPercentFormat]="reportData.GrandTotal.RejectPecentage"></td>
-                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.Void"></td>
-                        <td class="text-right" [napPercentFormat]="reportData.GrandTotal.VoidPecentage"></td>
-                        <td class="text-right" [napIntegerFormat]="reportData.GrandTotal.Refund"></td>
-                        <td class="text-right" [napPercentFormat]="reportData.GrandTotal.RefundPecentage"></td>
+                        <td class="text-right">{{reportData.grandTotal.reportBy}}</td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.noOfPlayers"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.betCount"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.reject"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.grandTotal.rejectPecentage"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.void"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.grandTotal.voidPecentage"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.refund"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.grandTotal.refundPecentage"></td>
                     </tr>
                 </tfoot>
             </table>

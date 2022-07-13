@@ -51,7 +51,7 @@ export class ProductComponent implements Grid {
   }
 
   get hasData(): boolean {
-    return this.reportData.ProductStatistics.length > 0;
+    return this.reportData.productStatistics.length > 0;
   }
 
   sort(sortColumnName: string) {
@@ -72,7 +72,7 @@ export class ProductComponent implements Grid {
 
   toggleReport() {
     this.collapseAll = !this.collapseAll;
-    this.reportData.ProductStatistics.forEach(item => {
+    this.reportData.productStatistics.forEach(item => {
       item.isCollapse = this.collapseAll;
       return item;
     });

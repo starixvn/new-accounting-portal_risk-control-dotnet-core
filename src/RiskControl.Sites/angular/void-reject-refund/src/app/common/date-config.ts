@@ -24,5 +24,6 @@ export const DATE_CONFIG = {
     dateFormatString: 'MMM DD, YYYY',
     dateFormatString2: 'MMM_DD_YYYY',
     dateMonthFormatString: 'MM, YYYY',
-    dateMonthFormatString2: 'MM_YYYY'
+    dateMonthFormatString2: 'MM_YYYY',
+    dateFormatYYYY_MM_DD: 'YYYY-MM-DD'
 };

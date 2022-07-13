@@ -42,38 +42,38 @@ export enum GameTypeId {
 }
 
 export interface StatisticModel {
-    GroupName: string;
-    ReportBy: string;
-    Currency: string;
-    NoOfPlayers: number;
-    BetCount: number;
-    Reject: number;
-    Void: number;
-    Refund: number;
-    RejectPecentage: number;
-    VoidPecentage: number;
-    RefundPecentage: number;
+    groupName: string;
+    reportBy: string;
+    currency: string;
+    noOfPlayers: number;
+    betCount: number;
+    reject: number;
+    void: number;
+    refund: number;
+    rejectPecentage: number;
+    voidPecentage: number;
+    refundPecentage: number;
 }
 
 export interface ChildGroupStatisticModel {
-    GroupName: string;
-    Statistics: StatisticModel[];
+    groupName: string;
+    statistics: StatisticModel[];
 }
 
 export interface StatisticReportModel {
-    Statistics: StatisticModel[];
-    GrandTotal: StatisticModel;
+    statistics: StatisticModel[];
+    grandTotal: StatisticModel;
 
 }
 
 export interface GroupStatisticModel {
-    Total: StatisticModel;
-    Statistics: ChildGroupStatisticModel[];
+    total: StatisticModel;
+    statistics: ChildGroupStatisticModel[];
 }
 
 export interface GroupStatisticReportModel {
-    Statistics: GroupStatisticModel[];
-    GrandTotal: StatisticModel;
+    statistics: GroupStatisticModel[];
+    grandTotal: StatisticModel;
 }
 
 export interface QueryModel {

@@ -1,31 +1,31 @@
 export interface ProductLeagueSportBettypeStatistic {
-    ProductId: number;
-    ProductName: string;
-    LeagueSportBettypeId: number;
-    LeagueSportBettypeName: string;
-    NoOfPlayers: number;
-    BettypeName: string;
-    BetCount: number;
-    Reject: number;
-    Void: number;
-    Refund: number;
-    RejectPecentage: number;
-    VoidPecentage: number;
-    RefundPecentage: number;
+    productId: number;
+    productName: string;
+    leagueSportBettypeId: number;
+    leagueSportBettypeName: string;
+    noOfPlayers: number;
+    bettypeName: string;
+    betCount: number;
+    reject: number;
+    void: number;
+    refund: number;
+    rejectPecentage: number;
+    voidPecentage: number;
+    refundPecentage: number;
 }
 
 export interface LeagueSportBettypeStatistic {
-    Total: ProductLeagueSportBettypeStatistic;
-    Bettypes: ProductLeagueSportBettypeStatistic[];
+    total: ProductLeagueSportBettypeStatistic;
+    bettypes: ProductLeagueSportBettypeStatistic[];
 }
 
 export interface ProductStatistic {
     isCollapse: boolean;
-    Total: ProductLeagueSportBettypeStatistic;
-    LeagueSportBettypes: LeagueSportBettypeStatistic[];
+    total: ProductLeagueSportBettypeStatistic;
+    leagueSportBettypes: LeagueSportBettypeStatistic[];
 }
 
 export interface ProductModel {
-    ProductStatistics: ProductStatistic[];
-    GrandTotal: ProductLeagueSportBettypeStatistic;
+    productStatistics: ProductStatistic[];
+    grandTotal: ProductLeagueSportBettypeStatistic;
 }

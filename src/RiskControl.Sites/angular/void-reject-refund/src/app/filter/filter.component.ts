@@ -88,8 +88,8 @@ export class FilterComponent implements OnInit {
 
     return true;
   }
-  @ViewChild('siteDropdownTreeview') siteDropdownTreeview: DropdownTreeviewComponent;
-  @ViewChild('productDropdownTreeview') productDropdownTreeview: DropdownTreeviewComponent;
+  @ViewChild('siteDropdownTreeview', { static: true }) siteDropdownTreeview: DropdownTreeviewComponent;
+  @ViewChild('productDropdownTreeview', { static: true }) productDropdownTreeview: DropdownTreeviewComponent;
   @Output() generated = new EventEmitter<FilterModel>();
   @Output() reset = new EventEmitter();
   today = DATE_CONFIG.reportDate.today;
@@ -290,8 +290,8 @@ export class FilterComponent implements OnInit {
     const gameTypeResult = FilterHelper.calculateGameTypes(gameTypeModel);
     const reportType = this.selectedReportType;
     const model: FilterModel = {
-      fromDate: DateHelper.formatMomentDate(fromDate, DateFormat.Date),
-      toDate: DateHelper.formatMomentDate(toDate, DateFormat.Date),
+      fromDate: fromDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
+      toDate: toDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
       reportType: reportType,
       productIds: gameTypeResult.productIds,
       sites: this.numberLicensees === this.selectedSites.length

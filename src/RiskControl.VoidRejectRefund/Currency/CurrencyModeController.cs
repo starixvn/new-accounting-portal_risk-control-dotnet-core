@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.VoidRejectRefund.Currency
 {
+    [ApiController]
     [Route("api/void-reject-refund/currency")]
     public class CurrencyModeController : ControllerBase
     {

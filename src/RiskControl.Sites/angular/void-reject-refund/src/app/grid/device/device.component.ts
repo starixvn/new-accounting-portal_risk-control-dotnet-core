@@ -44,7 +44,7 @@ export class DeviceComponent implements Grid {
   }
 
   get hasData(): boolean {
-    return !_.isNil(this.reportData) && this.reportData.Statistics.length > 0;
+    return !_.isNil(this.reportData) && this.reportData.statistics.length > 0;
   }
 
   sort(sortColumnName: string) {

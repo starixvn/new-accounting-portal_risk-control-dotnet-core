@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using RiskControl.VoidRejectRefund.Common;
 using RiskControl.VoidRejectRefund.Product;
 
@@ -8,6 +9,10 @@ namespace RiskControl.Sites.DependencyInjections
     {
         public static void RegisterVoidRejectRefundService(this IServiceCollection service)
         {
+            service.AddMediatR(typeof(Handler).Assembly);
+            service.AddMediatR(typeof(GroupHandler).Assembly);
+            service.AddMediatR(typeof(HandlerExcel).Assembly);
+            service.AddMediatR(typeof(GroupHandlerExcel).Assembly);
             service.AddTransient<Service, ServiceImp>();
             service.AddTransient<GroupService, GroupServiceImp>();
             service.AddTransient<ExcelBuilder, ExcelBuilderImp>();

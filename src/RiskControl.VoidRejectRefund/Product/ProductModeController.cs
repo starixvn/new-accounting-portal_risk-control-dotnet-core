@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.VoidRejectRefund.Product
 {
+    [ApiController]
     [Route("api/void-reject-refund/product")]
     public class ProductModeController : ControllerBase
     {

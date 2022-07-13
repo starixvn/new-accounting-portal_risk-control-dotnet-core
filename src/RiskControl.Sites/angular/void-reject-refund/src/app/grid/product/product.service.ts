@@ -23,7 +23,7 @@ export class ProductService {
     query(filterModel: FilterModel): Observable<ProductModel> {
         const queryModel = this.createQueryModel(filterModel);
         return this.httpService.post<ProductModel>(this.url, queryModel).pipe(map(result => {
-            result.ProductStatistics.forEach(item => {
+            result.productStatistics.forEach(item => {
                 item.isCollapse = true;
             });
 
