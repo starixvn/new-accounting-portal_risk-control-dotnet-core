@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main.History
 {
+    [ApiController]
     [Route("NonSportsGamesStatistics/UserNameViewHistory")]
     [ValidationActionFilterAttribute]
     public class UserNameViewHistoryModeController : ControllerBase

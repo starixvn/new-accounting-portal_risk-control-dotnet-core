@@ -58,9 +58,9 @@ class CurrencyHelper {
   ]
 })
 export class SpecificMemberFilterComponent implements OnInit {
-  @ViewChild('productDropdownTreeview') productDropdownTreeview: DropdownTreeviewComponent;
-  @ViewChild('columnDropdownTreeview') columnDropdownTreeview: DropdownTreeviewComponent;
-  @ViewChild('siteDropdownTreeview') siteDropdownTreeview: DropdownTreeviewComponent;
+  @ViewChild('productDropdownTreeview', { static: true }) productDropdownTreeview: DropdownTreeviewComponent;
+  @ViewChild('columnDropdownTreeview', { static: true }) columnDropdownTreeview: DropdownTreeviewComponent;
+  @ViewChild('siteDropdownTreeview', { static: true }) siteDropdownTreeview: DropdownTreeviewComponent;
   @Output() generate = new EventEmitter<FilterModel>();
   @Output() reset = new EventEmitter();
   today = DATE_CONFIG.reportDate.today;

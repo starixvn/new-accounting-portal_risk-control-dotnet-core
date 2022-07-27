@@ -4,7 +4,7 @@ import { forkJoin } from 'rxjs';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 import { ToastService } from 'nap-components/toast';
-import { TreeItem, DropdownTreeviewComponent, TreeviewConfig, TreeviewItem } from 'ngx-treeview';
+import { DropdownTreeviewComponent, TreeviewConfig, TreeviewItem } from 'ngx-treeview';
 import { NapDateStruct, DateHelper } from 'nap-components/date';
 import { ProductId, RoleId, DATE_CONFIG, GameTypeId } from '../common';
 import { FilterConfig } from './filter.config';
@@ -16,7 +16,6 @@ import {
 } from './filter.model';
 import { FilterHelper } from './filter-helper';
 import { UserNameSuggestionTextboxComponent } from './user-name-suggestion/user-name-suggestion-textbox.component';
-import { letProto } from 'rxjs-compat/operator/let';
 
 class CurrencyHelper {
   private readonly currenciesWithoutAll: Currency[];
@@ -306,7 +305,7 @@ export class FilterComponent implements OnInit {
   }
 
   onReportTypeChange(newReportType: ReportType) {
-    var cachedReportType = JSON.parse(localStorage.getItem("non-sport-reporttype")) as ReportType;
+    let cachedReportType = JSON.parse(localStorage.getItem("non-sport-reporttype")) as ReportType;
     const reportTypeChange = newReportType !== cachedReportType;
     const lastReportRoleId = this.reportRoleId;
     this.selectedReportType = newReportType;
@@ -327,7 +326,7 @@ export class FilterComponent implements OnInit {
   }
 
   onTop20RoleIdChange(roleId: RoleId) {
-    var cachedRoleId = JSON.parse(localStorage.getItem("non-sport-roleid")) as RoleId;
+    let cachedRoleId = JSON.parse(localStorage.getItem("non-sport-roleid")) as RoleId;
     if (roleId !== cachedRoleId) {
       localStorage.setItem('non-sport-roleid', JSON.stringify(roleId));
     }

@@ -92,7 +92,7 @@ export class CurrencyComponent implements OnInit, ModeGenerate {
       gridOptions.fullHeight = false;
       gridOptions.gridHeight = 500;
       gridOptions.titleInfo = {
-        text: gridOptions.TitleInfoText,
+        text: gridOptions.titleInfoText,
         showExcelButton: true,
         exportExcelFunction: () => this.excelGrandTotal(queryModel)
       };
@@ -130,17 +130,17 @@ export class CurrencyComponent implements OnInit, ModeGenerate {
 
   private updateGrandTotalCell(gridOptions: GridOptions) {
     const row = gridOptions.footerRows[0];
-    const column = row.Columns[0];
-    const currencyId = parseInt(column.CustomAttr, 10);
-    const currencyName = column.Value;
-    column.Value = `<a href="javascript:;" grand-total currency="${currencyId}">${currencyName}</a>`;
+    const column = row.columns[0];
+    const currencyId = parseInt(column.customAttr, 10);
+    const currencyName = column.value;
+    column.value = `<a href="javascript:;" grand-total currency="${currencyId}">${currencyName}</a>`;
   }
 
   private updateCurrencyColumn(gridOptions: GridOptions) {
     gridOptions.bodyRows.forEach(row => {
-      const column = row.Columns[0];
-      const currency = column.CustomAttr;
-      column.Value = `<a href="javascript:;" drill-down-company currency="${currency}">${column.Value}</a>`;
+      const column = row.columns[0];
+      const currency = column.customAttr;
+      column.value = `<a href="javascript:;" drill-down-company currency="${currency}">${column.value}</a>`;
     });
   }
 

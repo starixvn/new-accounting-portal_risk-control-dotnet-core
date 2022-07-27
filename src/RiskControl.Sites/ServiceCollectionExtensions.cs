@@ -8,18 +8,14 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using RiskControl.Sites.AutoMapperProfiles.BettingMonitoring;
 using RiskControl.Sites.AutoMapperProfiles.NonSports;
 using RiskControl.Sites.AutoMapperProfiles.VoidRejectRefund;
 using RiskControl.Sites.AutoMapperProfiles.WinLossLimitControl;
 using RiskControl.Sites.DependencyInjections;
-using RiskControl.Sites.Models;
-using RiskControl.Sites.Services;
 using Sentry;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 

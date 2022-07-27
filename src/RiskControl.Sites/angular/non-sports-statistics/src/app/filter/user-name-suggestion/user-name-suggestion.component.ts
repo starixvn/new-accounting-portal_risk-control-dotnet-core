@@ -22,8 +22,8 @@ class SelectUserName {
 })
 
 export class UserNameSuggestionComponent {
-  @ViewChild('input') input: ElementRef;
-  @ViewChild('hiddenInput') hiddenInput: ElementRef;
+  @ViewChild('input', { static: true }) input: ElementRef;
+  @ViewChild('hiddenInput', { static: true }) hiddenInput: ElementRef;
   @Input() roleId = RoleId.Member;
   @Output() complete = new EventEmitter<string[]>();
   suggestionIndex = -1;

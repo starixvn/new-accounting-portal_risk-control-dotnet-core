@@ -29,34 +29,34 @@ interface SortOption {
 }
 
 interface Column {
-    AllowTruncate: boolean;
-    CellAlign: CellAlign;
-    CssClass: string;
-    CustomAttr: string;
-    HeaderAlign: string;
-    HeaderText: string;
-    Name: string;
-    ShowCollapseExpand: boolean;
-    Width: number;
+    allowTruncate: boolean;
+    cellAlign: CellAlign;
+    cssClass: string;
+    customAttr: string;
+    headerAlign: string;
+    headerText: string;
+    name: string;
+    showCollapseExpand: boolean;
+    width: number;
 }
 
 interface Row {
-    Columns: DataRow[];
-    CssClass: string;
-    CustomAttr: string;
-    SubRows: Row[];
+    columns: DataRow[];
+    cssClass: string;
+    customAttr: string;
+    subRows: Row[];
 }
 
 interface DataRow {
-    CellAlign: CellAlign;
-    MergeRowNumber: number;
-    Name: string;
-    Value: string;
-    CustomAttr: string;
+    cellAlign: CellAlign;
+    mergeRowNumber: number;
+    name: string;
+    value: string;
+    customAttr: string;
 }
 
 interface GridOptions {
-    TitleInfoText: string;
+    titleInfoText: string;
     bodyRowHeight: number;
     gridExpandHeight: number;
     bodyRows: Row[];

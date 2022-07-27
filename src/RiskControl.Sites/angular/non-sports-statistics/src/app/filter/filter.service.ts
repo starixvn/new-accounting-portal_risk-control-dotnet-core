@@ -1,14 +1,13 @@
-﻿import { TreeviewItem } from 'ngx-treeview';
-import { Injectable } from '@angular/core';
-import { URLSearchParams } from '@angular/http';
+﻿import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
 import { SelectItem } from 'nap-components/dropdown-select';
 import { HttpService } from 'nap-components/http';
 import { Helper } from 'nap-components/helper';
-import { CasinoType, RoleId } from '../common';
+import { RoleId } from '../common';
 import {
-  Product, Site, GameType, Device, BaseCurrency, Permission,
+  Product, GameType, Device, BaseCurrency, Permission,
   Currency, CompareType, TimePeriod, ReportType, UsernameValidationModel, SiteGroupModel
 } from './filter.model';
 import { FilterHelper } from './filter-helper';

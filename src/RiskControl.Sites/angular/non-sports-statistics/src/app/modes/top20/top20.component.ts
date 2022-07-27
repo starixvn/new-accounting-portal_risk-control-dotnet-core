@@ -291,16 +291,16 @@ export class Top20Component implements OnInit, ModeGenerate {
   private updateHousePositionTakingColumn(gridOptions: GridOptions) {
     const housePositionTakingColumn = FilterConfig.gridColumns.housePositionTaking;
     gridOptions.bodyRows.forEach(row => {
-      row.SubRows.forEach(subRow => {
-        const rowAttribute = JSON.parse(subRow.CustomAttr) as SubRowCustomAttribute;
+      row.subRows.forEach(subRow => {
+        const rowAttribute = JSON.parse(subRow.customAttr) as SubRowCustomAttribute;
         const userName = rowAttribute.ReportBy;
-        for (const column of subRow.Columns) {
-          if (column.Name === housePositionTakingColumn.value) {
+        for (const column of subRow.columns) {
+          if (column.name === housePositionTakingColumn.value) {
             const custId = rowAttribute.ReportById;
-            const housePositionTaking = column.Value;
+            const housePositionTaking = column.value;
             const housePositionTakingPercent = numeral(housePositionTaking).format('0.00%');
             // tslint:disable-next-line:max-line-length
-            column.Value = `<a href="javascript:;" house-position-taking user-name="${userName}" cust-id="${custId}">${housePositionTakingPercent}</a>`;
+            column.value = `<a href="javascript:;" house-position-taking user-name="${userName}" cust-id="${custId}">${housePositionTakingPercent}</a>`;
             break;
           }
         }
@@ -311,14 +311,14 @@ export class Top20Component implements OnInit, ModeGenerate {
   private updateAssociatedAccountColumn(gridOptions: GridOptions) {
     const associatedAccountColumn = FilterConfig.gridColumns.associatedAccount;
     gridOptions.bodyRows.forEach(row => {
-      row.SubRows.forEach(subRow => {
-        const rowAttribute = JSON.parse(subRow.CustomAttr) as SubRowCustomAttribute;
+      row.subRows.forEach(subRow => {
+        const rowAttribute = JSON.parse(subRow.customAttr) as SubRowCustomAttribute;
         const userName = rowAttribute.ReportBy;
         const custId = rowAttribute.ReportById;
-        for (const column of subRow.Columns) {
-          if (column.Name === associatedAccountColumn.value) {
+        for (const column of subRow.columns) {
+          if (column.name === associatedAccountColumn.value) {
             // tslint:disable-next-line:max-line-length
-            column.Value = `<a href="javascript:;" associated-account user-name="${userName}" site="${rowAttribute.SiteName}" cust-id="${custId}">Link</a>`;
+            column.value = `<a href="javascript:;" associated-account user-name="${userName}" site="${rowAttribute.SiteName}" cust-id="${custId}">Link</a>`;
             break;
           }
         }
@@ -329,12 +329,12 @@ export class Top20Component implements OnInit, ModeGenerate {
   private updateUserNameColumn(gridOptions: GridOptions) {
     const reportByColumn = FilterConfig.gridColumns.reportBy;
     gridOptions.bodyRows.forEach(row => {
-      row.SubRows.forEach(subRow => {
-        for (const column of subRow.Columns) {
-          if (column.Name === reportByColumn.value) {
-            const rowAttribute = JSON.parse(subRow.CustomAttr) as SubRowCustomAttribute;
+      row.subRows.forEach(subRow => {
+        for (const column of subRow.columns) {
+          if (column.name === reportByColumn.value) {
+            const rowAttribute = JSON.parse(subRow.customAttr) as SubRowCustomAttribute;
             const userName = rowAttribute.ReportBy;
-            column.Value = `<a href="javascript:;" drill-down-user-name user-name="${userName}">${userName}</a>`;
+            column.value = `<a href="javascript:;" drill-down-user-name user-name="${userName}">${userName}</a>`;
             break;
           }
         }
@@ -345,13 +345,13 @@ export class Top20Component implements OnInit, ModeGenerate {
   private updateCurrencyColumn(gridOptions: GridOptions) {
     const currencyColumn = FilterConfig.gridColumns.currency;
     gridOptions.bodyRows.forEach(row => {
-      const rowAttribute = JSON.parse(row.CustomAttr) as RowAttribute;
+      const rowAttribute = JSON.parse(row.customAttr) as RowAttribute;
       const topType = rowAttribute.groupId;
-      for (const column of row.Columns) {
-        if (column.Name === currencyColumn.value) {
-          const currency = column.CustomAttr;
+      for (const column of row.columns) {
+        if (column.name === currencyColumn.value) {
+          const currency = column.customAttr;
           // tslint:disable-next-line:max-line-length
-          column.Value = `<a href="javascript:;" drill-down-currency currency="${currency}" top-type="${topType}">${column.Value}</a>`;
+          column.value = `<a href="javascript:;" drill-down-currency currency="${currency}" top-type="${topType}">${column.value}</a>`;
           break;
         }
       }

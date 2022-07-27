@@ -5,6 +5,7 @@ using Olympus.WebApi.Results;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main.Normal
 {
+    [ApiController]
     [Route("NonSportsGamesStatistics/UserNameViewNormal")]
     public class UserNameViewNormalModeController : ControllerBase
     {

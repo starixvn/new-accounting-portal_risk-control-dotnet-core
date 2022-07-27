@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Hourly.Normal
 {
+    [ApiController]
     [Route("NonSportsGamesStatistics/HourlyNormal")]
     public class HourlyNormalModeController : ControllerBase
     {

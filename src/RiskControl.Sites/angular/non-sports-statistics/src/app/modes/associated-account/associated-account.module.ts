@@ -22,7 +22,7 @@ import { AssociatedAccountService } from './associated-account.service';
     ]
 })
 export class AssociatedAccountModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<AssociatedAccountModule> {
         return {
             ngModule: AssociatedAccountModule,
             providers: [

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RiskControl.NonSportsGamesStatistics.Common;
 using System.Threading.Tasks;
 
@@ -12,13 +13,13 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.Daily.Normal
         {
         }
 
-        [HttpPost, Route("Query")]
+        [Route("Query")]
         public override async Task<IActionResult> Query(QueryModel queryModel)
         {
             return await base.Query(queryModel).ConfigureAwait(false);
         }
 
-        [HttpPost, Route("Excel")]
+        [Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
             string sheetName = $"{queryModel.ReportBy} Game Statistic";

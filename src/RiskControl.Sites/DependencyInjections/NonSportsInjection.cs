@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Filter;
 using RiskControl.NonSportsGamesStatistics.Model;
@@ -12,21 +13,17 @@ using DailyViewDaily = RiskControl.NonSportsGamesStatistics.DailyView.Daily;
 using DailyViewGrandTotal = RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal;
 using DailyViewGroupStatistics = RiskControl.NonSportsGamesStatistics.DailyView.GroupStatistics;
 using Hourly = RiskControl.NonSportsGamesStatistics.Hourly;
-using SpecificMemberAssociatedAccount = RiskControl.NonSportsGamesStatistics.SpecificMember.AssociatedAccount;
-using SpecificMemberCasinoProduct = RiskControl.NonSportsGamesStatistics.SpecificMember.CasinoProduct;
 using SpecificMemberCommon = RiskControl.NonSportsGamesStatistics.SpecificMember.Common;
-using SpecificMemberDaily = RiskControl.NonSportsGamesStatistics.SpecificMember.Daily;
-using SpecificMemberGrandTotal = RiskControl.NonSportsGamesStatistics.SpecificMember.GrandTotal;
-using SpecificMemberMonthly = RiskControl.NonSportsGamesStatistics.SpecificMember.Monthly;
-using SpecificMemberProduct = RiskControl.NonSportsGamesStatistics.SpecificMember.Product;
-using SpecificMemberUsername = RiskControl.NonSportsGamesStatistics.SpecificMember.Username;
 using TopTwentyCommon = RiskControl.NonSportsGamesStatistics.TopTwenty.Common;
 using TopTwentyGroupStatistics = RiskControl.NonSportsGamesStatistics.TopTwenty.GroupStatistics;
 using TopTwentyMain = RiskControl.NonSportsGamesStatistics.TopTwenty.Main;
-using UserNameViewAssociatedAccount = RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount;
 using UserNameViewCommon = RiskControl.NonSportsGamesStatistics.UserNameView.Common;
-using UserNameViewGrandTotal = RiskControl.NonSportsGamesStatistics.UserNameView.GrandTotal;
 using UserNameViewMain = RiskControl.NonSportsGamesStatistics.UserNameView.Main;
+using DailyViewHandler = RiskControl.NonSportsGamesStatistics.DailyView.Daily;
+using GrandTotal = RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal;
+using GroupStatistics = RiskControl.NonSportsGamesStatistics.DailyView.GroupStatistics;
+using SpecificMember = RiskControl.NonSportsGamesStatistics.SpecificMember;
+using UserNameView = RiskControl.NonSportsGamesStatistics.UserNameView;
 
 namespace RiskControl.Sites.DependencyInjections
 {
@@ -34,6 +31,46 @@ namespace RiskControl.Sites.DependencyInjections
     {
         public static void RegisterNonSportsServices(this IServiceCollection service)
         {
+            service.AddMediatR(typeof(DailyViewHandler.History.Handler).Assembly);
+            service.AddMediatR(typeof(DailyViewHandler.Normal.Handler).Assembly);
+            service.AddMediatR(typeof(GrandTotal.DailyGrandTotalHistory.Handler).Assembly);
+            service.AddMediatR(typeof(GrandTotal.DailyGrandTotalNormal.Handler).Assembly);
+            service.AddMediatR(typeof(GrandTotal.DailyViewGrandTotalHistory.Handler).Assembly);
+            service.AddMediatR(typeof(GrandTotal.DailyViewGrandTotalNormal.Handler).Assembly);
+            service.AddMediatR(typeof(GrandTotal.ProductGrandTotalHistory.Handler).Assembly);
+            service.AddMediatR(typeof(GrandTotal.ProductGrandTotalNormal.Handler).Assembly);
+            service.AddMediatR(typeof(GroupStatistics.CompanyHistory.Handler).Assembly);
+            service.AddMediatR(typeof(GroupStatistics.CompanyNormal.Handler).Assembly);
+            service.AddMediatR(typeof(GroupStatistics.DeviceHistory.Handler).Assembly);
+            service.AddMediatR(typeof(GroupStatistics.DeviceNormal.Handler).Assembly);
+            service.AddMediatR(typeof(DailyView.History.Handler).Assembly);
+            service.AddMediatR(typeof(DailyView.Normal.Handler).Assembly);
+            service.AddMediatR(typeof(DailyView.ProductHistory.Handler).Assembly);
+            service.AddMediatR(typeof(DailyView.ProductNormal.Handler).Assembly);
+            service.AddMediatR(typeof(Hourly.History.Handler).Assembly);
+            service.AddMediatR(typeof(Hourly.History.HandlerExcel).Assembly);
+            service.AddMediatR(typeof(Hourly.Normal.Handler).Assembly);
+            service.AddMediatR(typeof(Hourly.Normal.HandlerExcel).Assembly);
+            service.AddMediatR(typeof(SpecificMember.AssociatedAccount.Handler).Assembly);
+            service.AddMediatR(typeof(SpecificMember.CasinoProduct.Handler).Assembly);
+            service.AddMediatR(typeof(SpecificMember.Daily.Handler).Assembly);
+            service.AddMediatR(typeof(SpecificMember.GrandTotal.Daily.Handler).Assembly);
+            service.AddMediatR(typeof(SpecificMember.GrandTotal.CasinoProduct.Handler).Assembly);
+            service.AddMediatR(typeof(SpecificMember.GrandTotal.Product.Handler).Assembly);
+            service.AddMediatR(typeof(SpecificMember.Monthly.Handler).Assembly);
+            service.AddMediatR(typeof(SpecificMember.Product.Handler).Assembly);
+            service.AddMediatR(typeof(SpecificMember.Username.Handler).Assembly);
+            service.AddMediatR(typeof(TopTwentyGroupStatistics.History.Handler).Assembly);
+            service.AddMediatR(typeof(TopTwentyGroupStatistics.Normal.Handler).Assembly);
+            service.AddMediatR(typeof(TopTwentyMain.History.Handler).Assembly);
+            service.AddMediatR(typeof(TopTwentyMain.Normal.Handler).Assembly);
+            service.AddMediatR(typeof(UserNameView.AssociatedAccount.Normal.Handler).Assembly);
+            service.AddMediatR(typeof(UserNameView.AssociatedAccount.History.Handler).Assembly);
+            service.AddMediatR(typeof(UserNameView.GrandTotal.History.Handler).Assembly);
+            service.AddMediatR(typeof(UserNameView.GrandTotal.Normal.Handler).Assembly);
+            service.AddMediatR(typeof(UserNameView.HousePositionTaking.Handler).Assembly);
+            service.AddMediatR(typeof(UserNameViewMain.History.Handler).Assembly);
+            service.AddMediatR(typeof(UserNameViewMain.Normal.Handler).Assembly);
             service.AddTransient<RawService, RawServiceImp>();
             service.AddTransient<GridOptionRemoveColumnService, GridOptionRemoveColumnServiceImp>();
             service.AddTransient<DataSourceChooser, DataSourceChooserImp>();
@@ -75,11 +112,11 @@ namespace RiskControl.Sites.DependencyInjections
             service.AddTransient<SortingService<UserNameViewReportModel>, UserNameViewMain.SortingServiceImp>();
             service.AddTransient<GridOptionBuilderService<UserNameViewReportModel>, UserNameViewMain.GridOptionBuilderServiceImp>();
 
-            service.AddTransient<Service<UserNameViewReportModel>, UserNameViewGrandTotal.ServiceImp>();
-            service.AddTransient<GridOptionBuilderService<UserNameViewReportModel>, UserNameViewGrandTotal.GridOptionBuilderServiceImp>();
+            service.AddTransient<Service<UserNameViewReportModel>, UserNameView.GrandTotal.ServiceImp>();
+            service.AddTransient<GridOptionBuilderService<UserNameViewReportModel>, UserNameView.GrandTotal.GridOptionBuilderServiceImp>();
 
-            service.AddTransient<Service<UserNameViewReportModel>, UserNameViewAssociatedAccount.ServiceImp>();
-            service.AddTransient<GridOptionBuilderService<UserNameViewReportModel>, UserNameViewAssociatedAccount.GridOptionBuilderServiceImp>();
+            service.AddTransient<Service<UserNameViewReportModel>, UserNameView.AssociatedAccount.ServiceImp>();
+            service.AddTransient<GridOptionBuilderService<UserNameViewReportModel>, UserNameView.AssociatedAccount.GridOptionBuilderServiceImp>();
 
             service.AddTransient<TopTwentyCommon.GridOptionHeaderBuilderService, TopTwentyCommon.GridOptionHeaderBuilderServiceImp>();
             service.AddTransient<TopTwentyCommon.GridOptionDataRowBuilderService, TopTwentyCommon.GridOptionDataRowBuilderServiceImp>();
@@ -95,32 +132,32 @@ namespace RiskControl.Sites.DependencyInjections
 
             service.AddTransient<UserNameViewMain.ExcelReportBuilder, UserNameViewMain.ExcelReportBuilderImp>();
 
-            service.AddTransient<Service<UserNameViewReportModel>, SpecificMemberUsername.ServiceImp>();
+            service.AddTransient<Service<UserNameViewReportModel>, SpecificMember.Username.ServiceImp>();
 
             service.AddTransient<Service<DailyReportModel>, DailyViewDaily.ServiceImp>();
 
             service.AddTransient<Service<DailyViewReportModel>, DailyView.ServiceImp>();
 
-            service.AddTransient<Service<DailyViewReportModel>, SpecificMemberDaily.ServiceImp>();
+            service.AddTransient<Service<DailyViewReportModel>, SpecificMember.Daily.ServiceImp>();
 
-            service.AddTransient<Service<DailyViewReportModel>, SpecificMemberProduct.ServiceImp>();
+            service.AddTransient<Service<DailyViewReportModel>, SpecificMember.Product.ServiceImp>();
 
             service.AddTransient<SpecificMemberCommon.UsernameService, SpecificMemberCommon.UsernameServiceImp>();
-            service.AddTransient<Service<UserNameViewReportModel>, SpecificMemberAssociatedAccount.ServiceImp>();
+            service.AddTransient<Service<UserNameViewReportModel>, SpecificMember.AssociatedAccount.ServiceImp>();
 
             service.AddTransient<SpecificMemberCommon.DailyService, SpecificMemberCommon.DailyServiceImp>();
 
-            service.AddTransient<Service<DailyViewReportModel>, SpecificMemberCasinoProduct.ServiceImp>();
+            service.AddTransient<Service<DailyViewReportModel>, SpecificMember.CasinoProduct.ServiceImp>();
 
-            service.AddTransient<Service<DailyViewReportModel>, SpecificMemberMonthly.ServiceImp>();
+            service.AddTransient<Service<DailyViewReportModel>, SpecificMember.Monthly.ServiceImp>();
 
             service.AddTransient<Service<CurrencyViewStatisticsReportModel>, DailyViewGrandTotal.ServiceImp>();
 
-            service.AddTransient<Service<CurrencyViewStatisticsReportModel>, SpecificMemberGrandTotal.CasinoProduct.ServiceImp>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel>, SpecificMember.GrandTotal.CasinoProduct.ServiceImp>();
 
-            service.AddTransient<Service<CurrencyViewStatisticsReportModel>, SpecificMemberGrandTotal.Daily.ServiceImp>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel>, SpecificMember.GrandTotal.Daily.ServiceImp>();
 
-            service.AddTransient<Service<CurrencyViewStatisticsReportModel>, SpecificMemberGrandTotal.Product.ServiceImp>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel>, SpecificMember.GrandTotal.Product.ServiceImp>();
 
             service.AddTransient<SpecificMemberCommon.GrandTotalService, SpecificMemberCommon.GrandTotalServiceImp>();
 

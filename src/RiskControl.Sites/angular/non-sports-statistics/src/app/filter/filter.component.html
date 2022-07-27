@@ -114,9 +114,9 @@
             </nap-dropdown-select>
           </div>
           <div class="col-offset-60px">
-            <ngx-numeric-textbox [(ngModel)]="totalBetsValue" [min]="0" [max]="10000000000000" [format]="'0,0'"
+            <nap-ngx-numeric-textbox [(ngModel)]="totalBetsValue" [min]="0" [max]="10000000000000" [format]="'0,0'"
               [decimals]="0" [autoCorrect]="true" (valueChange)="totalBetChange($event)">
-            </ngx-numeric-textbox>
+            </nap-ngx-numeric-textbox>
           </div>
         </div>
       </div>
@@ -161,9 +161,9 @@
             </nap-dropdown-select>
           </div>
           <div class="col-offset-60px">
-            <ngx-numeric-textbox [(ngModel)]="gameIncomeValue" [min]="0" [max]="10000000000000" [format]="'0,0'"
+            <nap-ngx-numeric-textbox [(ngModel)]="gameIncomeValue" [min]="0" [max]="10000000000000" [format]="'0,0'"
               [decimals]="0" [autoCorrect]="true" (valueChange)="gameIncomeChange($event)">
-            </ngx-numeric-textbox>
+            </nap-ngx-numeric-textbox>
           </div>
         </div>
       </div>

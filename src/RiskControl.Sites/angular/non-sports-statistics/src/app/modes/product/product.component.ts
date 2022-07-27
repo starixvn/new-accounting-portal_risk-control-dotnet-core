@@ -120,7 +120,7 @@ export class ProductComponent implements OnInit, ModeGenerate {
       gridOptions.fullHeight = false;
       gridOptions.gridHeight = 500;
       gridOptions.titleInfo = {
-        text: gridOptions.TitleInfoText,
+        text: gridOptions.titleInfoText,
         showExcelButton: true,
         exportExcelFunction: () => this.excelGrandTotal(queryModel)
       };
@@ -259,14 +259,14 @@ export class ProductComponent implements OnInit, ModeGenerate {
   }
 
   private updateProductColumn(gridOptions: GridOptions) {
-    const reportByColumnName = gridOptions.columns[0].Name;
+    const reportByColumnName = gridOptions.columns[0].name;
     gridOptions.bodyRows.forEach(row => {
-      const column = row.Columns[0];
-      if (column.Name === reportByColumnName) {
-        const rowAttribute = JSON.parse(row.CustomAttr) as RowAttribute;
+      const column = row.columns[0];
+      if (column.name === reportByColumnName) {
+        const rowAttribute = JSON.parse(row.customAttr) as RowAttribute;
         const typeId = rowAttribute.groupId;
         const typeName = rowAttribute.groupName;
-        column.Value = `<a href="javascript:;" drill-down-product type-id="${typeId}" type-name="${typeName}">${column.Value}</a>`;
+        column.value = `<a href="javascript:;" drill-down-product type-id="${typeId}" type-name="${typeName}">${column.value}</a>`;
       }
     });
   }
@@ -274,14 +274,14 @@ export class ProductComponent implements OnInit, ModeGenerate {
   private updateCurrencyColumn(gridOptions: GridOptions) {
     const currencyColumn = FilterConfig.gridColumns.currency;
     gridOptions.bodyRows.forEach(row => {
-      const rowAttribute = JSON.parse(row.CustomAttr) as RowAttribute;
-      for (const column of row.Columns) {
-        if (column.Name === currencyColumn.value) {
-          const currency = column.CustomAttr;
+      const rowAttribute = JSON.parse(row.customAttr) as RowAttribute;
+      for (const column of row.columns) {
+        if (column.name === currencyColumn.value) {
+          const currency = column.customAttr;
           const typeId = rowAttribute.groupId;
           const typeName = rowAttribute.groupName;
           // tslint:disable-next-line:max-line-length
-          column.Value = `<a href="javascript:;" drill-down-currency currency="${currency}" type-id="${typeId}" type-name="${typeName}">${column.Value}</a>`;
+          column.value = `<a href="javascript:;" drill-down-currency currency="${currency}" type-id="${typeId}" type-name="${typeName}">${column.value}</a>`;
           break;
         }
       }
@@ -290,9 +290,9 @@ export class ProductComponent implements OnInit, ModeGenerate {
 
   private updateGrandTotalCell(gridOptions: GridOptions) {
     const row = gridOptions.footerRows[0];
-    const column = row.Columns[0];
-    const value = column.Value;
-    column.Value = `<a href="javascript:;" grand-total>${value}</a>`;
+    const column = row.columns[0];
+    const value = column.value;
+    column.value = `<a href="javascript:;" grand-total>${value}</a>`;
   }
 
   private excel(queryModel: QueryModel) {

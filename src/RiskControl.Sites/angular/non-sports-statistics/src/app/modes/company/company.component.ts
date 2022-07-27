@@ -77,7 +77,7 @@ export class CompanyComponent implements OnInit, ModeGenerate {
       gridOptions.fullHeight = false;
       gridOptions.gridHeight = 500;
       gridOptions.titleInfo = {
-        text: gridOptions.TitleInfoText,
+        text: gridOptions.titleInfoText,
         showExcelButton: true,
         exportExcelFunction: () => this.excelGrandTotal(queryModel)
       };
@@ -120,9 +120,9 @@ export class CompanyComponent implements OnInit, ModeGenerate {
 
   private updateGrandTotalCell(gridOptions: GridOptions) {
     const row = gridOptions.footerRows[0];
-    const column = row.Columns[0];
-    const value = column.Value;
-    column.Value = `<a href="javascript:;" grand-total>${value}</a>`;
+    const column = row.columns[0];
+    const value = column.value;
+    column.value = `<a href="javascript:;" grand-total>${value}</a>`;
   }
 
   private updateCurrencyColumn(gridOptions: GridOptions) {
@@ -133,18 +133,18 @@ export class CompanyComponent implements OnInit, ModeGenerate {
   private updateCurrencyColumnInRows(rows: Row[]) {
     const currencyColumn = FilterConfig.gridColumns.currency;
     rows.forEach(row => {
-      const rowAttribute = JSON.parse(row.CustomAttr) as RowAttribute;
+      const rowAttribute = JSON.parse(row.customAttr) as RowAttribute;
       const company = rowAttribute.groupName;
-      for (const column of row.Columns) {
-        if (column.Name === currencyColumn.value) {
-          const currency = column.CustomAttr;
+      for (const column of row.columns) {
+        if (column.name === currencyColumn.value) {
+          const currency = column.customAttr;
           // tslint:disable-next-line:max-line-length
-          column.Value = `<a href="javascript:;" drill-down-currency currency="${currency}" company="${company}">${column.Value}</a>`;
+          column.value = `<a href="javascript:;" drill-down-currency currency="${currency}" company="${company}">${column.value}</a>`;
           break;
         }
       }
 
-      const subRows = row.SubRows;
+      const subRows = row.subRows;
       if (!_.isNil(subRows)) {
         this.updateCurrencyColumnInRows(subRows);
       }

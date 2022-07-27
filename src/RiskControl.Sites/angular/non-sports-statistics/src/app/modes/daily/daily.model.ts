@@ -19,3 +19,4 @@ export class DailyGridModel extends GridModel {
         this.isDrillDownFromUserName = isDrillDownFromUserName;
     }
 }
+

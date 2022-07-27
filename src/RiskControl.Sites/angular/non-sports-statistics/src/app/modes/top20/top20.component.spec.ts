@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { TestBed, ComponentFixture, fakeAsync, tick, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
@@ -258,7 +258,7 @@ describe('Top20Component', () => {
             });
 
             describe('back', () => {
-                beforeEach(async(() => {
+                beforeEach(waitForAsync(() => {
                     const fakeModeContext: ModeContext = {
                         filterModel: fakeFilterModel,
                         gridModel: fakeGridModel,

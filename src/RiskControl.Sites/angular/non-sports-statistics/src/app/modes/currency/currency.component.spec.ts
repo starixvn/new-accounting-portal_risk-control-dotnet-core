@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { TestBed, ComponentFixture, fakeAsync, tick, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
@@ -124,7 +124,7 @@ describe('CurrencyComponent', () => {
     });
 
     describe('back', () => {
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             const fakeModeContext = {
                 filterModel: fakeFilterModel,
                 gridModel: fakeGridModel,
@@ -284,7 +284,7 @@ describe('CurrencyComponent', () => {
     describe('CurrencyGridModel', () => {
         let gridOptions: GridOptions;
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             const fakeModeContext = {
                 filterModel: fakeFilterModel,
                 gridModel: new CurrencyGridModel(true, 41),

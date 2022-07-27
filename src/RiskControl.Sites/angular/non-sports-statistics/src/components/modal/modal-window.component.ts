@@ -9,7 +9,7 @@ import { ModalOptions } from './modal-options';
     ]
 })
 export class ModalWindowComponent {
-    @Input() windowClass: string;
+    @Input() windowClass: string = '';
     @Input() width: number;
     @Input() height: number;
     @Input() backdrop: boolean;

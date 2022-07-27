@@ -69,7 +69,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 var fanexGrid = new Fanex.Grid(this, opts);
                 opts.pagerOption = Fanex.Grid.List[fanexGrid.tableContentId].pagerOption;
                 Fanex.Grid.Helper.UpdateSortInforAfterShowHideColumns(opts, Fanex.Grid.List[fanexGrid.tableContentId].sortOption);
-                //fanexGrid.RenderGrid();
                 fanexGrid.RenderShowHideColumns(false);
                 return fanexGrid.GetjQueryInstance();
             });
@@ -104,8 +103,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 $(this).fanexGrid('resizeGrid');
             });
         },
-        getCurrentPage: function () {
-        },
+        getCurrentPage: function () { },
         getColumnsIdentify: function (opts) {
             return Fanex.Grid.Helper.GetColumnsHastable(opts.columns);
         }
@@ -120,7 +118,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             return methods.createFanexGrid.apply(this, arguments);
         }
         else {
-            throw 'Options cannot be null';
+            throw new Error('Options cannot be null');
         }
     };
 
@@ -244,9 +242,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         this.frozenColsName = [];
         //// If frozen, then create an array contain frozen columns name
         if (options.numberOfFrozenColumn > 0) {
-            //var frozenColumnNumber = isValid(options.numberOfFrozenColumnSaved) ? options.numberOfFrozenColumnSaved : options.numberOfFrozenColumn;
             for (var colIndex = 0; colIndex < options.numberOfFrozenColumn; colIndex++) {
-                this.frozenColsName.push(options.columns[colIndex].Name);
+                this.frozenColsName.push(options.columns[colIndex].name);
             }
             //// If highlight frozen then set width for hightligth
             if (options.highlightFrozenWidth > 1) {
@@ -289,9 +286,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             if (me.gridObject) {
                 me.gridObject.innerHTML = html;
             }
-            //me.$grid.empty().html(html);
             me.$grid.before(me.RenderTitle());
-            //me.$grid.parent().css("float","left");
             me.RegisterMouseHoverEvent();
             me.Initialize();
             //// Render Title
@@ -328,10 +323,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var selector = [];
             var columnsShowLength = options.columns.length;
             for (var colIndex = 0; colIndex < columnsShowLength; colIndex++) {
-                //selector.push('.free-grid-td-' + colIndex);
                 me.$grid.find('.free-grid-td-' + colIndex).removeClass("grid-show-hide-column");
             }
-            //me.$grid.find(selector.join(',')).show();
 
             if (!isShow) {
                 var columnsHideLength = options.hiddenColumns.length,
@@ -340,38 +333,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 try {
                     for (var colIndex1 = 0; colIndex1 < columnsHideLength; colIndex1++) {
                         currentCol = options.hiddenColumns[colIndex1];
-                        //selector.push('.free-grid-td-' + currentCol);
-                        //me.$grid.find('.free-grid-td-' + currentCol).addClass("grid-show-hide-column");
                         me.$grid.find('.free-cell, .row_header_wrapper, .col_header, .grid-container')
                         .find('.free-grid-td-' + currentCol)
                         .addClass("grid-show-hide-column");
                     }
 
                     if (options.showFooter) {
-                        //                        var footerLength = options.footerRows[0].Columns.length;
-                        //                        var needHideCols = options.hiddenColumns.slice(0);
-                        //                        var currentColIndex = 0;
-                        //                        for (var ftColIndex = 0; ftColIndex < footerLength; ftColIndex++) {
-                        //                            currentCol = options.footerRows[0].Columns[ftColIndex];
-                        //                            if (currentCol.MergeColNumber) {
-                        //                                var removeArray = [];
-                        //                                for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {
-                        //                                    if (ftColIndex + currentCol.MergeColNumber >= ftColIndex + needHideCols[nhIndex]) {
-                        //                                        removeArray.push(nhIndex);
-                        //                                    }
-                        //                                    else if (ftColIndex < needHideCols[nhIndex]) {
-                        //                                        needHideCols[nhIndex] -= currentCol.MergeColNumber - 1;
-                        //                                    }
-                        //                                }
-
-                        //                                for (var rmIndex = removeArray.length - 1; rmIndex >= 0; rmIndex--) {
-                        //                                    needHideCols.splice(removeArray[rmIndex], 1);
-                        //                                }
-
-                        //                                //currentColIndex += currentCol.MergeColNumber;
-                        //                            }
-                        //                            // currentColIndex++;
-                        //                        }
                         var needHideCols = options.hiddenColumns.slice(0);
                         for (nhIndex = 0; nhIndex < needHideCols.length; nhIndex++) {
                             currentCol = needHideCols[nhIndex];
@@ -382,7 +349,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 catch (e) {
                     window.console.log(e);
                 }
-                //me.$grid.find(selector.join(',')).hide();
             }
 
             me.RegisterMouseHoverEvent();
@@ -399,8 +365,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             //// Save Current Sor
             Fanex.Grid.List[me.tableContentId].sortOption =
             {
-                SortColumnName: sortColumnName,
-                SortDirection: sortDirection
+                sortColumnName: sortColumnName,
+                sortDirection: sortDirection
             };
         },
         AppendBodyRows: function (rows) {
@@ -425,7 +391,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 }
 
                 //// If MainRow still has item, then continue render
-                for (rowIndex = frozenBodyLength; rowIndex < rowLength; rowIndex++) {
+                for (var rowIndex = frozenBodyLength; rowIndex < rowLength; rowIndex++) {
                     currentRow = rows[rowIndex];
                     bodyRowsHtml.push(me.RenderNormalRow(currentRow, 'td', true, rowIndex + currentPageStartIndex, '', false, rowIndex, 0));
                 }
@@ -607,11 +573,11 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 for (var rowIndex = 0; rowIndex < currentGroupHeader.length; rowIndex++) {
                     var currentRow = currentGroupHeader[rowIndex];
 
-                    if (currentRow.Columns.length > 0) {
+                    if (currentRow.columns.length > 0) {
                         headerHtml.push('<tr>');
 
-                        for (colIndex = 0; colIndex < currentRow.Columns.length && colIndex < columnLength; colIndex++) {
-                            currentCol = currentRow.Columns[colIndex];
+                        for (colIndex = 0; colIndex < currentRow.columns.length && colIndex < columnLength; colIndex++) {
+                            currentCol = currentRow.columns[colIndex];
                             if (isValid(currentCol)) {
                                 customSpan = '';
                                 var currentHeight = options.headerColumnHeight;
@@ -620,63 +586,63 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 if (isValid(currentCol) && isValid(currentCol.MergeRowNumber)) {
                                     //// If It has merge row and current row has only one columns and column has merge row, then remove next row
                                     Fanex.Grid.Helper.RemoveItemForRowSpan(currentGroupHeader, rowIndex, currentCol, me.columnsHastable);
-                                    var currentMergeRowNumber = ' rowspan="' + currentCol.MergeRowNumber + '"';
+                                    var currentMergeRowNumber = ' rowspan="' + currentCol.mergeRowNumber + '"';
                                     //if (type === 'frozenheader' || type === 'frozenbody') {
                                     //// Calculate height for merger row
-                                    currentHeight = ((options.headerColumnHeight * currentCol.MergeRowNumber) + (currentCol.MergeRowNumber - 1) * 5);
+                                    currentHeight = ((options.headerColumnHeight * currentCol.mergeRowNumber) + (currentCol.mergeRowNumber - 1) * 5);
                                     //}
                                     customSpan += currentMergeRowNumber;
                                 }
 
                                 //// If Current cell has merge Col
-                                if (isValid(currentCol) && isValid(currentCol.MergeColNumber)) {
+                                if (isValid(currentCol) && isValid(currentCol.mergeColNumber)) {
                                     //// Compute for With for merge
-                                    currentCol.Width = Fanex.Grid.Helper.GetColMergeWidth(me.columnsForComputingWidth,
-                                                                                            me.columnsHastable[currentCol.Name].ColumnIndex,
+                                    currentCol.width = Fanex.Grid.Helper.GetColMergeWidth(me.columnsForComputingWidth,
+                                                                                            me.columnsHastable[currentCol.name].columnIndex,
                                                                                             currentCol.MergeColNumber,
                                                                                             options.enableHiddenColumns,
                                                                                             options.columns);
                                     if (options.enableHiddenColumns === false) {
                                         showHeaderMergeCol = Fanex.Grid.Helper.HideHeaderGroupWhenShowHide(options.hiddenColumns,
-                                                                                                            me.columnsHastable[currentCol.Name].ColumnIndex,
+                                                                                                            me.columnsHastable[currentCol.name].columnIndex,
                                                                                                             currentCol.MergeColNumber);
                                         customSpan += ' colspan="' + Fanex.Grid.Helper.ReComputeMergeColumAfterShowHide(options.hiddenColumns,
-                                                                                                            me.columnsHastable[currentCol.Name].ColumnIndex,
-                                                                                                            currentCol.MergeColNumber) + '"';
+                                                                                                            me.columnsHastable[currentCol.name].columnIndex,
+                                                                                                            currentCol.mergeColNumber) + '"';
                                     }
                                     else {
                                         customSpan += ' colspan="' + currentCol.MergeColNumber + '"';
                                     }
                                 }
 
-                                if (isValid(currentCol) && isValid(currentCol.MergeHeaderColNumber)) {
-                                    customSpan += ' colspan="' + currentCol.MergeHeaderColNumber + '"';
+                                if (isValid(currentCol) && isValid(currentCol.mergeHeaderColNumber)) {
+                                    customSpan += ' colspan="' + currentCol.mergeHeaderColNumber + '"';
                                 }
 
                                 cellInfo =
                                 {
-                                    CellTag: 'th',
-                                    CustomSpan: customSpan,
-                                    CssClass: currentCol.CssClass,
-                                    SortClass: (currentRow.Columns[colIndex].Sort === true ? ' colSorter' : ''),
-                                    CellWidth: (currentCol.Width || me.columnsHastable[currentCol.Name].Width),
-                                    CellHeight: currentHeight,
-                                    CellId: (me.columnsHastable[currentCol.Name].Sort === true ? (me.gridId + '_header_sort_' + currentCol.Name) : ''),
-                                    Sort: currentRow.Columns[colIndex].Sort,
-                                    CellColumnName: currentCol.Name,
-                                    HeaderText: currentCol.HeaderText,
-                                    CustomAttr: (currentGroupHeader.length > 1 && rowIndex === (currentGroupHeader.length - 1)) ?
-                                                    me.columnsHastable[currentCol.Name].CustomAttr :
+                                    cellTag: 'th',
+                                    customSpan: customSpan,
+                                    cssClass: currentCol.cssClass,
+                                    sortClass: (currentRow.columns[colIndex].sort === true ? ' colSorter' : ''),
+                                    cellWidth: (currentCol.width || me.columnsHastable[currentCol.name].width),
+                                    cellHeight: currentHeight,
+                                    cellId: (me.columnsHastable[currentCol.name].sort === true ? (me.gridId + '_header_sort_' + currentCol.name) : ''),
+                                    sort: currentRow.columns[colIndex].sort,
+                                    cellColumnName: currentCol.name,
+                                    headerText: currentCol.headerText,
+                                    customAttr: (currentGroupHeader.length > 1 && rowIndex === (currentGroupHeader.length - 1)) ?
+                                                    me.columnsHastable[currentCol.name].customAttr :
                                                     undefined,
-                                    CustomHeaderRender: currentCol.CustomHeaderRender || me.columnsHastable[currentCol.Name].CustomHeaderRender,
-                                    SortDirection: currentRow.Columns[colIndex].SortDirection || '',
-                                    CanShowHide: (me.columnsHastable[currentCol.Name].CanShowHide && (!options.enableHiddenColumns) && showHeaderMergeCol),
-                                    TdClass: me.columnsHastable[currentCol.Name].TdClass || '',
-                                    ThClass: currentRow.Columns[colIndex].ThClass || '',
+                                    customHeaderRender: currentCol.customHeaderRender || me.columnsHastable[currentCol.name].customHeaderRender,
+                                    sortDirection: currentRow.columns[colIndex].sortDirection || '',
+                                    canShowHide: (me.columnsHastable[currentCol.name].canShowHide && (!options.enableHiddenColumns) && showHeaderMergeCol),
+                                    tdClass: me.columnsHastable[currentCol.name].tdClass || '',
+                                    thClass: currentRow.columns[colIndex].thClass || '',
                                     //                                    (currentGroupHeader.length > 1 && rowIndex === (currentGroupHeader.length - 1)) ?
                                     //                                                        me.columnsHastable[currentCol.Name].ThClass :
                                     //                                                        '',
-                                    CellAlign: me.columnsHastable[currentCol.Name].HeaderAlign || (me.columnsHastable[currentCol.Name].CellAlign || 'center')
+                                    cellAlign: me.columnsHastable[currentCol.name].headerAlign || (me.columnsHastable[currentCol.name].cellAlign || 'center')
                                 };
                                 trsHeader.push(me.RenderHeaderCell(cellInfo, currentCol));
                             }
@@ -693,28 +659,28 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 for (colIndex = 0; colIndex < columnLength; colIndex++) {
                     currentCol = me.headerColumnsCloneFromOptionColumns[colIndex];
                     customSpan = '';
-                    if (isValid(currentCol) && isValid(currentCol.MergeHeaderColNumber)) {
-                        customSpan += ' colspan="' + currentCol.MergeHeaderColNumber + '"';
+                    if (isValid(currentCol) && isValid(currentCol.mergeHeaderColNumber)) {
+                        customSpan += ' colspan="' + currentCol.mergeHeaderColNumber + '"';
                     }
                     cellInfo =
                     {
-                        CellTag: 'th',
-                        CustomSpan: customSpan,
-                        CssClass: currentCol.CssClass,
-                        SortClass: (currentCol.Sort === true ? ' colSorter' : ''),
-                        CellWidth: (currentCol.Width || me.columnsHastable[currentCol.Name].Width),
-                        CellHeight: options.headerColumnHeight,
-                        CellId: (me.columnsHastable[currentCol.Name].Sort === true ? (me.gridId + '_header_sort_' + currentCol.Name) : ''),
-                        Sort: currentCol.Sort,
-                        CellColumnName: currentCol.Name,
-                        HeaderText: currentCol.HeaderText,
-                        CustomHeaderRender: currentCol.CustomHeaderRender || me.columnsHastable[currentCol.Name].CustomHeaderRender,
-                        SortDirection: currentCol.SortDirection || '',
-                        CustomAttr: me.columnsHastable[currentCol.Name].CustomAttr,
-                        CanShowHide: me.columnsHastable[currentCol.Name].CanShowHide && (!options.enableHiddenColumns),
-                        TdClass: me.columnsHastable[currentCol.Name].TdClass || '',
-                        ThClass: me.columnsHastable[currentCol.Name].ThClass || '',
-                        CellAlign: me.columnsHastable[currentCol.Name].HeaderAlign || (me.columnsHastable[currentCol.Name].CellAlign || 'center')
+                        cellTag: 'th',
+                        customSpan: customSpan,
+                        cssClass: currentCol.cssClass,
+                        sortClass: (currentCol.sort === true ? ' colSorter' : ''),
+                        cellWidth: (currentCol.width || me.columnsHastable[currentCol.name].width),
+                        cellHeight: options.headerColumnHeight,
+                        cellId: (me.columnsHastable[currentCol.name].sort === true ? (me.gridId + '_header_sort_' + currentCol.name) : ''),
+                        sort: currentCol.sort,
+                        cellColumnName: currentCol.name,
+                        headerText: currentCol.headerText,
+                        customHeaderRender: currentCol.customHeaderRender || me.columnsHastable[currentCol.name].customHeaderRender,
+                        sortDirection: currentCol.sortDirection || '',
+                        customAttr: me.columnsHastable[currentCol.name].customAttr,
+                        canShowHide: me.columnsHastable[currentCol.name].canShowHide && (!options.enableHiddenColumns),
+                        tdClass: me.columnsHastable[currentCol.name].tdClass || '',
+                        thClass: me.columnsHastable[currentCol.name].thClass || '',
+                        cellAlign: me.columnsHastable[currentCol.name].headerAlign || (me.columnsHastable[currentCol.name].cellAlign || 'center')
                     };
                     trsHeader.push(me.RenderHeaderCell(cellInfo, currentCol));
                 }
@@ -732,85 +698,85 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var me = this;
             var options = me.Options;
             var frozenRowHtml = [];
-            var colsLength = currentRow.Columns.length;
+            var colsLength = currentRow.columns.length;
             var currentCollapseExpandId = '';
             var parentRowClass = '';
             var currentMergeColsIndex = 0;
             var trHighlightAtt = (options.showHighlightRow ? (' highlightatt="highlight-att-frozen-' + parentHighlight + '-' + rowIndex + '"') : '');
             var trClass = (options.showHighlightRow ? 'highlight-row ' : '') +
                             (treeCollapseExpandClass || '') +
-                            (currentRow.CssClass || '') +
+                            (currentRow.cssClass || '') +
                             (options.showDistinctRow ? ((rowIndex + 1) % 2 === 0 ? ' freegrid-even' : '') : '');
-            if (options.showTree === true && currentRow.SubRows) {
+            if (options.showTree === true && currentRow.subRows) {
                 parentRowClass = 'parent-row parent-level-' + level;
             }
 
-            frozenRowHtml.push('<tr class="' + trClass + ' ' + parentRowClass + '" ' + (currentRow.CustomAttr || '') + trHighlightAtt + '>');
+            frozenRowHtml.push('<tr class="' + trClass + ' ' + parentRowClass + '" ' + (currentRow.customAttr || '') + trHighlightAtt + '>');
             for (var columnIndex = 0; columnIndex < colsLength; columnIndex++) {
-                var currentCol = currentRow.Columns[columnIndex];
+                var currentCol = currentRow.columns[columnIndex];
                 var customSpan = '';
-                var currentHeight = 'height:' + (currentRow.RowHeight || options.bodyRowHeight) + 'px;';
-                var currentWidth = me.columnsHastable[currentCol.Name].Width;
+                var currentHeight = 'height:' + (currentRow.rowHeight || options.bodyRowHeight) + 'px;';
+                var currentWidth = me.columnsHastable[currentCol.name].width;
                 var currentHeightForComputeCenter = options.bodyRowHeight;
 
                 //// If Merge Row, then add rowspan, If in the same row and there are no other columns, then cal height, 
                 //// or there are some columns but they also have colspan, then cal height
-                if (isValid(currentCol.MergeRowNumber)) {
-                    customSpan += ' rowspan="' + currentCol.MergeRowNumber + '" ';
-                    if (Fanex.Grid.Helper.CheckHideColSpan(currentRow.Columns)) {
-                        currentHeightForComputeCenter = ((options.bodyRowHeight * currentCol.MergeRowNumber) + (currentCol.MergeRowNumber - 1) * 5);
+                if (isValid(currentCol.mergeRowNumber)) {
+                    customSpan += ' rowspan="' + currentCol.mergeRowNumber + '" ';
+                    if (Fanex.Grid.Helper.CheckHideColSpan(currentRow.columns)) {
+                        currentHeightForComputeCenter = ((options.bodyRowHeight * currentCol.mergeRowNumber) + (currentCol.mergeRowNumber - 1) * 5);
                         currentHeight = 'height:' + currentHeightForComputeCenter + 'px;';
                         customSpan = '';
                     }
                 }
 
                 //// If Merge Column and current row is footer, then calculate height
-                if (isValid(currentCol.MergeColNumber)) {
-                    customSpan += ' colspan="' + currentCol.MergeColNumber + '" ';
+                if (isValid(currentCol.mergeColNumber)) {
+                    customSpan += ' colspan="' + currentCol.mergeColNumber + '" ';
                     currentWidth = Fanex.Grid.Helper.GetColMergeWidth(me.columnsForComputingWidth,
-                                                                        me.columnsHastable[currentCol.Name].ColumnIndex,
-                                                                        currentCol.MergeColNumber,
+                                                                        me.columnsHastable[currentCol.name].columnIndex,
+                                                                        currentCol.mergeColNumber,
                                                                         options.enableHiddenColumns,
                                                                         options.columns);
                 }
 
-                if (currentCol.PrevRowsColMergeNumber) {
-                    currentMergeColsIndex += currentCol.PrevRowsColMergeNumber;
+                if (currentCol.prevRowsColMergeNumber) {
+                    currentMergeColsIndex += currentCol.prevRowsColMergeNumber;
                 }
 
                 var renderObject = me.RenderBodyCell(
                         {
-                            HtmlTag: colHtmlTag,
-                            CustomSpan: customSpan,
-                            Height: currentHeight
+                            htmlTag: colHtmlTag,
+                            customSpan: customSpan,
+                            height: currentHeight
                         },
                         {
-                            IsNoData: isForNoData,
-                            ColIndex: columnIndex,
-                            RowIndex: rowIndex,
-                            CssClass: (currentCol.CssClass || (me.columnsHastable[currentCol.Name].CellCssClass || '')),
-                            Width: currentWidth,
-                            Align: (currentCol.CellAlign || (me.columnsHastable[currentCol.Name].CellAlign || 'left')),
-                            CustomAttr: (currentCol.CustomAttr || ''),
-                            ParentHighlight: parentHighlight,
-                            MergeColumnIndex: currentMergeColsIndex
+                            isNoData: isForNoData,
+                            colIndex: columnIndex,
+                            rowIndex: rowIndex,
+                            cssClass: (currentCol.cssClass || (me.columnsHastable[currentCol.name].cellCssClass || '')),
+                            width: currentWidth,
+                            align: (currentCol.cellAlign || (me.columnsHastable[currentCol.name].cellAlign || 'left')),
+                            customAttr: (currentCol.customAttr || ''),
+                            parentHighlight: parentHighlight,
+                            mergeColumnIndex: currentMergeColsIndex
                         },
                         currentCol,
                         currentRow,
                         isBody,
                         level
                     );
-                frozenRowHtml.push(renderObject.CellHtml);
-                if (renderObject.CurrentColumnShowTree === true) {
-                    currentCollapseExpandId = renderObject.CurrentCollapseExpandId;
+                frozenRowHtml.push(renderObject.cellHtml);
+                if (renderObject.currentColumnShowTree === true) {
+                    currentCollapseExpandId = renderObject.currentCollapseExpandId;
                 }
-                if (isValid(currentCol.MergeColNumber)) {
-                    currentMergeColsIndex += currentCol.MergeColNumber - 1;
+                if (isValid(currentCol.mergeColNumber)) {
+                    currentMergeColsIndex += currentCol.mergeColNumber - 1;
                 }
             }
             frozenRowHtml.push('</tr>');
 
-            if (options.showTree === true && currentRow.SubRows) {
+            if (options.showTree === true && currentRow.subRows) {
                 frozenRowHtml.push(me.RenderSubRow(currentRow, false, isBody, 0, currentCollapseExpandId, parentHighlight, level));
             }
 
@@ -820,77 +786,77 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var me = this;
             var options = me.Options;
             var rowHtml = [];
-            var colsLength = currentRow.Columns.length;
+            var colsLength = currentRow.columns.length;
             var currentCollapseExpandId = '';
             var parentRowClass = '';
             var currentMergeColsIndex = 0;
             var trHighlightAtt = (options.showHighlightRow && isBody ? (' highlightatt="highlight-att-main-' + parentHighlight + '-' + rowIndex + '"') : '');
             var trClass = (options.showHighlightRow ? 'highlight-row ' : '') +
-                            (currentRow.CssClass || '') + ' ' +
+                            (currentRow.cssClass || '') + ' ' +
                             (treeCollapseExpandClass || '') + ' ' +
                             (options.showDistinctRow ? ((rowIndex + 1) % 2 === 0 ? ' freegrid-even' : '') : '');
 
             if (colsLength > 0) {
                 //// If show grid with tree, then add class to parent row
-                if (options.showTree === true && currentRow.SubRows) {
+                if (options.showTree === true && currentRow.subRows) {
                     parentRowClass = 'parent-row parent-level-' + level;
                 }
-                rowHtml.push('<tr class="' + trClass + ' ' + parentRowClass + '" ' + (currentRow.CustomAttr || '') + ' ' + trHighlightAtt + '>');
+                rowHtml.push('<tr class="' + trClass + ' ' + parentRowClass + '" ' + (currentRow.customAttr || '') + ' ' + trHighlightAtt + '>');
 
                 for (var colIndex = 0; colIndex < colsLength; colIndex++) {
-                    var currentCol = currentRow.Columns[colIndex];
-                    var currentWidth = me.columnsHastable[currentCol.Name].Width;
+                    var currentCol = currentRow.columns[colIndex];
+                    var currentWidth = me.columnsHastable[currentCol.name].width;
                     var customSpan = '';
-                    var currentHeight = 'height:' + (currentRow.RowHeight || options.bodyRowHeight) + 'px;';
+                    var currentHeight = 'height:' + (currentRow.rowHeight || options.bodyRowHeight) + 'px;';
                     var currentHeightForComputeCenter = options.bodyRowHeight;
-                    if (isValid(currentCol.MergeRowNumber)) {
-                        customSpan += ' rowspan="' + currentCol.MergeRowNumber + '" ';
-                        currentHeightForComputeCenter *= currentCol.MergeRowNumber;
+                    if (isValid(currentCol.mergeRowNumber)) {
+                        customSpan += ' rowspan="' + currentCol.mergeRowNumber + '" ';
+                        currentHeightForComputeCenter *= currentCol.mergeRowNumber;
                     }
 
                     //// If merge Column, then calculate width for merging
-                    if (isValid(currentCol.MergeColNumber)) {
-                        customSpan += ' colspan="' + currentCol.MergeColNumber + '" ';
+                    if (isValid(currentCol.mergeColNumber)) {
+                        customSpan += ' colspan="' + currentCol.mergeColNumber + '" ';
                         currentWidth = Fanex.Grid.Helper.GetColMergeWidth(me.columnsForComputingWidth,
-                                                                            me.columnsHastable[currentCol.Name].ColumnIndex,
-                                                                            currentCol.MergeColNumber,
+                                                                            me.columnsHastable[currentCol.name].columnIndex,
+                                                                            currentCol.mergeColNumber,
                                                                             options.enableHiddenColumns,
                                                                             options.columns);
                     }
-                    if (currentCol.PrevRowsColMergeNumber) {
-                        currentMergeColsIndex += currentCol.PrevRowsColMergeNumber;
+                    if (currentCol.prevRowsColMergeNumber) {
+                        currentMergeColsIndex += currentCol.prevRowsColMergeNumber;
                     }
                     var renderObject = me.RenderBodyCell({
-                        HtmlTag: colHtmlTag,
-                        CustomSpan: customSpan,
-                        Height: currentHeight
+                        htmlTag: colHtmlTag,
+                        customSpan: customSpan,
+                        height: currentHeight
                     }, {
-                        IsNoData: isForNoData,
-                        ColIndex: colIndex,
-                        RowIndex: rowIndex,
-                        CssClass: (currentCol.CssClass || (me.columnsHastable[currentCol.Name].CellCssClass || '')),
-                        Width: currentWidth,
-                        Align: (currentCol.CellAlign || (me.columnsHastable[currentCol.Name].CellAlign || 'left')),
-                        CustomAttr: (currentCol.CustomAttr || ''),
-                        ParentHighlight: parentHighlight,
-                        MergeColumnIndex: currentMergeColsIndex
+                        isNoData: isForNoData,
+                        colIndex: colIndex,
+                        rowIndex: rowIndex,
+                        cssClass: (currentCol.cssClass || (me.columnsHastable[currentCol.name].cellCssClass || '')),
+                        width: currentWidth,
+                        align: (currentCol.cellAlign || (me.columnsHastable[currentCol.name].cellAlign || 'left')),
+                        customAttr: (currentCol.customAttr || ''),
+                        parentHighlight: parentHighlight,
+                        mergeColumnIndex: currentMergeColsIndex
                     },
                         currentCol,
                         currentRow,
                         isBody,
                         level
                     );
-                    rowHtml.push(renderObject.CellHtml);
-                    if (renderObject.CurrentColumnShowTree === true) {
-                        currentCollapseExpandId = renderObject.CurrentCollapseExpandId;
+                    rowHtml.push(renderObject.cellHtml);
+                    if (renderObject.currentColumnShowTree === true) {
+                        currentCollapseExpandId = renderObject.currentCollapseExpandId;
                     }
-                    if (isValid(currentCol.MergeColNumber)) {
-                        currentMergeColsIndex += currentCol.MergeColNumber - 1;
+                    if (isValid(currentCol.mergeColNumber)) {
+                        currentMergeColsIndex += currentCol.mergeColNumber - 1;
                     }
                 }
                 rowHtml.push('</tr>');
 
-                if (options.showTree === true && currentRow.SubRows) {
+                if (options.showTree === true && currentRow.subRows) {
                     rowHtml.push(me.RenderSubRow(currentRow, true, isBody, 0, currentCollapseExpandId, parentHighlight, level));
                 }
             }
@@ -901,8 +867,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var me = this;
             var options = me.Options;
             var subRowHtml = [];
-            var currentSubRows = (isMain === true ? currentRow.SubRows :
-                                    Fanex.Grid.Helper.CreateRowsForFrozenColumn(currentRow.SubRows, options.numberOfFrozenColumn, me.frozenColsName));
+            var currentSubRows = (isMain === true ? currentRow.subRows :
+                                    Fanex.Grid.Helper.CreateRowsForFrozenColumn(currentRow.subRows, options.numberOfFrozenColumn, me.frozenColsName));
             var subRowsLength = currentSubRows.length;
             level++;
             for (var subRowIndex = 0; subRowIndex < subRowsLength; subRowIndex++) {
@@ -935,127 +901,127 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var cellHtml = [];
             var currentCollapseExpandId = '';
 
-            var currentValue = currentCol.Value;
-            if (me.columnsHastable[currentCol.Name].IsAbs && currentValue < 0) {
+            var currentValue = currentCol.value;
+            if (me.columnsHastable[currentCol.name].isAbs && currentValue < 0) {
                 currentValue = Math.abs(currentValue);
             }
 
-            if (me.columnsHastable[currentCol.Name].FormatNumber && !isNaN(currentValue) && currentValue !== '') {
-                currentValue = numeral(currentValue).format(me.columnsHastable[currentCol.Name].FormatNumber);
+            if (me.columnsHastable[currentCol.name].formatNumber && !isNaN(currentValue) && currentValue !== '') {
+                currentValue = numeral(currentValue).format(me.columnsHastable[currentCol.name].formatNumber);
             }
 
-            if (me.columnsHastable[currentCol.Name].FormatDateTime &&
+            if (me.columnsHastable[currentCol.name].formatDateTime &&
                 isValid(currentValue) &&
                 currentValue !== '' &&
                 currentValue != null) {
-                var momentObject = moment(currentValue);
+                    var momentObject = moment(currentValue);
                 if (momentObject.isValid()) {
                     if (options.timeZone !== '') {
                         momentObject = momentObject.zone(options.timeZone);
                     }
 
-                    currentValue = momentObject.format(me.columnsHastable[currentCol.Name].FormatDateTime);
+                    currentValue = momentObject.format(me.columnsHastable[currentCol.name].formatDateTime);
                 }
             }
 
-            if (me.columnsHastable[currentCol.Name].FormatNegative) {
-                if (currentCol.Value < 0) {
-                    currentValue = '<span class="format-negative">' + me.columnsHastable[currentCol.Name].FormatNegative.replace('$', currentValue) + '</span>';
+            if (me.columnsHastable[currentCol.name].formatNegative) {
+                if (currentCol.value < 0) {
+                    currentValue = '<span class="format-negative">' + me.columnsHastable[currentCol.name].formatNegative.replace('$', currentValue) + '</span>';
                 }
             }
 
-            if (me.columnsHastable[currentCol.Name].FormatPositive) {
-                if (currentCol.Value > 0) {
-                    currentValue = '<span class="format-positive">' + me.columnsHastable[currentCol.Name].FormatPositive.replace('$', currentValue) + '</span>';
+            if (me.columnsHastable[currentCol.name].formatPositive) {
+                if (currentCol.value > 0) {
+                    currentValue = '<span class="format-positive">' + me.columnsHastable[currentCol.name].formatPositive.replace('$', currentValue) + '</span>';
                 }
             }
 
             var cellContent = '';
             if (cell.IsNoData === true) {
-                cellContent = currentCol.Value;
+                cellContent = currentCol.value;
             }
             else {
-                cellContent = typeof currentCol.CustomCellRender === 'function' ?
+                cellContent = typeof currentCol.customCellRender === 'function' ?
                                                 currentCol.CustomCellRender(currentCol, currentValue) :
-                                                ((typeof (me.columnsHastable[currentCol.Name].CustomCellRender) === 'function' && isBody) ?
-                                                            me.columnsHastable[currentCol.Name].CustomCellRender(currentCol, currentValue) :
+                                                ((typeof (me.columnsHastable[currentCol.name].customCellRender) === 'function' && isBody) ?
+                                                            me.columnsHastable[currentCol.name].CustomCellRender(currentCol, currentValue) :
                                                             currentValue);
             }
 
             //// If show tree, then add icon expand
-            var tdClass = 'free-grid-td-' + (cell.ColIndex + cell.MergeColumnIndex) + ' '
-                            + (currentCol.TdClass || (me.columnsHastable[currentCol.Name].TdClass || ''));
-            if (options.showTree === true && currentRow.SubRows && me.columnsHastable[currentCol.Name].ShowCollapseExpand === true) {
+            var tdClass = 'free-grid-td-' + (cell.colIndex + cell.mergeColumnIndex) + ' '
+                            + (currentCol.tdClass || (me.columnsHastable[currentCol.name].tdClass || ''));
+            if (options.showTree === true && currentRow.subRows && me.columnsHastable[currentCol.name].showCollapseExpand === true) {
                 tdClass = 'tr-grid-collapse-expand';
             }
 
             //// For show/hide column
-            if (me.columnsHastable[currentCol.Name].CanShowHide && me.columnsHastable[currentCol.Name].CanShowHide === true && (!options.enableHiddenColumns)) {
+            if (me.columnsHastable[currentCol.name].canShowHide && me.columnsHastable[currentCol.name].canShowHide === true && (!options.enableHiddenColumns)) {
                 tdClass += ' grid-show-hide-column';
             }
 
             var truncateClass = '';
-            var allowTruncate = me.columnsHastable[currentCol.Name].AllowTruncate === true ? true : options.allowTruncate;
+            var allowTruncate = me.columnsHastable[currentCol.name].allowTruncate === true ? true : options.allowTruncate;
             if (allowTruncate === true) {
                 truncateClass = ' column-truncate';
             }
 
-            var titleTooltip = '';
-            if (typeof (currentCol.Value) === 'string' &&
-                (currentCol.Value.length * me.currentFontSize > me.columnsHastable[currentCol.Name].Width) &&
+            var titvarooltip = '';
+            if (typeof (currentCol.value) === 'string' &&
+                (currentCol.value.length * me.currentFontSize > me.columnsHastable[currentCol.name].width) &&
                 allowTruncate === true) {
-                titleTooltip = ' title="' + currentCol.Value + '" ';
+                titvarooltip = ' title="' + currentCol.value + '" ';
             }
 
             var isCurrentColShowTree = (options.showTree === true &&
-            currentRow.SubRows &&
-            currentRow.SubRows.length > 0 && me.columnsHastable[currentCol.Name].ShowCollapseExpand === true);
+            currentRow.subRows &&
+            currentRow.subRows.length > 0 && me.columnsHastable[currentCol.name].showCollapseExpand === true);
 
             var paddingLeft = '';
             if ((isCurrentColShowTree && level !== 0) ||
             (level > 0 &&
-                !(currentRow.SubRows && currentRow.SubRows.length > 0) &&
-                me.columnsHastable[currentCol.Name].ShowCollapseExpand === true) ||
+                !(currentRow.subRows && currentRow.subRows.length > 0) &&
+                me.columnsHastable[currentCol.name].showCollapseExpand === true) ||
             (level === 0 && isCurrentColShowTree &&
-                (!isValid(currentRow.SubRows) || currentRow.SubRows.length === 0))) {
-                var totalPaddingLeft = level * options.treeParentPaddingLeft;
+                (!isValid(currentRow.subRows) || currentRow.subRows.length === 0))) {
+                    var totalPaddingLeft = level * options.treeParentPaddingLeft;
                 paddingLeft = 'padding-left:' + totalPaddingLeft + 'px;';
-                cell.Width -= totalPaddingLeft;
+                cell.width -= totalPaddingLeft;
             }
 
-            cellHtml.push('<' + container.HtmlTag + ' ' + container.CustomSpan + ' class="' + tdClass + '"' + ' style="' + container.Height + '"' + ' >');
+            cellHtml.push('<' + container.htmlTag + ' ' + container.customSpan + ' class="' + tdClass + '"' + ' style="' + container.height + '"' + ' >');
             cellHtml.push('<div class="table-cell ' +
-                            cell.CssClass + ' ' +
+                            cell.cssClass + ' ' +
                             truncateClass +
-                            '" style="width:' + cell.Width + 'px;' + paddingLeft + '" ' +
-                            'align="' + cell.Align + '" ' + titleTooltip + cell.CustomAttr + '>');
+                            '" style="width:' + cell.width + 'px;' + paddingLeft + '" ' +
+                            'align="' + cell.align + '" ' + titvarooltip + cell.customAttr + '>');
 
             if (isCurrentColShowTree) {
-                currentCollapseExpandId = me.gridId + '_tree_' + cell.ParentHighlight;
+                currentCollapseExpandId = me.gridId + '_tree_' + cell.parentHighlight;
                 cellHtml.push('<span class="grid-collapse-expand grid-expand ' +
                                 currentCollapseExpandId + '-class' +
                                 '" id="' + currentCollapseExpandId + '"></span>');
                 currentCollapseExpandId += ' child-row';
             }
 
-            var showRowIndexNumber = (isBody && options.showNumberColumn && cell.ColIndex === 0 && !cell.IsNoData);
+            var showRowIndexNumber = (isBody && options.showNumberColumn && cell.colIndex === 0 && !cell.isNoData);
             var currentRowIndexForCustomPager = 0;
             if (showRowIndexNumber) {
                 if (options.customPager) {
-                    currentRowIndexForCustomPager = cell.RowIndex + options.currentStartRowIndex + 1;
+                    currentRowIndexForCustomPager = cell.rowIndex + options.currentStartRowIndex + 1;
                 }
                 else {
-                    currentRowIndexForCustomPager = (cell.RowIndex + 1);
+                    currentRowIndexForCustomPager = (cell.rowIndex + 1);
                 }
             }
 
             cellHtml.push(showRowIndexNumber ? currentRowIndexForCustomPager : cellContent);
-            cellHtml.push('</div></' + container.HtmlTag + '>');
+            cellHtml.push('</div></' + container.htmlTag + '>');
 
             return {
-                CellHtml: cellHtml.join(''),
-                CurrentCollapseExpandId: currentCollapseExpandId,
-                CurrentColumnShowTree: isCurrentColShowTree
+                cellHtml: cellHtml.join(''),
+                currentCollapseExpandId: currentCollapseExpandId,
+                currentColumnShowTree: isCurrentColShowTree
             };
         },
         RenderEmptyRow: function (columnName, columnValue, mergeColumnNumber, cssClass, showOnMainBody) {
@@ -1072,10 +1038,10 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 }
             }
             var columns = [{
-                Name: columnName,
-                Value: columnValue,
-                MergeColNumber: mergeColumnNumber - minusColumnNumber,
-                CssClass: cssClass
+                name: columnName,
+                value: columnValue,
+                mergeColNumber: mergeColumnNumber - minusColumnNumber,
+                cssClass: cssClass
             }];
             if (showOnMainBody) {
                 var minusMainColumnNumber = mergeColumnNumber - minusColumnNumber;
@@ -1087,15 +1053,15 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                     }
                 }
                 columns.push({
-                    Name: options.columns[minusMainColumnNumber].Name,
-                    Value: fanexGridCurrentLanguage.noData,
-                    MergeColNumber: (options.columns.length - minusMainColumnNumber),
-                    CssClass: cssClass
+                    name: options.columns[minusMainColumnNumber].name,
+                    value: fanexGridCurrentLanguage.noData,
+                    mergeColNumber: (options.columns.length - minusMainColumnNumber),
+                    cssClass: cssClass
                 });
             }
 
             var emptyRowHtml = this.RenderNormalRow({
-                Columns: columns
+                columns: columns
             }, 'td', true, 0, '', true, '');
             return emptyRowHtml;
         },
@@ -1103,37 +1069,37 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var me = this;
             var options = me.Options;
             var cellHtml = [];
-            var cellTag = cellInfo.CellTag || 'td';
-            var customSpan = cellInfo.CustomSpan || ' ';
-            var cssClass = cellInfo.CssClass || ' ';
-            var sortClass = cellInfo.SortClass || ' ';
-            var customAttr = cellInfo.CustomAttr || ' ';
-            var thClass = cellInfo.ThClass || ' ';
-            var cellWidth = 'width:' + (cellInfo.CellWidth || '200') + 'px;';
-            var cellHeight = isValid(cellInfo.CellHeight) ? ('height:' + (cellInfo.CellHeight || options.headerColumnHeight) + 'px;') : ' ';
-            var cellId = isValid(cellInfo.CellId) ? ' id="' + cellInfo.CellId + '"' : " ";
-            var sort = cellInfo.Sort || false;
-            var cellColumnName = cellInfo.CellColumnName || '';
-            var showClass = (isValid(cellInfo.CanShowHide) && cellInfo.CanShowHide) ? ('grid-show-hide-column') : ' ' + thClass;
+            var cellTag = cellInfo.cellTag || 'td';
+            var customSpan = cellInfo.customSpan || ' ';
+            var cssClass = cellInfo.cssClass || ' ';
+            var sortClass = cellInfo.sortClass || ' ';
+            var customAttr = cellInfo.customAttr || ' ';
+            var thClass = cellInfo.thClass || ' ';
+            var cellWidth = 'width:' + (cellInfo.cellWidth || '200') + 'px;';
+            var cellHeight = isValid(cellInfo.cellHeight) ? ('height:' + (cellInfo.cellHeight || options.headerColumnHeight) + 'px;') : ' ';
+            var cellId = isValid(cellInfo.cellId) ? ' id="' + cellInfo.cellId + '"' : " ";
+            var sort = cellInfo.sort || false;
+            var cellColumnName = cellInfo.cellColumnName || '';
+            var showClass = (isValid(cellInfo.canShowHide) && cellInfo.canShowHide) ? ('grid-show-hide-column') : ' ' + thClass;
 
             cellHtml.push('<' + cellTag + ' ' + customSpan + ' class="' + showClass + '" >');
 
             cellHtml.push('<div class="table-cell ' + cssClass + ' ' + sortClass +
                             '" style="' + cellWidth + cellHeight + '" ' + cellId +
-                            ' align="' + cellInfo.CellAlign + '" ' + customAttr + '>');
+                            ' align="' + cellInfo.cellAlign + '" ' + customAttr + '>');
             if (sort === true) {
                 cellHtml.push('<div class="display-inline-block">');
             }
 
-            if (typeof cellInfo.CustomHeaderRender === 'function') {
+            if (typeof cellInfo.customHeaderRender === 'function') {
                 cellHtml.push(cellInfo.CustomHeaderRender(currentColumn));
             }
             else {
-                cellHtml.push(cellInfo.HeaderText);
+                cellHtml.push(cellInfo.headerText);
             }
 
             if (sort === true) {
-                var sortDirection = cellInfo.SortDirection || '';
+                var sortDirection = cellInfo.sortDirection || '';
                 cellHtml.push('</div><div class="divSorter ' + sortDirection.toLowerCase() + '" data-columnname="' + cellColumnName + '"> </div>');
             }
 
@@ -1159,13 +1125,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 columnName = '',
                 currentDirection = '';
                 for (var colIndex = 0; colIndex < options.columns.length; colIndex++) {
-                    if (options.columns[colIndex].SortDirection != null
-                    && options.columns[colIndex].SortDirection !== '') {
+                    if (options.columns[colIndex].sortDirection != null
+                    && options.columns[colIndex].sortDirection !== '') {
                         defaultSort = true;
-                        currentDirection = options.columns[colIndex].SortDirection;
-                        customSortFunction = options.columns[colIndex].CustomSortFunction;
-                        columnName = options.columns[colIndex].Name;
-                        sortType = options.columns[colIndex].SortType;
+                        currentDirection = options.columns[colIndex].sortDirection;
+                        customSortFunction = options.columns[colIndex].customSortFunction;
+                        columnName = options.columns[colIndex].name;
+                        sortType = options.columns[colIndex].sortType;
                         break;
                     }
                 }
@@ -1196,7 +1162,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var currentFrozenRows = (options.numberOfFrozenColumn > 0) ?
                                     Fanex.Grid.Helper.CreateRowsForFrozenColumn(currentBodyRows, options.numberOfFrozenColumn, me.frozenColsName) :
                                     [];
-            var frozenBodyLength = currentFrozenRows.length;
+                                    var frozenBodyLength = currentFrozenRows.length;
 
             if (bodyLength > 0) {
                 //// Render Frozen Row and Main Row at the same time
@@ -1219,23 +1185,22 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 if (options.numberOfFrozenColumn > 0) {
                     if (options.showNoDataOnFrozen) {
                         //// Show No Info on the frozen table
-                        bodyRowsHtml.push(me.RenderEmptyRow(options.columns[0].Name, emptyData, options.columns.length, 'no-data-frozen', false));
-                        bodyFrozenHtml.push(me.RenderEmptyRow(options.columns[0].Name, emptyData, options.numberOfFrozenColumn, 'no-data-frozen', false));
+                        bodyRowsHtml.push(me.RenderEmptyRow(options.columns[0].name, emptyData, options.columns.length, 'no-data-frozen', false));
+                        bodyFrozenHtml.push(me.RenderEmptyRow(options.columns[0].name, emptyData, options.numberOfFrozenColumn, 'no-data-frozen', false));
                     }
                     else {
                         //// Show No Info on the main table
-                        bodyRowsHtml.push(me.RenderEmptyRow(options.columns[0].Name, '', options.numberOfFrozenColumn, 'no-data-frozen', true));
-                        bodyFrozenHtml.push(me.RenderEmptyRow(options.columns[0].Name, '', options.numberOfFrozenColumn, '', false));
+                        bodyRowsHtml.push(me.RenderEmptyRow(options.columns[0].name, '', options.numberOfFrozenColumn, 'no-data-frozen', true));
+                        bodyFrozenHtml.push(me.RenderEmptyRow(options.columns[0].name, '', options.numberOfFrozenColumn, '', false));
                     }
                 }
                 else {
                     //// Show No Info on the main table
-                    bodyRowsHtml.push(me.RenderEmptyRow(options.columns[0].Name, emptyData, options.columns.length, 'no-data-not-frozen', false));
+                    bodyRowsHtml.push(me.RenderEmptyRow(options.columns[0].name, emptyData, options.columns.length, 'no-data-not-frozen', false));
                 }
             }
 
             if (reRenderBody === true) {
-                //if (ub.msie) {
                 me.$grid.find('#' + me.frozenContentId + '> tbody').remove();
                 me.$grid.find('#' + me.tableContentId + '> tbody').remove();
                 var div = document.createElement("div");
@@ -1249,11 +1214,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 if (mainContainer) {
                     mainContainer.appendChild(div.firstChild.tBodies[0]);
                 }
-                //document.getElementById(me.tableContentId).getElementsByTagName('tbody')[0].outerHTML = '<body>' + bodyRowsHtml.join('') + '</body>';
-                //                }
-                //                else {
-                //                    
-                //                }
             }
             else {
                 // Fixbug for replace $' string
@@ -1271,7 +1231,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         },
         RenderFooter: function (reRender) {
             var me = this,
-            //options = me.Options,
                 footerHtml = [],
                 frozenFooterHtml = [],
                 currentFooterHtml = me.RenderFooterBody();
@@ -1380,9 +1339,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                                                                                 options.pagerOption.itemsPerPage);
                                 me.RenderFooter(true);
                             }
-                            //                            if (typeof (options.pagerOption.afterPagedFunction) === 'function') {
-                            //                                options.pagerOption.afterPagedFunction(options.pagerOption);
-                            //                            }
                             me.gridOptions.isResetScroller = true;
                             $(me.$grid).gridScroller(me.gridOptions);
                             me.RenderPager();
@@ -1511,8 +1467,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                 if (currentCol.Sort === true) {
                     /*jshint ignore:start*/
-                    me.$grid.off('click', '#' + me.gridId + '_header_sort_' + currentCol.Name, null)
-                            .on('click', '#' + me.gridId + '_header_sort_' + currentCol.Name, function () {
+                    me.$grid.off('click', '#' + me.gridId + '_header_sort_' + currentCol.name, null)
+                            .on('click', '#' + me.gridId + '_header_sort_' + currentCol.name, function () {
                                 var $this = $(this).find('.divSorter');
                                 var currentDirection = '';
                                 if ($this.hasClass('desc')) {
@@ -1533,13 +1489,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                                 var customSortFunction = null;
                                 var sortType = null;
                                 for (var colIndex = 0; colIndex < options.columns.length; colIndex++) {
-                                    if (options.columns[colIndex].Name === $this.data('columnname')) {
-                                        options.columns[colIndex].SortDirection = currentDirection.toLowerCase();
-                                        customSortFunction = options.columns[colIndex].CustomSortFunction;
-                                        sortType = options.columns[colIndex].SortType;
+                                    if (options.columns[colIndex].name === $this.data('columnname')) {
+                                        options.columns[colIndex].sortDirection = currentDirection.toLowerCase();
+                                        customSortFunction = options.columns[colIndex].customSortFunction;
+                                        sortType = options.columns[colIndex].sortType;
                                     }
                                     else {
-                                        options.columns[colIndex].SortDirection = '';
+                                        options.columns[colIndex].sortDirection = '';
                                     }
                                 }
                                 //customGridSort: null
@@ -1695,36 +1651,35 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             return browserDectect;
         },
         RemoveItemForRowSpan: function (rows, currentRowIndex, mainColumn) {
-            var rowSpanSize = mainColumn.MergeRowNumber;
-            var columnName = mainColumn.Name;
+            var rowSpanSize = mainColumn.mergeRowNumber;
+            var columnName = mainColumn.name;
             var currentLength = currentRowIndex + rowSpanSize;
             var rowsLength = currentLength < rows.length ? currentLength : rows.length;
             for (var rowIndex = currentRowIndex + 1; rowIndex < rowsLength; rowIndex++) {
-                for (var colIndex = 0; colIndex < rows[rowIndex].Columns.length; colIndex++) {
-                    var currentCol = rows[rowIndex].Columns[colIndex];
-                    if (currentCol.Name === columnName) {
-                        if (isValid(currentCol.Sort) && currentCol.Sort === true) {
-                            var firstColIndex = Fanex.Grid.Helper.GetColumnIndexFromColumnName(rows[currentRowIndex], currentCol.Name);
-                            rows[currentRowIndex].Columns[firstColIndex].Sort = true;
-                            rows[currentRowIndex].Columns[firstColIndex].SortDirection = currentCol.SortDirection;
+                for (var colIndex = 0; colIndex < rows[rowIndex].columns.length; colIndex++) {
+                    var currentCol = rows[rowIndex].columns[colIndex];
+                    if (currentCol.name === columnName) {
+                        if (isValid(currentCol.sort) && currentCol.sort === true) {
+                            var firstColIndex = Fanex.Grid.Helper.GetColumnIndexFromColumnName(rows[currentRowIndex], currentCol.name);
+                            rows[currentRowIndex].columns[firstColIndex].sort = true;
+                            rows[currentRowIndex].columns[firstColIndex].sortDirection = currentCol.sortDirection;
                         }
 
-                        if (isValid(mainColumn.MergeColNumber)) {
-                            var mergeColLength = mainColumn.MergeColNumber + colIndex;
-                            mergeColLength = (mergeColLength <= rows[rowIndex].Columns.length ? mergeColLength : 0);
+                        if (isValid(mainColumn.mergeColNumber)) {
+                            var mergeColLength = mainColumn.mergeColNumber + colIndex;
+                            mergeColLength = (mergeColLength <= rows[rowIndex].columns.length ? mergeColLength : 0);
                             for (var mergeColIndex = mergeColLength; mergeColIndex >= colIndex; mergeColIndex--) {
-                                rows[rowIndex].Columns.splice(mergeColIndex, 1);
-                                //rows[rowIndex].Columns.remove(mergeColIndex);
+                                rows[rowIndex].columns.splice(mergeColIndex, 1);
                             }
                         }
-                        rows[rowIndex].Columns.splice(colIndex, 1);
+                        rows[rowIndex].columns.splice(colIndex, 1);
                     }
                 }
             }
         },
         GetColumnIndexFromColumnName: function (row, columnName) {
-            for (var index = 0; index < row.Columns.length; index++) {
-                if (row.Columns[index].Name === columnName) {
+            for (var index = 0; index < row.columns.length; index++) {
+                if (row.Columns[index].name === columnName) {
                     return index;
                 }
             }
@@ -1739,12 +1694,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 var newRow = clone(currentRow);
                 newRow.Columns = [];
                 var isset = false;
-                var colsLength = currentRow.Columns.length < frozenColNumber ? currentRow.Columns.length : frozenColNumber;
+                var colsLength = currentRow.columns.length < frozenColNumber ? currentRow.columns.length : frozenColNumber;
 
                 for (var colIndex = 0; colIndex < colsLength; colIndex++) {
-                    var currentCol = currentRow.Columns[colIndex];
-                    if (Fanex.Grid.Helper.CheckExistName(frozenColsName, currentCol.Name)) {
-                        newRow.Columns.push(clone(currentRow.Columns[colIndex]));
+                    var currentCol = currentRow.columns[colIndex];
+                    if (Fanex.Grid.Helper.CheckExistName(frozenColsName, currentCol.name)) {
+                        newRow.columns.push(clone(currentRow.columns[colIndex]));
                         isset = true;
                     }
                 }
@@ -1766,7 +1721,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         CheckHideColSpan: function (currentFrozenColums) {
             var colsLength = currentFrozenColums.length;
             for (var colIndex = 0; colIndex < colsLength; colIndex++) {
-                if (!isValid(currentFrozenColums[colIndex].MergeRowNumber)) {
+                if (!isValid(currentFrozenColums[colIndex].mergeRowNumber)) {
                     return false;
                 }
             }
@@ -1779,13 +1734,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 var currentColumn = columns[columnIndex];
                 if (isValid(enableHiddenColumns) &&
                     enableHiddenColumns === false &&
-                    currentColumn.CanShowHide &&
-                    currentColumn.CanShowHide === true &&
+                    currentColumn.canShowHide &&
+                    currentColumn.canShowHide === true &&
                     isForComputingWidth === false) {
                     continue;
                 }
                 else {
-                    arrayWidth.push(currentColumn.Width);
+                    arrayWidth.push(currentColumn.width);
                 }
             }
             return arrayWidth;
@@ -1795,7 +1750,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var finalColMergeNumber = colMergeNumber;
             var colLength = arrayWidth.length < (startIndex + colMergeNumber) ? arrayWidth.length : (startIndex + colMergeNumber);
             for (var colIndex = startIndex; colIndex < colLength; colIndex++) {
-                if (isValid(enableHiddenColumns) && enableHiddenColumns === false && columns[colIndex].CanShowHide && columns[colIndex].CanShowHide === true) {
+                if (isValid(enableHiddenColumns) && enableHiddenColumns === false && columns[colIndex].canShowHide && columns[colIndex].canShowHide === true) {
                     finalColMergeNumber--;
                 }
                 else {
@@ -1808,8 +1763,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         GetColumnWidth: function (columns, name) {
             var colLength = columns.length;
             for (var colIndex = 0; colIndex < colLength; colIndex++) {
-                if (columns[colIndex].Name === name) {
-                    return columns[colIndex].Width;
+                if (columns[colIndex].name === name) {
+                    return columns[colIndex].width;
                 }
             }
             return 0;
@@ -1819,8 +1774,8 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var colLength = columns.length;
             for (var colIndex = 0; colIndex < colLength; colIndex++) {
                 var currentCol = columns[colIndex];
-                hastable[currentCol.Name] = currentCol;
-                hastable[currentCol.Name].ColumnIndex = colIndex;
+                hastable[currentCol.name] = currentCol;
+                hastable[currentCol.name].columnIndex = colIndex;
             }
             return hastable;
         },
@@ -1856,10 +1811,10 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var sortColIndex = null;
             if (rows.length > 0) {
                 var firstRow = rows[0];
-                var colLength = firstRow.Columns.length;
+                var colLength = firstRow.columns.length;
 
                 for (var colIndex = 0; colIndex < colLength; colIndex++) {
-                    if (firstRow.Columns[colIndex].Name === sortField) {
+                    if (firstRow.columns[colIndex].name === sortField) {
                         sortColIndex = colIndex;
                         break;
                     }
@@ -1914,25 +1869,16 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             }
         },
         CompareRow: function (sortColIndex, row1, row2, sortField, sortType, compareFunction) {
-            //            var col1Value = row1.Columns[sortColIndex].Value;
-            //            var col2Value = row2.Columns[sortColIndex].Value;
-            //            if (sortType != null) {
-            //                switch (sortType) {
-            //                    case 'number':
-            //                        
-            //                }
-            //            }
-
-            return compareFunction(row1.Columns[sortColIndex].Value, row2.Columns[sortColIndex].Value);
+            return compareFunction(row1.columns[sortColIndex].value, row2.columns[sortColIndex].value);
         },
         SetColumnDisplay: function (columns, showHideArray) {
             var columnsLengh = columns.length;
             for (var colIndex = 0; colIndex < columnsLengh; colIndex++) {
-                columns[colIndex].CanShowHide = false;
+                columns[colIndex].canShowHide = false;
             }
             var showhidelength = showHideArray.length;
             for (var index = 0; index < showhidelength; index++) {
-                columns[showHideArray[index]].CanShowHide = true;
+                columns[showHideArray[index]].canShowHide = true;
             }
             return columns;
         },
@@ -1969,12 +1915,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 var colsLength = options.columns.length;
                 var customSortFunction = null;
                 for (var colIndex = 0; colIndex < colsLength; colIndex++) {
-                    if (options.columns[colIndex].Name === sortOption.SortColumnName) {
-                        options.columns[colIndex].SortDirection = sortOption.SortDirection.toLowerCase();
-                        customSortFunction = options.columns[colIndex].CustomSortFunction;
+                    if (options.columns[colIndex].name === sortOption.sortColumnName) {
+                        options.columns[colIndex].sortDirection = sortOption.sortDirection.toLowerCase();
+                        customSortFunction = options.columns[colIndex].customSortFunction;
                     }
                 }
-                options.bodyRows = Fanex.Grid.Helper.GetSortedArray(options.bodyRows, sortOption.SortColumnName, sortOption.SortDirection, customSortFunction);
+                options.bodyRows = Fanex.Grid.Helper.GetSortedArray(options.bodyRows, sortOption.sortColumnName, sortOption.sortDirection, customSortFunction);
             }
         },
         RemoveSpaceIE9: function (html) {
@@ -1990,16 +1936,16 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             var colArray = [];
             for (var colIndex = 0; colIndex < colLength; colIndex++) {
                 var currentCol = clone(columns[colIndex]);
-                var currentWidth = currentCol.Width;
-                if (isValid(currentCol.MergeHeaderColNumber) && currentCol.MergeHeaderColNumber > 0) {
-                    var currentMaxLength = currentCol.MergeHeaderColNumber + colIndex;
+                var currentWidth = currentCol.width;
+                if (isValid(currentCol.mergeHeaderColNumber) && currentCol.mergeHeaderColNumber > 0) {
+                    var currentMaxLength = currentCol.mergeHeaderColNumber + colIndex;
                     colIndex++;
                     for (; colIndex < currentMaxLength && colIndex < colLength; colIndex++) {
-                        currentWidth += columns[colIndex].Width + 5;
+                        currentWidth += columns[colIndex].width + 5;
                     }
                     colIndex--;
                 }
-                currentCol.Width = currentWidth;
+                currentCol.width = currentWidth;
                 colArray.push(currentCol);
             }
             return colArray;
@@ -2026,13 +1972,13 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
             var mainColLength = options.columns.length;
             for (var mainColIndex = 0; mainColIndex < mainColLength; mainColIndex++) {
-                var currentResizeObject = resizeObject[options.columns[mainColIndex].Name];
+                var currentResizeObject = resizeObject[options.columns[mainColIndex].name];
                 if (currentResizeObject != null) {
                     if (currentResizeObject.calculated || options.calTextWidthWithFontSize) {
-                        options.columns[mainColIndex].Width = resizeObject[options.columns[mainColIndex].Name].length;
+                        options.columns[mainColIndex].width = resizeObject[options.columns[mainColIndex].name].length;
                     }
                     else {
-                        options.columns[mainColIndex].Width = Fanex.Grid.Helper.ComputeTextWidth(mainContainer, currentResizeObject.rawData) + 20;
+                        options.columns[mainColIndex].width = Fanex.Grid.Helper.ComputeTextWidth(mainContainer, currentResizeObject.rawData) + 20;
                     }
                 }
             }
@@ -2049,18 +1995,18 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
             for (var i = 0; i < colLength; i++) {
                 var currentCol = options.columns[i];
-                if (currentCol.CanResize === true) {
-                    if (typeof (currentCol.MaxResizeWidth) !== 'undefined' && currentCol.Width > currentCol.MaxResizeWidth) {
-                        currentCol.Width = currentCol.MaxResizeWidth;
+                if (currentCol.canResize === true) {
+                    if (typeof (currentCol.maxResizeWidth) !== 'undefined' && currentCol.width > currentCol.maxResizeWidth) {
+                        currentCol.width = currentCol.maxResizeWidth;
                     }
 
                     resizeCols.push({
                         colIndex: i,
-                        colName: currentCol.Name,
-                        colWidth: currentCol.Width
+                        colName: currentCol.name,
+                        colWidth: currentCol.width
                     });
                 }
-                totalCalulatedWidth += currentCol.Width;
+                totalCalulatedWidth += currentCol.width;
 
             }
 
@@ -2072,7 +2018,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
                 for (i = 0; i < resizeCols.length; i++) {
                     var currentResizeCol = resizeCols[i];
-                    options.columns[currentResizeCol.colIndex].Width = currentResizeCol.colWidth + addRowForEachColumn;
+                    options.columns[currentResizeCol.colIndex].width = currentResizeCol.colWidth + addRowForEachColumn;
                 }
             }
 
@@ -2080,37 +2026,36 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         },
         ComputeMaxWidthInRows: function (rows, resizeObject, columnHashtable, pixelsPerCharacter) {
             var rowLength = rows.length;
-            //currentPixelsPerChar = 0;
 
             for (var rowIndex = 0; rowIndex < rowLength; rowIndex++) {
                 var currentRow = rows[rowIndex],
-                    colLength = currentRow.Columns.length;
+                    colLength = currentRow.columns.length;
                 for (var colIndex = 0; colIndex < colLength; colIndex++) {
-                    var currentCol = currentRow.Columns[colIndex];
-                    if (columnHashtable[currentCol.Name].CanResize === true) {
+                    var currentCol = currentRow.columns[colIndex];
+                    if (columnHashtable[currentCol.name].canResize === true) {
                         var textLength = 0;
                         var calculated = true;
-                        if (typeof (resizeObject[currentCol.Name]) === 'undefined') {
-                            resizeObject[currentCol.Name] = {
-                                length: columnHashtable[currentCol.Name].Width,
+                        if (typeof (resizeObject[currentCol.name]) === 'undefined') {
+                            resizeObject[currentCol.name] = {
+                                length: columnHashtable[currentCol.name].width,
                                 calculated: true,
                                 rawData: ''
                             };
                         }
 
-                        if (columnHashtable[currentCol.Name].CalResizeFunction != null) {
-                            textLength = columnHashtable[currentCol.Name].CalResizeFunction(currentCol.Value);
+                        if (columnHashtable[currentCol.name].calResizeFunction != null) {
+                            textLength = columnHashtable[currentCol.name].CalResizeFunction(currentCol.value);
                         }
                         else {
-                            if (columnHashtable[currentCol.Name].PixelsPerCharacter != null) {
-                                if (currentCol.Value != null) {
-                                    textLength = currentCol.Value.toString().length * columnHashtable[currentCol.Name].PixelsPerCharacter;
+                            if (columnHashtable[currentCol.name].pixelsPerCharacter != null) {
+                                if (currentCol.value != null) {
+                                    textLength = currentCol.value.toString().length * columnHashtable[currentCol.name].pixelsPerCharacter;
                                 }
                             }
                             else {
                                 //currentpixelsPerChar = Fanex.Grid.;
-                                if (currentCol.Value != null) {
-                                    textLength = currentCol.Value.toString().length * pixelsPerCharacter;
+                                if (currentCol.value != null) {
+                                    textLength = currentCol.value.toString().length * pixelsPerCharacter;
                                 }
                                 calculated = false;
                             }
@@ -2118,12 +2063,12 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                             ////resizeResult = currentCol.Value.toString().length * currentpixelsPerChar;
                         }
 
-                        if (resizeObject[currentCol.Name].length < textLength) {
-                            resizeObject[currentCol.Name].length = textLength;
+                        if (resizeObject[currentCol.name].length < textLength) {
+                            resizeObject[currentCol.name].length = textLength;
                             if (calculated === false) {
-                                resizeObject[currentCol.Name].calculated = calculated;
-                                if (currentCol.Value != null) {
-                                    resizeObject[currentCol.Name].rawData = currentCol.Value.toString();
+                                resizeObject[currentCol.name].calculated = calculated;
+                                if (currentCol.value != null) {
+                                    resizeObject[currentCol.name].rawData = currentCol.value.toString();
                                 }
                             }
                         }
@@ -2174,14 +2119,9 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             if (!isValid(Fanex.Grid.List[options.tblContentId])) {
                 $(window).resize(function () {
                     if (!o.hasClass("display-none")) {
-                        //o.resetGrid(options.tblContentId);
                         var opt = $.extend({}, {}, Fanex.Grid.List[options.tblContentId].gridOptions);
                         opt.manualCopyHeader = true;
                         o.renderScroller(opt);
-                        //                        o.find('.grid-fixed-table').each(function () {
-                        //                            $(this).append(' ');
-                        //                        });
-                        //console.log("resize-" + options.tblContentId);
                     }
                 });
                 Fanex.Grid.List[options.tblContentId] =
@@ -2196,7 +2136,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             }
 
             o.renderScroller(options);
-            //o.find('.grid-fixed-table').append(' ');
 
             if (options.isResetScroller) {
                 o.resetScroller(o, container, rowheader, xscrollbar, yscrollbar);
@@ -2347,8 +2286,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                     }
                 }
 
-                // (padding + border + padding) * col
-                //options.gridWidth += (options.padding + 1 + options.padding) * col;
                 options.gridWidth += (options.padding + 1 + options.padding) * col;
                 options.freezeWidth += (numOfFreezeCol - 1) * options.padding * 2 + numOfFreezeCol - 1;
             }
@@ -2390,7 +2327,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
 
             var tblHeight = tblContent.height();
             var freezeHeight = tblContent.find("thead").height();
-            //var freezeFooterHeight = isShowFooter ? colFooterContainer.find("thead").height() + 3 : 0;
             var freezeFooterHeight = isShowFooter ? colFooterContainer.find("thead").height() + options.bottomBorderWidth : 0;
             var gridHeight = options.fullHeight ? ($(window).height() - options.gridHeight) : options.gridHeight;
             var isScrollY = gridHeight - titleHeight - pagerHeight - bar - freezeFooterHeight < tblHeight;
@@ -2442,7 +2378,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
                 "top": (gridHeight - pagerHeight - freezeFooterHeight - bar + 1 - extraPosition) + "px",
                 "border-top-width": options.bottomBorderWidth + "px"
             });
-            //pager.css("top", (gridHeight - pagerHeight - (isScrollX ? -(isShowFooter ? 0 : 1) : bar) - (isShowFooter ? 1 : 1)) + "px");
             pager.css("top", (gridHeight - pagerHeight - (isScrollX ? -(isShowFooter ? 0 : 1) : bar) - 2 + extraPosition * 2) + "px");
 
             xscrollbar.css("left", (freezeWidth + (options.padding) * 2 + 1 - extraPosition) + "px");
@@ -2681,16 +2616,6 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
         }
         return target;
     }
-
-    //    Array.prototype.contains = function (obj) {
-    //        var i = this.length;
-    //        while (i--) {
-    //            if (this[i] === obj) {
-    //                return true;
-    //            }
-    //        }
-    //        return false;
-    //    };
 })(jQuery);
 
 //// Language

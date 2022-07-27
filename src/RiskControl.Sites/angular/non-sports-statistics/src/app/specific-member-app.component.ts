@@ -22,7 +22,7 @@ import { ModeContext, ModeGenerate, ModeController, ModeService } from './modes'
   ]
 })
 export class SpecificMemberAppComponent implements ModeController {
-  @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
+  @ViewChild('container', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
   isHideFilter = false;
   private componentRef: ComponentRef<ModeGenerate>;
   private instances: ModeGenerate[] = [];

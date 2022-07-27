@@ -14,13 +14,13 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.Daily.History
         {
         }
 
-        [HttpPost, Route("Query")]
+        [Route("Query")]
         public override async Task<IActionResult> Query(QueryModel queryModel)
         {
             return await base.Query(queryModel).ConfigureAwait(false);
         }
 
-        [HttpPost, Route("Excel")]
+        [Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
             string sheetName = $"{queryModel.ReportBy} Game Statistic";

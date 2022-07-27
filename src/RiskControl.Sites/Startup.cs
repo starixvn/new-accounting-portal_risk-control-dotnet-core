@@ -30,7 +30,7 @@ namespace RiskControl.Sites
             {
                 options.Filters.Add(new ServiceFilterAttribute(typeof(CheckUMFilterAttribute)));
                 options.Filters.Add(new SessionAuthorizeAttribute());
-            });
+            }).AddNewtonsoftJson();
             services.AddHttpContextAccessor();
             services.RegisterRemotingRef(Configuration);
             services.RegisterFanexData(Configuration);

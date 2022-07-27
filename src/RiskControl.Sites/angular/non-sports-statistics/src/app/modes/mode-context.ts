@@ -1,6 +1,8 @@
 import { FilterModel } from '../filter';
 import { GridModel } from './mode.model';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class ModeContext {
     data?: object;
     label: string;

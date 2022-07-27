@@ -25,7 +25,7 @@ import { ModalStackService } from './modal-stack.service';
 })
 
 export class ModalModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<ModalModule> {
         return {
             ngModule: ModalModule,
             providers: [

@@ -6,6 +6,7 @@ using Olympus.WebApi.FanexGridExcel;
 
 namespace RiskControl.NonSportsGamesStatistics.Common
 {
+    [ApiController]
     public class BaseController<TQueryModel> : ControllerBase
         where TQueryModel : BaseStatisticQueryModel, IRequest<GridOptions>
     {

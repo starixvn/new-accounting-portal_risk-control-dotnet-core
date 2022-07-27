@@ -1,5 +1,5 @@
 ﻿@import '~nap-theme/scss/mixins';
-:host /deep/ .modal {
+:host ::ng-deep .modal {
     .modal-header {
         background: #5a7dc1;
         color: white;

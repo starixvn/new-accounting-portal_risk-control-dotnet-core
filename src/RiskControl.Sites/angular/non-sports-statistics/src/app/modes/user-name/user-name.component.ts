@@ -194,7 +194,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
       gridOptions.fullHeight = false;
       gridOptions.gridHeight = 500;
       gridOptions.titleInfo = {
-        text: gridOptions.TitleInfoText,
+        text: gridOptions.titleInfoText,
         showExcelButton: true,
         exportExcelFunction: () => this.excelGrandTotal(queryModel)
       };
@@ -331,15 +331,15 @@ export class UserNameComponent implements OnInit, ModeGenerate {
   private updateHousePositionTakingColumn(gridOptions: GridOptions) {
     const housePositionTakingColumn = FilterConfig.gridColumns.housePositionTaking;
     gridOptions.bodyRows.forEach(row => {
-      const customAttribute = JSON.parse(row.CustomAttr) as RowCustomAttribute;
+      const customAttribute = JSON.parse(row.customAttr) as RowCustomAttribute;
       const userName = customAttribute.ReportBy;
       const custId = customAttribute.ReportById;
-      for (const column of row.Columns) {
-        if (column.Name === housePositionTakingColumn.value) {
-          const housePositionTaking = column.Value;
+      for (const column of row.columns) {
+        if (column.name === housePositionTakingColumn.value) {
+          const housePositionTaking = column.value;
           const housePositionTakingPercent = numeral(housePositionTaking).format('0.00%');
           // tslint:disable-next-line:max-line-length
-          column.Value = `<a href="javascript:;" house-position-taking user-name="${userName}" cust-id="${custId}">${housePositionTakingPercent}</a>`;
+          column.value = `<a href="javascript:;" house-position-taking user-name="${userName}" cust-id="${custId}">${housePositionTakingPercent}</a>`;
         }
       }
     });
@@ -348,13 +348,13 @@ export class UserNameComponent implements OnInit, ModeGenerate {
   private updateAssociatedAccountColumn(gridOptions: GridOptions) {
     const associatedAccountColumn = FilterConfig.gridColumns.associatedAccount;
     gridOptions.bodyRows.forEach(row => {
-      const customAttribute = JSON.parse(row.CustomAttr) as RowCustomAttribute;
+      const customAttribute = JSON.parse(row.customAttr) as RowCustomAttribute;
       const userName = customAttribute.ReportBy;
       const custId = customAttribute.ReportById;
-      for (const column of row.Columns) {
-        if (column.Name === associatedAccountColumn.value) {
+      for (const column of row.columns) {
+        if (column.name === associatedAccountColumn.value) {
           // tslint:disable-next-line:max-line-length
-          column.Value = `<a href="javascript:;" associated-account user-name="${userName}" site="${customAttribute.SiteName}" cust-id=${custId}">Link</a>`;
+          column.value = `<a href="javascript:;" associated-account user-name="${userName}" site="${customAttribute.SiteName}" cust-id=${custId}">Link</a>`;
         }
       }
     });
@@ -363,11 +363,11 @@ export class UserNameComponent implements OnInit, ModeGenerate {
   private updateUserNameColumn(gridOptions: GridOptions) {
     const reportByColumn = FilterConfig.gridColumns.reportBy;
     gridOptions.bodyRows.forEach(row => {
-      for (const column of row.Columns) {
-        if (column.Name === reportByColumn.value) {
-          const customAttribute = JSON.parse(row.CustomAttr) as RowCustomAttribute;
+      for (const column of row.columns) {
+        if (column.name === reportByColumn.value) {
+          const customAttribute = JSON.parse(row.customAttr) as RowCustomAttribute;
           const userName = customAttribute.ReportBy;
-          column.Value = `<a href="javascript:;" drill-down-user-name user-name='${userName}'>${userName}</a>`;
+          column.value = `<a href="javascript:;" drill-down-user-name user-name='${userName}'>${userName}</a>`;
         }
       }
     });
@@ -375,9 +375,9 @@ export class UserNameComponent implements OnInit, ModeGenerate {
 
   private updateGrandTotalCell(gridOptions: GridOptions) {
     const row = gridOptions.footerRows[0];
-    const column = row.Columns[0];
-    const value = column.Value;
-    column.Value = `<a href="javascript:;" grand-total>${value}</a>`;
+    const column = row.columns[0];
+    const value = column.value;
+    column.value = `<a href="javascript:;" grand-total>${value}</a>`;
   }
 
   private excel(queryModel: UserNameQueryModel) {

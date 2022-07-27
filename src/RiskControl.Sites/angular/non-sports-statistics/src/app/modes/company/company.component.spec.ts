@@ -1,5 +1,5 @@
 ﻿import { DebugElement } from '@angular/core';
-import { TestBed, ComponentFixture, fakeAsync, tick, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
@@ -163,7 +163,7 @@ describe('CompanyComponent', () => {
     });
 
     describe('back', () => {
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             const fakeModeContext = {
                 filterModel: fakeFilterModelWithSitesNotAll,
                 gridModel: fakeGridModel,
@@ -288,7 +288,7 @@ describe('CompanyComponent', () => {
 
                 it('should invoke queryGrandTotal when clicking element', () => {
                     const fakeGrandTotalGridOptions: GridOptions = {
-                        TitleInfoText: '123',
+                        titleInfoText: '123',
                         bodyRowHeight: undefined,
                         gridExpandHeight: undefined,
                         bodyRows: undefined,

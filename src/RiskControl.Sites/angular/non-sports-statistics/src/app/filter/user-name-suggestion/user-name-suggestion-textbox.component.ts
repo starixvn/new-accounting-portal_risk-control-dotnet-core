@@ -12,7 +12,7 @@ import { UserNameSuggestionComponent } from './user-name-suggestion.component';
 export class UserNameSuggestionTextboxComponent {
     @Input() roleId: RoleId;
     @Output() complete = new EventEmitter<string[]>();
-    @ViewChild('suggestion') suggestionComponent: UserNameSuggestionComponent;
+    @ViewChild('suggestion', { static: true }) suggestionComponent: UserNameSuggestionComponent;
     text: string;
     isOpen = false;
 

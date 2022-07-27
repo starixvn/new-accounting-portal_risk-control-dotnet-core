@@ -5,7 +5,6 @@ import { ModalContext, ModalService } from 'components/modal';
 import { GridModalComponent } from 'components/grid-modal';
 import { GridContext } from 'components/grid';
 import { UserNameQueryModel } from '../user-name';
-import { FilterConfig } from '../../filter';
 import { AssociatedAccountService } from './associated-account.service';
 
 @Component({
@@ -48,7 +47,7 @@ export class AssociatedAccountComponent {
             gridOptions.fullHeight = false;
             gridOptions.gridHeight = 500;
             gridOptions.titleInfo = {
-                text: gridOptions.TitleInfoText,
+                text: gridOptions.titleInfoText,
                 showExcelButton: true,
                 exportExcelFunction: () => this.exportExcelAssociatedAccounts(grandTotalQueryModel)
             };
@@ -60,7 +59,7 @@ export class AssociatedAccountComponent {
         gridOptions.fullHeight = false;
         gridOptions.gridHeight = 500;
         gridOptions.titleInfo = {
-            text: gridOptions.TitleInfoText,
+            text: gridOptions.titleInfoText,
             showExcelButton: true,
             exportExcelFunction: () => this.exportExcelAssociatedAccounts(queryModel)
         };
@@ -75,9 +74,9 @@ export class AssociatedAccountComponent {
 
     private updateGrandTotal(gridOptions: GridOptions) {
         const row = gridOptions.footerRows[0];
-        const column = row.Columns[0];
-        const value = column.Value;
-        column.Value = `<a href="javascript:;" grand-total>${value}</a>`;
+        const column = row.columns[0];
+        const value = column.value;
+        column.value = `<a href="javascript:;" grand-total>${value}</a>`;
     }
 
     private exportExcelAssociatedAccounts(queryModel: UserNameQueryModel) {

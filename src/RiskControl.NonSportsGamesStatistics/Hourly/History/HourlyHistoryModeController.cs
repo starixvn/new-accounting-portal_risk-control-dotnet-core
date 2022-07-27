@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Hourly.History
 {
+    [ApiController]
     [Route("NonSportsGamesStatistics/HourlyHistory")]
     [ValidationActionFilterAttribute]
     public class HourlyHistoryModeController : ControllerBase

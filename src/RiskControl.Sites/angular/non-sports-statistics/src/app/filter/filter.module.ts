@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { TreeviewModule } from 'ngx-treeview';
-import { NumericTextboxModule } from 'ngx-numeric-textbox';
+import { NumericTextboxModule } from 'nap-components/numeric-textbox';
 import { DropdownTypeaheadModule } from 'nap-components/dropdown-typeahead';
 import { DropdownSelectModule } from 'nap-components/dropdown-select';
 import { HttpModule } from 'nap-components/http';

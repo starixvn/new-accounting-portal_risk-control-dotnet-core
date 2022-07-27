@@ -22,7 +22,7 @@ import { HousePositionTakingService } from './house-position-taking.service';
     ]
 })
 export class HousePositionTakingModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<HousePositionTakingModule> {
         return {
             ngModule: HousePositionTakingModule,
             providers: [

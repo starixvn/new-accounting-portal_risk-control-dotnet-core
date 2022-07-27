@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.HousePositionTaking
 {
+    [ApiController]
     [Route("NonSportsGamesStatistics/HousePostitionTaking")]
     public class HousePostitionTakingController : ControllerBase
     {

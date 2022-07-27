@@ -21,7 +21,7 @@ export class GridComponent implements OnInit, OnChanges {
     @Input() options: GridOptions;
     @Input() context: GridContext;
     @Output() afterGenerate = new EventEmitter<ElementRef>();
-    @ViewChild('grid') grid: ElementRef;
+    @ViewChild('grid', { static: true }) grid: ElementRef;
 
     constructor(
         private readonly gridService: GridService,

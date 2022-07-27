@@ -1,10 +1,10 @@
 ﻿import { Injectable } from '@angular/core';
-import { DateHelper, DateFormat } from 'nap-components/date';
 import { Helper } from 'nap-components/helper';
 import { ReportType, FilterModel, FilterHelper } from '../../filter';
 import { BaseQueryModel, QueryModel, NormalCriteria, HistoryCriteria } from '../../app.model';
 import { ModeContext } from '../mode-context';
 import { TitleService } from './title.service';
+import { DATE_CONFIG } from 'app/common';
 
 @Injectable()
 export class ModelService {
@@ -16,14 +16,14 @@ export class ModelService {
     createCriteria(filterModel: FilterModel): NormalCriteria | HistoryCriteria {
         if (filterModel.isNormalMode) {
             return {
-                winlostDate: DateHelper.formatMomentDate(filterModel.startDate, DateFormat.Date),
+                winlostDate: filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
                 housePTType: filterModel.housePTType,
                 housePTValue: filterModel.housePTValue
             };
         } else {
             return {
-                fromDate: DateHelper.formatMomentDate(filterModel.startDate, DateFormat.Date),
-                toDate: DateHelper.formatMomentDate(filterModel.endDate, DateFormat.Date)
+                fromDate: filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
+                toDate: filterModel.endDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD)
             };
         }
     }
