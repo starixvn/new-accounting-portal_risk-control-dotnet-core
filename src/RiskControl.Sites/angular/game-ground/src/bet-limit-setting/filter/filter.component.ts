@@ -27,9 +27,9 @@ export class FilterComponent implements OnInit {
 
   ngOnInit() {
     this.filterService.queryProductGameTypes().subscribe(productGameTypes => {
-      const products = _.uniqBy(productGameTypes, 'ProductId', 'ProductName');
+      const products = _.uniqBy(productGameTypes, 'productId', 'productName');
       this.allProductGameTypes = productGameTypes;
-      this.selectedProducts = _.map(products, product => product.ProductId);
+      this.selectedProducts = _.map(products, product => product.productId);
       this.search();
     });
   }

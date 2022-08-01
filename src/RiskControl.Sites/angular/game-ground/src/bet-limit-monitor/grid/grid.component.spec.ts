@@ -7,13 +7,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpModule } from 'nap-components/http';
 import { NumberFormatModule } from 'nap-components/number-format';
 import { PaginationModule, PaginationConfig } from 'nap-components/pagination';
-import {
-  TestBed,
-  async,
-  ComponentFixture,
-  fakeAsync,
-  tick
-} from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, waitForAsync as  } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -34,7 +28,7 @@ describe('GridComponent', () => {
   let gridServiceQuerySpy: jasmine.Spy;
   let gridServiceExportExcelSpy: jasmine.Spy;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,

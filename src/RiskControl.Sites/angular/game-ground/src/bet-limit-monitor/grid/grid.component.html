@@ -59,26 +59,26 @@
           <tbody>
             <tr *ngFor="let item of displayedModels">
               <td class="text-center">
-                {{ item.Index }}
+                {{ item.index }}
               </td>
               <td class="text-center">
-                {{ item.ProductName }}
+                {{ item.productName }}
               </td>
               <td class="text-center">
-                {{ item.BetTypeName }}
+                {{ item.betTypeName }}
               </td>
               <td class="text-center">
-                {{ item.GameRound }}
+                {{ item.gameRound }}
               </td>
               <td
                 class="text-right"
-                [napIntegerFormat]="item.GameRoundBetLimit"
+                [napIntegerFormat]="item.gameRoundBetLimit"
               ></td>
-              <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
-              <td class="text-right" [napIntegerFormat]="item.NoOfPlayers"></td>
-              <td class="text-right" [napIntegerFormat]="item.TotalStake"></td>
+              <td class="text-right" [napIntegerFormat]="item.betCount"></td>
+              <td class="text-right" [napIntegerFormat]="item.noOfPlayers"></td>
+              <td class="text-right" [napIntegerFormat]="item.totalStake"></td>
               <td class="text-center">
-                {{ item.ReachedLimitTime | date: "MM/dd/yyyy hh:mm:ss aa" }}
+                {{ item.reachedLimitTime | date: "MM/dd/yyyy hh:mm:ss aa" }}
               </td>
             </tr>
           </tbody>

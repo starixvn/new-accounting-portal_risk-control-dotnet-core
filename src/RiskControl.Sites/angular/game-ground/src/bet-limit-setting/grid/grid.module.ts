@@ -7,7 +7,7 @@ import { BreadcrumbModule } from 'nap-components/breadcrumb';
 import { ConfirmationModule } from 'nap-components/confirmation';
 import { NoteModule } from 'nap-components/note';
 import { GridComponent } from './grid.component';
-import { NumericTextboxModule } from 'ngx-numeric-textbox';
+import { NumericTextboxModule } from 'nap-components/numeric-textbox';
 @Injectable()
 @NgModule({
   imports: [

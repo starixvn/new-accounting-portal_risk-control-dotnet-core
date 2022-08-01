@@ -5,7 +5,7 @@ button {
 }
 
 .game-round-bet-limit {
-    ngx-numeric-textbox {
+    nap-ngx-numeric-textbox {
         float: left;
         width: 195px;
     }
@@ -15,5 +15,11 @@ button {
         width: 40px;
         padding-left: 10px;
         line-height: 25px;
+    }
+}
+
+div.nap-grid {
+    div.body {
+        overflow-x: hidden;
     }
 }

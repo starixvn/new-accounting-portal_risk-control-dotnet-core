@@ -1,8 +1,8 @@
 export interface SettingModel {
-  ProductId: number;
-  SportType: number;
-  BetType: number;
-  ProductName: string;
-  BetTypeName: string;
-  GameRoundBetLimit: number;
+  productId: number;
+  sportType: number;
+  betType: number;
+  productName: string;
+  betTypeName: string;
+  gameRoundBetLimit: number;
 }

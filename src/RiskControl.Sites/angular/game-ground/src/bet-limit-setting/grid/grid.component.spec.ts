@@ -5,13 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from 'nap-components/http';
 import { NumberFormatModule } from 'nap-components/number-format';
-import {
-  TestBed,
-  async,
-  ComponentFixture,
-  fakeAsync,
-  tick
-} from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, waitForAsync as  } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -19,7 +13,7 @@ import 'rxjs/add/observable/of';
 import { expect } from '../../testing';
 import { GridService } from './grid.service';
 import { SettingModel } from './grid.model';
-import { NumericTextboxModule } from 'ngx-numeric-textbox';
+import { NumericTextboxModule } from 'nap-components/numeric-textbox';
 import { NoteModule } from 'nap-components/note';
 import { ConfirmationModule } from 'nap-components/confirmation';
 import { ToastService, MessageType } from 'nap-components/toast';
@@ -32,7 +26,7 @@ describe('GridComponent', () => {
   let gridServiceHostSpy: jasmine.Spy;
   let gridServiceUpdateSpy: jasmine.Spy;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,

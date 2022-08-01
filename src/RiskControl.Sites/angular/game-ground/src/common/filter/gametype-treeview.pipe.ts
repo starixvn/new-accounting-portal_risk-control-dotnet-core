@@ -22,19 +22,19 @@ export class GametypeTreeviewPipe implements PipeTransform {
 
     products.forEach(product => {
       const productGameTypes = allProductGameTypes.filter(
-        gameType => gameType.ProductId === product
+        gameType => gameType.productId === product
       );
 
       const treeItem = new TreeviewItem({
-        text: productGameTypes[0].ProductName,
-        value: productGameTypes[0].ProductId
+        text: productGameTypes[0].productName,
+        value: productGameTypes[0].productId
       });
 
       if (productGameTypes.length > 0) {
         treeItem.children = productGameTypes.map(gameType => {
           const item = new TreeviewItem({
-            text: gameType.BettypeName,
-            value: gameType.Bettype
+            text: gameType.bettypeName,
+            value: gameType.bettype
           });
           return item;
         });

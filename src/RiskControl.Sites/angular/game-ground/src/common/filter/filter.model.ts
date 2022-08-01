@@ -8,10 +8,10 @@ export interface GameType {
 }
 
 export interface ProductGameType {
-  ProductId: number;
-  ProductName: string;
-  Bettype: number;
-  BettypeName: string;
+  productId: number;
+  productName: string;
+  bettype: number;
+  bettypeName: string;
 }
 
 const AllProducts: { [Id: number]: string } = {};

@@ -13,7 +13,7 @@ export class ProductTreeviewPipe implements PipeTransform {
       return undefined;
     }
 
-    const products = _.uniqBy(allProductGameTypes, 'ProductId', 'ProductName');
+    const products = _.uniqBy(allProductGameTypes, 'productId', 'productName');
     const items: TreeviewItem[] = [];
 
     if (_.isNil(products)) {
@@ -22,8 +22,8 @@ export class ProductTreeviewPipe implements PipeTransform {
 
     products.forEach(product => {
       const treeItem = new TreeviewItem({
-        text: product.ProductName,
-        value: product.ProductId
+        text: product.productName,
+        value: product.productId
       });
 
       items.push(treeItem);

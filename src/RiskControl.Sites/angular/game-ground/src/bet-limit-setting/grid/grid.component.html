@@ -36,22 +36,22 @@
                 {{ i + 1 }}
               </td>
               <td class="text-center">
-                {{ item.ProductName }}
+                {{ item.productName }}
               </td>
               <td class="text-center">
-                {{ item.BetTypeName }}
+                {{ item.betTypeName }}
               </td>
               <td class="game-round-bet-limit">
-                <ngx-numeric-textbox
+                <nap-ngx-numeric-textbox
                   [min]="0"
                   [max]="1000000000"
                   [decimals]="0"
                   [autoCorrect]="true"
                   [format]="'0,0'"
                   [disabled]="!hasHostPermission"
-                  [(ngModel)]="item.GameRoundBetLimit"
+                  [(ngModel)]="item.gameRoundBetLimit"
                 >
-                </ngx-numeric-textbox>
+                </nap-ngx-numeric-textbox>
                 <span>(RM)</span>
               </td>
             </tr>

@@ -64,7 +64,7 @@ export class GridComponent implements OnChanges, OnInit {
     for (let i = 0; i < this.displayModels.length; i++) {
       const displayModel = this.displayModels[i];
       const settingModel = this.settingModels[i];
-      if (displayModel.GameRoundBetLimit !== settingModel.GameRoundBetLimit) {
+      if (displayModel.gameRoundBetLimit !== settingModel.gameRoundBetLimit) {
         modifiedSettings.push(displayModel);
       }
     }

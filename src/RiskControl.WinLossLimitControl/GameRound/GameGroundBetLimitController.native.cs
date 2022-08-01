@@ -8,6 +8,7 @@ using RiskControl.WinLossLimitControl.Services;
 using System.Threading.Tasks;
 namespace RiskControl.WinLossLimitControl.GameRound
 {
+    [ApiController]
     public class GameRoundBetLimitController : ControllerBase
     {
         private readonly IMediator mediator;

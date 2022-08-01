@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using RiskControl.WinLossLimitControl.FileDownload;
 using RiskControl.WinLossLimitControl.Filter;
+using RiskControl.WinLossLimitControl.GameRound;
 using RiskControl.WinLossLimitControl.Monitor.Parser;
 using RiskControl.WinLossLimitControl.Monitor.Unblock;
 using RiskControl.WinLossLimitControl.PlayerSettings.Insert;
@@ -16,6 +18,11 @@ namespace RiskControl.Sites.DependencyInjections
     {
         public static void RegisterWinLimitControlServices(this IServiceCollection service)
         {
+            service.AddMediatR(typeof(FilterHandler).Assembly);
+            service.AddMediatR(typeof(BetLimitSettingUpdateHandler).Assembly);
+            service.AddMediatR(typeof(BetLimitSettingQueryHandler).Assembly);
+            service.AddMediatR(typeof(BetLimitMonitorQueryHandler).Assembly);
+            service.AddMediatR(typeof(BetLimitMonitorQueryExcelHandler).Assembly);
             service.AddTransient<AuthorizationService, AuthorizationServiceImp>();
             service.AddTransient<IncreamentedSeriesContrainService, IncreamentedSeriesContrainServiceImp>();
             service.AddTransient<DataTransformService, DataTransformServiceImp>();

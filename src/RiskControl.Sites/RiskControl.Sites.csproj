@@ -54,7 +54,9 @@
     <Content Include="App_Data\DBWH.bodb_dwrs.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\GameRound\Monitor.xlsx" />
+    <Content Include="Templates\GameRound\Monitor.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\NonSport\HourlyTemplate.xlsx" />
     <Content Include="Templates\NonSport\Template.xlsx" />
     <Content Include="Templates\NonSport\ViewByIntegerHourlyTemplate.xlsx" />

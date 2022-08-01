@@ -1,11 +1,11 @@
 export interface MonitorModel {
-    Index: number;
-    ProductName: string;
-    BetTypeName: string;
-    GameRound: string;
-    GameRoundBetLimit: number;
-    BetCount: number;
-    NoOfPlayers: number;
-    TotalStake: number;
-    ReachedLimitTime: Date;
+    index: number;
+    productName: string;
+    betTypeName: string;
+    gameRound: string;
+    gameRoundBetLimit: number;
+    betCount: number;
+    noOfPlayers: number;
+    totalStake: number;
+    reachedLimitTime: Date;
 }

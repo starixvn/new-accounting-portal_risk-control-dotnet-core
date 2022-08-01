@@ -22,7 +22,7 @@ export class GridService {
     return this.httpService
       .post<SettingModel[]>(url, queryModel)
       .map(settings => {
-        return _.sortBy(settings, ['ProductName', 'BetTypeName']);
+        return _.sortBy(settings, ['productName', 'betTypeName']);
       });
   }
 
