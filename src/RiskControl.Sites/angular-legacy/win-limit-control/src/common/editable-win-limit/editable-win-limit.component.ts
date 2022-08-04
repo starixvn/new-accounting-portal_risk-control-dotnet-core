@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
+// @ts-nocheck
+import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import * as _ from 'lodash';
 import { WinLimitTextboxComponent } from '../win-limit-textbox';
 
@@ -6,7 +7,7 @@ import { WinLimitTextboxComponent } from '../win-limit-textbox';
     selector: 'nap-editable-win-limit',
     templateUrl: './editable-win-limit.component.html'
 })
-export class EditableWinLimitComponent extends WinLimitTextboxComponent implements OnInit {
+export class EditableWinLimitComponent extends WinLimitTextboxComponent implements AfterViewInit {
     @Input() editable = true;
     @ViewChild('winLimitTextbox') winLimitTextbox: WinLimitTextboxComponent;
     @Output() edit = new EventEmitter();
@@ -24,7 +25,7 @@ export class EditableWinLimitComponent extends WinLimitTextboxComponent implemen
         return this.winLimitTextbox ? this.winLimitTextbox.invalid : false;
     }
 
-    ngOnInit() {
+    ngAfterViewInit() {
         this.winLimitTextbox.numericTextboxComponent.enter.subscribe(() => this.onEnter());
         this.winLimitTextbox.numericTextboxComponent.escape.subscribe(() => this.onEscape());
     }
@@ -36,7 +37,7 @@ export class EditableWinLimitComponent extends WinLimitTextboxComponent implemen
 
         this.isEdit = true;
         setTimeout(() => {
-            this.winLimitTextbox.numericTextboxComponent.focus();
+            this.winLimitTextbox.numericTextboxComponent.focusInput();
         });
         this.edit.emit();
     }
@@ -57,13 +58,13 @@ export class EditableWinLimitComponent extends WinLimitTextboxComponent implemen
         if (!_.isNil(this.value)) {
             this.isEmitted = true;
             this.complete.emit(this.value);
-            this.winLimitTextbox.numericTextboxComponent.blur();
+            this.winLimitTextbox.numericTextboxComponent.blurInput();
         }
     }
 
     private onEscape() {
         this.isEmitted = true;
         this.complete.emit();
-        this.winLimitTextbox.numericTextboxComponent.blur();
+        this.winLimitTextbox.numericTextboxComponent.blurInput();
     }
 }

@@ -25,19 +25,19 @@
     </button>
 </div>
 <div class="modal-body">
-    <div class="filter-container" [ngStyle]="{'width.px': width}">
+    <div class="nap-filter" [ngStyle]="{'width.px': width}">
         <div class="row">
-            <div class="col-nap">
-                <div class="group-nap">
+            <div class="nap-col">
+                <div class="nap-group pl-3">
                     <label>Show Column</label>
-                    <div class="control-nap">
+                    <div class="nap-control">
                         <ngx-dropdown-treeview class="treeview-button-ellipsis" [items]="columnTreeviewItems" (selectedChange)="onColumnChange($event)"></ngx-dropdown-treeview>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="grid" [ngSwitch]="historyModels.length > 0">
+    <div class="nap-grid" [ngSwitch]="historyModels.length > 0">
         <div [ngStyle]="{'width.px': width}">
             <div class="header">
                 <table>
@@ -75,38 +75,38 @@
                             <td *ngIf="columns.no.checked" class="text-center">
                                 {{ i + 1 }}
                             </td>
-                            <td *ngIf="columns.date.checked" class="text-center">{{item.ModifiedDate | date:'MM/dd/yyyy HH:mm:ss a'}}</td>
-                            <td *ngIf="columns.settingGroup.checked">{{item.GroupName}}</td>
-                            <td *ngIf="columns.lossLimitLevel.checked" class="number number-limit" [napNumberStyle]="item.BlackLimit">
-                                {{item.BlackLimit | napHistoryLimitPipe:item.ActionName}}
+                            <td *ngIf="columns.date.checked" class="text-center">{{item.modifiedDate | date:'MM/dd/yyyy HH:mm:ss a'}}</td>
+                            <td *ngIf="columns.settingGroup.checked">{{item.groupName}}</td>
+                            <td *ngIf="columns.lossLimitLevel.checked" class="number number-limit" [napNumberStyle]="item.blackLimit">
+                                {{item.blackLimit | napHistoryLimitPipe:item.actionName}}
                             </td>
-                            <td *ngIf="columns.lossLimitLevel.checked" class="number number-limit" [napNumberStyle]="item.GreyLimit">
-                                {{item.GreyLimit | napHistoryLimitPipe:item.ActionName}}
+                            <td *ngIf="columns.lossLimitLevel.checked" class="number number-limit" [napNumberStyle]="item.greyLimit">
+                                {{item.greyLimit | napHistoryLimitPipe:item.actionName}}
                             </td>
-                            <td *ngIf="columns.winLimitLevel.checked" class="number number-limit" [napNumberStyle]="item.OrangeLimit">
-                                {{item.OrangeLimit | napHistoryLimitPipe:item.ActionName}}
+                            <td *ngIf="columns.winLimitLevel.checked" class="number number-limit" [napNumberStyle]="item.orangeLimit">
+                                {{item.orangeLimit | napHistoryLimitPipe:item.actionName}}
                             </td>
-                            <td *ngIf="columns.winLimitLevel.checked" class="number number-limit" [napNumberStyle]="item.YellowLimit">
-                                {{item.YellowLimit | napHistoryLimitPipe:item.ActionName}}
+                            <td *ngIf="columns.winLimitLevel.checked" class="number number-limit" [napNumberStyle]="item.yellowLimit">
+                                {{item.yellowLimit | napHistoryLimitPipe:item.actionName}}
                             </td>
-                            <td *ngIf="columns.winLimitLevel.checked" class="number number-limit" [napNumberStyle]="item.RedLimit">
-                                {{item.RedLimit | napHistoryLimitPipe:item.ActionName}}
+                            <td *ngIf="columns.winLimitLevel.checked" class="number number-limit" [napNumberStyle]="item.redLimit">
+                                {{item.redLimit | napHistoryLimitPipe:item.actionName}}
                             </td>
-                            <td *ngIf="columns.winningLosingAmountRM.checked" class="number" [napNumberStyle]="item.WinningAmountRM">
-                                {{item.WinningAmountRM | napFloorPipe | napHistoryLimitPipe:item.ActionName}}
+                            <td *ngIf="columns.winningLosingAmountRM.checked" class="number" [napNumberStyle]="item.winningAmountRM">
+                                {{item.winningAmountRM | napFloorPipe | napHistoryLimitPipe:item.actionName}}
                             </td>
-                            <td *ngIf="columns.winningLosingAmountInPlayerCurrency.checked" class="number" [napNumberStyle]="item.WinningAmount">
-                                {{item.WinningAmount | napFloorPipe | napHistoryLimitPipe:item.ActionName}}
+                            <td *ngIf="columns.winningLosingAmountInPlayerCurrency.checked" class="number" [napNumberStyle]="item.winningAmount">
+                                {{item.winningAmount | napFloorPipe | napHistoryLimitPipe:item.actionName}}
                             </td>
                             <td *ngIf="columns.reachedLimitLevel.checked" class="text-center">
-                                <i class="fa fa-flag fa-lg" [ngClass]="item.ReachedLimitLevel | napFlagPipe" aria-hidden="true"></i>
+                                <i class="fa fa-flag fa-lg" [ngClass]="item.reachedLimitLevel | napFlagPipe" aria-hidden="true"></i>
                             </td>
-                            <td *ngIf="columns.action.checked" class="word-break-all">{{item.ActionName}}</td>
-                            <td *ngIf="columns.proceededBy.checked" class="word-break-all">{{item.ProceededBy}}</td>
+                            <td *ngIf="columns.action.checked" class="word-break-all">{{item.actionName}}</td>
+                            <td *ngIf="columns.proceededBy.checked" class="word-break-all">{{item.proceededBy}}</td>
                             <td *ngIf="columns.isNotified.checked" class="text-center">
-                                <input class="test-unblock-transfer" type="checkbox" [disabled]="!hasHostPermission || !item.IsNotified"
-                                    [checked]="item.IsNotified" (click)="onUncheckNotification(item)" /></td>
-                            <td *ngIf="columns.logID.checked" class="word-break-all">{{item.LogID}}</td>
+                                <input class="test-unblock-transfer" type="checkbox" [disabled]="!hasHostPermission || !item.isNotified"
+                                    [checked]="item.isNotified" (click)="onUncheckNotification(item)" /></td>
+                            <td *ngIf="columns.logID.checked" class="word-break-all">{{item.logID}}</td>
                         </tr>
                     </tbody>
                 </table>

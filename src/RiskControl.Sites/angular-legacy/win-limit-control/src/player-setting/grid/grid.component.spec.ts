@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { DebugElement, Component, EventEmitter } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -32,9 +32,9 @@ class TestComponent {
 }
 
 let hostPermission: HostPermission = {
-    PlayerWinLimitManagement: true,
-    CurrencyWinLimitSetting: true,
-    WinLimitMonitor: true
+    playerWinLimitManagement: true,
+    currencyWinLimitSetting: true,
+    winLimitMonitor: true
 };
 let hasHostPermissionSpyCount = 0;
 class AuthorizationServiceStub extends AuthorizationService {
@@ -71,7 +71,7 @@ class GridServiceStub extends GridService {
     delete(deleteCommand: DeleteCommand): Observable<CommandResult> {
         deleteSpyCount++;
         const commandResult: CommandResult = {
-            ErrorCode: deleteErrorCode
+            errorCode: deleteErrorCode
         };
         return Observable.of(commandResult);
     }
@@ -79,7 +79,7 @@ class GridServiceStub extends GridService {
     update(updateCommand: UpdateCommand): Observable<CommandResult> {
         updateSpyCount++;
         const commandResult: CommandResult = {
-            ErrorCode: updateErrorCode
+            errorCode: updateErrorCode
         };
         return Observable.of(commandResult);
     }
@@ -196,9 +196,9 @@ describe('GridComponent', () => {
         describe('Product 2 with data and not have host permission', () => {
             beforeEach(fakeAsync(() => {
                 hostPermission = {
-                    PlayerWinLimitManagement: false,
-                    CurrencyWinLimitSetting: false,
-                    WinLimitMonitor: false
+                    playerWinLimitManagement: false,
+                    currencyWinLimitSetting: false,
+                    winLimitMonitor: false
                 };
                 querySpyCount = 0;
                 fakeFilterModel.productId = 2;
@@ -233,9 +233,9 @@ describe('GridComponent', () => {
         describe('Product 2 with data and have host permission', () => {
             beforeEach(fakeAsync(() => {
                 hostPermission = {
-                    PlayerWinLimitManagement: true,
-                    CurrencyWinLimitSetting: true,
-                    WinLimitMonitor: true
+                    playerWinLimitManagement: true,
+                    currencyWinLimitSetting: true,
+                    winLimitMonitor: true
                 };
                 querySpyCount = 0;
                 fakeFilterModel.productId = 2;

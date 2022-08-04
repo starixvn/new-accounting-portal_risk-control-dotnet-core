@@ -1,12 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/forkJoin';
+import { Observable } from 'rxjs';
+
 import * as _ from 'lodash';
-import * as moment from 'moment';
 import { TreeviewItem } from 'ngx-treeview';
 import { ToastService } from 'nap-components/toast';
 import { TypeaheadQuery } from 'nap-components/dropdown-typeahead';
-import { NgbDateStruct, NgbDate, DateHelper } from 'nap-components/date';
+import { NapDate } from 'nap-components/date';
 import { TableColumn, ColumnHelper } from '../common/column';
 import {
     Product, Currency, LimitLevel, Site, QueryCurrencyModel,
@@ -30,10 +29,10 @@ export class FilterComponent implements OnInit {
     productId: number;
     currencies: Currency[];
     currencyId: number;
-    fromDate: NgbDate;
-    toDate: NgbDate;
-    minDate: NgbDate;
-    maxDate: NgbDate;
+    fromDate: NapDate;
+    toDate: NapDate;
+    minDate: NapDate;
+    maxDate: NapDate;
     excludeTestData: boolean;
     limitLevels: TreeviewItem[];
     selectedLimitLevels: LimitLevel[];
@@ -51,10 +50,10 @@ export class FilterComponent implements OnInit {
         const lastYear = new Date();
         lastYear.setFullYear(lastYear.getFullYear() - 1);
 
-        this.fromDate = NgbDate.fromToday();
-        this.toDate = NgbDate.fromToday();
-        this.minDate = NgbDate.fromDate(lastYear);
-        this.maxDate = NgbDate.fromToday();
+        this.fromDate = NapDate.fromToday();
+        this.toDate = NapDate.fromToday();
+        this.minDate = NapDate.fromDate(lastYear);
+        this.maxDate = NapDate.fromToday();
         this.excludeTestData = true;
         this.userName = '';
         this.currencyId = 0;
@@ -83,7 +82,7 @@ export class FilterComponent implements OnInit {
     }
 
     onSiteSelectedChange() {
-        const isCreditSite = this.creditSites.filter(site => site.SiteId === this.siteId).length > 0;
+        const isCreditSite = this.creditSites.filter(site => site.siteId === this.siteId).length > 0;
         const currencyQueryModel: QueryCurrencyModel = {
             isCreditSite: isCreditSite,
             siteId: this.siteId
@@ -123,7 +122,7 @@ export class FilterComponent implements OnInit {
         const observable = this.filterService.queryProducts();
         observable.subscribe(products => {
             this.products = FilterHelper.insertProductAll(products);
-            this.productId = this.products[0].Id;
+            this.productId = this.products[0].id;
         });
         return observable;
     }
@@ -132,7 +131,7 @@ export class FilterComponent implements OnInit {
         const observable = this.filterService.queryCurrencies(currencyQueryModel);
         observable.subscribe(currencies => {
             this.currencies = FilterHelper.insertCurrencyAll(currencies);
-            this.currencyId = this.currencies[0].Id;
+            this.currencyId = this.currencies[0].id;
         });
         return observable;
     }
@@ -140,8 +139,8 @@ export class FilterComponent implements OnInit {
     private querySites(productId = AllProductId): Observable<any> {
         const observable = this.filterService.querySites(productId);
         observable.subscribe(siteGroups => {
-            const creditSiteGroups = siteGroups.filter(group => FilterHelper.isCreditSiteGroup(group.GroupName));
-            this.creditSites = creditSiteGroups.length === 1 ? creditSiteGroups[0].Sites : [];
+            const creditSiteGroups = siteGroups.filter(group => FilterHelper.isCreditSiteGroup(group.groupName));
+            this.creditSites = creditSiteGroups.length === 1 ? creditSiteGroups[0].sites : [];
             this.currencyId = 0;
             this.sites = FilterHelper.convertSiteToTreeviewItem(siteGroups);
         });

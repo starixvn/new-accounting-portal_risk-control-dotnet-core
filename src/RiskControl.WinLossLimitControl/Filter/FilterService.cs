@@ -17,6 +17,8 @@ namespace RiskControl.WinLossLimitControl.Filter
         Task<IEnumerable<SiteGroup>> GetSiteByProduct(GetSiteCriteria criteria);
 
         Task<IEnumerable<Customer>> SearchUsers(CustomerSuggestionCriteria criteria);
+
+        Task<IEnumerable<Group>> GetGroupByProduct(GetGroupCriteria criteria);
     }
 
     public class FilterServiceImp : FilterService
@@ -33,6 +35,11 @@ namespace RiskControl.WinLossLimitControl.Filter
         public async Task<IEnumerable<BaseEntity>> GetCurrencies(GetCurrencyCriteria criteria)
         {
             return await repository.FetchAsync<BaseEntity>(criteria);
+        }
+
+        public async Task<IEnumerable<Group>> GetGroupByProduct(GetGroupCriteria criteria)
+        {
+            return await repository.FetchAsync<Group>(criteria);
         }
 
         public IEnumerable<BaseEntity> GetProducts()

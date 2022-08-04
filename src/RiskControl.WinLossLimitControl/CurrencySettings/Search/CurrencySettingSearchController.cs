@@ -7,6 +7,7 @@ using RiskControl.Core.Model;
 
 namespace RiskControl.WinLossLimitControl.CurrencySettings.Search
 {
+    [ApiController]
     [Route("api/win-limit-control/currency-setting")]
     public class CurrencySettingSearchController : ControllerBase
     {

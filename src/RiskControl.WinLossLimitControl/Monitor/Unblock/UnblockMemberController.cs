@@ -7,6 +7,7 @@ using RiskControl.Core.Model;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Unblock
 {
+    [ApiController]
     [Route("state-api/win-limit-control/monitor")]
     public class UnblockMemberController : ControllerBase
     {

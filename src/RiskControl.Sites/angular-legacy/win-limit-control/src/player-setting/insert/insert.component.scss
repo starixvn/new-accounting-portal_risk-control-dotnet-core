@@ -1,6 +1,6 @@
 @import '~nap-theme/scss/filter';
 @import '~nap-theme/scss/grid';
-.col-nap {
+.nap-col {
     margin-right: 10px;
 }
 
@@ -11,5 +11,11 @@
     nap-loss-limit-textbox,
     nap-win-limit-textbox {
         padding-right: 3px;
+    }
+}
+
+.nap-grid {
+    div.body {
+        overflow-x: hidden;
     }
 }

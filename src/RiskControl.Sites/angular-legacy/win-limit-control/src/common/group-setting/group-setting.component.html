@@ -13,15 +13,15 @@
 <div class="modal-body">
     <ng-template ngFor let-hiddenSetting [ngForOf]="hiddenSettings">
         <div style="width: 520px">
-            <div class="grid">
+            <div class="nap-grid">
                 <div class="header stretch">
                     <table>
                         <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                         <thead>
                             <tr>
                                 <td colspan="2">
-                                    <i (click)="toggleHidden(hiddenSetting)" aria-hidden="true" class="fa" [ngClass]="{'fa-plus-square': hiddenSetting.hidden, 'fa-minus-square': !hiddenSetting.hidden}"></i>
-                                    <strong>{{ hiddenSetting.setting.ProductName }}</strong>
+                                    <i (click)="toggleHidden(hiddenSetting)" aria-hidden="true" class="mr-2 fa" [ngClass]="{'fa-plus-square': hiddenSetting.hidden, 'fa-minus-square': !hiddenSetting.hidden}"></i>
+                                    <strong>{{ hiddenSetting.setting.productName }}</strong>
                                 </td>
                             </tr>
                         </thead>
@@ -42,10 +42,10 @@
                     <table>
                         <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                         <tbody>
-                            <ng-template ngFor let-group [ngForOf]="hiddenSetting.setting.Groups">
-                                <ng-template ngFor let-betType [ngForOf]="group.BetTypes" let-isFirst="first">
+                            <ng-template ngFor let-group [ngForOf]="hiddenSetting.setting.groups">
+                                <ng-template ngFor let-betType [ngForOf]="group.betTypes" let-isFirst="first">
                                     <tr>
-                                        <td *ngIf="isFirst" class="text-center group-name" [attr.rowspan]="group.BetTypes.length">{{ group.GroupName }}</td>
+                                        <td *ngIf="isFirst" class="text-center group-name" [attr.rowspan]="group.betTypes.length">{{ group.groupName }}</td>
                                         <td>{{ betType }}</td>
                                     </tr>
                                 </ng-template>

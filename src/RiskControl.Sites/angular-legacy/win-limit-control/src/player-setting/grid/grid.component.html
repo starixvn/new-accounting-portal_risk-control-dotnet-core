@@ -22,7 +22,7 @@
     </div>
 </ng-template>
 <div *ngIf="playerCurrencySettings" [ngSwitch]="playerCurrencySettings.length > 0">
-    <div class="grid">
+    <div class="nap-grid">
         <div [ngStyle]="{'width.px': (hasHostPermission ? 1440 : 1370)}">
             <nap-breadcrumb *ngIf="hasHostPermission" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
             <div class="header">
@@ -55,20 +55,20 @@
                     <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                     <tbody>
                         <ng-template ngFor let-currencySetting [ngForOf]="playerCurrencySettings" let-i="index">
-                            <ng-template ngFor let-productSetting [ngForOf]="currencySetting.Products" let-isFirstCurrencySetting="first">
-                                <ng-template ngFor let-playerSetting [ngForOf]="productSetting.PlayerSettings" let-isFirstProductSetting="first">
+                            <ng-template ngFor let-productSetting [ngForOf]="currencySetting.products" let-isFirstCurrencySetting="first">
+                                <ng-template ngFor let-playerSetting [ngForOf]="productSetting.playerSettings" let-isFirstProductSetting="first">
                                     <tr napLossLimitValidator napWinLimitValidator #lossValidator="napLossLimitValidator" #winValidator="napWinLimitValidator">
-                                        <td *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.SettingCount" class="text-center">
+                                        <td *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.settingCount" class="text-center">
                                             {{ i + 1 }}
                                         </td>
-                                        <td class="word-break-all" *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.SettingCount">{{ currencySetting.Username }}</td>
-                                        <td class="word-break-all" *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.SettingCount">{{ currencySetting.SiteName }}</td>
-                                        <td class="word-break-all" *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.SettingCount">{{ currencySetting.CurrencyName }}</td>
-                                        <td class="word-break-all" *ngIf="isFirstProductSetting" [attr.rowspan]="productSetting.PlayerSettings.length">{{ productSetting.ProductName }}</td>
-                                        <td class="word-break-all"><span class="nap-link" (click)="showGroupSetting(productSetting.ProductName)"> {{ playerSetting.GroupName }}</span></td>
+                                        <td class="word-break-all" *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.settingCount">{{ currencySetting.username }}</td>
+                                        <td class="word-break-all" *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.settingCount">{{ currencySetting.siteName }}</td>
+                                        <td class="word-break-all" *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.settingCount">{{ currencySetting.currencyName }}</td>
+                                        <td class="word-break-all" *ngIf="isFirstProductSetting" [attr.rowspan]="productSetting.playerSettings.length">{{ productSetting.productName }}</td>
+                                        <td class="word-break-all"><span class="nap-link" (click)="showGroupSetting(productSetting.productName)"> {{ playerSetting.groupName }}</span></td>
                                         <td>
                                             <div class="limit-row">
-                                                <nap-editable-loss-limit #blackLossLimitTextbox [value]="playerSetting.BlackLimit" [editable]="hasHostPermission" (edit)="onEditLimit(blackLossLimitTextbox)"
+                                                <nap-editable-loss-limit #blackLossLimitTextbox [value]="playerSetting.blackLimit" [editable]="hasHostPermission" (edit)="onEditLimit(blackLossLimitTextbox)"
                                                     (complete)="saveBlackLimit(lossValidator.isValid, playerSetting, $event)">
                                                 </nap-editable-loss-limit>
                                                 <nap-exclamation #blackExclamation></nap-exclamation>
@@ -77,7 +77,7 @@
                                         </td>
                                         <td>
                                             <div class="limit-row">
-                                                <nap-editable-loss-limit #greyLossLimitTextbox [value]="playerSetting.GreyLimit" [editable]="hasHostPermission" (edit)="onEditLimit(greyLossLimitTextbox)"
+                                                <nap-editable-loss-limit #greyLossLimitTextbox [value]="playerSetting.greyLimit" [editable]="hasHostPermission" (edit)="onEditLimit(greyLossLimitTextbox)"
                                                     (complete)="saveGreyLimit(lossValidator.isValid, playerSetting, $event)">
                                                 </nap-editable-loss-limit>
                                                 <nap-exclamation #greyExclamation></nap-exclamation>
@@ -86,7 +86,7 @@
                                         </td>
                                         <td>
                                             <div class="limit-row">
-                                                <nap-editable-win-limit #orangeWinLimitTextbox [value]="playerSetting.OrangeLimit" [editable]="hasHostPermission" (edit)="onEditLimit(orangeWinLimitTextbox)"
+                                                <nap-editable-win-limit #orangeWinLimitTextbox [value]="playerSetting.orangeLimit" [editable]="hasHostPermission" (edit)="onEditLimit(orangeWinLimitTextbox)"
                                                     (complete)="saveOrangeLimit(winValidator.isValid, playerSetting, $event)">
                                                 </nap-editable-win-limit>
                                                 <nap-exclamation #orangeExclamation></nap-exclamation>
@@ -95,7 +95,7 @@
                                         </td>
                                         <td>
                                             <div class="limit-row">
-                                                <nap-editable-win-limit #yellowWinLimitTextbox [value]="playerSetting.YellowLimit" [editable]="hasHostPermission" (edit)="onEditLimit(yellowWinLimitTextbox)"
+                                                <nap-editable-win-limit #yellowWinLimitTextbox [value]="playerSetting.yellowLimit" [editable]="hasHostPermission" (edit)="onEditLimit(yellowWinLimitTextbox)"
                                                     (complete)="saveYellowLimit(winValidator.isValid, playerSetting, $event)">
                                                 </nap-editable-win-limit>
                                                 <nap-exclamation #yellowExclamation></nap-exclamation>
@@ -104,7 +104,7 @@
                                         </td>
                                         <td>
                                             <div class="limit-row">
-                                                <nap-editable-win-limit #redWinLimitTextbox [value]="playerSetting.RedLimit" [editable]="hasHostPermission" (edit)="onEditLimit(redWinLimitTextbox)"
+                                                <nap-editable-win-limit #redWinLimitTextbox [value]="playerSetting.redLimit" [editable]="hasHostPermission" (edit)="onEditLimit(redWinLimitTextbox)"
                                                     (complete)="saveRedLimit(winValidator.isValid, playerSetting, $event)">
                                                 </nap-editable-win-limit>
                                                 <nap-exclamation #redExclamation></nap-exclamation>

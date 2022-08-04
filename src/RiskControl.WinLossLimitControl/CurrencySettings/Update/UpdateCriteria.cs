@@ -4,49 +4,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
 {
     public class UpdateCriteria : CriteriaBase, INonQueryCommand
     {
-        private const int MostDangerousLevel = 3;
-
-        private bool isBlockedPlaceBet;
-
-        private bool isBlockedTransfer;
-
-        public int ProductId { get; set; }
-
-        public int GroupId { get; set; }
-
-        public int CurrencyId { get; set; }
-
-        public int SiteId { get; set; }
-
-        public int LevelId { get; set; }
-
-        public decimal MaxWinLimit { get; set; }
-
-        public bool IsBlockedPlaceBet
-        {
-            get
-            {
-                return LevelId == MostDangerousLevel && isBlockedPlaceBet;
-            }
-
-            set
-            {
-                isBlockedPlaceBet = value;
-            }
-        }
-
-        public bool IsBlockedTransfer
-        {
-            get
-            {
-                return LevelId == MostDangerousLevel && isBlockedTransfer;
-            }
-
-            set
-            {
-                isBlockedTransfer = value;
-            }
-        }
+        public string Xml { get; set; }
 
         public int UserId { get; set; }
 

@@ -1,5 +1,5 @@
-:host /deep/ {
-    ngx-numeric-textbox {
+:host ::ng-deep {
+    nap-ngx-numeric-textbox {
         &.win-limit-unlimited {
             input {
                 color: red;

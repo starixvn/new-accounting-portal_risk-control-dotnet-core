@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChildren, QueryList } from '@angular/core';
 import * as _ from 'lodash';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService, MessageType } from 'nap-components/toast';
@@ -52,7 +52,7 @@ export class InsertComponent implements OnInit {
     }
 
     this.insertHttpService.validateForInserting(this.username).subscribe(commandResult => {
-      switch (commandResult.ErrorCode) {
+      switch (commandResult.errorCode) {
         case 3:
           this.error = 'Invalid username';
           break;
@@ -107,7 +107,7 @@ export class InsertComponent implements OnInit {
 
   private internalSave(insertCommands: InsertCommand[]) {
     this.insertHttpService.insert(insertCommands).subscribe(commandResult => {
-      switch (commandResult.ErrorCode) {
+      switch (commandResult.errorCode) {
         case 1:
           // tslint:disable-next-line:max-line-length
           this.error = 'Please input Black level limit < Grey level limit <= 0 <= Orange level limit < Yellow level limit < Red level limit.';
@@ -127,20 +127,20 @@ export class InsertComponent implements OnInit {
   private getInsertCommands(playerCurrencySettings: PlayerCurrencySetting[]): InsertCommand[] {
     const insertCommands: InsertCommand[] = [];
     for (const currencySetting of playerCurrencySettings) {
-      for (const productSetting of currencySetting.Products) {
-        for (const playerSetting of productSetting.PlayerSettings) {
+      for (const productSetting of currencySetting.products) {
+        for (const playerSetting of productSetting.playerSettings) {
           if (this.isSettingModified(playerSetting)) {
             const insertCommand: InsertCommand = {
-              CustId: playerSetting.CustId,
-              CurrencyId: playerSetting.CurrencyId,
-              SiteId: playerSetting.SiteId,
-              ProductId: playerSetting.ProductId,
-              GroupId: playerSetting.GroupId,
-              BlackLimit: playerSetting.BlackLimit,
-              GreyLimit: playerSetting.GreyLimit,
-              OrangeLimit: playerSetting.OrangeLimit,
-              YellowLimit: playerSetting.YellowLimit,
-              RedLimit: playerSetting.RedLimit
+              custId: playerSetting.custId,
+              currencyId: playerSetting.currencyId,
+              siteId: playerSetting.siteId,
+              productId: playerSetting.productId,
+              groupId: playerSetting.groupId,
+              blackLimit: playerSetting.blackLimit,
+              greyLimit: playerSetting.greyLimit,
+              orangeLimit: playerSetting.orangeLimit,
+              yellowLimit: playerSetting.yellowLimit,
+              redLimit: playerSetting.redLimit
             };
             insertCommands.push(insertCommand);
           }
@@ -152,11 +152,11 @@ export class InsertComponent implements OnInit {
   }
 
   private isSettingModified(playerSetting: PlayerSetting): boolean {
-    const hasLimitDefined = !_.isNil(playerSetting.BlackLimit)
-      || !_.isNil(playerSetting.GreyLimit)
-      || !_.isNil(playerSetting.OrangeLimit)
-      || !_.isNil(playerSetting.YellowLimit)
-      || !_.isNil(playerSetting.RedLimit);
+    const hasLimitDefined = !_.isNil(playerSetting.blackLimit)
+      || !_.isNil(playerSetting.greyLimit)
+      || !_.isNil(playerSetting.orangeLimit)
+      || !_.isNil(playerSetting.yellowLimit)
+      || !_.isNil(playerSetting.redLimit);
 
     return hasLimitDefined;
   }

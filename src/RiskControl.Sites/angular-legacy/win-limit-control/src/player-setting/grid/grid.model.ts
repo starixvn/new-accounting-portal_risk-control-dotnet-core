@@ -1,45 +1,45 @@
 export interface PlayerCurrencySetting {
-    Username: string;
-    SiteName: string;
-    CurrencyName: string;
-    SettingCount?: number;
-    Products: PlayerProductSetting[];
+    username: string;
+    siteName: string;
+    currencyName: string;
+    settingCount?: number;
+    products: PlayerProductSetting[];
 }
 
 export interface PlayerProductSetting {
-    ProductName: string;
-    PlayerSettings: PlayerSetting[];
+    productName: string;
+    playerSettings: PlayerSetting[];
 }
 
 export interface PlayerSetting {
-    CustId: number;
-    Username: string;
-    SiteId: number;
-    SiteName: string;
-    CurrencyId: number;
-    CurrencyName: string;
-    ProductId: number;
-    ProductName: string;
-    GroupId: number;
-    GroupName: string;
-    BlackLimit: number;
-    GreyLimit: number;
-    OrangeLimit: number;
-    YellowLimit: number;
-    RedLimit: number;
-    HasCurrencySetting: boolean;
+    custId: number;
+    username: string;
+    siteId: number;
+    siteName: string;
+    currencyId: number;
+    currencyName: string;
+    productId: number;
+    productName: string;
+    groupId: number;
+    groupName: string;
+    blackLimit: number;
+    greyLimit: number;
+    orangeLimit: number;
+    yellowLimit: number;
+    redLimit: number;
+    hasCurrencySetting: boolean;
 }
 
 export interface DeleteCommand {
-    CustId: number;
-    ProductId: number;
-    GroupId: number;
+    custId: number;
+    productId: number;
+    groupId: number;
 }
 
 export interface UpdateCommand {
-    CustId: number;
-    ProductId: number;
-    GroupId: number;
-    LevelId: number;
-    Limit: number;
+    custId: number;
+    productId: number;
+    groupId: number;
+    levelId: number;
+    limit: number;
 }

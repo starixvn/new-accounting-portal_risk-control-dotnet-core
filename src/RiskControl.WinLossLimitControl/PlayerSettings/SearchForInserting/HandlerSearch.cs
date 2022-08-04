@@ -21,6 +21,7 @@ namespace RiskControl.WinLossLimitControl.PlayerSettings.SearchForInserting
             : base(cacheRefService, dataTransformService)
         {
             this.dynamicRepository = dynamicRepository;
+            this.mapper = mapper;
         }
 
         public async Task<List<PlayerSettingCurrency>> Handle(RequestSearch request, CancellationToken cancellationToken)

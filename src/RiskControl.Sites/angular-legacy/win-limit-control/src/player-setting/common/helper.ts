@@ -8,14 +8,14 @@ export const Helper = {
 
 function calculateSettingCountForCurrencyGroup(playerCurrencySettings: PlayerCurrencySetting[]) {
     for (const currencySetting of playerCurrencySettings) {
-        currencySetting.SettingCount = _.sumBy(currencySetting.Products, function (o) { return o.PlayerSettings.length; });
+        currencySetting.settingCount = _.sumBy(currencySetting.products, function (o) { return o.playerSettings.length; });
     }
 }
 
 function resetLimitValue(playerCurrencySettings: PlayerCurrencySetting[]) {
     for (const currencySetting of playerCurrencySettings) {
-        for (const product of currencySetting.Products) {
-            for (const playerSetting of product.PlayerSettings) {
+        for (const product of currencySetting.products) {
+            for (const playerSetting of product.playerSettings) {
                 resetPlayerSettingLimitValue(playerSetting);
             }
         }
@@ -23,9 +23,9 @@ function resetLimitValue(playerCurrencySettings: PlayerCurrencySetting[]) {
 }
 
 function resetPlayerSettingLimitValue(playerSetting: PlayerSetting) {
-    playerSetting.BlackLimit = null;
-    playerSetting.GreyLimit = null;
-    playerSetting.OrangeLimit = null;
-    playerSetting.YellowLimit = null;
-    playerSetting.RedLimit = null;
+    playerSetting.blackLimit = null;
+    playerSetting.greyLimit = null;
+    playerSetting.orangeLimit = null;
+    playerSetting.yellowLimit = null;
+    playerSetting.redLimit = null;
 }

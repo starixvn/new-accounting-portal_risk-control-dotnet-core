@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TreeviewItem } from 'ngx-treeview';
 import { TypeaheadQuery } from 'nap-components/dropdown-typeahead';
 import { FilterModel } from './filter.model';
-import { Product, SiteGroup, Currency, Site, QueryCurrencyModel, FilterService, FilterHelper } from '../../common/filter';
+import { Product, Currency, Site, QueryCurrencyModel, FilterService, FilterHelper } from '../../common/filter';
 
 @Component({
     selector: 'nap-filter',
@@ -37,7 +37,7 @@ export class FilterComponent implements OnInit {
         this.userNameTypeaheadQuery = this.filterService.createUserNameTypeaheadQuery();
         this.filterService.queryProducts().subscribe(products => {
             this.products = FilterHelper.insertProductAll(products);
-            this.productId = this.products[0].Id;
+            this.productId = this.products[0].id;
         });
         this.querySite();
         this.queryCurrencies(this.defaultCurrencyQueryModel);
@@ -51,7 +51,7 @@ export class FilterComponent implements OnInit {
     }
 
     onSiteSelectedChange() {
-        const isCreditSite = this.creditSites.filter(site => site.SiteId === this.siteId).length > 0;
+        const isCreditSite = this.creditSites.filter(site => site.siteId === this.siteId).length > 0;
         const currencyQueryModel: QueryCurrencyModel = {
             isCreditSite: isCreditSite,
             siteId: this.siteId
@@ -60,7 +60,6 @@ export class FilterComponent implements OnInit {
     }
 
     search() {
-        const productName = this.products.filter(product => product.Id === this.productId)[0].Name;
         const filterModel: FilterModel = {
             userName: this.userName,
             productId: this.productId,
@@ -72,8 +71,8 @@ export class FilterComponent implements OnInit {
 
     private querySite() {
         this.filterService.querySites(this.productId).subscribe(siteGroups => {
-            const creditSiteGroups = siteGroups.filter(group => FilterHelper.isCreditSiteGroup(group.GroupName));
-            this.creditSites = creditSiteGroups.length === 1 ? creditSiteGroups[0].Sites : [];
+            const creditSiteGroups = siteGroups.filter(group => FilterHelper.isCreditSiteGroup(group.groupName));
+            this.creditSites = creditSiteGroups.length === 1 ? creditSiteGroups[0].sites : [];
             this.sites = FilterHelper.convertSiteToTreeviewItem(siteGroups);
         });
     }
@@ -81,7 +80,7 @@ export class FilterComponent implements OnInit {
     private queryCurrencies(currencyQueryModel: QueryCurrencyModel) {
         this.filterService.queryCurrencies(currencyQueryModel).subscribe(currencies => {
             this.currencies = FilterHelper.insertCurrencyAll(currencies);
-            this.currencyId = this.currencies[0].Id;
+            this.currencyId = this.currencies[0].id;
         });
     }
 }

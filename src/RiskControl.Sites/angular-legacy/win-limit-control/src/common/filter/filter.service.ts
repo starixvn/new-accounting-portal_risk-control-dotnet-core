@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+
 import { TreeviewItem } from 'ngx-treeview';
 import { HttpService } from 'nap-components/http';
 import { TypeaheadQuery } from 'nap-components/dropdown-typeahead';
-import { LimitLevel, Product, SiteGroup, Currency, QueryCurrencyModel } from './filter.model';
+import { LimitLevel, Product, SiteGroup, Currency, QueryCurrencyModel, Group } from './filter.model';
 
 @Injectable()
 export class FilterService {
@@ -37,7 +37,7 @@ export class FilterService {
 
     queryUserName(term: string): Observable<string[]> {
         const url = `api/win-limit-control/filter/search-users?term=${term}`;
-        return this.httpService.get<string[]>(url, null, {
+        return this.httpService.post<string[]>(url, null, {
             noSpinner: true,
             noToast: true
         });
@@ -47,5 +47,10 @@ export class FilterService {
         return new TypeaheadQuery(term => {
             return this.queryUserName(term);
         });
+    }
+
+    queryGroups(productId: number): Observable<Group[]> {
+        const url = 'api/win-limit-control/filter/get-groups';
+        return this.httpService.post<Group[]>(url, { productId: productId });
     }
 }

@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { DebugElement, Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -46,7 +46,7 @@ let insertSpyCount = 0;
 class FakeInsertHttpService extends InsertHttpService {
     validateForInserting(username: string): Observable<CommandResult> {
         const commandResult: CommandResult = {
-            ErrorCode: validateForInsertingErrorCode
+            errorCode: validateForInsertingErrorCode
         };
         return Observable.of(commandResult);
     }
@@ -113,7 +113,7 @@ class FakeInsertHttpService extends InsertHttpService {
     insert(insertCommands: InsertCommand[]): Observable<CommandResult> {
         insertSpyCount++;
         const commandResult: CommandResult = {
-            ErrorCode: insertErrorCode
+            errorCode: insertErrorCode
         };
         return Observable.of(commandResult);
     }
@@ -130,7 +130,7 @@ describe('InsertComponent', () => {
     let component: InsertComponent;
     let page: Page;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 InsertModule

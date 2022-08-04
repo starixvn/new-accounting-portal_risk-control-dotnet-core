@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ViewChild } from '@angular/core';
-import { NumericTextboxComponent } from 'ngx-numeric-textbox';
+import { NumericTextboxComponent } from 'nap-components/numeric-textbox';
 
 @Component({
   selector: 'nap-loss-limit-textbox',
@@ -29,7 +29,7 @@ export class LossLimitTextboxComponent implements OnChanges {
   }
 
   focus() {
-    this.numericTextboxComponent.focus();
+    this.numericTextboxComponent.focusInput();
   }
 
   onBlur() {

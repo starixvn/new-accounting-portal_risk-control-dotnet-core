@@ -10,7 +10,7 @@ import { WinLimitValidatorDirective } from '../../common/win-limit-textbox';
 import { LossLimitValidatorDirective } from '../../common/loss-limit-textbox';
 import { AuthorizationService } from '../../common/authorization';
 import { FilterModel } from '../filter';
-import { ProductSetting, ProductSettingGroup } from './grid.model';
+import { ClickedAllPageModel, InactiveSite, ProductSetting, ProductSettingGroup } from './grid.model';
 import { GridService } from './grid.service';
 
 @Component({
@@ -37,7 +37,10 @@ export class GridComponent implements OnInit, OnChanges {
     isBlockedTransferRedLevel = false;
     productSettings: ProductSetting[];
     displayedProductSettings: ProductSetting[];
+    tempProductSettings: ProductSetting[];
     hasHostPermission: boolean;
+    isAllDisabledBlockedTransferRedLevel = true;
+    clickedAllPageModel = {} as ClickedAllPageModel;
     private paginatePipe: PaginatePipe;
 
     constructor(
@@ -67,43 +70,50 @@ export class GridComponent implements OnInit, OnChanges {
 
     applyBlackLimit() {
         if (!_.isNil(this.blackLimit)) {
-            this.populateGroupSetting(group => group.BlackLimit = this.blackLimit);
+            this.populateGroupSettingOnAllPage(group => group.blackLimit = this.blackLimit);
+            this.clickedAllPageModel.blackLimit = this.blackLimit;
         }
     }
 
     applyGreyLimit() {
         if (!_.isNil(this.greyLimit)) {
-            this.populateGroupSetting(group => group.GreyLimit = this.greyLimit);
+            this.populateGroupSettingOnAllPage(group => group.greyLimit = this.greyLimit);
+            this.clickedAllPageModel.greyLimit = this.greyLimit;
         }
     }
 
     applyOrangeLimit() {
         if (!_.isNil(this.orangeLimit)) {
-            this.populateGroupSetting(group => group.OrangeLimit = this.orangeLimit);
+            this.populateGroupSettingOnAllPage(group => group.orangeLimit = this.orangeLimit);
+            this.clickedAllPageModel.orangeLimit = this.orangeLimit;
         }
     }
 
     applyYellowLimit() {
         if (!_.isNil(this.yellowLimit)) {
-            this.populateGroupSetting(group => group.YellowLimit = this.yellowLimit);
+            this.populateGroupSettingOnAllPage(group => group.yellowLimit = this.yellowLimit);
+            this.clickedAllPageModel.yellowLimit = this.yellowLimit;
         }
     }
 
     applyRedLimit() {
         if (!_.isNil(this.redLimit)) {
-            this.populateGroupSetting(group => group.RedLimit = this.redLimit);
+            this.populateGroupSettingOnAllPage(group => group.redLimit = this.redLimit);
+            this.clickedAllPageModel.redLimit = this.redLimit;
         }
     }
 
     applyRedBlockPlacebet() {
-        this.populateGroupSetting(group => group.IsBlockedPlacebetRedLevel = this.isBlockedPlacebetRedLevel);
+        this.populateGroupSettingOnAllPage(group => group.isBlockedPlacebetRedLevel = this.isBlockedPlacebetRedLevel);
+        this.clickedAllPageModel.blockedPlaceBet = this.isBlockedPlacebetRedLevel;
     }
 
     applyRedBlockTransfer() {
-        this.populateGroupSetting(group => {
-            if (!group.IsCreditSite) {
-                group.IsBlockedTransferRedLevel = this.isBlockedTransferRedLevel;
+        this.populateGroupSettingOnAllPage(group => {
+            if (!group.isCreditSite) {
+                group.isBlockedTransferRedLevel = this.isBlockedTransferRedLevel;
             }
+            this.clickedAllPageModel.blockedTransfer = this.isBlockedTransferRedLevel;
         });
     }
 
@@ -152,8 +162,8 @@ export class GridComponent implements OnInit, OnChanges {
 
     onIsBlockedPlacebetRedLevelChange() {
         let isBlockedPlacebetRedLevel = true;
-        this.populateGroupSetting(group => {
-            if (isBlockedPlacebetRedLevel && !group.IsBlockedPlacebetRedLevel) {
+        this.populateGroupSettingOnAllPage(group => {
+            if (isBlockedPlacebetRedLevel && !group.isBlockedPlacebetRedLevel) {
                 isBlockedPlacebetRedLevel = false;
             }
         });
@@ -162,18 +172,27 @@ export class GridComponent implements OnInit, OnChanges {
 
     onIsBlockedTransferRedLevelChange() {
         let isBlockedTransferRedLevel = true;
-        this.populateGroupSetting(group => {
-            if (isBlockedTransferRedLevel && !group.IsBlockedTransferRedLevel) {
+        this.isAllDisabledBlockedTransferRedLevel = true;
+        this.populateGroupSettingOnAllPage(group => {
+            if (isBlockedTransferRedLevel && !group.isBlockedTransferRedLevel && !group.isCreditSite) {
                 isBlockedTransferRedLevel = false;
+            }
+            if (!group.isCreditSite) {
+                this.isAllDisabledBlockedTransferRedLevel = false;
             }
         });
         this.isBlockedTransferRedLevel = isBlockedTransferRedLevel;
+        if (this.isAllDisabledBlockedTransferRedLevel) {
+            this.isBlockedTransferRedLevel = false;
+        }
     }
 
     private search() {
         this.productSettings = undefined;
+        this.clickedAllPageModel = {} as ClickedAllPageModel;
         this.gridService.query(this.filterModel).subscribe(productSettings => {
             this.productSettings = productSettings;
+            this.tempProductSettings = _.cloneDeep(this.productSettings);
             this.paginationInstance = this.paginationService.createPaginationInstance(this.productSettings.length);
             this.onPageChange();
         });
@@ -181,8 +200,10 @@ export class GridComponent implements OnInit, OnChanges {
 
     private fetch() {
         const currentPage = this.paginationInstance.currentPage;
+        this.clickedAllPageModel = {} as ClickedAllPageModel;
         this.gridService.query(this.filterModel, { noToast: true }).subscribe(productSettings => {
             this.productSettings = productSettings;
+            this.tempProductSettings = _.cloneDeep(this.productSettings);
             this.paginationInstance = this.paginationService.createPaginationInstance(this.productSettings.length);
             this.paginationInstance.currentPage = currentPage;
             this.onPageChange();
@@ -191,7 +212,7 @@ export class GridComponent implements OnInit, OnChanges {
 
     private queryHostPermission() {
         this.authorizationService.getHostPermission().subscribe((result) => {
-            this.hasHostPermission = result.CurrencyWinLimitSetting;
+            this.hasHostPermission = result.currencyWinLimitSetting;
         });
     }
 
@@ -206,24 +227,25 @@ export class GridComponent implements OnInit, OnChanges {
     }
 
     private generateDisplayedProductSettings() {
-        const paginateProductSettings = this.paginatePipe.transform(this.productSettings, this.paginationInstance);
-        this.displayedProductSettings = _.cloneDeep(paginateProductSettings);
+        this.displayedProductSettings = this.paginatePipe.transform(this.tempProductSettings, this.paginationInstance);
     }
 
-    private populateGroupSetting(exec: (group: ProductSettingGroup) => void) {
+    private populateGroupSettingOnAllPage(exec: (group: ProductSettingGroup) => void) {
         this.displayedProductSettings.forEach(setting => {
-            setting.Groups.forEach(group => exec(group));
+            setting.groups.forEach(group => exec(group));
+        });
+        this.tempProductSettings.forEach(setting => {
+            setting.groups.forEach(group => exec(group));
         });
     }
 
     private getModifiedSettings(): ProductSettingGroup[] {
         const commandSettings: ProductSettingGroup[] = [];
-        const paginateProductSettings: ProductSetting[] = this.paginatePipe.transform(this.productSettings, this.paginationInstance);
-        for (let i = 0; i < this.displayedProductSettings.length; i++) {
-            const displayedProductSetting = this.displayedProductSettings[i];
-            for (let j = 0; j < displayedProductSetting.Groups.length; j++) {
-                if (!_.isEqual(displayedProductSetting.Groups[j], paginateProductSettings[i].Groups[j])) {
-                    commandSettings.push(displayedProductSetting.Groups[j]);
+        for (let i = 0; i < this.tempProductSettings.length; i++) {
+            const temp = this.tempProductSettings[i];
+            for (let j = 0; j < temp.groups.length; j++) {
+                if (!_.isEqual(temp.groups[j], this.productSettings[i].groups[j])) {
+                    commandSettings.push(temp.groups[j]);
                 }
             }
         }
@@ -231,11 +253,62 @@ export class GridComponent implements OnInit, OnChanges {
         return commandSettings;
     }
 
+    private getInactiveSites(): InactiveSite[] {
+        const result: InactiveSite[] = [];
+        if (!_.isNil(this.clickedAllPageModel.blackLimit)) {
+            result.push(this.createInactiveSiteModel(102, this.clickedAllPageModel.blackLimit, false, false));
+        }
+        if (!_.isNil(this.clickedAllPageModel.greyLimit)) {
+            result.push(this.createInactiveSiteModel(101, this.clickedAllPageModel.greyLimit, false, false));
+        }
+        if (!_.isNil(this.clickedAllPageModel.orangeLimit)) {
+            result.push(this.createInactiveSiteModel(1, this.clickedAllPageModel.orangeLimit, false, false));
+        }
+        if (!_.isNil(this.clickedAllPageModel.yellowLimit)) {
+            result.push(this.createInactiveSiteModel(2, this.clickedAllPageModel.yellowLimit, false, false));
+        }
+        if (!_.isNil(this.clickedAllPageModel.redLimit)) {
+            result.push(this.createInactiveSiteModel(3, this.clickedAllPageModel.redLimit, this.isBlockedPlacebetRedLevel, this.isBlockedTransferRedLevel));
+        } else {
+            if (!_.isNil(this.clickedAllPageModel.blockedPlaceBet) || !_.isNil(this.clickedAllPageModel.blockedTransfer)) {
+                const redLimit = this.productSettings[0].groups[0].redLimit;
+                result.push(this.createInactiveSiteModel(3, redLimit, this.isBlockedPlacebetRedLevel, this.isBlockedTransferRedLevel));
+            }
+        }
+        return result;
+    }
+
+    private createInactiveSiteModel(level: number, maxWinLimit: number, isBlockedPlaceBet: boolean, isBlockedTransfer: boolean): InactiveSite {
+        const model: InactiveSite = {
+            productId: this.filterModel.productId,
+            groupId: this.filterModel.groupId,
+            levelId: level,
+            exchangeID: this.filterModel.currencyId,
+            maxWinLimit: maxWinLimit,
+            isBlockedPlaceBet: isBlockedPlaceBet,
+            isBlockedTransfer: isBlockedTransfer
+        };
+        return model;
+    }
+
     private internalSave(settings: ProductSettingGroup[]) {
         this.gridService.update(settings).subscribe(result => {
-            if (result.ErrorCode === 0) {
-                this.toastService.activate('The setting has been updated successfully!', MessageType.Success, 3);
-                this.fetch();
+            if (result.errorCode === 0) {
+                const inactiveSites = this.getInactiveSites();
+                if (this.filterModel.siteId === 0 && inactiveSites.length > 0)
+                {
+                    this.gridService.updateInactiveSite(inactiveSites).subscribe(data => {
+                        if (data.errorCode === 0) {
+                            this.toastService.activate('The setting has been updated successfully!', MessageType.Success, 3);
+                            this.fetch();
+                        } else {
+                            this.toastService.activate('Failed!!! Please try again', MessageType.Danger);
+                        }
+                    });
+                } else {
+                    this.toastService.activate('The setting has been updated successfully!', MessageType.Success, 3);
+                    this.fetch();
+                }
             } else {
                 const message = 'Please input Black level limit < Grey level limit <= 0'
                     + ' <= Orange level limit < Yellow level limit < Red level limit.';

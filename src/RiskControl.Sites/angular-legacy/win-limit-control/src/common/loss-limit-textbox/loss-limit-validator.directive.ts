@@ -1,4 +1,4 @@
-import { Directive, ContentChild, ContentChildren, QueryList, ElementRef, AfterContentInit, AfterViewInit } from '@angular/core';
+import { Directive, ContentChild, ElementRef, AfterContentInit, AfterViewInit } from '@angular/core';
 import * as _ from 'lodash';
 import { LossLimitTextboxComponent } from './loss-limit-textbox.component';
 import { ExclamationComponent } from '../exclamation';

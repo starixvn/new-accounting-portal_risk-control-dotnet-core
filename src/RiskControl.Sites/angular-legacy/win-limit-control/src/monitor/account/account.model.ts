@@ -1,27 +1,27 @@
 export interface Customer {
-    CustId: number;
-    Username: string;
-    Agent: string;
-    AgentId: number;
-    Master: string;
-    MasterId: number;
-    Super: string;
-    SuperId: number;
-    SiteName: string;
-    IsCreditUser: boolean;
+    custId: number;
+    username: string;
+    agent: string;
+    agentId: number;
+    master: string;
+    masterId: number;
+    super: string;
+    superId: number;
+    siteName: string;
+    isCreditUser: boolean;
 }
 
 
 export interface AssociatedUser {
-    CustId: number;
-    Username: string;
-    Site: string;
-    LastBettingDate: Date;
+    custId: number;
+    username: string;
+    site: string;
+    lastBettingDate: Date;
 }
 
 export interface AccountModel {
-    Customer: Customer;
-    UsersByDevice: AssociatedUser[];
-    UsersByIP: AssociatedUser[];
-    UsersByManual: AssociatedUser[];
+    customer: Customer;
+    usersByDevice: AssociatedUser[];
+    usersByIP: AssociatedUser[];
+    usersByManual: AssociatedUser[];
 }

@@ -1,47 +1,63 @@
-<div class="filter-container">
+<div class="nap-filter">
     <div class="row">
-        <div class="col-nap col-nap-1">
-            <div class="group-nap">
+        <div class="nap-col nap-col-1">
+            <div class="nap-group">
                 <label for="select-product">Product</label>
-                <div class="control-nap">
+                <div class="nap-control">
                     <select class="form-control" id="select-product" [(ngModel)]="productId" (ngModelChange)="onProductChange()">
-                        <option *ngFor="let product of products" [ngValue]="product.Id">
-                            {{product.Name}}
+                        <option *ngFor="let product of products" [ngValue]="product.id">
+                            {{product.name}}
                         </option>
                     </select>
                 </div>
             </div>
         </div>
-        <div class="col-nap col-nap-2">
-            <div class="group-nap">
+        <div class="nap-col nap-col-2">
+            <div class="nap-group">
+                <label for="select-currency">Group</label>
+                <div class="nap-control">
+                    <select class="form-control" id="select-currency" [(ngModel)]="groupId">
+                        <option [ngValue]="0">All</option>
+                        <option *ngFor="let group of groups" [ngValue]="group.groupId">
+                            {{group.groupName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="nap-col nap-col-3">
+            <div class="nap-group">
                 <label for="select-site">Site / Licensee</label>
-                <div class="control-nap">
+                <div class="nap-control">
                     <select class="form-control" id="select-site" [(ngModel)]="siteId" (ngModelChange)="onSiteChange()">
                         <option [ngValue]="0">All</option>
-                        <optgroup *ngFor="let group of siteGroups" [label]="group.GroupName">
-                            <option *ngFor="let site of group.Sites" [ngValue]="site.SiteId">
-                                {{site.SiteName}}
+                        <optgroup *ngFor="let group of siteGroups" [label]="group.groupName">
+                            <option *ngFor="let site of group.sites" [ngValue]="site.siteId">
+                                {{site.siteName}}
                             </option>
                         </optgroup>
                     </select>
                 </div>
             </div>
         </div>
-        <div class="col-nap col-nap-3">
-            <div class="group-nap">
+        <div class="nap-col nap-col-4">
+            <div class="nap-group">
                 <label for="select-currency">Currency</label>
-                <div class="control-nap">
+                <div class="nap-control">
                     <select class="form-control" id="select-currency" [(ngModel)]="currencyId">
-                        <option *ngFor="let currency of currencies" [ngValue]="currency.Id">
-                            {{currency.Name}}
+                        <option *ngFor="let currency of currencies" [ngValue]="currency.id">
+                            {{currency.name}}
                         </option>
                     </select>
                 </div>
             </div>
         </div>
-        <div class="col-nap">
-            <button type="button" class="btn btn-primary" (click)="search()">
+        <div class="nap-col">
+            <button type="button" class="btn btn-primary mr-2" (click)="search()">
                 Search
+            </button>
+            <button type="button" class="btn btn-primary" (click)="manageSettingGroup()">
+                Manage Setting Group
             </button>
         </div>
     </div>

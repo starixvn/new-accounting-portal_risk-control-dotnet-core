@@ -28,9 +28,9 @@
 <ng-template #tbody let-users="users">
     <tbody>
         <tr *ngFor="let user of users">
-            <td class="word-break-all">{{user.Site}}</td>
-            <td class="word-break-all">{{user.Username}}</td>
-            <td class="text-center">{{user.LastBettingDate | date:'MM/dd/yyyy HH:mm:ss a'}}</td>
+            <td class="word-break-all">{{user.site}}</td>
+            <td class="word-break-all">{{user.username}}</td>
+            <td class="text-center">{{user.lastBettingDate | date:'MM/dd/yyyy HH:mm:ss a'}}</td>
         </tr>
     </tbody>
 </ng-template>
@@ -50,24 +50,24 @@
             <tbody>
                 <tr>
                     <td>CUSTOMER</td>
-                    <td>{{accountModel.Customer.Username}} ({{accountModel.Customer.CustId}})</td>
+                    <td>{{accountModel.customer.username}} ({{accountModel.customer.custId}})</td>
                 </tr>
-                <tr *ngIf="accountModel.Customer.IsCreditUser">
+                <tr *ngIf="accountModel.customer.isCreditUser">
                     <td>AGENT</td>
-                    <td>{{accountModel.Customer.Agent}} ({{accountModel.Customer.AgentId}})</td>
+                    <td>{{accountModel.customer.agent}} ({{accountModel.customer.agentId}})</td>
                 </tr>
-                <tr *ngIf="accountModel.Customer.IsCreditUser">
+                <tr *ngIf="accountModel.customer.isCreditUser">
                     <td>MASTER</td>
-                    <td>{{accountModel.Customer.Master}} ({{accountModel.Customer.MasterId}})</td>
+                    <td>{{accountModel.customer.master}} ({{accountModel.customer.masterId}})</td>
                 </tr>
-                <tr *ngIf="accountModel.Customer.IsCreditUser">
+                <tr *ngIf="accountModel.customer.isCreditUser">
                     <td>SUPER</td>
-                    <td>{{accountModel.Customer.Super}} ({{accountModel.Customer.SuperId}})</td>
+                    <td>{{accountModel.customer.super}} ({{accountModel.customer.superId}})</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="grid">
+    <div class="nap-grid">
         <div style="width: 560px">
             <div class="header">
                 <table>
@@ -84,16 +84,16 @@
                     </thead>
                 </table>
             </div>
-            <div *ngIf="userByDeviceIsExpanded && accountModel.UsersByDevice.length > 0" class="body">
+            <div *ngIf="userByDeviceIsExpanded && accountModel.usersByDevice.length > 0" class="body">
                 <table class="table-striped test-associated-users-by-device">
                     <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
-                    <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.UsersByDevice}"></ng-template>
+                    <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.usersByDevice}"></ng-template>
                 </table>
             </div>
-            <ng-template *ngIf="userByDeviceIsExpanded && accountModel.UsersByDevice.length === 0" [ngTemplateOutlet]="noData"></ng-template>
+            <ng-template *ngIf="userByDeviceIsExpanded && accountModel.usersByDevice.length === 0" [ngTemplateOutlet]="noData"></ng-template>
         </div>
     </div>
-    <div class="grid">
+    <div class="nap-grid">
         <div style="width: 560px">
             <div class="header">
                 <table>
@@ -110,17 +110,17 @@
                     </thead>
                 </table>
             </div>
-            <div *ngIf="userByIPIsExpanded && accountModel.UsersByIP.length > 0" class="body">
+            <div *ngIf="userByIPIsExpanded && accountModel.usersByIP.length > 0" class="body">
                 <table class="table-striped test-associated-users-by-ip">
                     <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
-                    <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.UsersByIP}"></ng-template>
+                    <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.usersByIP}"></ng-template>
                 </table>
             </div>
-            <ng-template *ngIf="userByIPIsExpanded && accountModel.UsersByIP.length === 0" [ngTemplateOutlet]="noData"></ng-template>
+            <ng-template *ngIf="userByIPIsExpanded && accountModel.usersByIP.length === 0" [ngTemplateOutlet]="noData"></ng-template>
         </div>
     </div>
 
-    <div class="grid">
+    <div class="nap-grid">
       <div style="width: 560px">
           <div class="header">
               <table>
@@ -137,13 +137,13 @@
                   </thead>
               </table>
           </div>
-          <div *ngIf="userByManualIsExpanded && accountModel.UsersByManual.length > 0" class="body">
+          <div *ngIf="userByManualIsExpanded && accountModel.usersByManual.length > 0" class="body">
               <table class="table-striped test-associated-users-by-ip">
                   <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
-                  <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.UsersByManual}"></ng-template>
+                  <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.usersByManual}"></ng-template>
               </table>
           </div>
-          <ng-template *ngIf="userByManualIsExpanded && accountModel.UsersByManual.length === 0" [ngTemplateOutlet]="noData"></ng-template>
+          <ng-template *ngIf="userByManualIsExpanded && accountModel.usersByManual.length === 0" [ngTemplateOutlet]="noData"></ng-template>
       </div>
   </div>
 </div>

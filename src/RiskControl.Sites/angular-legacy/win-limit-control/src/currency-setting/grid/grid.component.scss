@@ -1,6 +1,6 @@
 @import '~nap-theme/scss/grid';
 .header {
-    .btn-secondary {
+    .btn-light {
         margin-left: 3px;
     }
 }
@@ -9,4 +9,10 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+}
+
+div.nap-grid {
+    div.body {
+        overflow-x: hidden;
+    }
 }

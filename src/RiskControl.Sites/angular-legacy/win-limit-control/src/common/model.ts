@@ -1,9 +1,9 @@
 export interface CommandResult {
-    ErrorCode: number;
+    errorCode: number;
 }
 
 export interface HostPermission {
-    PlayerWinLimitManagement: boolean;
-    CurrencyWinLimitSetting: boolean;
-    WinLimitMonitor: boolean;
+    playerWinLimitManagement: boolean;
+    currencyWinLimitSetting: boolean;
+    winLimitMonitor: boolean;
 }

@@ -1,27 +1,47 @@
 export interface ProductSettingGroup {
-    ProductId: number;
-    CurrencyId: number;
-    SiteId: number;
-    GroupId: number;
-    GroupName: string;
-    IsBlockedPlacebetRedLevel: boolean;
-    IsBlockedTransferRedLevel: boolean;
-    IsCreditSite: boolean;
-    BlackLimit: number;
-    GreyLimit: number;
-    OrangeLimit: number;
-    YellowLimit: number;
-    RedLimit: number;
+    productId: number;
+    currencyId: number;
+    siteId: number;
+    groupId: number;
+    groupName: string;
+    isBlockedPlacebetRedLevel: boolean;
+    isBlockedTransferRedLevel: boolean;
+    isCreditSite: boolean;
+    blackLimit: number;
+    greyLimit: number;
+    orangeLimit: number;
+    yellowLimit: number;
+    redLimit: number;
 }
 
 export interface ProductSetting {
-    ProductName: string;
-    CurrencyName: string;
-    SiteName: string;
-    Groups: ProductSettingGroup[];
+    productName: string;
+    currencyName: string;
+    siteName: string;
+    groups: ProductSettingGroup[];
 }
 
 export interface CommandResult {
-    ErrorCode: number;
-    IsValid: boolean;
+    errorCode: number;
+    isValid: boolean;
+}
+
+export interface InactiveSite {
+    productId: number;
+    groupId: number;
+    levelId: number;
+    exchangeID: number;
+    maxWinLimit: number;
+    isBlockedPlaceBet: boolean;
+    isBlockedTransfer: boolean;
+}
+
+export interface ClickedAllPageModel {
+    blackLimit: number;
+    greyLimit: number;
+    orangeLimit: number;
+    yellowLimit: number;
+    redLimit: number;
+    blockedPlaceBet: boolean;
+    blockedTransfer: boolean;
 }

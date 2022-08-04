@@ -5,8 +5,7 @@ import { FilterModel } from './filter';
   selector: 'nap-root',
   templateUrl: './app.component.html',
   styleUrls: [
-    './app.component.scss',
-    '../../node_modules/nap-theme/scss/header.scss'
+    './app.component.scss'
   ]
 })
 export class AppComponent {

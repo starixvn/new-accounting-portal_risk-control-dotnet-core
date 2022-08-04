@@ -9,7 +9,7 @@ import { GroupSettingService } from './group-setting.service';
     imports: [
         CommonModule,
         HttpModule.forRoot(),
-        NgbModalModule.forRoot()
+        NgbModalModule
     ],
     declarations: [
         GroupSettingComponent
@@ -22,7 +22,7 @@ import { GroupSettingService } from './group-setting.service';
     ]
 })
 export class GroupSettingModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<GroupSettingModule> {
         return {
             ngModule: GroupSettingModule,
             providers: [

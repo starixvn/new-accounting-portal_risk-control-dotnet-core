@@ -7,6 +7,7 @@ using RiskControl.Core.Model;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Search
 {
+    [ApiController]
     [Route("api/win-limit-control/monitor")]
     public class MonitorSearchController : ControllerBase
     {

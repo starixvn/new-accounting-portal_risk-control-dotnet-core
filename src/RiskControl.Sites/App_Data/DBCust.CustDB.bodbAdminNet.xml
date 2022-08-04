@@ -32,6 +32,11 @@
     <Setting Key="NAP_WinLimit_CustomerInformationSel" SpName="NAP_WinLimit_CustomerInformationSel" DbName="DBCust.CustDB.bodbAdminNet" TimeOut="300" />
     <Setting Key="NAP_WinLimit_CustomerSiteSel" SpName="NAP_WinLimit_CustomerSiteSel" DbName="DBCust.CustDB.bodbAdminNet" TimeOut="300" />
     <Setting Key="NAP_WinLimit_CustomerSiteByCustIdSel" SpName="NAP_WinLimit_CustomerSiteByCustIdSel" DbName="DBCust.CustDB.bodbAdminNet" TimeOut="300" />
+	<Setting Key="NAP_WinLimit_GameGroupSettingSel" SpName="NAP_WinLimit_GameGroupSettingSel" DbName="DBCust.CustDB.bodbAdminNet" TimeOut="300"/>
+    <Setting Key="NAP_WinLimit_UnassignedBettypeSel" SpName="NAP_WinLimit_UnassignedBettypeSel" DbName="DBCust.CustDB.bodbAdminNet" TimeOut="300"/>
+	<Setting Key="NAP_WinLimit_GroupByProductSel" SpName="NAP_WinLimit_GroupByProductSel" DbName="DBCust.CustDB.bodbAdminNet" TimeOut="300"/>
+	<Setting Key="NAP_Winlimit_GameGroupSettingIns" SpName="NAP_Winlimit_GameGroupSettingIns" DbName="DBCust.CustDB.bodbAdminNet" TimeOut="300"/>
+	<Setting Key="NAP_WinLimit_CurrencySettingInactiveSiteUpd" SpName="NAP_WinLimit_CurrencySettingInactiveSiteUpd" DbName="DBCust.CustDB.bodbAdminNet" TimeOut="300" />
   </Function>
   <Function Name="Game Ground Bet Limit Control">
     <Setting Key="NAP_GameRoundBetLimitSettingUpd" SpName="NAP_GameRoundBetLimitSettingUpd" DbName="DBCust.CustDB.bodbAdminNet" TimeOut="300" />

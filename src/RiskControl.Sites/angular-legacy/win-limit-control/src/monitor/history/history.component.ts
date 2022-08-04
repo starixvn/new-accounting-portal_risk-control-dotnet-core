@@ -55,14 +55,14 @@ export class HistoryComponent {
     this.confirmationService.openContent(
         'Are you sure you want to uncheck? Click "OK" to convert IsNotified from 1 to 0',
         () => this.internalUnCheckNotification(historyModel),
-        () => historyModel.IsNotified = true
+        () => historyModel.isNotified = true
     );
     return false;
   }
 
   private internalUnCheckNotification(historyModel: HistoryModel) {
-    this.gridService.unCheckNotification(historyModel.LogID, this.custId).subscribe(commandResult => {
-        historyModel.IsNotified = commandResult.ErrorCode !== 0;
+    this.gridService.unCheckNotification(historyModel.logID, this.custId).subscribe(commandResult => {
+        historyModel.isNotified = commandResult.errorCode !== 0;
     });
   }
 

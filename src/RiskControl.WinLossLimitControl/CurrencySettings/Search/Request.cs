@@ -12,5 +12,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Search
         public bool IsCreditSite { get; set; }
 
         public int CurrencyId { get; set; }
+
+        public int GroupId { get; set; }
     }
 }

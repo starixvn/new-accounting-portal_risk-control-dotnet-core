@@ -3,14 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using RiskControl.WinLossLimitControl.FileDownload;
 using RiskControl.WinLossLimitControl.Filter;
 using RiskControl.WinLossLimitControl.GameRound;
-using RiskControl.WinLossLimitControl.Monitor.Parser;
-using RiskControl.WinLossLimitControl.Monitor.Unblock;
-using RiskControl.WinLossLimitControl.PlayerSettings.Insert;
 using RiskControl.WinLossLimitControl.Services;
-using CurrencySettingUpdate = RiskControl.WinLossLimitControl.CurrencySettings.Update;
-using Filter = RiskControl.WinLossLimitControl.Filter;
-using GameRound = RiskControl.WinLossLimitControl.GameRound;
-using PlayerSettingUpdate = RiskControl.WinLossLimitControl.PlayerSettings.Update;
+using PlayerSettings = RiskControl.WinLossLimitControl.PlayerSettings;
+using ManagedSettingGroup = RiskControl.WinLossLimitControl.ManagedSettingGroup;
+using CurrencySettings = RiskControl.WinLossLimitControl.CurrencySettings;
+using Monitor = RiskControl.WinLossLimitControl.Monitor;
 
 namespace RiskControl.Sites.DependencyInjections
 {
@@ -23,6 +20,23 @@ namespace RiskControl.Sites.DependencyInjections
             service.AddMediatR(typeof(BetLimitSettingQueryHandler).Assembly);
             service.AddMediatR(typeof(BetLimitMonitorQueryHandler).Assembly);
             service.AddMediatR(typeof(BetLimitMonitorQueryExcelHandler).Assembly);
+            service.AddMediatR(typeof(ManagedSettingGroup.Search.Handler).Assembly);
+            service.AddMediatR(typeof(ManagedSettingGroup.Update.Handler).Assembly);
+            service.AddMediatR(typeof(CurrencySettings.Search.Handler).Assembly);
+            service.AddMediatR(typeof(CurrencySettings.Update.Handler).Assembly);
+            service.AddMediatR(typeof(CurrencySettings.Update.UpdateInactiveSiteHandler).Assembly);
+            service.AddMediatR(typeof(PlayerSettings.Search.Handler).Assembly);
+            service.AddMediatR(typeof(PlayerSettings.Insert.Handler).Assembly);
+            service.AddMediatR(typeof(PlayerSettings.Update.Handler).Assembly);
+            service.AddMediatR(typeof(PlayerSettings.SearchForInserting.HandlerSearch).Assembly);
+            service.AddMediatR(typeof(PlayerSettings.SearchForInserting.HandlerValidation).Assembly);
+            service.AddMediatR(typeof(PlayerSettings.Delete.Handler).Assembly);
+            service.AddMediatR(typeof(Monitor.Account.Handler).Assembly);
+            service.AddMediatR(typeof(Monitor.History.Handler).Assembly);
+            service.AddMediatR(typeof(Monitor.History.HandlerUncheckedNotification).Assembly);
+            service.AddMediatR(typeof(Monitor.Search.Handler).Assembly);
+            service.AddMediatR(typeof(Monitor.Unblock.HandlerUnblockPlaceBet).Assembly);
+            service.AddMediatR(typeof(Monitor.Unblock.HandlerUnblockTransfer).Assembly);
             service.AddTransient<AuthorizationService, AuthorizationServiceImp>();
             service.AddTransient<IncreamentedSeriesContrainService, IncreamentedSeriesContrainServiceImp>();
             service.AddTransient<DataTransformService, DataTransformServiceImp>();
@@ -30,23 +44,23 @@ namespace RiskControl.Sites.DependencyInjections
 
             service.AddTransient<BaseEntityGroupLoaderService, BaseEntityGroupLoaderServiceImp>();
             service.AddTransient<FilterService, FilterServiceImp>();
-            service.AddTransient<Filter.CacheRefService, Filter.CacheRefServiceImp>();
+            service.AddTransient<CacheRefService, CacheRefServiceImp>();
 
-            service.AddTransient<CurrencySettingUpdate.UpdateService, CurrencySettingUpdate.UpdateServiceImp>();
-            service.AddTransient<CurrencySettingUpdate.ValidationService, CurrencySettingUpdate.ValidationServiceImp>();
+            service.AddTransient<CurrencySettings.Update.UpdateService, CurrencySettings.Update.UpdateServiceImp>();
+            service.AddTransient<CurrencySettings.Update.ValidationService, CurrencySettings.Update.ValidationServiceImp>();
 
-            service.AddTransient<InsertService, InsertServiceImp>();
-            service.AddTransient<ValidationService, ValidationServiceImp>();
+            service.AddTransient<PlayerSettings.Insert.InsertService, PlayerSettings.Insert.InsertServiceImp>();
+            service.AddTransient<PlayerSettings.Insert.ValidationService, PlayerSettings.Insert.ValidationServiceImp>();
 
-            service.AddTransient<PlayerSettingUpdate.ValidationService, PlayerSettingUpdate.ValidationServiceImp>();
+            service.AddTransient<PlayerSettings.Update.ValidationService, PlayerSettings.Update.ValidationServiceImp>();
 
-            service.AddTransient<WinLimitSettingXmlParser, WinLimitSettingXmlParserImp>();
+            service.AddTransient<Monitor.Parser.WinLimitSettingXmlParser, Monitor.Parser.WinLimitSettingXmlParserImp>();
 
-            service.AddTransient<UnblockMemberService, UnblockMemberServiceImp>();
+            service.AddTransient<Monitor.Unblock.UnblockMemberService, Monitor.Unblock.UnblockMemberServiceImp>();
 
             service.AddTransient<FileContentService, FileContentServiceImp>();
 
-            service.AddTransient<GameRound.BetLimitMonitorDataService, GameRound.BetLimitMonitorDataServiceImp>();
+            service.AddTransient<BetLimitMonitorDataService, BetLimitMonitorDataServiceImp>();
         }
     }
 }

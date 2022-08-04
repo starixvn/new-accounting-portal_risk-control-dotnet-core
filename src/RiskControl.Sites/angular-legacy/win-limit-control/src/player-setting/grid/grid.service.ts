@@ -1,5 +1,7 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpService } from 'nap-components/http';
 import { CommandResult } from '../../common/model';
 import { FilterModel } from '../filter';
@@ -15,11 +17,11 @@ export class GridService {
     query(filterModel: FilterModel): Observable<PlayerCurrencySetting[]> {
         const url = 'api/win-limit-control/player-setting/search';
         return this.httpService
-            .post<PlayerCurrencySetting[]>(url, filterModel)
-            .map(playerCurrencySettings => {
+            .post<PlayerCurrencySetting[]>(url, filterModel).pipe(
+            map(playerCurrencySettings => {
                 Helper.calculateSettingCountForCurrencyGroup(playerCurrencySettings);
                 return playerCurrencySettings;
-            });
+            }));
     }
 
     delete(deleteCommand: DeleteCommand): Observable<CommandResult> {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.WinLossLimitControl.Filter
 {
+    [ApiController]
     [Route("api/win-limit-control/filter")]
     public class FilterController : ControllerBase
     {
@@ -40,13 +41,20 @@ namespace RiskControl.WinLossLimitControl.Filter
         }
 
         [Route("search-users")]
-        [HttpGet]
         public async Task<IActionResult> SearchUsers(string term)
         {
             var criteria = new CustomerSuggestionCriteria { CustomerName = term.Trim() };
             var customers = await filterService.SearchUsers(criteria);
             var userNames = customers.Select(customer => customer.Username);
             return Ok(userNames);
+        }
+
+        [Route("get-groups")]
+        [HttpPost]
+        public async Task<IActionResult> GetGroups(GetGroupCriteria criteria)
+        {
+            var groups = (await filterService.GetGroupByProduct(criteria)).ToList();
+            return Ok(groups);
         }
     }
 }

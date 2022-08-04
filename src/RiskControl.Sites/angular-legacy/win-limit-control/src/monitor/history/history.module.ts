@@ -18,7 +18,7 @@ import { HistoryLimitPipe } from './history-limit.pipe';
         CommonModule,
         FormsModule,
         HttpModule.forRoot(),
-        NgbModalModule.forRoot(),
+        NgbModalModule,
         TreeviewModule.forRoot(),
         NumberFormatModule,
         FlagModule,

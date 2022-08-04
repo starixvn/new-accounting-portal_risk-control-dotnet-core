@@ -1,4 +1,4 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { HttpService, DefaultHttpOptions, HttpOptions } from 'nap-components/http';
@@ -58,7 +58,7 @@ describe('GridService', () => {
     it('should invoke update method with right parameters and returns data of httpService',
         inject([HttpService, GridService], (httpService: HttpService, gridService: GridService) => {
             const commandResult: CommandResult = {
-                ErrorCode: 0
+                errorCode: 0
             };
             const spy = spyOn(httpService, 'post').and.returnValue(Observable.of(commandResult));
             const productSettingGroups: ProductSettingGroup[] = [{

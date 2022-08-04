@@ -1,4 +1,4 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { HttpService, HttpModule } from 'nap-components/http';
@@ -20,9 +20,9 @@ describe('AuthorizationService', () => {
     it('should invoke hasHostPermission method with right parameters and returns data of httpService',
         inject([HttpService, AuthorizationService], (httpService: HttpService, authorizationService: AuthorizationService) => {
             const hostPermission: HostPermission = {
-                PlayerWinLimitManagement: true,
-                CurrencyWinLimitSetting: true,
-                WinLimitMonitor: true
+                playerWinLimitManagement: true,
+                currencyWinLimitSetting: true,
+                winLimitMonitor: true
             }
             const spy = spyOn(httpService, 'post').and.returnValue(Observable.of(hostPermission));
             const result = authorizationService.getHostPermission();

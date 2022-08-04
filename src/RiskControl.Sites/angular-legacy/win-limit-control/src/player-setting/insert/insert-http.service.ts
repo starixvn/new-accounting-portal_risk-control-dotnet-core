@@ -1,11 +1,12 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+
+import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HttpService } from 'nap-components/http';
 import { CommandResult } from '../../common/model';
 import { PlayerCurrencySetting } from '../grid';
 import { Helper } from '../common';
 import { InsertCommand } from './insert.model';
-import { InsertComponent } from './insert.component';
 
 @Injectable()
 export class InsertHttpService {
@@ -20,12 +21,12 @@ export class InsertHttpService {
 
     searchForInserting(username: string): Observable<PlayerCurrencySetting[]> {
         const url = 'api/win-limit-control/player-setting/search-for-inserting';
-        return this.httpService.post<PlayerCurrencySetting[]>(url, { Username: username })
-            .map(playerCurrencySettings => {
+        return this.httpService.post<PlayerCurrencySetting[]>(url, { Username: username }).pipe(
+            map(playerCurrencySettings => {
                 Helper.calculateSettingCountForCurrencyGroup(playerCurrencySettings);
                 Helper.resetLimitValue(playerCurrencySettings);
                 return playerCurrencySettings;
-            });
+            }));
     }
 
     insert(insertCommands: InsertCommand[]): Observable<CommandResult> {

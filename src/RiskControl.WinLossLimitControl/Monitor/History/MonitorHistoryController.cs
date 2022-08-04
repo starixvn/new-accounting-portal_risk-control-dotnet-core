@@ -7,6 +7,7 @@ using RiskControl.Core.Model;
 
 namespace RiskControl.WinLossLimitControl.Monitor.History
 {
+    [ApiController]
     [Route("api/win-limit-control/monitor")]
     public class MonitorHistoryController : ControllerBase
     {

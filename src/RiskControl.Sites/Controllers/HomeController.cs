@@ -54,6 +54,13 @@ namespace RiskControl.Sites.Controllers
             return View("~/wwwroot/currency-setting/index.cshtml");
         }
 
+        [Route("WinLimitControl/ManageSettingGroup/Index")]
+        [NapAuth(FunctionKey = FunctionKeys.CurrencyWinLimitSetting, Policy = Constant.Policy.Read)]
+        public ActionResult ManageSettingGroup()
+        {
+            return View("~/wwwroot/manage-setting-group/index.cshtml");
+        }
+
         [Route("WinLimitControl/PlayerSetting/Index")]
         [NapAuth(FunctionKey = FunctionKeys.PlayerWinLimitManagement, Policy = Constant.Policy.Read)]
         public ActionResult PlayerSetting()

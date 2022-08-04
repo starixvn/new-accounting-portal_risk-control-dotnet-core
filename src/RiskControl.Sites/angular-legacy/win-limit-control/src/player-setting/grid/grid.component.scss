@@ -6,13 +6,16 @@
     color: #0876B7;
 }
 
-.grid {
+.nap-grid {
     td {
         height: 38px;
     }
+    div.body {
+        overflow-x: hidden;
+    }
 }
 
-:host /deep/ .limit-row {
+:host ::ng-deep .limit-row {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;

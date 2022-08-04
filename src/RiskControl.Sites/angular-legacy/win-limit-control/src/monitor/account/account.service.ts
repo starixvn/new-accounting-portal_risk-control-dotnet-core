@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpService } from 'nap-components/http';
 import { MonitorModel } from '../grid';
@@ -14,7 +14,7 @@ export class AccountService {
     ) { }
 
     show(monitorModel: MonitorModel) {
-        this.query(monitorModel.CustId).subscribe(accountModel => {
+        this.query(monitorModel.custId).subscribe(accountModel => {
             const modalRef = this.modalService.open(AccountComponent, { backdrop: 'static', windowClass: 'modal-auto-size' });
             const componentInstance: AccountComponent = modalRef.componentInstance;
             componentInstance.show(accountModel);

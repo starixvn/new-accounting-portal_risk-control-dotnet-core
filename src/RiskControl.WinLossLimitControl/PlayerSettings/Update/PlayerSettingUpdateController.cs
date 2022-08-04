@@ -7,6 +7,7 @@ using RiskControl.Core.Model;
 
 namespace RiskControl.WinLossLimitControl.PlayerSettings.Update
 {
+    [ApiController]
     [Route("state-api/win-limit-control/player-setting")]
     public class PlayerSettingUpdateController : ControllerBase
     {

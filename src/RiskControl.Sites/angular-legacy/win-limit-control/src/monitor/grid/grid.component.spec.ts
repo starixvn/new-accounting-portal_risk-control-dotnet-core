@@ -1,5 +1,5 @@
 import { Component, DebugElement, Injectable } from '@angular/core';
-import { TestBed, ComponentFixture, async, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -87,7 +87,7 @@ class GridServiceStub extends GridService {
         unblockPlaceBetSpyCount++;
         unblockPlaceBetCommand = unblockCommand;
         const commandResult: CommandResult = {
-            ErrorCode: 0
+            errorCode: 0
         };
         return Observable.of(commandResult);
     }
@@ -96,7 +96,7 @@ class GridServiceStub extends GridService {
         unblockTransferSpyCount++;
         unblockTransferCommand = unblockCommand;
         const commandResult: CommandResult = {
-            ErrorCode: 0
+            errorCode: 0
         };
         return Observable.of(commandResult);
     }

@@ -49,7 +49,8 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Search
                 ? (ICriteria)new AllSiteSearchCriteria
                 {
                     ProductId = parameter.ProductId,
-                    CurrencyId = parameter.CurrencyId
+                    CurrencyId = parameter.CurrencyId,
+                    GroupId = parameter.GroupId
                 }
                 : mapper.Map<SearchCriteria>(parameter);
             return await repository.FetchAsync<CurrencySettingRaw>(processingCriteria);

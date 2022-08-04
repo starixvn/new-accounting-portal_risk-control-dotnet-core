@@ -19,7 +19,7 @@ import { InsertComponent } from './insert.component';
         BrowserModule,
         CommonModule,
         FormsModule,
-        NgbModalModule.forRoot(),
+        NgbModalModule,
         HttpModule.forRoot(),
         ToastModule.forRoot(),
         NoteModule,

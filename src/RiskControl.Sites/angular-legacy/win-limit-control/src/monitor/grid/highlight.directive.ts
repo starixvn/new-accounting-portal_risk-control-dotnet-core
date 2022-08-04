@@ -1,4 +1,4 @@
-import { Directive, Input, HostListener, Renderer, ElementRef, OnChanges } from '@angular/core';
+import { Directive, Input, HostListener, ElementRef, OnChanges, Renderer2 } from '@angular/core';
 
 @Directive({
     selector: 'tr[napHighlight]'
@@ -8,7 +8,7 @@ export class HighlightDirective implements OnChanges {
     @Input('napHighlight') isHighlight: boolean;
 
     constructor(
-        private renderer: Renderer,
+        private renderer: Renderer2,
         private elementRef: ElementRef
     ) { }
 
@@ -25,10 +25,10 @@ export class HighlightDirective implements OnChanges {
     }
 
     private setHighlight() {
-        this.renderer.setElementClass(this.elementRef.nativeElement, 'highlight', true);
+        this.renderer.addClass(this.elementRef.nativeElement, 'highlight');
     }
 
     private clearHighlight() {
-        this.renderer.setElementClass(this.elementRef.nativeElement, 'highlight', false);
+        this.renderer.removeClass(this.elementRef.nativeElement, 'highlight');
     }
 }

@@ -1,32 +1,32 @@
 export interface MonitorModel {
-    CustId: number;
-    UserName: string;
-    SiteId: number;
-    SiteName: string;
-    CurrencyId: number;
-    CurrencyName: string;
-    ProductId: number;
-    ProductName: string;
-    GroupId: number;
-    GroupName: string;
-    WinningAmount: number;
-    WinningAmountRM: number;
-    ReachedLimitTime: string;
-    ReachedLimitLevel: number;
-    NumberReachedLimit: number;
-    IsNotified: boolean;
-    IsBlockedPlaceBet: boolean;
-    IsBlockedTransfer: boolean;
-    IsEnableUnblock: boolean;
-    BlackLimit: number;
-    GreyLimit: number;
-    YellowLimit: number;
-    OrangeLimit: number;
-    RedLimit: number;
+    custId: number;
+    userName: string;
+    siteId: number;
+    siteName: string;
+    currencyId: number;
+    currencyName: string;
+    productId: number;
+    productName: string;
+    groupId: number;
+    groupName: string;
+    winningAmount: number;
+    winningAmountRM: number;
+    reachedLimitTime: string;
+    reachedLimitLevel: number;
+    numberReachedLimit: number;
+    isNotified: boolean;
+    isBlockedPlaceBet: boolean;
+    isBlockedTransfer: boolean;
+    isEnableUnblock: boolean;
+    blackLimit: number;
+    greyLimit: number;
+    yellowLimit: number;
+    orangeLimit: number;
+    redLimit: number;
 }
 
 export interface UnblockCommand {
-    CustId: number;
-    ProductId: number;
-    GroupId: number;
+    custId: number;
+    productId: number;
+    groupId: number;
 }

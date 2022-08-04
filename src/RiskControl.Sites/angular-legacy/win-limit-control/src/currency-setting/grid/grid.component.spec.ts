@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { DebugElement, Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -153,7 +153,7 @@ class GridServiceStub extends GridService {
     update(settings: ProductSettingGroup[]): Observable<CommandResult> {
         updateSpyCount++;
         const commandResult: CommandResult = {
-            ErrorCode: updateErrorCode
+            errorCode: updateErrorCode
         };
         return Observable.of(commandResult);
     }

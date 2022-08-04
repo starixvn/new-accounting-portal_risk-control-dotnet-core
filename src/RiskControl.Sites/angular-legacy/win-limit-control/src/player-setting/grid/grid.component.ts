@@ -5,7 +5,6 @@ import { ConfirmationService } from 'nap-components/confirmation';
 import { GroupSettingService } from '../../common/group-setting';
 import { EditableWinLimitComponent } from '../../common/editable-win-limit';
 import { EditableLossLimitComponent } from '../../common/editable-loss-limit';
-import { CommandResult } from '../../common/model';
 import { AuthorizationService } from '../../common/authorization';
 import { LimitLevel } from '../../common/filter';
 import { FilterModel } from '../filter';
@@ -76,33 +75,33 @@ export class GridComponent implements OnInit, OnChanges {
     }
 
     saveBlackLimit(isValid: boolean, playerSetting: PlayerSetting, value: number) {
-        this.saveLimit(isValid, playerSetting, value, playerSetting.BlackLimit, LimitLevel.Black,
-            () => playerSetting.BlackLimit = value);
+        this.saveLimit(isValid, playerSetting, value, playerSetting.blackLimit, LimitLevel.Black,
+            () => playerSetting.blackLimit = value);
     }
 
     saveGreyLimit(isValid: boolean, playerSetting: PlayerSetting, value: number) {
-        this.saveLimit(isValid, playerSetting, value, playerSetting.GreyLimit, LimitLevel.Grey,
-            () => playerSetting.GreyLimit = value);
+        this.saveLimit(isValid, playerSetting, value, playerSetting.greyLimit, LimitLevel.Grey,
+            () => playerSetting.greyLimit = value);
     }
 
     saveOrangeLimit(isValid: boolean, playerSetting: PlayerSetting, value: number) {
-        this.saveLimit(isValid, playerSetting, value, playerSetting.OrangeLimit, LimitLevel.Orange,
-            () => playerSetting.OrangeLimit = value);
+        this.saveLimit(isValid, playerSetting, value, playerSetting.orangeLimit, LimitLevel.Orange,
+            () => playerSetting.orangeLimit = value);
     }
 
     saveYellowLimit(isValid: boolean, playerSetting: PlayerSetting, value: number) {
-        this.saveLimit(isValid, playerSetting, value, playerSetting.YellowLimit, LimitLevel.Yellow,
-            () => playerSetting.YellowLimit = value);
+        this.saveLimit(isValid, playerSetting, value, playerSetting.yellowLimit, LimitLevel.Yellow,
+            () => playerSetting.yellowLimit = value);
     }
 
     saveRedLimit(isValid: boolean, playerSetting: PlayerSetting, value: number) {
-        this.saveLimit(isValid, playerSetting, value, playerSetting.RedLimit, LimitLevel.Red,
-            () => playerSetting.RedLimit = value);
+        this.saveLimit(isValid, playerSetting, value, playerSetting.redLimit, LimitLevel.Red,
+            () => playerSetting.redLimit = value);
     }
 
     private queryHostPermission() {
         this.authorizationService.getHostPermission().subscribe((result) => {
-            this.hasHostPermission = result.PlayerWinLimitManagement;
+            this.hasHostPermission = result.playerWinLimitManagement;
         });
     }
 
@@ -124,7 +123,7 @@ export class GridComponent implements OnInit, OnChanges {
             return;
         }
 
-        this.confirmationService.openContent(`Are you sure want to change setting of ${playerSetting.Username}?`,
+        this.confirmationService.openContent(`Are you sure want to change setting of ${playerSetting.username}?`,
             () => {
                 updateFn();
                 this.internalSaveLimit(playerSetting, levelId, value);
@@ -136,14 +135,14 @@ export class GridComponent implements OnInit, OnChanges {
 
     private internalSaveLimit(playerSetting: PlayerSetting, levelId: number, value: number) {
         const command: UpdateCommand = {
-            CustId: playerSetting.CustId,
-            GroupId: playerSetting.GroupId,
-            LevelId: levelId,
-            ProductId: playerSetting.ProductId,
-            Limit: value
+            custId: playerSetting.custId,
+            groupId: playerSetting.groupId,
+            levelId: levelId,
+            productId: playerSetting.productId,
+            limit: value
         };
         this.gridService.update(command).subscribe((result) => {
-            if (result.ErrorCode !== 0) {
+            if (result.errorCode !== 0) {
                 const message = 'Please input Black level limit < Grey level limit <= 0'
                     + ' <= Orange level limit < Yellow level limit < Red level limit.';
                 this.toastService.activate(message, MessageType.Danger);
@@ -163,12 +162,12 @@ export class GridComponent implements OnInit, OnChanges {
 
     private internalDeletePlayer(playerSetting: PlayerSetting) {
         const command: DeleteCommand = {
-            CustId: playerSetting.CustId,
-            ProductId: playerSetting.ProductId,
-            GroupId: playerSetting.GroupId
+            custId: playerSetting.custId,
+            productId: playerSetting.productId,
+            groupId: playerSetting.groupId
         };
         this.gridService.delete(command).subscribe(result => {
-            if (result.ErrorCode === 0) {
+            if (result.errorCode === 0) {
                 this.search();
             } else {
                 this.toastService.activate('Can not remove player setting!', MessageType.Danger);

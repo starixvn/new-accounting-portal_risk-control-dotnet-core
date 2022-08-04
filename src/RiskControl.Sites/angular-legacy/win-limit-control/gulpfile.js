@@ -19,9 +19,9 @@ function transform(transformFolder) {
 }
 
 function getOutputFolder() {
-    let content = fs.readFileSync(path.resolve('./.angular-cli.json'), encoding);
+    let content = fs.readFileSync(path.resolve('./angular.json'), encoding);
     let json = JSON.parse(content);
-    return path.resolve(json.apps[0].outDir);
+    return path.resolve(json.projects['manage-setting-group'].architect["build"].options["outputPath"]);
 }
 
 function changeFileNames(outputFolder, transformFolder) {
@@ -52,7 +52,7 @@ function changeFileNames(outputFolder, transformFolder) {
 }
 
 function readOptions(outputFolder, transformFolder) {
-    let resourceDir = transformFolder.replace(/\.\.\//g, '');
+    let resourceDir = transformFolder.replace(/\.\.\//g, '').replace(/wwwroot/g, '~');
     let content = fs.readFileSync(outputFolder + '/index.html', encoding);
     let $ = cheerio.load(content);
     let files = {
@@ -89,7 +89,7 @@ function changeBundle(fileName) {
     return newBundleName;
 }
 
-gulp.task('default', () => {
+gulp.task('default', async () => {
     if (argv.path) {
 		const transformFolder = argv.path;
         rimraf.sync(transformFolder);

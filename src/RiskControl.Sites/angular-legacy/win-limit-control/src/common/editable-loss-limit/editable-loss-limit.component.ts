@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
+// @ts-nocheck
+import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import * as _ from 'lodash';
 import { LossLimitTextboxComponent } from '../loss-limit-textbox';
 
@@ -6,7 +7,7 @@ import { LossLimitTextboxComponent } from '../loss-limit-textbox';
     selector: 'nap-editable-loss-limit',
     templateUrl: './editable-loss-limit.component.html'
 })
-export class EditableLossLimitComponent extends LossLimitTextboxComponent implements OnInit {
+export class EditableLossLimitComponent extends LossLimitTextboxComponent implements AfterViewInit {
     @Input() editable = true;
     @ViewChild('lossLimitTextbox') lossLimitTextbox: LossLimitTextboxComponent;
     @Output() edit = new EventEmitter();
@@ -24,7 +25,7 @@ export class EditableLossLimitComponent extends LossLimitTextboxComponent implem
         return this.lossLimitTextbox ? this.lossLimitTextbox.invalid : false;
     }
 
-    ngOnInit() {
+    ngAfterViewInit() {
         this.lossLimitTextbox.numericTextboxComponent.enter.subscribe(() => this.onEnter());
         this.lossLimitTextbox.numericTextboxComponent.escape.subscribe(() => this.onEscape());
     }
@@ -36,7 +37,7 @@ export class EditableLossLimitComponent extends LossLimitTextboxComponent implem
 
         this.isEdit = true;
         setTimeout(() => {
-            this.lossLimitTextbox.numericTextboxComponent.focus();
+            this.lossLimitTextbox.numericTextboxComponent.focusInput();
         });
         this.edit.emit();
     }
@@ -57,13 +58,13 @@ export class EditableLossLimitComponent extends LossLimitTextboxComponent implem
         if (!_.isNil(this.value)) {
             this.isEmitted = true;
             this.complete.emit(this.value);
-            this.lossLimitTextbox.numericTextboxComponent.blur();
+            this.lossLimitTextbox.numericTextboxComponent.blurInput();
         }
     }
 
     private onEscape() {
         this.isEmitted = true;
         this.complete.emit();
-        this.lossLimitTextbox.numericTextboxComponent.blur();
+        this.lossLimitTextbox.numericTextboxComponent.blurInput();
     }
 }

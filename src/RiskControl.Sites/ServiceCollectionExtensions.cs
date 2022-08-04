@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RiskControl.Sites.App_Start.AutoMapperProfiles.WinLossLimitControl;
 using RiskControl.Sites.AutoMapperProfiles.BettingMonitoring;
 using RiskControl.Sites.AutoMapperProfiles.NonSports;
 using RiskControl.Sites.AutoMapperProfiles.VoidRejectRefund;
@@ -83,6 +84,7 @@ namespace RiskControl.Sites
                     mc.AddProfile(new TopTwentyProfile());
                     mc.AddProfile(new UserNameViewProfile());
                     mc.AddProfile(new CurrencySettingProfile());
+                    mc.AddProfile(new ManagedSettingGroupProfile());
                     mc.AddProfile(new GameRoundProfile());
                     mc.AddProfile(new MonitorProfile());
                     mc.AddProfile(new PlayerSettingProfile());

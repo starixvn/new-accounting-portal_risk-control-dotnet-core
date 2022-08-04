@@ -1,4 +1,4 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { HttpService } from 'nap-components/http';
@@ -21,7 +21,7 @@ describe('InsertHttpService', () => {
     it('should invoke validateForInserting method with right parameters and returns data of httpService',
         inject([HttpService, InsertHttpService], (httpService: HttpService, insertHttpService: InsertHttpService) => {
             const fakeResult: CommandResult = {
-                ErrorCode: 0
+                errorCode: 0
             };
             const spy = spyOn(httpService, 'post').and.returnValue(Observable.of(fakeResult));
             const result = insertHttpService.validateForInserting('');
@@ -65,7 +65,7 @@ describe('InsertHttpService', () => {
                 RedLimit: 3
             }];
             const fakeResult: CommandResult = {
-                ErrorCode: 0
+                errorCode: 0
             };
             const spy = spyOn(httpService, 'post').and.returnValue(Observable.of(fakeResult));
             const result = insertHttpService.insert(insertCommand);

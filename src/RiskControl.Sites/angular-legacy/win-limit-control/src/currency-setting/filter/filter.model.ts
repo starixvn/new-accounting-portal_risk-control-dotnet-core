@@ -5,4 +5,5 @@ export interface FilterModel {
     isCreditSite: boolean;
     currencyId: number;
     excludeTestCurrency: boolean;
+    groupId: number;
 }

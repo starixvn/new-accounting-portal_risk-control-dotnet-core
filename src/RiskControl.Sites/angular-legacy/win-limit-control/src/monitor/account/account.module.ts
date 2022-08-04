@@ -13,7 +13,7 @@ import { AccountComponent } from './account.component';
         CommonModule,
         FormsModule,
         HttpModule.forRoot(),
-        NgbModalModule.forRoot()
+        NgbModalModule
     ],
     declarations: [
         AccountComponent

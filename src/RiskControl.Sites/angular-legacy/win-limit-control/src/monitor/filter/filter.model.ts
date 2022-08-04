@@ -1,10 +1,10 @@
-import { NgbDate } from 'nap-components/date';
+import { NapDate } from 'nap-components/date';
 import { LimitLevel } from '../../common/filter';
 import { GridColumns } from '../common/column';
 
 export class FilterModel {
-  fromDate: NgbDate;
-  toDate: NgbDate;
+  fromDate: NapDate;
+  toDate: NapDate;
   productId: number;
   levelId: LimitLevel[];
   userName: string;

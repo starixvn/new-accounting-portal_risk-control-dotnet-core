@@ -1,22 +1,22 @@
 import { TableColumn, TableColumns } from '../common/column';
 
 export interface HistoryModel {
-    GroupId: number;
-    GroupName: string;
-    Currency: string;
-    ModifiedDate: Date;
-    BlackLimit: number;
-    GreyLimit: number;
-    OrangeLimit: number;
-    YellowLimit: number;
-    RedLimit: number;
-    WinningAmount: number;
-    WinningAmountRM: number;
-    ReachedLimitLevel: number;
-    ActionName: string;
-    ProceededBy: string;
-    IsNotified: boolean;
-    LogID: number;
+    groupId: number;
+    groupName: string;
+    currency: string;
+    modifiedDate: Date;
+    blackLimit: number;
+    greyLimit: number;
+    orangeLimit: number;
+    yellowLimit: number;
+    redLimit: number;
+    winningAmount: number;
+    winningAmountRM: number;
+    reachedLimitLevel: number;
+    actionName: string;
+    proceededBy: string;
+    isNotified: boolean;
+    logID: number;
 }
 
 export interface InsertColumns extends TableColumns {

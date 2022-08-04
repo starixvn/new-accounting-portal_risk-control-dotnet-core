@@ -1,4 +1,4 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { HttpService } from 'nap-components/http';
@@ -19,7 +19,7 @@ describe('GridService', () => {
     });
 
     const commandResult: CommandResult = {
-        ErrorCode: 0
+        errorCode: 0
     };
 
     it('should invoke search method with right parameters and returns data of httpService',

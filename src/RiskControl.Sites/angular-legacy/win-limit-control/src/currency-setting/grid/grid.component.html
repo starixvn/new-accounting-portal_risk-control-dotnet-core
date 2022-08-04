@@ -14,7 +14,7 @@
     </colgroup>
 </ng-template>
 <div *ngIf="productSettings" [ngSwitch]="productSettings.length > 0">
-    <div class="grid">
+    <div class="nap-grid">
         <div style="width: 1610px">
             <nap-breadcrumb [items]="breadcrumbItems"></nap-breadcrumb>
             <div class="header">
@@ -41,42 +41,42 @@
                                 Loss Limit (RM)
                                 <div class="limit-row" *ngIf="hasHostPermission">
                                     <nap-loss-limit-textbox [(value)]="blackLimit"></nap-loss-limit-textbox>
-                                    <button type="button" class="btn btn-secondary" (click)="applyBlackLimit()">Apply</button>
+                                    <button type="button" class="btn btn-light" (click)="applyBlackLimit()">Apply</button>
                                 </div>
                             </th>
                             <th>
                                 Loss Limit (RM)
                                 <div class="limit-row" *ngIf="hasHostPermission">
                                     <nap-loss-limit-textbox [(value)]="greyLimit"></nap-loss-limit-textbox>
-                                    <button type="button" class="btn btn-secondary" (click)="applyGreyLimit()">Apply</button>
+                                    <button type="button" class="btn btn-light" (click)="applyGreyLimit()">Apply</button>
                                 </div>
                             </th>
                             <th>
                                 Win Limit (RM)
                                 <div class="limit-row" *ngIf="hasHostPermission">
                                     <nap-win-limit-textbox [(value)]="orangeLimit"></nap-win-limit-textbox>
-                                    <button type="button" class="btn btn-secondary" (click)="applyOrangeLimit()">Apply</button>
+                                    <button type="button" class="btn btn-light" (click)="applyOrangeLimit()">Apply</button>
                                 </div>
                             </th>
                             <th>
                                 Win Limit (RM)
                                 <div class="limit-row" *ngIf="hasHostPermission">
                                     <nap-win-limit-textbox [(value)]="yellowLimit"></nap-win-limit-textbox>
-                                    <button type="button" class="btn btn-secondary" (click)="applyYellowLimit()">Apply</button>
+                                    <button type="button" class="btn btn-light" (click)="applyYellowLimit()">Apply</button>
                                 </div>
                             </th>
                             <th>
                                 Win Limit (RM)
                                 <div class="limit-row" *ngIf="hasHostPermission">
                                     <nap-win-limit-textbox [(value)]="redLimit"></nap-win-limit-textbox>
-                                    <button type="button" class="btn btn-secondary" (click)="applyRedLimit()">Apply</button>
+                                    <button type="button" class="btn btn-light" (click)="applyRedLimit()">Apply</button>
                                 </div>
                             </th>
                             <th>
                                 Allow Block Place Bet
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" [disabled]="!hasHostPermission" class="form-check-input" [(ngModel)]="isBlockedPlacebetRedLevel" (ngModelChange)="applyRedBlockPlacebet()">
+                                        <input type="checkbox" [disabled]="!hasHostPermission" class="form-check-input position-static" [(ngModel)]="isBlockedPlacebetRedLevel" (ngModelChange)="applyRedBlockPlacebet()">
                                     </label>
                                 </div>
                             </th>
@@ -84,7 +84,7 @@
                                 Allow Block Transfer/Withdraw
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" [disabled]="!hasHostPermission" class="form-check-input" [(ngModel)]="isBlockedTransferRedLevel" (ngModelChange)="applyRedBlockTransfer()">
+                                        <input type="checkbox" [disabled]="!hasHostPermission || isAllDisabledBlockedTransferRedLevel" class="form-check-input position-static" [(ngModel)]="isBlockedTransferRedLevel" (ngModelChange)="applyRedBlockTransfer()">
                                     </label>
                                 </div>
                             </th>
@@ -97,57 +97,57 @@
                     <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                     <tbody>
                         <ng-template *ngIf="productSettings.length > 0" ngFor let-setting [ngForOf]="displayedProductSettings" let-i="index">
-                            <ng-template ngFor let-group [ngForOf]="setting.Groups" let-isFirst="first">
+                            <ng-template ngFor let-group [ngForOf]="setting.groups" let-isFirst="first">
                                 <tr napLossLimitValidator napWinLimitValidator>
-                                    <td *ngIf="isFirst" class="text-center" [attr.rowspan]="setting.Groups.length">
+                                    <td *ngIf="isFirst" class="text-center" [attr.rowspan]="setting.groups.length">
                                         {{ paginationInstance.itemsPerPage * (paginationInstance.currentPage - 1) + i + 1 }}
                                     </td>
-                                    <td class="word-break-all" *ngIf="isFirst" [attr.rowspan]="setting.Groups.length">{{ setting.CurrencyName }}</td>
-                                    <td class="word-break-all" *ngIf="isFirst" [attr.rowspan]="setting.Groups.length">{{ setting.SiteName }}</td>
-                                    <td><span class="nap-link word-break-all" (click)="showGroupSetting(setting.ProductName)"> {{ group.GroupName }}</span></td>
+                                    <td class="word-break-all" *ngIf="isFirst" [attr.rowspan]="setting.groups.length">{{ setting.currencyName }}</td>
+                                    <td class="word-break-all" *ngIf="isFirst" [attr.rowspan]="setting.groups.length">{{ setting.siteName }}</td>
+                                    <td><span class="nap-link word-break-all" (click)="showGroupSetting(setting.productName)"> {{ group.groupName }}</span></td>
                                     <td>
                                         <div class="limit-row">
-                                            <nap-loss-limit-textbox [disabled]="!hasHostPermission" #blackLossLimitTextbox [(value)]="group.BlackLimit"></nap-loss-limit-textbox>
+                                            <nap-loss-limit-textbox [disabled]="!hasHostPermission" #blackLossLimitTextbox [(value)]="group.blackLimit"></nap-loss-limit-textbox>
                                             <nap-exclamation #blackExclamation></nap-exclamation>
                                             <span>(RM)</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="limit-row">
-                                            <nap-loss-limit-textbox [disabled]="!hasHostPermission" #greyLossLimitTextbox [(value)]="group.GreyLimit"></nap-loss-limit-textbox>
+                                            <nap-loss-limit-textbox [disabled]="!hasHostPermission" #greyLossLimitTextbox [(value)]="group.greyLimit"></nap-loss-limit-textbox>
                                             <nap-exclamation #greyExclamation></nap-exclamation>
                                             <span>(RM)</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="limit-row">
-                                            <nap-win-limit-textbox [disabled]="!hasHostPermission" #orangeWinLimitTextbox [(value)]="group.OrangeLimit"></nap-win-limit-textbox>
+                                            <nap-win-limit-textbox [disabled]="!hasHostPermission" #orangeWinLimitTextbox [(value)]="group.orangeLimit"></nap-win-limit-textbox>
                                             <nap-exclamation #orangeExclamation></nap-exclamation>
                                             <span>(RM)</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="limit-row">
-                                            <nap-win-limit-textbox [disabled]="!hasHostPermission" #yellowWinLimitTextbox [(value)]="group.YellowLimit"></nap-win-limit-textbox>
+                                            <nap-win-limit-textbox [disabled]="!hasHostPermission" #yellowWinLimitTextbox [(value)]="group.yellowLimit"></nap-win-limit-textbox>
                                             <nap-exclamation #yellowExclamation></nap-exclamation>
                                             <span>(RM)</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="limit-row">
-                                            <nap-win-limit-textbox [disabled]="!hasHostPermission" #redWinLimitTextbox [(value)]="group.RedLimit"></nap-win-limit-textbox>
+                                            <nap-win-limit-textbox [disabled]="!hasHostPermission" #redWinLimitTextbox [(value)]="group.redLimit"></nap-win-limit-textbox>
                                             <nap-exclamation #redExclamation></nap-exclamation>
                                             <span>(RM)</span>
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <label class="form-check-label">
-                                        <input type="checkbox" [disabled]="!hasHostPermission" class="form-check-input" [(ngModel)]="group.IsBlockedPlacebetRedLevel" (ngModelChange)="onIsBlockedPlacebetRedLevelChange()">
+                                        <label class="form-check">
+                                        <input type="checkbox" [disabled]="!hasHostPermission" class="form-check-input position-static" [(ngModel)]="group.isBlockedPlacebetRedLevel" (ngModelChange)="onIsBlockedPlacebetRedLevelChange()">
                                     </label>
                                     </td>
                                     <td class="text-center">
-                                        <label class="form-check-label">
-                                        <input type="checkbox" [disabled]="group.IsCreditSite || !hasHostPermission" class="form-check-input" [(ngModel)]="group.IsBlockedTransferRedLevel" (ngModelChange)="onIsBlockedTransferRedLevelChange()">
+                                        <label class="form-check">
+                                        <input type="checkbox" [disabled]="group.isCreditSite || !hasHostPermission" class="form-check-input position-static" [(ngModel)]="group.isBlockedTransferRedLevel" (ngModelChange)="onIsBlockedTransferRedLevelChange()">
                                     </label>
                                     </td>
                                 </tr>
@@ -185,7 +185,7 @@
         <nap-note>
             <span class="text-danger">- Limit Setting = 0: Unlimited.</span>
         </nap-note>
-        <button *ngIf="hasHostPermission" type="button" class="btn btn-primary" (click)="save()">
+        <button *ngIf="hasHostPermission" type="button" class="btn btn-primary mr-2" (click)="save()">
             Save
         </button>
         <button *ngIf="hasHostPermission" type="button" class="btn btn-danger" (click)="cancel()">

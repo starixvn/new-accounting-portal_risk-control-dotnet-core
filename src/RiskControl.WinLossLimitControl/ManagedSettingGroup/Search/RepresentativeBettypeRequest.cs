@@ -1,0 +1,10 @@
+﻿using MediatR;
+using System.Collections.Generic;
+
+namespace RiskControl.WinLossLimitControl.ManagedSettingGroup.Search
+{
+    public class RepresentativeBettypeRequest : IRequest<RepresentativeBettypeModel>
+    {
+        public int ProductID { get; set; }
+    }
+}

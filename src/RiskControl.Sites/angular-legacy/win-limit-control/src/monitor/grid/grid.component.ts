@@ -125,44 +125,44 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
 
     onUnblockPlaceBet(monitorModel: MonitorModel) {
         this.confirmationService.openContent(
-            `Are you sure you want to UnBlock player ${monitorModel.UserName} on ${monitorModel.ProductName} product?`,
+            `Are you sure you want to UnBlock player ${monitorModel.userName} on ${monitorModel.productName} product?`,
             () => this.internalUnblockPlaceBet(monitorModel),
-            () => monitorModel.IsBlockedPlaceBet = true
+            () => monitorModel.isBlockedPlaceBet = true
         );
         return false;
     }
 
     private internalUnblockPlaceBet(monitorModel: MonitorModel) {
         const unblockCommand: UnblockCommand = {
-            CustId: monitorModel.CustId,
-            ProductId: monitorModel.ProductId,
-            GroupId: monitorModel.GroupId
+            custId: monitorModel.custId,
+            productId: monitorModel.productId,
+            groupId: monitorModel.groupId
         };
 
         this.gridService.unblockPlaceBet(unblockCommand).subscribe(commandResult => {
-            monitorModel.IsBlockedPlaceBet = commandResult.ErrorCode !== 0;
+            monitorModel.isBlockedPlaceBet = commandResult.errorCode !== 0;
             this.ngOnChanges();
         });
     }
 
     onUnblockTransfer(monitorModel: MonitorModel) {
         this.confirmationService.openContent(
-            `Are you sure you want to UnBlock player ${monitorModel.UserName} on ${monitorModel.ProductName} product?`,
+            `Are you sure you want to UnBlock player ${monitorModel.userName} on ${monitorModel.productName} product?`,
             () => this.internalUnblockTransfer(monitorModel),
-            () => monitorModel.IsBlockedTransfer = true
+            () => monitorModel.isBlockedTransfer = true
         );
         return false;
     }
 
     private internalUnblockTransfer(monitorModel: MonitorModel) {
         const unblockCommand: UnblockCommand = {
-            CustId: monitorModel.CustId,
-            ProductId: monitorModel.ProductId,
-            GroupId: monitorModel.GroupId
+            custId: monitorModel.custId,
+            productId: monitorModel.productId,
+            groupId: monitorModel.groupId
         };
 
         this.gridService.unblockTransfer(unblockCommand).subscribe(commandResult => {
-            monitorModel.IsBlockedTransfer = commandResult.ErrorCode !== 0;
+            monitorModel.isBlockedTransfer = commandResult.errorCode !== 0;
             this.ngOnChanges();
         });
     }

@@ -1,2 +1,8 @@
 @import '~nap-theme/scss/filter';
 @import '~nap-theme/scss/grid';
+
+.nap-grid {
+    div.body {
+        overflow-x: hidden;
+    }
+}

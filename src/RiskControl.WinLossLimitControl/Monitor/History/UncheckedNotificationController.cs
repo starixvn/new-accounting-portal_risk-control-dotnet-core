@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.WinLossLimitControl.Monitor.History
 {
+    [ApiController]
     [Route("state-api/win-limit-control/monitor")]
     public class UncheckedNotificationController : ControllerBase
     {

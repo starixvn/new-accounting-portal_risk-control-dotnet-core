@@ -1,12 +1,12 @@
 export interface InsertCommand {
-    CustId: number;
-    CurrencyId: number;
-    SiteId: number;
-    ProductId: number;
-    GroupId: number;
-    BlackLimit: number;
-    GreyLimit: number;
-    OrangeLimit: number;
-    YellowLimit: number;
-    RedLimit: number;
+    custId: number;
+    currencyId: number;
+    siteId: number;
+    productId: number;
+    groupId: number;
+    blackLimit: number;
+    greyLimit: number;
+    orangeLimit: number;
+    yellowLimit: number;
+    redLimit: number;
 }

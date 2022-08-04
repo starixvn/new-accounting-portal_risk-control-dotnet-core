@@ -1,8 +1,9 @@
 import { TreeviewItem } from 'ngx-treeview';
-import { Product, Currency, SiteGroup } from './filter.model';
+import { Product, Currency, SiteGroup, Group } from './filter.model';
 
 export const AllProductId = 0;
 export const AllCurrencyId = 0;
+export const AllGroupId = 0;
 export const FilterHelper = {
     insertProductAll: insertProductAll,
     insertCurrencyAll: insertCurrencyAll,
@@ -12,8 +13,8 @@ export const FilterHelper = {
 
 function insertProductAll(products: Product[]): Product[] {
     const allProducts: Product[] = [{
-        Id: AllProductId,
-        Name: 'All'
+        id: AllProductId,
+        name: 'All'
     }];
     return allProducts.concat(products);
 }
@@ -21,8 +22,8 @@ function insertProductAll(products: Product[]): Product[] {
 
 function insertCurrencyAll(products: Currency[]): Currency[] {
     const allCurrencies: Currency[] = [{
-        Id: AllCurrencyId,
-        Name: 'All'
+        id: AllCurrencyId,
+        name: 'All'
     }];
     return allCurrencies.concat(products);
 }
@@ -30,11 +31,11 @@ function insertCurrencyAll(products: Currency[]): Currency[] {
 function convertSiteToTreeviewItem(siteGroups: SiteGroup[]): TreeviewItem[] {
     return siteGroups.map(siteGroup => {
         return new TreeviewItem({
-            text: siteGroup.GroupName,
-            value: siteGroup.GroupName,
-            children: siteGroup.Sites.map(site => new TreeviewItem({
-                text: site.SiteName,
-                value: site.SiteId
+            text: siteGroup.groupName,
+            value: siteGroup.groupName,
+            children: siteGroup.sites.map(site => new TreeviewItem({
+                text: site.siteName,
+                value: site.siteId
             }))
         });
     });

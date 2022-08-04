@@ -8,10 +8,12 @@
     vertical-align: top;
 }
 
-.grid {
+.nap-grid {
     .body {
+        overflow-x: hidden;
         &.no-scroll {
             overflow-y: auto;
+            overflow-x: hidden;
         }
     }
 }

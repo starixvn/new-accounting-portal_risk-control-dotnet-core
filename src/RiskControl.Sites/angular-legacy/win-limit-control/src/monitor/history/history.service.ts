@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpService } from 'nap-components/http';
 import { MonitorModel } from '../grid';
@@ -15,10 +15,10 @@ export class HistoryService {
     ) { }
 
     show(monitorModel: MonitorModel, hasHostPermission: boolean) {
-        this.query(monitorModel.CustId, monitorModel.ProductId).subscribe(historyModels => {
+        this.query(monitorModel.custId, monitorModel.productId).subscribe(historyModels => {
             const modalRef = this.modalService.open(HistoryComponent, { backdrop: 'static', windowClass: 'modal-auto-size' });
             const componentInstance: HistoryComponent = modalRef.componentInstance;
-            componentInstance.show(historyModels, monitorModel.UserName, monitorModel.ProductName, monitorModel.CustId, hasHostPermission);
+            componentInstance.show(historyModels, monitorModel.userName, monitorModel.productName, monitorModel.custId, hasHostPermission);
         });
     }
 

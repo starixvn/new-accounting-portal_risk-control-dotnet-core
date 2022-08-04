@@ -26,6 +26,13 @@
     }
 }
 
-:host /deep/ nap-countdown-timer .fa-refresh {
+:host ::ng-deep nap-countdown-timer .fa-refresh {
     color: #0876B7;
+    padding-right: 10px;
+}
+
+.nap-grid {
+    div.body {
+        overflow-x: hidden;
+    }
 }

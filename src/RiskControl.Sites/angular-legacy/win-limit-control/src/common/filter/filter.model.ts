@@ -7,23 +7,28 @@ export enum LimitLevel {
 }
 
 export interface Product {
-    Id: number;
-    Name: string;
+    id: number;
+    name: string;
 }
 
 export interface SiteGroup {
-    GroupName: string;
-    Sites: Site[];
+    groupName: string;
+    sites: Site[];
 }
 
 export interface Site {
-    SiteId: number;
-    SiteName: string;
+    siteId: number;
+    siteName: string;
 }
 
 export interface Currency {
-    Id: number;
-    Name: string;
+    id: number;
+    name: string;
+}
+
+export interface Group {
+    groupId: number,
+    groupName: string;
 }
 
 export interface QueryCurrencyModel {

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { NumericTextboxModule } from 'ngx-numeric-textbox';
+import { NumericTextboxModule } from 'nap-components/numeric-textbox';
 import { HttpModule } from 'nap-components/http';
 import { NoteModule } from 'nap-components/note';
 import { NumberFormatModule } from 'nap-components/number-format';
@@ -34,7 +34,7 @@ export class CustomPaginationConfig extends PaginationConfig {
         LossLimitTextboxModule,
         ExclamationModule,
         NgxPaginationModule,
-        NgbModalModule.forRoot(),
+        NgbModalModule,
         NoteModule,
         BreadcrumbModule,
         ConfirmationModule.forRoot(),

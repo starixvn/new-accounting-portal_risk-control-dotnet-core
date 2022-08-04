@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpService } from 'nap-components/http';
 import { DateHelper } from 'nap-components/date';
 import { CommandResult } from '../../common/model';
