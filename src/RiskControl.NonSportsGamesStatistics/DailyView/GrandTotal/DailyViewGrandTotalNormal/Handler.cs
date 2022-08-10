@@ -10,7 +10,7 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.DailyViewGra
     public class Handler : BaseHandlerWithoutSorting<QueryModel, Criteria, CurrencyViewStatisticsReportModel>, IRequestHandler<QueryModel, GridOptions>
     {
         public Handler(
-            Service<CurrencyViewStatisticsReportModel> service,
+            Service<CurrencyViewStatisticsReportModel, Criteria> service,
             GridOptionBuilderService<CurrencyViewStatisticsReportModel> gridOptionService) : base(service, gridOptionService)
         {
         }

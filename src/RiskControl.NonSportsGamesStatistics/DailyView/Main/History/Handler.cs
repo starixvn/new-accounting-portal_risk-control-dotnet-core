@@ -10,7 +10,7 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.Main.History
     public class Handler : BaseHandlerWithSorting<QueryModel, Criteria, DailyViewReportModel>, IRequestHandler<QueryModel, GridOptions>
     {
         public Handler(
-            Service<DailyViewReportModel> service,
+            Service<DailyViewReportModel, Criteria> service,
             SortingService<DailyViewReportModel> sortingService,
             GridOptionBuilderService<DailyViewReportModel> gridOptionService) : base(service, sortingService, gridOptionService)
         {

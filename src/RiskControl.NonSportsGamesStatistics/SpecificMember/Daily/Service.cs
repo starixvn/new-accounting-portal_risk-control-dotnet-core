@@ -7,7 +7,8 @@ using RiskControl.NonSportsGamesStatistics.SpecificMember.Common;
 
 namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Daily
 {
-    public class ServiceImp : Service<DailyViewReportModel>
+    public class ServiceImp<TCriteria> : Service<DailyViewReportModel, TCriteria>
+        where TCriteria: BaseStatisticCriteria
     {
         private readonly DailyService dailyService;
         private readonly IMapper mapper;
@@ -18,7 +19,7 @@ namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Daily
             this.mapper = mapper;
         }
 
-        public async Task<DailyViewReportModel> Query(BaseStatisticCriteria criteria, DateTime winLossDate)
+        public async Task<DailyViewReportModel> Query(TCriteria criteria, DateTime winLossDate)
         {
             var historyCriteria = mapper.Map<HistoryCriteria>(criteria);
             var normalCriteria = mapper.Map<NormalCriteria>(criteria);

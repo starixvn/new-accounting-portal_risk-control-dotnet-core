@@ -14,7 +14,7 @@ import { ModalOptions } from './modal-options';
   selector: '[napModalContainer]',
 })
 export class ModalContainerDirective {
-  private index = 0;
+  private index = 1;
   private readonly windowFactory: ComponentFactory<ModalWindowComponent>;
   private readonly backdropFactory: ComponentFactory<ModalBackdropComponent>;
 

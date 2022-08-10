@@ -10,7 +10,7 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main.History
     public class Handler : BaseHandlerWithSorting<QueryModel, Criteria, UserNameViewReportModel>, IRequestHandler<QueryModel, GridOptions>
     {
         public Handler(
-            Service<UserNameViewReportModel> service,
+            Service<UserNameViewReportModel, Criteria> service,
             SortingService<UserNameViewReportModel> sortingService,
             GridOptionBuilderService<UserNameViewReportModel> gridOptionService) : base(service, sortingService, gridOptionService)
         {

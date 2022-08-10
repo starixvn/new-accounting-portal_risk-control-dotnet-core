@@ -11,7 +11,7 @@ namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Username
     public class Handler : BaseHandlerWithSorting<QueryModel, UsernameHistoryCriteria, UserNameViewReportModel>, IRequestHandler<QueryModel, GridOptions>
     {
         public Handler(
-            Service<UserNameViewReportModel> service,
+            Service<UserNameViewReportModel, UsernameHistoryCriteria> service,
             SortingService<UserNameViewReportModel> sortingService,
             GridOptionBuilderService<UserNameViewReportModel> gridOptionService) : base(service, sortingService, gridOptionService)
         {

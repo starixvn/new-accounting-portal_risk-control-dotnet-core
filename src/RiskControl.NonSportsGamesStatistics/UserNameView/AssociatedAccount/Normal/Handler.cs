@@ -10,7 +10,7 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount.No
     public class Handler : BaseHandlerWithoutSorting<QueryModel, Criteria, UserNameViewReportModel>, IRequestHandler<QueryModel, GridOptions>
     {
         public Handler(
-            Service<UserNameViewReportModel> service,
+            Service<UserNameViewReportModel, Criteria> service,
             GridOptionBuilderService<UserNameViewReportModel> gridOptionService) : base(service, gridOptionService)
         {
         }

@@ -10,7 +10,7 @@ namespace RiskControl.NonSportsGamesStatistics.SpecificMember.GrandTotal.CasinoP
     public class Handler : BaseHandlerWithoutSorting<QueryModel, HistoryCriteria, CurrencyViewStatisticsReportModel>, IRequestHandler<QueryModel, GridOptions>
     {
         public Handler(
-            Service<CurrencyViewStatisticsReportModel> service,
+            Service<CurrencyViewStatisticsReportModel, HistoryCriteria> service,
             GridOptionBuilderService<CurrencyViewStatisticsReportModel> gridOptionService) : base(service, gridOptionService)
         {
         }

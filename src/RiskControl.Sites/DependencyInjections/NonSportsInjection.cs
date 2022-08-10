@@ -83,8 +83,10 @@ namespace RiskControl.Sites.DependencyInjections
 
             service.AddTransient<GridOptionBuilderService<CurrencyViewStatisticsReportModel>, DailyViewGrandTotal.GridOptionBuilderServiceImp>();
 
-            service.AddTransient<Service<DailyViewGroupStatisticWithTotalReportModel>, DailyViewGroupStatistics.CompanyServiceImp>();
-            service.AddTransient<Service<DailyViewGroupStatisticWithTotalReportModel>, DailyViewGroupStatistics.DeviceServiceImp>();
+            service.AddTransient<Service<DailyViewGroupStatisticWithTotalReportModel, DailyViewGroupStatistics.CompanyHistory.Criteria>, DailyViewGroupStatistics.CompanyServiceImp<DailyViewGroupStatistics.CompanyHistory.Criteria>>();
+            service.AddTransient<Service<DailyViewGroupStatisticWithTotalReportModel, DailyViewGroupStatistics.CompanyNormal.Criteria>, DailyViewGroupStatistics.CompanyServiceImp<DailyViewGroupStatistics.CompanyNormal.Criteria>>();
+            service.AddTransient<Service<DailyViewGroupStatisticWithTotalReportModel, DailyViewGroupStatistics.DeviceHistory.Criteria>, DailyViewGroupStatistics.DeviceServiceImp<DailyViewGroupStatistics.DeviceHistory.Criteria>>();
+            service.AddTransient<Service<DailyViewGroupStatisticWithTotalReportModel, DailyViewGroupStatistics.DeviceNormal.Criteria>, DailyViewGroupStatistics.DeviceServiceImp<DailyViewGroupStatistics.DeviceNormal.Criteria>>();
 
             service.AddTransient<GridOptionBuilderService<DailyViewGroupStatisticWithTotalReportModel>, DailyViewGroupStatistics.GridOptionBuilderServiceImp>();
             service.AddTransient<SortingService<DailyViewGroupStatisticWithTotalReportModel>, DailyViewGroupStatistics.SortingServiceImp>();
@@ -108,23 +110,28 @@ namespace RiskControl.Sites.DependencyInjections
             service.AddTransient<UserNameViewCommon.GridOptionHeaderBuilderService, UserNameViewCommon.GridOptionHeaderBuilderServiceImp>();
             service.AddTransient<UserNameViewCommon.GridOptionDataRowBuilderService, UserNameViewCommon.GridOptionDataRowBuilderServiceImp>();
 
-            service.AddTransient<Service<UserNameViewReportModel>, UserNameViewMain.ServiceImp>();
+            service.AddTransient<Service<UserNameViewReportModel, UserNameViewMain.History.Criteria>, UserNameViewMain.ServiceImp<UserNameViewMain.History.Criteria>>();
+            service.AddTransient<Service<UserNameViewReportModel, UserNameViewMain.Normal.Criteria>, UserNameViewMain.ServiceImp<UserNameViewMain.Normal.Criteria>>();
             service.AddTransient<SortingService<UserNameViewReportModel>, UserNameViewMain.SortingServiceImp>();
             service.AddTransient<GridOptionBuilderService<UserNameViewReportModel>, UserNameViewMain.GridOptionBuilderServiceImp>();
 
-            service.AddTransient<Service<UserNameViewReportModel>, UserNameView.GrandTotal.ServiceImp>();
+            service.AddTransient<Service<UserNameViewReportModel, UserNameView.GrandTotal.History.Criteria>, UserNameView.GrandTotal.ServiceImp<UserNameView.GrandTotal.History.Criteria>>();
+            service.AddTransient<Service<UserNameViewReportModel, UserNameView.GrandTotal.Normal.Criteria>, UserNameView.GrandTotal.ServiceImp<UserNameView.GrandTotal.Normal.Criteria>>();
             service.AddTransient<GridOptionBuilderService<UserNameViewReportModel>, UserNameView.GrandTotal.GridOptionBuilderServiceImp>();
 
-            service.AddTransient<Service<UserNameViewReportModel>, UserNameView.AssociatedAccount.ServiceImp>();
+            service.AddTransient<Service<UserNameViewReportModel, UserNameView.AssociatedAccount.History.Criteria>, UserNameView.AssociatedAccount.ServiceImp<UserNameView.AssociatedAccount.History.Criteria>>();
+            service.AddTransient<Service<UserNameViewReportModel, UserNameView.AssociatedAccount.Normal.Criteria>, UserNameView.AssociatedAccount.ServiceImp<UserNameView.AssociatedAccount.Normal.Criteria>>();
             service.AddTransient<GridOptionBuilderService<UserNameViewReportModel>, UserNameView.AssociatedAccount.GridOptionBuilderServiceImp>();
 
             service.AddTransient<TopTwentyCommon.GridOptionHeaderBuilderService, TopTwentyCommon.GridOptionHeaderBuilderServiceImp>();
             service.AddTransient<TopTwentyCommon.GridOptionDataRowBuilderService, TopTwentyCommon.GridOptionDataRowBuilderServiceImp>();
 
-            service.AddTransient<Service<List<UserNameViewGroupStatisticsWithTotalModel>>, TopTwentyMain.ServiceImp>();
+            service.AddTransient<Service<List<UserNameViewGroupStatisticsWithTotalModel>, TopTwentyMain.History.Criteria>, TopTwentyMain.ServiceImp<TopTwentyMain.History.Criteria>>();
+            service.AddTransient<Service<List<UserNameViewGroupStatisticsWithTotalModel>, TopTwentyMain.Normal.Criteria>, TopTwentyMain.ServiceImp<TopTwentyMain.Normal.Criteria>>();
             service.AddTransient<GridOptionBuilderService<List<UserNameViewGroupStatisticsWithTotalModel>>, TopTwentyMain.GridOptionBuilderServiceImp>();
 
-            service.AddTransient<Service<UserNameViewGroupStatisticsWithTotalModel>, TopTwentyGroupStatistics.ServiceImp>();
+            service.AddTransient<Service<UserNameViewGroupStatisticsWithTotalModel, TopTwentyGroupStatistics.History.Criteria>, TopTwentyGroupStatistics.ServiceImp<TopTwentyGroupStatistics.History.Criteria>>();
+            service.AddTransient<Service<UserNameViewGroupStatisticsWithTotalModel, TopTwentyGroupStatistics.Normal.Criteria>, TopTwentyGroupStatistics.ServiceImp<TopTwentyGroupStatistics.Normal.Criteria>>();
             service.AddTransient<GridOptionBuilderService<UserNameViewGroupStatisticsWithTotalModel>, TopTwentyGroupStatistics.GridOptionBuilderServiceImp>();
 
             service.AddTransient<Hourly.Service, Hourly.ServiceImp>();
@@ -132,32 +139,41 @@ namespace RiskControl.Sites.DependencyInjections
 
             service.AddTransient<UserNameViewMain.ExcelReportBuilder, UserNameViewMain.ExcelReportBuilderImp>();
 
-            service.AddTransient<Service<UserNameViewReportModel>, SpecificMember.Username.ServiceImp>();
+            service.AddTransient<Service<UserNameViewReportModel, SpecificMember.Common.UsernameHistoryCriteria>, SpecificMember.Username.ServiceImp<SpecificMember.Common.UsernameHistoryCriteria>>();
 
-            service.AddTransient<Service<DailyReportModel>, DailyViewDaily.ServiceImp>();
+            service.AddTransient<Service<DailyReportModel, DailyViewDaily.History.Criteria>, DailyViewDaily.ServiceImp<DailyViewDaily.History.Criteria>>();
+            service.AddTransient<Service<DailyReportModel, DailyViewDaily.Normal.Criteria>, DailyViewDaily.ServiceImp<DailyViewDaily.Normal.Criteria>>();
 
-            service.AddTransient<Service<DailyViewReportModel>, DailyView.ServiceImp>();
+            service.AddTransient<Service<DailyViewReportModel, DailyView.History.Criteria>, DailyView.ServiceImp<DailyView.History.Criteria>>();
+            service.AddTransient<Service<DailyViewReportModel, DailyView.Normal.Criteria>, DailyView.ServiceImp<DailyView.Normal.Criteria>>();
+            service.AddTransient<Service<DailyViewReportModel, DailyView.ProductHistory.Criteria>, DailyView.ServiceImp<DailyView.ProductHistory.Criteria>>();
+            service.AddTransient<Service<DailyViewReportModel, DailyView.ProductNormal.Criteria>, DailyView.ServiceImp<DailyView.ProductNormal.Criteria>>();
 
-            service.AddTransient<Service<DailyViewReportModel>, SpecificMember.Daily.ServiceImp>();
+            service.AddTransient<Service<DailyViewReportModel, SpecificMember.Daily.HistoryCriteria>, SpecificMember.Daily.ServiceImp<SpecificMember.Daily.HistoryCriteria>>();
 
-            service.AddTransient<Service<DailyViewReportModel>, SpecificMember.Product.ServiceImp>();
+            service.AddTransient<Service<DailyViewReportModel, SpecificMember.Product.HistoryCriteria>, SpecificMember.Product.ServiceImp<SpecificMember.Product.HistoryCriteria>>();
 
             service.AddTransient<SpecificMemberCommon.UsernameService, SpecificMemberCommon.UsernameServiceImp>();
-            service.AddTransient<Service<UserNameViewReportModel>, SpecificMember.AssociatedAccount.ServiceImp>();
+            service.AddTransient<Service<UserNameViewReportModel, SpecificMember.Common.UsernameHistoryCriteria>, SpecificMember.AssociatedAccount.ServiceImp<SpecificMember.Common.UsernameHistoryCriteria>>();
 
             service.AddTransient<SpecificMemberCommon.DailyService, SpecificMemberCommon.DailyServiceImp>();
 
-            service.AddTransient<Service<DailyViewReportModel>, SpecificMember.CasinoProduct.ServiceImp>();
+            service.AddTransient<Service<DailyViewReportModel, SpecificMember.CasinoProduct.HistoryCriteria>, SpecificMember.CasinoProduct.ServiceImp<SpecificMember.CasinoProduct.HistoryCriteria>>();
 
-            service.AddTransient<Service<DailyViewReportModel>, SpecificMember.Monthly.ServiceImp>();
+            service.AddTransient<Service<DailyViewReportModel, SpecificMember.Monthly.HistoryCriteria>, SpecificMember.Monthly.ServiceImp<SpecificMember.Monthly.HistoryCriteria>>();
 
-            service.AddTransient<Service<CurrencyViewStatisticsReportModel>, DailyViewGrandTotal.ServiceImp>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel, DailyViewGrandTotal.DailyGrandTotalHistory.Criteria>, DailyViewGrandTotal.ServiceImp<DailyViewGrandTotal.DailyGrandTotalHistory.Criteria>>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel, DailyViewGrandTotal.DailyGrandTotalNormal.Criteria>, DailyViewGrandTotal.ServiceImp<DailyViewGrandTotal.DailyGrandTotalNormal.Criteria>>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel, DailyViewGrandTotal.DailyViewGrandTotalHistory.Criteria>, DailyViewGrandTotal.ServiceImp<DailyViewGrandTotal.DailyViewGrandTotalHistory.Criteria>>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel, DailyViewGrandTotal.DailyViewGrandTotalNormal.Criteria>, DailyViewGrandTotal.ServiceImp<DailyViewGrandTotal.DailyViewGrandTotalNormal.Criteria>>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel, DailyViewGrandTotal.ProductGrandTotalHistory.Criteria>, DailyViewGrandTotal.ServiceImp<DailyViewGrandTotal.ProductGrandTotalHistory.Criteria>>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel, DailyViewGrandTotal.ProductGrandTotalNormal.Criteria>, DailyViewGrandTotal.ServiceImp<DailyViewGrandTotal.ProductGrandTotalNormal.Criteria>>();
 
-            service.AddTransient<Service<CurrencyViewStatisticsReportModel>, SpecificMember.GrandTotal.CasinoProduct.ServiceImp>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel, SpecificMember.GrandTotal.CasinoProduct.HistoryCriteria>, SpecificMember.GrandTotal.CasinoProduct.ServiceImp<SpecificMember.GrandTotal.CasinoProduct.HistoryCriteria>>();
 
-            service.AddTransient<Service<CurrencyViewStatisticsReportModel>, SpecificMember.GrandTotal.Daily.ServiceImp>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel, SpecificMember.GrandTotal.Daily.HistoryCriteria>, SpecificMember.GrandTotal.Daily.ServiceImp<SpecificMember.GrandTotal.Daily.HistoryCriteria>>();
 
-            service.AddTransient<Service<CurrencyViewStatisticsReportModel>, SpecificMember.GrandTotal.Product.ServiceImp>();
+            service.AddTransient<Service<CurrencyViewStatisticsReportModel, SpecificMember.GrandTotal.Product.HistoryCriteria>, SpecificMember.GrandTotal.Product.ServiceImp<SpecificMember.GrandTotal.Product.HistoryCriteria>>();
 
             service.AddTransient<SpecificMemberCommon.GrandTotalService, SpecificMemberCommon.GrandTotalServiceImp>();
 

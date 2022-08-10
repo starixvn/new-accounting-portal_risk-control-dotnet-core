@@ -10,11 +10,11 @@ namespace RiskControl.NonSportsGamesStatistics.Common
         where TCriteria : BaseStatisticCriteria
         where TReportModel : class
     {
-        private readonly Service<TReportModel> service;
+        private readonly Service<TReportModel, TCriteria> service;
         private readonly GridOptionBuilderService<TReportModel> gridOptionService;
 
         protected BaseHandlerWithoutSorting(
-              Service<TReportModel> service,
+              Service<TReportModel, TCriteria> service,
               GridOptionBuilderService<TReportModel> gridOptionService)
         {
             this.service = service;

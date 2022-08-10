@@ -5,7 +5,8 @@ using RiskControl.NonSportsGamesStatistics.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.Main
 {
-    public class ServiceImp : Service<DailyViewReportModel>
+    public class ServiceImp<TCriteria> : Service<DailyViewReportModel, TCriteria>
+        where TCriteria: BaseStatisticCriteria
     {
         private readonly RawService rawService;
         private readonly CalculationService service;
@@ -16,7 +17,7 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.Main
             this.service = service;
         }
 
-        public async Task<DailyViewReportModel> Query(BaseStatisticCriteria criteria, DateTime winLossDate)
+        public async Task<DailyViewReportModel> Query(TCriteria criteria, DateTime winLossDate)
         {
             var rawData = await rawService.QueryMultipleData<BaseRawStatistic>(criteria, winLossDate).ConfigureAwait(false);
             return service.CalculateDailyViewReport(rawData);

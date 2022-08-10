@@ -11,7 +11,7 @@ namespace RiskControl.NonSportsGamesStatistics.TopTwenty.Main.Normal
     public class Handler : BaseHandlerWithoutSorting<QueryModel, Criteria, List<UserNameViewGroupStatisticsWithTotalModel>>, IRequestHandler<QueryModel, GridOptions>
     {
         public Handler(
-            Service<List<UserNameViewGroupStatisticsWithTotalModel>> service,
+            Service<List<UserNameViewGroupStatisticsWithTotalModel>, Criteria> service,
             GridOptionBuilderService<List<UserNameViewGroupStatisticsWithTotalModel>> gridOptionService) : base(service, gridOptionService)
         {
         }

@@ -10,7 +10,7 @@ namespace RiskControl.NonSportsGamesStatistics.SpecificMember.CasinoProduct
     public class Handler : BaseHandlerWithSorting<QueryModel, HistoryCriteria, DailyViewReportModel>, IRequestHandler<QueryModel, GridOptions>
     {
         public Handler(
-            Service<DailyViewReportModel> service,
+            Service<DailyViewReportModel, HistoryCriteria> service,
             SortingService<DailyViewReportModel> sortingService,
             GridOptionBuilderService<DailyViewReportModel> gridOptionService) : base(service, sortingService, gridOptionService)
         {

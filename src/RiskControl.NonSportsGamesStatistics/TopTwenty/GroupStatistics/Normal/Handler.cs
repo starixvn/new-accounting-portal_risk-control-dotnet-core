@@ -10,7 +10,7 @@ namespace RiskControl.NonSportsGamesStatistics.TopTwenty.GroupStatistics.Normal
     public class Handler : BaseHandlerWithoutSorting<QueryModel, Criteria, UserNameViewGroupStatisticsWithTotalModel>, IRequestHandler<QueryModel, GridOptions>
     {
         public Handler(
-            Service<UserNameViewGroupStatisticsWithTotalModel> service,
+            Service<UserNameViewGroupStatisticsWithTotalModel, Criteria> service,
             GridOptionBuilderService<UserNameViewGroupStatisticsWithTotalModel> gridOptionService) : base(service, gridOptionService)
         {
         }

@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.SpecificMember.AssociatedAccount
 {
-    public class ServiceImp : Service<UserNameViewReportModel>
+    public class ServiceImp<TCriteria> : Service<UserNameViewReportModel, TCriteria>
+        where TCriteria: BaseStatisticCriteria
     {
         private readonly UsernameService service;
         private readonly AssociatedAccountService associatedAccountService;
@@ -26,7 +27,7 @@ namespace RiskControl.NonSportsGamesStatistics.SpecificMember.AssociatedAccount
             this.mapper = mapper;
         }
 
-        public async Task<UserNameViewReportModel> Query(BaseStatisticCriteria criteria, DateTime winLossDate)
+        public async Task<UserNameViewReportModel> Query(TCriteria criteria, DateTime winLossDate)
         {
             var associatedAccounts = await GetAssociatedAccounts(criteria.CustId).ConfigureAwait(false);
             criteria.UserName = string.Join(",", associatedAccounts);

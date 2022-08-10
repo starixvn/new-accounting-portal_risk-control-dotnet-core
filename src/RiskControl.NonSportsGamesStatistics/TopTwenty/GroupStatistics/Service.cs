@@ -6,7 +6,8 @@ using RiskControl.NonSportsGamesStatistics.RawData;
 
 namespace RiskControl.NonSportsGamesStatistics.TopTwenty.GroupStatistics
 {
-    public class ServiceImp : Service<UserNameViewGroupStatisticsWithTotalModel>
+    public class ServiceImp<TCriteria> : Service<UserNameViewGroupStatisticsWithTotalModel, TCriteria>
+        where TCriteria: BaseStatisticCriteria
     {
         private readonly RawService rawService;
         private readonly CalculationService service;
@@ -17,7 +18,7 @@ namespace RiskControl.NonSportsGamesStatistics.TopTwenty.GroupStatistics
             this.service = service;
         }
 
-        public async Task<UserNameViewGroupStatisticsWithTotalModel> Query(BaseStatisticCriteria criteria, DateTime winLossDate)
+        public async Task<UserNameViewGroupStatisticsWithTotalModel> Query(TCriteria criteria, DateTime winLossDate)
         {
             var rawData = await rawService.QueryMultipleData<TopTwentyRawStatistics>(criteria, winLossDate).ConfigureAwait(false);
             return service.CalculateTopTwentyGroupReport(rawData);
