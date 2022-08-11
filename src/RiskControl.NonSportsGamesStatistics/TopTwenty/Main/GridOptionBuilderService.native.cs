@@ -9,7 +9,8 @@ using RiskControl.NonSportsGamesStatistics.TopTwenty.Common;
 
 namespace RiskControl.NonSportsGamesStatistics.TopTwenty.Main
 {
-    public class GridOptionBuilderServiceImp : GridOptionBuilderService<List<UserNameViewGroupStatisticsWithTotalModel>>
+    public class GridOptionBuilderServiceImp<TQueryModel> : GridOptionBuilderService<List<UserNameViewGroupStatisticsWithTotalModel>, TQueryModel>
+        where TQueryModel: BaseStatisticQueryModel
     {
         private const int CustIdColumnIndex = 1;
         private readonly GridOptionDataRowBuilderService gridDataRowBuilderService;
@@ -27,7 +28,7 @@ namespace RiskControl.NonSportsGamesStatistics.TopTwenty.Main
         }
 
         public GridOptions BuildGridOptions(List<UserNameViewGroupStatisticsWithTotalModel> statistics,
-            BaseStatisticQueryModel queryModel)
+            TQueryModel queryModel)
         {
             var gridOptions = new GridOptions
             {

@@ -8,7 +8,8 @@ using RiskControl.NonSportsGamesStatistics.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.GroupStatistics
 {
-    public class GridOptionBuilderServiceImp : GridOptionBuilderService<DailyViewGroupStatisticWithTotalReportModel>
+    public class GridOptionBuilderServiceImp<TQueryModel> : GridOptionBuilderService<DailyViewGroupStatisticWithTotalReportModel, TQueryModel>
+        where TQueryModel: BaseStatisticQueryModel
     {
         private readonly GridOptionDataRowBuilderService gridDataRowBuilderService;
         private readonly GridOptionRemoveColumnService gridOptionRemoveColumnService;
@@ -25,7 +26,7 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.GroupStatistics
         }
 
         public GridOptions BuildGridOptions(DailyViewGroupStatisticWithTotalReportModel statistics,
-            BaseStatisticQueryModel queryModel)
+            TQueryModel queryModel)
         {
             var gridOptions = new GridOptions
             {

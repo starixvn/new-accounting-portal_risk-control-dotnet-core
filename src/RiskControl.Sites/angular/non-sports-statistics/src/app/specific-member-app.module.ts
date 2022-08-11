@@ -45,11 +45,11 @@ export class SpecificMemberAppModule {
         navbarService.userMenus = [
             {
                 name: 'Change Password',
-                link: 'UserInfo/ChangePassword'
+                link: 'Auth/ChangePassword'
             },
             {
                 name: 'Sign Out',
-                link: 'UserLogin/Login/LogOut'
+                link: 'Auth/LogOut'
             }
         ];
     }

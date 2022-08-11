@@ -12,7 +12,7 @@ namespace RiskControl.NonSportsGamesStatistics.TopTwenty.Main.History
     {
         public Handler(
             Service<List<UserNameViewGroupStatisticsWithTotalModel>, Criteria> service,
-            GridOptionBuilderService<List<UserNameViewGroupStatisticsWithTotalModel>> gridOptionService) : base(service, gridOptionService)
+            GridOptionBuilderService<List<UserNameViewGroupStatisticsWithTotalModel>, QueryModel> gridOptionService) : base(service, gridOptionService)
         {
         }
 

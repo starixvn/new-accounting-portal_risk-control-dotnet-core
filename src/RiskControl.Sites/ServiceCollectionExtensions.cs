@@ -83,6 +83,7 @@ namespace RiskControl.Sites
                     mc.AddProfile(new SpecificMemberProfile());
                     mc.AddProfile(new TopTwentyProfile());
                     mc.AddProfile(new UserNameViewProfile());
+                    mc.AddProfile(new AssociatedAccountProfile());
                     mc.AddProfile(new CurrencySettingProfile());
                     mc.AddProfile(new ManagedSettingGroupProfile());
                     mc.AddProfile(new GameRoundProfile());

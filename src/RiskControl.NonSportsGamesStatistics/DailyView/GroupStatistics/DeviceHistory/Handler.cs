@@ -12,7 +12,7 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.GroupStatistics.DeviceH
         public Handler(
             Service<DailyViewGroupStatisticWithTotalReportModel, Criteria> service,
             SortingService<DailyViewGroupStatisticWithTotalReportModel> sortingService,
-            GridOptionBuilderService<DailyViewGroupStatisticWithTotalReportModel> gridOptionService) : base(service, sortingService, gridOptionService)
+            GridOptionBuilderService<DailyViewGroupStatisticWithTotalReportModel, QueryModel> gridOptionService) : base(service, sortingService, gridOptionService)
         {
         }
 

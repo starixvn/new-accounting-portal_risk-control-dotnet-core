@@ -12,7 +12,7 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.Daily.History
         public Handler(
             Service<DailyReportModel, Criteria> service,
             SortingService<DailyReportModel> sortingService,
-            GridOptionBuilderService<DailyReportModel> gridOptionService) : base(service, sortingService, gridOptionService)
+            GridOptionBuilderService<DailyReportModel, QueryModel> gridOptionService) : base(service, sortingService, gridOptionService)
         {
         }
 

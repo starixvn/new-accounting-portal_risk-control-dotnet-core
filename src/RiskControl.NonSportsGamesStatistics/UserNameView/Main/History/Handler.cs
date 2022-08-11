@@ -12,7 +12,7 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main.History
         public Handler(
             Service<UserNameViewReportModel, Criteria> service,
             SortingService<UserNameViewReportModel> sortingService,
-            GridOptionBuilderService<UserNameViewReportModel> gridOptionService) : base(service, sortingService, gridOptionService)
+            GridOptionBuilderService<UserNameViewReportModel, QueryModel> gridOptionService) : base(service, sortingService, gridOptionService)
         {
         }
 

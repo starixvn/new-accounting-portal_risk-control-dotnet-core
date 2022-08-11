@@ -11,7 +11,7 @@ namespace RiskControl.NonSportsGamesStatistics.SpecificMember.GrandTotal.Product
     {
         public Handler(
             Service<CurrencyViewStatisticsReportModel, HistoryCriteria> service,
-            GridOptionBuilderService<CurrencyViewStatisticsReportModel> gridOptionService) : base(service, gridOptionService)
+            GridOptionBuilderService<CurrencyViewStatisticsReportModel, QueryModel> gridOptionService) : base(service, gridOptionService)
         {
         }
 

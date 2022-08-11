@@ -11,7 +11,7 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount.Hi
     {
         public Handler(
             Service<UserNameViewReportModel, Criteria> service,
-            GridOptionBuilderService<UserNameViewReportModel> gridOptionService) : base(service, gridOptionService)
+            GridOptionBuilderService<UserNameViewReportModel, QueryModel> gridOptionService) : base(service, gridOptionService)
         {
         }
 

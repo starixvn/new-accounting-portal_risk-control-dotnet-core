@@ -14,7 +14,7 @@
     ]
   },
   "files": [
-    "main.ts",
+    "specific-member.ts",
     "polyfills.ts"
   ],
   "include": [

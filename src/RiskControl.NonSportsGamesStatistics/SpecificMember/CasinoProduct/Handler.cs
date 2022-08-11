@@ -12,7 +12,7 @@ namespace RiskControl.NonSportsGamesStatistics.SpecificMember.CasinoProduct
         public Handler(
             Service<DailyViewReportModel, HistoryCriteria> service,
             SortingService<DailyViewReportModel> sortingService,
-            GridOptionBuilderService<DailyViewReportModel> gridOptionService) : base(service, sortingService, gridOptionService)
+            GridOptionBuilderService<DailyViewReportModel, QueryModel> gridOptionService) : base(service, sortingService, gridOptionService)
         {
         }
 

@@ -2,8 +2,10 @@
 
 namespace RiskControl.NonSportsGamesStatistics.Common
 {
-    public interface GridOptionBuilderService<in TReportModel> where TReportModel : class
+    public interface GridOptionBuilderService<in TReportModel, in TQueryModel>
+        where TReportModel : class
+        where TQueryModel: BaseStatisticQueryModel
     {
-        GridOptions BuildGridOptions(TReportModel statistics, BaseStatisticQueryModel queryModel);
+        GridOptions BuildGridOptions(TReportModel statistics, TQueryModel queryModel);
     }
 }

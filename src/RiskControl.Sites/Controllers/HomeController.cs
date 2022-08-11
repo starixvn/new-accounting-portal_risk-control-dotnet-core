@@ -25,19 +25,27 @@ namespace RiskControl.Sites.Controllers
 
         public ActionResult Index()
         {
-            bool hasPermission = userService.GetPermission(
+            try
+            {
+                bool hasPermission = userService.GetPermission(
                 currentSession.UserId,
                 napSettings.SiteId,
                 FunctionKeys.RiskControlDashboard) >= (int)Constant.Policy.Read;
 
-            if (hasPermission)
-            {
-                return View("~/wwwroot/dashboard/index.cshtml");
+                if (hasPermission)
+                {
+                    return View("~/wwwroot/dashboard/index.cshtml");
+                }
+                else
+                {
+                    return View();
+                }
             }
-            else
+            catch
             {
                 return View();
             }
+            
         }
 
         [Route("NonSportGameStatistics/Main/Index")]

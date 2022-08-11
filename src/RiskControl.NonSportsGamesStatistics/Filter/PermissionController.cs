@@ -8,6 +8,7 @@ using RiskControl.NonSportsGamesStatistics.Filter.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.Filter
 {
+    [ApiController]
     [Route("state-api/NonSportsGamesStatistics/Permission")]
     public class PermissionController : ControllerBase
     {

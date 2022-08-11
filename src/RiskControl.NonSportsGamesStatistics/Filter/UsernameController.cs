@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Filter
 {
+    [ApiController]
     public class UsernameController : ControllerBase
     {
         private readonly INapSession session;

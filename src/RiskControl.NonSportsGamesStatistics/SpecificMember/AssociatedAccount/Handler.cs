@@ -1,18 +1,17 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Fanex.Excel.Models;
+﻿using Fanex.Excel.Models;
 using MediatR;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
-using RiskControl.NonSportsGamesStatistics.SpecificMember.Common;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.SpecificMember.AssociatedAccount
 {
-    public class Handler : BaseHandlerWithoutSorting<QueryModel, UsernameHistoryCriteria, UserNameViewReportModel>, IRequestHandler<QueryModel, GridOptions>
+    public class Handler : BaseHandlerWithoutSorting<QueryModel, Criteria, UserNameViewReportModel>, IRequestHandler<QueryModel, GridOptions>
     {
         public Handler(
-            Service<UserNameViewReportModel, UsernameHistoryCriteria> service,
-            GridOptionBuilderService<UserNameViewReportModel> gridOptionService) : base(service, gridOptionService)
+            Service<UserNameViewReportModel, Criteria> service,
+            GridOptionBuilderService<UserNameViewReportModel, QueryModel> gridOptionService) : base(service, gridOptionService)
         {
         }
 

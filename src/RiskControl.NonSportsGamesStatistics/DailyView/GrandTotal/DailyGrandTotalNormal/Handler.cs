@@ -11,7 +11,7 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.DailyGrandTo
     {
         public Handler(
             Service<CurrencyViewStatisticsReportModel, Criteria> service,
-            GridOptionBuilderService<CurrencyViewStatisticsReportModel> gridOptionService) : base(service, gridOptionService)
+            GridOptionBuilderService<CurrencyViewStatisticsReportModel, QueryModel> gridOptionService) : base(service, gridOptionService)
         {
         }
 

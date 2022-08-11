@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Filter
 {
+    [ApiController]
     [Route("NonSportsGamesStatistics/Currency")]
     public class CurrencyController : ControllerBase
     {

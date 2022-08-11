@@ -1465,7 +1465,7 @@ var fanexGridCurrentLanguage = fanexGridCurrentLanguage || {};
             for (var colIndex = 0; colIndex < colsLength; colIndex++) {
                 var currentCol = options.columns[colIndex];
 
-                if (currentCol.Sort === true) {
+                if (currentCol.sort === true) {
                     /*jshint ignore:start*/
                     me.$grid.off('click', '#' + me.gridId + '_header_sort_' + currentCol.name, null)
                             .on('click', '#' + me.gridId + '_header_sort_' + currentCol.name, function () {

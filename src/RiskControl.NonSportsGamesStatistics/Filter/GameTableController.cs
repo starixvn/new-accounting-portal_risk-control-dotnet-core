@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Filter
 {
+    [ApiController]
     [Route("NonSportsGamesStatistics/GameTable")]
     public class GameTableController : ControllerBase
     {

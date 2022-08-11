@@ -8,7 +8,8 @@ using RiskControl.NonSportsGamesStatistics.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal
 {
-    public class GridOptionBuilderServiceImp : GridOptionBuilderService<CurrencyViewStatisticsReportModel>
+    public class GridOptionBuilderServiceImp<TQuery> : GridOptionBuilderService<CurrencyViewStatisticsReportModel, TQuery>
+        where TQuery: BaseStatisticQueryModel
     {
         private readonly GridOptionDataRowBuilderService gridDataRowBuilderService;
         private readonly GridOptionHeaderBuilderService headerBuilderService;
@@ -24,7 +25,7 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal
             this.gridOptionRemoveColumnService = gridOptionRemoveColumnService;
         }
 
-        public GridOptions BuildGridOptions(CurrencyViewStatisticsReportModel statistics, BaseStatisticQueryModel queryModel)
+        public GridOptions BuildGridOptions(CurrencyViewStatisticsReportModel statistics, TQuery queryModel)
         {
             var gridOptions = new GridOptions
             {

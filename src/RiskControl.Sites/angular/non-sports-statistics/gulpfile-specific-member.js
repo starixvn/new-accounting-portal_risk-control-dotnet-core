@@ -52,7 +52,7 @@ function changeFileNames(outputFolder, transformFolder) {
 }
 
 function readOptions(outputFolder, transformFolder) {
-    let resourceDir = transformFolder.replace(/\.\.\//g, '');
+    let resourceDir = transformFolder.replace(/\.\.\//g, '').replace(/wwwroot/g, '~');
     let content = fs.readFileSync(outputFolder + '/specific-member-index.html', encoding);
     let $ = cheerio.load(content);
     let files = {
@@ -89,7 +89,7 @@ function changeBundle(fileName) {
     return newBundleName;
 }
 
-gulp.task('default', () => {
+gulp.task('default', async () => {
     if (argv.path) {
 		const transformFolder = argv.path;
         rimraf.sync(transformFolder);

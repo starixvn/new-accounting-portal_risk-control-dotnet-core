@@ -9,7 +9,8 @@ using RiskControl.NonSportsGamesStatistics.UserNameView.Common;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount
 {
-    public class GridOptionBuilderServiceImp : GridOptionBuilderService<UserNameViewReportModel>
+    public class GridOptionBuilderServiceImp<TQuery> : GridOptionBuilderService<UserNameViewReportModel, TQuery>
+        where TQuery: BaseStatisticQueryModel
     {
         private const int UserNameColumnIndex = 0;
         private const int CustIdColumnIndex = 1;
@@ -28,7 +29,7 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount
             this.gridOptionRemoveColumnService = gridOptionRemoveColumnService;
         }
 
-        public GridOptions BuildGridOptions(UserNameViewReportModel statistics, BaseStatisticQueryModel queryModel)
+        public GridOptions BuildGridOptions(UserNameViewReportModel statistics, TQuery queryModel)
         {
             var gridOptions = new GridOptions
             {
