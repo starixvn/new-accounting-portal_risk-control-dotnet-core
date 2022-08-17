@@ -3,6 +3,7 @@ using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
 using Fanex.NAP.Core.Business;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.Core.Model;
 
@@ -46,6 +47,12 @@ namespace RiskControl.Sites.Controllers
                 return View();
             }
             
+        }
+
+        [AllowAnonymous]
+        public string HealthCheck()
+        {
+            return "Ok";
         }
 
         [Route("NonSportGameStatistics/Main/Index")]

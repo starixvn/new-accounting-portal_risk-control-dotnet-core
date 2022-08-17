@@ -16,11 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="App_Data\DBACC.bodb02.bodbAdminNet.xml" />
-    <None Remove="App_Data\DBAGE.bodb02.bodbAdminNet.xml" />
-    <None Remove="App_Data\DBCust.CustDB.bodbAdminNet.xml" />
-    <None Remove="App_Data\DBTXT.bodb02.bodbAdminNet.xml" />
-    <None Remove="App_Data\DBWH.bodb_dwrs.bodbAdminNet.xml" />
+    <None Remove="App_Data\SpName.LOCAL.xml" />
+    <None Remove="App_Data\SpName.LOCAL_1.xml" />
+    <None Remove="App_Data\SpName.PRO.xml" />
+    <None Remove="App_Data\SpName.UAT.xml" />
+    <None Remove="App_Data\SpName.xml" />
     <None Remove="Templates\GameRound\Monitor.xlsx" />
     <None Remove="Templates\NonSport\HourlyTemplate.xlsx" />
     <None Remove="Templates\NonSport\Template.xlsx" />
@@ -39,19 +39,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="App_Data\DBACC.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\SpName.LOCAL.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\DBAGE.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\SpName.LOCAL_1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\DBCust.CustDB.bodbAdminNet.xml">
+    <Content Include="App_Data\SpName.PRO.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\DBTXT.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\SpName.UAT.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\DBWH.bodb_dwrs.bodbAdminNet.xml">
+    <Content Include="App_Data\SpName.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\GameRound\Monitor.xlsx">
