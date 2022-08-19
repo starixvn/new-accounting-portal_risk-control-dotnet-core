@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ONEbook.UM.AspNetCore.Filters;
+using RiskControl.Sites.Extensions;
 
 namespace RiskControl.Sites
 {
@@ -58,6 +59,7 @@ namespace RiskControl.Sites
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.ConfigureExceptionHandler();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
