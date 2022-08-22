@@ -24,7 +24,9 @@ namespace RiskControl.Core.BalanceUp
 
         public BalanceUpRange Query()
         {
-            return QueryFromSource();
+            return cacheService.GetOrSet(
+                BalanceUpRangeCacheKey,
+                QueryFromSource);
         }
 
         private BalanceUpRange QueryFromSource()

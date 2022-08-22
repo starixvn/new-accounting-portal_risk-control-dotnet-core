@@ -34,7 +34,7 @@ namespace RiskControl.ProgressiveJackpot
 
         private ExcelPackage LoadTemplate(string template)
         {
-            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}\\Templates\\ProgressiveJackpot\\{template}.xlsx";
+            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/Templates/ProgressiveJackpot/{template}.xlsx";
             using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
             {
                 var excelPackage = new ExcelPackage(stream);

@@ -15,9 +15,9 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main
 
     public class ExcelReportBuilderImp : ExcelReportBuilder
     {
-        private const string TemplatePath = @"Templates\NonSport\Template.xlsx";
+        private const string TemplatePath = @"Templates/NonSport/Template.xlsx";
 
-        private const string ViewByIntegerTemplatePath = @"Templates\NonSport\ViewByIntegerTemplate.xlsx";
+        private const string ViewByIntegerTemplatePath = @"Templates/NonSport/ViewByIntegerTemplate.xlsx";
 
         private const int StartRowIndex = 5;
 

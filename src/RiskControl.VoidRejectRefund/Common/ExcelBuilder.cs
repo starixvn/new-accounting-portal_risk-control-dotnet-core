@@ -44,7 +44,7 @@ namespace RiskControl.VoidRejectRefund.Common
         private void LoadTemplate(ReportType reportBy)
         {
             string reportMode = reportModeService.GetReportMode(reportBy);
-            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}\\Templates\\VoidRejectRefund\\{reportMode}.xlsx";
+            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/Templates/VoidRejectRefund/{reportMode}.xlsx";
             using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
             {
                 ExcelPackage = new ExcelPackage(stream);

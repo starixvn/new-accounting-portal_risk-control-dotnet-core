@@ -17,9 +17,9 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly
 
     public class ExcelReportBuilderImp : ExcelReportBuilder
     {
-        private const string TemplatePath = @"Templates\NonSport\HourlyTemplate.xlsx";
+        private const string TemplatePath = @"Templates/NonSport/HourlyTemplate.xlsx";
 
-        private const string ViewByIntegerTemplatePath = @"Templates\NonSport\ViewByIntegerHourlyTemplate.xlsx";
+        private const string ViewByIntegerTemplatePath = @"Templates/NonSport/ViewByIntegerHourlyTemplate.xlsx";
 
         private const int HourlyAccumulatedStartRowIndex = 5;
 
@@ -61,7 +61,7 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly
         private ExcelPackage LoadTemplate(bool viewByInteger)
         {
             var templatePath = viewByInteger ? ViewByIntegerTemplatePath : TemplatePath;
-            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}\\{templatePath}";
+            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/{templatePath}";
             using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
             {
                 var excelPackage = new ExcelPackage(stream);
