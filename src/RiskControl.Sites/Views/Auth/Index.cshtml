@@ -41,8 +41,8 @@
                 <div class="auth">
                     <input type="text" id="username" name="username" autocomplete="off" />
                     <input type="password" id="password" name="password" />
-                    <input type="submit" id="submit" value="Sign In" />
                     <input id="loginToken" name="loginToken" value="@Model.FormToken" type="hidden" />
+                    <input type="submit" id="submit" value="Sign In" />
                     <div class="bestview">
                         <span>Best view in </span><span class="ff4">Firefox 60+</span><span class="chrome">Chrome 67+</span>
                     </div>
@@ -51,8 +51,8 @@
         </div>
     }
 
-    <script src="@Url.Content("~/Auth/Static")?url=jquery-1.8.0.min.js" type="text/javascript"></script>
-    <script src="@Url.Content("~/Auth/Static")?url=cryptojs.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/nap-auth/jquery-1.8.0.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/nap-auth/cryptojs.js")" type="text/javascript"></script>
     <script type="text/javascript">
 
         var msg, username, password, btnSubmit;

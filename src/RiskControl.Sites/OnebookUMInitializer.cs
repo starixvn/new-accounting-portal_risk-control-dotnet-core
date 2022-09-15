@@ -20,7 +20,8 @@ namespace RiskControl.Sites
             UMClientManager
               .UseConfig(umConfig)
               .UseCacheService(new UMCacheService(new CacheService()))
-              .UseRestClient(new UMRestClient(umConfig));
+              .UseRestClient(new UMRestClient(umConfig))
+              .UseHttpContext(new HttpContextHelper());
         }
 
         public static void RegisterServiceCollection(IServiceCollection services, IConfiguration configuration)

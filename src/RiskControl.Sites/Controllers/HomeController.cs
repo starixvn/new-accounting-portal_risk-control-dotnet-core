@@ -24,6 +24,7 @@ namespace RiskControl.Sites.Controllers
             this.napSettings = napSettings;
         }
 
+       // [ServiceFilter(typeof(CheckUMFilterAttribute))]
         public ActionResult Index()
         {
             try

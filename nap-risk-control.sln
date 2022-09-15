@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.VoidRejectRefun
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.WinLossLimitControl", "src\RiskControl.WinLossLimitControl\RiskControl.WinLossLimitControl.csproj", "{638653A3-D7B7-4DA6-B0D6-35AB035AA5C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskControl.Core", "src\RiskControl.Core\RiskControl.Core.csproj", "{955BFEA9-C843-48E0-BD4A-161ED861B972}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.Core", "src\RiskControl.Core\RiskControl.Core.csproj", "{955BFEA9-C843-48E0-BD4A-161ED861B972}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskControl.Sites", "src\RiskControl.Sites\RiskControl.Sites.csproj", "{D6DB9C85-1B0E-4C33-9250-C85531FE0CCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.Sites", "src\RiskControl.Sites\RiskControl.Sites.csproj", "{D6DB9C85-1B0E-4C33-9250-C85531FE0CCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
