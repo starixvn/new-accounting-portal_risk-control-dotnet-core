@@ -31,8 +31,6 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main
 
         private ExcelWorksheet statisticSheet;
 
-        private ExcelWorksheet templateSheet;
-
         private ExcelWorksheet totalTemplateSheet;
 
         private int endRowIndex;
@@ -55,12 +53,11 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main
         private ExcelPackage LoadTemplate(bool viewByInteger)
         {
             var templatePath = viewByInteger ? ViewByIntegerTemplatePath : TemplatePath;
-            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}\\{templatePath}";
+            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/{templatePath}";
             using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
             {
                 var excelPackage = new ExcelPackage(stream);
-                statisticSheet = excelPackage.Workbook.Worksheets.Copy("Template", "Username Game Statistic");
-                templateSheet = excelPackage.Workbook.Worksheets["Template"];
+                statisticSheet = excelPackage.Workbook.Worksheets["Template"];
                 totalTemplateSheet = excelPackage.Workbook.Worksheets["TotalTemplate"];
 
                 return excelPackage;
@@ -74,7 +71,6 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main
 
         private void ClearTemplate(ExcelPackage excelPackage)
         {
-            excelPackage.Workbook.Worksheets.Delete(templateSheet);
             excelPackage.Workbook.Worksheets.Delete(totalTemplateSheet);
         }
 

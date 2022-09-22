@@ -39,28 +39,28 @@
     </thead>
 </ng-template>
 <ng-template #hourlyStatistics let-item="item">
-    <td class="text-right time">{{ item.ReportBy }}</td>
-    <td *ngIf="isShowColumn(0)" class="text-right" [napIntegerFormat]="item.NoOfPlayers"></td>
-    <td *ngIf="isShowColumn(1)" class="text-right" [napIntegerFormat]="item.BetCount"></td>
-    <td *ngIf="isShowColumn(2)" class="text-center">{{ item.Currency }}</td>
-    <td *ngIf="isShowColumn(3)" class="text-right" [napIntegerFormat]="item.TotalBets"></td>
-    <td *ngIf="isShowColumn(4)" class="text-right" [napIntegerFormat]="item.TotalWins"></td>
-    <td *ngIf="isShowColumn(5)" class="number" [ngClass]="{'highlight': item.GameIncome <= -100000}"
-        [napNumberFormat]="item.GameIncome" [format]="numberFormat"></td>
+    <td class="text-right time">{{ item.reportBy }}</td>
+    <td *ngIf="isShowColumn(0)" class="text-right" [napIntegerFormat]="item.noOfPlayers"></td>
+    <td *ngIf="isShowColumn(1)" class="text-right" [napIntegerFormat]="item.betCount"></td>
+    <td *ngIf="isShowColumn(2)" class="text-center">{{ item.currency }}</td>
+    <td *ngIf="isShowColumn(3)" class="text-right" [napIntegerFormat]="item.totalBets"></td>
+    <td *ngIf="isShowColumn(4)" class="text-right" [napIntegerFormat]="item.totalWins"></td>
+    <td *ngIf="isShowColumn(5)" class="number" [ngClass]="{'highlight': item.gameIncome <= -100000}"
+        [napNumberFormat]="item.gameIncome" [format]="numberFormat"></td>
     <td *ngIf="isShowColumn(6)" class="text-right"
-        [ngClass]="{'highlight': item.GamePayout >= 1.05, 'red': item.GamePayout > 1}"
-        [napNumberFormat]="item.GamePayout" [format]="percentFormat"></td>
-    <td *ngIf="isShowColumn(7)" class="number" [napNumberFormat]="item.TotalRefund" [format]="numberFormat"></td>
-    <td *ngIf="isShowColumn(8)" class="number" [napNumberFormat]="item.HouseTurnover" [format]="numberFormat"></td>
-    <td *ngIf="isShowColumn(9)" class="number" [napNumberFormat]="item.RealTurnover" [format]="numberFormat"></td>
-    <td *ngIf="isShowColumn(10)" class="number" [napNumberFormat]="item.HouseGrossIncome" [format]="numberFormat"></td>
-    <td *ngIf="isShowColumn(11)" class="text-right red" [napNumberFormat]="item.HouseComm" [format]="numberFormat"></td>
-    <td *ngIf="isShowColumn(12)" class="text-right" [napNumberFormat]="item.ExtraPT" [format]="numberFormat"></td>
-    <td *ngIf="isShowColumn(13)" class="text-right" [napNumberFormat]="item.HouseNetIncome" [format]="numberFormat">
+        [ngClass]="{'highlight': item.gamePayout >= 1.05, 'red': item.gamePayout > 1}"
+        [napNumberFormat]="item.gamePayout" [format]="percentFormat"></td>
+    <td *ngIf="isShowColumn(7)" class="number" [napNumberFormat]="item.totalRefund" [format]="numberFormat"></td>
+    <td *ngIf="isShowColumn(8)" class="number" [napNumberFormat]="item.houseTurnover" [format]="numberFormat"></td>
+    <td *ngIf="isShowColumn(9)" class="number" [napNumberFormat]="item.realTurnover" [format]="numberFormat"></td>
+    <td *ngIf="isShowColumn(10)" class="number" [napNumberFormat]="item.houseGrossIncome" [format]="numberFormat"></td>
+    <td *ngIf="isShowColumn(11)" class="text-right red" [napNumberFormat]="item.houseComm" [format]="numberFormat"></td>
+    <td *ngIf="isShowColumn(12)" class="text-right" [napNumberFormat]="item.extraPT" [format]="numberFormat"></td>
+    <td *ngIf="isShowColumn(13)" class="text-right" [napNumberFormat]="item.houseNetIncome" [format]="numberFormat">
     </td>
 </ng-template>
 <ng-template #empty let-item="item">
-    <td class="text-right time">{{ item.ReportBy }}</td>
+    <td class="text-right time">{{ item.reportBy }}</td>
     <td *ngIf="isShowColumn(0)"></td>
     <td *ngIf="isShowColumn(1)"></td>
     <td *ngIf="isShowColumn(2)"></td>
@@ -92,8 +92,8 @@
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
             <ng-template [ngTemplateOutlet]="thead"></ng-template>
             <tbody>
-                <tr *ngFor="let item of data.HourlyStatisticAccumulated.HourlyStatistics"
-                    [ngSwitch]="item.Currency === null">
+                <tr *ngFor="let item of data.hourlyStatisticAccumulated.hourlyStatistics"
+                    [ngSwitch]="item.currency === null">
                     <ng-template *ngSwitchCase="true" [ngTemplateOutlet]="empty"
                         [ngTemplateOutletContext]="{ item: item }"></ng-template>
                     <ng-template *ngSwitchCase="false" [ngTemplateOutlet]="hourlyStatistics"
@@ -103,7 +103,7 @@
             <tfoot>
                 <tr class="average">
                     <th class="text-right">Average</th>
-                    <th class="text-center" [napIntegerFormat]="data.HourlyStatisticAccumulated.AveragePlayer"></th>
+                    <th class="text-center" [napIntegerFormat]="data.hourlyStatisticAccumulated.averagePlayer"></th>
                     <th colspan="12"></th>
                 </tr>
             </tfoot>
@@ -118,7 +118,7 @@
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
             <ng-template [ngTemplateOutlet]="thead"></ng-template>
             <tbody>
-                <tr *ngFor="let item of data.HourlyStatistics" [ngSwitch]="item.Currency === null">
+                <tr *ngFor="let item of data.hourlyStatistics" [ngSwitch]="item.currency === null">
                     <ng-template *ngSwitchCase="true" [ngTemplateOutlet]="empty"
                         [ngTemplateOutletContext]="{ item: item }"></ng-template>
                     <ng-template *ngSwitchCase="false" [ngTemplateOutlet]="hourlyStatistics"

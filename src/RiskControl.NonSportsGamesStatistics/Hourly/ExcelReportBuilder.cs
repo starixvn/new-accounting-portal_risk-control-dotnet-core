@@ -41,8 +41,6 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly
 
         private ExcelWorksheet statisticSheet;
 
-        private ExcelWorksheet templateSheet;
-
         public ExcelReportBuilderImp(ConfigurationService configurationService)
         {
             this.configurationService = configurationService;
@@ -65,8 +63,7 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly
             using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
             {
                 var excelPackage = new ExcelPackage(stream);
-                statisticSheet = excelPackage.Workbook.Worksheets.Copy("Template", "Hourly Report");
-                templateSheet = excelPackage.Workbook.Worksheets["Template"];
+                statisticSheet = excelPackage.Workbook.Worksheets["Template"];
                 averageSheet = excelPackage.Workbook.Worksheets["Average"];
                 return excelPackage;
             }
@@ -74,12 +71,12 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly
 
         private void ApplySetting()
         {
+            statisticSheet.Name = "Hourly Report";
             statisticSheet.OutLineSummaryBelow = false;
         }
 
         private void ClearTemplate(ExcelPackage excelPackage)
         {
-            excelPackage.Workbook.Worksheets.Delete(templateSheet);
             excelPackage.Workbook.Worksheets.Delete(averageSheet);
         }
 
@@ -93,7 +90,7 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly
 
         private void ApplyTitle(string title, string cellRange)
         {
-            templateSheet.Cells["A1:O2"].Copy(statisticSheet.Cells[cellRange]);
+            statisticSheet.Cells["A1:O2"].Copy(statisticSheet.Cells[cellRange]);
             statisticSheet.Cells[cellRange].Value = title;
             statisticSheet.Cells[cellRange].Merge = true;
             statisticSheet.Cells[cellRange].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
@@ -101,7 +98,7 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly
 
         private void ApplyHeader(string cellRange)
         {
-            templateSheet.Cells["A3:O4"].Copy(statisticSheet.Cells[cellRange]);
+            statisticSheet.Cells["A3:O4"].Copy(statisticSheet.Cells[cellRange]);
         }
 
         private void ApplyHourlyStatistics(List<HourlyStatistics> statistics, int startRowIndex)

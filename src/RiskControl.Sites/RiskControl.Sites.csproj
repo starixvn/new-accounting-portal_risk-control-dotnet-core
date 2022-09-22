@@ -57,10 +57,18 @@
     <Content Include="Templates\GameRound\Monitor.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\NonSport\HourlyTemplate.xlsx" />
-    <Content Include="Templates\NonSport\Template.xlsx" />
-    <Content Include="Templates\NonSport\ViewByIntegerHourlyTemplate.xlsx" />
-    <Content Include="Templates\NonSport\ViewByIntegerTemplate.xlsx" />
+    <Content Include="Templates\NonSport\HourlyTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\NonSport\Template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\NonSport\ViewByIntegerHourlyTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\NonSport\ViewByIntegerTemplate.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\ProgressiveJackpot\Daily.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

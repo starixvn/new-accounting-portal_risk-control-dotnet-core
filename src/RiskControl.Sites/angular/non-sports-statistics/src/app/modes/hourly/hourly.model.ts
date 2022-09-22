@@ -11,30 +11,30 @@ export class HourlyGridModel extends GridModel {
 }
 
 export interface HourlyData {
-    HourlyStatisticAccumulated: HourlyStatisticAccumulatedData;
-    HourlyStatistics: HourlyStatistics[];
+    hourlyStatisticAccumulated: HourlyStatisticAccumulatedData;
+    hourlyStatistics: HourlyStatistics[];
 }
 
 export interface HourlyStatisticAccumulatedData {
-    HourlyStatistics: HourlyStatistics[];
-    AveragePlayer: number;
+    hourlyStatistics: HourlyStatistics[];
+    averagePlayer: number;
 }
 
 export interface HourlyStatistics {
-    ReportBy: string;
-    NoOfPlayers: number;
-    BetCount: number;
-    Currency: string;
-    TotalBets: number;
-    TotalWins: number;
-    GameIncome: number;
-    GamePayout: number;
-    HouseTurnover: number;
-    RealTurnover: number;
-    HouseGrossIncome: number;
-    HouseComm: number;
-    HouseNetIncome: number;
-    ExtraPT: number;
+    reportBy: string;
+    noOfPlayers: number;
+    betCount: number;
+    currency: string;
+    totalBets: number;
+    totalWins: number;
+    gameIncome: number;
+    gamePayout: number;
+    houseTurnover: number;
+    realTurnover: number;
+    houseGrossIncome: number;
+    houseComm: number;
+    houseNetIncome: number;
+    extraPT: number;
 }
 
 export interface HourlyNormalQueryModel extends NormalQueryModel { usernameDrillDown: boolean; }
