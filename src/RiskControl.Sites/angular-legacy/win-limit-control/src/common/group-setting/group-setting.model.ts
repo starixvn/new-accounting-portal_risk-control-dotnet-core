@@ -4,12 +4,12 @@ export interface HiddenProductBetTypeSetting {
 }
 
 export interface ProductBetTypeSettingGroup {
-    GroupName: string;
-    BetTypes: string[];
+    groupName: string;
+    betTypes: string[];
 }
 
 export interface ProductBetTypeSetting {
-    ProductId: number;
-    ProductName: string;
-    Groups: ProductBetTypeSettingGroup[];
+    productId: number;
+    productName: string;
+    groups: ProductBetTypeSettingGroup[];
 }

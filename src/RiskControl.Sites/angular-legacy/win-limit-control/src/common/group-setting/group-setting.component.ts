@@ -20,7 +20,7 @@ export class GroupSettingComponent {
   updateSettings(settings: ProductBetTypeSetting[], productName: string) {
     this.hiddenSettings = settings.map(setting => {
       const hiddenSetting = <HiddenProductBetTypeSetting>{
-        hidden: setting.ProductName !== productName,
+        hidden: setting.productName !== productName,
         setting: setting
       };
       if (!hiddenSetting.hidden) {

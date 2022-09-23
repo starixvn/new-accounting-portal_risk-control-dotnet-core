@@ -123,13 +123,16 @@ export class GridComponent implements OnInit, OnChanges {
             return;
         }
 
-        this.confirmationService.openContent(`Are you sure want to change setting of ${playerSetting.username}?`,
+        setTimeout(() => {
+            this.confirmationService.openContent(`Are you sure want to change setting of ${playerSetting.username}?`,
             () => {
                 updateFn();
                 this.internalSaveLimit(playerSetting, levelId, value);
             },
             () => this.editComponent.value = orginalValue
         );
+        });
+        
         this.editComponent.closeEdit();
     }
 

@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Fanex.Data.Repository;
+using Microsoft.Extensions.Configuration;
 using RiskControl.WinLossLimitControl.Constants;
 using RiskControl.WinLossLimitControl.CurrencySettings.Model;
 using RiskControl.WinLossLimitControl.Extensions;
@@ -18,10 +19,12 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
     public class UpdateServiceImp : UpdateService
     {
         private readonly IDynamicRepository repository;
+        private readonly IConfiguration configuration;
 
-        public UpdateServiceImp(IDynamicRepository repository)
+        public UpdateServiceImp(IDynamicRepository repository, IConfiguration configuration)
         {
             this.repository = repository;
+            this.configuration = configuration;
         }
 
         public async Task Execute(List<CurrencySetting> currencySettings, UserContext userContext)
@@ -34,7 +37,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
 
         private IEnumerable<UpdateCriteria> GetUpdateCurrencyWinLimitCriteria(IEnumerable<CurrencySetting> currencySettings, UserContext userContext)
         {
-            var itemsPerBatch = int.Parse(ConfigurationManager.AppSettings["ItemsPerBatch"]);
+            var itemsPerBatch = int.Parse(configuration["ItemsPerBatch"]);
             var list = currencySettings.Select(c => GetUpdateCurrencyWinLimitAllLevel(c))
                                    .SelectMany(c => c);
             var criteriaList = new List<UpdateCriteria>();
