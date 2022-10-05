@@ -19,7 +19,7 @@ namespace RiskControl.WinLossLimitControl.FileDownload
 
         public byte[] ReadAllBytes(string filename)
         {
-            var filePath = $"{configurationService.FileServerDirectory}\\{filename}";
+            var filePath = $"{configurationService.FileServerDirectory}/{filename}";
             return File.ReadAllBytes(filePath);
         }
     }

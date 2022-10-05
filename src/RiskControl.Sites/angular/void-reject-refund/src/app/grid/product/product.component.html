@@ -74,9 +74,9 @@
                                 <td class="text-right" [napIntegerFormat]="childItem.total.refund"></td>
                                 <td class="text-right" [napPercentFormat]="childItem.total.refundPecentage"></td>
                             </tr>
-                            <ng-template *ngIf="!parentItem.isCollapse" ngFor let-item [ngForOf]="childItem.Bettypes">
+                            <ng-template *ngIf="!parentItem.isCollapse" ngFor let-item [ngForOf]="childItem.bettypes">
                                 <tr>
-                                    <td class="text-left">{{item.ReportBy }}</td>
+                                    <td class="text-left">{{item.reportBy }}</td>
                                     <td class="text-right" [napIntegerFormat]="item.noOfPlayers"></td>
                                     <td class="text-right" [napIntegerFormat]="item.betCount"></td>
                                     <td class="text-right" [napIntegerFormat]="item.reject"></td>
