@@ -776,13 +776,14 @@ export class FilterComponent implements OnInit {
   private getGameTypes(isEqualProducts: boolean) {
     this.filterService.getGameTypes().subscribe(gameTypes => {
       this.gameTypes = gameTypes;
+      const defaultGameTypes = gameTypes.filter(x => !x.typeName.includes('Jackpot Prize'));
 
       this.selectedGameTypes = isEqualProducts ?
         JSON.parse(localStorage.getItem('non-sport-gametypes')) as GameType[] :
-        gameTypes;
+        defaultGameTypes;
 
       if (this.selectedGameTypes == null || this.selectedGameTypes.length === 0) {
-        this.selectedGameTypes = gameTypes;
+        this.selectedGameTypes = defaultGameTypes;
       }
 
       this.gameTypeTreeViewItems = this.treeviewBuilderService.buildGameTypeTreeViewItems(gameTypes, this.selectedProducts, this.selectedGameTypes);
