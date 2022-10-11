@@ -27,7 +27,6 @@ namespace RiskControl.Sites
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterAuthentication(Configuration);
-            services.LoadConfig();
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new ServiceFilterAttribute(typeof(CheckUMFilterAttribute)));

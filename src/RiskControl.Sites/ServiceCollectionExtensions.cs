@@ -2,7 +2,7 @@
 using Fanex.Data;
 using Fanex.Data.SqlServer;
 using Fanex.Logging;
-using Fanex.Logging.Sentry;
+using Fanex.Logging.Sentry.RavenClient;
 using Fanex.RemotingRef;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +14,7 @@ using RiskControl.Sites.AutoMapperProfiles.NonSports;
 using RiskControl.Sites.AutoMapperProfiles.VoidRejectRefund;
 using RiskControl.Sites.AutoMapperProfiles.WinLossLimitControl;
 using RiskControl.Sites.DependencyInjections;
-using Sentry;
+using SharpRaven;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,14 +53,6 @@ namespace RiskControl.Sites
                     Dsn = new Dsn(configuration.GetSection("SentryClientKey").Value)
                 })
             });
-        }
-
-        public static void LoadConfig(this IServiceCollection services)
-        {
-            //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-
-            //var text = File.ReadAllText("appsettings.json");
-            //AppConfigService.AppConfig = JsonConvert.DeserializeObject<ConfigSettingModel>(text);
         }
 
         public static void RegisterRemotingRef(this IServiceCollection services, IConfiguration configuration)
