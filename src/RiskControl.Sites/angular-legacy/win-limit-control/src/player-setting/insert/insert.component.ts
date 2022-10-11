@@ -136,11 +136,11 @@ export class InsertComponent implements OnInit {
               siteId: playerSetting.siteId,
               productId: playerSetting.productId,
               groupId: playerSetting.groupId,
-              blackLimit: playerSetting.blackLimit,
-              greyLimit: playerSetting.greyLimit,
-              orangeLimit: playerSetting.orangeLimit,
-              yellowLimit: playerSetting.yellowLimit,
-              redLimit: playerSetting.redLimit
+              blackLimit: playerSetting.blackLimit??0,
+              greyLimit: playerSetting.greyLimit??0,
+              orangeLimit: playerSetting.orangeLimit??0,
+              yellowLimit: playerSetting.yellowLimit??0,
+              redLimit: playerSetting.redLimit??0
             };
             insertCommands.push(insertCommand);
           }
