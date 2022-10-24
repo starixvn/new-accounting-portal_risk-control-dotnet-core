@@ -1,0 +1,39 @@
+﻿@import '~nap-theme/scss/mixins';
+.search-choice {
+    display: inline-block;
+    background-color: #f5f5f5;
+    border: $input-btn-border-width solid #ccc;
+    border-radius: $btn-border-radius;
+    margin: 0 .3rem .3rem 0;
+    padding: .1rem .2rem;
+    cursor: default;
+    &.active {
+        border-color: #4d90fe !important;
+        background-color: #eee !important;
+    }
+    &:hover {
+        border-color: #adadad;
+    }
+    .fa-times {
+        margin-left: .3rem;
+        opacity: 0.6;
+        cursor: pointer;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+.search-field {
+    width: 100%;
+    input {
+        border: none;
+        outline: none;
+        width: 100%;
+        &.hidden {
+            left: -10000px;
+            width: 1px;
+            position: absolute;
+        }
+    }
+}

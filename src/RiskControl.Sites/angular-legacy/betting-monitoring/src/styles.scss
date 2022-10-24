@@ -1,0 +1,13 @@
+@import '~font-awesome/css/font-awesome.min.css';
+@import '~nap-theme/css/theme.css';
+.spinner-loading {
+    background-image: url("assets/spinner.gif");
+}
+
+.navbar-brand {
+    .logo {
+        background-image: url("assets/logo.png");
+        width: 113px;
+        height: 24px;
+    }
+}

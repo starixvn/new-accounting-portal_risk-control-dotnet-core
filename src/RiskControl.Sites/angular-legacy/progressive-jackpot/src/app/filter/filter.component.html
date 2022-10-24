@@ -1,0 +1,65 @@
+<div class="nap-filter">
+  <div class="row">
+    <div class="nap-col col-title">
+      Search by
+    </div>
+    <div class="nap-col nap-col-1">
+      <div class="nap-group">
+        <label for="select-game-group">Game Group</label>
+        <div class="nap-control">
+          <select class="form-control" id="select-game-group" [(ngModel)]="gameGroupId" (ngModelChange)="onGameGroupChange()">
+            <option *ngFor="let gameGroup of gameGroups" [ngValue]="gameGroup.gameGroupId">
+              {{gameGroup.gameGroupNameAlias}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col col-title"></div>
+    <div class="nap-col nap-col-1">
+      <div class="nap-group">
+        <label for="select-game-type">Game Type</label>
+        <div class="nap-control">
+          <select class="form-control" id="select-game-type" [(ngModel)]="gameTypeId" (ngModelChange)="onGameTypeChange()">
+            <option *ngFor="let gameType of gameTypes" [ngValue]="gameType.gameTypeId">
+              {{gameType.gameTypeNameAlias}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col col-title"></div>
+    <div class="nap-col nap-col-1">
+      <div class="nap-group">
+        <label for="select-jackpot-type">Jackpot Type</label>
+        <div class="nap-control">
+          <select class="form-control" id="select-jackpot-type" [(ngModel)]="jackpotTypeId">
+            <option *ngFor="let jackpotType of jackpotTypes" [ngValue]="jackpotType.jackpotTypeId">
+              {{jackpotType.jackpotTypeNameAlias}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col col-title"></div>
+    <div class="nap-col nap-col-1">
+      <div class="nap-group">
+        <label></label>
+        <div class="nap-control">
+          <button type="button" class="btn btn-primary mr-2" (click)="search()">
+            SEARCH
+          </button>
+          <button type="button" class="btn btn-primary" (click)="searchWinRecord()">
+            WIN RECORD
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

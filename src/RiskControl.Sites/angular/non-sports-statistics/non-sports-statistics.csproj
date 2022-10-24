@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{53B0E126-D547-4C7E-8D87-94B4CC445A2C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>2.2</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="karma.conf.js" />
+    <Content Include="protractor.conf.js" />
+    <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\filter\filter.component.html" />
+    <Content Include="src\app\filter\user-name-suggestion\images\sprite.gif" />
+    <Content Include="src\app\filter\user-name-suggestion\user-name-suggestion-textbox.component.html" />
+    <Content Include="src\app\filter\user-name-suggestion\user-name-suggestion.component.html" />
+    <Content Include="src\app\images\icon-collapse.png" />
+    <Content Include="src\app\images\icon-expand.png" />
+    <Content Include="src\app\modes\common\associated-account-modal.component.html" />
+    <Content Include="src\app\modes\common\house-position-taking-modal.component.html" />
+    <Content Include="src\app\modes\grid.html" />
+    <Content Include="src\components\date-picker\date-picker.component.html" />
+    <Content Include="src\components\date-picker\images\icon-date-picker.png" />
+    <Content Include="src\components\dropdown-select\dropdown-select.component.html" />
+    <Content Include="src\components\dropdown-typeahead\dropdown-typeahead.component.html" />
+    <Content Include="src\components\grid-modal\grid-modal.component.html" />
+    <Content Include="src\components\grid\grid.component.html" />
+    <Content Include="src\components\modal\modal-window.component.html" />
+    <Content Include="src\components\navbar\images\bgmenu-more.png" />
+    <Content Include="src\components\navbar\images\logo.png" />
+    <Content Include="src\components\navbar\images\small-arrow-down.png" />
+    <Content Include="src\components\navbar\images\user.png" />
+    <Content Include="src\components\navbar\navbar.component.html" />
+    <Content Include="src\components\spinner\images\spinner.gif" />
+    <Content Include="src\components\spinner\spinner.component.html" />
+    <Content Include="src\components\toast\toast.component.html" />
+    <Content Include="src\config\helper.js" />
+    <Content Include="src\favicon.ico" />
+    <Content Include="src\index.html" />
+    <Content Include="src\libs\Fanex.Grid.js" />
+    <Content Include="src\libs\Fanex.Pagination.js" />
+    <Content Include="src\shared\legend\images\button-default.png" />
+    <Content Include="src\shared\legend\images\button-hover.png" />
+    <Content Include="src\shared\legend\legend.component.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="e2e\app.e2e-spec.ts" />
+    <TypeScriptCompile Include="e2e\app.po.ts" />
+    <TypeScriptCompile Include="src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\app.component.ts" />
+    <TypeScriptCompile Include="src\app\app.helper.ts" />
+    <TypeScriptCompile Include="src\app\app.model.ts" />
+    <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\app.service.ts" />
+    <TypeScriptCompile Include="src\app\breadcrumb.service.ts" />
+    <TypeScriptCompile Include="src\app\filter\column.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\filter\column.service.ts" />
+    <TypeScriptCompile Include="src\app\filter\device-treeview.pipe.spec.ts" />
+    <TypeScriptCompile Include="src\app\filter\device-treeview.pipe.ts" />
+    <TypeScriptCompile Include="src\app\filter\exclude-test.pipe.spec.ts" />
+    <TypeScriptCompile Include="src\app\filter\exclude-test.pipe.ts" />
+    <TypeScriptCompile Include="src\app\filter\exclude-test2.pipe.spec.ts" />
+    <TypeScriptCompile Include="src\app\filter\exclude-test2.pipe.ts" />
+    <TypeScriptCompile Include="src\app\filter\filter.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\filter\filter.component.ts" />
+    <TypeScriptCompile Include="src\app\filter\filter.config.ts" />
+    <TypeScriptCompile Include="src\app\filter\filter.model.ts" />
+    <TypeScriptCompile Include="src\app\filter\filter.module.ts" />
+    <TypeScriptCompile Include="src\app\filter\filter.service.ts" />
+    <TypeScriptCompile Include="src\app\filter\gametype-treeview.pipe.spec.ts" />
+    <TypeScriptCompile Include="src\app\filter\gametype-treeview.pipe.ts" />
+    <TypeScriptCompile Include="src\app\filter\index.ts" />
+    <TypeScriptCompile Include="src\app\filter\product-treeview.pipe.spec.ts" />
+    <TypeScriptCompile Include="src\app\filter\product-treeview.pipe.ts" />
+    <TypeScriptCompile Include="src\app\filter\user-name-suggestion\index.ts" />
+    <TypeScriptCompile Include="src\app\filter\user-name-suggestion\user-name-suggestion-textbox.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\filter\user-name-suggestion\user-name-suggestion-textbox.component.ts" />
+    <TypeScriptCompile Include="src\app\filter\user-name-suggestion\user-name-suggestion.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\filter\user-name-suggestion\user-name-suggestion.component.ts" />
+    <TypeScriptCompile Include="src\app\filter\user-name-suggestion\user-name-suggestion.module.ts" />
+    <TypeScriptCompile Include="src\app\filter\user-name-suggestion\user-name-suggestion.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\common\associated-account-modal.component.ts" />
+    <TypeScriptCompile Include="src\app\modes\common\common.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\common\grid.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\common\house-position-taking-modal.component.ts" />
+    <TypeScriptCompile Include="src\app\modes\common\model.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\common\model.ts" />
+    <TypeScriptCompile Include="src\app\modes\common\title.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\company\company.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\company\company.component.ts" />
+    <TypeScriptCompile Include="src\app\modes\company\company.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\company\company.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\company\mocks\filter-model.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\company\mocks\grid-model.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\currency\currency.component.ts" />
+    <TypeScriptCompile Include="src\app\modes\currency\currency.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\currency\currency.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\currency\model.ts" />
+    <TypeScriptCompile Include="src\app\modes\daily\daily.component.ts" />
+    <TypeScriptCompile Include="src\app\modes\daily\daily.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\daily\daily.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\daily\model.ts" />
+    <TypeScriptCompile Include="src\app\modes\device\device.component.ts" />
+    <TypeScriptCompile Include="src\app\modes\device\device.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\device\device.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\grid-model.ts" />
+    <TypeScriptCompile Include="src\app\modes\mode-context.ts" />
+    <TypeScriptCompile Include="src\app\modes\mode-controller.ts" />
+    <TypeScriptCompile Include="src\app\modes\mode.module.ts" />
+    <TypeScriptCompile Include="src\app\modes\model.ts" />
+    <TypeScriptCompile Include="src\app\modes\monthly\monthly.component.ts" />
+    <TypeScriptCompile Include="src\app\modes\monthly\monthly.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\monthly\monthly.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\casino-product.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\casino-product.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\casino-setting.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\keno-setting.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\live-casino-setting.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\model.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\number-game-setting.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\product-setting.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\product.component.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\product.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\product.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\rng-casino-setting.ts" />
+    <TypeScriptCompile Include="src\app\modes\product\virtual-sports-setting.ts" />
+    <TypeScriptCompile Include="src\app\modes\top20\mocks\filter-model.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\top20\mocks\grid-model.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\top20\model.ts" />
+    <TypeScriptCompile Include="src\app\modes\top20\top20.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\top20\top20.component.ts" />
+    <TypeScriptCompile Include="src\app\modes\top20\top20.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\modes\top20\top20.service.ts" />
+    <TypeScriptCompile Include="src\app\modes\user-name\model.ts" />
+    <TypeScriptCompile Include="src\app\modes\user-name\user-name.component.ts" />
+    <TypeScriptCompile Include="src\app\modes\user-name\user-name.service.ts" />
+    <TypeScriptCompile Include="src\components\date-picker\date-picker.component.spec.ts" />
+    <TypeScriptCompile Include="src\components\date-picker\date-picker.component.ts" />
+    <TypeScriptCompile Include="src\components\date-picker\index.ts" />
+    <TypeScriptCompile Include="src\components\dropdown-select\dropdown-select.component.ts" />
+    <TypeScriptCompile Include="src\components\dropdown-select\dropdown-select.pipe.spec.ts" />
+    <TypeScriptCompile Include="src\components\dropdown-select\dropdown-select.pipe.ts" />
+    <TypeScriptCompile Include="src\components\dropdown-select\index.ts" />
+    <TypeScriptCompile Include="src\components\dropdown-typeahead\dropdown-typeahead.component.ts" />
+    <TypeScriptCompile Include="src\components\dropdown-typeahead\index.ts" />
+    <TypeScriptCompile Include="src\components\exception.service.ts" />
+    <TypeScriptCompile Include="src\components\grid-modal\grid-modal.component.ts" />
+    <TypeScriptCompile Include="src\components\grid-modal\index.ts" />
+    <TypeScriptCompile Include="src\components\grid\grid.component.ts" />
+    <TypeScriptCompile Include="src\components\grid\grid.service.ts" />
+    <TypeScriptCompile Include="src\components\grid\index.ts" />
+    <TypeScriptCompile Include="src\components\grid\model.ts" />
+    <TypeScriptCompile Include="src\components\helper.ts" />
+    <TypeScriptCompile Include="src\components\http.service.ts" />
+    <TypeScriptCompile Include="src\components\integer-only\index.ts" />
+    <TypeScriptCompile Include="src\components\integer-only\integer-only.directive.ts" />
+    <TypeScriptCompile Include="src\components\modal\content-ref.ts" />
+    <TypeScriptCompile Include="src\components\modal\index.ts" />
+    <TypeScriptCompile Include="src\components\modal\modal-backdrop.component.ts" />
+    <TypeScriptCompile Include="src\components\modal\modal-container.directive.ts" />
+    <TypeScriptCompile Include="src\components\modal\modal-context.ts" />
+    <TypeScriptCompile Include="src\components\modal\modal-options.ts" />
+    <TypeScriptCompile Include="src\components\modal\modal-ref.ts" />
+    <TypeScriptCompile Include="src\components\modal\modal-stack.service.ts" />
+    <TypeScriptCompile Include="src\components\modal\modal-window.component.ts" />
+    <TypeScriptCompile Include="src\components\modal\modal.module.ts" />
+    <TypeScriptCompile Include="src\components\modal\modal.service.ts" />
+    <TypeScriptCompile Include="src\components\moment-format.pipe.spec.ts" />
+    <TypeScriptCompile Include="src\components\moment-format.pipe.ts" />
+    <TypeScriptCompile Include="src\components\navbar\index.ts" />
+    <TypeScriptCompile Include="src\components\navbar\navbar.component.ts" />
+    <TypeScriptCompile Include="src\components\navbar\navbar.model.ts" />
+    <TypeScriptCompile Include="src\components\navbar\navbar.module.ts" />
+    <TypeScriptCompile Include="src\components\navbar\navbar.service.ts" />
+    <TypeScriptCompile Include="src\components\spinner\index.ts" />
+    <TypeScriptCompile Include="src\components\spinner\spinner.component.ts" />
+    <TypeScriptCompile Include="src\components\spinner\spinner.service.ts" />
+    <TypeScriptCompile Include="src\components\toast\index.ts" />
+    <TypeScriptCompile Include="src\components\toast\toast.component.spec.ts" />
+    <TypeScriptCompile Include="src\components\toast\toast.component.ts" />
+    <TypeScriptCompile Include="src\components\toast\toast.service.ts" />
+    <TypeScriptCompile Include="src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="src\environments\environment.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\polyfills.ts" />
+    <TypeScriptCompile Include="src\shared\common.service.ts" />
+    <TypeScriptCompile Include="src\shared\config.ts" />
+    <TypeScriptCompile Include="src\shared\legend\index.ts" />
+    <TypeScriptCompile Include="src\shared\legend\legend.component.ts" />
+    <TypeScriptCompile Include="src\shared\legend\legend.service.ts" />
+    <TypeScriptCompile Include="src\shared\model.ts" />
+    <TypeScriptCompile Include="src\test.ts" />
+    <TypeScriptCompile Include="src\testing\common.ts" />
+    <TypeScriptCompile Include="src\testing\event-helper.ts" />
+    <TypeScriptCompile Include="src\testing\index.ts" />
+    <TypeScriptCompile Include="src\testing\jasmine-matchers.ts" />
+    <TypeScriptCompile Include="src\typings.d.ts" />
+    <TypeScriptCompile Include="src\typings\fanex-grid.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".angular-cli.json" />
+    <Content Include=".editorconfig" />
+    <Content Include=".gitignore" />
+    <Content Include="package-lock.json" />
+    <Content Include="package.json" />
+    <Content Include="proxy.conf.json" />
+    <Content Include="README.md" />
+    <Content Include="src\app\app.component.scss" />
+    <Content Include="src\app\filter\filter.component.scss" />
+    <Content Include="src\app\filter\mocks\base-currencies.json" />
+    <Content Include="src\app\filter\mocks\currencies.json" />
+    <Content Include="src\app\filter\mocks\devices.json" />
+    <Content Include="src\app\filter\mocks\filter-model.json" />
+    <Content Include="src\app\filter\mocks\game-tables.json" />
+    <Content Include="src\app\filter\mocks\game-types.json" />
+    <Content Include="src\app\filter\mocks\products.json" />
+    <Content Include="src\app\filter\mocks\sites.json" />
+    <Content Include="src\app\filter\user-name-suggestion\user-name-suggestion-textbox.component.scss" />
+    <Content Include="src\app\filter\user-name-suggestion\user-name-suggestion.component.scss" />
+    <Content Include="src\app\modes\company\mocks\back-grid-options.json" />
+    <Content Include="src\app\modes\company\mocks\forward-grid-options.json" />
+    <Content Include="src\app\modes\top20\mocks\back-grid-options.json" />
+    <Content Include="src\app\modes\top20\mocks\forward-grid-options.json" />
+    <Content Include="src\assets\.gitkeep" />
+    <Content Include="src\components\date-picker\date-picker.component.scss" />
+    <Content Include="src\components\grid\grid.component.scss" />
+    <Content Include="src\components\modal\modal-window.component.scss" />
+    <Content Include="src\components\navbar\navbar.component.scss" />
+    <Content Include="src\components\spinner\spinner.component.scss" />
+    <Content Include="src\shared\legend\legend.component.scss" />
+    <Content Include="src\shared\style\common.scss" />
+    <Content Include="src\shared\style\fanex-grid.scss" />
+    <Content Include="src\shared\style\mixins.scss" />
+    <Content Include="src\shared\style\page-header.scss" />
+    <Content Include="src\shared\style\variables.scss" />
+    <Content Include="src\styles.scss" />
+    <Content Include="src\tsconfig.app.json" />
+    <Content Include="src\tsconfig.spec.json" />
+    <Content Include="tsconfig.json" />
+    <Content Include="tslint.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="e2e\tsconfig.e2e.json" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>non_sports_statistics</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4062</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:4062/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl></CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>

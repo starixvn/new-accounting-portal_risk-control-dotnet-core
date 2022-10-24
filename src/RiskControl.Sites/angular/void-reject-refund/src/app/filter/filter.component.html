@@ -1,0 +1,118 @@
+<div class="nap-filter">
+  <nap-legend [legendId]="351" [legendTitle]="'Dashboard'"></nap-legend>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Product</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview #productDropdownTreeview [items]="products | napProductTreeview"
+            [config]="productTreeviewConfig" (selectedChange)="onProductChange($event)"></ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Time period</label>
+        <div class="nap-control">
+          <nap-dropdown-select [items]="timePeriodSelectItems" [(value)]="timePeriod"
+            (valueChange)="onTimePeriodChange()">
+          </nap-dropdown-select>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col" *ngIf="!isYerterdayDataWarehouseReady">
+      <div class="text-danger">Yesterday's data is not ready.</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Company</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview #siteDropdownTreeview [items]="sites | napSiteTreeview" [config]="siteTreeviewConfig"
+          (selectedChange)="onSiteChange($event)">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>From Date</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="startDate" [minDate]="minStartDate" [maxDate]="endDate"
+            (dateChange)="onDateChange()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>To Date</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="endDate" [minDate]="startDate" [maxDate]="maxEndDate"
+            (dateChange)="onDateChange()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Currency</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview [config]="currenciesTreeviewConfig"
+            [items]="currencies | napExcludeTest2:isExcludeTest | ngxTreeview:'currency'"
+            (selectedChange)="selectedCurrencies = $event">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Game type</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview
+            [items]="gameTypes | napExcludeTest:isExcludeTest | napGametypeTreeview:selectedProducts"
+            [config]="gameTypeTreeviewConfig" (selectedChange)="selectedGameTypes = $event">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col nap-col-exclude-test">
+      <div class="form-check nap-form-checkbox">
+        <label class="form-check-label">
+          <input name="excludeTestCheckbox" type="checkbox" class="form-check-input" [(ngModel)]="isExcludeTest">
+          Exclude test data
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Report by</label>
+        <div class="nap-control">
+          <nap-dropdown-select [items]="reportTypeSelectItems" [(value)]="selectedReportType"
+            (valueChange)="onReportTypeChange($event)">
+          </nap-dropdown-select>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Device</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview [config]="deviceTreeviewConfig" [items]="devices | napDeviceTreeview"
+            (selectedChange)="selectedDevices = $event">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col col-buttons blocks">
+      <label>&nbsp;</label>
+      <button type="button" class="btn btn-primary" (click)="onGenerateClick()">
+        GENERATE
+      </button>
+    </div>
+  </div>

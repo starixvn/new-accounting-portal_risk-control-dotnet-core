@@ -1,86 +1,82 @@
-using AutoMapper;
-using MediatR;
+using Fanex.NAP.Client;
+using Fanex.NAP.Client.Configuration;
+using Fanex.NAP.Client.Helpers.Web;
+using Fanex.NAP.Signin.AspNetCore.Attribute;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Olympus.DotNetCore.Authentication;
-using Olympus.DotNetCore.Maintenance;
-using Olympus.DotNetCore.NapApiClient.Configuration;
-using RiskControl.Account.Extensions;
-using RiskControl.Account.Models;
-using RiskControl.Account;
-using RiskControl.WinLossLimitControl.Configurations;
-using RiskControl.WinLossLimitControl.Extensions;
-using RiskControl.WinLossLimitControl;
+using Microsoft.Extensions.Hosting;
+using ONEbook.UM.AspNetCore.Filters;
+using RiskControl.Sites.Extensions;
 
-namespace RiskControl.Sites {
-    public partial class Startup {
-        public Startup (IConfiguration configuration) {
+namespace RiskControl.Sites
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices (IServiceCollection services) {
-            ConfigureSettings (services);
-            ConfigureAuth (services);
-            ConfigureGlobalServices(services);
-
-            services.AddMediatR (
-                typeof (IAccountMarker).Assembly,
-                typeof (IWinLossLimitControlMarker).Assembly
-            );
-            services.AddOptions ();
-            services.AddAccountModule ();
-            services.AddWinLossLimitControlModule();
-            
-            services.AddMvc (options => {
-                options.Filters.Add (typeof (MaintenanceFilter));
-            });
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor> ();
-
-            Mapper.Initialize (cfg => {
-                cfg.InitializeWinLossLimitControl ();
-            });
-        }
-
-        private void ConfigureSettings (IServiceCollection services) {
-            services.Configure<NapApiOptions> (Configuration.GetSection ("NapApiOptions"));
-            services.Configure<TokenProviderOptions> (Configuration.GetSection ("TokenProviderOptions"));
-            services.Configure<WinLossLimitControlOptions> (Configuration.GetSection ("WinLossLimitControlOptions"));
-            services.Configure<MaintenanceOptions> (Configuration.GetSection ("MaintenanceOptions"));
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.RegisterAuthentication(Configuration);
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new ServiceFilterAttribute(typeof(CheckUMFilterAttribute)));
+                options.Filters.Add(new SessionAuthorizeAttribute());
+            }).AddNewtonsoftJson();
+            services.AddHttpContextAccessor();
+            services.RegisterRemotingRef(Configuration);
+            services.RegisterFanexData(Configuration);
+            services.RegisterSentry(Configuration);
+            services.RegisterInternalServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure (IApplicationBuilder app, IHostingEnvironment env) {
-            if (env.IsDevelopment ()) {
-                app.UseDeveloperExceptionPage ();
-                app.UseWebpackDevMiddleware (new WebpackDevMiddlewareOptions {
-                    HotModuleReplacement = true
-                });
-            } else {
-                app.UseExceptionHandler ("/Home/Error");
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            app.Use((context, next) =>
+            {
+                context.Request.PathBase = new PathString(Configuration.GetSection("PathBase").Value);
+                return next();
+            });
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+            app.UseHttpsRedirection();
+            app.ConfigureExceptionHandler();
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+            app.UseSession();
+            app.UseRouting();
+            NapClientManager
+                .UseConfig(app.ApplicationServices.GetService<INapSettings>())
+                .UseSession(app.ApplicationServices.GetService<INapSession>());
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-            // TODO: Add Fanex.Data
-            // ConfigureFanexData(app);
-            // TODO
-            app.ConfigureAccountModule ();
-            app.UseStaticFiles ();
-            app.UseAuthentication ();
-            app.UseMvc (routes => {
-                routes.MapRoute (
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapSpaFallbackRoute (
-                    name: "spa-fallback",
-                    defaults : new { controller = "Home", action = "Index" });
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        
     }
 }

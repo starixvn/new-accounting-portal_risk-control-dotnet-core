@@ -1,0 +1,13 @@
+<nap-navbar></nap-navbar>
+<div class="container-fluid" style="min-width: 1215px;">
+    <div class="nap-header">
+        <div class="title">
+            <span class="active">Currency Win Loss Limit Setting</span>
+        </div>
+        <div>GMT-4</div>
+    </div>
+    <nap-filter (generate)="filterModel = $event"></nap-filter>
+    <nap-toast></nap-toast>
+    <nap-grid [filterModel]="filterModel"></nap-grid>
+</div>
+<nap-spinner></nap-spinner>

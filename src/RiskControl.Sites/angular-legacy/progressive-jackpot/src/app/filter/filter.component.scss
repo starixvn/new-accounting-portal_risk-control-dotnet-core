@@ -1,0 +1,18 @@
+@import '~nap-theme/scss/filter';
+.col-title {
+  width: 100px;
+  font-weight: 700;
+  padding-left: 15px !important;
+}
+
+.nap-col-1 {
+  label {
+    width: 100px;
+  }
+}
+
+.nap-control {
+  button {
+    padding: .244rem 1rem;
+  }
+}

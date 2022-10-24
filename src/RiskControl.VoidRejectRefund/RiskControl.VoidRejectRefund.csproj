@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Company\" />
+    <Folder Include="Currency\" />
+    <Folder Include="Daily\" />
+    <Folder Include="Device\" />
+    <Folder Include="Monthly\" />
+    <Folder Include="Product\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="EPPlus" Version="6.0.3" />
+    <PackageReference Include="Epplus.Mapper" Version="1.0.0.13" />
+    <PackageReference Include="Fanex.Data.Repository" Version="4.2.2" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Olympus.WebApi.Epplus.AspNetCore" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RiskControl.Core\RiskControl.Core.csproj" />
+  </ItemGroup>
+
+</Project>

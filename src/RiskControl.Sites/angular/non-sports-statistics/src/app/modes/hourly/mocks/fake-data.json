@@ -1,0 +1,94 @@
+{
+    "HourlyStatisticAccumulated": {
+        "HourlyStatistics": [
+            {
+                "ReportBy": "13:00",
+                "NoOfPlayers": 1,
+                "BetCount": 2,
+                "Currency": "RM",
+                "TotalBets": 61,
+                "TotalWins": 28.3696,
+                "GameIncome": 33.0184,
+                "GamePayout": 0.4621359223300971,
+                "TotalRefund": 0,
+                "HouseTurnover": 6.1388,
+                "RealTurnover": 6.1388,
+                "HouseGrossIncome": 3.3018,
+                "HouseComm": 1.0,
+                "ExtraPT": 1.0,
+                "HouseNetIncome": 3.3018
+            },
+            {
+                "ReportBy": "14:00",
+                "NoOfPlayers": null,
+                "BetCount": null,
+                "Currency": null,
+                "TotalBets": null,
+                "TotalWins": null,
+                "GameIncome": null,
+                "GamePayout": null,
+                "TotalRefund": null,
+                "HouseTurnover": null,
+                "RealTurnover": null,
+                "HouseGrossIncome": null,
+                "HouseComm": null,
+                "ExtraPT": null,
+                "HouseNetIncome": null
+            },
+            {
+                "ReportBy": "15:00",
+                "NoOfPlayers": 1111,
+                "BetCount": 2111,
+                "Currency": "RM",
+                "TotalBets": 61,
+                "TotalWins": -28.3696,
+                "GameIncome": -33.0184,
+                "GamePayout": 1.4621359223300971,
+                "TotalRefund": 0,
+                "HouseTurnover": 6.1388,
+                "RealTurnover": 6.1388,
+                "HouseGrossIncome": -3.3018,
+                "HouseComm": 1.0,
+                "ExtraPT": 2.0,
+                "HouseNetIncome": -3.3018
+            }
+        ],
+        "AveragePlayer": 1211
+    },
+    "HourlyStatistics": [
+        {
+            "ReportBy": "13:00",
+            "NoOfPlayers": 1,
+            "BetCount": 2,
+            "Currency": "RM",
+            "TotalBets": 61,
+            "TotalWins": 28.3696,
+            "GameIncome": 33.0184,
+            "GamePayout": 0.4621359223300971,
+            "TotalRefund": 0,
+            "HouseTurnover": 6.1388,
+            "RealTurnover": 6.1388,
+            "HouseGrossIncome": 3.3018,
+            "HouseComm": 1.0,
+            "ExtraPT": 1,
+            "HouseNetIncome": 3.3018
+        },
+        {
+            "ReportBy": "14:00",
+            "NoOfPlayers": null,
+            "BetCount": null,
+            "Currency": null,
+            "TotalBets": null,
+            "TotalWins": null,
+            "GameIncome": null,
+            "GamePayout": null,
+            "TotalRefund": null,
+            "HouseTurnover": null,
+            "RealTurnover": null,
+            "HouseGrossIncome": null,
+            "HouseComm": null,
+            "ExtraPT": null,
+            "HouseNetIncome": null
+        }
+    ]
+}

@@ -1,0 +1,236 @@
+﻿[
+  {
+    "gameTableId": 22890,
+    "gameTable": "BaccaratQ1",
+    "typeId": 1101,
+    "isTest": true
+  },
+  {
+    "gameTableId": 22891,
+    "gameTable": "BaccaratQ2",
+    "typeId": 1101,
+    "isTest": true
+  },
+  {
+    "gameTableId": 22892,
+    "gameTable": "BaccaratQ3",
+    "typeId": 1101,
+    "isTest": true
+  },
+  {
+    "gameTableId": 22893,
+    "gameTable": "BaccaratQ4",
+    "typeId": 1101,
+    "isTest": true
+  },
+  {
+    "gameTableId": 22946,
+    "gameTable": "BaccaratQ5",
+    "typeId": 1101,
+    "isTest": true
+  },
+  {
+    "gameTableId": 22947,
+    "gameTable": "BaccaratQ6",
+    "typeId": 1101,
+    "isTest": true
+  },
+  {
+    "gameTableId": 22992,
+    "gameTable": "Baccarat07T",
+    "typeId": 1101,
+    "isTest": true
+  },
+  {
+    "gameTableId": 22993,
+    "gameTable": "Baccarat08T",
+    "typeId": 1101,
+    "isTest": true
+  },
+  {
+    "gameTableId": 22994,
+    "gameTable": "Baccarat01",
+    "typeId": 1101,
+    "isTest": false
+  },
+  {
+    "gameTableId": 22995,
+    "gameTable": "Baccarat02",
+    "typeId": 1101,
+    "isTest": false
+  },
+  {
+    "gameTableId": 22996,
+    "gameTable": "Baccarat03",
+    "typeId": 1101,
+    "isTest": false
+  },
+  {
+    "gameTableId": 23618,
+    "gameTable": "Baccarat04",
+    "typeId": 1101,
+    "isTest": false
+  },
+  {
+    "gameTableId": 23751,
+    "gameTable": "Baccarat05",
+    "typeId": 1101,
+    "isTest": false
+  },
+  {
+    "gameTableId": 25818,
+    "gameTable": "TST Table",
+    "typeId": 1101,
+    "isTest": true
+  },
+  {
+    "gameTableId": 26063,
+    "gameTable": "Q7",
+    "typeId": 1102,
+    "isTest": true
+  },
+  {
+    "gameTableId": 26064,
+    "gameTable": "Q8",
+    "typeId": 1102,
+    "isTest": true
+  },
+  {
+    "gameTableId": 26065,
+    "gameTable": "Q9",
+    "typeId": 1102,
+    "isTest": true
+  },
+  {
+    "gameTableId": 26120,
+    "gameTable": "Roulette06",
+    "typeId": 1102,
+    "isTest": false
+  },
+  {
+    "gameTableId": 26121,
+    "gameTable": "Roulette07",
+    "typeId": 1102,
+    "isTest": false
+  },
+  {
+    "gameTableId": 26122,
+    "gameTable": "T9",
+    "typeId": 1102,
+    "isTest": true
+  },
+  {
+    "gameTableId": 27946,
+    "gameTable": "S1",
+    "typeId": 1102,
+    "isTest": true
+  },
+  {
+    "gameTableId": 28578,
+    "gameTable": "S2",
+    "typeId": 1102,
+    "isTest": true
+  },
+  {
+    "gameTableId": 28680,
+    "gameTable": "Baccarat11",
+    "typeId": 1103,
+    "isTest": false
+  },
+  {
+    "gameTableId": 28681,
+    "gameTable": "Baccarat12",
+    "typeId": 1103,
+    "isTest": false
+  },
+  {
+    "gameTableId": 28682,
+    "gameTable": "Baccarat13",
+    "typeId": 1103,
+    "isTest": false
+  },
+  {
+    "gameTableId": 28683,
+    "gameTable": "Baccarat14",
+    "typeId": 1103,
+    "isTest": false
+  },
+  {
+    "gameTableId": 30190,
+    "gameTable": "BaccaratT6",
+    "typeId": 1103,
+    "isTest": true
+  },
+  {
+    "gameTableId": 30325,
+    "gameTable": "BaccaratQA",
+    "typeId": 1103,
+    "isTest": true
+  },
+  {
+    "gameTableId": 30326,
+    "gameTable": "BaccaratQB",
+    "typeId": 1103,
+    "isTest": true
+  },
+  {
+    "gameTableId": 31313,
+    "gameTable": "RouletteQD",
+    "typeId": 1104,
+    "isTest": true
+  },
+  {
+    "gameTableId": 31314,
+    "gameTable": "RouletteQE",
+    "typeId": 1104,
+    "isTest": true
+  },
+  {
+    "gameTableId": 31315,
+    "gameTable": "RouletteQF",
+    "typeId": 1104,
+    "isTest": true
+  },
+  {
+    "gameTableId": 31316,
+    "gameTable": "RouletteQG",
+    "typeId": 1104,
+    "isTest": true
+  },
+  {
+    "gameTableId": 32156,
+    "gameTable": "RouletteTA",
+    "typeId": 1104,
+    "isTest": true
+  },
+  {
+    "gameTableId": 32157,
+    "gameTable": "Roulette31",
+    "typeId": 1104,
+    "isTest": false
+  },
+  {
+    "gameTableId": 46759,
+    "gameTable": "No Card Baccarat QH",
+    "typeId": 1106,
+    "isTest": true
+  },
+  {
+    "gameTableId": 46760,
+    "gameTable": "No Card Baccarat QI",
+    "typeId": 1106,
+    "isTest": true
+  },
+  {
+    "gameTableId": 46761,
+    "gameTable": "No Card Baccarat M5",
+    "typeId": 1106,
+    "isTest": true
+  },
+  {
+    "gameTableId": 50809,
+    "gameTable": "BaccaratQC",
+    "typeId": 1103,
+    "isTest": true
+  }
+]

@@ -1,0 +1,126 @@
+@import '~nap-theme/scss/header.scss';
+@import '~nap-theme/scss/filter';
+.nap-col-70 {
+    label {
+        width: 70px;
+    }
+}
+
+.nap-col-140 {
+    label {
+        width: 140px;
+    }
+}
+
+.nap-col-90 {
+    label {
+        width: 90px;
+    }
+}
+
+.nap-col-40-percent {
+    width: 40%;
+    border: 1px solid #c1c1c1;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    table.unassigned-bettype {
+        tr.selected {
+            background-color: #0275d8;
+            color: white;
+        }
+    }
+}
+
+.nap-col-55 {
+    width: 55px;
+    position: relative;
+    div {
+        position: absolute;
+        top: 40%;
+        button {
+            padding: 0.244rem 1rem;
+        }
+    }
+}
+
+.input-186 {
+    width: 186px;
+}
+
+.content-container {
+    padding: .3rem;
+    .border {
+        border: solid 1px #cecccd;
+        border-radius: 0.3rem;
+        @include box-shadow(0 0 4px 1px rgba(0, 0, 0, .1));
+    }
+    .row {
+        margin-top: 3px;
+        padding: .3rem;
+        
+    }
+    .nap-col {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .nap-group {
+        label {
+            margin-right: .5em;
+            text-align: right;
+        }
+        .nap-control {
+            display: inline-block;
+        }
+        .header {
+            background: -webkit-linear-gradient(#ffcc33, #ffcc35);
+            padding: 3px 2px;
+        }
+        div.title {
+            padding: 8px;
+            span {
+                padding: 2px;
+                border: 1px solid #c1c1c1;
+                cursor: pointer;
+                &.selected {
+                    background-color: #0275d8;
+                    color: white;
+                }
+            }
+            div {
+                float: left;
+            }
+            div.viewmore {
+                float: right;
+                color: red;
+                cursor: pointer;
+            }
+        }
+        div.body {
+            padding-left: 40px;
+            div.legend {
+                float: right;
+                color: #ffcc34;
+                font-size: 16px;
+            }
+            tr {
+                &.selected {
+                    background-color: #0275d8;
+                    color: white;
+                }
+                &.hide {
+                    display: none;
+                }
+                &.show {
+                    display: table-row;
+                }
+            }
+        }
+    }
+    div.item-container {
+        span {
+            font-size: 20px;
+        }
+    }
+}

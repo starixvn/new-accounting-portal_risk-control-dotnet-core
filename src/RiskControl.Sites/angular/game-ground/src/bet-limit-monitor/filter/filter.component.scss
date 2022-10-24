@@ -1,0 +1,18 @@
+@import '~nap-theme/scss/filter';
+.nap-filter {
+  .nap-col {
+    .nap-group {
+      & > label {
+        float: left;
+        width: 100px;
+      }
+      & > .nap-control {
+        float: left;
+        width: 200px;
+      }
+      .left-checkbox {
+        margin-right: 5px;
+      }
+    }
+  }
+}

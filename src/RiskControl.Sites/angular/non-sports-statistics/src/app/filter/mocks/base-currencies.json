@@ -1,0 +1,226 @@
+﻿[
+  {
+    "exchangeId": 35,
+    "currency": "$US"
+  },
+  {
+    "exchangeId": 9,
+    "currency": "AUD"
+  },
+  {
+    "exchangeId": 46,
+    "currency": "BND"
+  },
+  {
+    "exchangeId": 28,
+    "currency": "C"
+  },
+  {
+    "exchangeId": 21,
+    "currency": "CAD"
+  },
+  {
+    "exchangeId": 50,
+    "currency": "CAN"
+  },
+  {
+    "exchangeId": 41,
+    "currency": "CHF"
+  },
+  {
+    "exchangeId": 57,
+    "currency": "CZK"
+  },
+  {
+    "exchangeId": 47,
+    "currency": "DDD"
+  },
+  {
+    "exchangeId": 52,
+    "currency": "DKK"
+  },
+  {
+    "exchangeId": 6,
+    "currency": "EURO"
+  },
+  {
+    "exchangeId": 12,
+    "currency": "GBP"
+  },
+  {
+    "exchangeId": 27,
+    "currency": "H"
+  },
+  {
+    "exchangeId": 5,
+    "currency": "HK$"
+  },
+  {
+    "exchangeId": 67,
+    "currency": "HKK"
+  },
+  {
+    "exchangeId": 33,
+    "currency": "IDD"
+  },
+  {
+    "exchangeId": 34,
+    "currency": "IDR"
+  },
+  {
+    "exchangeId": 15,
+    "currency": "IN"
+  },
+  {
+    "exchangeId": 22,
+    "currency": "IND"
+  },
+  {
+    "exchangeId": 51,
+    "currency": "INH"
+  },
+  {
+    "exchangeId": 61,
+    "currency": "INR"
+  },
+  {
+    "exchangeId": 40,
+    "currency": "IRR"
+  },
+  {
+    "exchangeId": 32,
+    "currency": "JPY"
+  },
+  {
+    "exchangeId": 71,
+    "currency": "KHR"
+  },
+  {
+    "exchangeId": 62,
+    "currency": "KW"
+  },
+  {
+    "exchangeId": 70,
+    "currency": "MKK"
+  },
+  {
+    "exchangeId": 69,
+    "currency": "MMK"
+  },
+  {
+    "exchangeId": 49,
+    "currency": "MXN"
+  },
+  {
+    "exchangeId": 54,
+    "currency": "NOK"
+  },
+  {
+    "exchangeId": 30,
+    "currency": "NT"
+  },
+  {
+    "exchangeId": 17,
+    "currency": "NTD"
+  },
+  {
+    "exchangeId": 63,
+    "currency": "NZD"
+  },
+  {
+    "exchangeId": 37,
+    "currency": "P"
+  },
+  {
+    "exchangeId": 42,
+    "currency": "PE"
+  },
+  {
+    "exchangeId": 56,
+    "currency": "PLN"
+  },
+  {
+    "exchangeId": 68,
+    "currency": "POS"
+  },
+  {
+    "exchangeId": 44,
+    "currency": "PT"
+  },
+  {
+    "exchangeId": 31,
+    "currency": "Pts"
+  },
+  {
+    "exchangeId": 2,
+    "currency": "RM"
+  },
+  {
+    "exchangeId": 13,
+    "currency": "RMB"
+  },
+  {
+    "exchangeId": 58,
+    "currency": "RON"
+  },
+  {
+    "exchangeId": 55,
+    "currency": "RUB"
+  },
+  {
+    "exchangeId": 1,
+    "currency": "SD$"
+  },
+  {
+    "exchangeId": 53,
+    "currency": "SEK"
+  },
+  {
+    "exchangeId": 4,
+    "currency": "TB"
+  },
+  {
+    "exchangeId": 43,
+    "currency": "THB"
+  },
+  {
+    "exchangeId": 65,
+    "currency": "UDI"
+  },
+  {
+    "exchangeId": 3,
+    "currency": "US$"
+  },
+  {
+    "exchangeId": 64,
+    "currency": "UT"
+  },
+  {
+    "exchangeId": 20,
+    "currency": "UUS"
+  },
+  {
+    "exchangeId": 45,
+    "currency": "Won"
+  },
+  {
+    "exchangeId": 36,
+    "currency": "Y$US"
+  },
+  {
+    "exchangeId": 16,
+    "currency": "Yen"
+  },
+  {
+    "exchangeId": 72,
+    "currency": "YNG"
+  },
+  {
+    "exchangeId": 66,
+    "currency": "YUN"
+  },
+  {
+    "exchangeId": 48,
+    "currency": "ZAR"
+  }
+]

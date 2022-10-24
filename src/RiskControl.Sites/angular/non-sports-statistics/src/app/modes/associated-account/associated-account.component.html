@@ -1,0 +1,9 @@
+﻿<div class="modal-header">
+    <p class="modal-title">&nbsp;</p>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <nap-grid [options]="gridOptions" [context]="gridContext" (afterGenerate)="onAfterGenerate($event)"></nap-grid>
+</div>

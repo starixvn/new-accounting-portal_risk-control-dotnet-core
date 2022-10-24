@@ -1,0 +1,271 @@
+<ng-template #breadcrumbToolboxTemplate>
+  <div class="breadcrumb-toolbox">
+    <div class="toolbox-item" *ngIf="hasExcel">
+      <i class="nap-icon nap-icon-breadcrumb-excel" aria-hidden="true" title="Export excel" (click)="exportExcel()"></i>
+    </div>
+  </div>
+</ng-template>
+<ng-template #realTimeColgroup>
+  <colgroup>
+    <col style="width: 200px" />
+    <col style="width: 200px" />
+    <col style="width: 200px" />
+    <col style="width: 100px" />
+    <col style="width: 100px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+  </colgroup>
+</ng-template>
+<div *ngIf="gridType === GridType.RealTime && realTimeRecords" [ngSwitch]="realTimeRecords.length > 0">
+  <div class="nap-grid">
+    <div style="width: 1420px">
+      <nap-breadcrumb [items]="breadcrumbItems" (itemClick)="breadcrumbItemClick($event)" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
+      <div class="header">
+        <table>
+          <ng-template [ngTemplateOutlet]="realTimeColgroup"></ng-template>
+          <thead>
+            <tr>
+              <th>Game Group</th>
+              <th>Game Type</th>
+              <th>Jackpot Type</th>
+              <th>Jackpot Start Date</th>
+              <th>No. Players</th>
+              <th>Bet Count</th>
+              <th>Total bet</th>
+              <th>Current Refund Pool</th>
+              <th>Current Reserve Pool</th>
+              <th>Current Jackpot Pool</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="body stretch">
+        <table class="table-striped">
+          <ng-template [ngTemplateOutlet]="realTimeColgroup"></ng-template>
+          <tbody>
+            <tr *ngFor="let record of realTimeRecords">
+              <td>{{record.gameGroupNameAlias}}</td>
+              <td>{{record.gameTypeNameAlias}}</td>
+              <td>{{record.jackpotTypeNameAlias}}</td>
+              <td class="text-center">
+                <span class="nap-link" (click)="drillDownMonthly(record)">{{record.jackpotStartDate | napDate:'MM-dd-yyyy'}}</span>
+              </td>
+              <td class="number" [napIntegerFormat]="record.playerCount"></td>
+              <td class="number" [napIntegerFormat]="record.betCount"></td>
+              <td class="number" [napDecimalFormat]="record.totalBet"></td>
+              <td class="number" [napDecimalFormat]="record.currentRefundPool"></td>
+              <td class="number" [napDecimalFormat]="record.currentReservePool"></td>
+              <td class="number" [napDecimalFormat]="record.currentJackpotPool"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="false" class="body stretch">
+        <table>
+          <tbody>
+            <tr>
+              <th [attr.colspan]="10" class="no-data">
+                There is no data
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #monthlyColgroup>
+  <colgroup>
+    <col style="width: 200px" />
+    <col style="width: 200px" />
+    <col style="width: 200px" />
+    <col style="width: 100px" />
+    <col style="width: 100px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+  </colgroup>
+</ng-template>
+<div *ngIf="gridType === GridType.Monthly && monthlyRecords" [ngSwitch]="monthlyRecords.length > 0">
+  <div class="nap-grid">
+    <div style="width: 1060px">
+      <nap-breadcrumb [items]="breadcrumbItems" (itemClick)="breadcrumbItemClick($event)" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
+      <div class="header">
+        <table>
+          <ng-template [ngTemplateOutlet]="monthlyColgroup"></ng-template>
+          <thead>
+            <tr>
+              <th>Game Group</th>
+              <th>Game Type</th>
+              <th>Jackpot Type</th>
+              <th>Month</th>
+              <th>No. Players</th>
+              <th>Bet Count</th>
+              <th>Total bet</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="body stretch">
+        <table class="table-striped">
+          <ng-template [ngTemplateOutlet]="monthlyColgroup"></ng-template>
+          <tbody>
+            <tr *ngFor="let record of monthlyRecords">
+              <td>{{record.gameGroupNameAlias}}</td>
+              <td>{{record.gameTypeNameAlias}}</td>
+              <td>{{record.jackpotTypeNameAlias}}</td>
+              <td class="text-center">
+                <span class="nap-link" (click)="drillDownDaily(record)">{{record.month | napDate:'MM-yyyy'}}</span>
+              </td>
+              <td class="number" [napIntegerFormat]="record.playerCount"></td>
+              <td class="number" [napIntegerFormat]="record.betCount"></td>
+              <td class="number" [napDecimalFormat]="record.totalBet"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="false" class="body stretch">
+        <table>
+          <tbody>
+            <tr>
+              <th [attr.colspan]="7" class="no-data">
+                There is no data
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dailyColgroup>
+  <colgroup>
+    <col style="width: 200px" />
+    <col style="width: 200px" />
+    <col style="width: 200px" />
+    <col style="width: 100px" />
+    <col style="width: 100px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+  </colgroup>
+</ng-template>
+<div *ngIf="gridType === GridType.Daily && dailyRecords" [ngSwitch]="dailyRecords.length > 0">
+  <div class="nap-grid">
+    <div style="width: 1060px">
+      <nap-breadcrumb [items]="breadcrumbItems" (itemClick)="breadcrumbItemClick($event)" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
+      <div class="header">
+        <table>
+          <ng-template [ngTemplateOutlet]="dailyColgroup"></ng-template>
+          <thead>
+            <tr>
+              <th>Game Group</th>
+              <th>Game Type</th>
+              <th>Jackpot Type</th>
+              <th>Date</th>
+              <th>No. Players</th>
+              <th>Bet Count</th>
+              <th>Total bet</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="body stretch">
+        <table class="table-striped">
+          <ng-template [ngTemplateOutlet]="dailyColgroup"></ng-template>
+          <tbody>
+            <tr *ngFor="let record of dailyRecords">
+              <td>{{record.gameGroupNameAlias}}</td>
+              <td>{{record.gameTypeNameAlias}}</td>
+              <td>{{record.jackpotTypeNameAlias}}</td>
+              <td class="text-center"> {{record.date | napDate:'MM-dd-yyyy'}} </td>
+              <td class="number" [napIntegerFormat]="record.playerCount"></td>
+              <td class="number" [napIntegerFormat]="record.betCount"></td>
+              <td class="number" [napDecimalFormat]="record.totalBet"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="false" class="body stretch">
+        <table>
+          <tbody>
+            <tr>
+              <th [attr.colspan]="7" class="no-data">
+                There is no data
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #winnerColgroup>
+  <colgroup>
+    <col style="width: 200px" />
+    <col style="width: 200px" />
+    <col style="width: 200px" />
+    <col style="width: 150px" />
+    <col style="width: 150px" />
+    <col style="width: 150px" />
+    <col style="width: 150px" />
+  </colgroup>
+</ng-template>
+<div *ngIf="gridType === GridType.Winner && winnerRecords" [ngSwitch]="winnerRecords.length > 0">
+  <div class="nap-grid">
+    <div style="width: 1220px">
+      <nap-breadcrumb [items]="breadcrumbItems" (itemClick)="breadcrumbItemClick($event)" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
+      <div class="header">
+        <table>
+          <ng-template [ngTemplateOutlet]="winnerColgroup"></ng-template>
+          <thead>
+            <tr>
+              <th>Game Group</th>
+              <th>Game Type</th>
+              <th>Jackpot Type</th>
+              <th>Jackpot Start Date</th>
+              <th>Jackpot Hit Date</th>
+              <th>Username</th>
+              <th>Winning Amount</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="body stretch">
+        <table class="table-striped">
+          <ng-template [ngTemplateOutlet]="winnerColgroup"></ng-template>
+          <tbody>
+            <tr *ngFor="let record of winnerRecords">
+              <td>{{record.gameGroupNameAlias}}</td>
+              <td>{{record.gameTypeNameAlias}}</td>
+              <td>{{record.jackpotTypeNameAlias}}</td>
+              <td class="text-center">
+                {{record.jackpotStartDate | napDate:'MM-dd-yyyy'}}
+              </td>
+              <td class="text-center">
+                {{record.jackpotHitDate | napDate:'MM-dd-yyyy'}}
+              </td>
+              <td>{{record.userName}}</td>
+              <td class="number" [napDecimalFormat]="record.winningAmt"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="false" class="body stretch">
+        <table>
+          <tbody>
+            <tr>
+              <th [attr.colspan]="7" class="no-data">
+                There is no data
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

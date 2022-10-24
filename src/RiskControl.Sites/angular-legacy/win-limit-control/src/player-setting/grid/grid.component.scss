@@ -1,0 +1,26 @@
+@import '~nap-theme/scss/breadcrumb';
+@import '~nap-theme/scss/grid';
+.fa-plus-circle,
+.fa-times {
+    cursor: pointer;
+    color: #0876B7;
+}
+
+.nap-grid {
+    td {
+        height: 38px;
+    }
+    div.body {
+        overflow-x: hidden;
+    }
+}
+
+:host ::ng-deep .limit-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    float: right;
+    input {
+        text-align: right;
+    }
+}

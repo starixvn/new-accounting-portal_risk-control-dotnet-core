@@ -1,0 +1,126 @@
+<ng-template #colgroup>
+    <colgroup>
+        <col style="width: 200px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+    </colgroup>
+</ng-template>
+<ng-template #thead>
+    <thead>
+        <tr>
+            <th (click)="toggleReport()">
+                <i *ngIf="hasData" [ngClass]="{'fa-caret-square-o-up': collapseAll, ' fa-caret-square-o-down': !collapseAll}"
+                    class="fa  pull-left" [attr.title]="collapseAll ? 'Expand' : 'Collapse'"></i>
+                Product/Game Type</th>
+            <th (click)="sort('NoOfPlayers')">No. Players
+                <i class="fa" [ngClass]="{'fa-sort': sortColumnName != 'NoOfPlayers', 
+                  'fa-sort-asc': (sortColumnName == 'NoOfPlayers' && sortDirection == 'desc'), 
+                  'fa-sort-desc': (sortColumnName == 'NoOfPlayers' && sortDirection == 'asc')}"></i>
+            </th>
+            <th (click)="sort('BetCount')">BetCount
+                <i class="fa" [ngClass]="{'fa-sort': sortColumnName != 'BetCount', 
+                      'fa-sort-asc': (sortColumnName == 'BetCount' && sortDirection == 'desc'), 
+                      'fa-sort-desc': (sortColumnName == 'BetCount' && sortDirection == 'asc')}"></i>
+            </th>
+            <th colspan="2">Reject</th>
+            <th colspan="2">Void</th>
+            <th colspan="2">Refund</th>
+        </tr>
+    </thead>
+</ng-template>
+
+<div *ngIf="reportData" class="nap-grid" [ngSwitch]="hasData">
+    <div style="width: 1180px;">
+        <div class="header">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <ng-template [ngTemplateOutlet]="thead"></ng-template>
+            </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <tbody>
+                    <ng-template ngFor let-parentItem [ngForOf]="reportData.productStatistics">
+                        <tr class="total-row font-weight-bold">
+                            <td class="text-left" (click)="parentItem.isCollapse=!parentItem.isCollapse">
+                                <i [ngClass]="{'fa-caret-right': parentItem.isCollapse, 'fa-caret-down': !parentItem.isCollapse}"
+                                    class="fa"></i>
+                                {{parentItem.total.reportBy }} </td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.total.noOfPlayers"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.total.betCount"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.total.reject"></td>
+                            <td class="text-right" [napPercentFormat]="parentItem.total.rejectPecentage"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.total.void"></td>
+                            <td class="text-right" [napPercentFormat]="parentItem.total.voidPecentage"></td>
+                            <td class="text-right" [napIntegerFormat]="parentItem.total.refund"></td>
+                            <td class="text-right" [napPercentFormat]="parentItem.total.refundPecentage"></td>
+                        </tr>
+                        <ng-template *ngIf="!parentItem.isCollapse" ngFor let-childItem [ngForOf]="parentItem.leagueSportBettypes">
+                            <tr [ngClass]="{'total-row': childItem.bettypes.length > 0}">
+                                <td class="text-left">{{childItem.total.reportBy}}</td>
+                                <td class="text-right" [napIntegerFormat]="childItem.total.noOfPlayers"></td>
+                                <td class="text-right" [napIntegerFormat]="childItem.total.betCount"></td>
+                                <td class="text-right" [napIntegerFormat]="childItem.total.reject"></td>
+                                <td class="text-right" [napPercentFormat]="childItem.total.rejectPecentage"></td>
+                                <td class="text-right" [napIntegerFormat]="childItem.total.void"></td>
+                                <td class="text-right" [napPercentFormat]="childItem.total.voidPecentage"></td>
+                                <td class="text-right" [napIntegerFormat]="childItem.total.refund"></td>
+                                <td class="text-right" [napPercentFormat]="childItem.total.refundPecentage"></td>
+                            </tr>
+                            <ng-template *ngIf="!parentItem.isCollapse" ngFor let-item [ngForOf]="childItem.bettypes">
+                                <tr>
+                                    <td class="text-left">{{item.reportBy }}</td>
+                                    <td class="text-right" [napIntegerFormat]="item.noOfPlayers"></td>
+                                    <td class="text-right" [napIntegerFormat]="item.betCount"></td>
+                                    <td class="text-right" [napIntegerFormat]="item.reject"></td>
+                                    <td class="text-right" [napPercentFormat]="item.rejectPecentage"></td>
+                                    <td class="text-right" [napIntegerFormat]="item.void"></td>
+                                    <td class="text-right" [napPercentFormat]="item.voidPecentage"></td>
+                                    <td class="text-right" [napIntegerFormat]="item.refund"></td>
+                                    <td class="text-right" [napPercentFormat]="item.refundPecentage"></td>
+                                </tr>
+                            </ng-template>
+                        </ng-template>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
+
+        <div *ngSwitchCase="false" class="body stretch">
+            <table>
+                <tbody>
+                    <tr>
+                        <th class="no-data" colspan="8">
+                            There is no data
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngSwitchCase="true" class="footer">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <tfoot>
+                    <tr class="font-weight-bold">
+                        <td class="text-right">{{reportData.grandTotal.reportBy}}</td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.noOfPlayers"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.betCount"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.reject"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.grandTotal.rejectPecentage"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.void"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.grandTotal.voidPecentage"></td>
+                        <td class="text-right" [napIntegerFormat]="reportData.grandTotal.refund"></td>
+                        <td class="text-right" [napPercentFormat]="reportData.grandTotal.refundPecentage"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

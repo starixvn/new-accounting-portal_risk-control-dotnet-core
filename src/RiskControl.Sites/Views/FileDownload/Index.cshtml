@@ -1,0 +1,26 @@
+﻿@{
+    @model RiskControl.WinLossLimitControl.FileDownload.FileDownloadModel
+    ViewBag.Title = "Download File";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head
+{
+}
+
+@section Headline
+{
+    <div class="title">
+        <div>
+            <span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink(@Model.FileName, "Excel", new { FileName = Model.FileName })
+</div>
+
+@section Foot
+{
+}

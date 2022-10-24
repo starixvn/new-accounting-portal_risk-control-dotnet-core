@@ -1,0 +1,91 @@
+<div class="nap-filter">
+    <div class="row">
+        <div class="nap-col nap-col-1">
+            <div class="nap-group">
+                <label>From Date</label>
+                <div class="nap-control">
+                    <nap-date-picker [(date)]="fromDate" [minDate]="minDate" [maxDate]="toDate"></nap-date-picker>
+                </div>
+            </div>
+        </div>
+        <div class="nap-col nap-col-2">
+            <div class="nap-group">
+                <label>To Date</label>
+                <div class="nap-control">
+                    <nap-date-picker [(date)]="toDate" [minDate]="fromDate" [maxDate]="maxDate"></nap-date-picker>
+                </div>
+            </div>
+        </div>
+        <div class="nap-col nap-col-3">
+            <div class="nap-group">
+                <label for="select-product">Product</label>
+                <div class="nap-control">
+                    <select class="form-control" id="select-product" [(ngModel)]="productId" (ngModelChange)="onProductChange()">
+                        <option *ngFor="let product of products" [ngValue]="product.id">
+                            {{product.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="nap-col nap-col-4">
+            <div class="nap-group">
+                <label>Reached Limit Level</label>
+                <div class="nap-control">
+                    <ngx-dropdown-treeview [items]="limitLevels" (selectedChange)="onLimitLevelSelectedChange($event)"></ngx-dropdown-treeview>
+                </div>
+            </div>
+        </div>
+        <div class="nap-col nap-col-5 nap-col-exclude-test">
+            <div class="d-inline-block">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" [(ngModel)]="excludeTestData">
+                        Exclude test data
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="nap-col nap-col-1">
+            <div class="nap-group">
+                <label>Username</label>
+                <div class="nap-control">
+                    <nap-dropdown-typeahead [query]="userNameTypeaheadQuery" [minLengthHasSuggestion]="3" [(text)]="userName"></nap-dropdown-typeahead>
+                </div>
+            </div>
+        </div>
+        <div class="nap-col nap-col-2">
+            <div class="nap-group">
+                <label>Site / Licensee</label>
+                <div class="nap-control">
+                    <nap-dropdown-treeview-select [items]="sites" [(value)]="siteId" (valueChange)="onSiteSelectedChange()"></nap-dropdown-treeview-select>
+                </div>
+            </div>
+        </div>
+        <div class="nap-col nap-col-3">
+            <div class="nap-group">
+                <label for="select-currency">Currency</label>
+                <div class="nap-control">
+                    <select class="form-control" id="select-currency" [(ngModel)]="currencyId">
+                        <option *ngFor="let currency of currencies" [ngValue]="currency.id">
+                            {{currency.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="nap-col nap-col-4">
+            <div class="nap-group">
+                <label>Show Column</label>
+                <div class="nap-control">
+                    <ngx-dropdown-treeview class="treeview-button-ellipsis" [items]="columnTreeviewItems" (selectedChange)="onColumnChange($event)"></ngx-dropdown-treeview>
+                </div>
+            </div>
+        </div>
+        <div class="nap-col nap-col-5">
+            <button type="button" class="btn btn-primary" (click)="search()">Search</button>
+        </div>
+    </div>
+</div>

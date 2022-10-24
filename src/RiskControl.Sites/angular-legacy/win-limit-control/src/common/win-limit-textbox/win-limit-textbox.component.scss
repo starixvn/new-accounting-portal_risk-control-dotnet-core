@@ -1,0 +1,14 @@
+:host ::ng-deep {
+    nap-ngx-numeric-textbox {
+        &.win-limit-unlimited {
+            input {
+                color: red;
+            }
+        }
+        &.invalid {
+            input {
+                border-color: red;
+            }
+        }
+    }
+}

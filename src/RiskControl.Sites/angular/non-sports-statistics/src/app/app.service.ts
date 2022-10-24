@@ -1,0 +1,16 @@
+﻿import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpService } from 'nap-components/http';
+import { Product, Currency } from './filter';
+import { BalanceUpModel } from './app.model';
+
+@Injectable()
+export class AppService {
+    constructor(
+        private readonly httpService: HttpService
+    ) { }
+
+    getBalanceup(): Observable<BalanceUpModel> {
+        return this.httpService.post<BalanceUpModel>('api/application/balance-up');
+    }
+}

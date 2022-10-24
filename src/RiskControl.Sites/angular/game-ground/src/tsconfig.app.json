@@ -1,0 +1,29 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "baseUrl": "./",
+    "types": ["node"],
+    "paths": {
+      "@angular/*": [
+        "../node_modules/@angular/*"
+      ],
+      "@ng-bootstrap/ng-bootstrap": [
+        "../node_modules/@ng-bootstrap/ng-bootstrap"
+      ],
+      "ngx-pagination": [
+        "../node_modules/ngx-pagination"
+      ],
+      "rxjs/*": [
+        "../node_modules/rxjs/*"
+      ]
+    }
+  },
+  "files": [
+    "bet-limit-monitor.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}

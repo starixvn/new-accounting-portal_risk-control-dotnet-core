@@ -1,0 +1,19 @@
+@import '~nap-theme/scss/grid';
+
+.fa {
+    cursor: pointer;
+}
+
+.group-name {
+    vertical-align: top;
+}
+
+.nap-grid {
+    .body {
+        overflow-x: hidden;
+        &.no-scroll {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+    }
+}

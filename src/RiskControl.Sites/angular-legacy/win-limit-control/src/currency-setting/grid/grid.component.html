@@ -1,0 +1,195 @@
+<ng-template #colgroup>
+    <colgroup>
+        <col style="width: 50px" />
+        <col style="width: 100px" />
+        <col style="width: 110px" />
+        <col style="width: 160px" />
+        <col style="width: 190px" />
+        <col style="width: 190px" />
+        <col style="width: 190px" />
+        <col style="width: 190px" />
+        <col style="width: 190px" />
+        <col style="width: 90px" />
+        <col style="width: 130px" />
+    </colgroup>
+</ng-template>
+<div *ngIf="productSettings" [ngSwitch]="productSettings.length > 0">
+    <div class="nap-grid">
+        <div style="width: 1610px">
+            <nap-breadcrumb [items]="breadcrumbItems"></nap-breadcrumb>
+            <div class="header">
+                <table>
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <thead>
+                        <tr>
+                            <th rowspan="3">#</th>
+                            <th rowspan="3">Currency</th>
+                            <th rowspan="3">Site / Licensee</th>
+                            <th rowspan="3">Setting Group</th>
+                            <th colspan="2">Currency Loss Limit</th>
+                            <th colspan="5">Currency Win Limit</th>
+                        </tr>
+                        <tr>
+                            <th>Black level <i class="fa fa-flag text-black" aria-hidden="true"></i></th>
+                            <th>Grey level <i class="fa fa-flag text-grey" aria-hidden="true"></i></th>
+                            <th>Orange level <i class="fa fa-flag text-orange" aria-hidden="true"></i></th>
+                            <th>Yellow level <i class="fa fa-flag text-yellow" aria-hidden="true"></i></th>
+                            <th colspan="3">Red level <i class="fa fa-flag text-red" aria-hidden="true"></i></th>
+                        </tr>
+                        <tr>
+                            <th>
+                                Loss Limit (RM)
+                                <div class="limit-row" *ngIf="hasHostPermission">
+                                    <nap-loss-limit-textbox [(value)]="blackLimit"></nap-loss-limit-textbox>
+                                    <button type="button" class="btn btn-light" (click)="applyBlackLimit()">Apply</button>
+                                </div>
+                            </th>
+                            <th>
+                                Loss Limit (RM)
+                                <div class="limit-row" *ngIf="hasHostPermission">
+                                    <nap-loss-limit-textbox [(value)]="greyLimit"></nap-loss-limit-textbox>
+                                    <button type="button" class="btn btn-light" (click)="applyGreyLimit()">Apply</button>
+                                </div>
+                            </th>
+                            <th>
+                                Win Limit (RM)
+                                <div class="limit-row" *ngIf="hasHostPermission">
+                                    <nap-win-limit-textbox [(value)]="orangeLimit"></nap-win-limit-textbox>
+                                    <button type="button" class="btn btn-light" (click)="applyOrangeLimit()">Apply</button>
+                                </div>
+                            </th>
+                            <th>
+                                Win Limit (RM)
+                                <div class="limit-row" *ngIf="hasHostPermission">
+                                    <nap-win-limit-textbox [(value)]="yellowLimit"></nap-win-limit-textbox>
+                                    <button type="button" class="btn btn-light" (click)="applyYellowLimit()">Apply</button>
+                                </div>
+                            </th>
+                            <th>
+                                Win Limit (RM)
+                                <div class="limit-row" *ngIf="hasHostPermission">
+                                    <nap-win-limit-textbox [(value)]="redLimit"></nap-win-limit-textbox>
+                                    <button type="button" class="btn btn-light" (click)="applyRedLimit()">Apply</button>
+                                </div>
+                            </th>
+                            <th>
+                                Allow Block Place Bet
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" [disabled]="!hasHostPermission" class="form-check-input position-static" [(ngModel)]="isBlockedPlacebetRedLevel" (ngModelChange)="applyRedBlockPlacebet()">
+                                    </label>
+                                </div>
+                            </th>
+                            <th>
+                                Allow Block Transfer/Withdraw
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" [disabled]="!hasHostPermission || isAllDisabledBlockedTransferRedLevel" class="form-check-input position-static" [(ngModel)]="isBlockedTransferRedLevel" (ngModelChange)="applyRedBlockTransfer()">
+                                    </label>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div *ngSwitchCase="true" class="body">
+                <table class="table-striped">
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <tbody>
+                        <ng-template *ngIf="productSettings.length > 0" ngFor let-setting [ngForOf]="displayedProductSettings" let-i="index">
+                            <ng-template ngFor let-group [ngForOf]="setting.groups" let-isFirst="first">
+                                <tr napLossLimitValidator napWinLimitValidator>
+                                    <td *ngIf="isFirst" class="text-center" [attr.rowspan]="setting.groups.length">
+                                        {{ paginationInstance.itemsPerPage * (paginationInstance.currentPage - 1) + i + 1 }}
+                                    </td>
+                                    <td class="word-break-all" *ngIf="isFirst" [attr.rowspan]="setting.groups.length">{{ setting.currencyName }}</td>
+                                    <td class="word-break-all" *ngIf="isFirst" [attr.rowspan]="setting.groups.length">{{ setting.siteName }}</td>
+                                    <td><span class="nap-link word-break-all" (click)="showGroupSetting(setting.productName)"> {{ group.groupName }}</span></td>
+                                    <td>
+                                        <div class="limit-row">
+                                            <nap-loss-limit-textbox [disabled]="!hasHostPermission" #blackLossLimitTextbox [(value)]="group.blackLimit"></nap-loss-limit-textbox>
+                                            <nap-exclamation #blackExclamation></nap-exclamation>
+                                            <span>(RM)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="limit-row">
+                                            <nap-loss-limit-textbox [disabled]="!hasHostPermission" #greyLossLimitTextbox [(value)]="group.greyLimit"></nap-loss-limit-textbox>
+                                            <nap-exclamation #greyExclamation></nap-exclamation>
+                                            <span>(RM)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="limit-row">
+                                            <nap-win-limit-textbox [disabled]="!hasHostPermission" #orangeWinLimitTextbox [(value)]="group.orangeLimit"></nap-win-limit-textbox>
+                                            <nap-exclamation #orangeExclamation></nap-exclamation>
+                                            <span>(RM)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="limit-row">
+                                            <nap-win-limit-textbox [disabled]="!hasHostPermission" #yellowWinLimitTextbox [(value)]="group.yellowLimit"></nap-win-limit-textbox>
+                                            <nap-exclamation #yellowExclamation></nap-exclamation>
+                                            <span>(RM)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="limit-row">
+                                            <nap-win-limit-textbox [disabled]="!hasHostPermission" #redWinLimitTextbox [(value)]="group.redLimit"></nap-win-limit-textbox>
+                                            <nap-exclamation #redExclamation></nap-exclamation>
+                                            <span>(RM)</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check">
+                                        <input type="checkbox" [disabled]="!hasHostPermission" class="form-check-input position-static" [(ngModel)]="group.isBlockedPlacebetRedLevel" (ngModelChange)="onIsBlockedPlacebetRedLevelChange()">
+                                    </label>
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check">
+                                        <input type="checkbox" [disabled]="group.isCreditSite || !hasHostPermission" class="form-check-input position-static" [(ngModel)]="group.isBlockedTransferRedLevel" (ngModelChange)="onIsBlockedTransferRedLevelChange()">
+                                    </label>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngSwitchCase="false" class="body stretch">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th class="no-data" colspan="11">
+                                There is no data
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngSwitchCase="true" class="footer">
+                <table>
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <tfoot>
+                        <tr>
+                            <td colspan="11">
+                                <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange($event)"></nap-pagination>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div *ngSwitchCase="true">
+        <nap-note>
+            <span class="text-danger">- Limit Setting = 0: Unlimited.</span>
+        </nap-note>
+        <button *ngIf="hasHostPermission" type="button" class="btn btn-primary mr-2" (click)="save()">
+            Save
+        </button>
+        <button *ngIf="hasHostPermission" type="button" class="btn btn-danger" (click)="cancel()">
+            Cancel
+        </button>
+    </div>
+</div>

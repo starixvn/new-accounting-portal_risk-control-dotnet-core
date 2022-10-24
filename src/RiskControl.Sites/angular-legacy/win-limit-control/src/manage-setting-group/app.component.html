@@ -1,0 +1,114 @@
+<nap-navbar></nap-navbar>
+<div class="container-fluid" style="min-width: 1215px;">
+    <div class="nap-header">
+        <div class="title">
+            <span class="active">Manage Setting Group</span>
+        </div>
+    </div>
+    <div class="nap-filter">
+        <div class="row">
+            <div class="nap-col nap-col-70">
+                <div class="nap-group">
+                    <label for="select-product">Product</label>
+                    <div class="nap-control">
+                        <select class="form-control" id="select-product" [(ngModel)]="productId" (ngModelChange)="onProductChange()">
+                            <option *ngFor="let product of products" [ngValue]="product.id">
+                                {{product.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="nap-col">
+                <button type="button" class="btn btn-primary" (click)="search()">
+                    Search
+                </button>
+            </div>
+        </div>
+    </div>
+    <nap-toast></nap-toast>
+    <div class="content-container" *ngIf="isDislayContent">
+        <div class="row border">
+            <div class="nap-col nap-col-70">
+                <div class="nap-group">
+                    <label>ProductId</label>
+                    <div class="nap-control">
+                        <input type="text" [(ngModel)]="bettypeProductId" class="input-186" [disabled]="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="nap-col nap-col-90">
+                <div class="nap-group">
+                    <label>Product Name</label>
+                    <div class="nap-control">
+                        <input type="text" [(ngModel)]="productName" class="input-186" [disabled]="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="nap-col nap-col-140">
+                <div class="nap-group">
+                    <label>Representative Bettype</label>
+                    <div class="nap-control">
+                        <input type="text" [(ngModel)]="representativeBettype" class="input-186" [disabled]="true" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="nap-col nap-col-40-percent">
+                <div class="nap-group">
+                    <div class="header">Unssigned BettypeId</div>
+                    <table class="table table-bordered unassigned-bettype">
+                        <tr *ngFor="let item of unsignedBettypes" (click)="clickUnsignedBettypeRow(item)" [class.selected]="item.selected">
+                            <td>{{item.bettype}}</td>
+                            <td>{{item.typenamee}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="nap-col nap-col-55">
+                <div class="item-container">
+                    <button class="btn mb-1 item" [disabled]="!isMoveIn()" (click)="moveIn()">
+                        <span class="fa fa-angle-right"></span>
+                    </button>
+                    <button class="btn item" [disabled]="!isMoveOut()" (click)="moveOut()">
+                        <span class="fa fa fa-angle-left"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="nap-col nap-col-40-percent">
+                <div class="nap-group">
+                    <div class="header">Group Setting</div>
+                    <div *ngFor="let group of groupSettings">
+                        <div class="title">
+                            <div (click)="clickGroupGroupSettingRow(group)">
+                                <span [class.selected]="group.selected">{{group.groupID}}</span> - <span [class.selected]="group.selected">{{group.groupName}}</span>
+                            </div>
+                            <div *ngIf="group.items.length > group.maxItems" (click)="viewMore(group)" class="viewmore">View more ...</div>
+                        </div>
+                        <div class="body">
+                            <table class="table table-bordered group-setting">
+                                <tr *ngFor="let item of group.items; index as i" [ngClass]="{'show': i + 1 <= group.maxItems, 'hide' : i + 1 > group.maxItems }"
+                                    (click)="clickGroupSettingRow(item)" [class.selected]="item.selected">
+                                    <td>{{item.betTypeID}}</td>
+                                    <td>{{item.typenamee}}
+                                        <div *ngIf="item.isLegend" class="legend fa fa-exclamation"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="hasHostPermission">
+            <button type="button" class="btn btn-primary mr-1" (click)="save()">
+                Save
+            </button>
+            <button type="button" class="btn btn-danger" (click)="cancel()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+<nap-spinner></nap-spinner>

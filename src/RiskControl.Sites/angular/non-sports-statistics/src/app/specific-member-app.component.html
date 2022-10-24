@@ -1,0 +1,15 @@
+<nap-navbar></nap-navbar>
+<div napRecheckin class="container-fluid" style="min-width: 1250px;">
+    <div class="nap-header">
+        <div class="title">
+            Reports / <span class="active">Non-Sport Game Statistics Specific Member</span>
+            <i class="nap-icon" [ngClass]="{'nap-icon-header-collapse' : isHideFilter, 'nap-icon-header-expand': !isHideFilter}" (click)="toggleShowHideFilter()"
+                [title]="isHideFilter ? 'Show filter' : 'Hide filter'"></i>
+        </div>
+    </div>
+    <nap-specific-member-filter [hidden]="isHideFilter" (generate)="generate($event)" (reset)="reset()"></nap-specific-member-filter>
+    <nap-toast></nap-toast>
+    <div #container></div>
+</div>
+<ng-template napModalContainer></ng-template>
+<nap-spinner></nap-spinner>

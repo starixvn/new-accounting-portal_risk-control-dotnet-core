@@ -1,0 +1,56 @@
+<div class="nap-filter">
+  <nap-legend [legendId]="291" [legendTitle]="'Game Round Bet Limit Monitor Legend'"></nap-legend>
+  <div class="row">
+    <div class="nap-col nap-col-1">
+      <div class="nap-group">
+        <label>From Date</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="fromDate" [maxDate]="today"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col nap-col-2">
+      <div class="nap-group">
+        <label>To Date</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="toDate" [minDate]="fromDate" [maxDate]="today"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col nap-col-3">
+      <div class="nap-group">
+        <div class="nap-control">
+          <input name="exclude-test-data" type="checkbox" class="left-checkbox" [(ngModel)]="excludeTestData" />
+          <label for="exclude-test-data">Exclude test data</label>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col nap-col-3">
+      <button type="button" class="btn btn-primary" (click)="search()">
+        Search
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col nap-col-3">
+      <div class="nap-group">
+        <label for="select-product">Product</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview [items]="allProductGameTypes | napProductTreeview: allProductGameTypes"
+            [config]="treeviewConfig" id="product-tree-view" (selectedChange)="onProductChange($event)">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col nap-col-3">
+      <div class="nap-group">
+        <label for="select-product">Game Type</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview [items]="allProductGameTypes | napGametypeTreeview: selectedProducts"
+            id="game-type-tree-view" [config]="treeviewConfig" (selectedChange)="selectedGameTypes = $event">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
