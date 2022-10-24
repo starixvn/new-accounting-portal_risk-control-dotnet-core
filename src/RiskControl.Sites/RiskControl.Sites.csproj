@@ -16,11 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="App_Data\SpName.LOCAL.xml" />
-    <None Remove="App_Data\SpName.LOCAL_1.xml" />
-    <None Remove="App_Data\SpName.PROD.xml" />
-    <None Remove="App_Data\SpName.UAT.xml" />
-    <None Remove="App_Data\SpName.UAT_1.xml" />
     <None Remove="App_Data\SpName.xml" />
     <None Remove="Templates\GameRound\Monitor.xlsx" />
     <None Remove="Templates\NonSport\HourlyTemplate.xlsx" />
@@ -40,21 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="App_Data\SpName.LOCAL.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\SpName.LOCAL_1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\SpName.PROD.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\SpName.UAT.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\SpName.UAT_1.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="App_Data\SpName.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
