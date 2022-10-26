@@ -27,108 +27,7 @@ namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Common
                 ? Math.Round(statistic.GamePayout, 0, MidpointRounding.AwayFromZero)
                 : statistic.GamePayout;
             const int CurrencyColumnIndex = 3;
-            var columns = new List<Columns>
-            {
-                new Columns
-                {
-                    Name = "ReportBy",
-                    Value = statistic.ReportBy,
-                    CellAlignment = HAlignment.Left,
-                    CustomAttributes = statistic.CurrencyId.ToString()
-                },
-                new Columns
-                {
-                    Name = "NoOfPlayers",
-                    Value = statistic.NoOfPlayers,
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = ExcelCellType.Integer
-                },
-                new Columns
-                {
-                    Name = "BetCount",
-                    Value = statistic.BetCount,
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = ExcelCellType.Integer
-                },
-                new Columns
-                {
-                    Name = "TotalBets",
-                    Value = Math.Round(statistic.TotalBets, 2, MidpointRounding.AwayFromZero),
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
-                },
-                new Columns
-                {
-                    Name = "TotalWins",
-                    Value = Math.Round(statistic.TotalWins, 2, MidpointRounding.AwayFromZero),
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
-                },
-                new Columns
-                {
-                    Name = "GameIncome",
-                    Value = Math.Round(statistic.GameIncome, 2, MidpointRounding.AwayFromZero),
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
-                },
-                new Columns
-                {
-                    Name = "GamePayout",
-                    Value = gamePayout/100,
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = ExcelCellType.Percentage
-                },
-                new Columns
-                {
-                    Name = "TotalRefund",
-                    Value = Math.Round(statistic.TotalRefund, 2, MidpointRounding.AwayFromZero),
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
-                },
-                new Columns
-                {
-                    Name = "HouseTurnover",
-                    Value = Math.Round(statistic.HouseTurnover, 2, MidpointRounding.AwayFromZero),
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
-                },
-                new Columns
-                {
-                    Name = "RealTurnover",
-                    Value = Math.Round(statistic.RealTurnover, 2, MidpointRounding.AwayFromZero),
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
-                },
-                new Columns
-                {
-                    Name = "HouseGrossIncome",
-                    Value = Math.Round(statistic.HouseGrossIncome, 2, MidpointRounding.AwayFromZero),
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
-                },
-                new Columns
-                {
-                    Name = "HouseComm",
-                    Value = Math.Round(statistic.HouseComm, 2, MidpointRounding.AwayFromZero),
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
-                },
-                new Columns
-                {
-                    Name = "ExtraPT",
-                    Value = Math.Round(statistic.ExtraPT, 2, MidpointRounding.AwayFromZero),
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
-                },
-                new Columns
-                {
-                    Name = "HouseNetIncome",
-                    Value = Math.Round(statistic.HouseNetIncome, 2, MidpointRounding.AwayFromZero),
-                    CellAlignment = HAlignment.Right,
-                    CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
-                }
-            };
-
+            var columns = InitColumns(statistic, viewByInteger, gamePayout);
             if (drillDownCurrency != 0)
             {
                 columns.Insert(CurrencyColumnIndex,
@@ -141,6 +40,84 @@ namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Common
             {
                 Columns = columns
             };
+        }
+
+        private static List<Columns> InitColumns(DailyViewStatisticsModel statistic, bool viewByInteger, decimal gamePayout)
+        {
+            var columns = new List<Columns>
+            {
+                new Columns
+                {
+                    Name = "ReportBy", Value = statistic.ReportBy,
+                    CellAlignment = HAlignment.Left, CustomAttributes = statistic.CurrencyId.ToString()
+                },
+                new Columns
+                {
+                    Name = "NoOfPlayers", Value = statistic.NoOfPlayers,
+                    CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Integer
+                },
+                new Columns
+                {
+                    Name = "BetCount", Value = statistic.BetCount,
+                    CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Integer
+                },
+                new Columns
+                {
+                    Name = "TotalBets", Value = Math.Round(statistic.TotalBets, 2, MidpointRounding.AwayFromZero),
+                    CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
+                },
+                new Columns
+                {
+                    Name = "TotalWins", Value = Math.Round(statistic.TotalWins, 2, MidpointRounding.AwayFromZero),
+                    CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
+                },
+                new Columns
+                {
+                    Name = "GameIncome", Value = Math.Round(statistic.GameIncome, 2, MidpointRounding.AwayFromZero),
+                    CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
+                },
+                new Columns
+                {
+                    Name = "GamePayout", Value = gamePayout/100,
+                    CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Percentage
+                },
+                new Columns
+                {
+                    Name = "TotalRefund", Value = Math.Round(statistic.TotalRefund, 2, MidpointRounding.AwayFromZero),
+                    CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
+                },
+                new Columns
+                {
+                    Name = "HouseTurnover", Value = Math.Round(statistic.HouseTurnover, 2, MidpointRounding.AwayFromZero),
+                    CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
+                },
+                new Columns
+                {
+                    Name = "RealTurnover", Value = Math.Round(statistic.RealTurnover, 2, MidpointRounding.AwayFromZero),
+                    CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
+                },
+                new Columns
+                {
+                    Name = "HouseGrossIncome", Value = Math.Round(statistic.HouseGrossIncome, 2, MidpointRounding.AwayFromZero),
+                    CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
+                },
+                new Columns
+                {
+                    Name = "HouseComm", Value = Math.Round(statistic.HouseComm, 2, MidpointRounding.AwayFromZero),
+                    CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
+                },
+                new Columns
+                {
+                    Name = "ExtraPT", Value = Math.Round(statistic.ExtraPT, 2, MidpointRounding.AwayFromZero),
+                    CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
+                },
+                new Columns
+                {
+                    Name = "HouseNetIncome", Value = Math.Round(statistic.HouseNetIncome, 2, MidpointRounding.AwayFromZero),
+                    CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
+                }
+            };
+            return columns;
         }
     }
 }

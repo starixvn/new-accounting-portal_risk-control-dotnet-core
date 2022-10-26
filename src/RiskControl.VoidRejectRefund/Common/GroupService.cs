@@ -46,7 +46,7 @@ namespace RiskControl.VoidRejectRefund.Common
             };
         }
 
-        private GroupStatisticModel CalculateStatisticForPerGroup(IEnumerable<StatisticModel> statistics, StatisticModel total)
+        private static GroupStatisticModel CalculateStatisticForPerGroup(IEnumerable<StatisticModel> statistics, StatisticModel total)
         {
             var childGroups = statistics.GroupBy(x => x.ReportBy);
 

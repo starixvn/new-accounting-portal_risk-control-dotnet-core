@@ -23,7 +23,7 @@ namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Monthly
         [HttpPost, Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
-            string sheetName = $"Monthly Game Statistic";
+            const string sheetName = "Monthly Game Statistic";
             return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
         }
     }

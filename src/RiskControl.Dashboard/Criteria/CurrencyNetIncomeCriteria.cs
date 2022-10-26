@@ -5,21 +5,26 @@ namespace RiskControl.Dashboard.Criteria
 {
     public class CurrencyNetIncomeCriteria : CriteriaBase
     {
-        public DateTime FromDate => new DateTime(
-            DateTime.Now.Year,
-            DateTime.Now.Month,
-            1,
-            0,
-            0,
-            0);
+        public CurrencyNetIncomeCriteria()
+        {
+            FromDate = new DateTime(
+                DateTime.Now.Year,
+                DateTime.Now.Month,
+                1,
+                0,
+                0,
+                0);
+            ToDate = new DateTime(
+                DateTime.Now.AddDays(-1).Year,
+                DateTime.Now.AddDays(-1).Month,
+                DateTime.Now.AddDays(-1).Day,
+                23,
+                59,
+                59);
+        }
+        public DateTime FromDate { get; set; }
 
-        public DateTime ToDate => new DateTime(
-            DateTime.Now.AddDays(-1).Year,
-            DateTime.Now.AddDays(-1).Month,
-            DateTime.Now.AddDays(-1).Day,
-            23,
-            59,
-            59);
+        public DateTime ToDate { get; set; }
 
         public override bool IsValid() => true;
 

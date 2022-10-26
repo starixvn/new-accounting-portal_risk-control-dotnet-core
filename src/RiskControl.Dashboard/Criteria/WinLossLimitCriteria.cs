@@ -5,9 +5,15 @@ namespace RiskControl.Dashboard.Criteria
 {
     public class WinLossLimitCriteria : CriteriaBase
     {
-        public DateTime FromDate => new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+        public WinLossLimitCriteria()
+        {
+            FromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+            ToDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
+        }
 
-        public DateTime ToDate => new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
+        public DateTime FromDate { get; set; }
+
+        public DateTime ToDate { get; set; }
 
         public override bool IsValid() => true;
 

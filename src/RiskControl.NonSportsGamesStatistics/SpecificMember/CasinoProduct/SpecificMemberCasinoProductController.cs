@@ -23,7 +23,7 @@ namespace RiskControl.NonSportsGamesStatistics.SpecificMember.CasinoProduct
         [HttpPost, Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
-            string sheetName = $"Product Game Statistic";
+            const string sheetName = "Product Game Statistic";
             return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
         }
     }

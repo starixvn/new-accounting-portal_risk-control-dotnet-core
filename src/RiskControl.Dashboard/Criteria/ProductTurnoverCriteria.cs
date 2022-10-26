@@ -3,23 +3,28 @@ using System;
 
 namespace RiskControl.Dashboard.Criteria
 {
-    class ProductTurnoverCriteria : CriteriaBase
+    public class ProductTurnoverCriteria : CriteriaBase
     {
-        public DateTime FromDate => new DateTime(
-          DateTime.Now.Year,
-          DateTime.Now.Month,
-          1,
-          0,
-          0,
-          0);
+        public ProductTurnoverCriteria()
+        {
+            FromDate = new DateTime(
+              DateTime.Now.Year,
+              DateTime.Now.Month,
+              1,
+              0,
+              0,
+              0);
+            ToDate = new DateTime(
+                DateTime.Now.AddDays(-1).Year,
+                DateTime.Now.AddDays(-1).Month,
+                DateTime.Now.AddDays(-1).Day,
+                23,
+                59,
+                59);
+        }
+        public DateTime FromDate { get; set; }
 
-        public DateTime ToDate => new DateTime(
-            DateTime.Now.AddDays(-1).Year,
-            DateTime.Now.AddDays(-1).Month,
-            DateTime.Now.AddDays(-1).Day,
-            23,
-            59,
-            59);
+        public DateTime ToDate { get; set; }
 
         public override bool IsValid() => true;
 

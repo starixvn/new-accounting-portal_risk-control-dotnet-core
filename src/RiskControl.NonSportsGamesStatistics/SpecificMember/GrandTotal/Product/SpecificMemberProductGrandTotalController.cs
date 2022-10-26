@@ -23,7 +23,7 @@ namespace RiskControl.NonSportsGamesStatistics.SpecificMember.GrandTotal.Product
         [HttpPost, Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
-            string sheetName = $"Grand Total by Currency";
+            const string sheetName = "Grand Total by Currency";
             return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
         }
     }
