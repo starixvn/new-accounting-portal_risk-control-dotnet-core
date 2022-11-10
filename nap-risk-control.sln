@@ -35,9 +35,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.UnitTest.Core",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.Core.UnitTests", "test\unit\RiskControl.Core.UnitTests\RiskControl.Core.UnitTests.csproj", "{CBA8BB56-CCDE-4933-BEC1-BE51723C6F2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskControl.Dashboard.UnitTests", "test\unit\RiskControl.Dashboard.UnitTests\RiskControl.Dashboard.UnitTests.csproj", "{DA26BF4E-31E7-4FDD-8DB3-BC86AAA1CAE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.Dashboard.UnitTests", "test\unit\RiskControl.Dashboard.UnitTests\RiskControl.Dashboard.UnitTests.csproj", "{DA26BF4E-31E7-4FDD-8DB3-BC86AAA1CAE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskControl.ProgressiveJackpot.UnitTests", "test\unit\RiskControl.ProgressiveJackpot.UnitTests\RiskControl.ProgressiveJackpot.UnitTests.csproj", "{4D160AB6-1C2E-4790-878F-8EE41AB3ACD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.ProgressiveJackpot.UnitTests", "test\unit\RiskControl.ProgressiveJackpot.UnitTests\RiskControl.ProgressiveJackpot.UnitTests.csproj", "{4D160AB6-1C2E-4790-878F-8EE41AB3ACD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskControl.NonSportsGamesStatistics.UnitTests", "test\unit\RiskControl.NonSportsGamesStatistics.UnitTests\RiskControl.NonSportsGamesStatistics.UnitTests.csproj", "{2CB8927D-7F3C-4544-A489-C56A69BAE80A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{4D160AB6-1C2E-4790-878F-8EE41AB3ACD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D160AB6-1C2E-4790-878F-8EE41AB3ACD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D160AB6-1C2E-4790-878F-8EE41AB3ACD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB8927D-7F3C-4544-A489-C56A69BAE80A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB8927D-7F3C-4544-A489-C56A69BAE80A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB8927D-7F3C-4544-A489-C56A69BAE80A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB8927D-7F3C-4544-A489-C56A69BAE80A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +132,7 @@ Global
 		{CBA8BB56-CCDE-4933-BEC1-BE51723C6F2B} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
 		{DA26BF4E-31E7-4FDD-8DB3-BC86AAA1CAE1} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
 		{4D160AB6-1C2E-4790-878F-8EE41AB3ACD2} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
+		{2CB8927D-7F3C-4544-A489-C56A69BAE80A} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FBF92E47-50E6-4A60-AEB9-7251A38B2985}

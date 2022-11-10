@@ -1,0 +1,76 @@
+﻿{
+  "RawStatistics": [
+    {
+      "ReportBy": "DDD",
+      "CurrencyId": 47,
+      "Currency": "DDD",
+      "NoOfPlayers": 50,
+      "BetCount": 100,
+      "TotalBets": 200,
+      "TotalWins": 100,
+      "TotalRefund": 20,
+      "HouseTurnover": 150,
+      "RealTurnover": 150,
+      "HouseGrossIncome": 50,
+      "HouseComm": 20
+    },
+    {
+      "ReportBy": "HK$",
+      "CurrencyId": 5,
+      "Currency": "HK$",
+      "NoOfPlayers": 20,
+      "BetCount": 150,
+      "TotalBets": 400,
+      "TotalWins": 200,
+      "TotalRefund": 50,
+      "HouseTurnover": 250,
+      "RealTurnover": 250,
+      "HouseGrossIncome": 150,
+      "HouseComm": 50
+    },
+    {
+      "ReportBy": "IDD",
+      "CurrencyId": 33,
+      "Currency": "IDD",
+      "NoOfPlayers": 20,
+      "BetCount": 150,
+      "TotalBets": 400,
+      "TotalWins": 200,
+      "TotalRefund": 50,
+      "HouseTurnover": 250,
+      "RealTurnover": 250,
+      "HouseGrossIncome": 150,
+      "HouseComm": 50
+    },
+    {
+      "ReportBy": "THB",
+      "CurrencyId": 43,
+      "Currency": "THB",
+      "NoOfPlayers": 80,
+      "BetCount": 250,
+      "TotalBets": 600,
+      "TotalWins": 300,
+      "TotalRefund": 20,
+      "HouseTurnover": 100,
+      "RealTurnover": 100,
+      "HouseGrossIncome": 50,
+      "HouseComm": 10
+    }
+  ],
+  "Total": [
+    {
+      "ReportBy": "GrandTotalRM",
+      "CurrencyId": 0,
+      "Currency": "RM",
+      "NoOfPlayers": 80,
+      "BetCount": 650,
+      "TotalBets": 1600,
+      "TotalWins": 800,
+      "TotalRefund": 140,
+      "HouseTurnover": 750,
+      "RealTurnover": 750,
+      "HouseGrossIncome": 400,
+      "HouseComm": 130
+    }
+  ]
+}
