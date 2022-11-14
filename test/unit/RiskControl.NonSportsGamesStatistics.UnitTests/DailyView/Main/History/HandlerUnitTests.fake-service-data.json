@@ -1,0 +1,94 @@
+﻿{
+  "Statistics": [
+    {
+      "GroupName": "11/2016",
+      "DailyViewStatistics": [
+        {
+          "ReportBy": "11/2016",
+          "NoOfPlayers": 50,
+          "BetCount": 100,
+          "CurrencyId": 5,
+          "Currency": "HK$",
+          "TotalBets": 200,
+          "TotalWins": 100,
+          "GameIncome": 100,
+          "GamePayout": 50,
+          "TotalRefund": 20,
+          "HouseTurnover": 150,
+          "HouseGrossIncome": 50,
+          "HouseComm": 20,
+          "HouseNetIncome": 70
+        },
+        {
+          "ReportBy": "11/2016",
+          "NoOfPlayers": 20,
+          "BetCount": 150,
+          "CurrencyId": 43,
+          "Currency": "THB",
+          "TotalBets": 400,
+          "TotalWins": 200,
+          "GameIncome": 200,
+          "GamePayout": 50,
+          "TotalRefund": 50,
+          "HouseTurnover": 250,
+          "HouseGrossIncome": 150,
+          "HouseComm": 50,
+          "HouseNetIncome": 200
+        }
+      ]
+    },
+    {
+      "GroupName": "12/2016",
+      "DailyViewStatistics": [
+        {
+          "ReportBy": "12/2016",
+          "NoOfPlayers": 20,
+          "BetCount": 150,
+          "CurrencyId": 43,
+          "Currency": "THB",
+          "TotalBets": 400,
+          "TotalWins": 200,
+          "GameIncome": 200,
+          "GamePayout": 50,
+          "TotalRefund": 50,
+          "HouseTurnover": 250,
+          "HouseGrossIncome": 150,
+          "HouseComm": 50,
+          "HouseNetIncome": 200
+        },
+        {
+          "ReportBy": "12/2016",
+          "NoOfPlayers": 80,
+          "BetCount": 250,
+          "CurrencyId": 13,
+          "Currency": "RMB",
+          "TotalBets": 600,
+          "TotalWins": 300,
+          "GameIncome": 300,
+          "GamePayout": 50,
+          "TotalRefund": 20,
+          "HouseTurnover": 100,
+          "HouseGrossIncome": 50,
+          "HouseComm": 10,
+          "HouseNetIncome": 60
+        }
+      ]
+    }
+  ],
+  "GrandTotal": {
+    "ReportBy": "Grand Total RM",
+    "NoOfPlayers": 80,
+    "BetCount": 650,
+    "CurrencyId": 2,
+    "Currency": "RM",
+    "TotalBets": 1600,
+    "TotalWins": 800,
+    "GameIncome": 800,
+    "GamePayout": 50,
+    "TotalRefund": 140,
+    "HouseTurnover": 750,
+    "HouseGrossIncome": 400,
+    "HouseComm": 130,
+    "HouseNetIncome": 530
+  }
+}

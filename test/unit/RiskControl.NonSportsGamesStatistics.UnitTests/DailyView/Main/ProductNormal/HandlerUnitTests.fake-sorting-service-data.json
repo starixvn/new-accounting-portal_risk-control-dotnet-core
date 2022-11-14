@@ -1,0 +1,101 @@
+{
+  "Statistics": [
+    {
+      "GroupId": null,
+      "GroupName": "Microgaming - Live Casino",
+      "DailyViewStatistics": [
+        {
+          "NoOfPlayers": 80,
+          "ReportBy": "Microgaming - Live Casino",
+          "ReportById": null,
+          "CurrencyId": 13,
+          "Currency": "RMB",
+          "BetCount": 250,
+          "TotalBets": 600.0,
+          "TotalWins": 300.0,
+          "GameIncome": 300.0,
+          "GamePayout": 50.0,
+          "TotalRefund": 20.0,
+          "HouseTurnover": 100.0,
+          "HouseGrossIncome": 50.0,
+          "HouseComm": 10.0,
+          "HouseNetIncome": 60.0
+        },
+        {
+          "NoOfPlayers": 20,
+          "ReportBy": "Microgaming - Live Casino",
+          "ReportById": null,
+          "CurrencyId": 43,
+          "Currency": "THB",
+          "BetCount": 150,
+          "TotalBets": 400.0,
+          "TotalWins": 200.0,
+          "GameIncome": 200.0,
+          "GamePayout": 50.0,
+          "TotalRefund": 50.0,
+          "HouseTurnover": 250.0,
+          "HouseGrossIncome": 150.0,
+          "HouseComm": 50.0,
+          "HouseNetIncome": 200.0
+        }
+      ]
+    },
+    {
+      "GroupId": null,
+      "GroupName": "SLI",
+      "DailyViewStatistics": [
+        {
+          "NoOfPlayers": 20,
+          "ReportBy": "SLI",
+          "ReportById": null,
+          "CurrencyId": 43,
+          "Currency": "THB",
+          "BetCount": 150,
+          "TotalBets": 400.0,
+          "TotalWins": 200.0,
+          "GameIncome": 200.0,
+          "GamePayout": 50.0,
+          "TotalRefund": 50.0,
+          "HouseTurnover": 250.0,
+          "HouseGrossIncome": 150.0,
+          "HouseComm": 50.0,
+          "HouseNetIncome": 200.0
+        },
+        {
+          "NoOfPlayers": 50,
+          "ReportBy": "SLI",
+          "ReportById": null,
+          "CurrencyId": 5,
+          "Currency": "HK$",
+          "BetCount": 100,
+          "TotalBets": 200.0,
+          "TotalWins": 100.0,
+          "GameIncome": 100.0,
+          "GamePayout": 50.0,
+          "TotalRefund": 20.0,
+          "HouseTurnover": 150.0,
+          "HouseGrossIncome": 50.0,
+          "HouseComm": 20.0,
+          "HouseNetIncome": 70.0
+        }
+      ]
+    }
+  ],
+  "GrandTotal": {
+    "NoOfPlayers": 80,
+    "ReportBy": "Grand Total RM",
+    "ReportById": null,
+    "CurrencyId": 2,
+    "Currency": "RM",
+    "BetCount": 650,
+    "TotalBets": 1600.0,
+    "TotalWins": 800.0,
+    "GameIncome": 800.0,
+    "GamePayout": 50.0,
+    "TotalRefund": 140.0,
+    "HouseTurnover": 750.0,
+    "HouseGrossIncome": 400.0,
+    "HouseComm": 130.0,
+    "HouseNetIncome": 530.0
+  }
+}
