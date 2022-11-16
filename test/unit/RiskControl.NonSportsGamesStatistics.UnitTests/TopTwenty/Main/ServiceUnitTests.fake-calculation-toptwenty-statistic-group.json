@@ -1,0 +1,156 @@
+﻿[
+  {
+    "Total": {
+      "ReportById": "1",
+      "ReportBy": "Top 20",
+      "BetCount": 350,
+      "CurrencyId": 0,
+      "Currency": "RM",
+      "TotalBets": 2000,
+      "TotalWins": 500,
+      "GameIncome": 1500,
+      "GamePayout": 25,
+      "TotalRefund": 50,
+      "HouseTurnover": 1450,
+      "RealTurnover": 1450,
+      "HouseGrossIncome": 1450,
+      "HouseComm": 50,
+      "HouseNetIncome": 1500
+    },
+    "Statistics": [
+      {
+        "GroupId": "23743294",
+        "GroupName": "12BETINR01129",
+        "UserNameViewStatistics": [
+          {
+            "ReportById": "23743294",
+            "ReportBy": "12BETINR01129",
+            "RoleId": 1,
+            "RoleName": "Member",
+            "NoOfPlayers": 0,
+            "BetCount": 250,
+            "CurrencyId": 61,
+            "Currency": "INR",
+            "TotalBets": 400,
+            "TotalWins": 200,
+            "GameIncome": 200,
+            "GamePayout": 50,
+            "TotalRefund": 50,
+            "HouseTurnover": 800,
+            "RealTurnover": 800,
+            "HouseGrossIncome": 500,
+            "HouseComm": 50,
+            "HouseNetIncome": 550,
+            "HousePositionTaking": 0.15,
+            "SiteName": "site 1"
+          }
+        ]
+      },
+      {
+        "GroupId": "23136817",
+        "GroupName": "2AA0600007",
+        "UserNameViewStatistics": [
+          {
+            "ReportById": "23136817",
+            "ReportBy": "2AA0600007",
+            "RoleId": 1,
+            "RoleName": "Member",
+            "NoOfPlayers": 0,
+            "BetCount": 3,
+            "CurrencyId": 67,
+            "Currency": "HKK",
+            "TotalBets": 320,
+            "TotalWins": 320,
+            "GameIncome": 0,
+            "GamePayout": 100,
+            "TotalRefund": 0,
+            "HouseTurnover": 25,
+            "RealTurnover": 25,
+            "HouseGrossIncome": 0,
+            "HouseComm": 0,
+            "HouseNetIncome": 0,
+            "HousePositionTaking": 0.1,
+            "SiteName": "site 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Total": {
+      "ReportById": "2",
+      "ReportBy": "Bottom 20",
+      "BetCount": 250,
+      "CurrencyId": 0,
+      "Currency": "RM",
+      "TotalBets": 1000,
+      "TotalWins": 500,
+      "GameIncome": 500,
+      "GamePayout": 50,
+      "TotalRefund": 50,
+      "HouseTurnover": 450,
+      "RealTurnover": 450,
+      "HouseGrossIncome": 450,
+      "HouseComm": 50,
+      "HouseNetIncome": 500
+    },
+    "Statistics": [
+      {
+        "GroupId": "22000125",
+        "GroupName": "2HKPU01000",
+        "UserNameViewStatistics": [
+          {
+            "ReportById": "22000125",
+            "ReportBy": "2HKPU01000",
+            "RoleId": 1,
+            "RoleName": "Member",
+            "NoOfPlayers": 0,
+            "BetCount": 1,
+            "CurrencyId": 3,
+            "Currency": "US$",
+            "TotalBets": 100,
+            "TotalWins": 100,
+            "GameIncome": 0,
+            "GamePayout": 100,
+            "TotalRefund": 0,
+            "HouseTurnover": 7,
+            "RealTurnover": 7,
+            "HouseGrossIncome": 0,
+            "HouseComm": 0,
+            "HouseNetIncome": 0,
+            "HousePositionTaking": 0.2,
+            "SiteName": "site 1"
+          }
+        ]
+      },
+      {
+        "GroupId": "22988294",
+        "GroupName": "ALKR88SS144",
+        "UserNameViewStatistics": [
+          {
+            "ReportById": "22988294",
+            "ReportBy": "ALKR88SS144",
+            "RoleId": 1,
+            "RoleName": "Member",
+            "NoOfPlayers": 0,
+            "BetCount": 1,
+            "CurrencyId": 45,
+            "Currency": "Won",
+            "TotalBets": 300,
+            "TotalWins": 300,
+            "GameIncome": 0,
+            "GamePayout": 100,
+            "TotalRefund": 0,
+            "HouseTurnover": 50,
+            "RealTurnover": 50,
+            "HouseGrossIncome": 0,
+            "HouseComm": 0,
+            "HouseNetIncome": 0,
+            "HousePositionTaking": 0.15,
+            "SiteName": "site 1"
+          }
+        ]
+      }
+    ]
+  }
+]

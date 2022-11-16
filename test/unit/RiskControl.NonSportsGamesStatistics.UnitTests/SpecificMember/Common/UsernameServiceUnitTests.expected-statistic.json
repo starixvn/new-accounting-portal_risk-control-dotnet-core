@@ -1,0 +1,60 @@
+﻿{
+  "Statistics": [
+    {
+      "ReportById": "23743294",
+      "ReportBy": "12BETINR01129",
+      "RoleId": 1,
+      "RoleName": "Member",
+      "BetCount": 10,
+      "CurrencyId": -1,
+      "Currency": "RM",
+      "TotalBets": 100,
+      "TotalWins": 0,
+      "GameIncome": 100,
+      "GamePayout": 0,
+      "TotalRefund": 0,
+      "HouseTurnover": 100,
+      "RealTurnover": 100,
+      "HouseGrossIncome": 0,
+      "HouseComm": 0,
+      "HouseNetIncome": 0,
+      "HousePositionTaking": 0
+    },
+    {
+      "ReportById": "23136817",
+      "ReportBy": "2AA0600007",
+      "RoleId": 1,
+      "RoleName": "Member",
+      "BetCount": 10,
+      "CurrencyId": -1,
+      "Currency": "RM",
+      "TotalBets": 200,
+      "TotalWins": 0,
+      "GameIncome": 200,
+      "GamePayout": 0,
+      "TotalRefund": 0,
+      "HouseTurnover": 200,
+      "RealTurnover": 200,
+      "HouseGrossIncome": 0,
+      "HouseComm": 0,
+      "HouseNetIncome": 0,
+      "HousePositionTaking": 0
+    }
+  ],
+  "GrandTotal": {
+    "ReportBy": "Grand Total RM",
+    "BetCount": 20,
+    "CurrencyId": -1,
+    "Currency": "RM",
+    "TotalBets": 300,
+    "TotalWins": 0,
+    "GameIncome": 300,
+    "GamePayout": 0,
+    "TotalRefund": 0,
+    "HouseTurnover": 300,
+    "RealTurnover": 300,
+    "HouseGrossIncome": 0,
+    "HouseComm": 0,
+    "HouseNetIncome": 0
+  }
+}

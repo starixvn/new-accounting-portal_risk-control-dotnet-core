@@ -1,0 +1,62 @@
+﻿{
+  "RawStatistics": [
+    {
+      "ReportBy": "Top 20",
+      "NoOfPlayers": 1,
+      "BetCount": 250,
+      "CurrencyId": 61,
+      "Currency": "INR",
+      "TotalBets": 400,
+      "TotalWins": 200,
+      "TotalRefund": 50,
+      "HouseTurnover": 800,
+      "RealTurnover": 800,
+      "HouseGrossIncome": 500,
+      "HouseComm": 50
+    },
+    {
+      "ReportBy": "Top 20",
+      "NoOfPlayers": 2,
+      "BetCount": 3,
+      "CurrencyId": 67,
+      "Currency": "HKK",
+      "TotalBets": 320,
+      "TotalWins": 320,
+      "TotalRefund": 0,
+      "HouseTurnover": 25,
+      "RealTurnover": 25,
+      "HouseGrossIncome": 0,
+      "HouseComm": 0
+    },
+    {
+      "ReportBy": "Top 20",
+      "NoOfPlayers": 3,
+      "BetCount": 1,
+      "CurrencyId": 3,
+      "Currency": "US$",
+      "TotalBets": 100,
+      "TotalWins": 100,
+      "TotalRefund": 0,
+      "HouseTurnover": 7,
+      "RealTurnover": 7,
+      "HouseGrossIncome": 0,
+      "HouseComm": 0
+    }
+  ],
+  "Total": [
+    {
+      "ReportBy": "GrandTotal",
+      "BetCount": 350,
+      "NoOfPlayers": 2,
+      "CurrencyId": 0,
+      "Currency": "RM",
+      "TotalBets": 2000,
+      "TotalWins": 500,
+      "TotalRefund": 50,
+      "HouseTurnover": 1450,
+      "RealTurnover": 1450,
+      "HouseGrossIncome": 1450,
+      "HouseComm": 50
+    }
+  ]
+}

@@ -9,7 +9,7 @@ namespace RiskControl.UnitTest.Core.TestUtilities
     {
         public static T Load<T>(string name, [CallerFilePath] string sourceFilePath = "", string dateTimeFormat = "yyyy:MM:dd")
         {
-            var dataFilePath = $"{Path.GetDirectoryName(sourceFilePath)}\\{Path.GetFileNameWithoutExtension(sourceFilePath)}.{name}.json";
+            var dataFilePath = $"{Path.GetDirectoryName(sourceFilePath)}/{Path.GetFileNameWithoutExtension(sourceFilePath)}.{name}.json";
             var text = File.ReadAllText(dataFilePath);
             var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = dateTimeFormat };
             return JsonConvert.DeserializeObject<T>(text, dateTimeConverter);
@@ -17,20 +17,20 @@ namespace RiskControl.UnitTest.Core.TestUtilities
 
         public static string LoadTestContent(string name, [CallerFilePath] string sourceFilePath = "")
         {
-            var dataFilePath = $"{Path.GetDirectoryName(sourceFilePath)}\\{Path.GetFileNameWithoutExtension(sourceFilePath)}.{name}.json";
+            var dataFilePath = $"{Path.GetDirectoryName(sourceFilePath)}/{Path.GetFileNameWithoutExtension(sourceFilePath)}.{name}.json";
             return File.ReadAllText(dataFilePath);
         }
 
         public static void SaveTestContent(string name, object value, [CallerFilePath] string sourceFilePath = "")
         {
-            var dataFilePath = $"{Path.GetDirectoryName(sourceFilePath)}\\{Path.GetFileNameWithoutExtension(sourceFilePath)}.{name}.json";
+            var dataFilePath = $"{Path.GetDirectoryName(sourceFilePath)}/{Path.GetFileNameWithoutExtension(sourceFilePath)}.{name}.json";
             var json = JsonConvert.SerializeObject(value, Formatting.Indented);
             File.WriteAllText(dataFilePath, json);
         }
 
         public static T LoadByDataSourceName<T>(string name, [CallerFilePath] string sourceFilePath = "", string dateTimeFormat = "yyyy:MM:dd")
         {
-            var dataFilePath = $"{Path.GetDirectoryName(sourceFilePath)}\\{name}.json";
+            var dataFilePath = $"{Path.GetDirectoryName(sourceFilePath)}/{name}.json";
             var text = File.ReadAllText(dataFilePath);
             var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = dateTimeFormat };
             return JsonConvert.DeserializeObject<T>(text, dateTimeConverter);
@@ -45,7 +45,7 @@ namespace RiskControl.UnitTest.Core.TestUtilities
 
         public static void Write(string name, object value, [CallerFilePath] string sourceFilePath = "")
         {
-            var dataFilePath = $"{Path.GetDirectoryName(sourceFilePath)}\\{Path.GetFileNameWithoutExtension(sourceFilePath)}.{name}.json";
+            var dataFilePath = $"{Path.GetDirectoryName(sourceFilePath)}/{Path.GetFileNameWithoutExtension(sourceFilePath)}.{name}.json";
             string json = JsonConvert.SerializeObject(value);
             File.WriteAllText(dataFilePath, json);
         }

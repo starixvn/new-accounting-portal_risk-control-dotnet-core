@@ -37,4 +37,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Hourly\History\" />
+    <Folder Include="TopTwenty\Common\" />
+  </ItemGroup>
+
 </Project>
