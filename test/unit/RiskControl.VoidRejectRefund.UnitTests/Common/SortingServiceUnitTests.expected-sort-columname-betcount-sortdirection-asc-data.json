@@ -1,0 +1,60 @@
+{
+  "Statistics": [
+    {
+      "GroupName": null,
+      "ReportBy": "Item 3",
+      "ReportById": 0,
+      "Currency": null,
+      "NoOfPlayers": 10,
+      "BetCount": 15,
+      "Reject": 0,
+      "Void": 0,
+      "Refund": 0,
+      "RejectPecentage": 0.0,
+      "VoidPecentage": 0.0,
+      "RefundPecentage": 0.0
+    },
+    {
+      "GroupName": null,
+      "ReportBy": "Item 2",
+      "ReportById": 0,
+      "Currency": null,
+      "NoOfPlayers": 15,
+      "BetCount": 25,
+      "Reject": 0,
+      "Void": 0,
+      "Refund": 5,
+      "RejectPecentage": 0.0,
+      "VoidPecentage": 0.0,
+      "RefundPecentage": 0.2
+    },
+    {
+      "GroupName": null,
+      "ReportBy": "Item 1",
+      "ReportById": 0,
+      "Currency": null,
+      "NoOfPlayers": 15,
+      "BetCount": 40,
+      "Reject": 0,
+      "Void": 0,
+      "Refund": 15,
+      "RejectPecentage": 0.0,
+      "VoidPecentage": 0.0,
+      "RefundPecentage": 0.375
+    }
+  ],
+  "GrandTotal": {
+    "GroupName": null,
+    "ReportBy": "Grand Total",
+    "ReportById": 0,
+    "Currency": null,
+    "NoOfPlayers": 30,
+    "BetCount": 150,
+    "Reject": 0,
+    "Void": 0,
+    "Refund": 30,
+    "RejectPecentage": 0.0,
+    "VoidPecentage": 0.0,
+    "RefundPecentage": 0.2
+  }
+}
