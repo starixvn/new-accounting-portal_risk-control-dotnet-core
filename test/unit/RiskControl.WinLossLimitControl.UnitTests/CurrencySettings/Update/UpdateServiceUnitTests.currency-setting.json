@@ -1,0 +1,38 @@
+[
+  {
+    "productId": 67,
+    "productName": "AdvantPlay",
+    "groupId": 49,
+    "groupName": "AdvantPlay",
+    "currencyId": 20,
+    "currencyName": " (UUS)",
+    "siteId": 268,
+    "siteName": "108bet",
+    "blackLimit": -500000.0000,
+    "greyLimit": -100000.0000,
+    "orangeLimit": 100000.0000,
+    "yellowLimit": 300000.0000,
+    "redLimit": 500000.0000,
+    "isBlockedPlacebetRedLevel": false,
+    "isBlockedTransferRedLevel": false,
+    "isCreditSite": false
+  },
+  {
+    "productId": 67,
+    "productName": "AdvantPlay",
+    "groupId": 49,
+    "groupName": "AdvantPlay",
+    "currencyId": 13,
+    "currencyName": "CNY (RMB)",
+    "siteId": 268,
+    "siteName": "108bet",
+    "blackLimit": -500000.0000,
+    "greyLimit": -100000.0000,
+    "orangeLimit": 100000.0000,
+    "yellowLimit": 300000.0000,
+    "redLimit": 500000.0000,
+    "isBlockedPlacebetRedLevel": false,
+    "isBlockedTransferRedLevel": false,
+    "isCreditSite": false
+  }
+]

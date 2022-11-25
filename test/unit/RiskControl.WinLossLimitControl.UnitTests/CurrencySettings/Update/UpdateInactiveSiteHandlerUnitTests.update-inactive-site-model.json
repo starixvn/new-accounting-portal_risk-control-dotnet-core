@@ -1,0 +1,21 @@
+[
+  {
+    "productId": 67,
+    "groupId": 49,
+    "levelId": 20,
+    "exchangeID": 268,
+    "maxWinLimit": 500000.0000,
+    "isBlockedPlaceBet": false,
+    "isBlockedTransfer": false
+  },
+  {
+    "productId": 67,
+    "groupId": 49,
+    "levelId": 13,
+    "exchangeID": 268,
+    "siteName": "108bet",
+    "maxWinLimit": 100000.0000,
+    "isBlockedPlaceBet": false,
+    "isBlockedTransfer": false
+  }
+]

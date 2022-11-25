@@ -1,0 +1,42 @@
+[
+  {
+    "productId": 45,
+    "productName": "AE Sexy",
+    "sportType": 243,
+    "betType": 3101,
+    "betTypeName": "Baccarat",
+    "gameRoundBetLimit": 200002.0000
+  },
+  {
+    "productId": 45,
+    "productName": "AE Sexy",
+    "sportType": 243,
+    "betType": 3102,
+    "betTypeName": "Dragon Tiger",
+    "gameRoundBetLimit": 200002.0000
+  },
+  {
+    "productId": 45,
+    "productName": "AE Sexy",
+    "sportType": 243,
+    "betType": 3103,
+    "betTypeName": "Sicbo",
+    "gameRoundBetLimit": 290000.0000
+  },
+  {
+    "productId": 45,
+    "productName": "AE Sexy",
+    "sportType": 243,
+    "betType": 3104,
+    "betTypeName": "Roulette",
+    "gameRoundBetLimit": 30000.0000
+  },
+  {
+    "productId": 45,
+    "productName": "AE Sexy",
+    "sportType": 243,
+    "betType": 3105,
+    "betTypeName": "Red Blue Duel",
+    "gameRoundBetLimit": 200003.0000
+  }
+]
