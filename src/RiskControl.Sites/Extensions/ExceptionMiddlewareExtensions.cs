@@ -25,7 +25,7 @@ namespace RiskControl.Sites.Extensions
                         var logMessage = new LogMessage(contextFeature.Error.Message)
                             .AddSection("Database Info", DatabaseInfoGetters.GetDbExceptionInfo(contextFeature.Error))
                             .AddSection("Server Info", CommonInfoGetters.GetServerInfo())
-                            .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(contextFeature.Error))
+                            .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(contextFeature.Error.InnerException))
                             .ToString();
                         LogService.Error(logMessage);
                         await context.Response.WriteAsync(new ErrorDetails()
