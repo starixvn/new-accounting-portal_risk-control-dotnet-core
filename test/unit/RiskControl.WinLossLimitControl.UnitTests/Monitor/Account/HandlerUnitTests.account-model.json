@@ -1,0 +1,38 @@
+{
+  "customer": {
+    "custId": 1290,
+    "username": "302RM",
+    "agent": "wsrm",
+    "agentId": 1262,
+    "master": "mrm",
+    "masterId": 4174,
+    "super": "SA-RM",
+    "superId": 2,
+    "siteName": "BEST-ODDS",
+    "isCreditUser": true
+  },
+  "usersByDevice": [
+    {
+      "custId": 1290,
+      "site": "BEST-ODDS",
+      "username": "302RM",
+      "lastBettingDate": "2019-07-04T13:33:03.969Z"
+    }
+  ],
+  "usersByIP": [
+    {
+      "custId": 1290,
+      "site": "BEST-ODDS",
+      "username": "302RM",
+      "lastBettingDate": "2019-07-04T13:33:03.969Z"
+    }
+  ],
+  "usersByManual": [
+    {
+      "custId": 1290,
+      "site": "BEST-ODDS",
+      "username": "302RM",
+      "lastBettingDate": "2019-07-04T13:33:03.969Z"
+    }
+  ]
+}
