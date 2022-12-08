@@ -9,7 +9,7 @@
     {
         public string GetReportMode(ReportType reportBy)
         {
-            string reportMode = string.Empty;
+            string reportMode;
 
             switch (reportBy)
             {

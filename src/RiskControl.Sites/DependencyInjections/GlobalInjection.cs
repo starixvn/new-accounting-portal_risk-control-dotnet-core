@@ -26,7 +26,7 @@ namespace RiskControl.Sites.DependencyInjections
             service.AddTransient<ISecurityService, SecurityService>();
             service.AddTransient<INapSession, NapSession>();
             service.AddTransient<INapSettings, NapSettings>();
-            service.AddSingleton<ICache>((x) =>
+            service.AddSingleton<ICache>((_) =>
             {
                 return new MemoryCache(new MemoryCacheOptions());
             });

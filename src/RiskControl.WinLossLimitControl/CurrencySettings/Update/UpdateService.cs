@@ -55,7 +55,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
             return criteriaList;
         }
 
-        private IEnumerable<UpdateSiteModel> GetUpdateCurrencyWinLimitAllLevel(CurrencySetting currencySetting)
+        private static IEnumerable<UpdateSiteModel> GetUpdateCurrencyWinLimitAllLevel(CurrencySetting currencySetting)
         {
             yield return GetUpdateCurrencyBlackLevel(currencySetting);
             yield return GetUpdateCurrencyGreyLevel(currencySetting);
@@ -64,7 +64,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
             yield return GetUpdateCurrencyRedLevel(currencySetting);
         }
 
-        private UpdateSiteModel GetUpdateCurrencyBlackLevel(CurrencySetting currencySetting)
+        private static UpdateSiteModel GetUpdateCurrencyBlackLevel(CurrencySetting currencySetting)
         {
             var defaultLevel = GetUpdateCurrencyDefaultLevel(currencySetting);
             defaultLevel.LevelId = LimitLevelConstant.BlackLevel;
@@ -73,7 +73,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
             return defaultLevel;
         }
 
-        private UpdateSiteModel GetUpdateCurrencyGreyLevel(CurrencySetting currencySetting)
+        private static UpdateSiteModel GetUpdateCurrencyGreyLevel(CurrencySetting currencySetting)
         {
             var defaultLevel = GetUpdateCurrencyDefaultLevel(currencySetting);
             defaultLevel.LevelId = LimitLevelConstant.GreyLevel;
@@ -82,7 +82,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
             return defaultLevel;
         }
 
-        private UpdateSiteModel GetUpdateCurrencyOrangeLevel(CurrencySetting currencySetting)
+        private static UpdateSiteModel GetUpdateCurrencyOrangeLevel(CurrencySetting currencySetting)
         {
             var defaultLevel = GetUpdateCurrencyDefaultLevel(currencySetting);
             defaultLevel.LevelId = LimitLevelConstant.OrangeLevel;
@@ -91,7 +91,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
             return defaultLevel;
         }
 
-        private UpdateSiteModel GetUpdateCurrencyYellowLevel(CurrencySetting currencySetting)
+        private static UpdateSiteModel GetUpdateCurrencyYellowLevel(CurrencySetting currencySetting)
         {
             var defaultLevel = GetUpdateCurrencyDefaultLevel(currencySetting);
             defaultLevel.LevelId = LimitLevelConstant.YellowLevel;
@@ -100,7 +100,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
             return defaultLevel;
         }
 
-        private UpdateSiteModel GetUpdateCurrencyRedLevel(CurrencySetting currencySetting)
+        private static UpdateSiteModel GetUpdateCurrencyRedLevel(CurrencySetting currencySetting)
         {
             var defaultLevel = GetUpdateCurrencyDefaultLevel(currencySetting);
             defaultLevel.LevelId = LimitLevelConstant.RedLevel;
@@ -109,7 +109,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
             return defaultLevel;
         }
 
-        private UpdateSiteModel GetUpdateCurrencyDefaultLevel(CurrencySetting currencySetting)
+        private static UpdateSiteModel GetUpdateCurrencyDefaultLevel(CurrencySetting currencySetting)
         {
             return new UpdateSiteModel
             {

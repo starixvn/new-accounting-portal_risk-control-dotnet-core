@@ -33,7 +33,7 @@ namespace RiskControl.WinLossLimitControl.Monitor.Parser
             return GetWinLimitSetting(document.Root);
         }
 
-        private WinLimitSetting GetWinLimitSetting(XElement element)
+        private static WinLimitSetting GetWinLimitSetting(XElement element)
         {
             return new WinLimitSetting
             {

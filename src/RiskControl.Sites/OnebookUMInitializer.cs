@@ -52,6 +52,7 @@ namespace RiskControl.Sites
 
         public void SetSession(string key, string value)
         {
+            // Method intentionally left empty.
         }
     }
 }

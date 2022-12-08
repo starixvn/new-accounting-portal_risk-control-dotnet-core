@@ -90,7 +90,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Search
             }
         }
 
-        private IEnumerable<SettingSite> GroupBySite(IEnumerable<CurrencySetting> settings)
+        private static IEnumerable<SettingSite> GroupBySite(IEnumerable<CurrencySetting> settings)
         {
             var groups =
                 settings.GroupBy(

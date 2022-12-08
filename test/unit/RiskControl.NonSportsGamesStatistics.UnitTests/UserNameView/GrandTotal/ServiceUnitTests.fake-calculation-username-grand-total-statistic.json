@@ -1,0 +1,72 @@
+﻿{
+  "Statistics": [
+    {
+      "ReportBy": "Total EURO",
+      "NoOfPlayers": 1,
+      "BetCount": 3,
+      "CurrencyId": 6,
+      "Currency": "EURO",
+      "TotalBets": 400,
+      "TotalWins": 200,
+      "GameIncome": 200,
+      "GamePayout": 50,
+      "TotalRefund": 50,
+      "HouseTurnover": 800,
+      "RealTurnover": 800,
+      "HouseGrossIncome": 500,
+      "HouseComm": 50,
+      "HouseNetIncome": 550
+    },
+    {
+      "ReportBy": "Total IND",
+      "NoOfPlayers": 2,
+      "BetCount": 2,
+      "CurrencyId": 22,
+      "Currency": "IND",
+      "TotalBets": 320,
+      "TotalWins": 320,
+      "GameIncome": 0,
+      "GamePayout": 100,
+      "TotalRefund": 0,
+      "HouseTurnover": 25,
+      "RealTurnover": 25,
+      "HouseGrossIncome": 0,
+      "HouseComm": 0,
+      "HouseNetIncome": 0
+    },
+    {
+      "ReportBy": "Total US$",
+      "NoOfPlayers": 1,
+      "BetCount": 1,
+      "CurrencyId": 3,
+      "Currency": "US$",
+      "TotalBets": 100,
+      "TotalWins": 100,
+      "GameIncome": 0,
+      "GamePayout": 100,
+      "TotalRefund": 0,
+      "HouseTurnover": 7,
+      "RealTurnover": 7,
+      "HouseGrossIncome": 0,
+      "HouseComm": 0,
+      "HouseNetIncome": 0
+    }
+  ],
+  "GrandTotal": {
+    "ReportBy": "Grand Total RM",
+    "NoOfPlayers": 100,
+    "BetCount": 250,
+    "CurrencyId": -1,
+    "Currency": "RM",
+    "TotalBets": 1000,
+    "TotalWins": 200,
+    "GameIncome": 800,
+    "GamePayout": 20,
+    "TotalRefund": 50,
+    "HouseTurnover": 800,
+    "RealTurnover": 800,
+    "HouseGrossIncome": 800,
+    "HouseComm": 50,
+    "HouseNetIncome": 850
+  }
+}

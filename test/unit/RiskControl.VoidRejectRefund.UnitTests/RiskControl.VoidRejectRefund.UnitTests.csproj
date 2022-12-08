@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Templates\VoidRejectRefund\Company.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Company_Data.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Currency.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Daily.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Daily_Data.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Device.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Monthly.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Product.xlsx" />
+    <None Remove="Templates\VoidRejectRefund\Product_Data.xlsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Templates\VoidRejectRefund\Company.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\VoidRejectRefund\Company_Data.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\VoidRejectRefund\Daily.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\VoidRejectRefund\Daily_Data.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\VoidRejectRefund\Product.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\VoidRejectRefund\Product_Data.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.17.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+    <PackageReference Include="NSubstitute" Version="4.4.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="1.3.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\RiskControl.VoidRejectRefund\RiskControl.VoidRejectRefund.csproj" />
+    <ProjectReference Include="..\RiskControl.UnitTest.Core\RiskControl.UnitTest.Core.csproj" />
+  </ItemGroup>
+
+</Project>

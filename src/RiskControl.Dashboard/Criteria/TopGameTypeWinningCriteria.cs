@@ -5,21 +5,29 @@ namespace RiskControl.Dashboard.Criteria
 {
     public class TopGameTypeWinningCriteria : CriteriaBase
     {
-        public DateTime FromDate => new DateTime(
-            DateTime.Now.AddDays(-7).Year,
-            DateTime.Now.AddDays(-7).Month,
-            DateTime.Now.AddDays(-7).Day,
-            0,
-            0,
-            0);
+        private const int NEGATIVE_SEVEN = -7;
 
-        public DateTime ToDate => new DateTime(
-            DateTime.Now.AddDays(-1).Year,
-            DateTime.Now.AddDays(-1).Month,
-            DateTime.Now.AddDays(-1).Day,
-            23,
-            59,
-            59);
+        public TopGameTypeWinningCriteria()
+        {
+            FromDate = new DateTime(
+                DateTime.Now.AddDays(NEGATIVE_SEVEN).Year,
+                DateTime.Now.AddDays(NEGATIVE_SEVEN).Month,
+                DateTime.Now.AddDays(NEGATIVE_SEVEN).Day,
+                0,
+                0,
+                0);
+            ToDate = new DateTime(
+                DateTime.Now.AddDays(-1).Year,
+                DateTime.Now.AddDays(-1).Month,
+                DateTime.Now.AddDays(-1).Day,
+                23,
+                59,
+                59);
+        }
+
+        public DateTime FromDate { get; set; }
+
+        public DateTime ToDate { get; set; }
 
         public override bool IsValid() => true;
 

@@ -1,0 +1,83 @@
+﻿{
+  "Statistics": [
+    {
+      "GroupName": "RNG Casino",
+      "DailyViewStatistics": [
+        {
+          "ReportBy": "RNG Casino",
+          "BetCount": 20,
+          "CurrencyId": -1,
+          "Currency": "RM",
+          "TotalBets": 100,
+          "TotalWins": 50,
+          "GameIncome": 50,
+          "GamePayout": 50,
+          "TotalRefund": 0,
+          "HouseTurnover": 50,
+          "RealTurnover": 50,
+          "HouseGrossIncome": 0,
+          "HouseComm": 0,
+          "HouseNetIncome": 0
+        }
+      ]
+    },
+    {
+      "GroupName": "Virtual Sports",
+      "DailyViewStatistics": [
+        {
+          "ReportBy": "Virtual Sports",
+          "BetCount": 100,
+          "CurrencyId": -1,
+          "Currency": "RM",
+          "TotalBets": 200,
+          "TotalWins": 100,
+          "GameIncome": 100,
+          "GamePayout": 50,
+          "TotalRefund": 20,
+          "HouseTurnover": 150,
+          "RealTurnover": 150,
+          "HouseGrossIncome": 50,
+          "HouseComm": 20,
+          "HouseNetIncome": 70
+        }
+      ]
+    },
+    {
+      "GroupName": "Number Game",
+      "DailyViewStatistics": [
+        {
+          "ReportBy": "Number Game",
+          "BetCount": 150,
+          "CurrencyId": -1,
+          "Currency": "RM",
+          "TotalBets": 400,
+          "TotalWins": 200,
+          "GameIncome": 200,
+          "GamePayout": 50,
+          "TotalRefund": 50,
+          "HouseTurnover": 250,
+          "RealTurnover": 250,
+          "HouseGrossIncome": 150,
+          "HouseComm": 50,
+          "HouseNetIncome": 200
+        }
+      ]
+    }
+  ],
+  "GrandTotal": {
+    "ReportBy": "Grand Total RM",
+    "BetCount": 270,
+    "CurrencyId": -1,
+    "Currency": "RM",
+    "TotalBets": 700,
+    "TotalWins": 350,
+    "GameIncome": 350,
+    "GamePayout": 50,
+    "TotalRefund": 70,
+    "HouseTurnover": 450,
+    "RealTurnover": 450,
+    "HouseGrossIncome": 200,
+    "HouseComm": 70,
+    "HouseNetIncome": 270
+  }
+}

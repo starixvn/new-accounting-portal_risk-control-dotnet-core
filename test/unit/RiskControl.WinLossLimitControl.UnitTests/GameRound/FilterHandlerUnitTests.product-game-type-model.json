@@ -1,0 +1,32 @@
+[
+  {
+    "productId": 45,
+    "productName": "AE Sexy",
+    "betType": 3101,
+    "betTypeName": "Baccarat"
+  },
+  {
+    "productId": 45,
+    "productName": "AE Sexy",
+    "betType": 3102,
+    "betTypeName": "Dragon Tiger"
+  },
+  {
+    "productId": 45,
+    "productName": "AE Sexy",
+    "betType": 3103,
+    "betTypeName": "Sicbo"
+  },
+  {
+    "productId": 45,
+    "productName": "AE Sexy",
+    "betType": 3104,
+    "betTypeName": "Roulette"
+  },
+  {
+    "productId": 45,
+    "productName": "AE Sexy",
+    "betType": 3105,
+    "betTypeName": "Red Blue Duel"
+  }
+]

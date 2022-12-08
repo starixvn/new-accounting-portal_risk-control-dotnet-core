@@ -1,0 +1,234 @@
+﻿{
+  "GroupStatisticWithTotal": [
+    {
+      "Total": {
+        "NoOfPlayers": 11,
+        "ReportBy": "MBC Group",
+        "ReportById": null,
+        "CurrencyId": 0,
+        "Currency": "RM",
+        "BetCount": 10,
+        "TotalBets": 800.0,
+        "TotalWins": 400.0,
+        "GameIncome": 400.0,
+        "GamePayout": 50.0,
+        "TotalRefund": 0.0,
+        "HouseTurnover": 400.0,
+        "RealTurnover": 400.0,
+        "HouseGrossIncome": 400.0,
+        "HouseComm": -50.0,
+        "HouseNetIncome": 350.0
+      },
+      "Statistics": [
+        {
+          "GroupId": null,
+          "GroupName": "368Cash",
+          "DailyViewStatistics": [
+            {
+              "NoOfPlayers": 3,
+              "ReportBy": "368Cash",
+              "ReportById": null,
+              "CurrencyId": 4,
+              "Currency": "TB",
+              "BetCount": 10,
+              "TotalBets": 200.0,
+              "TotalWins": 100.0,
+              "GameIncome": 100.0,
+              "GamePayout": 50.0,
+              "TotalRefund": 0.0,
+              "HouseTurnover": 150.0,
+              "RealTurnover": 150.0,
+              "HouseGrossIncome": 150.0,
+              "HouseComm": 0.0,
+              "HouseNetIncome": 150.0
+            },
+            {
+              "NoOfPlayers": 3,
+              "ReportBy": "368Cash",
+              "ReportById": null,
+              "CurrencyId": 3,
+              "Currency": "US$",
+              "BetCount": 10,
+              "TotalBets": 50.0,
+              "TotalWins": 25.0,
+              "GameIncome": 25.0,
+              "GamePayout": 50.0,
+              "TotalRefund": 0.0,
+              "HouseTurnover": 40.0,
+              "RealTurnover": 40.0,
+              "HouseGrossIncome": 40.0,
+              "HouseComm": -10.0,
+              "HouseNetIncome": 30.0
+            }
+          ]
+        },
+        {
+          "GroupId": null,
+          "GroupName": "9Club",
+          "DailyViewStatistics": [
+            {
+              "NoOfPlayers": 1,
+              "ReportBy": "9Club",
+              "ReportById": null,
+              "CurrencyId": 4,
+              "Currency": "TB",
+              "BetCount": 13,
+              "TotalBets": 120.0,
+              "TotalWins": 60.0,
+              "GameIncome": 60.0,
+              "GamePayout": 50.0,
+              "TotalRefund": 0.0,
+              "HouseTurnover": 200.0,
+              "RealTurnover": 200.0,
+              "HouseGrossIncome": 200.0,
+              "HouseComm": 0.0,
+              "HouseNetIncome": 200.0
+            },
+            {
+              "NoOfPlayers": 1,
+              "ReportBy": "9Club",
+              "ReportById": null,
+              "CurrencyId": 3,
+              "Currency": "US$",
+              "BetCount": 2,
+              "TotalBets": 20.0,
+              "TotalWins": 10.0,
+              "GameIncome": 10.0,
+              "GamePayout": 50.0,
+              "TotalRefund": 0.0,
+              "HouseTurnover": 20.0,
+              "RealTurnover": 20.0,
+              "HouseGrossIncome": 10.0,
+              "HouseComm": 0.0,
+              "HouseNetIncome": 10.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Total": {
+        "NoOfPlayers": 9,
+        "ReportBy": "Licensee Group",
+        "ReportById": null,
+        "CurrencyId": 0,
+        "Currency": "RM",
+        "BetCount": 20,
+        "TotalBets": 600.0,
+        "TotalWins": 300.0,
+        "GameIncome": 300.0,
+        "GamePayout": 50.0,
+        "TotalRefund": 0.0,
+        "HouseTurnover": 300.0,
+        "RealTurnover": 300.0,
+        "HouseGrossIncome": 300.0,
+        "HouseComm": 0.0,
+        "HouseNetIncome": 300.0
+      },
+      "Statistics": [
+        {
+          "GroupId": null,
+          "GroupName": "733333",
+          "DailyViewStatistics": [
+            {
+              "NoOfPlayers": 8,
+              "ReportBy": "733333",
+              "ReportById": null,
+              "CurrencyId": 4,
+              "Currency": "TB",
+              "BetCount": 15,
+              "TotalBets": 40.0,
+              "TotalWins": 20.0,
+              "GameIncome": 20.0,
+              "GamePayout": 50.0,
+              "TotalRefund": 0.0,
+              "HouseTurnover": 60.0,
+              "RealTurnover": 60.0,
+              "HouseGrossIncome": 60.0,
+              "HouseComm": -5.0,
+              "HouseNetIncome": 55.0
+            },
+            {
+              "NoOfPlayers": 12,
+              "ReportBy": "733333",
+              "ReportById": null,
+              "CurrencyId": 3,
+              "Currency": "US$",
+              "BetCount": 12,
+              "TotalBets": 30.0,
+              "TotalWins": 15.0,
+              "GameIncome": 15.0,
+              "GamePayout": 50.0,
+              "TotalRefund": 0.0,
+              "HouseTurnover": 120.0,
+              "RealTurnover": 120.0,
+              "HouseGrossIncome": 120.0,
+              "HouseComm": -10.0,
+              "HouseNetIncome": 110.0
+            }
+          ]
+        },
+        {
+          "GroupId": null,
+          "GroupName": "722222",
+          "DailyViewStatistics": [
+            {
+              "NoOfPlayers": 5,
+              "ReportBy": "722222",
+              "ReportById": null,
+              "CurrencyId": 3,
+              "Currency": "US$",
+              "BetCount": 15,
+              "TotalBets": 30.0,
+              "TotalWins": 15.0,
+              "GameIncome": 15.0,
+              "GamePayout": 50.0,
+              "TotalRefund": 5.0,
+              "HouseTurnover": 50.0,
+              "RealTurnover": 50.0,
+              "HouseGrossIncome": 40.0,
+              "HouseComm": -5.0,
+              "HouseNetIncome": 35.0
+            },
+            {
+              "NoOfPlayers": 7,
+              "ReportBy": "722222",
+              "ReportById": null,
+              "CurrencyId": 4,
+              "Currency": "TB",
+              "BetCount": 10,
+              "TotalBets": 20.0,
+              "TotalWins": 10.0,
+              "GameIncome": 10.0,
+              "GamePayout": 50.0,
+              "TotalRefund": 10.0,
+              "HouseTurnover": 100.0,
+              "RealTurnover": 100.0,
+              "HouseGrossIncome": 100.0,
+              "HouseComm": -10.0,
+              "HouseNetIncome": 90.0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "GrandTotal": {
+    "NoOfPlayers": 20,
+    "ReportBy": "Grand Total RM",
+    "ReportById": null,
+    "CurrencyId": -1,
+    "Currency": "RM",
+    "BetCount": 30,
+    "TotalBets": 1400.0,
+    "TotalWins": 700.0,
+    "GameIncome": 700.0,
+    "GamePayout": 50.0,
+    "TotalRefund": 0.0,
+    "HouseTurnover": 700.0,
+    "RealTurnover": 700.0,
+    "HouseGrossIncome": 700.0,
+    "HouseComm": -50.0,
+    "HouseNetIncome": 650.0
+  }
+}

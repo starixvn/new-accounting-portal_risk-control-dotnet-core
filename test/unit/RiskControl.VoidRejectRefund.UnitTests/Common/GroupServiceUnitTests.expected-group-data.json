@@ -1,0 +1,163 @@
+{
+  "Statistics": [
+    {
+      "Total": {
+        "GroupName": null,
+        "ReportBy": "Group 1 Total",
+        "ReportById": 0,
+        "Currency": null,
+        "NoOfPlayers": 15,
+        "BetCount": 80,
+        "Reject": 0,
+        "Void": 0,
+        "Refund": 25,
+        "RejectPecentage": 0.0,
+        "VoidPecentage": 0.0,
+        "RefundPecentage": 0.3125
+      },
+      "Statistics": [
+        {
+          "GroupName": "Item 1",
+          "Statistics": [
+            {
+              "GroupName": "Group 1",
+              "ReportBy": "Item 1",
+              "ReportById": 0,
+              "Currency": "RM",
+              "NoOfPlayers": 15,
+              "BetCount": 40,
+              "Reject": 0,
+              "Void": 0,
+              "Refund": 15,
+              "RejectPecentage": 0.0,
+              "VoidPecentage": 0.0,
+              "RefundPecentage": 0.375
+            }
+          ]
+        },
+        {
+          "GroupName": "Item 2",
+          "Statistics": [
+            {
+              "GroupName": "Group 1",
+              "ReportBy": "Item 2",
+              "ReportById": 0,
+              "Currency": "INH",
+              "NoOfPlayers": 15,
+              "BetCount": 25,
+              "Reject": 0,
+              "Void": 0,
+              "Refund": 10,
+              "RejectPecentage": 0.0,
+              "VoidPecentage": 0.0,
+              "RefundPecentage": 0.4
+            },
+            {
+              "GroupName": "Group 1",
+              "ReportBy": "Item 2",
+              "ReportById": 0,
+              "Currency": "Won",
+              "NoOfPlayers": 10,
+              "BetCount": 15,
+              "Reject": 0,
+              "Void": 0,
+              "Refund": 0,
+              "RejectPecentage": 0.0,
+              "VoidPecentage": 0.0,
+              "RefundPecentage": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Total": {
+        "GroupName": null,
+        "ReportBy": "Group 2 Total",
+        "ReportById": 0,
+        "Currency": null,
+        "NoOfPlayers": 25,
+        "BetCount": 80,
+        "Reject": 0,
+        "Void": 0,
+        "Refund": 10,
+        "RejectPecentage": 0.0,
+        "VoidPecentage": 0.0,
+        "RefundPecentage": 0.125
+      },
+      "Statistics": [
+        {
+          "GroupName": "Item 3",
+          "Statistics": [
+            {
+              "GroupName": "Group 2",
+              "ReportBy": "Item 3",
+              "ReportById": 0,
+              "Currency": "HKK",
+              "NoOfPlayers": 10,
+              "BetCount": 25,
+              "Reject": 0,
+              "Void": 0,
+              "Refund": 0,
+              "RejectPecentage": 0.0,
+              "VoidPecentage": 0.0,
+              "RefundPecentage": 0.0
+            }
+          ]
+        },
+        {
+          "GroupName": "Item 4",
+          "Statistics": [
+            {
+              "GroupName": "Group 2",
+              "ReportBy": "Item 4",
+              "ReportById": 0,
+              "Currency": "IDD",
+              "NoOfPlayers": 20,
+              "BetCount": 25,
+              "Reject": 0,
+              "Void": 0,
+              "Refund": 10,
+              "RejectPecentage": 0.0,
+              "VoidPecentage": 0.0,
+              "RefundPecentage": 0.4
+            }
+          ]
+        },
+        {
+          "GroupName": "Item 5",
+          "Statistics": [
+            {
+              "GroupName": "Group 2",
+              "ReportBy": "Item 5",
+              "ReportById": 0,
+              "Currency": "IDD",
+              "NoOfPlayers": 20,
+              "BetCount": 30,
+              "Reject": 0,
+              "Void": 0,
+              "Refund": 0,
+              "RejectPecentage": 0.0,
+              "VoidPecentage": 0.0,
+              "RefundPecentage": 0.0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "GrandTotal": {
+    "GroupName": null,
+    "ReportBy": "Grand Total",
+    "ReportById": 0,
+    "Currency": null,
+    "NoOfPlayers": 32,
+    "BetCount": 160,
+    "Reject": 0,
+    "Void": 0,
+    "Refund": 35,
+    "RejectPecentage": 0.0,
+    "VoidPecentage": 0.0,
+    "RefundPecentage": 0.21875
+  }
+}

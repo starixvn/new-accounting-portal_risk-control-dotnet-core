@@ -69,10 +69,7 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
                 {
                     var childGroups = mapper.Map<List<SiteGroupModel>>(item.ChildItems);
 
-                    if(item.ChildGroups == null)
-                    {
-                        item.ChildGroups = new List<SiteGroupModel>();
-                    }
+                    item.ChildGroups ??= new List<SiteGroupModel>();
 
                     item.ChildGroups.AddRange(childGroups);
                     item.ChildItems.RemoveRange(0, item.ChildItems.Count);

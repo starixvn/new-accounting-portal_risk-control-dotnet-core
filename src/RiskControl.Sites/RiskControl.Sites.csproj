@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <CodeAnalysisRuleSet>..\..\.sonarlint\nap-riskcontrolcsharp.ruleset</CodeAnalysisRuleSet>
+	<!-- Exclude the project from analysis -->
+	<SonarQubeExclude>true</SonarQubeExclude>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="..\..\.sonarlint\nap-riskcontrol\CSharp\SonarLint.xml" Link="SonarLint.xml" />
     <Content Include="App_Data\SpName.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -92,7 +96,7 @@
     <PackageReference Include="Fanex.Logging.Extensions.Database" Version="1.0.8" />
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1" />
     <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.1" />
-    <PackageReference Include="Fanex.NAP.Signin.AspNetCore" Version="2.0.0.5-beta1" />
+    <PackageReference Include="Fanex.NAP.Signin.AspNetCore" Version="2.0.0.5-beta2" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.17" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

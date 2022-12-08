@@ -33,27 +33,13 @@ namespace RiskControl.Sites.Controllers
                 currentSession.UserId,
                 napSettings.SiteId,
                 FunctionKeys.RiskControlDashboard) >= (int)Constant.Policy.Read;
-
-                if (hasPermission)
-                {
-                    return View("~/wwwroot/dashboard/index.cshtml");
-                }
-                else
-                {
-                    return View();
-                }
+                return hasPermission ? View("~/wwwroot/dashboard/index.cshtml") : View();
             }
             catch
             {
                 return View();
             }
             
-        }
-
-        [AllowAnonymous]
-        public string HealthCheck()
-        {
-            return "Ok";
         }
 
         [Route("NonSportGameStatistics/Main/Index")]

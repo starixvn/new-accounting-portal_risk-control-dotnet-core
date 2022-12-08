@@ -1,0 +1,219 @@
+﻿{
+  "GroupStatisticWithTotal": [
+    {
+      "Total": {
+        "ReportBy": "MBC Group",
+        "NoOfPlayers": 11,
+        "CurrencyId": 0,
+        "Currency": "RM",
+        "BetCount": 10,
+        "TotalBets": 800,
+        "TotalWins": 400,
+        "GameIncome": 400,
+        "GamePayout": 50,
+        "TotalRefund": 0,
+        "HouseTurnover": 400,
+        "RealTurnover": 400,
+        "HouseGrossIncome": 400,
+        "HouseComm": -50,
+        "HouseNetIncome": 350
+      },
+      "Statistics": [
+        {
+          "GroupName": "368Cash",
+          "DailyViewStatistics": [
+            {
+              "ReportBy": "368Cash",
+              "NoOfPlayers": 3,
+              "CurrencyId": 4,
+              "Currency": "TB",
+              "BetCount": 10,
+              "TotalBets": 200,
+              "TotalWins": 100,
+              "GameIncome": 100,
+              "GamePayout": 50,
+              "TotalRefund": 0,
+              "HouseTurnover": 150,
+              "RealTurnover": 150,
+              "HouseGrossIncome": 150,
+              "HouseComm": 0,
+              "HouseNetIncome": 150
+            },
+            {
+              "ReportBy": "368Cash",
+              "NoOfPlayers": 3,
+              "CurrencyId": 3,
+              "Currency": "US$",
+              "BetCount": 10,
+              "TotalBets": 50,
+              "TotalWins": 25,
+              "GameIncome": 25,
+              "GamePayout": 50,
+              "TotalRefund": 0,
+              "HouseTurnover": 40,
+              "RealTurnover": 40,
+              "HouseGrossIncome": 40,
+              "HouseComm": -10,
+              "HouseNetIncome": 30
+            }
+          ]
+        },
+        {
+          "GroupName": "9Club",
+          "DailyViewStatistics": [
+            {
+              "ReportBy": "9Club",
+              "NoOfPlayers": 1,
+              "CurrencyId": 4,
+              "Currency": "TB",
+              "BetCount": 13,
+              "TotalBets": 120,
+              "TotalWins": 60,
+              "GameIncome": 60,
+              "GamePayout": 50,
+              "TotalRefund": 0,
+              "HouseTurnover": 200,
+              "RealTurnover": 200,
+              "HouseGrossIncome": 200,
+              "HouseComm": 0,
+              "HouseNetIncome": 200
+            },
+            {
+              "ReportBy": "9Club",
+              "NoOfPlayers": 1,
+              "CurrencyId": 3,
+              "Currency": "US$",
+              "BetCount": 2,
+              "TotalBets": 20,
+              "TotalWins": 10,
+              "GameIncome": 10,
+              "GamePayout": 50,
+              "TotalRefund": 0,
+              "HouseTurnover": 20,
+              "RealTurnover": 20,
+              "HouseGrossIncome": 10,
+              "HouseComm": 0,
+              "HouseNetIncome": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Total": {
+        "ReportBy": "Licensee Group",
+        "NoOfPlayers": 9,
+        "CurrencyId": 0,
+        "Currency": "RM",
+        "BetCount": 20,
+        "TotalBets": 600,
+        "TotalWins": 300,
+        "GameIncome": 300,
+        "GamePayout": 50,
+        "TotalRefund": 0,
+        "HouseTurnover": 300,
+        "RealTurnover": 300,
+        "HouseGrossIncome": 300,
+        "HouseComm": 0,
+        "HouseNetIncome": 300
+      },
+      "Statistics": [
+        {
+          "GroupName": "722222",
+          "DailyViewStatistics": [
+            {
+              "ReportBy": "722222",
+              "NoOfPlayers": 7,
+              "CurrencyId": 4,
+              "Currency": "TB",
+              "BetCount": 10,
+              "TotalBets": 20,
+              "TotalWins": 10,
+              "GameIncome": 10,
+              "GamePayout": 50,
+              "TotalRefund": 10,
+              "HouseTurnover": 100,
+              "RealTurnover": 100,
+              "HouseGrossIncome": 100,
+              "HouseComm": -10,
+              "HouseNetIncome": 90
+            },
+            {
+              "ReportBy": "722222",
+              "NoOfPlayers": 5,
+              "CurrencyId": 3,
+              "Currency": "US$",
+              "BetCount": 15,
+              "TotalBets": 30,
+              "TotalWins": 15,
+              "GameIncome": 15,
+              "GamePayout": 50,
+              "TotalRefund": 5,
+              "HouseTurnover": 50,
+              "RealTurnover": 50,
+              "HouseGrossIncome": 40,
+              "HouseComm": -5,
+              "HouseNetIncome": 35
+            }
+          ]
+        },
+        {
+          "GroupName": "733333",
+          "DailyViewStatistics": [
+            {
+              "ReportBy": "733333",
+              "NoOfPlayers": 8,
+              "CurrencyId": 4,
+              "Currency": "TB",
+              "BetCount": 15,
+              "TotalBets": 40,
+              "TotalWins": 20,
+              "GameIncome": 20,
+              "GamePayout": 50,
+              "TotalRefund": 0,
+              "HouseTurnover": 60,
+              "RealTurnover": 60,
+              "HouseGrossIncome": 60,
+              "HouseComm": -5,
+              "HouseNetIncome": 55
+            },
+            {
+              "ReportBy": "733333",
+              "NoOfPlayers": 12,
+              "CurrencyId": 3,
+              "Currency": "US$",
+              "BetCount": 12,
+              "TotalBets": 30,
+              "TotalWins": 15,
+              "GameIncome": 15,
+              "GamePayout": 50,
+              "TotalRefund": 0,
+              "HouseTurnover": 120,
+              "RealTurnover": 120,
+              "HouseGrossIncome": 120,
+              "HouseComm": -10,
+              "HouseNetIncome": 110
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "GrandTotal": {
+    "ReportBy": "Grand Total RM",
+    "NoOfPlayers": 20,
+    "CurrencyId": -1,
+    "Currency": "RM",
+    "BetCount": 30,
+    "TotalBets": 1400,
+    "TotalWins": 700,
+    "GameIncome": 700,
+    "GamePayout": 50,
+    "TotalRefund": 0,
+    "HouseTurnover": 700,
+    "RealTurnover": 700,
+    "HouseGrossIncome": 700,
+    "HouseComm": -50,
+    "HouseNetIncome": 650
+  }
+}
