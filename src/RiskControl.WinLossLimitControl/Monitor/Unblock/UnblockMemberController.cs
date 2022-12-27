@@ -20,7 +20,7 @@ namespace RiskControl.WinLossLimitControl.Monitor.Unblock
 
         [Route("unblock-transfer")]
         [HttpPost]
-        [NapAuth(FunctionKey = FunctionKeys.PlayerWinLimitManagement, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = FunctionKeys.WinLimitMonitor, Policy = Constant.Policy.Host)]
         public async Task<IActionResult> UnblockTransfer(RequestUnblockTransfer request)
         {
             var viewModel = await mediator.Send(request);
@@ -29,7 +29,7 @@ namespace RiskControl.WinLossLimitControl.Monitor.Unblock
 
         [Route("unblock-place-bet")]
         [HttpPost]
-        [NapAuth(FunctionKey = FunctionKeys.PlayerWinLimitManagement, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = FunctionKeys.WinLimitMonitor, Policy = Constant.Policy.Host)]
         public async Task<IActionResult> UnblockPlaceBet(RequestUnblockPlaceBet request)
         {
             var viewModel = await mediator.Send(request);
