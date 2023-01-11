@@ -4,30 +4,30 @@
 }
 @section Head
 {
-    <style type="text/css">
-        .alert-browser {
-            clear: both;
-            display: none;
-            margin-top: 100px;
-            text-align: center;
-            color: red;
-            font-size: 1rem;
-        }
-    </style>
+    <link href="@Url.Content("~/content/themes/home.css")" rel="stylesheet" />
 }
 @section Headline
 {
-    <div class="title">
-        <div>
-            <span class="curr">Welcome to Risk &#38; Control!</span>
-        </div>
-    </div>
     <div class="alert-browser">
         You are using a browser that is not supported by this site.
         <br />
         Please upgrade your browser now to Firefox 49+ or Chrome 54+ by openning the following link <a href="http://outdatedbrowser.com/en" target="_blank">http://outdatedbrowser.com/en</a>
     </div>
 }
+<div class="home-info">
+    <div>
+        <div id="welcome">Welcome <span id="user">@Context.User.Identity.Name</span><br /> to Risk &#38; Control</div>
+        <div id="button">
+            <a id="change-pass" href="@Url.Content("~/Auth/ChangePassword")">Change Password</a>
+            <a id="logout" href="@Url.Content("~/Auth/LogOut")">Sign Out</a>
+        </div>
+        <div id="time">@string.Format("{0} GMT-4", DateTime.Now)</div>
+    </div>
+    <div style="width: 50px;"></div>
+    <div>
+        <img src="@Url.Content("~/content/themes/img/welcome.png")" />
+    </div>
+</div>
 @section Foot
 {
     <script type="text/javascript">

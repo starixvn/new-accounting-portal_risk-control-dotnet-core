@@ -332,9 +332,9 @@ header {
         header .logo a {
             display: block;
             background: url("img/logo.png") left center no-repeat;
-            margin: 7px 0px 5px 26px;
+            margin: 5px 0px 5px 10px;
             height: 28px;
-            width: 147px;
+            width: 130px;
             border-right: 1px solid rgb(126, 163, 233);
             box-shadow: rgb(36, 71, 153) 1px 0px;
         }
@@ -344,7 +344,7 @@ header {
             }
 
     header nav {
-        margin-left: 12px;
+        margin-left: 3px;
         float: left;
     }
 
@@ -358,6 +358,7 @@ header {
                 float: left;
                 list-style-type: none;
                 position: relative;
+                padding: 1px 0px;
             }
 
                 header nav .menu li a {
@@ -368,13 +369,12 @@ header {
             header nav .menu > li > a {
                 display: block;
                 font-size: 1em;
-                padding: 8px 16px;
+                padding: 9px 16px;
                 border: 1px solid transparent;
             }
 
             header nav .menu > li ul {
                 position: absolute;
-                top: 26px;
                 background-color: rgb(255, 255, 255);
                 margin: 0px;
                 text-align: left;
@@ -429,7 +429,6 @@ header {
             }
 
             header nav .menu > li:hover ul {
-                top: 26px;
                 visibility: visible;
                 opacity: 1;
             }
@@ -473,7 +472,7 @@ header {
                 clear: none;
                 margin: 0px 0px 0px -2px;
                 float: left;
-                padding: 4px 10px 4px 28px;
+                padding: 5px 10px 5px 28px;
                 color: rgb(255, 255, 255);
                 border-radius: 3px;
                 font-weight: normal;
