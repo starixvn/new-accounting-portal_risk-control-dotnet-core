@@ -893,7 +893,7 @@ export class FilterComponent implements OnInit {
         this.selectedProducts = this.products;
       }
 
-      this.productTreeViewItems = this.treeviewBuilderService.buildProductTreeViewItems(products, this.selectedProducts);
+      this.productTreeViewItems = this.treeviewBuilderService.buildProductTreeViewItems(this.products, this.selectedProducts);
     });
 
     this.filterService.getDevices().subscribe(devices => {

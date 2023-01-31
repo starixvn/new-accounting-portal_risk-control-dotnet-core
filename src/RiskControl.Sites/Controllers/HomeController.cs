@@ -24,22 +24,17 @@ namespace RiskControl.Sites.Controllers
             this.napSettings = napSettings;
         }
 
-       // [ServiceFilter(typeof(CheckUMFilterAttribute))]
         public ActionResult Index()
         {
-            try
-            {
-                bool hasPermission = userService.GetPermission(
-                currentSession.UserId,
-                napSettings.SiteId,
-                FunctionKeys.RiskControlDashboard) >= (int)Constant.Policy.Read;
-                return hasPermission ? View("~/wwwroot/dashboard/index.cshtml") : View();
-            }
-            catch
-            {
-                return View();
-            }
-            
+            return View();
+
+        }
+
+        [Route("Dashboard/Index")]
+        [NapAuth(FunctionKey = FunctionKeys.RiskControlDashboard, Policy = Constant.Policy.Read)]
+        public ActionResult Dashboard()
+        {
+            return View("~/wwwroot/dashboard/index.cshtml");
         }
 
         [Route("NonSportGameStatistics/Main/Index")]
