@@ -28,36 +28,38 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
 
         public async Task<List<SiteGroupModel>> GetSiteGroups(string productId)
         {
-            var result = new List<SiteGroupModel>();
+            const int oneMillion = 1_000_000;
 
+            var result = new List<SiteGroupModel>();
             var criteria = new SiteCriteria { ProductId = productId };
 
-            var entities = await repository.FetchMultipleAsync<SiteGroupEntity, LicenseeEntity>(criteria);
+            var (firstResultSet, secondResultSet) = await repository.FetchMultipleAsync<SiteGroupEntity, LicenseeEntity>(criteria);
 
-            var creditSites = entities.Item2.Where(x => x.GroupId == -1);
-
-            var creditGroup = new SiteGroupModel
-            {
-                GroupName = "Credit Group",
-                ChildItems = mapper.Map<List<LicenseeModel>>(creditSites)
-            };
-
-
+            var licenseeItemsOfCredit = firstResultSet.Where(x => x.GroupId >= oneMillion);
+            var creditGroup = CreateSiteGroup("Credit Group", licenseeItemsOfCredit, secondResultSet);
+            var specialLicensees = CreateSpecialChild(secondResultSet);
+            creditGroup.ChildGroups.AddRange(specialLicensees);
             result.Add(creditGroup);
 
-            var licenseeItems = entities.Item1.Where(x => x.GroupId != -1);
-            var licenseeGroups = CreateLicenseeGroup(licenseeItems);
-            CreateChildLicensee(licenseeGroups, entities.Item2);
-
-            var depositGroup = new SiteGroupModel
-            {
-                GroupName = "Licensee Group",
-                ChildGroups = licenseeGroups
-            };
-
+            var licenseeItemsOfDeposit = firstResultSet.Where(x => x.GroupId < oneMillion);
+            var depositGroup = CreateSiteGroup("Licensee Group", licenseeItemsOfDeposit, secondResultSet);
             result.Add(depositGroup);
+
             MoveChildItemsToChildGroups(result);
 
+            return result;
+        }
+
+        private SiteGroupModel CreateSiteGroup(string groupName, IEnumerable<SiteGroupEntity> siteGroups, IEnumerable<LicenseeEntity> licenseeEntities)
+        {
+            var groups = CreateGroup(siteGroups);
+            CreateChild(groups, licenseeEntities);
+
+            var result = new SiteGroupModel
+            {
+                GroupName = groupName,
+                ChildGroups = groups
+            };
             return result;
         }
 
@@ -82,7 +84,26 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
             }
         }
 
-        private void CreateChildLicensee(List<SiteGroupModel> siteGroups, IEnumerable<LicenseeEntity> licenseeEntities)
+        private static List<SiteGroupModel> CreateSpecialChild(IEnumerable<LicenseeEntity> licenseeEntities)
+        {
+            var result = new List<SiteGroupModel>();
+            var licensees = licenseeEntities.Where(x => x.GroupId == 0);
+            foreach (var item in licensees)
+            {
+                var group = new SiteGroupModel
+                {
+                    ParentId = 0,
+                    GroupId = 0,
+                    GroupName = item.LicenseeName,
+                    LicenseeName = item.LicenseeName,
+                    LicenseeId = item.LicenseeId
+                };
+                result.Add(group);
+            }
+            return result;
+        }
+
+        private void CreateChild(List<SiteGroupModel> siteGroups, IEnumerable<LicenseeEntity> licenseeEntities)
         {
             foreach (var item in siteGroups)
             {
@@ -93,12 +114,12 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
 
                 if (item.ChildGroups != null && item.ChildGroups.Count > 0)
                 {
-                    CreateChildLicensee(item.ChildGroups, licenseeEntities);
+                    CreateChild(item.ChildGroups, licenseeEntities);
                 }
             }
         }
 
-        private List<SiteGroupModel> CreateLicenseeGroup(IEnumerable<SiteGroupEntity> entities)
+        private List<SiteGroupModel> CreateGroup(IEnumerable<SiteGroupEntity> entities)
         {
             var parentItems = entities.Where(x => x.ParentId == 0);
             var result = mapper.Map<List<SiteGroupModel>>(parentItems);
