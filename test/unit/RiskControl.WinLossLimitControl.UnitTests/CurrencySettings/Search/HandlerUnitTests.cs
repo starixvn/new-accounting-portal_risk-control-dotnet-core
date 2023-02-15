@@ -35,9 +35,9 @@ namespace RiskControl.WinLossLimitControl.UnitTests.CurrencySettings.Search
             var request = new Request
             {
                 CurrencyId = 20,
-                IsCreditSite = true,
+                IsCreditSite = 1,
                 ProductId = 3,
-                SiteId = 20
+                MultiSite = "20"
             };
             var service = new Handler(repository, cacheRefSerivce, dataTransformService, mapper);
 

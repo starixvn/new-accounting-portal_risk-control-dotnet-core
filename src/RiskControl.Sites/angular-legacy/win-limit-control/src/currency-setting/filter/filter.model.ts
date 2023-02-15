@@ -1,8 +1,8 @@
 export interface FilterModel {
     productId: number;
     productName: string;
-    siteId: number;
-    isCreditSite: boolean;
+    multiSite: string;
+    isCreditSite: number;
     currencyId: number;
     excludeTestCurrency: boolean;
     groupId: number;

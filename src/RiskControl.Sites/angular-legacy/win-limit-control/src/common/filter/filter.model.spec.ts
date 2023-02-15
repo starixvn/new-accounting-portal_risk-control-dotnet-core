@@ -11,13 +11,13 @@ export const fakeCurrencies: Currency[] = [
 ];
 
 export const fakeCreditSites: Site[] = [
-    { siteId: 1, siteName: 'Credit 1' },
-    { siteId: 2, siteName: 'Credit 2' }
+    { siteId: 1, siteName: 'Credit 1', siteLabel: '789y' },
+    { siteId: 2, siteName: 'Credit 2', siteLabel: '789y' }
 ];
 
 export const fakeDepositSites: Site[] = [
-    { siteId: 3, siteName: 'Deposit 1' },
-    { siteId: 4, siteName: 'Deposit 2' }
+    { siteId: 3, siteName: 'Deposit 1', siteLabel: '789y' },
+    { siteId: 4, siteName: 'Deposit 2', siteLabel: '789y' }
 ];
 
 export const fakeCreditSiteGroup: SiteGroup = {

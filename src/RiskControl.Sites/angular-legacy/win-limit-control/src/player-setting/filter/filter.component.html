@@ -26,7 +26,9 @@
             <div class="nap-group">
                 <label for="select-site">Site / Licensee</label>
                 <div class="nap-control">
-                    <nap-dropdown-treeview-select [items]="sites" [(value)]="siteId" (valueChange)="onSiteSelectedChange()"></nap-dropdown-treeview-select>
+                    <ngx-dropdown-treeview #siteDropdownTreeview [items]="siteGroups | siteTreeview:siteGroups" [config]="siteTreeviewConfig"
+                        (selectedChange)="onSiteSelectedChange($event)">
+                    </ngx-dropdown-treeview>
                 </div>
             </div>
         </div>

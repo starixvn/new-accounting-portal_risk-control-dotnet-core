@@ -6,9 +6,9 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Search
     {
         public int ProductId { get; set; }
 
-        public int SiteId { get; set; }
+        public string MultiSite { get; set; }
 
-        public bool IsCreditSite { get; set; }
+        public byte IsCreditSite { get; set; }
 
         public int CurrencyId { get; set; }
 

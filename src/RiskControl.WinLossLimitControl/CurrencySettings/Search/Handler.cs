@@ -45,7 +45,7 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Search
 
         private async Task<IEnumerable<CurrencySettingRaw>> QueryFromDatabase(Request parameter)
         {
-            var processingCriteria = parameter.SiteId == 0
+            var processingCriteria = parameter.MultiSite == "0"
                 ? (ICriteria)new AllSiteSearchCriteria
                 {
                     ProductId = parameter.ProductId,

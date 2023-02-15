@@ -62,3 +62,22 @@ body {
         text-overflow: ellipsis;
     }
 }
+
+.btn-outline-secondary {
+    color: #6c757d;
+    background-color: transparent;
+    background-image: none;
+    border-color: #6c757d;
+     &:hover {
+      color: #6c757d;
+      background-color: #e6e6e6;
+      border-color: #adadad;
+     }
+     &.disabled, &:disabled {
+      color: #6c757d;
+      background-color: transparent;
+     }
+     &.focus, &:focus {
+      box-shadow: 0 0 0 2px hsla(0,0%,80%,.5);
+     }
+  }

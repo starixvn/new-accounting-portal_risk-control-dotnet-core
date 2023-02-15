@@ -20,7 +20,7 @@ const fakeFilterModel: FilterModel = {
     userName: 'User1',
     productId: 1,
     currencyId: 1,
-    siteId: 1
+    multiSite: '1',
 };
 
 @Component({

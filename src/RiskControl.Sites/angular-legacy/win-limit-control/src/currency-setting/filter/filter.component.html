@@ -29,14 +29,9 @@
             <div class="nap-group">
                 <label for="select-site">Site / Licensee</label>
                 <div class="nap-control">
-                    <select class="form-control" id="select-site" [(ngModel)]="siteId" (ngModelChange)="onSiteChange()">
-                        <option [ngValue]="0">All</option>
-                        <optgroup *ngFor="let group of siteGroups" [label]="group.groupName">
-                            <option *ngFor="let site of group.sites" [ngValue]="site.siteId">
-                                {{site.siteName}}
-                            </option>
-                        </optgroup>
-                    </select>
+                    <ngx-dropdown-treeview #siteDropdownTreeview [items]="siteGroups | siteTreeview:siteGroups" [config]="siteTreeviewConfig"
+                        (selectedChange)="onSiteChange($event)">
+                    </ngx-dropdown-treeview>
                 </div>
             </div>
         </div>

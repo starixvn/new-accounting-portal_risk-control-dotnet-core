@@ -8,6 +8,7 @@ import { DropdownSelectModule } from 'nap-components/dropdown-select';
 import { DropdownTypeaheadModule } from 'nap-components/dropdown-typeahead';
 import { DropdownTreeviewSelectModule } from 'nap-components/dropdown-treeview-select';
 import { FilterComponent } from './filter.component';
+import { SiteTreeviewPipe } from '../../common/filter/site-treeview.pipe';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { FilterComponent } from './filter.component';
         DropdownSelectModule
     ],
     declarations: [
-        FilterComponent
+        FilterComponent,
+        SiteTreeviewPipe
     ],
     exports: [
         FilterComponent
