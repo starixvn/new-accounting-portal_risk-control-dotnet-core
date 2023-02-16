@@ -28,20 +28,20 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
 
         public async Task<List<SiteGroupModel>> GetSiteGroups(string productId)
         {
-            const int oneMillion = 1_000_000;
+            const int NEGATIVE_ONE_THOUSAND = -1000;
 
             var result = new List<SiteGroupModel>();
             var criteria = new SiteCriteria { ProductId = productId };
 
             var (firstResultSet, secondResultSet) = await repository.FetchMultipleAsync<SiteGroupEntity, LicenseeEntity>(criteria);
 
-            var licenseeItemsOfCredit = firstResultSet.Where(x => x.GroupId >= oneMillion);
+            var licenseeItemsOfCredit = firstResultSet.Where(x => x.GroupId <= NEGATIVE_ONE_THOUSAND);
             var creditGroup = CreateSiteGroup("Credit Group", licenseeItemsOfCredit, secondResultSet);
             var specialLicensees = CreateSpecialChild(secondResultSet);
             creditGroup.ChildGroups.AddRange(specialLicensees);
             result.Add(creditGroup);
 
-            var licenseeItemsOfDeposit = firstResultSet.Where(x => x.GroupId < oneMillion);
+            var licenseeItemsOfDeposit = firstResultSet.Where(x => x.GroupId > NEGATIVE_ONE_THOUSAND);
             var depositGroup = CreateSiteGroup("Licensee Group", licenseeItemsOfDeposit, secondResultSet);
             result.Add(depositGroup);
 
