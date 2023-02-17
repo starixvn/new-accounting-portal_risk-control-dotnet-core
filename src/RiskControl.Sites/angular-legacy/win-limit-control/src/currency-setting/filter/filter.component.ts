@@ -50,12 +50,16 @@ export class FilterComponent implements OnInit {
     }
 
     onSiteChange(siteIds: number[])  {
-        this.selectedSites = siteIds;
-        const currencyQueryModel: QueryCurrencyModel = {
-            isCreditSite: FilterHelper.getSiteType(this.siteGroups, this.selectedSites),
-            multiSite: siteIds.length === this.sitesLength ? '0' : siteIds.join(',')
-        };
-        this.queryCurrencies(currencyQueryModel);
+        if (siteIds.length > 0) {
+            this.selectedSites = siteIds;
+            const currencyQueryModel: QueryCurrencyModel = {
+                isCreditSite: FilterHelper.getSiteType(this.siteGroups, this.selectedSites),
+                multiSite: siteIds.length === this.sitesLength ? '0' : siteIds.join(',')
+            };
+            this.queryCurrencies(currencyQueryModel);
+        } else {
+            this.initCurrencies([]);
+        }
     }
 
     search() {
@@ -89,8 +93,7 @@ export class FilterComponent implements OnInit {
 
     private queryCurrencies(currencyQueryModel: QueryCurrencyModel) {
         this.filterService.queryCurrencies(currencyQueryModel).subscribe(currencies => {
-            this.currencies = FilterHelper.insertCurrencyAll(currencies);
-            this.currencyId = this.currencies[0].id;
+            this.initCurrencies(currencies);
         });
     }
 
@@ -105,5 +108,10 @@ export class FilterComponent implements OnInit {
             this.siteGroups = siteGroups;
             this.sitesLength = FilterHelper.countAllSiteItems(this.siteGroups);
         });
+    }
+
+    private initCurrencies(currencies: Currency[]): void {
+        this.currencies = FilterHelper.insertCurrencyAll(currencies);
+        this.currencyId = this.currencies[0].id;
     }
 }
