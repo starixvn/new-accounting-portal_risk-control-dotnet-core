@@ -48,29 +48,33 @@ function isCreditSiteGroup(groupName: string) {
 }
 
 function getSiteType(siteGroups: SiteGroup[], selectedSites: number[]) {
+    const specialLicenseeList: number[] = [557];
     let isCreditSite = false;
-        let isLicenseeSite = false;
-        const creditGroups = siteGroups.filter(group => FilterHelper.isCreditSiteGroup(group.groupName));
-        if (creditGroups.length > 0) {
-            isCreditSite = creditGroups[0].sites.filter(site => selectedSites.indexOf(site.siteId) > -1).length > 0;
+    let isLicenseeSite = selectedSites.filter(site => specialLicenseeList.indexOf(site) > -1).length > 0;
+    const siteList = selectedSites.filter(site => specialLicenseeList.indexOf(site) === -1);
+    const creditGroups = siteGroups.filter(group => FilterHelper.isCreditSiteGroup(group.groupName));
+    if (creditGroups.length > 0) {
+        isCreditSite = creditGroups[0].sites.filter(site => siteList.indexOf(site.siteId) > -1).length > 0;
+    }
+    if (isCreditSite)
+    {
+        if (isLicenseeSite) {
+            return SiteType.Both;
         }
-        if (isCreditSite)
+        const licenseeGroups = siteGroups.filter(group => !FilterHelper.isCreditSiteGroup(group.groupName));
+        for (let group of licenseeGroups)
         {
-            const licenseeGroups = siteGroups.filter(group => !FilterHelper.isCreditSiteGroup(group.groupName));
-            for (let group of licenseeGroups)
+            const isHasData = group.sites.filter(site => siteList.indexOf(site.siteId) > -1).length > 0;
+            if (isHasData)
             {
-                const isHasData = group.sites.filter(site => selectedSites.indexOf(site.siteId) > -1).length > 0;
-                if (isHasData)
-                {
-                    isLicenseeSite = true;
-                    break;
-                }
+                return SiteType.Both;
             }
-            return isLicenseeSite ? SiteType.Both : SiteType.Credit;
         }
-        else {
-            return SiteType.Licensee;
-        }
+        return SiteType.Credit;
+    }
+    else {
+        return SiteType.Licensee;
+    }
 }
 
 function countAllSiteItems(siteGroups: SiteGroup[]) {

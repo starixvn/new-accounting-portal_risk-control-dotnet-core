@@ -20,7 +20,7 @@
     }
   },
   "files": [
-    "player-setting.ts",
+    "monitor.ts",
     "polyfills.ts"
   ],
   "include": [
