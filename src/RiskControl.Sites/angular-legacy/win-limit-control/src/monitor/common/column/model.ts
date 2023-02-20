@@ -37,7 +37,7 @@ export interface GridColumns extends TableColumns {
 export const Columns: GridColumns = {
     no: new TableColumn('#', 45, true, true),
     username: new TableColumn('Username', 150, true, true),
-    siteLicensee: new TableColumn('Site / Licensee', 100),
+    siteLicensee: new TableColumn('Site / Licensee', 150),
     currency: new TableColumn('Currency', 100),
     product: new TableColumn('Product', 120),
     settingGroup: new TableColumn('Setting Group', 150),
