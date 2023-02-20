@@ -58,6 +58,7 @@ export class FilterComponent implements OnInit {
             };
             this.queryCurrencies(currencyQueryModel);
         } else {
+            this.selectedSites = [];
             this.initCurrencies([]);
         }
     }
