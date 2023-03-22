@@ -19,8 +19,8 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
             {
                 new SiteGroupEntity
                 {
-                    GroupId = -1,
-                    GroupName = "Credit Group",
+                    GroupId = -1000,
+                    GroupName = "789y",
                     ParentId = 0,
                 },
                 new SiteGroupEntity
@@ -36,14 +36,14 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
             {
                 new LicenseeEntity
                 {
-                    GroupId = -1,
-                    LicenseeName = "A1game",
+                    GroupId = -1000,
+                    LicenseeName = "y789",
                     LicenseeId = -1
                 },
                 new LicenseeEntity
                 {
-                    GroupId = -1,
-                    LicenseeName = "AJJCV",
+                    GroupId = -1000,
+                    LicenseeName = "y889",
                     LicenseeId = -1
                 },
                 new LicenseeEntity
@@ -63,26 +63,37 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
                     {
                         new SiteGroupModel
                         {
-                            ChildGroups = null,
-                            ChildItems = null,
-                            GroupId = -1,
-                            GroupName = null,
-                            LicenseeId = -1,
-                            LicenseeName = "A1game",
+                            ChildGroups = new List<SiteGroupModel> { 
+                                new SiteGroupModel
+                                {
+                                    ChildGroups = null,
+                                    ChildItems = null,
+                                    GroupId = -1000,
+                                    GroupName = null,
+                                    LicenseeId = -1,
+                                    LicenseeName = "y789",
+                                    ParentId = 0
+                                },
+                                new SiteGroupModel
+                                {
+                                    ChildGroups = null,
+                                    ChildItems = null,
+                                    GroupId = -1000,
+                                    GroupName = null,
+                                    LicenseeId = -1,
+                                    LicenseeName = "y889",
+                                    ParentId = 0
+                                }
+                            },
+                            ChildItems = new List<LicenseeModel>(),
+                            GroupId = -1000,
+                            GroupName = "789y",
+                            LicenseeId = 0,
+                            LicenseeName = null,
                             ParentId = 0
                         },
-                        new SiteGroupModel
-                        {
-                            ChildGroups = null,
-                            ChildItems = null,
-                            GroupId = -1,
-                            GroupName = null,
-                            LicenseeId = -1,
-                            LicenseeName = "AJJCV",
-                            ParentId = 0
-                        }
                     },
-                    ChildItems = new(),
+                    ChildItems = null,
                     GroupId = 0,
                     GroupName = "Credit Group",
                     LicenseeId = 0,
