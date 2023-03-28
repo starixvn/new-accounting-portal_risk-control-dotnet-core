@@ -75,8 +75,8 @@ describe('FilterComponent', () => {
             const args = queryCurrenciesSpy.calls.mostRecent().args;
             const expectedQueryCurrencyModel: QueryCurrencyModel = {
                 excludeTestCurrency: true,
-                isCreditSite: false,
-                siteId: 0
+                isCreditSite: 0,
+                multiSite: '0'
             };
             expect(args[0]).toEqual(expectedQueryCurrencyModel);
             const selectText = currencySelectHelper.getTextOfSelectElement();
@@ -158,8 +158,8 @@ describe('FilterComponent', () => {
                 const args = queryCurrenciesSpy.calls.mostRecent().args;
                 const expectedQueryCurrencyModel: QueryCurrencyModel = {
                     excludeTestCurrency: true,
-                    isCreditSite: false,
-                    siteId: 0
+                    isCreditSite: 0,
+                    multiSite: '0'
                 };
                 expect(args[0]).toEqual(expectedQueryCurrencyModel);
                 const selectText = currencySelectHelper.getTextOfSelectElement();
@@ -181,10 +181,11 @@ describe('FilterComponent', () => {
                     const expectedFilterModel: FilterModel = {
                         productId: 1,
                         productName: 'Product 1',
-                        siteId: 0,
-                        isCreditSite: false,
+                        isCreditSite: 0,
+                        multiSite: '0',
                         currencyId: 0,
-                        excludeTestCurrency: false
+                        excludeTestCurrency: false,
+                        groupId: 67
                     };
                     expect(args[0]).toEqual(expectedFilterModel);
                 });
@@ -210,10 +211,11 @@ describe('FilterComponent', () => {
                         const expectedFilterModel: FilterModel = {
                             productId: 1,
                             productName: 'Product 1',
-                            siteId: 0,
-                            isCreditSite: false,
+                            isCreditSite: 0,
+                            multiSite: '0',
                             currencyId: 1,
-                            excludeTestCurrency: false
+                            excludeTestCurrency: false,
+                            groupId: 67
                         };
                         expect(args[0]).toEqual(expectedFilterModel);
                     });
@@ -232,8 +234,8 @@ describe('FilterComponent', () => {
                     expect(queryCurrenciesSpy.calls.count()).toBe(1);
                     const args = queryCurrenciesSpy.calls.mostRecent().args;
                     const expectedQueryCurrencyModel: QueryCurrencyModel = {
-                        isCreditSite: true,
-                        siteId: 1
+                        isCreditSite: 0,
+                        multiSite: '0'
                     };
                     expect(args[0]).toEqual(expectedQueryCurrencyModel);
                     const selectText = currencySelectHelper.getTextOfSelectElement();
@@ -255,10 +257,11 @@ describe('FilterComponent', () => {
                         const expectedFilterModel: FilterModel = {
                             productId: 1,
                             productName: 'Product 1',
-                            siteId: 1,
-                            isCreditSite: true,
+                            isCreditSite: 1,
+                            multiSite: '0',
                             currencyId: 0,
-                            excludeTestCurrency: false
+                            excludeTestCurrency: false,
+                            groupId: 67
                         };
                         expect(args[0]).toEqual(expectedFilterModel);
                     });
@@ -291,8 +294,8 @@ describe('FilterComponent', () => {
                     expect(queryCurrenciesSpy.calls.count()).toBe(1);
                     const args = queryCurrenciesSpy.calls.mostRecent().args;
                     const expectedQueryCurrencyModel: QueryCurrencyModel = {
-                        isCreditSite: false,
-                        siteId: 3
+                        isCreditSite: 0,
+                        multiSite: '0'
                     };
                     expect(args[0]).toEqual(expectedQueryCurrencyModel);
                     const selectText = currencySelectHelper.getTextOfSelectElement();
@@ -335,10 +338,11 @@ describe('FilterComponent', () => {
                         const expectedFilterModel: FilterModel = {
                             productId: 2,
                             productName: 'Product 2',
-                            siteId: 0,
-                            isCreditSite: false,
+                            isCreditSite: 0,
+                            multiSite: '0',
                             currencyId: 0,
-                            excludeTestCurrency: false
+                            excludeTestCurrency: false,
+                            groupId: 67
                         };
                         expect(args[0]).toEqual(expectedFilterModel);
                     });

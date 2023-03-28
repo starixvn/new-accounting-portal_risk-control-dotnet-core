@@ -295,7 +295,7 @@ export class GridComponent implements OnInit, OnChanges {
         this.gridService.update(settings).subscribe(result => {
             if (result.errorCode === 0) {
                 const inactiveSites = this.getInactiveSites();
-                if (this.filterModel.siteId === 0 && inactiveSites.length > 0)
+                if (this.filterModel.multiSite === '0' && inactiveSites.length > 0)
                 {
                     this.gridService.updateInactiveSite(inactiveSites).subscribe(data => {
                         if (data.errorCode === 0) {

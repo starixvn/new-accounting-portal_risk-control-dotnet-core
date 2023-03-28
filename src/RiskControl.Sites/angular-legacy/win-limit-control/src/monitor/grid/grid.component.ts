@@ -58,7 +58,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
         private audioWrapper: AudioWrapper
     ) {
         this.paginatePipe = new PaginatePipe(this.ngxPaginationService);
-        this.audioWrapper.create('wwwroot/monitor/assets/koekoeksklok.mp3');
+        this.audioWrapper.create('monitor/assets/koekoeksklok.mp3');
     }
 
     ngOnInit() {

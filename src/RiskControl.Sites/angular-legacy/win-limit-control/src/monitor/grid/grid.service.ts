@@ -20,7 +20,7 @@ export class GridService {
             productId: filterModel.productId,
             levelId: filterModel.levelId.join(','),
             userName: filterModel.userName,
-            siteId: filterModel.siteId,
+            multiSite: filterModel.multiSite,
             currencyId: filterModel.currencyId,
             excludeTestData: filterModel.excludeTestData
         };

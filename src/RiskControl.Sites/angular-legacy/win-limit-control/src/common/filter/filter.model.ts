@@ -6,6 +6,12 @@ export enum LimitLevel {
     Black = 102
 }
 
+export enum SiteType {
+    Licensee,
+    Credit,
+    Both
+}
+
 export interface Product {
     id: number;
     name: string;
@@ -19,6 +25,7 @@ export interface SiteGroup {
 export interface Site {
     siteId: number;
     siteName: string;
+    siteLabel: string;
 }
 
 export interface Currency {
@@ -33,6 +40,6 @@ export interface Group {
 
 export interface QueryCurrencyModel {
     excludeTestCurrency?: boolean;
-    isCreditSite: boolean;
-    siteId: number;
+    isCreditSite: number;
+    multiSite: string;
 }

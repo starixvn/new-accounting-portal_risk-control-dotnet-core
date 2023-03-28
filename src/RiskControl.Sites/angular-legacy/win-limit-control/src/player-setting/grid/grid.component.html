@@ -2,7 +2,7 @@
     <colgroup>
         <col style="width: 60px" />
         <col style="width: 180px" />
-        <col style="width: 110px" />
+        <col style="width: 150px" />
         <col style="width: 90px" />
         <col style="width: 105px" />
         <col style="width: 105px" />
@@ -23,7 +23,7 @@
 </ng-template>
 <div *ngIf="playerCurrencySettings" [ngSwitch]="playerCurrencySettings.length > 0">
     <div class="nap-grid">
-        <div [ngStyle]="{'width.px': (hasHostPermission ? 1440 : 1370)}">
+        <div [ngStyle]="{'width.px': (hasHostPermission ? 1480 : 1410)}">
             <nap-breadcrumb *ngIf="hasHostPermission" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
             <div class="header">
                 <table>

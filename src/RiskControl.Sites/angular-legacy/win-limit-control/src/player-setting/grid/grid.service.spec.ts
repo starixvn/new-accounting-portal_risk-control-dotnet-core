@@ -29,7 +29,7 @@ describe('GridService', () => {
             const filterModel: FilterModel = {
                 productId: 0,
                 userName: '',
-                siteId: 0,
+                multiSite: '0',
                 currencyId: 0
             };
             const result = gridService.query(filterModel);
@@ -45,11 +45,11 @@ describe('GridService', () => {
         (httpService: HttpService, gridService: GridService) => {
             const spy = spyOn(httpService, 'post').and.returnValue(Observable.of(commandResult));
             const updateCommand: UpdateCommand = {
-                CustId: 1,
-                ProductId: 1,
-                GroupId: 1,
-                LevelId: 1,
-                Limit: 1
+                custId: 1,
+                productId: 1,
+                groupId: 1,
+                levelId: 1,
+                limit: 1
             };
             const result = gridService.update(updateCommand);
             const args = spy.calls.mostRecent().args;
@@ -64,9 +64,9 @@ describe('GridService', () => {
         inject([HttpService, GridService], (httpService: HttpService, gridService: GridService) => {
             const spy = spyOn(httpService, 'post').and.returnValue(Observable.of(commandResult));
             const deleteCommand: DeleteCommand = {
-                CustId: 1,
-                ProductId: 1,
-                GroupId: 1
+                custId: 1,
+                productId: 1,
+                groupId: 1
             };
             const result = gridService.delete(deleteCommand);
             const args = spy.calls.mostRecent().args;

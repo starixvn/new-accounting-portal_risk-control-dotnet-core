@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ToastService } from 'nap-components/toast';
 import { FilterModel } from './filter.model';
-import { FilterHelper, Product, SiteGroup, Site, Currency, FilterService, QueryCurrencyModel, Group } from '../../common/filter';
+import { FilterHelper, Product, SiteGroup, Site, Currency, FilterService, QueryCurrencyModel, Group, SiteType } from '../../common/filter';
+import { TreeviewConfig } from 'ngx-treeview';
 
 @Component({
     selector: 'nap-filter',
@@ -15,18 +16,19 @@ export class FilterComponent implements OnInit {
     @Output() generate = new EventEmitter<FilterModel>();
     products: Product[];
     productId: number;
-    siteGroups: SiteGroup[];
-    siteId = 0;
+    siteGroups: SiteGroup[] = [];
     currencies: Currency[];
     currencyId: number;
+    siteTreeviewConfig = TreeviewConfig.create({
+        hasFilter: true,
+        hasAllCheckBox: true,
+        hasCollapseExpand: false,
+        maxHeight: 500
+      });
+    selectedSites: number[] = [];
+    sitesLength: number = 0;
     groups: Group[];
     groupId = 0;
-    private creditSites: Site[];
-    private defaultCurrencyQueryModel: QueryCurrencyModel = {
-        excludeTestCurrency: true,
-        isCreditSite: false,
-        siteId: 0
-    };
 
     constructor(
         private toastService: ToastService,
@@ -37,29 +39,28 @@ export class FilterComponent implements OnInit {
         this.filterService.queryProducts().subscribe(products => {
             this.products = products;
         });
-        this.queryCurrencies(this.defaultCurrencyQueryModel);
+        this.querySites(0);
     }
 
     onProductChange() {
-        this.siteId = 0;
         this.currencyId = 0;
         this.groupId = 0;
-        this.filterService.querySites(this.productId).subscribe(siteGroups => {
-            this.siteGroups = siteGroups;
-            const creditSiteGroups = siteGroups.filter(group => FilterHelper.isCreditSiteGroup(group.groupName));
-            this.creditSites = creditSiteGroups.length === 1 ? creditSiteGroups[0].sites : [];
-        });
-        this.queryCurrencies(this.defaultCurrencyQueryModel);
+        this.querySites(this.productId);
         this.queryGroups(this.productId);
     }
 
-    onSiteChange() {
-        const isCreditSite = this.creditSites.filter(site => site.siteId === this.siteId).length > 0;
-        const currencyQueryModel: QueryCurrencyModel = {
-            isCreditSite: isCreditSite,
-            siteId: this.siteId
-        };
-        this.queryCurrencies(currencyQueryModel);
+    onSiteChange(siteIds: number[])  {
+        if (siteIds.length > 0) {
+            this.selectedSites = siteIds;
+            const currencyQueryModel: QueryCurrencyModel = {
+                isCreditSite: FilterHelper.getSiteType(this.siteGroups, this.selectedSites),
+                multiSite: siteIds.length === this.sitesLength ? '0' : siteIds.join(',')
+            };
+            this.queryCurrencies(currencyQueryModel);
+        } else {
+            this.selectedSites = [];
+            this.initCurrencies([]);
+        }
     }
 
     search() {
@@ -69,17 +70,16 @@ export class FilterComponent implements OnInit {
             return;
         }
 
-        let isCreditSite = false;
-        const filteredGroups = this.siteGroups.filter(group => FilterHelper.isCreditSiteGroup(group.groupName));
-        if (filteredGroups.length > 0) {
-            isCreditSite = filteredGroups[0].sites.filter(site => site.siteId === this.siteId).length > 0;
+        if (this.selectedSites.length === 0) {
+            this.toastService.activate('Please select a Site / Licensee');
+            return;
         }
         const productName = this.products.filter(product => product.id === this.productId)[0].name;
         const filterModel: FilterModel = {
             productId: this.productId,
             productName: productName,
-            siteId: this.siteId,
-            isCreditSite: isCreditSite,
+            multiSite: this.selectedSites.length === this.sitesLength ? '0' : this.selectedSites.join(','),
+            isCreditSite: FilterHelper.getSiteType(this.siteGroups, this.selectedSites),
             currencyId: this.currencyId,
             excludeTestCurrency: false,
             groupId: this.groupId
@@ -94,8 +94,7 @@ export class FilterComponent implements OnInit {
 
     private queryCurrencies(currencyQueryModel: QueryCurrencyModel) {
         this.filterService.queryCurrencies(currencyQueryModel).subscribe(currencies => {
-            this.currencies = FilterHelper.insertCurrencyAll(currencies);
-            this.currencyId = this.currencies[0].id;
+            this.initCurrencies(currencies);
         });
     }
 
@@ -103,5 +102,17 @@ export class FilterComponent implements OnInit {
         this.filterService.queryGroups(productId).subscribe(groups => {
             this.groups = groups;
         });
+    }
+
+    private querySites(productId: number) {
+        this.filterService.querySites(productId).subscribe(siteGroups => {
+            this.siteGroups = siteGroups;
+            this.sitesLength = FilterHelper.countAllSiteItems(this.siteGroups);
+        });
+    }
+
+    private initCurrencies(currencies: Currency[]): void {
+        this.currencies = FilterHelper.insertCurrencyAll(currencies);
+        this.currencyId = this.currencies[0].id;
     }
 }

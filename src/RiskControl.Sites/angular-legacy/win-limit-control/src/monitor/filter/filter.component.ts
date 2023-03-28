@@ -2,14 +2,14 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import * as _ from 'lodash';
-import { TreeviewItem } from 'ngx-treeview';
+import { TreeviewConfig, TreeviewItem } from 'ngx-treeview';
 import { ToastService } from 'nap-components/toast';
 import { TypeaheadQuery } from 'nap-components/dropdown-typeahead';
 import { NapDate } from 'nap-components/date';
 import { TableColumn, ColumnHelper } from '../common/column';
 import {
     Product, Currency, LimitLevel, Site, QueryCurrencyModel,
-    FilterService, FilterHelper, AllProductId
+    FilterService, FilterHelper, AllProductId, SiteGroup, SiteType
 } from '../../common/filter';
 import { Columns, GridColumns } from '../common/column';
 import { FilterModel } from './filter.model';
@@ -39,8 +39,15 @@ export class FilterComponent implements OnInit {
     userName: string;
     userNameTypeaheadQuery: TypeaheadQuery;
     columnTreeviewItems = ColumnHelper.createColumnTreeviewItems(Columns);
-    siteId: number;
-    private creditSites: Site[];
+    siteGroups: SiteGroup[] = [];
+    siteTreeviewConfig = TreeviewConfig.create({
+        hasFilter: true,
+        hasAllCheckBox: true,
+        hasCollapseExpand: false,
+        maxHeight: 500
+      });
+    selectedSites: number[] = [];
+    sitesLength: number = 0;
     private defaultCurrencyQueryModel: QueryCurrencyModel;
 
     constructor(
@@ -59,8 +66,8 @@ export class FilterComponent implements OnInit {
         this.currencyId = 0;
         this.productId = 0;
         this.defaultCurrencyQueryModel = {
-            isCreditSite: false,
-            siteId: 0
+            isCreditSite: SiteType.Licensee,
+            multiSite: '0'
         };
     }
 
@@ -69,25 +76,28 @@ export class FilterComponent implements OnInit {
         this.limitLevels = this.filterService.limitLevels;
         this.selectedLimitLevels = this.limitLevels.map(level => level.value);
         this.queryProducts();
-        this.querySites();
-        this.queryCurrencies();
+        this.querySites(0);
         this.search();
     }
 
     onProductChange() {
-        this.siteId = undefined;
         this.currencyId = 0;
         this.querySites(this.productId);
-        this.queryCurrencies();
     }
 
-    onSiteSelectedChange() {
-        const isCreditSite = this.creditSites.filter(site => site.siteId === this.siteId).length > 0;
-        const currencyQueryModel: QueryCurrencyModel = {
-            isCreditSite: isCreditSite,
-            siteId: this.siteId
-        };
-        this.queryCurrencies(currencyQueryModel);
+    onSiteSelectedChange(siteIds: number[]) {
+        if (siteIds.length > 0) {
+            this.selectedSites = siteIds;
+            const currencyQueryModel: QueryCurrencyModel = {
+                isCreditSite: FilterHelper.getSiteType(this.siteGroups, this.selectedSites),
+                multiSite: siteIds.length === this.sitesLength ? '0' : siteIds.join(',')
+            };
+            this.queryCurrencies(currencyQueryModel);
+        } else {
+            this.selectedSites = [];
+            this.initCurrencies([]);
+        }
+        
     }
 
     onColumnChange(selectedColumns: TableColumn[]) {
@@ -104,11 +114,16 @@ export class FilterComponent implements OnInit {
             return;
         }
 
+        if (this.selectedSites.length === 0) {
+            this.toastService.activate('Please select at least one Site / Licensee');
+            return;
+        }
+
         const filterModel: FilterModel = {
             fromDate: this.fromDate,
             toDate: this.toDate,
             productId: this.productId,
-            siteId: this.siteId ? this.siteId : 0,
+            multiSite: this.selectedSites.length === this.sitesLength ? '0' : this.selectedSites.join(','),
             currencyId: this.currencyId,
             levelId: this.selectedLimitLevels,
             userName: this.userName,
@@ -127,23 +142,26 @@ export class FilterComponent implements OnInit {
         return observable;
     }
 
-    private queryCurrencies(currencyQueryModel = this.defaultCurrencyQueryModel): Observable<any> {
+    private queryCurrencies(currencyQueryModel: QueryCurrencyModel): Observable<any> {
         const observable = this.filterService.queryCurrencies(currencyQueryModel);
         observable.subscribe(currencies => {
-            this.currencies = FilterHelper.insertCurrencyAll(currencies);
-            this.currencyId = this.currencies[0].id;
+            this.initCurrencies(currencies);
         });
         return observable;
     }
 
-    private querySites(productId = AllProductId): Observable<any> {
+    private querySites(productId: number): Observable<any> {
         const observable = this.filterService.querySites(productId);
         observable.subscribe(siteGroups => {
-            const creditSiteGroups = siteGroups.filter(group => FilterHelper.isCreditSiteGroup(group.groupName));
-            this.creditSites = creditSiteGroups.length === 1 ? creditSiteGroups[0].sites : [];
             this.currencyId = 0;
-            this.sites = FilterHelper.convertSiteToTreeviewItem(siteGroups);
+            this.siteGroups = siteGroups;
+            this.sitesLength = FilterHelper.countAllSiteItems(this.siteGroups);
         });
         return observable;
+    }
+
+    private initCurrencies(currencies: Currency[]): void {
+        this.currencies = FilterHelper.insertCurrencyAll(currencies);
+        this.currencyId = this.currencies[0].id;
     }
 }

@@ -7,5 +7,7 @@
         public string SiteName { get; set; }
 
         public string GroupName { get; set; }
+
+        public string SiteLabel { get; set; }
     }
 }

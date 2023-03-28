@@ -8,7 +8,7 @@ namespace RiskControl.WinLossLimitControl.PlayerSettings.Search
     {
         public string Username { get; set; }
 
-        public int SiteId { get; set; }
+        public string MultiSite { get; set; }
 
         public byte ProductId { get; set; }
 

@@ -13,7 +13,7 @@ namespace RiskControl.WinLossLimitControl.Monitor.Search
 
         public string Username { get; set; }
 
-        public int SiteId { get; set; }
+        public string MultiSite { get; set; }
 
         public int CurrencyId { get; set; }
 

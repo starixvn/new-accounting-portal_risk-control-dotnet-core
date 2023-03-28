@@ -83,8 +83,8 @@ describe('FilterComponent', () => {
             const args = queryCurrenciesSpy.calls.mostRecent().args;
             const expectedQueryCurrencyModel: QueryCurrencyModel = {
                 excludeTestCurrency: false,
-                isCreditSite: false,
-                siteId: 0
+                isCreditSite: 0,
+                multiSite: '0',
             };
             expect(args[0]).toEqual(expectedQueryCurrencyModel);
             const selectText = currencySelectHelper.getTextOfSelectElement();
@@ -155,8 +155,8 @@ describe('FilterComponent', () => {
                 const args = queryCurrenciesSpy.calls.mostRecent().args;
                 const expectedQueryCurrencyModel: QueryCurrencyModel = {
                     excludeTestCurrency: false,
-                    isCreditSite: false,
-                    siteId: 0
+                    isCreditSite: 0,
+                    multiSite: '0',
                 };
                 expect(args[0]).toEqual(expectedQueryCurrencyModel);
                 const selectText = currencySelectHelper.getTextOfSelectElement();
@@ -198,8 +198,8 @@ describe('FilterComponent', () => {
                 expect(queryCurrenciesSpy.calls.count()).toBe(1);
                 const args = queryCurrenciesSpy.calls.mostRecent().args;
                 const expectedQueryCurrencyModel: QueryCurrencyModel = {
-                    isCreditSite: true,
-                    siteId: 1
+                    isCreditSite: 1,
+                    multiSite: '1',
                 };
                 expect(args[0]).toEqual(expectedQueryCurrencyModel);
                 const selectText = currencySelectHelper.getTextOfSelectElement();
@@ -247,7 +247,7 @@ describe('FilterComponent', () => {
                         const expectedFilterModel: FilterModel = {
                             userName: 'ABC',
                             productId: 0,
-                            siteId: 1,
+                            multiSite: '1',
                             currencyId: 1
                         };
                         expect(args[0]).toEqual(expectedFilterModel);
@@ -267,8 +267,8 @@ describe('FilterComponent', () => {
                 expect(queryCurrenciesSpy.calls.count()).toBe(1);
                 const args = queryCurrenciesSpy.calls.mostRecent().args;
                 const expectedQueryCurrencyModel: QueryCurrencyModel = {
-                    isCreditSite: false,
-                    siteId: 3
+                    isCreditSite: 0,
+                    multiSite: '3',
                 };
                 expect(args[0]).toEqual(expectedQueryCurrencyModel);
                 const selectText = currencySelectHelper.getTextOfSelectElement();
@@ -290,7 +290,7 @@ describe('FilterComponent', () => {
                 const expectedFilterModel: FilterModel = {
                     userName: undefined,
                     productId: 0,
-                    siteId: undefined,
+                    multiSite: '0',
                     currencyId: 0
                 };
                 expect(args[0]).toEqual(expectedFilterModel);

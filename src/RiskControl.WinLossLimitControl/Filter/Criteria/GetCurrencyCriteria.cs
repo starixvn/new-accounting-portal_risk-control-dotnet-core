@@ -4,9 +4,9 @@ namespace RiskControl.WinLossLimitControl.Filter.Criteria
 {
     public class GetCurrencyCriteria : CriteriaBase
     {
-        public int SiteId { get; set; }
+        public string MultiSite { get; set; }
 
-        public bool IsCreditSite { get; set; }
+        public byte IsCreditSite { get; set; }
 
         public bool ExcludeTestCurrency { get; set; }
 

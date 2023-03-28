@@ -8,7 +8,7 @@ export class FilterModel {
   productId: number;
   levelId: LimitLevel[];
   userName: string;
-  siteId: number;
+  multiSite: string;
   currencyId: number;
   excludeTestData: boolean;
   columns: GridColumns;
