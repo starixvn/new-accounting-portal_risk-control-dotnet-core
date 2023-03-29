@@ -565,9 +565,9 @@ export class FilterComponent implements OnInit {
 
   private get isValidDateRange(): boolean {
     if (!this.isNormalMode) {
-      const maxDate = DateHelper.convertDateStructToMoment(this.startDate).add(6, 'month');
+      const maxDate = DateHelper.convertDateStructToMoment(this.startDate).add(12, 'month');
       if (!DateHelper.convertDateStructToMoment(this.endDate).isBefore(maxDate)) {
-        this.toastService.activate(`Date range should not exceed 6 months!`);
+        this.toastService.activate(`Date range should not exceed 12 months!`);
         return false;
       }
     }

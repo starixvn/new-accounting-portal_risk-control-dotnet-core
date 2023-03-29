@@ -3,16 +3,15 @@ using Fanex.Excel.Models;
 using MediatR;
 using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
+using RiskControl.NonSportsGamesStatistics.Constants;
 
 namespace RiskControl.NonSportsGamesStatistics.SpecificMember.GrandTotal.CasinoProduct
 {
     public class QueryModel : BaseStatisticQueryModel, IRequest<GridOptions>
     {
-        private const int MaxDayRange = 6;
-
         public DateTime FromDate { get; set; }
 
-        [DateRangeLessThan("FromDate", MaxDayRange)]
+        [DateRangeLessThan("FromDate", DateRangeConstant.MAX_MONTH)]
         public DateTime ToDate { get; set; }
 
         public bool IsDrillDown { get; set; }
