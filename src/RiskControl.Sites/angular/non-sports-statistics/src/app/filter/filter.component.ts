@@ -774,9 +774,10 @@ export class FilterComponent implements OnInit {
   }
 
   private getGameTypes(isEqualProducts: boolean) {
+    const uncheckedGameTypes: string[] = ['Jackpot Prize', 'Promotion', 'Tournament Prize', 'Promotion Prize'];
     this.filterService.getGameTypes().subscribe(gameTypes => {
       this.gameTypes = gameTypes;
-      const defaultGameTypes = gameTypes.filter(x => !x.typeName.includes('Jackpot Prize'));
+      const defaultGameTypes = gameTypes.filter(x => !uncheckedGameTypes.includes(x.typeName));
 
       this.selectedGameTypes = isEqualProducts ?
         JSON.parse(localStorage.getItem('non-sport-gametypes')) as GameType[] :
