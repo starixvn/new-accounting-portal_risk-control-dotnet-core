@@ -565,9 +565,9 @@ export class FilterComponent implements OnInit {
 
   private get isValidDateRange(): boolean {
     if (!this.isNormalMode) {
-      const maxDate = DateHelper.convertDateStructToMoment(this.startDate).add(6, 'month');
+      const maxDate = DateHelper.convertDateStructToMoment(this.startDate).add(12, 'month');
       if (!DateHelper.convertDateStructToMoment(this.endDate).isBefore(maxDate)) {
-        this.toastService.activate(`Date range should not exceed 6 months!`);
+        this.toastService.activate(`Date range should not exceed 12 months!`);
         return false;
       }
     }
@@ -774,9 +774,10 @@ export class FilterComponent implements OnInit {
   }
 
   private getGameTypes(isEqualProducts: boolean) {
+    const uncheckedGameTypes: string[] = ['Jackpot Prize', 'Promotion', 'Tournament Prize', 'Promotion Prize'];
     this.filterService.getGameTypes().subscribe(gameTypes => {
       this.gameTypes = gameTypes;
-      const defaultGameTypes = gameTypes.filter(x => !x.typeName.includes('Jackpot Prize'));
+      const defaultGameTypes = gameTypes.filter(x => !uncheckedGameTypes.includes(x.typeName));
 
       this.selectedGameTypes = isEqualProducts ?
         JSON.parse(localStorage.getItem('non-sport-gametypes')) as GameType[] :
