@@ -75,7 +75,7 @@ export class FilterComponent implements OnInit {
   productTreeviewConfig = TreeviewConfig.create({
     hasCollapseExpand: true,
     hasAllCheckBox: true,
-    hasFilter: false,
+    hasFilter: true,
     maxHeight: 500
   });
   products: Product[] = [];
@@ -155,6 +155,7 @@ export class FilterComponent implements OnInit {
   private readonly lastMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(1, 'month').startOf('month');
   private readonly lastThreeMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(3, 'month').startOf('month');
   private readonly lastSixMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(6, 'month').startOf('month');
+  private readonly lastYearStartDate = moment.utc(DATE_CONFIG.reportDate.today).subtract(1, 'year');
   private numberLicensees = 0;
 
   private readonly TimeRanges: TimeRange[] = [
@@ -197,6 +198,11 @@ export class FilterComponent implements OnInit {
       timePeriodType: TimePeriod.LastSixMonths,
       startDate: this.lastSixMonthStartDate,
       endDate: moment.utc(this.lastMonthStartDate).endOf('month')
+    },
+    {
+      timePeriodType: TimePeriod.SinceLastYear,
+      startDate: this.lastYearStartDate,
+      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
     }
   ];
 

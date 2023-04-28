@@ -100,7 +100,8 @@ export enum TimePeriod {
     SinceLastMonth,
     SpecificDate,
     LastThreeMonths,
-    LastSixMonths
+    LastSixMonths,
+    SinceLastYear
 }
 
 export interface GameTypeModel {
