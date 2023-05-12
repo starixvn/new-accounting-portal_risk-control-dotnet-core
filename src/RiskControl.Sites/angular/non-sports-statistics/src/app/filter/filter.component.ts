@@ -93,7 +93,7 @@ export class FilterComponent implements OnInit {
   deviceTreeviewConfig = TreeviewConfig.create({
     hasCollapseExpand: true,
     hasAllCheckBox: true,
-    hasFilter: false,
+    hasFilter: true,
     maxHeight: 500
   });
   devices: Device[] = [];
