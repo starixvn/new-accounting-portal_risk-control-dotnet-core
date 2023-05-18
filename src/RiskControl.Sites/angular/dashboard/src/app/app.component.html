@@ -14,82 +14,34 @@
       <div class="card-body">
         <div class="row">
           <div class="col-6 col-sm-6 col-md-6">
-            <div *ngIf="monthlyTurnoverAndNetIncome" class="chart-block">
-              <canvas napChart [datasets]="netIncomeDatasets" [labels]="monthLabels" chartType="bar"
+            <div *ngIf="weeklyNetIncome" class="chart-block">
+              <canvas napChart [datasets]="netIncomeDatasets" [labels]="weekLabels" chartType="bar"
                 [options]="netIncomeOptions" [colors]="netIncomeChartColors"></canvas>
             </div>
             <br />
-            <div *ngIf="monthlyTurnoverAndNetIncome" class="chart-block">
-              <canvas napChart [datasets]="turnoverDatasets" [labels]="monthLabels" chartType="bar"
-                [options]="turnoverOptions" [colors]="turnoverChartColors"></canvas>
+            <div *ngIf="weeklyNetIncome" class="chart-block">
+              <canvas napChart [datasets]="depositNetIncomeDatasets" [labels]="weekLabels" chartType="bar"
+                [options]="depositNetIncomeOptions" [colors]="depositNetIncomeChartColors"></canvas>
             </div>
           </div>
           <div class="col-6 col-sm-6 col-md-6">
-            <div *ngIf="currencyNetIncome" class="chart-block">
-              <canvas napChart [datasets]="currencyDatasets" [labels]="currencyLabels" chartType="bar"
-                [options]="currencyOptions" [colors]="currencyChartColors"></canvas>
+            <div *ngIf="weeklyNetIncome" class="chart-block">
+              <canvas napChart [datasets]="creditNetIncomeDatasets" [labels]="weekLabels" chartType="bar"
+                [options]="creditNetIncomeOptions" [colors]="creditNetIncomeChartColors"></canvas>
             </div>
             <br />
-            <div *ngIf="productTurnover" class="chart-block">
-              <canvas napChart [datasets]="productDatasets" [labels]="productLabels" chartType="pie"
-                [options]="productOptions"></canvas>
+            <div *ngIf="totalPlayersByDevice" class="chart-block">
+              <canvas napChart [datasets]="totalPlayersByDeviceDatasets" [labels]="weekLabelsOfPlayersDevice" chartType="bar"
+                [options]="totalPlayersByDeviceOptions" [colors]="totalPlayersByDeviceChartColors"></canvas>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="col-3 col-sm-3 col-md-3">
-      <div class="card w-100 win-loss-limit-block">
-        <div class="card-header">
-          Win Loss Limit Monitor
-        </div>
-        <div *ngIf="winlossLimit" [ngSwitch]="winlossLimit.length > 0" class="card-body">
-          <div *ngSwitchCase="true">
-            <div class="row">
-              <div class="col-4 col-sm-4 col-md-4">
-                <label>UserName</label>
-              </div>
-              <div class="col-2 col-sm-2 col-md-2">
-                <label>Currency</label>
-              </div>
-              <div class="col-4 col-sm-4 col-md-4">
-                <label>Product</label>
-              </div>
-              <div class="col-2 col-sm-2 col-md-2">
-                <label>Limit Level</label>
-              </div>
-            </div>
-            <div *ngFor="let item of winlossLimit" class="row mt-1">
-              <div class="col-4 col-sm-4 col-md-4">
-                {{item.userName}}
-              </div>
-              <div class="col-2 col-sm-4 col-md-2">
-                {{item.currency}}
-              </div>
-              <div class="col-4 col-sm-4 col-md-4">
-                {{item.product}}
-              </div>
-              <div class="col-2 col-sm-2 col-md-2">
-                <i class="fa fa-flag" [ngClass]="{
-                'text-orrange': (item.limitLevel == 1), 
-                'text-yellow': (item.limitLevel == 2),
-                'text-red': (item.limitLevel == 3),
-                'text-grey': (item.limitLevel == 101),
-                'text-black': (item.limitLevel == 102)}"></i>
-              </div>
-            </div>
-          </div>
-          <div *ngSwitchCase="false">
-            <div class="row text-red font-weight-bold">
-              <div class="col-12 col-xs-12 col-md-12">There is no data</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br />
       <div class="card w-100 top-member-winning">
         <div class="card-header">
-          Top Members with High Winning (RM)
+          Top Credit Player with High Winning (RM)
         </div>
         <div class="card-body">
           <div class="row">
@@ -103,7 +55,36 @@
               <label>Game Income</label>
             </div>
           </div>
-          <div *ngFor="let item of topMemberWinning" class="row mt-1">
+          <div *ngFor="let item of topCreditPlayer" class="row mt-1">
+            <div class="col-5 col-sm-5 col-md-5">
+              {{item.username}}
+            </div>
+            <div class="col-3 col-sm-3 col-md-3">
+              {{item.currency}}
+            </div>
+            <div class="col-4 col-sm-4 col-md-4 text-right" [napIntegerFormat]="item.gameIncome">
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="card w-100 top-member-winning">
+        <div class="card-header">
+          Top Licensee Player with High Winning (RM)
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-5 col-sm-5 col-md-5">
+              <label>UserName</label>
+            </div>
+            <div class="col-3 col-sm-3 col-md-3">
+              <label>Currency</label>
+            </div>
+            <div class="col-4 col-sm-4 col-md-4 text-right">
+              <label>Game Income</label>
+            </div>
+          </div>
+          <div *ngFor="let item of topLicenseePlayer" class="row mt-1">
             <div class="col-5 col-sm-5 col-md-5">
               {{item.username}}
             </div>

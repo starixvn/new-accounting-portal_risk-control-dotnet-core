@@ -2,33 +2,27 @@ import { Injectable } from '@angular/core';
 import { HttpService } from 'nap-components/http';
 import { Observable } from 'rxjs';
 import {
-  CurrencyNetIncome,
-  MonthlyTurnoverAndNetIncome,
-  ProductTurnover,
   TopGameTypeWinning,
   TopMemberWinning,
-  WinLossLimit,
-  BalanceUpModel
+  BalanceUpModel,
+  WeeklyNetIncome,
+  TotalPlayersByDevice
 } from './app.model';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class AppService {
   private readonly url = 'api/dashboard/';
   constructor(private readonly httpService: HttpService) {}
 
-  queryCurrencyNetIncome(): Observable<CurrencyNetIncome[]> {
-    const url = this.url + 'currency-netincome';
-    return this.httpService.get<CurrencyNetIncome[]>(url);
+  queryWeeklyNetIncome(): Observable<WeeklyNetIncome[]> {
+    const url = `${this.url}weekly-net-income`;
+    return this.httpService.get<WeeklyNetIncome[]>(url);
   }
 
-  queryMonthlyTurnoverAndNetIncome(): Observable<MonthlyTurnoverAndNetIncome[]> {
-    const url = this.url + 'monthly-turnover-netincome';
-    return this.httpService.get<MonthlyTurnoverAndNetIncome[]>(url);
-  }
-
-  queryProductTurnover(): Observable<ProductTurnover[]> {
-    const url = this.url + 'product-turnover';
-    return this.httpService.get<ProductTurnover[]>(url);
+  queryTotalPlayersByDevice(): Observable<TotalPlayersByDevice[]> {
+    const url = `${this.url}total-players-by-device`;
+    return this.httpService.get<TotalPlayersByDevice[]>(url);
   }
 
   queryTopGameTypeWinning(): Observable<TopGameTypeWinning[]> {
@@ -36,14 +30,11 @@ export class AppService {
     return this.httpService.get<TopGameTypeWinning[]>(url);
   }
 
-  queryTopMemberWinning(): Observable<TopMemberWinning[]> {
+  queryTopMemberWinning(isDeposit: boolean): Observable<TopMemberWinning[]> {
     const url = this.url + 'top-member-winning';
-    return this.httpService.get<TopMemberWinning[]>(url);
-  }
+    const options = { params: new HttpParams().set('isDeposit', isDeposit) };
 
-  queryWinLossLimit(): Observable<WinLossLimit[]> {
-    const url = this.url + 'winloss-limit';
-    return this.httpService.get<WinLossLimit[]>(url);
+    return this.httpService.get<TopMemberWinning[]>(url, options);
   }
 
   getBalanceup(): Observable<BalanceUpModel> {
