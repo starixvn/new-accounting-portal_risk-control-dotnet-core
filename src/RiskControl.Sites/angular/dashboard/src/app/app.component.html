@@ -32,7 +32,7 @@
             <br />
             <div *ngIf="totalPlayersByDevice" class="chart-block">
               <canvas napChart [datasets]="totalPlayersByDeviceDatasets" [labels]="weekLabelsOfPlayersDevice" chartType="bar"
-                [options]="totalPlayersByDeviceOptions" [colors]="totalPlayersByDeviceChartColors"></canvas>
+                [options]="totalPlayersByDeviceOptions" [colors]="totalPlayersByDeviceChartColors" [plugins]="chartPlugins"></canvas>
             </div>
           </div>
         </div>

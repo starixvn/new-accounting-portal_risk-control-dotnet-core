@@ -12,6 +12,8 @@ import {
   TotalPlayersByDevice
 } from './app.model';
 import { DATE_CONFIG } from './date.config';
+import * as Chart from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 @Component({
   selector: 'app-root',
@@ -41,9 +43,12 @@ export class AppComponent implements OnInit {
   currentMonth = moment.utc(DATE_CONFIG.reportDate.today).format('MM/YYYY');
   cachedDate: string;
   warehouseLastDate: string;
-  xxx: string;
 
   title = 'dashboard';
+
+  chartPlugins = [
+    ChartDataLabels
+  ]
 
   turnoverChartColors: Array<ChartColor> = [
     { // all colors in order
@@ -142,7 +147,7 @@ export class AppComponent implements OnInit {
       title: {
         display: true,
         text: 'Weekly Net Income - Credit/Licensse (RM)',
-        fontColor: '#63B6FE',
+        fontColor: '#595959',
         fontSize: '16'
       },
       legend: {
@@ -175,7 +180,7 @@ export class AppComponent implements OnInit {
       title: {
         display: true,
         text: 'Weekly Net Income - Credit (RM)',
-        fontColor: '#63B6FE',
+        fontColor: '#595959',
         fontSize: '16'
       },
       legend: {
@@ -208,7 +213,7 @@ export class AppComponent implements OnInit {
       title: {
         display: true,
         text: 'Weekly Net Income - Licensee (RM)',
-        fontColor: '#63B6FE',
+        fontColor: '#595959',
         fontSize: '16'
       },
       legend: {
@@ -239,11 +244,11 @@ export class AppComponent implements OnInit {
     this.totalPlayersByDeviceDatasets = [
       {
         label: 'Mobile',
-        data: this.totalPlayersByDevice.map(item => item.mobilePlayers)
+        data: this.totalPlayersByDevice.map(item => Math.round(item.mobilePlayers))
       },
       {
         label: 'Non-Mobile',
-        data: this.totalPlayersByDevice.map(item => item.nonMobilePlayers)
+        data: this.totalPlayersByDevice.map(item => Math.round(item.nonMobilePlayers))
       }
     ];
 
@@ -251,13 +256,14 @@ export class AppComponent implements OnInit {
       title: {
         display: true,
         text: 'Total Players by Device',
-        fontColor: '#63B6FE',
+        fontColor: '#595959',
         fontSize: '16'
       },
       legend: {
         display: true
       },
       tooltips: {
+        enabled: false,
         callbacks: {
           label(tooltipItem) {
             return NumberFormatHelper.format(tooltipItem.yLabel, NumberFormatType.Integer);
@@ -269,13 +275,22 @@ export class AppComponent implements OnInit {
           stacked: true,
         }],
         yAxes: [{
+          display: false,
           stacked: true,
           ticks: {
             callback(value, index, values) {
               return callbackFn(value, index, values);
             }
-          }
+          },
         }]
+      },
+      plugins: {
+        datalabels: {
+          color: '#ffffff',
+          font : {
+            weight: 'bold'
+          },
+        }
       }
     };
   }
