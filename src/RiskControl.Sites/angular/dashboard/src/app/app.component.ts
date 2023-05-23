@@ -146,7 +146,7 @@ export class AppComponent implements OnInit {
     this.netIncomeOptions = {
       title: {
         display: true,
-        text: 'Weekly Net Income - Credit/Licensse (RM)',
+        text: 'Weekly Net Income - Credit/Licensee (RM)',
         fontColor: '#595959',
         fontSize: '16'
       },
