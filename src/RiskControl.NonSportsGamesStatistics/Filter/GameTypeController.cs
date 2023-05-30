@@ -1,5 +1,7 @@
 ﻿using Fanex.Data.Repository;
+using Fanex.Logging;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RiskControl.NonSportsGamesStatistics.Filter.Criteria;
 using RiskControl.NonSportsGamesStatistics.Filter.Model;
 using System.Collections.Generic;
@@ -24,6 +26,13 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
         {
             var criteria = new GameTypeCriteria();
             return await repository.FetchAsync<GameTypeModel>(criteria).ConfigureAwait(false) as List<GameTypeModel>;
+        }
+
+        [Route("WriteGameTypeLog")]
+        [HttpPost]
+        public async Task WriteGameTypeLog(List<GameTypeModel> data)
+        {
+            await LogService.InfoAsync($"GameType: {JsonConvert.SerializeObject(data)}");
         }
     }
 }

@@ -492,6 +492,12 @@ export class FilterComponent implements OnInit {
     }
 
     const model = this.createModel();
+    if (model.sportBettypes.filter(s => s.sportType === undefined).length > 0
+      || model.leagueIds.filter(l => l.leagueId === undefined).length > 0)
+    {
+      this.filterService.writeGameTypeLog(this.gameTypes).subscribe();
+    }
+    
     this.generate.emit(model);
   }
 

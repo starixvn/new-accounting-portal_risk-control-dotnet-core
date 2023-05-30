@@ -58,6 +58,11 @@ export class FilterService {
     return this.httpService.get<GameType[]>(url);
   }
 
+  writeGameTypeLog(gametypes: GameType[]){
+    const url = 'NonSportsGamesStatistics/GameType/WriteGameTypeLog';
+    return this.httpService.post(url, gametypes);
+  }
+
   getDevices(): Observable<Device[]> {
     const url = 'NonSportsGamesStatistics/Device/Query';
     return this.httpService.get<Device[]>(url);
