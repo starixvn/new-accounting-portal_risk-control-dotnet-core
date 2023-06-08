@@ -30,9 +30,9 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
 
         [Route("WriteGameTypeLog")]
         [HttpPost]
-        public async Task WriteGameTypeLog(List<GameTypeModel> data)
+        public async Task WriteGameTypeLog(DataLogModel data)
         {
-            await LogService.InfoAsync($"GameType: {JsonConvert.SerializeObject(data)}");
+            await LogService.InfoAsync($"Data: {JsonConvert.SerializeObject(data)}");
         }
     }
 }
