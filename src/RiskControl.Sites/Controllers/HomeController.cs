@@ -1,9 +1,5 @@
 ﻿using Fanex.NAP.Client.AspNetCore.Attributes;
-using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Web;
-using Fanex.NAP.Client.Services;
 using Fanex.NAP.Core.Business;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.Core.Model;
 
@@ -11,19 +7,6 @@ namespace RiskControl.Sites.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserService userService;
-
-        private readonly INapSession currentSession;
-
-        private readonly INapSettings napSettings;
-
-        public HomeController(INapSession currentSession, IUserService userService, INapSettings napSettings)
-        {
-            this.currentSession = currentSession;
-            this.userService = userService;
-            this.napSettings = napSettings;
-        }
-
         public ActionResult Index()
         {
             return View();

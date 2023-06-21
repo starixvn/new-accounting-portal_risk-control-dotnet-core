@@ -1,12 +1,11 @@
-﻿using System;
-using RiskControl.WinLossLimitControl.Filter;
+﻿using RiskControl.WinLossLimitControl.Filter;
 using RiskControl.WinLossLimitControl.Filter.Model;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Mocks
 {
     public class CacheRefServiceMockImp : CacheRefService
     {
-        public BaseEntityGroup BaseEntityGroup => new BaseEntityGroup();
+        public BaseEntityGroup BaseEntityGroup => new();
 
         public string GetBetTypeName(int betTypeId)
         {

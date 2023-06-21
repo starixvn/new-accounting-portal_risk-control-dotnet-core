@@ -7,7 +7,7 @@ using RiskControl.NonSportsGamesStatistics.Common;
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.GrandTotal.History
 {
     [Route("NonSportsGamesStatistics/UserNameViewGrandTotalHistory")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class UserNameViewGrandTotalHistoryModeController : BaseController<QueryModel>
     {
         public UserNameViewGrandTotalHistoryModeController(IMediator mediator) : base(mediator)
@@ -23,7 +23,7 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.GrandTotal.History
         [HttpPost, Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
-            string sheetName = $"{queryModel.ReportBy} Game Statistic";
+            var sheetName = $"{queryModel.ReportBy} Game Statistic";
             return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
         }
     }

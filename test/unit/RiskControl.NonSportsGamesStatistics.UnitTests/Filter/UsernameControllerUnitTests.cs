@@ -82,12 +82,12 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
             // Arrange
             var fakeUsernames = new List<UsernameValidationModel>
             {
-               new UsernameValidationModel {IsCust = true, CustId = "112" },
-               new UsernameValidationModel {IsCust = false, CustId = "113" }
+               new() {IsCust = true, CustId = "112" },
+               new() {IsCust = false, CustId = "113" }
 
             };
 
-            var expectedResult = new List<UsernameValidationModel> { new UsernameValidationModel { IsCust = true, CustId = "112" } };
+            var expectedResult = new List<UsernameValidationModel> { new() { IsCust = true, CustId = "112" } };
             var session = Substitute.For<INapSession>();
             session.UserId.Returns(1);
 

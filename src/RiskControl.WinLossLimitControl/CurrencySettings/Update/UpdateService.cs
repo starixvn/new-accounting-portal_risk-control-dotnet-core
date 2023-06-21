@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Fanex.Data.Repository;
@@ -38,10 +37,10 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
         private IEnumerable<UpdateCriteria> GetUpdateCurrencyWinLimitCriteria(IEnumerable<CurrencySetting> currencySettings, UserContext userContext)
         {
             var itemsPerBatch = int.Parse(configuration["ItemsPerBatch"]);
-            var list = currencySettings.Select(c => GetUpdateCurrencyWinLimitAllLevel(c))
+            var list = currencySettings.Select(GetUpdateCurrencyWinLimitAllLevel)
                                    .SelectMany(c => c);
             var criteriaList = new List<UpdateCriteria>();
-            for (int i = 0; i < list.Count(); i += itemsPerBatch)
+            for (var i = 0; i < list.Count(); i += itemsPerBatch)
             {
                 var models = list.Skip(i).Take(itemsPerBatch);
                 var criteria = new UpdateCriteria

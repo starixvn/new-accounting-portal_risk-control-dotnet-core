@@ -26,7 +26,7 @@ namespace RiskControl.NonSportsGamesStatistics.Model
         public decimal? GameIncome => TotalBets - TotalWins;
 
         [Cell("H5")]
-        public decimal? GamePayout => (!TotalBets.HasValue || !TotalWins.HasValue || TotalBets == 0) ? null : TotalWins / TotalBets;
+        public decimal? GamePayout => !TotalBets.HasValue || !TotalWins.HasValue || TotalBets == 0 ? null : TotalWins / TotalBets;
 
         [Cell("I5")]
         public decimal? TotalRefund { get; set; }

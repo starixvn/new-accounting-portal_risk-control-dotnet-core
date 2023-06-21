@@ -48,7 +48,7 @@ namespace RiskControl.WinLossLimitControl.UnitTests.FileDownload
             // Arrange
             const string TempFile = "AnyFile.xlsx";
             var fileContentService = Substitute.For<FileContentService>();
-            fileContentService.ReadAllBytes(TempFile).Returns(x => { throw new FileNotFoundException(); });
+            fileContentService.ReadAllBytes(TempFile).Returns(_ => throw new FileNotFoundException());
             var controller = new FileDownloadController(fileContentService);
 
             // Act

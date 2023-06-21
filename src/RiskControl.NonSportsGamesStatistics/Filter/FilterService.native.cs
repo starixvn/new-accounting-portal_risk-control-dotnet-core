@@ -67,7 +67,7 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
         {
             foreach (var item in siteGroups)
             {
-                if (item.ChildItems != null && item.ChildItems.Count > 0)
+                if (item.ChildItems is { Count: > 0 })
                 {
                     var childGroups = mapper.Map<List<SiteGroupModel>>(item.ChildItems);
 
@@ -77,7 +77,7 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
                     item.ChildItems.RemoveRange(0, item.ChildItems.Count);
                 }
 
-                if (item.ChildGroups != null && item.ChildGroups.Count > 0)
+                if (item.ChildGroups is { Count: > 0 })
                 {
                     MoveChildItemsToChildGroups(item.ChildGroups);
                 }
@@ -112,7 +112,7 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
                 var groupLicensees = mapper.Map<List<LicenseeModel>>(groupLicenseeEntities);
                 item.ChildItems = groupLicensees;
 
-                if (item.ChildGroups != null && item.ChildGroups.Count > 0)
+                if (item.ChildGroups is { Count: > 0 })
                 {
                     CreateChild(item.ChildGroups, licenseeEntities);
                 }
@@ -126,13 +126,13 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
             var childItems = GetChildItems(entities);
             UpdateChildItems(childItems);
 
-            for (int i = 0; i < result.Count; i++)
+            for (var i = 0; i < result.Count; i++)
             {
-                for (int j = 0; j < childItems.Count; j++)
+                foreach (var group in childItems)
                 {
-                    if (childItems[j].GroupId == result[i].GroupId)
+                    if (group.GroupId == result[i].GroupId)
                     {
-                        result[i] = childItems[j];
+                        result[i] = group;
                     }
                 }
             }

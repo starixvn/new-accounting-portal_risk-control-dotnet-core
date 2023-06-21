@@ -18,8 +18,8 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
             // Arrange
             var expectedDevices = new List<DeviceModel>
             {
-                new DeviceModel { BetFrom = "Any bet from 1", FullName = "Any full name 1", GroupName = "Any group 1" },
-                new DeviceModel { BetFrom = "Any bet from 2", FullName = "Any full name 2", GroupName = "Any group 2" }
+                new() { BetFrom = "Any bet from 1", FullName = "Any full name 1", GroupName = "Any group 1" },
+                new() { BetFrom = "Any bet from 2", FullName = "Any full name 2", GroupName = "Any group 2" }
             };
 
             var repository = Substitute.For<IDynamicRepository>();

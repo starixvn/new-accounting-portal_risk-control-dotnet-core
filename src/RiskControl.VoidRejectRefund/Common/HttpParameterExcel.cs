@@ -1,5 +1,4 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 using OfficeOpenXml;
 
 namespace RiskControl.VoidRejectRefund.Common

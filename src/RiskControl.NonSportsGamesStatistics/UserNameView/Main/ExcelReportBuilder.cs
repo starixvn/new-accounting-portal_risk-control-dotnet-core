@@ -54,14 +54,12 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main
         {
             var templatePath = viewByInteger ? ViewByIntegerTemplatePath : TemplatePath;
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/{templatePath}";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                var excelPackage = new ExcelPackage(stream);
-                statisticSheet = excelPackage.Workbook.Worksheets["Template"];
-                totalTemplateSheet = excelPackage.Workbook.Worksheets["TotalTemplate"];
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            var excelPackage = new ExcelPackage(stream);
+            statisticSheet = excelPackage.Workbook.Worksheets["Template"];
+            totalTemplateSheet = excelPackage.Workbook.Worksheets["TotalTemplate"];
 
-                return excelPackage;
-            }
+            return excelPackage;
         }
 
         private void ApplySetting()

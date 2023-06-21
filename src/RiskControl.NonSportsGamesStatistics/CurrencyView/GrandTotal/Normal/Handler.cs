@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Fanex.Excel.Models;
 using MediatR;
-using RiskControl.NonSportsGamesStatistics.Common;
 
 namespace RiskControl.NonSportsGamesStatistics.CurrencyView.GrandTotal.Normal
 {

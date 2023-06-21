@@ -16,16 +16,18 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
             // Arrange
             var expectedSites = new List<SiteGroupModel>
             {
-                new SiteGroupModel {
+                new()
+                {
                     GroupId = 0, GroupName = "Credit Group", LicenseeId = 0, LicenseeName = null,
                     ChildGroups = new List<SiteGroupModel>(),
                     ChildItems = new List<LicenseeModel>()
                 },
-                new SiteGroupModel {
+                new()
+                {
                     GroupId = 0, GroupName = "Licensee Group", LicenseeId = 0, LicenseeName = null,
                     ChildGroups = new List<SiteGroupModel>(),
                     ChildItems = new List<LicenseeModel>()
-                },
+                }
             };
 
             var filterService = Substitute.For<FilterService>();

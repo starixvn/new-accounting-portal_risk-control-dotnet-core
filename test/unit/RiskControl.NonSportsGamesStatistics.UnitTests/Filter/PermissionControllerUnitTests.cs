@@ -20,14 +20,14 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
             // Arrange
             var fakeModePermissions = new List<FunctionPolicy>
             {
-                new FunctionPolicy
+                new()
                 {
                     Id = 1938,
                     Key = "HistoryMode",
                     Name = "HistoryMode",
                     Policy = 1
                 },
-                new FunctionPolicy
+                new()
                 {
                     Id = 1937,
                     Key = "NormalMode",
@@ -38,22 +38,22 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
 
             var fakeProductPermissions = new List<FunctionPolicy>
             {
-                new FunctionPolicy
+                new()
                 {
                     Id = 12,
                     Key = "Allbet",
                     Name = "Allbet",
                     Policy = 1
                 },
-                new FunctionPolicy
+                new()
                 {
                     Id = 13,
                     Key = "Keno",
                     Name = "Keno",
                     Policy = 1
                 },
-                 new FunctionPolicy
-                {
+                 new()
+                 {
                     Id = 14,
                     Key = "Macau",
                     Name = "Macau",

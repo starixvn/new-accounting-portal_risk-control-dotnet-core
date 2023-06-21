@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RiskControl.NonSportsGamesStatistics.DailyView.Main.ProductHistory
 {
     [Route("NonSportsGamesStatistics/ProductHistory")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class ProductHistoryModeController : BaseController<QueryModel>
     {
         public ProductHistoryModeController(IMediator mediator) : base(mediator)
@@ -23,7 +23,7 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.Main.ProductHistory
         [HttpPost, Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
-            string sheetName = $"{queryModel.ReportBy} Game Statistic";
+            var sheetName = $"{queryModel.ReportBy} Game Statistic";
             return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
         }
     }

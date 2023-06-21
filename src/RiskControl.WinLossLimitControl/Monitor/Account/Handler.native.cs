@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Fanex.Data.Repository;
 using MediatR;
-using Olympus.FPSAPI.Client;
-using RiskControl.Core.Configuration;
 using RiskControl.WinLossLimitControl.Monitor.Account.Criteria;
 using RiskControl.WinLossLimitControl.Monitor.Account.Model;
 using RiskControl.Core.AssociatedAcccount;

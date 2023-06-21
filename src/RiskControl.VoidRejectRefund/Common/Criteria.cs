@@ -33,7 +33,7 @@ namespace RiskControl.VoidRejectRefund.Common
 
         public override string GetSettingKey()
         {
-            string settingKey = string.Empty;
+            string settingKey;
 
             switch (ReportBy)
             {

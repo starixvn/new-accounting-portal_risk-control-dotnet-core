@@ -1,17 +1,14 @@
-export interface CurrencyNetIncome {
-    currency: string;
+export interface WeeklyNetIncome {
+    week: string;
+    creditNetIncome: number;
+    depositNetIncome: number;
     netIncome: number;
 }
 
-export interface MonthlyTurnoverAndNetIncome {
-    month: string;
-    turnover: number;
-    netIncome: number;
-}
-
-export interface ProductTurnover {
-    product: string;
-    turnover: number;
+export interface TotalPlayersByDevice {
+    weekly: string;
+    mobilePlayers: number;
+    nonMobilePlayers: number;
 }
 
 export interface TopGameTypeWinning {
@@ -24,13 +21,6 @@ export interface TopMemberWinning {
     username: string;
     currency: string;
     gameIncome: number;
-}
-
-export interface WinLossLimit {
-    userName: string;
-    currency: string;
-    product: string;
-    limitLevel: number;
 }
 
 interface BalanceUpRange {

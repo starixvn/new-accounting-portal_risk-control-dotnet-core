@@ -55,7 +55,7 @@ namespace RiskControl.WinLossLimitControl.UnitTests.Filter
             var actualResult = service.GetProducts().ToList();
 
             // Assert
-            var expected = new List<BaseEntity> { new BaseEntity { Id = 1, Name = "Product 1" } };
+            var expected = new List<BaseEntity> { new() { Id = 1, Name = "Product 1" } };
             DeepAssert.Equal(expected, actualResult);
         }
 
@@ -117,7 +117,7 @@ namespace RiskControl.WinLossLimitControl.UnitTests.Filter
         public async Task GetGroups_Always_ReturnDataFromRepository()
         {
             // Arrange
-            var expectedGroupList = new List<Group> { new Group { GroupId = 50, GroupName = "AdvantPlay Mini" } };
+            var expectedGroupList = new List<Group> { new() { GroupId = 50, GroupName = "AdvantPlay Mini" } };
             var repository = Substitute.For<IDynamicRepository>();
             repository.FetchAsync<Group>(Arg.Compat.Any<ICriteria>()).Returns(expectedGroupList);
 

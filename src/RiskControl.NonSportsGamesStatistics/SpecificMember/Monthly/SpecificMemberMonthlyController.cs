@@ -7,7 +7,7 @@ using RiskControl.NonSportsGamesStatistics.Common;
 namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Monthly
 {
     [Route("NonSportsGamesStatistics/SpecificMember/Monthly")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class SpecificMemberMonthlyController : BaseController<QueryModel>
     {
         public SpecificMemberMonthlyController(IMediator mediator) : base(mediator)

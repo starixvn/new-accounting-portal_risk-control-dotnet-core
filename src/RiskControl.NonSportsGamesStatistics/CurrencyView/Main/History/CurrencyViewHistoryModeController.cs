@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Main.History
 {
     [Route("NonSportsGamesStatistics/CurrencyViewHistory")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class CurrencyViewHistoryModeController : BaseController<QueryModel>
     {
         public CurrencyViewHistoryModeController(IMediator mediator) : base(mediator)
@@ -23,7 +23,7 @@ namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Main.History
         [HttpPost, Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
-            string sheetName = $"{queryModel.ReportBy} Game Statistic";
+            var sheetName = $"{queryModel.ReportBy} Game Statistic";
             return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
         }
     }

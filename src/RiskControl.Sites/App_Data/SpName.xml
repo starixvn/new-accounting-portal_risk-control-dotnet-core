@@ -146,11 +146,9 @@
 		<Setting Key="Void_Recject_Refund_Device" SpName="Acc_Rpt_NonSportVoidRejectRefund_Device" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
 	</Function>
 	<Function Name="Dashboard">
-		<Setting Key="RiskControl_Dashboard_WinLossLimit" SpName="Acc_Rpt_NonSports_Dashboard_WinLossLimit" DbName="DBCust.CustDB.bodbAdminNet" TimeOut="300" />
-		<Setting Key="RiskControl_Dashboard_Currency" SpName="Acc_Rpt_NonSports_Dashboard_Currency" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
-		<Setting Key="RiskControl_Dashboard_Monthly" SpName="Acc_Rpt_NonSports_Dashboard_Monthly" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
-		<Setting Key="RiskControl_Dashboard_Product" SpName="Acc_Rpt_NonSports_Dashboard_Product" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
 		<Setting Key="RiskControl_Dashboard_TopGameTypeWinning" SpName="Acc_Rpt_NonSports_Dashboard_TopGameTypeWinning" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
 		<Setting Key="RiskControl_Dashboard_TopMemberWinning" SpName="Acc_Rpt_NonSports_Dashboard_TopMemberWinning" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSports_Dashboard_Weekly" SpName="Acc_Rpt_NonSports_Dashboard_Weekly" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSports_Dashboard_PlayersByDevice" SpName="Acc_Rpt_NonSports_Dashboard_PlayersByDevice" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
 	</Function>
 </Functions>

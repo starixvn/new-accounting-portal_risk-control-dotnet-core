@@ -60,13 +60,11 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly
         {
             var templatePath = viewByInteger ? ViewByIntegerTemplatePath : TemplatePath;
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/{templatePath}";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                var excelPackage = new ExcelPackage(stream);
-                statisticSheet = excelPackage.Workbook.Worksheets["Template"];
-                averageSheet = excelPackage.Workbook.Worksheets["Average"];
-                return excelPackage;
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            var excelPackage = new ExcelPackage(stream);
+            statisticSheet = excelPackage.Workbook.Worksheets["Template"];
+            averageSheet = excelPackage.Workbook.Worksheets["Average"];
+            return excelPackage;
         }
 
         private void ApplySetting()
@@ -114,7 +112,7 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly
 
         private void ApplyAccumulatedHourly(HourlyStatisticsAccumulatedModel model, DateTime winlossDate)
         {
-            string title = $"Accumulated Hourly Statistics Record  on {winlossDate:MMM dd, yyyy}";
+            var title = $"Accumulated Hourly Statistics Record  on {winlossDate:MMM dd, yyyy}";
             ApplyTitle(title, "A1:O2");
             ApplyHourlyStatistics(model.HourlyStatistics, HourlyAccumulatedStartRowIndex);
             ApplyAveragePlayer(model.AveragePlayer);
@@ -122,7 +120,7 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly
 
         private void ApplyHourly(List<HourlyStatistics> model, DateTime winlossDate)
         {
-            string title = $"Hourly Statistics Record  on {winlossDate:MMM dd, yyyy}";
+            var title = $"Hourly Statistics Record  on {winlossDate:MMM dd, yyyy}";
             ApplyTitle(title, "A31:O32");
             ApplyHeader("A33:O34");
             ApplyHourlyStatistics(model, HourlyStartRowIndex);

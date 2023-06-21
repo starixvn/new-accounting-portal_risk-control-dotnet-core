@@ -4,16 +4,16 @@ import * as _ from 'lodash';
 import { NumberFormatHelper, NumberFormatType } from 'nap-components/number-format';
 import { AppService } from './app.service';
 import {
-  CurrencyNetIncome,
-  MonthlyTurnoverAndNetIncome,
-  ProductTurnover,
   TopMemberWinning,
   TopGameTypeWinning,
-  WinLossLimit,
   ChartDataSet,
-  ChartColor
+  ChartColor,
+  WeeklyNetIncome,
+  TotalPlayersByDevice
 } from './app.model';
 import { DATE_CONFIG } from './date.config';
+import * as Chart from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 @Component({
   selector: 'app-root',
@@ -27,27 +27,28 @@ import { DATE_CONFIG } from './date.config';
 export class AppComponent implements OnInit {
   netIncomeDatasets: ChartDataSet[];
   netIncomeOptions: object;
-  turnoverOptions: object;
-  turnoverDatasets: ChartDataSet[];
-  monthLabels: string[];
-  currencyLabels: string[];
-  currencyDatasets: ChartDataSet[];
-  currencyOptions: object;
-  productLabels: string[];
-  productDatasets: ChartDataSet[];
-  productOptions: object;
-  currencyNetIncome: CurrencyNetIncome[];
-  monthlyTurnoverAndNetIncome: MonthlyTurnoverAndNetIncome[];
-  productTurnover: ProductTurnover[];
-  topMemberWinning: TopMemberWinning[];
+  creditNetIncomeDatasets: ChartDataSet[];
+  creditNetIncomeOptions: object;
+  depositNetIncomeDatasets: ChartDataSet[];
+  depositNetIncomeOptions: object;
+  weekLabels: string[];
+  weeklyNetIncome: WeeklyNetIncome[];
+  totalPlayersByDeviceDatasets: ChartDataSet[];
+  totalPlayersByDeviceOptions: object;
+  weekLabelsOfPlayersDevice: string[];
+  totalPlayersByDevice: TotalPlayersByDevice[];
+  topCreditPlayer: TopMemberWinning[];
+  topLicenseePlayer: TopMemberWinning[];
   topGameTypeWinning: TopGameTypeWinning[];
-  winlossLimit: WinLossLimit[];
   currentMonth = moment.utc(DATE_CONFIG.reportDate.today).format('MM/YYYY');
   cachedDate: string;
   warehouseLastDate: string;
-  xxx: string;
 
   title = 'dashboard';
+
+  chartPlugins = [
+    ChartDataLabels
+  ]
 
   turnoverChartColors: Array<ChartColor> = [
     { // all colors in order
@@ -59,6 +60,27 @@ export class AppComponent implements OnInit {
     { // all colors in order
       backgroundColor: ['#FA8334', '#FA8334', '#FA8334', '#FA8334', '#FA8334', '#FA8334']
     }
+  ];
+
+  creditNetIncomeChartColors: Array<ChartColor> = [
+    { // all colors in order
+      backgroundColor: ['#70ad47', '#70ad47', '#70ad47', '#70ad47', '#70ad47', '#70ad47']
+    }
+  ];
+
+  depositNetIncomeChartColors: Array<ChartColor> = [
+    { // all colors in order
+      backgroundColor: ['#5b9bd5', '#5b9bd5', '#5b9bd5', '#5b9bd5', '#5b9bd5', '#5b9bd5']
+    }
+  ];
+
+  totalPlayersByDeviceChartColors: Array<ChartColor> = [
+    { 
+      backgroundColor: ['#5b9bd5', '#5b9bd5', '#5b9bd5', '#5b9bd5', '#5b9bd5', '#5b9bd5']
+    },
+    { 
+      backgroundColor: ['#FA8334', '#FA8334', '#FA8334', '#FA8334', '#FA8334', '#FA8334']
+    },
   ];
 
   currencyChartColors: Array<ChartColor> = [
@@ -90,47 +112,42 @@ export class AppComponent implements OnInit {
   }
 
   private loadData() {
-    this.appService.queryCurrencyNetIncome().subscribe(data => {
-      this.currencyNetIncome = data;
-      this.createCurrencyNetIncome();
+    this.appService.queryWeeklyNetIncome().subscribe(data => {
+      this.weeklyNetIncome = data;
+      this.createWeeklyNetIncome();
     });
 
-    this.appService.queryMonthlyTurnoverAndNetIncome().subscribe(data => {
-      this.monthlyTurnoverAndNetIncome = data;
-      this.createMonthlyTurnoverAndNetIncome();
+    this.appService.queryTotalPlayersByDevice().subscribe(data => {
+      this.totalPlayersByDevice = data;
+      this.createTotalPlayersByDevice();
+    })
+
+    this.appService.queryTopMemberWinning(false).subscribe(data => {
+      this.topCreditPlayer = data;
     });
 
-    this.appService.queryProductTurnover().subscribe(data => {
-      this.productTurnover = data;
-      this.createProductTurnover();
-    });
-
-    this.appService.queryTopMemberWinning().subscribe(data => {
-      this.topMemberWinning = data;
+    this.appService.queryTopMemberWinning(true).subscribe(data => {
+      this.topLicenseePlayer = data;
     });
 
     this.appService.queryTopGameTypeWinning().subscribe(data => {
       this.topGameTypeWinning = data;
     });
-
-    this.appService.queryWinLossLimit().subscribe(data => {
-      this.winlossLimit = data;
-    });
   }
 
-  private createMonthlyTurnoverAndNetIncome() {
-    this.monthLabels = this.monthlyTurnoverAndNetIncome.map(item => item.month);
+  private createWeeklyNetIncome() {
+    this.weekLabels = this.weeklyNetIncome.map(item => item.week);
 
     this.netIncomeDatasets = [{
       label: 'NetIncome',
-      data: this.monthlyTurnoverAndNetIncome.map(item => item.netIncome)
+      data: this.weeklyNetIncome.map(item => item.netIncome)
     }];
 
     this.netIncomeOptions = {
       title: {
         display: true,
-        text: 'Net Income - Last 6 Months (BaseRM)',
-        fontColor: '#63B6FE',
+        text: 'Weekly Net Income - Credit/Licensee (RM)',
+        fontColor: '#595959',
         fontSize: '16'
       },
       legend: {
@@ -154,16 +171,49 @@ export class AppComponent implements OnInit {
       }
     };
 
-    this.turnoverDatasets = [{
-      label: 'Turnover',
-      data: this.monthlyTurnoverAndNetIncome.map(item => item.turnover)
+    this.creditNetIncomeDatasets = [{
+      label: 'NetIncome - Credit',
+      data: this.weeklyNetIncome.map(item => item.creditNetIncome)
     }];
 
-    this.turnoverOptions = {
+    this.creditNetIncomeOptions = {
       title: {
         display: true,
-        text: '3rd Products Turnover - Last 6 Months (BaseRM)',
-        fontColor: '#63B6FE',
+        text: 'Weekly Net Income - Credit (RM)',
+        fontColor: '#595959',
+        fontSize: '16'
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        callbacks: {
+          label(tooltipItem) {
+            return NumberFormatHelper.format(tooltipItem.yLabel, NumberFormatType.Integer);
+          }
+        }
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            callback(value, index, values) {
+              return callbackFn(value, index, values);
+            }
+          }
+        }]
+      }
+    };
+
+    this.depositNetIncomeDatasets = [{
+      label: 'NetIncome - Deposit',
+      data: this.weeklyNetIncome.map(item => item.depositNetIncome)
+    }];
+
+    this.depositNetIncomeOptions = {
+      title: {
+        display: true,
+        text: 'Weekly Net Income - Licensee (RM)',
+        fontColor: '#595959',
         fontSize: '16'
       },
       legend: {
@@ -188,25 +238,32 @@ export class AppComponent implements OnInit {
     };
   }
 
-  private createCurrencyNetIncome() {
-    this.currencyLabels = this.currencyNetIncome.map(item => item.currency);
+  private createTotalPlayersByDevice() {
+    this.weekLabelsOfPlayersDevice = this.totalPlayersByDevice.map(item => item.weekly);
 
-    this.currencyDatasets = [{
-      label: 'Net Income By Currency',
-      data: this.currencyNetIncome.map(item => item.netIncome)
-    }];
+    this.totalPlayersByDeviceDatasets = [
+      {
+        label: 'Mobile',
+        data: this.totalPlayersByDevice.map(item => Math.round(item.mobilePlayers))
+      },
+      {
+        label: 'Non-Mobile',
+        data: this.totalPlayersByDevice.map(item => Math.round(item.nonMobilePlayers))
+      }
+    ];
 
-    this.currencyOptions = {
+    this.totalPlayersByDeviceOptions = {
       title: {
         display: true,
-        text: `Net Income by Currency - ${this.currentMonth} (Base RM)`,
-        fontColor: '#63B6FE',
+        text: 'Total Players by Device',
+        fontColor: '#595959',
         fontSize: '16'
       },
       legend: {
-        display: false
+        display: true
       },
       tooltips: {
+        enabled: false,
         callbacks: {
           label(tooltipItem) {
             return NumberFormatHelper.format(tooltipItem.yLabel, NumberFormatType.Integer);
@@ -214,42 +271,25 @@ export class AppComponent implements OnInit {
         }
       },
       scales: {
+        xAxes: [{
+          stacked: true,
+        }],
         yAxes: [{
+          display: false,
+          stacked: true,
           ticks: {
             callback(value, index, values) {
               return callbackFn(value, index, values);
             }
-          }
+          },
         }]
-      }
-    };
-  }
-
-  private createProductTurnover() {
-    this.productLabels = this.productTurnover.map(item => item.product);
-
-    this.productDatasets = [{
-      label: '',
-      data: this.productTurnover.map(item => item.turnover)
-    }];
-
-    this.productOptions = {
-      legend: {
-        display: false
       },
-      title: {
-        display: true,
-        text: `Turnover By Product - ${this.currentMonth} (Base RM)`,
-        fontColor: '#63B6FE',
-        fontSize: '16'
-      },
-      tooltips: {
-        callbacks: {
-          label(tooltipItem, data) {
-            const label = data.labels[tooltipItem.index];
-            const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-            return `${label} : ${NumberFormatHelper.format(value, NumberFormatType.Integer)}`;
-          }
+      plugins: {
+        datalabels: {
+          color: '#ffffff',
+          font : {
+            weight: 'bold'
+          },
         }
       }
     };

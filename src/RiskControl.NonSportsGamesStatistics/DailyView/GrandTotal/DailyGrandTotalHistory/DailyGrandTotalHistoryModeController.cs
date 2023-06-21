@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.DailyGrandTotalHistory
 {
     [Route("NonSportsGamesStatistics/DailyGrandTotalHistory")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class DailyGrandTotalHistoryModeController : BaseController<QueryModel>
     {
         public DailyGrandTotalHistoryModeController(IMediator mediator) : base(mediator)

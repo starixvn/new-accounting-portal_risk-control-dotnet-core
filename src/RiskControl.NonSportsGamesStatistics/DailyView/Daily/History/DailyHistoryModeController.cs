@@ -7,7 +7,7 @@ using RiskControl.NonSportsGamesStatistics.Common;
 namespace RiskControl.NonSportsGamesStatistics.DailyView.Daily.History
 {
     [Route("NonSportsGamesStatistics/DailyHistory")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class DailyHistoryModeController : BaseController<QueryModel>
     {
         public DailyHistoryModeController(IMediator mediator) : base(mediator)
@@ -23,7 +23,7 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.Daily.History
         [Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
-            string sheetName = $"{queryModel.ReportBy} Game Statistic";
+            var sheetName = $"{queryModel.ReportBy} Game Statistic";
             return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
         }
     }

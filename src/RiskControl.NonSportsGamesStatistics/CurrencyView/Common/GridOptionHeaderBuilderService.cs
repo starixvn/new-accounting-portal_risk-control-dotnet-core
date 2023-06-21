@@ -21,56 +21,56 @@ namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Common
             var reportBy = drillDownCurrency == 0 ? HeaderColumnConstant.CURRENCY_TEXT : "Company";
             var headerColumns = new List<HeaderColumns>
             {
-                new HeaderColumns {HeaderText = reportBy, Width = 100, Name = "ReportBy"},
-                new HeaderColumns
+                new() {HeaderText = reportBy, Width = 100, Name = "ReportBy"},
+                new()
                 {
                     HeaderText = "No. Players", Width = 100, Name = "NoOfPlayers", CustomCellType = ExcelCellType.Integer
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Bet Count", Width = 100, Name = "BetCount", CustomCellType = ExcelCellType.Integer
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Total Bets", Width = 120, Name = "TotalBets", CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Total Wins", Width = 120, Name = "TotalWins", CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Game Income", Width = 120, Name = "GameIncome", CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Game Payout", Width = 120, Name = "GamePayout", CustomCellType = ExcelCellType.Percentage
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Total Refund", Width = 120, Name = "TotalRefund", CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Turnover", Width = 120, Name = "HouseTurnover", CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
                 },
-                 new HeaderColumns
-                {
+                 new()
+                 {
                     HeaderText = "Real Turnover", Width = 120, Name = "RealTurnover", CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Gross Income", Width = 120, Name = "HouseGrossIncome", CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Comm", Width = 120, Name = "HouseComm", CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = HeaderColumnConstant.EXTRAPT_TEXT, Width = 120, Name = HeaderColumnConstant.EXTRAPT_TEXT, CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Net Income", Width = 120, Name = "HouseNetIncome", CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
                 }
@@ -108,74 +108,74 @@ namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Common
         {
             var headerColumns = new List<HeaderColumns>
             {
-                new HeaderColumns
+                new()
                 {
                     HeaderText = reportBy, Width = 100, Name = "ReportBy", Sort = true,
                     SortDirection = queryModel.SortColumnName == "ReportBy" ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "No. Players", Width = 100, Name = "NoOfPlayers", CustomCellType = ExcelCellType.Integer,
                     Sort = true, SortDirection = queryModel.SortColumnName == "NoOfPlayers" ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Bet Count", Width = 100, Name = "BetCount", CustomCellType = ExcelCellType.Integer,
                     Sort = true, SortDirection = queryModel.SortColumnName == "BetCount" ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Total Bets", Width = 120, Name = "TotalBets", CustomCellType = queryModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
                     Sort = true, SortDirection = queryModel.SortColumnName == "TotalBets" ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Total Wins", Width = 120, Name = "TotalWins", CustomCellType = queryModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
                     Sort = true, SortDirection = queryModel.SortColumnName == "TotalWins" ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Game Income", Width = 120, Name = "GameIncome",
                     CustomCellType =
                         queryModel.ViewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative,
                     Sort = true, SortDirection = queryModel.SortColumnName == "GameIncome" ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Game Payout", Width = 120, Name = "GamePayout", CustomCellType = ExcelCellType.Percentage,
                     Sort = true, SortDirection = queryModel.SortColumnName == "GamePayout" ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Total Refund", Width = 120, Name = "TotalRefund", CustomCellType = queryModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
                     Sort = true, SortDirection = queryModel.SortColumnName == "TotalRefund" ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Turnover", Width = 120, Name = "HouseTurnover", CustomCellType = queryModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
                     Sort = true, SortDirection = queryModel.SortColumnName == "HouseTurnover" ? queryModel.SortDirection : string.Empty
                 },
-                 new HeaderColumns
-                {
+                 new()
+                 {
                     HeaderText = "Real Turnover", Width = 120, Name = "RealTurnover", CustomCellType = queryModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
                     Sort = true, SortDirection = queryModel.SortColumnName == "RealTurnover" ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Gross Income", Width = 120, Name = "HouseGrossIncome", CustomCellType = queryModel.ViewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative,
                     Sort = true, SortDirection = queryModel.SortColumnName == "HouseGrossIncome" ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Comm", Width = 120, Name = "HouseComm", CustomCellType = queryModel.ViewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative,
                     Sort = true, SortDirection = queryModel.SortColumnName == "HouseComm" ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = HeaderColumnConstant.EXTRAPT_TEXT, Width = 120, Name = HeaderColumnConstant.EXTRAPT_TEXT, CustomCellType = queryModel.ViewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative,
                     Sort = true, SortDirection = queryModel.SortColumnName == HeaderColumnConstant.EXTRAPT_TEXT ? queryModel.SortDirection : string.Empty
                 },
-                new HeaderColumns
+                new()
                 {
                     HeaderText = "Net Income", Width = 120, Name = "HouseNetIncome", CustomCellType = queryModel.ViewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative,
                     Sort = true, SortDirection = queryModel.SortColumnName == "HouseNetIncome" ? queryModel.SortDirection : string.Empty

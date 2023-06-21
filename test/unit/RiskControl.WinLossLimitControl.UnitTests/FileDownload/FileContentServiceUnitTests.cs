@@ -19,9 +19,9 @@ namespace RiskControl.WinLossLimitControl.UnitTests.FileDownload
         {
             // Arrange
             var configurationService = Substitute.For<ConfigurationService>();
-            string fileServerDirectory = GetFakeFileServerDirectory();
+            var fileServerDirectory = GetFakeFileServerDirectory();
             configurationService.FileServerDirectory.Returns(fileServerDirectory);
-            string fileName = "AnyFile.xlsx";
+            const string fileName = "AnyFile.xlsx";
             var service = new FileContentServiceImp(configurationService);
 
             // Act

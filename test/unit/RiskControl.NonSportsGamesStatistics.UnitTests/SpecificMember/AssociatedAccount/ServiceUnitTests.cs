@@ -29,15 +29,15 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.Associat
 
             var associatedAccountService = Substitute.For<AssociatedAccountService>();
             var associatedByDeviceList = new List<TopAssociatedAccount> {
-                new TopAssociatedAccount { CustId = criteria.CustId, Site = "12Bet", Username = "12BETUUS01001", LastBettingDate = new DateTime(2022, 10, 10) }
+                new() { CustId = criteria.CustId, Site = "12Bet", Username = "12BETUUS01001", LastBettingDate = new DateTime(2022, 10, 10) }
             };
             var associatedByManualList = new List<TopAssociatedAccount> {
-                new TopAssociatedAccount { CustId = criteria.CustId , Site = "722222", Username = "FYJ8500001", LastBettingDate = new DateTime(2022, 10, 10) }
+                new() { CustId = criteria.CustId , Site = "722222", Username = "FYJ8500001", LastBettingDate = new DateTime(2022, 10, 10) }
             };
             var associatedByIpList = new List<TopAssociatedAccount> {
-                new TopAssociatedAccount { CustId = criteria.CustId , Site = "733333", Username = "Seantest", LastBettingDate = new DateTime(2022, 10, 10) }
+                new() { CustId = criteria.CustId , Site = "733333", Username = "Seantest", LastBettingDate = new DateTime(2022, 10, 10) }
             };
-            var expectedUsernames = "12BETUUS01001,FYJ8500001,Seantest";
+            const string expectedUsernames = "12BETUUS01001,FYJ8500001,Seantest";
             associatedAccountService.GetAssociatedByDevice(criteria.CustId).Returns(associatedByDeviceList);
             associatedAccountService.GetAssociatedByManual(criteria.CustId).Returns(associatedByManualList);
             associatedAccountService.GetAssociateddByIp(criteria.CustId).Returns(associatedByIpList);

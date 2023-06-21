@@ -10,17 +10,17 @@ namespace RiskControl.NonSportsGamesStatistics.Common
 
     public class HeaderTextByReportServiceImp : HeaderTextByReportService
     {
-        const string userName = "Username";
-        const string product = "Product";
-        const string gameType = "Game Type";
-        const string gameTable = "Game Table";
-        const string bettype = "Bet Type";
-        const string sportType = "Sport Type";
-        const string gameGroup = "Game Group";
-        const string league = "League";
-        const string month = "Month";
+        private const string userName = "Username";
+        private const string product = "Product";
+        private const string gameType = "Game Type";
+        private const string gameTable = "Game Table";
+        private const string bettype = "Bet Type";
+        private const string sportType = "Sport Type";
+        private const string gameGroup = "Game Group";
+        private const string league = "League";
+        private const string month = "Month";
 
-        private readonly Dictionary<string, string> headerText = new Dictionary<string, string>
+        private readonly Dictionary<string, string> headerText = new()
         {
             { "Daily", "Date" },
             { "Monthly", month },

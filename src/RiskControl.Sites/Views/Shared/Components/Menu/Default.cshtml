@@ -5,7 +5,7 @@
 }
 <nav>
     <ul class="menu">
-        @for (int i = 0; i < lvl0MenuItemList.Count; i++)
+        @for (var i = 0; i < lvl0MenuItemList.Count; i++)
         {
             var menuItem = lvl0MenuItemList[i];
             var lvl1MenuItemList = Model.Where(x => x.ParentId >= 0 && x.ParentId == menuItem.Id)

@@ -48,9 +48,8 @@ namespace RiskControl.WinLossLimitControl.Monitor.Parser
         private static decimal GetAttribute(XElement element, string attributeName)
         {
             var attribute = element.Attribute(attributeName);
-            decimal parsedValue;
 
-            return attribute != null && decimal.TryParse(attribute.Value, NumberStyles.Any, CultureInfo.CurrentCulture.NumberFormat, out parsedValue)
+            return attribute != null && decimal.TryParse(attribute.Value, NumberStyles.Any, CultureInfo.CurrentCulture.NumberFormat, out _)
                 ? decimal.Parse(attribute.Value, CultureInfo.CurrentCulture.NumberFormat)
                 : DefaultValue;
         }

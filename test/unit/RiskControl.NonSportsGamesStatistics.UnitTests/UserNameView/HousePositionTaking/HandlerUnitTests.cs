@@ -20,8 +20,8 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.UserNameView.HousePosit
             // Arrange
             var expectedResult = new List<HousePositionTakingModel>
             {
-                new HousePositionTakingModel { HousePositionTaking = 0.5m, Product = "Product 1" },
-                new HousePositionTakingModel { HousePositionTaking = 0.3m, Product = "Product 2" }
+                new() { HousePositionTaking = 0.5m, Product = "Product 1" },
+                new() { HousePositionTaking = 0.3m, Product = "Product 2" }
             };
 
             var dataSourceChooser = Substitute.For<DataSourceChooser>();

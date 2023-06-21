@@ -17,40 +17,26 @@ namespace RiskControl.Dashboard
             this.repository = repository;
         }
 
-        [Route("currency-netincome")]
+        [Route("weekly-net-income")]
         [HttpGet]
-        [ResponseCache(Duration = 86400)]
-        public async Task<IActionResult> CurrencyNetIncome()
+        public async Task<IActionResult> WeeklyNetIncome()
         {
-            var criteria = new CurrencyNetIncomeCriteria();
-            var result = await repository.FetchAsync<CurrencyNetIncome>(criteria);
-
+            var criteria = new WeeklyNetIncomeCriteria();
+            var result = await repository.FetchAsync<WeeklyNetIncomeModel>(criteria);
             return Ok(result);
         }
 
-        [Route("monthly-turnover-netincome")]
+        [Route("total-players-by-device")]
         [HttpGet]
-        [ResponseCache(Duration = 86400)]
-        public async Task<IActionResult> MonthlyTurnoverAndNetIncome()
+        public async Task<IActionResult> TotalPlayersByDevice()
         {
-            var criteria = new MonthlyTurnoverAndNetIncomeCriteria();
-            var result = await repository.FetchAsync<MonthlyTurnoverAndNetIncome>(criteria);
-            return Ok(result);
-        }
-
-        [Route("product-turnover")]
-        [HttpGet]
-        [ResponseCache(Duration = 86400)]
-        public async Task<IActionResult> ProductTurnover()
-        {
-            var criteria = new ProductTurnoverCriteria();
-            var result = await repository.FetchAsync<ProductTurnover>(criteria);
+            var criteria = new TotalPlayersByDeviceCriteria();
+            var result = await repository.FetchAsync<TotalPlayersByDeviceModel>(criteria);
             return Ok(result);
         }
 
         [Route("top-gametype-winning")]
         [HttpGet]
-        [ResponseCache(Duration = 86400)]
         public async Task<IActionResult> TopGameTypeWinning()
         {
             var criteria = new TopGameTypeWinningCriteria();
@@ -60,20 +46,10 @@ namespace RiskControl.Dashboard
 
         [Route("top-member-winning")]
         [HttpGet]
-        [ResponseCache(Duration = 86400)]
-        public async Task<IActionResult> TopMemberWinning()
+        public async Task<IActionResult> TopMemberWinning(bool isDeposit)
         {
-            var criteria = new TopMemberWinningCriteria();
+            var criteria = new TopMemberWinningCriteria { IsDeposit = isDeposit };
             var result = await repository.FetchAsync<TopMemberWinning>(criteria);
-            return Ok(result);
-        }
-
-        [Route("winloss-limit")]
-        [HttpGet]
-        public async Task<IActionResult> WinLossLimit()
-        {
-            var criteria = new WinLossLimitCriteria();
-            var result = await repository.FetchAsync<WinLossLimit>(criteria);
             return Ok(result);
         }
     }

@@ -14,7 +14,7 @@ namespace RiskControl.ProgressiveJackpot.UnitTests
 {
     public class ProgressiveJackpotControllerUnitTests
     {
-        private readonly ExcelPackage defaultExcelPackage = new ExcelPackage();
+        private readonly ExcelPackage defaultExcelPackage = new();
 
         [Fact]
         public async Task GameGroup_Always_ReturnsDataFromProgressiveApiClient()
