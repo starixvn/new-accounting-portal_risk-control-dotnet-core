@@ -10,7 +10,7 @@ namespace RiskControl.ProgressiveJackpot.UnitTests
 {
     public class ExcelBuilderUnitTests
     {
-        private readonly Fixture fixture = new Fixture();
+        private readonly Fixture fixture = new();
 
         [Fact]
         public void Build_RealTimeModelWithOneItem_ReturnsExcelFileWithOneRow()

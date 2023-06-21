@@ -9,7 +9,7 @@ namespace RiskControl.Dashboard.Utility
 
         public static Tuple<DateTime, DateTime> GetLastSixWeekFromLastWeek()
         {
-            DateTime startingDate = DateTime.Today;
+            var startingDate = DateTime.Today;
 
             while (startingDate.DayOfWeek != WEEK_START)
             {

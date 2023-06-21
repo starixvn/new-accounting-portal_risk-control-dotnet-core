@@ -7,7 +7,7 @@ using RiskControl.NonSportsGamesStatistics.Common;
 namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Daily
 {
     [Route("NonSportsGamesStatistics/SpecificMember/Daily")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class SpecificMemberDailyController : BaseController<QueryModel>
     {
         public SpecificMemberDailyController(IMediator mediator) : base(mediator)

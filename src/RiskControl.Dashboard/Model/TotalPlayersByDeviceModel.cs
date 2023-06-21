@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RiskControl.Dashboard.Model
+﻿namespace RiskControl.Dashboard.Model
 {
     public class TotalPlayersByDeviceModel
     {

@@ -7,7 +7,7 @@ using RiskControl.NonSportsGamesStatistics.Common;
 namespace RiskControl.NonSportsGamesStatistics.TopTwenty.Main.History
 {
     [Route("NonSportsGamesStatistics/TopTwentyHistory")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class TopTwentyHistoryModeController : BaseController<QueryModel>
     {
         public TopTwentyHistoryModeController(IMediator mediator) : base(mediator)
@@ -23,7 +23,7 @@ namespace RiskControl.NonSportsGamesStatistics.TopTwenty.Main.History
         [HttpPost, Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
-            string sheetName = $"{queryModel.ReportBy} Game Statistic";
+            var sheetName = $"{queryModel.ReportBy} Game Statistic";
             return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
         }
     }

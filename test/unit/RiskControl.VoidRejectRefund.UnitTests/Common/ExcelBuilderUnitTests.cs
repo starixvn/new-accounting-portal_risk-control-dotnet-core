@@ -10,7 +10,7 @@ namespace RiskControl.VoidRejectRefund.UnitTests.Common
 {
     public class ExcelBuilderUnitTests
     {
-        private readonly Fixture fixture = new Fixture();
+        private readonly Fixture fixture = new();
 
         [Fact]
         public void Build_StatisticExcelReportModelHasData_ReturnsExpectedExcelFile()

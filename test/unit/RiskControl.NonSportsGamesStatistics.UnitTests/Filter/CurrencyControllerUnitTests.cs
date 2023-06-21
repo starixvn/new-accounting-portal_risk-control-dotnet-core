@@ -19,8 +19,8 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
             // Arrange
             var expectedCurrencies = new List<CurrencyModel>
              {
-                new CurrencyModel { ExchangeId = 2, Currency = "Any currency 1" },
-                new CurrencyModel { ExchangeId = 1, Currency = "currency 2" }
+                new() { ExchangeId = 2, Currency = "Any currency 1" },
+                new() { ExchangeId = 1, Currency = "currency 2" }
             };
 
             var repository = Substitute.For<IDynamicRepository>();

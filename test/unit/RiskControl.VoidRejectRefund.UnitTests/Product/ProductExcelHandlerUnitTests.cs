@@ -15,7 +15,7 @@ namespace RiskControl.VoidRejectRefund.UnitTests.Product
 {
     public class ProductExcelHandlerUnitTests
     {
-        private readonly Fixture fixture = new Fixture();
+        private readonly Fixture fixture = new();
 
         private static ExcelPackage CreateExcelPackage()
         {
@@ -49,7 +49,7 @@ namespace RiskControl.VoidRejectRefund.UnitTests.Product
             var handler = new ProductExcelHandler(service, sortingService, excelBuilder, mapper);
 
             // Act
-            var actualExcelPackage = await handler.Handle(new VoidRejectRefund.Product.HttpParameterExcel()
+            var actualExcelPackage = await handler.Handle(new VoidRejectRefund.Product.HttpParameterExcel
             {
                 SortDirection = "asc",
                 SortColumnName = "BetCount"

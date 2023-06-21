@@ -7,7 +7,7 @@ using RiskControl.NonSportsGamesStatistics.Common;
 namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Username
 {
     [Route("NonSportsGamesStatistics/SpecificMember/Username")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class SpecificMemberController : BaseController<QueryModel>
     {
         public SpecificMemberController(IMediator mediator) : base(mediator)

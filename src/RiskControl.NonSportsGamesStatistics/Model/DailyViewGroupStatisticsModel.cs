@@ -8,6 +8,6 @@ namespace RiskControl.NonSportsGamesStatistics.Model
 
         public string GroupName { get; set; }
 
-        public List<DailyViewStatisticsModel> DailyViewStatistics { get; set; } = new List<DailyViewStatisticsModel>();
+        public List<DailyViewStatisticsModel> DailyViewStatistics { get; set; } = new();
     }
 }

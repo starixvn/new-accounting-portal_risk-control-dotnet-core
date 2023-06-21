@@ -14,7 +14,7 @@ namespace RiskControl.VoidRejectRefund.UnitTests.Common
 {
     public class GroupHandlerExcelUnitTests
     {
-        private readonly Fixture fixture = new Fixture();
+        private readonly Fixture fixture = new();
 
         private static ExcelPackage CreateExcelPackage()
         {
@@ -52,7 +52,8 @@ namespace RiskControl.VoidRejectRefund.UnitTests.Common
             var handler = new GroupHandlerExcel(service, sortingService, excelBuilder, mapper);
 
             // Act
-            var actualExcelPackage = await handler.Handle(new HttpParameterGroupExcel() {
+            var actualExcelPackage = await handler.Handle(new HttpParameterGroupExcel
+            {
                 SortDirection = "asc",
                 SortColumnName = "BetCount"
             }, new CancellationToken());

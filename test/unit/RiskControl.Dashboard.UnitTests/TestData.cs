@@ -8,13 +8,13 @@ namespace RiskControl.Dashboard.UnitTests
         public static IEnumerable<TopGameTypeWinning> TopGameTypeWinningList =>
             new List<TopGameTypeWinning>
                 {
-                    new TopGameTypeWinning
+                    new()
                     {
                         Product = "Saba Casino",
                         Bettype = "Over/Under",
                         GameIncome = 592.669m
                     },
-                    new TopGameTypeWinning
+                    new()
                     {
                         Product = "Number Game",
                         Bettype = "Handicap",
@@ -25,13 +25,13 @@ namespace RiskControl.Dashboard.UnitTests
         public static IEnumerable<TopMemberWinning> TopMemberWinningList =>
             new List<TopMemberWinning>
                 {
-                    new TopMemberWinning
+                    new()
                     {
                         Username = "12BETUUS01001",
                         Currency = "(UUS)",
                         GameIncome = 592.669m
                     },
-                    new TopMemberWinning
+                    new()
                     {
                         Username = "FYJ8500001",
                         Currency = "CNY (RMB)",

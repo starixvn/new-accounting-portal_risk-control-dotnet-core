@@ -46,14 +46,14 @@ namespace RiskControl.UnitTest.Core.TestUtilities
         public static void Write(string name, object value, [CallerFilePath] string sourceFilePath = "")
         {
             var dataFilePath = $"{Path.GetDirectoryName(sourceFilePath)}/{Path.GetFileNameWithoutExtension(sourceFilePath)}.{name}.json";
-            string json = JsonConvert.SerializeObject(value);
+            var json = JsonConvert.SerializeObject(value);
             File.WriteAllText(dataFilePath, json);
         }
 
         public static void WriteFile(string name, object value, string path)
         {
             var dataFilePath = $"{path}.{name}.json";
-            string json = JsonConvert.SerializeObject(value);
+            var json = JsonConvert.SerializeObject(value);
             File.WriteAllText(dataFilePath, json);
         }
     }

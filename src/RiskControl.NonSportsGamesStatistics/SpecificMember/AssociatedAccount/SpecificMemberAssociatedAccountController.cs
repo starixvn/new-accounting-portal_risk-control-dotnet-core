@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RiskControl.NonSportsGamesStatistics.SpecificMember.AssociatedAccount
 {
     [Route("NonSportsGamesStatistics/SpecificMember/AssociatedAccount")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class SpecificMemberAssociatedAccountController : BaseController<QueryModel>
     {
         public SpecificMemberAssociatedAccountController(IMediator mediator) : base(mediator)

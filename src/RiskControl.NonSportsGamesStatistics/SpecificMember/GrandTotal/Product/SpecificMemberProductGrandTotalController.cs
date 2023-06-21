@@ -7,7 +7,7 @@ using RiskControl.NonSportsGamesStatistics.Common;
 namespace RiskControl.NonSportsGamesStatistics.SpecificMember.GrandTotal.Product
 {
     [Route("NonSportsGamesStatistics/SpecificMember/ProductGrandTotal")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class SpecificMemberProductGrandTotalController : BaseController<QueryModel>
     {
         public SpecificMemberProductGrandTotalController(IMediator mediator) : base(mediator)

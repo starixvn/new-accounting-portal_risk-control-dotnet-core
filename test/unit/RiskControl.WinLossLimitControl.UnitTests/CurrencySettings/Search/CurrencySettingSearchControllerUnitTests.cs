@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using NSubstitute;
 using RiskControl.WinLossLimitControl.CurrencySettings.Search;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 

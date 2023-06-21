@@ -7,7 +7,7 @@ using RiskControl.NonSportsGamesStatistics.Common;
 namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Product
 {
     [Route("NonSportsGamesStatistics/SpecificMember/Product")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class SpecificMemberProductController : BaseController<QueryModel>
     {
         public SpecificMemberProductController(IMediator mediator) : base(mediator)
@@ -23,7 +23,7 @@ namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Product
         [HttpPost, Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
-            string sheetName = $"{queryModel.ReportBy.Replace("SpecificMember", string.Empty)} Game Statistic";
+            var sheetName = $"{queryModel.ReportBy.Replace("SpecificMember", string.Empty)} Game Statistic";
             return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
         }
     }

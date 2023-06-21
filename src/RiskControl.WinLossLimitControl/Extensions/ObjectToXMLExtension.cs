@@ -1,5 +1,4 @@
 ﻿using RiskControl.WinLossLimitControl.CurrencySettings.Model;
-using RiskControl.WinLossLimitControl.ManagedSettingGroup.Update;
 using System.Collections.Generic;
 using System.Text;
 

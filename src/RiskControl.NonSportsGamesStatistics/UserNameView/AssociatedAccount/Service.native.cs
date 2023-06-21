@@ -1,7 +1,4 @@
-﻿using Fanex.Data.Repository;
-using Olympus.FPSAPI.Client;
-using RiskControl.Core.AssociatedAcccount;
-using RiskControl.Core.Configuration;
+﻿using RiskControl.Core.AssociatedAcccount;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.RawData;
@@ -18,11 +15,8 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount
         private readonly CalculationService service;
         private readonly AssociatedAccountService associatedAccountService;
 
-        public ServiceImp(ConfigurationService configurationService,
-            RawService rawService,
-            FraudServiceWrapper fraudServiceWrapper,
+        public ServiceImp(RawService rawService,
             CalculationService service,
-            IDynamicRepository repository,
              AssociatedAccountService associatedAccountService)
         {
             this.rawService = rawService;

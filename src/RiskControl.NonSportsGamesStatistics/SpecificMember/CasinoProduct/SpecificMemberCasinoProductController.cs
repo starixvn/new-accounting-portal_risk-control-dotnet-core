@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RiskControl.NonSportsGamesStatistics.SpecificMember.CasinoProduct
 {
     [Route("NonSportsGamesStatistics/SpecificMember/CasinoProduct")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class SpecificMemberCasinoProductController : BaseController<QueryModel>
     {
         public SpecificMemberCasinoProductController(IMediator mediator) : base(mediator)

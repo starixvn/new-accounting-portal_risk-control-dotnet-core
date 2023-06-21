@@ -8,7 +8,7 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly.History
 {
     [ApiController]
     [Route("NonSportsGamesStatistics/HourlyHistory")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class HourlyHistoryModeController : ControllerBase
     {
         private readonly IMediator mediator;

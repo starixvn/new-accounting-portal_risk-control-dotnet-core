@@ -43,11 +43,9 @@ namespace RiskControl.WinLossLimitControl.GameRound
         private ExcelPackage LoadTemplate()
         {
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/Templates/GameRound/Monitor.xlsx";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                var excelPackage = new ExcelPackage(stream);
-                return excelPackage;
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            var excelPackage = new ExcelPackage(stream);
+            return excelPackage;
         }
     }
 }

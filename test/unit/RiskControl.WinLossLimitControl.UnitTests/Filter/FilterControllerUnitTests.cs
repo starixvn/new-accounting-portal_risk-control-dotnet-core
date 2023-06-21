@@ -70,7 +70,7 @@ namespace RiskControl.WinLossLimitControl.UnitTests.Filter
         public async Task SearchUsers_Always_ReturnsDataFromFilterService()
         {
             // Arrange
-            var customer = new List<Customer> { new Customer { CustId = 1, Username = "Any Username" } };
+            var customer = new List<Customer> { new() { CustId = 1, Username = "Any Username" } };
             var filterService = Substitute.For<FilterService>();
             filterService.SearchUsers(Arg.Compat.Any<CustomerSuggestionCriteria>()).Returns(customer);
 
@@ -88,7 +88,7 @@ namespace RiskControl.WinLossLimitControl.UnitTests.Filter
         public async Task GetGroups_Always_ReturnsDataFromFilterService()
         {
             // Arrange
-            var expectedGroupList = new List<Group> { new Group { GroupId = 50, GroupName = "AdvantPlay Mini" } };
+            var expectedGroupList = new List<Group> { new() { GroupId = 50, GroupName = "AdvantPlay Mini" } };
             var filterService = Substitute.For<FilterService>();
             filterService.GetGroupByProduct(Arg.Compat.Any<GetGroupCriteria>()).Returns(expectedGroupList);
 

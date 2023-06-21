@@ -8,6 +8,6 @@ namespace RiskControl.NonSportsGamesStatistics.Model
 
         public string GroupName { get; set; }
 
-        public List<UserNameViewStatisticsModel> UserNameViewStatistics { get; set; } = new List<UserNameViewStatisticsModel>();
+        public List<UserNameViewStatisticsModel> UserNameViewStatistics { get; set; } = new();
     }
 }

@@ -17,36 +17,36 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
         private static IEnumerable<SiteGroupEntity> SiteGroupEntityList =>
             new List<SiteGroupEntity>
             {
-                new SiteGroupEntity
+                new()
                 {
                     GroupId = -1000,
                     GroupName = "789y",
-                    ParentId = 0,
+                    ParentId = 0
                 },
-                new SiteGroupEntity
+                new()
                 {
                     GroupId = 3,
                     GroupName = "Alek's Group",
-                    ParentId = 0,
+                    ParentId = 0
                 }
             };
 
         private static IEnumerable<LicenseeEntity> LicenseeEntityList =>
             new List<LicenseeEntity>
             {
-                new LicenseeEntity
+                new()
                 {
                     GroupId = -1000,
                     LicenseeName = "y789",
                     LicenseeId = -1
                 },
-                new LicenseeEntity
+                new()
                 {
                     GroupId = -1000,
                     LicenseeName = "y889",
                     LicenseeId = -1
                 },
-                new LicenseeEntity
+                new()
                 {
                     GroupId = 3,
                     LicenseeId = 137,
@@ -55,16 +55,16 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
             };
 
         private static List<SiteGroupModel>  ExpectedData =>
-            new List<SiteGroupModel>
+            new()
             {
                 new SiteGroupModel
                 {
                     ChildGroups = new List<SiteGroupModel>
                     {
-                        new SiteGroupModel
+                        new()
                         {
                             ChildGroups = new List<SiteGroupModel> { 
-                                new SiteGroupModel
+                                new()
                                 {
                                     ChildGroups = null,
                                     ChildItems = null,
@@ -74,7 +74,7 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
                                     LicenseeName = "y789",
                                     ParentId = 0
                                 },
-                                new SiteGroupModel
+                                new()
                                 {
                                     ChildGroups = null,
                                     ChildItems = null,
@@ -91,7 +91,7 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
                             LicenseeId = 0,
                             LicenseeName = null,
                             ParentId = 0
-                        },
+                        }
                     },
                     ChildItems = null,
                     GroupId = 0,
@@ -104,11 +104,11 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
                 {
                     ChildGroups = new List<SiteGroupModel>
                     {
-                        new SiteGroupModel
+                        new()
                         {
                             ChildGroups = new List<SiteGroupModel>
                             { 
-                                new SiteGroupModel
+                                new()
                                 {
                                     ChildGroups = null,
                                     ChildItems = null,
@@ -119,7 +119,7 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
                                     ParentId = 0
                                 }
                             },
-                            ChildItems = new(),
+                            ChildItems = new List<LicenseeModel>(),
                             GroupId = 3,
                             GroupName = "Alek's Group",
                             LicenseeId = 0,
@@ -154,7 +154,7 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
         public async Task GetSiteGroups_HaveProductId_ReturnExpectedData()
         {
             // Arrange
-            var productId = "47,59";
+            const string productId = "47,59";
             var repository = Substitute.For<IDynamicRepository>();
             repository.FetchMultipleAsync<SiteGroupEntity, LicenseeEntity>(Arg.Compat.Any<SiteCriteria>()).Returns((SiteGroupEntityList, LicenseeEntityList));
 

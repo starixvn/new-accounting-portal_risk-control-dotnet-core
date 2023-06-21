@@ -31,6 +31,6 @@ namespace RiskControl.Dashboard.Criteria
 
         public override bool IsValid() => true;
 
-        public override string GetSettingKey() => $"RiskControl_Dashboard_TopGameTypeWinning";
+        public override string GetSettingKey() => "RiskControl_Dashboard_TopGameTypeWinning";
     }
 }

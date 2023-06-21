@@ -43,14 +43,12 @@ namespace RiskControl.VoidRejectRefund.Common
 
         private void LoadTemplate(ReportType reportBy)
         {
-            string reportMode = reportModeService.GetReportMode(reportBy);
+            var reportMode = reportModeService.GetReportMode(reportBy);
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/Templates/VoidRejectRefund/{reportMode}.xlsx";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                summarySheet = ExcelPackage.Workbook.Worksheets.Copy("Void Reject Refund", $"{reportMode} Void Reject Refund");
-                totalSheet = ExcelPackage.Workbook.Worksheets["Grand Total"];
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            summarySheet = ExcelPackage.Workbook.Worksheets.Copy("Void Reject Refund", $"{reportMode} Void Reject Refund");
+            totalSheet = ExcelPackage.Workbook.Worksheets["Grand Total"];
         }
 
         private void BuilTitle(string title)

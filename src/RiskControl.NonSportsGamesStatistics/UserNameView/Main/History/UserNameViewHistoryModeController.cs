@@ -8,7 +8,7 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main.History
 {
     [ApiController]
     [Route("NonSportsGamesStatistics/UserNameViewHistory")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class UserNameViewHistoryModeController : ControllerBase
     {
         private readonly IMediator mediator;

@@ -11,7 +11,7 @@ namespace RiskControl.VoidRejectRefund.UnitTests.Product
 {
     public class ProductExcelBuilderUnitTests
     {
-        private readonly Fixture fixture = new Fixture();
+        private readonly Fixture fixture = new();
 
         [Fact]
         public void Build_ProductModelHasData_ReturnsExpectedExcelFile()

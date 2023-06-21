@@ -10,8 +10,8 @@ namespace RiskControl.Application.UnitTests.Header
     public class HeaderControllerUnitTests
     {
         private static List<MenuItem> MenuItemList =>
-            new List<MenuItem>
-                {
+            new()
+            {
                     new MenuItem
                     {
                         DisplayOrder = 3,

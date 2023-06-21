@@ -53,17 +53,15 @@ namespace RiskControl.VoidRejectRefund.Product
 
         private void LoadTemplate(ReportType reportBy)
         {
-            string reportMode = reportModeService.GetReportMode(reportBy);
+            var reportMode = reportModeService.GetReportMode(reportBy);
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/Templates/VoidRejectRefund/{reportMode}.xlsx";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                productMainSheet = ExcelPackage.Workbook.Worksheets.Copy("Void Reject Refund", $"{reportMode} Void Reject Refund");
-                tempSheet = ExcelPackage.Workbook.Worksheets.Copy("Void Reject Refund", "Temp Sheet");
-                totalFirstLevelSheet = ExcelPackage.Workbook.Worksheets["Sub Total 2"];
-                totalSecondLevelSheet = ExcelPackage.Workbook.Worksheets["Sub Total"];
-                grandTotalSheet = ExcelPackage.Workbook.Worksheets["Grand Total"];
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            productMainSheet = ExcelPackage.Workbook.Worksheets.Copy("Void Reject Refund", $"{reportMode} Void Reject Refund");
+            tempSheet = ExcelPackage.Workbook.Worksheets.Copy("Void Reject Refund", "Temp Sheet");
+            totalFirstLevelSheet = ExcelPackage.Workbook.Worksheets["Sub Total 2"];
+            totalSecondLevelSheet = ExcelPackage.Workbook.Worksheets["Sub Total"];
+            grandTotalSheet = ExcelPackage.Workbook.Worksheets["Grand Total"];
         }
 
         private void SetStartRowIndex()

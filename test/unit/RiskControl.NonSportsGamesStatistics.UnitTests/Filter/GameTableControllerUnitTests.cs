@@ -18,8 +18,8 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
             // Arrange
             var expectedGameTables = new List<GameTableModel>
             {
-                new GameTableModel { GameTableId = 1, GameTable = "Any game table 1", TypeId = 1, IsTest = true },
-                new GameTableModel { GameTableId = 2, GameTable = "Any game table 2", TypeId = 2, IsTest = false }
+                new() { GameTableId = 1, GameTable = "Any game table 1", TypeId = 1, IsTest = true },
+                new() { GameTableId = 2, GameTable = "Any game table 2", TypeId = 2, IsTest = false }
             };
 
             var repository = Substitute.For<IDynamicRepository>();

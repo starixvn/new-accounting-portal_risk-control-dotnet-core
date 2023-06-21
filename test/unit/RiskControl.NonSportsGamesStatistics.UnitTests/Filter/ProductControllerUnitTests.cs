@@ -18,14 +18,14 @@ namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter
             // Arrange
             var fakeProducts = new List<ProductModel>
             {
-                new ProductModel { ProductId = 1, ProductName = "Any product name 1", CasinoType = 0, IsSingleWallet = false },
-                new ProductModel { ProductId = 2, ProductName = "Any product name 2", CasinoType = 1, IsSingleWallet = true }
+                new() { ProductId = 1, ProductName = "Any product name 1", CasinoType = 0, IsSingleWallet = false },
+                new() { ProductId = 2, ProductName = "Any product name 2", CasinoType = 1, IsSingleWallet = true }
             };
 
             var expectedProducts = new List<ProductModel>
             {
-                new ProductModel { ProductId = 1, ProductName = "Any product name 1", CasinoType = 0, IsSingleWallet = false },
-                new ProductModel { ProductId = 2, ProductName = "Any product name 2", CasinoType = 1, IsSingleWallet = true }
+                new() { ProductId = 1, ProductName = "Any product name 1", CasinoType = 0, IsSingleWallet = false },
+                new() { ProductId = 2, ProductName = "Any product name 2", CasinoType = 1, IsSingleWallet = true }
             };
 
             var repository = Substitute.For<IDynamicRepository>();

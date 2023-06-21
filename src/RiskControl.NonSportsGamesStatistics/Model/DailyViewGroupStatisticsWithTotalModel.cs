@@ -4,8 +4,8 @@ namespace RiskControl.NonSportsGamesStatistics.Model
 {
     public class DailyViewGroupStatisticsWithTotalModel
     {
-        public DailyViewStatisticsModel Total { get; set; } = new DailyViewStatisticsModel();
+        public DailyViewStatisticsModel Total { get; set; } = new();
 
-        public List<DailyViewGroupStatisticsModel> Statistics { get; set; } = new List<DailyViewGroupStatisticsModel>();
+        public List<DailyViewGroupStatisticsModel> Statistics { get; set; } = new();
     }
 }

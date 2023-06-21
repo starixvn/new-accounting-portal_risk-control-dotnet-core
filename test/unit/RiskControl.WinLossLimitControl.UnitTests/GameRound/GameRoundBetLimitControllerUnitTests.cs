@@ -14,16 +14,14 @@ namespace RiskControl.WinLossLimitControl.UnitTests.GameRound
     {
         private readonly IMediator mediator;
 
-        private readonly AuthorizationService authorizationService;
-
         private readonly GameRoundBetLimitController controller;
 
         public GameRoundBetLimitControllerUnitTests()
         {
-            this.mediator = Substitute.For<IMediator>();
-            this.authorizationService = Substitute.For<AuthorizationService>();
-            this.authorizationService.HasPermission(Arg.Compat.Any<string>(), Arg.Compat.Any<Policy>()).Returns(true);
-            this.controller = new GameRoundBetLimitController(this.mediator, this.authorizationService);
+            mediator = Substitute.For<IMediator>();
+            var authorizationService = Substitute.For<AuthorizationService>();
+            authorizationService.HasPermission(Arg.Compat.Any<string>(), Arg.Compat.Any<Policy>()).Returns(true);
+            controller = new GameRoundBetLimitController(mediator, authorizationService);
         }
 
         [Fact]

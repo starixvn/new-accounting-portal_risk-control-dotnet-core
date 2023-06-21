@@ -7,7 +7,7 @@ using RiskControl.NonSportsGamesStatistics.Common;
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount.History
 {
     [Route("NonSportsGamesStatistics/AssociatedAccountHistory")]
-    [ValidationActionFilterAttribute]
+    [ValidationActionFilter]
     public class AssociatedAccountHistoryModeController : BaseController<QueryModel>
     {
         public AssociatedAccountHistoryModeController(IMediator mediator) : base(mediator)
@@ -23,7 +23,7 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount.Hi
         [HttpPost, Route("Excel")]
         public async Task<IActionResult> Excel(QueryModel queryModel)
         {
-            string sheetName = $"{queryModel.ReportBy} Game Statistic";
+            var sheetName = $"{queryModel.ReportBy} Game Statistic";
             return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
         }
     }

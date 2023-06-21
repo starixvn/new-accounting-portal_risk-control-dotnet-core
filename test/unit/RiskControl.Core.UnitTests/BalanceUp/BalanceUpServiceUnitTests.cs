@@ -11,7 +11,7 @@ namespace RiskControl.Core.UnitTests.BalanceUp
     public class BalanceUpServiceUnitTests
     {
         private static BalanceUpRange BalanceUpRangeData =>
-            new BalanceUpRange
+            new()
             {
                 BalanceUpDay = new DateTime(2022, 10, 10),
                 MoveBetsDay = new DateTime(2022, 10, 10)

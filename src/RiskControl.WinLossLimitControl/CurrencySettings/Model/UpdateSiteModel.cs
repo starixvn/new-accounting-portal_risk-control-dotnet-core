@@ -22,28 +22,16 @@
 
         public bool IsBlockedPlaceBet
         {
-            get
-            {
-                return LevelId == MostDangerousLevel && isBlockedPlaceBet;
-            }
+            get => LevelId == MostDangerousLevel && isBlockedPlaceBet;
 
-            set
-            {
-                isBlockedPlaceBet = value;
-            }
+            set => isBlockedPlaceBet = value;
         }
 
         public bool IsBlockedTransfer
         {
-            get
-            {
-                return LevelId == MostDangerousLevel && isBlockedTransfer;
-            }
+            get => LevelId == MostDangerousLevel && isBlockedTransfer;
 
-            set
-            {
-                isBlockedTransfer = value;
-            }
+            set => isBlockedTransfer = value;
         }
     }
 }

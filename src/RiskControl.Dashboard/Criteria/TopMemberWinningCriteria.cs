@@ -13,6 +13,6 @@ namespace RiskControl.Dashboard.Criteria
 
         public override bool IsValid() => true;
 
-        public override string GetSettingKey() => $"RiskControl_Dashboard_TopMemberWinning";
+        public override string GetSettingKey() => "RiskControl_Dashboard_TopMemberWinning";
     }
 }
