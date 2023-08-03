@@ -189,7 +189,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
     const gridModel = this.modeContext.gridModel;
     const queryModel = this.createQueryModel();
     this.modelService.updateModelToQueryGrandTotal(queryModel);
-    queryModel.isDrillDown = gridModel.isDrillDownCurrency;
+    //queryModel.isDrillDown = gridModel.isDrillDownCurrency;
     this.userNameService.queryGrandTotal(queryModel).subscribe(gridOptions => {
       gridOptions.fullHeight = false;
       gridOptions.gridHeight = 500;
