@@ -186,13 +186,13 @@ export class UserNameComponent implements OnInit, ModeGenerate {
   }
 
   private showGrandTotal() {
-    const gridModel = this.modeContext.gridModel;
+    const gridModel = this.modeContext.gridModel as UserNameGridModel;
     const queryModel = this.createQueryModel();
     this.modelService.updateModelToQueryGrandTotal(queryModel);
 
-    if(queryModel.roleId === 1) {
-      queryModel.isDrillDown = false;
-    }
+    queryModel.isDrillDown = gridModel.isDrillDownFromUserName ?
+      gridModel.isDrillDownFromUserName :
+      gridModel.isDrillDownCurrency;
 
     this.userNameService.queryGrandTotal(queryModel).subscribe(gridOptions => {
       gridOptions.fullHeight = false;
