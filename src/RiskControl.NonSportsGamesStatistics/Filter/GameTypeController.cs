@@ -32,7 +32,9 @@ namespace RiskControl.NonSportsGamesStatistics.Filter
         [HttpPost]
         public async Task WriteGameTypeLog(DataLogModel data)
         {
-            await LogService.InfoAsync($"Data: {JsonConvert.SerializeObject(data)}");
-        }
+            await LogService.InfoAsync($"Logs - GameTypes: {JsonConvert.SerializeObject(data.GameTypes)}");
+            await LogService.InfoAsync($"Logs - Product: {JsonConvert.SerializeObject(data.Product)}");
+            await LogService.InfoAsync($"Logs - SelectedGameTypes: {JsonConvert.SerializeObject(data.SelectedGameTypes)}");
+		}
     }
 }
