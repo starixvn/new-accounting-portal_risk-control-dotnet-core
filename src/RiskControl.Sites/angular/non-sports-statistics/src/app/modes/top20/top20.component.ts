@@ -219,6 +219,7 @@ export class Top20Component implements OnInit, ModeGenerate {
     filterModel.reportType = ReportType.UserName;
     filterModel.roleId = roleId;
     filterModel.userName = userName;
+    filterModel.isDrillDown = true;
     const modeContext = ModeContext.create(userName, filterModel, new Top20GridModel(false, true));
     this.modeController.forward(this.gridOptions, modeContext);
   }

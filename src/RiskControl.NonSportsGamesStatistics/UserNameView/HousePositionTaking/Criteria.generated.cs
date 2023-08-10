@@ -25,7 +25,7 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.HousePositionTaking
 
         public string GameTableId { get; set; }
 
-        public int Currency { get; set; }
+        public string Currency { get; set; }
 
         public string Device { get; set; }
 
