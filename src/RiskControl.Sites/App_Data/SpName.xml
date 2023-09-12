@@ -137,14 +137,7 @@
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_SpecificMemberMonthly_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Monthly" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsStatistics_TopAssociatedAccount_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_TopAssociatedAccount" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
 	</Function>
-	<Function Name="Void Reject Refund">
-		<Setting Key="Void_Reject_Refund_Daily" SpName="Acc_Rpt_NonSportVoidRejectRefund_Daily" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
-		<Setting Key="Void_Reject_Refund_Monthly" SpName="Acc_Rpt_NonSportVoidRejectRefund_Monthly" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
-		<Setting Key="Void_Reject_Refund_Product" SpName="Acc_Rpt_NonSportVoidRejectRefund_Product" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
-		<Setting Key="Void_Reject_Refund_Currency" SpName="Acc_Rpt_NonSportVoidRejectRefund_Currency" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
-		<Setting Key="Void_Reject_Refund_Company" SpName="Acc_Rpt_NonSportVoidRejectRefund_Company" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
-		<Setting Key="Void_Reject_Refund_Device" SpName="Acc_Rpt_NonSportVoidRejectRefund_Device" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
-	</Function>
+	
 	<Function Name="Dashboard">
 		<Setting Key="RiskControl_Dashboard_TopGameTypeWinning" SpName="Acc_Rpt_NonSports_Dashboard_TopGameTypeWinning" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
 		<Setting Key="RiskControl_Dashboard_TopMemberWinning" SpName="Acc_Rpt_NonSports_Dashboard_TopMemberWinning" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="300" />
