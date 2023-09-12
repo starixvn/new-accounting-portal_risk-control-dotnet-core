@@ -21,6 +21,13 @@ using System.Threading.Tasks;
 
 namespace RiskControl.Sites;
 
+using System.Reflection;
+using BettingMonitoring;
+using NonSportsGamesStatistics;
+using ProgressiveJackpot;
+using VoidRejectRefund;
+using WinLossLimitControl;
+
 public static class ServiceCollectionExtensions
 {
     public static void RegisterFanexData(this IServiceCollection services, IConfiguration configuration)
@@ -86,6 +93,21 @@ public static class ServiceCollectionExtensions
             return mapperConfig.CreateMapper();
         }
     }
+
+    public static void RegisterAssemblyForMediatR(this IServiceCollection services)
+    {
+        void ConfigAssembly(MediatRServiceConfiguration configuration, Type type)
+        {
+            configuration.RegisterServicesFromAssemblies(type.GetTypeInfo().Assembly);
+        }
+
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(BettingMonitoringMarker)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(NonSportsGamesStatisticsMarker)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(ProgressiveJackpotMarker)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(VoidRejectRefundMarker)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(WinLossLimitControlMarker)));
+    }
+
 
     public static void RegisterInternalServices(this IServiceCollection services, IConfiguration configuration)
     {

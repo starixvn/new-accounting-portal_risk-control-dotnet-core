@@ -27,7 +27,7 @@ public static class ExceptionMiddlewareExtensions
                         .AddSection("Server Info", CommonInfoGetters.GetServerInfo())
                         .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(contextFeature.Error.InnerException))
                         .ToString();
-                    LogService.Error(logMessage);
+                    await LogService.ErrorAsync(logMessage);
                     await context.Response.WriteAsync(new ErrorDetails
                     {
                         StatusCode = context.Response.StatusCode,

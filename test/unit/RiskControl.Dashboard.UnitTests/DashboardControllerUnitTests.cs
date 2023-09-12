@@ -24,7 +24,7 @@ public class DashboardControllerUnitTests
     [Fact]
     public async Task TopGameTypeWinning_Always_ReturnExpectedData()
     {
-        // Arrang
+        // Arrange
         repository.FetchAsync<TopGameTypeWinning>(Arg.Compat.Any<TopGameTypeWinningCriteria>()).Returns(TestData.TopGameTypeWinningList);
 
         // Act
@@ -37,7 +37,7 @@ public class DashboardControllerUnitTests
     [Fact]
     public async Task TopMemberWinning_Always_ReturnExpectedData()
     {
-        // Arrang
+        // Arrange
         repository.FetchAsync<TopMemberWinning>(Arg.Compat.Any<TopMemberWinningCriteria>()).Returns(TestData.TopMemberWinningList);
 
         // Act

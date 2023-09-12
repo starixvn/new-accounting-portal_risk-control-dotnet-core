@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using RiskControl.VoidRejectRefund.Common;
 using RiskControl.VoidRejectRefund.Product;
 
@@ -7,21 +6,17 @@ namespace RiskControl.Sites.DependencyInjections;
 
 public static class VoidRejectRefundInjection
 {
-    public static void RegisterVoidRejectRefundService(this IServiceCollection service)
+    public static void RegisterVoidRejectRefundService(this IServiceCollection services)
     {
-        service.AddMediatR(typeof(Handler).Assembly);
-        service.AddMediatR(typeof(GroupHandler).Assembly);
-        service.AddMediatR(typeof(HandlerExcel).Assembly);
-        service.AddMediatR(typeof(GroupHandlerExcel).Assembly);
-        service.AddTransient<Service, ServiceImp>();
-        service.AddTransient<GroupService, GroupServiceImp>();
-        service.AddTransient<ExcelBuilder, ExcelBuilderImp>();
-        service.AddTransient<GroupExcelBuilder, GroupExcelBuilderImp>();
-        service.AddTransient<SortingService<StatisticReportModel>, SortingServiceImp>();
-        service.AddTransient<SortingService<GroupStatisticReportModel>, SortingGroupServiceImp>();
-        service.AddTransient<ReportModeService, ReportModeServiceImp>();
-        service.AddTransient<ProductService, ProductServiceImp>();
-        service.AddTransient<SortingService<ProductModel>, ProductSortingServiceImp>();
-        service.AddTransient<ProductExcelBuilder, ProductExcelBuilderImp>();
+        services.AddTransient<Service, ServiceImp>();
+        services.AddTransient<GroupService, GroupServiceImp>();
+        services.AddTransient<ExcelBuilder, ExcelBuilderImp>();
+        services.AddTransient<GroupExcelBuilder, GroupExcelBuilderImp>();
+        services.AddTransient<SortingService<StatisticReportModel>, SortingServiceImp>();
+        services.AddTransient<SortingService<GroupStatisticReportModel>, SortingGroupServiceImp>();
+        services.AddTransient<ReportModeService, ReportModeServiceImp>();
+        services.AddTransient<ProductService, ProductServiceImp>();
+        services.AddTransient<SortingService<ProductModel>, ProductSortingServiceImp>();
+        services.AddTransient<ProductExcelBuilder, ProductExcelBuilderImp>();
     }
 }

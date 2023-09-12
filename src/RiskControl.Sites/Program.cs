@@ -25,6 +25,7 @@ services.RegisterRemotingRef(configuration);
 services.RegisterFanexData(configuration);
 services.RegisterSentry(configuration);
 services.RegisterInternalServices(configuration);
+services.RegisterAssemblyForMediatR();
 
 var app = builder.Build();
 app.Use((context, next) =>
