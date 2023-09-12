@@ -8,53 +8,52 @@ using RiskControl.WinLossLimitControl.Models;
 using System.Collections.Generic;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.Filter
+namespace RiskControl.WinLossLimitControl.UnitTests.Filter;
+
+public class BaseEntityGroupLoaderServiceUnitTests
 {
-    public class BaseEntityGroupLoaderServiceUnitTests
+    [Fact]
+    public void GetBaseEntityGroup_Always_ReturnsDataFromRepository()
     {
-        [Fact]
-        public void GetBaseEntityGroup_Always_ReturnsDataFromRepository()
+        // Arrange
+        var baseEntityList = CreateBaseEntityList();
+        var repository = Substitute.For<IDynamicRepository>();
+        repository.Fetch<BaseEntity>(Arg.Compat.Any<GetAllCurrencyCriteria>()).Returns(baseEntityList);
+        repository.Fetch<BaseEntity>(Arg.Compat.Any<GetAllGroupCriteria>()).Returns(baseEntityList);
+        repository.Fetch<BaseEntity>(Arg.Compat.Any<GetAllProductCriteria>()).Returns(baseEntityList);
+        repository.Fetch<BaseEntity>(Arg.Compat.Any<GetAllSiteCriteria>()).Returns(baseEntityList);
+
+        // Act
+        var service = new BaseEntityGroupLoaderServiceImp(repository);
+        var baseEntityGroup = service.GetBaseEntityGroup();
+
+        // Assert
+        var expectedDictionary = CreateExpectedDictionary();
+        var expected = new BaseEntityGroup
         {
-            // Arrange
-            var baseEntityList = CreateBaseEntityList();
-            var repository = Substitute.For<IDynamicRepository>();
-            repository.Fetch<BaseEntity>(Arg.Compat.Any<GetAllCurrencyCriteria>()).Returns(baseEntityList);
-            repository.Fetch<BaseEntity>(Arg.Compat.Any<GetAllGroupCriteria>()).Returns(baseEntityList);
-            repository.Fetch<BaseEntity>(Arg.Compat.Any<GetAllProductCriteria>()).Returns(baseEntityList);
-            repository.Fetch<BaseEntity>(Arg.Compat.Any<GetAllSiteCriteria>()).Returns(baseEntityList);
+            Currencies = expectedDictionary,
+            Groups = expectedDictionary,
+            Products = expectedDictionary,
+            Sites = expectedDictionary
+        };
 
-            // Act
-            var service = new BaseEntityGroupLoaderServiceImp(repository);
-            var baseEntityGroup = service.GetBaseEntityGroup();
+        DeepAssert.Equal(expected, baseEntityGroup);
+    }
 
-            // Assert
-            var expectedDictionary = CreateExpectedDictionary();
-            var expected = new BaseEntityGroup
-            {
-                Currencies = expectedDictionary,
-                Groups = expectedDictionary,
-                Products = expectedDictionary,
-                Sites = expectedDictionary
-            };
-
-            DeepAssert.Equal(expected, baseEntityGroup);
-        }
-
-        private static List<BaseEntity> CreateBaseEntityList()
+    private static List<BaseEntity> CreateBaseEntityList()
+    {
+        var baseEntity = new BaseEntity { Id = 1, Name = "Item 1" };
+        return new List<BaseEntity>
         {
-            var baseEntity = new BaseEntity { Id = 1, Name = "Item 1" };
-            return new List<BaseEntity>
-            {
-                baseEntity
-            };
-        }
+            baseEntity
+        };
+    }
 
-        private static Dictionary<int, string> CreateExpectedDictionary()
+    private static Dictionary<int, string> CreateExpectedDictionary()
+    {
+        return new Dictionary<int, string>
         {
-            return new Dictionary<int, string>
-            {
-                { 1, "Item 1" }
-            };
-        }
+            { 1, "Item 1" }
+        };
     }
 }

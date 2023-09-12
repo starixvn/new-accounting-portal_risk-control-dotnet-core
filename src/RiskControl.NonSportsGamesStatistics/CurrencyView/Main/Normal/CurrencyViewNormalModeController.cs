@@ -3,26 +3,25 @@ using Microsoft.AspNetCore.Mvc;
 using RiskControl.NonSportsGamesStatistics.Common;
 using System.Threading.Tasks;
 
-namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Main.Normal
+namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Main.Normal;
+
+[Route("NonSportsGamesStatistics/CurrencyViewNormal")]
+public class CurrencyViewNormalModeController : BaseController<QueryModel>
 {
-    [Route("NonSportsGamesStatistics/CurrencyViewNormal")]
-    public class CurrencyViewNormalModeController : BaseController<QueryModel>
+    public CurrencyViewNormalModeController(IMediator mediator) : base(mediator)
     {
-        public CurrencyViewNormalModeController(IMediator mediator) : base(mediator)
-        {
-        }
+    }
 
-        [Route("Query")]
-        public override async Task<IActionResult> Query(QueryModel queryModel)
-        {
-            return await base.Query(queryModel).ConfigureAwait(false);
-        }
+    [Route("Query")]
+    public override async Task<IActionResult> Query(QueryModel queryModel)
+    {
+        return await base.Query(queryModel).ConfigureAwait(false);
+    }
 
-        [HttpPost, Route("Excel")]
-        public async Task<IActionResult> Excel(QueryModel queryModel)
-        {
-            var sheetName = $"{queryModel.ReportBy} Game Statistic";
-            return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
-        }
+    [HttpPost, Route("Excel")]
+    public async Task<IActionResult> Excel(QueryModel queryModel)
+    {
+        var sheetName = $"{queryModel.ReportBy} Game Statistic";
+        return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
     }
 }

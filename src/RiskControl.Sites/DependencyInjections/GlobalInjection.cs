@@ -11,31 +11,30 @@ using RiskControl.Core.AssociatedAcccount;
 using RiskControl.Core.BalanceUp;
 using RiskControl.Core.Configuration;
 
-namespace RiskControl.Sites.DependencyInjections
+namespace RiskControl.Sites.DependencyInjections;
+
+using Fanex.NAP.Client.Session;
+
+public static class GlobalInjection
 {
-    using Fanex.NAP.Client.Session;
-
-    public static class GlobalInjection
+    public static void RegisterGlobalServices(this IServiceCollection service)
     {
-        public static void RegisterGlobalServices(this IServiceCollection service)
-        {
-            service.AddTransient<IRemotingRefService, RemotingRefService>();
-            service.AddTransient<IUserService, UserService>();
-            service.AddTransient<IGroupService, GroupService>();
-            service.AddTransient<ISiteService, SiteService>();
-            service.AddTransient<ISecurityService, SecurityService>();
-            service.AddTransient<INapSession, NapSession>();
-            service.AddTransient<INapSettings, NapSettings>();
-            service.AddSingleton<ICache>(_ => new MemoryCache(new MemoryCacheOptions()));
+        service.AddTransient<IRemotingRefService, RemotingRefService>();
+        service.AddTransient<IUserService, UserService>();
+        service.AddTransient<IGroupService, GroupService>();
+        service.AddTransient<ISiteService, SiteService>();
+        service.AddTransient<ISecurityService, SecurityService>();
+        service.AddTransient<INapSession, NapSession>();
+        service.AddTransient<INapSettings, NapSettings>();
+        service.AddSingleton<ICache>(_ => new MemoryCache(new MemoryCacheOptions()));
 
-            service.AddTransient<IDynamicRepository, DynamicRepository>();
+        service.AddTransient<IDynamicRepository, DynamicRepository>();
 
-            service.AddTransient<ConfigurationService, ConfigurationServiceImp>();
-            service.AddTransient<BalanceUpService, BalanceUpServiceImp>();
+        service.AddTransient<ConfigurationService, ConfigurationServiceImp>();
+        service.AddTransient<BalanceUpService, BalanceUpServiceImp>();
 
-            service.AddTransient<FraudServiceWrapper, FraudServiceWrapperImp>();
-            service.AddTransient<AssociatedAccountService, AssociatedAccountServiceImp>();
-            service.AddSingleton<ICacheService>(new CacheService());
-        }
+        service.AddTransient<FraudServiceWrapper, FraudServiceWrapperImp>();
+        service.AddTransient<AssociatedAccountService, AssociatedAccountServiceImp>();
+        service.AddSingleton<ICacheService>(new CacheService());
     }
 }

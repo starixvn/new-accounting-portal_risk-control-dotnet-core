@@ -4,23 +4,22 @@ using RiskControl.WinLossLimitControl.Monitor.History;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.History
+namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.History;
+
+public class UncheckedNotificationControllerUnitTests
 {
-    public class UncheckedNotificationControllerUnitTests
+    [Fact]
+    public async Task UncheckNotification_Always_CallMediatorSend()
     {
-        [Fact]
-        public async Task UncheckNotification_Always_CallMediatorSend()
-        {
-            // Arrange
-            var mediator = Substitute.For<IMediator>();
-            var request = new RequestUncheckedNotification();
+        // Arrange
+        var mediator = Substitute.For<IMediator>();
+        var request = new RequestUncheckedNotification();
 
-            // Act
-            var controller = new UncheckedNotificationController(mediator);
-            await controller.UncheckNotification(request);
+        // Act
+        var controller = new UncheckedNotificationController(mediator);
+        await controller.UncheckNotification(request);
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<RequestUncheckedNotification>());
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<RequestUncheckedNotification>());
     }
 }

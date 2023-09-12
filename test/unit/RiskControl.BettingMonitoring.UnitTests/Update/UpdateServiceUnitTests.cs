@@ -7,24 +7,23 @@ using RiskControl.BettingMonitoring.Update;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.BettingMonitoring.UnitTests.Update
+namespace RiskControl.BettingMonitoring.UnitTests.Update;
+
+public class UpdateServiceUnitTests
 {
-    public class UpdateServiceUnitTests
+    [Fact]
+    public async Task Execute_Always_CallRepositoryExecuteAsync()
     {
-        [Fact]
-        public async Task Execute_Always_CallRepositoryExecuteAsync()
-        {
-            // Arrange
-            var repository = Substitute.For<IDynamicRepository>();
-            var mapper = Substitute.For<IMapper>();
-            var service = new UpdateServiceImp(repository, mapper);
+        // Arrange
+        var repository = Substitute.For<IDynamicRepository>();
+        var mapper = Substitute.For<IMapper>();
+        var service = new UpdateServiceImp(repository, mapper);
 
-            // Act
-            var model = new BettingMonitoringModel();
-            await service.Execute(model);
+        // Act
+        var model = new BettingMonitoringModel();
+        await service.Execute(model);
 
-            // Assert
-            await repository.Received().ExecuteAsync(Arg.Compat.Any<BettingMonitoringUpdateCriteria>());
-        }
+        // Assert
+        await repository.Received().ExecuteAsync(Arg.Compat.Any<BettingMonitoringUpdateCriteria>());
     }
 }

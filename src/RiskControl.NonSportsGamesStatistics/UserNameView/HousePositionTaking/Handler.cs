@@ -7,29 +7,28 @@ using MediatR;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 
-namespace RiskControl.NonSportsGamesStatistics.UserNameView.HousePositionTaking
+namespace RiskControl.NonSportsGamesStatistics.UserNameView.HousePositionTaking;
+
+public class Handler : IRequestHandler<QueryModel, IEnumerable<HousePositionTakingModel>>
 {
-    public class Handler : IRequestHandler<QueryModel, IEnumerable<HousePositionTakingModel>>
+    private readonly DataSourceChooser dataSourceChooser;
+    private readonly IDynamicRepository repository;
+    private readonly IMapper mapper;
+
+    public Handler(
+        DataSourceChooser dataSourceChooser,
+        IDynamicRepository repository,
+        IMapper mapper)
     {
-        private readonly DataSourceChooser dataSourceChooser;
-        private readonly IDynamicRepository repository;
-        private readonly IMapper mapper;
+        this.dataSourceChooser = dataSourceChooser;
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 
-        public Handler(
-            DataSourceChooser dataSourceChooser,
-            IDynamicRepository repository,
-            IMapper mapper)
-        {
-            this.dataSourceChooser = dataSourceChooser;
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-
-        public Task<IEnumerable<HousePositionTakingModel>> Handle(QueryModel request, CancellationToken cancellationToken)
-        {
-            var criteria = mapper.Map<Criteria>(request);
-            criteria.Source = dataSourceChooser.GetDataSource(criteria.IsNormalMode);
-            return repository.FetchAsync<HousePositionTakingModel>(criteria);
-        }
+    public Task<IEnumerable<HousePositionTakingModel>> Handle(QueryModel request, CancellationToken cancellationToken)
+    {
+        var criteria = mapper.Map<Criteria>(request);
+        criteria.Source = dataSourceChooser.GetDataSource(criteria.IsNormalMode);
+        return repository.FetchAsync<HousePositionTakingModel>(criteria);
     }
 }

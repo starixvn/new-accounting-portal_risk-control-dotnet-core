@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace RiskControl.ProgressiveJackpot.ApiModel
-{
-    public class BaseCallMessage
-    {
-        protected BaseCallMessage()
-        {
-            Seq = Guid.NewGuid().ToString();
-        }
+namespace RiskControl.ProgressiveJackpot.ApiModel;
 
-        public string Seq { get; }
+public class BaseCallMessage
+{
+    protected BaseCallMessage()
+    {
+        Seq = Guid.NewGuid().ToString();
     }
+
+    public string Seq { get; }
 }

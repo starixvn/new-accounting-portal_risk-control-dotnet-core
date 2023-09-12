@@ -1,8 +1,7 @@
 ﻿using RiskControl.ProgressiveJackpot.ApiModel;
 
-namespace RiskControl.ProgressiveJackpot.Model
+namespace RiskControl.ProgressiveJackpot.Model;
+
+public class GameGroupCallMessage : BaseCallMessage
 {
-    public class GameGroupCallMessage : BaseCallMessage
-    {
-    }
 }

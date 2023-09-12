@@ -1,15 +1,14 @@
 ﻿using Fanex.Data.Repository;
 
-namespace RiskControl.NonSportsGamesStatistics.Filter.Criteria
+namespace RiskControl.NonSportsGamesStatistics.Filter.Criteria;
+
+public class ValidUsernameCriteria : CriteriaBase
 {
-    public class ValidUsernameCriteria : CriteriaBase
-    {
-        public string Username { get; set; }
+    public string Username { get; set; }
 
-        public int RoleId { get; set; }
+    public int RoleId { get; set; }
 
-        public override bool IsValid() => true;
+    public override bool IsValid() => true;
 
-        public override string GetSettingKey() => "NonSportsProductStatistics_GetValidUsername";
-    }
+    public override string GetSettingKey() => "NonSportsProductStatistics_GetValidUsername";
 }

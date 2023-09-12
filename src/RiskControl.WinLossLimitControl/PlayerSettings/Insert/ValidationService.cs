@@ -5,63 +5,62 @@ using Fanex.Data.Repository;
 using RiskControl.WinLossLimitControl.PlayerSettings.Insert.Criteria;
 using RiskControl.WinLossLimitControl.Services;
 
-namespace RiskControl.WinLossLimitControl.PlayerSettings.Insert
+namespace RiskControl.WinLossLimitControl.PlayerSettings.Insert;
+
+public interface ValidationService
 {
-    public interface ValidationService
+    Task<int> Execute(List<PlayerSetting> playerSettings);
+}
+
+public class ValidationServiceImp : ValidationService
+{
+    private const int ValidCode = 0;
+
+    private const int InvalidPlayerSettingErrorCode = 2;
+
+    public const int InvalidCurrencySettingErrorCode = 1;
+
+    private readonly IDynamicRepository repository;
+
+    private readonly IncreamentedSeriesContrainService increamentedSeriesContrainService;
+
+    public ValidationServiceImp(IDynamicRepository repository, IncreamentedSeriesContrainService increamentedSeriesContrainService)
     {
-        Task<int> Execute(List<PlayerSetting> playerSettings);
+        this.repository = repository;
+        this.increamentedSeriesContrainService = increamentedSeriesContrainService;
     }
 
-    public class ValidationServiceImp : ValidationService
+    public async Task<int> Execute(List<PlayerSetting> playerSettings)
     {
-        private const int ValidCode = 0;
-
-        private const int InvalidPlayerSettingErrorCode = 2;
-
-        public const int InvalidCurrencySettingErrorCode = 1;
-
-        private readonly IDynamicRepository repository;
-
-        private readonly IncreamentedSeriesContrainService increamentedSeriesContrainService;
-
-        public ValidationServiceImp(IDynamicRepository repository, IncreamentedSeriesContrainService increamentedSeriesContrainService)
+        var isContrainsValid = playerSettings.All(IsValidLevelContrains);
+        if (!isContrainsValid)
         {
-            this.repository = repository;
-            this.increamentedSeriesContrainService = increamentedSeriesContrainService;
+            return InvalidCurrencySettingErrorCode;
         }
 
-        public async Task<int> Execute(List<PlayerSetting> playerSettings)
+        var isCurrencySettingAvailable = await IsCurrencySettingAvailable(playerSettings);
+        return isCurrencySettingAvailable ? ValidCode : InvalidPlayerSettingErrorCode;
+    }
+
+    private bool IsValidLevelContrains(PlayerSetting setting)
+    {
+        return increamentedSeriesContrainService.IsPositiveIncreamented(setting.OrangeLimit, setting.YellowLimit, setting.RedLimit)
+               && increamentedSeriesContrainService.IsNegativeIncreamented(setting.BlackLimit, setting.GreyLimit);
+    }
+
+    private async Task<bool> IsCurrencySettingAvailable(IEnumerable<PlayerSetting> playerSettings)
+    {
+        var firstPlayerSetting = playerSettings.First();
+        var criteria = new CurrencySettingReadCriteria
         {
-            var isContrainsValid = playerSettings.All(IsValidLevelContrains);
-            if (!isContrainsValid)
-            {
-                return InvalidCurrencySettingErrorCode;
-            }
+            CurrencyId = firstPlayerSetting.CurrencyId,
+            GroupId = firstPlayerSetting.GroupId,
+            SiteId = firstPlayerSetting.SiteId,
+            ProductId = firstPlayerSetting.ProductId
+        };
 
-            var isCurrencySettingAvailable = await IsCurrencySettingAvailable(playerSettings);
-            return isCurrencySettingAvailable ? ValidCode : InvalidPlayerSettingErrorCode;
-        }
+        var settings = await repository.FetchAsync<CurrencySetting>(criteria);
 
-        private bool IsValidLevelContrains(PlayerSetting setting)
-        {
-            return increamentedSeriesContrainService.IsPositiveIncreamented(setting.OrangeLimit, setting.YellowLimit, setting.RedLimit)
-                && increamentedSeriesContrainService.IsNegativeIncreamented(setting.BlackLimit, setting.GreyLimit);
-        }
-
-        private async Task<bool> IsCurrencySettingAvailable(IEnumerable<PlayerSetting> playerSettings)
-        {
-            var firstPlayerSetting = playerSettings.First();
-            var criteria = new CurrencySettingReadCriteria
-            {
-                CurrencyId = firstPlayerSetting.CurrencyId,
-                GroupId = firstPlayerSetting.GroupId,
-                SiteId = firstPlayerSetting.SiteId,
-                ProductId = firstPlayerSetting.ProductId
-            };
-
-            var settings = await repository.FetchAsync<CurrencySetting>(criteria);
-
-            return settings.Any();
-        }
+        return settings.Any();
     }
 }

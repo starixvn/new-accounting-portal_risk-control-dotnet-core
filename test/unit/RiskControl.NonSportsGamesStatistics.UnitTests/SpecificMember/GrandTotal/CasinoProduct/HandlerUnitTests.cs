@@ -10,37 +10,36 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.GrandTotal.CasinoProduct
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.GrandTotal.CasinoProduct;
+
+public class HandlerUnitTests
 {
-    public class HandlerUnitTests
+    [Fact]
+    public async Task Handle_CasinoGrandTotalWithAnyQueryModel_ReturnRightGridOptions()
     {
-        [Fact]
-        public async Task Handle_CasinoGrandTotalWithAnyQueryModel_ReturnRightGridOptions()
-        {
-            // Arrange
-            var fakeDailyGrandTotalReportModel = TestDataProvider.Load<CurrencyViewStatisticsReportModel>("fake-service-data", dateTimeFormat: "MMM dd, yyyy");
-            var fakeGridOptions = TestDataProvider.Load<GridOptions>("fake-gridOptions");
-            var expectedGridOptions = TestDataProvider.Load<GridOptions>("expected-gridOptions");
+        // Arrange
+        var fakeDailyGrandTotalReportModel = TestDataProvider.Load<CurrencyViewStatisticsReportModel>("fake-service-data", dateTimeFormat: "MMM dd, yyyy");
+        var fakeGridOptions = TestDataProvider.Load<GridOptions>("fake-gridOptions");
+        var expectedGridOptions = TestDataProvider.Load<GridOptions>("expected-gridOptions");
 
-            var service = Substitute.For<Service<CurrencyViewStatisticsReportModel, HistoryCriteria>>();
-            service.Query(Arg.Compat.Any<HistoryCriteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeDailyGrandTotalReportModel);
+        var service = Substitute.For<Service<CurrencyViewStatisticsReportModel, HistoryCriteria>>();
+        service.Query(Arg.Compat.Any<HistoryCriteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeDailyGrandTotalReportModel);
 
-            var gridOptionService = Substitute.For<GridOptionBuilderService<CurrencyViewStatisticsReportModel, QueryModel>>();
-            gridOptionService.BuildGridOptions(Arg.Compat.Any<CurrencyViewStatisticsReportModel>(), Arg.Compat.Any<QueryModel>()).Returns(fakeGridOptions);
+        var gridOptionService = Substitute.For<GridOptionBuilderService<CurrencyViewStatisticsReportModel, QueryModel>>();
+        gridOptionService.BuildGridOptions(Arg.Compat.Any<CurrencyViewStatisticsReportModel>(), Arg.Compat.Any<QueryModel>()).Returns(fakeGridOptions);
 
-            var handler = new Handler(service, gridOptionService);
+        var handler = new Handler(service, gridOptionService);
 
-            // Act
-            var actualResult = await handler.Handle(
-                new QueryModel
-                {
-                    FromDate = new DateTime(2017, 1, 1),
-                    ToDate = new DateTime(2017, 3, 1)
-                },
-                new CancellationToken());
+        // Act
+        var actualResult = await handler.Handle(
+            new QueryModel
+            {
+                FromDate = new DateTime(2017, 1, 1),
+                ToDate = new DateTime(2017, 3, 1)
+            },
+            new CancellationToken());
 
-            // Assert
-            DeepAssert.Equal(expectedGridOptions, actualResult);
-        }
+        // Assert
+        DeepAssert.Equal(expectedGridOptions, actualResult);
     }
 }

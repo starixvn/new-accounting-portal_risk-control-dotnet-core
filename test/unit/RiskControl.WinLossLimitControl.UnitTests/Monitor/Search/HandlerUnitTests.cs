@@ -11,33 +11,32 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.Search
+namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.Search;
+
+public class HandlerUnitTests
 {
-    public class HandlerUnitTests
+    [Fact]
+    public async Task Handle_Always_ReturnsDataFromRepository()
     {
-        [Fact]
-        public async Task Handle_Always_ReturnsDataFromRepository()
+        // Arrange
+        var fakeRawData = TestDataProvider.Load<List<MonitorModelRaw>>("monitor-model-raw");
+        var repository = Substitute.For<IDynamicRepository>();
+        repository.FetchAsync<MonitorModelRaw>(Arg.Compat.Any<ICriteria>()).Returns(fakeRawData);
+
+        var cacheRefService = new CacheRefServiceMockImp();
+        var winLimitSettingXmlParser = new WinLimitSettingXmlParserImp();
+
+        var mapper = new MapperConfiguration(mcf =>
         {
-            // Arrange
-            var fakeRawData = TestDataProvider.Load<List<MonitorModelRaw>>("monitor-model-raw");
-            var repository = Substitute.For<IDynamicRepository>();
-            repository.FetchAsync<MonitorModelRaw>(Arg.Compat.Any<ICriteria>()).Returns(fakeRawData);
+            mcf.CreateMap<Request, MonitorSearchCriteria>();
+        }).CreateMapper();
 
-            var cacheRefService = new CacheRefServiceMockImp();
-            var winLimitSettingXmlParser = new WinLimitSettingXmlParserImp();
+        // Act
+        var handler = new Handler(repository, cacheRefService, winLimitSettingXmlParser, mapper);
+        var result = await handler.Handle(new Request(), new CancellationToken());
 
-            var mapper = new MapperConfiguration(mcf =>
-            {
-                mcf.CreateMap<Request, MonitorSearchCriteria>();
-            }).CreateMapper();
-
-            // Act
-            var handler = new Handler(repository, cacheRefService, winLimitSettingXmlParser, mapper);
-            var result = await handler.Handle(new Request(), new CancellationToken());
-
-            // Assert
-            var expected = TestDataProvider.Load<List<MonitorModel>>("monitor-model");
-            DeepAssert.Equal(result, expected);
-        }
+        // Assert
+        var expected = TestDataProvider.Load<List<MonitorModel>>("monitor-model");
+        DeepAssert.Equal(result, expected);
     }
 }

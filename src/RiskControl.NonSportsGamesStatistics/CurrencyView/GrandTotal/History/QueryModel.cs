@@ -5,15 +5,14 @@ using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Constants;
 
-namespace RiskControl.NonSportsGamesStatistics.CurrencyView.GrandTotal.History
+namespace RiskControl.NonSportsGamesStatistics.CurrencyView.GrandTotal.History;
+
+public class QueryModel : BaseStatisticQueryModel, IRequest<GridOptions>
 {
-    public class QueryModel : BaseStatisticQueryModel, IRequest<GridOptions>
-    {
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        [DateRangeLessThan("FromDate", DateRangeConstant.MAX_MONTH)]
-        public DateTime ToDate { get; set; }
+    [DateRangeLessThan("FromDate", DateRangeConstant.MAX_MONTH)]
+    public DateTime ToDate { get; set; }
 
-        public int DrillDownCurrency { get; set; }
-    }
+    public int DrillDownCurrency { get; set; }
 }

@@ -6,24 +6,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RiskControl.NonSportsGamesStatistics.Filter
+namespace RiskControl.NonSportsGamesStatistics.Filter;
+
+[ApiController]
+[Route("NonSportsGamesStatistics/Currency")]
+public class CurrencyController : ControllerBase
 {
-    [ApiController]
-    [Route("NonSportsGamesStatistics/Currency")]
-    public class CurrencyController : ControllerBase
+    private readonly IDynamicRepository repository;
+
+    public CurrencyController(IDynamicRepository repository)
     {
-        private readonly IDynamicRepository repository;
+        this.repository = repository;
+    }
 
-        public CurrencyController(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-
-        [Route("Query")]
-        public async Task<IEnumerable<CurrencyModel>> Query(CurrencyCriteria criteria)
-        {
-            var currencies = await repository.FetchAsync<CurrencyModel>(criteria).ConfigureAwait(false);
-            return currencies.OrderBy(r => r.Currency);
-        }
+    [Route("Query")]
+    public async Task<IEnumerable<CurrencyModel>> Query(CurrencyCriteria criteria)
+    {
+        var currencies = await repository.FetchAsync<CurrencyModel>(criteria).ConfigureAwait(false);
+        return currencies.OrderBy(r => r.Currency);
     }
 }

@@ -5,44 +5,43 @@ using MediatR;
 using OfficeOpenXml;
 using RiskControl.VoidRejectRefund.Common;
 
-namespace RiskControl.VoidRejectRefund.Product
+namespace RiskControl.VoidRejectRefund.Product;
+
+public class ProductExcelHandler : IRequestHandler<HttpParameterExcel, ExcelPackage>
 {
-    public class ProductExcelHandler : IRequestHandler<HttpParameterExcel, ExcelPackage>
+    private readonly ProductService service;
+
+    private readonly SortingService<ProductModel> sortingService;
+
+    private readonly ProductExcelBuilder excelBuilder;
+
+    private readonly IMapper mapper;
+
+    public ProductExcelHandler(ProductService service,
+        SortingService<ProductModel> sortingService,
+        ProductExcelBuilder excelBuilder,
+        IMapper mapper)
     {
-        private readonly ProductService service;
+        this.service = service;
+        this.sortingService = sortingService;
+        this.excelBuilder = excelBuilder;
+        this.mapper = mapper;
+    }
 
-        private readonly SortingService<ProductModel> sortingService;
+    public async Task<ExcelPackage> Handle(HttpParameterExcel request, CancellationToken cancellationToken)
+    {
+        var sortColumnName = request.SortColumnName;
+        var sortDirection = request.SortDirection;
 
-        private readonly ProductExcelBuilder excelBuilder;
+        var jsonMessage = mapper.Map<HttpParameterGroupJson>(request);
+        var reportModel = await service.Query(jsonMessage).ConfigureAwait(false);
 
-        private readonly IMapper mapper;
-
-        public ProductExcelHandler(ProductService service,
-            SortingService<ProductModel> sortingService,
-            ProductExcelBuilder excelBuilder,
-            IMapper mapper)
+        if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
         {
-            this.service = service;
-            this.sortingService = sortingService;
-            this.excelBuilder = excelBuilder;
-            this.mapper = mapper;
+            reportModel = sortingService.SortData(reportModel, sortDirection, sortColumnName);
         }
 
-        public async Task<ExcelPackage> Handle(HttpParameterExcel request, CancellationToken cancellationToken)
-        {
-            var sortColumnName = request.SortColumnName;
-            var sortDirection = request.SortDirection;
-
-            var jsonMessage = mapper.Map<HttpParameterGroupJson>(request);
-            var reportModel = await service.Query(jsonMessage).ConfigureAwait(false);
-
-            if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
-            {
-                reportModel = sortingService.SortData(reportModel, sortDirection, sortColumnName);
-            }
-
-            var excelPackage = excelBuilder.Build(request, reportModel);
-            return excelPackage;
-        }
+        var excelPackage = excelBuilder.Build(request, reportModel);
+        return excelPackage;
     }
 }

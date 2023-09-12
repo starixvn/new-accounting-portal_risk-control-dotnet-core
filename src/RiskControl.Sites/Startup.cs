@@ -12,71 +12,70 @@ using Microsoft.Extensions.Hosting;
 using ONEbook.UM.AspNetCore.Filters;
 using RiskControl.Sites.Extensions;
 
-namespace RiskControl.Sites
+namespace RiskControl.Sites;
+
+public class Startup
 {
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.RegisterAuthentication(Configuration);
+        services.AddControllersWithViews(options =>
         {
-            Configuration = configuration;
-        }
+            options.Filters.Add(new ServiceFilterAttribute(typeof(CheckUMFilterAttribute)));
+            options.Filters.Add(new SessionAuthorizeAttribute());
+        }).AddNewtonsoftJson();
+        services.AddHttpContextAccessor();
+        services.RegisterRemotingRef(Configuration);
+        services.RegisterFanexData(Configuration);
+        services.RegisterSentry(Configuration);
+        services.RegisterInternalServices(Configuration);
+    }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        app.Use((context, next) =>
         {
-            services.RegisterAuthentication(Configuration);
-            services.AddControllersWithViews(options =>
-            {
-                options.Filters.Add(new ServiceFilterAttribute(typeof(CheckUMFilterAttribute)));
-                options.Filters.Add(new SessionAuthorizeAttribute());
-            }).AddNewtonsoftJson();
-            services.AddHttpContextAccessor();
-            services.RegisterRemotingRef(Configuration);
-            services.RegisterFanexData(Configuration);
-            services.RegisterSentry(Configuration);
-            services.RegisterInternalServices(Configuration);
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+            context.Request.PathBase = new PathString(Configuration.GetSection("PathBase").Value);
+            return next();
+        });
+        if (env.IsDevelopment())
         {
-            app.Use((context, next) =>
-            {
-                context.Request.PathBase = new PathString(Configuration.GetSection("PathBase").Value);
-                return next();
-            });
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            app.UseHttpsRedirection();
-            app.ConfigureExceptionHandler();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
-            app.UseSession();
-            app.UseRouting();
-            NapClientManager
-                .UseConfig(app.ApplicationServices.GetService<INapSettings>())
-                .UseSession(app.ApplicationServices.GetService<INapSession>());
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseDeveloperExceptionPage();
         }
+        else
+        {
+            app.UseExceptionHandler("/Home/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
+        }
+        app.UseHttpsRedirection();
+        app.ConfigureExceptionHandler();
+        app.UseStaticFiles();
+        app.UseCookiePolicy();
+        app.UseSession();
+        app.UseRouting();
+        NapClientManager
+            .UseConfig(app.ApplicationServices.GetService<INapSettings>())
+            .UseSession(app.ApplicationServices.GetService<INapSession>());
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+        });
+    }
 
         
-    }
 }

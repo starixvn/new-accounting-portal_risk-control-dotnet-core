@@ -5,67 +5,66 @@ using RiskControl.WinLossLimitControl.Services;
 using System.Collections.Generic;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.CurrencySettings.Update
+namespace RiskControl.WinLossLimitControl.UnitTests.CurrencySettings.Update;
+
+public class ValidationServiceUnitTests
 {
-    public class ValidationServiceUnitTests
+    [Fact]
+    public void Execute_ViolatedContrainsSettings_ReturnsViolatedContrainsError()
     {
-        [Fact]
-        public void Execute_ViolatedContrainsSettings_ReturnsViolatedContrainsError()
-        {
-            // Arrange
-            // Act
-            var service = ValidationServiceUnitTestsFactory.CreateValidationService(false);
-            var settings = ValidationServiceUnitTestsFactory.CreateCurrencySettings(-2);
-            var actualResult = service.Execute(settings);
+        // Arrange
+        // Act
+        var service = ValidationServiceUnitTestsFactory.CreateValidationService(false);
+        var settings = ValidationServiceUnitTestsFactory.CreateCurrencySettings(-2);
+        var actualResult = service.Execute(settings);
 
-            // Assert
-            Assert.Equal(ValidationServiceUnitTestsFactory.ViolatedContrainsError, actualResult);
-        }
-
-        [Fact]
-        public void Execute_ValidSettings_ReturnsValidResult()
-        {
-            // Arrange
-            // Act
-            var service = ValidationServiceUnitTestsFactory.CreateValidationService(true);
-            var settings = ValidationServiceUnitTestsFactory.CreateCurrencySettings(-2);
-            var actualResult = service.Execute(settings);
-
-            // Assert
-            Assert.Equal(ValidationServiceUnitTestsFactory.ValidResult, actualResult);
-        }
+        // Assert
+        Assert.Equal(ValidationServiceUnitTestsFactory.ViolatedContrainsError, actualResult);
     }
 
-    internal static class ValidationServiceUnitTestsFactory
+    [Fact]
+    public void Execute_ValidSettings_ReturnsValidResult()
     {
-        public static int ViolatedContrainsError => 1;
+        // Arrange
+        // Act
+        var service = ValidationServiceUnitTestsFactory.CreateValidationService(true);
+        var settings = ValidationServiceUnitTestsFactory.CreateCurrencySettings(-2);
+        var actualResult = service.Execute(settings);
 
-        public static int ValidResult => 0;
+        // Assert
+        Assert.Equal(ValidationServiceUnitTestsFactory.ValidResult, actualResult);
+    }
+}
 
-        public static List<CurrencySetting> CreateCurrencySettings(decimal seed)
+internal static class ValidationServiceUnitTestsFactory
+{
+    public static int ViolatedContrainsError => 1;
+
+    public static int ValidResult => 0;
+
+    public static List<CurrencySetting> CreateCurrencySettings(decimal seed)
+    {
+        var setting = new CurrencySetting
         {
-            var setting = new CurrencySetting
-            {
-                BlackLimit = seed,
-                GreyLimit = seed++,
-                OrangeLimit = seed++,
-                YellowLimit = seed++,
-                RedLimit = seed
-            };
+            BlackLimit = seed,
+            GreyLimit = seed++,
+            OrangeLimit = seed++,
+            YellowLimit = seed++,
+            RedLimit = seed
+        };
 
-            return new List<CurrencySetting>
-            {
-               setting
-            };
-        }
-
-        public static ValidationService CreateValidationService(bool increamentedContrainsResult)
+        return new List<CurrencySetting>
         {
-            var increamentedSeriesContrainService = Substitute.For<IncreamentedSeriesContrainService>();
-            increamentedSeriesContrainService.IsNegativeIncreamented(Arg.Compat.Any<decimal[]>()).Returns(increamentedContrainsResult);
-            increamentedSeriesContrainService.IsPositiveIncreamented(Arg.Compat.Any<decimal[]>()).Returns(increamentedContrainsResult);
+            setting
+        };
+    }
 
-            return new ValidationServiceImp(increamentedSeriesContrainService);
-        }
+    public static ValidationService CreateValidationService(bool increamentedContrainsResult)
+    {
+        var increamentedSeriesContrainService = Substitute.For<IncreamentedSeriesContrainService>();
+        increamentedSeriesContrainService.IsNegativeIncreamented(Arg.Compat.Any<decimal[]>()).Returns(increamentedContrainsResult);
+        increamentedSeriesContrainService.IsPositiveIncreamented(Arg.Compat.Any<decimal[]>()).Returns(increamentedContrainsResult);
+
+        return new ValidationServiceImp(increamentedSeriesContrainService);
     }
 }

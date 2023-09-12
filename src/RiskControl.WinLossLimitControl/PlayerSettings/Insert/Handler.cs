@@ -4,37 +4,36 @@ using MediatR;
 using RiskControl.WinLossLimitControl.Models;
 using RiskControl.WinLossLimitControl.Services;
 
-namespace RiskControl.WinLossLimitControl.PlayerSettings.Insert
+namespace RiskControl.WinLossLimitControl.PlayerSettings.Insert;
+
+public class Handler : IRequestHandler<Request, ExecuteResult>
 {
-    public class Handler : IRequestHandler<Request, ExecuteResult>
+    private readonly UserHttpContext userHttpContext;
+
+    private readonly ValidationService validationService;
+
+    private readonly InsertService insertService;
+
+    public Handler(UserHttpContext userHttpContext, ValidationService validationService, InsertService insertService)
     {
-        private readonly UserHttpContext userHttpContext;
+        this.insertService = insertService;
+        this.validationService = validationService;
+        this.userHttpContext = userHttpContext;
+    }
 
-        private readonly ValidationService validationService;
+    public async Task<ExecuteResult> Handle(Request request, CancellationToken cancellationToken)
+    {
+        var userContext = new UserContext { UserId = userHttpContext.UserId, IP = userHttpContext.IP };
 
-        private readonly InsertService insertService;
-
-        public Handler(UserHttpContext userHttpContext, ValidationService validationService, InsertService insertService)
+        var validattionResult = await validationService.Execute(request);
+        if (validattionResult == 0)
         {
-            this.insertService = insertService;
-            this.validationService = validationService;
-            this.userHttpContext = userHttpContext;
+            await insertService.Execute(request, userContext);
+            return new ExecuteResult();
         }
-
-        public async Task<ExecuteResult> Handle(Request request, CancellationToken cancellationToken)
+        else
         {
-            var userContext = new UserContext { UserId = userHttpContext.UserId, IP = userHttpContext.IP };
-
-            var validattionResult = await validationService.Execute(request);
-            if (validattionResult == 0)
-            {
-                await insertService.Execute(request, userContext);
-                return new ExecuteResult();
-            }
-            else
-            {
-                return new ExecuteResult(validattionResult);
-            }
+            return new ExecuteResult(validattionResult);
         }
     }
 }

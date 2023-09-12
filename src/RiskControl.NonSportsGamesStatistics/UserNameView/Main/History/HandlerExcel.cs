@@ -6,27 +6,26 @@ using OfficeOpenXml;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 
-namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main.History
+namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main.History;
+
+public class HandlerExcel : IRequestHandler<QueryModelExcel, ExcelPackage>
 {
-    public class HandlerExcel : IRequestHandler<QueryModelExcel, ExcelPackage>
+    private readonly Service<UserNameViewReportModel, Criteria> service;
+    private readonly ExcelReportBuilder excelBuilder;
+    private readonly IMapper mapper;
+
+    public HandlerExcel(Service<UserNameViewReportModel, Criteria> service, ExcelReportBuilder excelBuilder, IMapper mapper)
     {
-        private readonly Service<UserNameViewReportModel, Criteria> service;
-        private readonly ExcelReportBuilder excelBuilder;
-        private readonly IMapper mapper;
+        this.service = service;
+        this.excelBuilder = excelBuilder;
+        this.mapper = mapper;
+    }
 
-        public HandlerExcel(Service<UserNameViewReportModel, Criteria> service, ExcelReportBuilder excelBuilder, IMapper mapper)
-        {
-            this.service = service;
-            this.excelBuilder = excelBuilder;
-            this.mapper = mapper;
-        }
-
-        public async Task<ExcelPackage> Handle(QueryModelExcel request, CancellationToken cancellationToken)
-        {
-            var criteria = mapper.Map<Criteria>(request);
-            var reportModel = await service.Query(criteria, criteria.FromDate).ConfigureAwait(false);
-            var excelPackage = excelBuilder.CreateExcelPackage(reportModel, request);
-            return excelPackage;
-        }
+    public async Task<ExcelPackage> Handle(QueryModelExcel request, CancellationToken cancellationToken)
+    {
+        var criteria = mapper.Map<Criteria>(request);
+        var reportModel = await service.Query(criteria, criteria.FromDate).ConfigureAwait(false);
+        var excelPackage = excelBuilder.CreateExcelPackage(reportModel, request);
+        return excelPackage;
     }
 }

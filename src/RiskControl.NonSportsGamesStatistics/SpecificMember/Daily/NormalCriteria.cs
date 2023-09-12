@@ -1,9 +1,8 @@
 ﻿using RiskControl.NonSportsGamesStatistics.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Daily
+namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Daily;
+
+public class NormalCriteria : BaseNormalCriteria
 {
-    public class NormalCriteria : BaseNormalCriteria
-    {
-        public bool UsernameDrillDown { get; set; }
-    }
+    public bool UsernameDrillDown { get; set; }
 }

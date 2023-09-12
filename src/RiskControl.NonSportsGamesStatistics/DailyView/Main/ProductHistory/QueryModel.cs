@@ -5,19 +5,18 @@ using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Constants;
 
-namespace RiskControl.NonSportsGamesStatistics.DailyView.Main.ProductHistory
+namespace RiskControl.NonSportsGamesStatistics.DailyView.Main.ProductHistory;
+
+public class QueryModel : BaseStatisticQueryModel, IRequest<GridOptions>
 {
-    public class QueryModel : BaseStatisticQueryModel, IRequest<GridOptions>
-    {
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        [DateRangeLessThan("FromDate", DateRangeConstant.MAX_MONTH)]
-        public DateTime ToDate { get; set; }
+    [DateRangeLessThan("FromDate", DateRangeConstant.MAX_MONTH)]
+    public DateTime ToDate { get; set; }
 
-        public bool IsDrillDown { get; set; }
+    public bool IsDrillDown { get; set; }
 
-        public bool IsGrandTotal { get; set; }
+    public bool IsGrandTotal { get; set; }
 
-        public int CasinoType { get; set; }
-    }
+    public int CasinoType { get; set; }
 }

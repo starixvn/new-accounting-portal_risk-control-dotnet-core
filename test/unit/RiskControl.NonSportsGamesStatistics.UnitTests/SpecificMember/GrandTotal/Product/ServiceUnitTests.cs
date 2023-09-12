@@ -10,33 +10,32 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.GrandTotal.Product
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.GrandTotal.Product;
+
+public class ServiceUnitTests
 {
-    public class ServiceUnitTests
+    [Fact]
+    public async Task Query_ProductGrandTotalWithAnyCriteria_ReturnRightStatistics()
     {
-        [Fact]
-        public async Task Query_ProductGrandTotalWithAnyCriteria_ReturnRightStatistics()
+        // Arrange
+        var fakeProductGrandTotalData = TestDataProvider.Load<CurrencyViewStatisticsReportModel>("fake-product-grand-total-data");
+        var expectedResult = TestDataProvider.Load<CurrencyViewStatisticsReportModel>("expected-statistic", dateTimeFormat: "MMM dd, yyyy");
+
+        var dailyGrandTotalService = Substitute.For<GrandTotalService>();
+        dailyGrandTotalService.Query(Arg.Compat.Any<HistoryCriteria>(), Arg.Compat.Any<NormalCriteria>()).Returns(fakeProductGrandTotalData);
+
+        var mapper = new MapperConfiguration(cf =>
         {
-            // Arrange
-            var fakeProductGrandTotalData = TestDataProvider.Load<CurrencyViewStatisticsReportModel>("fake-product-grand-total-data");
-            var expectedResult = TestDataProvider.Load<CurrencyViewStatisticsReportModel>("expected-statistic", dateTimeFormat: "MMM dd, yyyy");
+            cf.CreateMap<BaseStatisticCriteria, HistoryCriteria>();
+            cf.CreateMap<BaseStatisticCriteria, NormalCriteria>();
+        }).CreateMapper();
 
-            var dailyGrandTotalService = Substitute.For<GrandTotalService>();
-            dailyGrandTotalService.Query(Arg.Compat.Any<HistoryCriteria>(), Arg.Compat.Any<NormalCriteria>()).Returns(fakeProductGrandTotalData);
+        var service = new ServiceImp<BaseStatisticCriteria>(dailyGrandTotalService, mapper);
 
-            var mapper = new MapperConfiguration(cf =>
-            {
-                cf.CreateMap<BaseStatisticCriteria, HistoryCriteria>();
-                cf.CreateMap<BaseStatisticCriteria, NormalCriteria>();
-            }).CreateMapper();
+        // Act
+        var actualResult = await service.Query(new HistoryCriteria(), DateTime.Now);
 
-            var service = new ServiceImp<BaseStatisticCriteria>(dailyGrandTotalService, mapper);
-
-            // Act
-            var actualResult = await service.Query(new HistoryCriteria(), DateTime.Now);
-
-            // Assert
-            DeepAssert.Equal(expectedResult, actualResult);
-        }
+        // Assert
+        DeepAssert.Equal(expectedResult, actualResult);
     }
 }

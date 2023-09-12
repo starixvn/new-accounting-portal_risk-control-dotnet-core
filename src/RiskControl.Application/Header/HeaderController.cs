@@ -4,54 +4,53 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RiskControl.Application.Header
+namespace RiskControl.Application.Header;
+
+public class HeaderController : ControllerBase
 {
-    public class HeaderController : ControllerBase
+    private readonly INapSession napSession;
+
+    public HeaderController(INapSession napSession)
     {
-        private readonly INapSession napSession;
+        this.napSession = napSession;
+    }
 
-        public HeaderController(INapSession napSession)
+    [Route("state-api/application/header")]
+    public Header Index()
+    {
+        var sessionMenus = napSession.MenuItemList ?? new List<MenuItem>();
+        var menus = GetMenus(sessionMenus);
+        return new Header
         {
-            this.napSession = napSession;
-        }
+            Username = napSession.UserName,
+            Menus = menus
+        };
+    }
 
-        [Route("state-api/application/header")]
-        public Header Index()
-        {
-            var sessionMenus = napSession.MenuItemList ?? new List<MenuItem>();
-            var menus = GetMenus(sessionMenus);
-            return new Header
+    private static List<Menu> GetMenus(IList<MenuItem> menus)
+    {
+        return menus.Where(m => m.ParentId <= 0)
+            .OrderBy(m => m.DisplayOrder)
+            .Select(m => new Menu
             {
-                Username = napSession.UserName,
-                Menus = menus
-            };
-        }
+                Id = m.Id,
+                Name = m.Name,
+                Link = m.Url,
+                Children = GetChildrenMenus(menus, m.Id)
+            })
+            .ToList();
+    }
 
-        private static List<Menu> GetMenus(IList<MenuItem> menus)
-        {
-            return menus.Where(m => m.ParentId <= 0)
-                .OrderBy(m => m.DisplayOrder)
-                .Select(m => new Menu
-                {
-                    Id = m.Id,
-                    Name = m.Name,
-                    Link = m.Url,
-                    Children = GetChildrenMenus(menus, m.Id)
-                })
-                .ToList();
-        }
-
-        private static List<Menu> GetChildrenMenus(IEnumerable<MenuItem> menus, int parentMenuId)
-        {
-            return menus.Where(x => x.ParentId == parentMenuId)
-                .OrderBy(m => m.DisplayOrder)
-                .Select(m => new Menu
-                {
-                    Id = m.Id,
-                    Name = m.Name,
-                    Link = m.Url
-                })
-                .ToList();
-        }
+    private static List<Menu> GetChildrenMenus(IEnumerable<MenuItem> menus, int parentMenuId)
+    {
+        return menus.Where(x => x.ParentId == parentMenuId)
+            .OrderBy(m => m.DisplayOrder)
+            .Select(m => new Menu
+            {
+                Id = m.Id,
+                Name = m.Name,
+                Link = m.Url
+            })
+            .ToList();
     }
 }

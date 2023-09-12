@@ -9,30 +9,29 @@ using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System.Collections.Generic;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.CurrencyView.GrandTotal
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.CurrencyView.GrandTotal;
+
+public class GridOptionBuilderServiceUnitTests
 {
-    public class GridOptionBuilderServiceUnitTests
+    [Fact]
+    public void BuildGridOptions_CurrencyGrandTotalWithAnyStatistics_ReturnRightGridOptions()
     {
-        [Fact]
-        public void BuildGridOptions_CurrencyGrandTotalWithAnyStatistics_ReturnRightGridOptions()
-        {
-            // Arrange
-            var fakeGridOptionsAfterRemoveColumns = TestDataProvider.Load<GridOptions>("fake-gridoptions");
-            var expectedGridOptions = TestDataProvider.Load<GridOptions>("expected-gridoptions");
+        // Arrange
+        var fakeGridOptionsAfterRemoveColumns = TestDataProvider.Load<GridOptions>("fake-gridoptions");
+        var expectedGridOptions = TestDataProvider.Load<GridOptions>("expected-gridoptions");
 
-            var gridDataRowBuilderService = Substitute.For<GridOptionDataRowBuilderService>();
-            var headerBuilderService = Substitute.For<GridOptionHeaderBuilderService>();
+        var gridDataRowBuilderService = Substitute.For<GridOptionDataRowBuilderService>();
+        var headerBuilderService = Substitute.For<GridOptionHeaderBuilderService>();
 
-            var gridOptionRemoveColumnService = Substitute.For<GridOptionRemoveColumnService>();
-            gridOptionRemoveColumnService.RemoveColumn(Arg.Compat.Any<GridOptions>(), Arg.Compat.Any<List<string>>()).Returns(fakeGridOptionsAfterRemoveColumns);
+        var gridOptionRemoveColumnService = Substitute.For<GridOptionRemoveColumnService>();
+        gridOptionRemoveColumnService.RemoveColumn(Arg.Compat.Any<GridOptions>(), Arg.Compat.Any<List<string>>()).Returns(fakeGridOptionsAfterRemoveColumns);
 
-            var service = new GridOptionBuilderServiceImp(gridDataRowBuilderService, headerBuilderService, gridOptionRemoveColumnService);
+        var service = new GridOptionBuilderServiceImp(gridDataRowBuilderService, headerBuilderService, gridOptionRemoveColumnService);
 
-            // Act
-            var actualResult = service.BuildGridOptions(new CurrencyViewStatisticsReportModel(), new BaseStatisticQueryModel(), Arg.Compat.Any<int>());
+        // Act
+        var actualResult = service.BuildGridOptions(new CurrencyViewStatisticsReportModel(), new BaseStatisticQueryModel(), Arg.Compat.Any<int>());
 
-            // Assert
-            DeepAssert.Equal(actualResult,expectedGridOptions);
-        }
+        // Assert
+        DeepAssert.Equal(actualResult,expectedGridOptions);
     }
 }

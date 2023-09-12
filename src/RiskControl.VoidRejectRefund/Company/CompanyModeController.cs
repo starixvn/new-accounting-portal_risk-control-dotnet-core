@@ -4,31 +4,30 @@ using Olympus.WebApi.Results;
 using RiskControl.VoidRejectRefund.Common;
 using System.Threading.Tasks;
 
-namespace RiskControl.VoidRejectRefund.Company
+namespace RiskControl.VoidRejectRefund.Company;
+
+[ApiController]
+[Route("api/void-reject-refund/company")]
+public class CompanyModeController : ControllerBase
 {
-    [ApiController]
-    [Route("api/void-reject-refund/company")]
-    public class CompanyModeController : ControllerBase
+    private readonly IMediator mediator;
+
+    public CompanyModeController(IMediator mediator)
     {
-        private readonly IMediator mediator;
+        this.mediator = mediator;
+    }
 
-        public CompanyModeController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
+    [Route("")]
+    public async Task<IActionResult> Index(HttpParameterGroupJson httpParameter)
+    {
+        var viewModel = await mediator.Send(httpParameter).ConfigureAwait(false);
+        return Ok(viewModel);
+    }
 
-        [Route("")]
-        public async Task<IActionResult> Index(HttpParameterGroupJson httpParameter)
-        {
-            var viewModel = await mediator.Send(httpParameter).ConfigureAwait(false);
-            return Ok(viewModel);
-        }
-
-        [Route("excel")]
-        public async Task<IActionResult> Excel(HttpParameterGroupExcel httpParameter)
-        {
-            var excelPackage = await mediator.Send(httpParameter).ConfigureAwait(false);
-            return new EpplusExcelResult(excelPackage);
-        }
+    [Route("excel")]
+    public async Task<IActionResult> Excel(HttpParameterGroupExcel httpParameter)
+    {
+        var excelPackage = await mediator.Send(httpParameter).ConfigureAwait(false);
+        return new EpplusExcelResult(excelPackage);
     }
 }

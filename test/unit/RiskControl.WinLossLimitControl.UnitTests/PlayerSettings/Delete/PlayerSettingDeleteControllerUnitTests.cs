@@ -7,26 +7,25 @@ using RiskControl.WinLossLimitControl.PlayerSettings.Delete;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.PlayerSettings.Delete
+namespace RiskControl.WinLossLimitControl.UnitTests.PlayerSettings.Delete;
+
+public class PlayerSettingDeleteControllerUnitTests
 {
-    public class PlayerSettingDeleteControllerUnitTests
+    [Fact]
+    public async Task Post_Always_ReturnsResultFromMediator()
     {
-        [Fact]
-        public async Task Post_Always_ReturnsResultFromMediator()
-        {
-            // Arrange
-            var executeResult = new ExecuteResult();
+        // Arrange
+        var executeResult = new ExecuteResult();
 
-            var mediator = Substitute.For<IMediator>();
-            mediator.Send(Arg.Compat.Any<Request>()).Returns(executeResult);
+        var mediator = Substitute.For<IMediator>();
+        mediator.Send(Arg.Compat.Any<Request>()).Returns(executeResult);
 
-            var controller = new PlayerSettingDeleteController(mediator);
+        var controller = new PlayerSettingDeleteController(mediator);
 
-            // Act
-            var actionResult = await controller.Post(new Request()) as OkObjectResult;
+        // Act
+        var actionResult = await controller.Post(new Request()) as OkObjectResult;
 
-            // Assert
-            DeepAssert.Equal(actionResult.Value, executeResult);
-        }
+        // Assert
+        DeepAssert.Equal(actionResult.Value, executeResult);
     }
 }

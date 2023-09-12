@@ -1,11 +1,10 @@
 ﻿using RiskControl.ProgressiveJackpot.ApiModel;
 
-namespace RiskControl.ProgressiveJackpot.Model
-{
-    public class ReportMonthlyCallMessage : BaseCallMessage
-    {
-        public int PJMainId { get; set; }
+namespace RiskControl.ProgressiveJackpot.Model;
 
-        public int Level { get; set; }
-    }
+public class ReportMonthlyCallMessage : BaseCallMessage
+{
+    public int PJMainId { get; set; }
+
+    public int Level { get; set; }
 }

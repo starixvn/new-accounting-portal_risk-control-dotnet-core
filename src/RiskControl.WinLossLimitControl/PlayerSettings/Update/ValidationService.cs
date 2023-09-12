@@ -5,77 +5,76 @@ using Fanex.Data.Repository;
 using RiskControl.WinLossLimitControl.Constants;
 using RiskControl.WinLossLimitControl.Services;
 
-namespace RiskControl.WinLossLimitControl.PlayerSettings.Update
+namespace RiskControl.WinLossLimitControl.PlayerSettings.Update;
+
+public interface ValidationService
 {
-    public interface ValidationService
+    Task<bool> Execute(Request request);
+
+    Task<bool> CheckWinContrains(Request request);
+
+    Task<bool> CheckLossContrains(Request request);
+}
+
+public class ValidationServiceImp : ValidationService
+{
+    private readonly IDynamicRepository repository;
+
+    private readonly IncreamentedSeriesContrainService increamentedSeriesContrainService;
+
+    public ValidationServiceImp(IDynamicRepository repository, IncreamentedSeriesContrainService increamentedSeriesContrainService)
     {
-        Task<bool> Execute(Request request);
-
-        Task<bool> CheckWinContrains(Request request);
-
-        Task<bool> CheckLossContrains(Request request);
+        this.repository = repository;
+        this.increamentedSeriesContrainService = increamentedSeriesContrainService;
     }
 
-    public class ValidationServiceImp : ValidationService
+    public async Task<bool> Execute(Request request)
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly IncreamentedSeriesContrainService increamentedSeriesContrainService;
-
-        public ValidationServiceImp(IDynamicRepository repository, IncreamentedSeriesContrainService increamentedSeriesContrainService)
+        var winLimit = request.Limit;
+        if (winLimit == 0)
         {
-            this.repository = repository;
-            this.increamentedSeriesContrainService = increamentedSeriesContrainService;
+            return true;
         }
 
-        public async Task<bool> Execute(Request request)
+        var isValid = LimitLevelConstant.IsWinLimitLevel(request.LevelId)
+            ? await CheckWinContrains(request)
+            : await CheckLossContrains(request);
+
+        return isValid;
+    }
+
+    private async Task<IEnumerable<PlayerSetting>> GetPlayerSettings(int custId, int productId, int groupId)
+    {
+        var criteria = new ReadCriteria
         {
-            var winLimit = request.Limit;
-            if (winLimit == 0)
-            {
-                return true;
-            }
+            CustId = custId,
+            GroupId = groupId,
+            ProductId = productId
+        };
 
-            var isValid = LimitLevelConstant.IsWinLimitLevel(request.LevelId)
-                ? await CheckWinContrains(request)
-                : await CheckLossContrains(request);
+        return await repository.FetchAsync<PlayerSetting>(criteria);
+    }
 
-            return isValid;
-        }
+    public async Task<bool> CheckWinContrains(Request request)
+    {
+        var playerSettings = await GetPlayerSettings(request.CustId, request.ProductId, request.GroupId);
+        var limits = playerSettings.Where(p => LimitLevelConstant.IsWinLimitLevel(p.LevelId))
+            .OrderBy(p => p.LevelId)
+            .Select(p => p.MaxWinLimit)
+            .ToArray();
+        limits[request.LevelId - 1] = request.Limit;
+        return increamentedSeriesContrainService.IsPositiveIncreamented(limits);
+    }
 
-        private async Task<IEnumerable<PlayerSetting>> GetPlayerSettings(int custId, int productId, int groupId)
-        {
-            var criteria = new ReadCriteria
-            {
-                CustId = custId,
-                GroupId = groupId,
-                ProductId = productId
-            };
+    public async Task<bool> CheckLossContrains(Request request)
+    {
+        var playerSettings = await GetPlayerSettings(request.CustId, request.ProductId, request.GroupId);
+        var limits = playerSettings.Where(p => LimitLevelConstant.IsLossLimitLevel(p.LevelId))
+            .OrderByDescending(p => p.LevelId)
+            .Select(p => p.MaxWinLimit)
+            .ToArray();
+        limits[LimitLevelConstant.BlackLevel - request.LevelId] = request.Limit;
 
-            return await repository.FetchAsync<PlayerSetting>(criteria);
-        }
-
-        public async Task<bool> CheckWinContrains(Request request)
-        {
-            var playerSettings = await GetPlayerSettings(request.CustId, request.ProductId, request.GroupId);
-            var limits = playerSettings.Where(p => LimitLevelConstant.IsWinLimitLevel(p.LevelId))
-                                    .OrderBy(p => p.LevelId)
-                                    .Select(p => p.MaxWinLimit)
-                                    .ToArray();
-            limits[request.LevelId - 1] = request.Limit;
-            return increamentedSeriesContrainService.IsPositiveIncreamented(limits);
-        }
-
-        public async Task<bool> CheckLossContrains(Request request)
-        {
-            var playerSettings = await GetPlayerSettings(request.CustId, request.ProductId, request.GroupId);
-            var limits = playerSettings.Where(p => LimitLevelConstant.IsLossLimitLevel(p.LevelId))
-                                     .OrderByDescending(p => p.LevelId)
-                                     .Select(p => p.MaxWinLimit)
-                                     .ToArray();
-            limits[LimitLevelConstant.BlackLevel - request.LevelId] = request.Limit;
-
-            return increamentedSeriesContrainService.IsNegativeIncreamented(limits);
-        }
+        return increamentedSeriesContrainService.IsNegativeIncreamented(limits);
     }
 }

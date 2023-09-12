@@ -11,33 +11,32 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.History
+namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.History;
+
+public class HandlerUnitTests
 {
-    public class HandlerUnitTests
+    [Fact]
+    public async Task Handle_Always_ReturnsDataFromRepository()
     {
-        [Fact]
-        public async Task Handle_Always_ReturnsDataFromRepository()
+        // Arrange
+        var fakeRawData = TestDataProvider.Load<List<WinLimitHistoryRaw>>("win-limit-history-raw");
+        var repository = Substitute.For<IDynamicRepository>();
+        repository.FetchAsync<WinLimitHistoryRaw>(Arg.Compat.Any<ICriteria>()).Returns(fakeRawData);
+
+        var cacheRefService = new CacheRefServiceMockImp();
+        var winLimitSettingXmlParserImp = new WinLimitSettingXmlParserImp();
+
+        var mapper = new MapperConfiguration(mcf =>
         {
-            // Arrange
-            var fakeRawData = TestDataProvider.Load<List<WinLimitHistoryRaw>>("win-limit-history-raw");
-            var repository = Substitute.For<IDynamicRepository>();
-            repository.FetchAsync<WinLimitHistoryRaw>(Arg.Compat.Any<ICriteria>()).Returns(fakeRawData);
+            mcf.CreateMap<Request, HistoryCriteria>();
+        }).CreateMapper();
 
-            var cacheRefService = new CacheRefServiceMockImp();
-            var winLimitSettingXmlParserImp = new WinLimitSettingXmlParserImp();
+        // Act
+        var handler = new Handler(repository, cacheRefService, winLimitSettingXmlParserImp, mapper);
+        var result = await handler.Handle(new Request(), new CancellationToken());
 
-            var mapper = new MapperConfiguration(mcf =>
-            {
-                mcf.CreateMap<Request, HistoryCriteria>();
-            }).CreateMapper();
-
-            // Act
-            var handler = new Handler(repository, cacheRefService, winLimitSettingXmlParserImp, mapper);
-            var result = await handler.Handle(new Request(), new CancellationToken());
-
-            // Assert
-            var expected = TestDataProvider.Load<List<WinLimitHistory>>("win-limit-history");
-            DeepAssert.Equal(result, expected);
-        }
+        // Assert
+        var expected = TestDataProvider.Load<List<WinLimitHistory>>("win-limit-history");
+        DeepAssert.Equal(result, expected);
     }
 }

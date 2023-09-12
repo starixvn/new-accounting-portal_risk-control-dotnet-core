@@ -5,38 +5,37 @@ using RiskControl.VoidRejectRefund.Device;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.VoidRejectRefund.UnitTests.Device
+namespace RiskControl.VoidRejectRefund.UnitTests.Device;
+
+public class DeviceModeControllerUnitTests
 {
-    public class DeviceModeControllerUnitTests
+    [Fact]
+    public async Task Index_Always_CallMediatorSend()
     {
-        [Fact]
-        public async Task Index_Always_CallMediatorSend()
-        {
-            // Arrange
-            var mediator = Substitute.For<IMediator>();
-            var httpParameter = new HttpParameterGroupJson();
+        // Arrange
+        var mediator = Substitute.For<IMediator>();
+        var httpParameter = new HttpParameterGroupJson();
 
-            // Act
-            var controller = new DeviceModeController(mediator);
-            await controller.Index(httpParameter);
+        // Act
+        var controller = new DeviceModeController(mediator);
+        await controller.Index(httpParameter);
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<HttpParameterGroupJson>());
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<HttpParameterGroupJson>());
+    }
 
-        [Fact]
-        public async Task Excel_Always_CallMediatorSend()
-        {
-            // Arrange
-            var mediator = Substitute.For<IMediator>();
-            var httpParameterExcel = new HttpParameterGroupExcel();
+    [Fact]
+    public async Task Excel_Always_CallMediatorSend()
+    {
+        // Arrange
+        var mediator = Substitute.For<IMediator>();
+        var httpParameterExcel = new HttpParameterGroupExcel();
 
-            // Act
-            var controller = new DeviceModeController(mediator);
-            await controller.Excel(httpParameterExcel);
+        // Act
+        var controller = new DeviceModeController(mediator);
+        await controller.Excel(httpParameterExcel);
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<HttpParameterGroupExcel>());
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<HttpParameterGroupExcel>());
     }
 }

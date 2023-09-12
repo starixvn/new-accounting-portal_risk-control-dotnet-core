@@ -1,9 +1,8 @@
-﻿namespace RiskControl.WinLossLimitControl.Models
-{
-    public interface WinLossLimitRaw
-    {
-        int LevelId { get; set; }
+﻿namespace RiskControl.WinLossLimitControl.Models;
 
-        decimal MaxWinLimit { get; set; }
-    }
+public interface WinLossLimitRaw
+{
+    int LevelId { get; set; }
+
+    decimal MaxWinLimit { get; set; }
 }

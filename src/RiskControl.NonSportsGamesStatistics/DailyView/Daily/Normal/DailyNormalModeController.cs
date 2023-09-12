@@ -3,26 +3,25 @@ using Microsoft.AspNetCore.Mvc;
 using RiskControl.NonSportsGamesStatistics.Common;
 using System.Threading.Tasks;
 
-namespace RiskControl.NonSportsGamesStatistics.DailyView.Daily.Normal
+namespace RiskControl.NonSportsGamesStatistics.DailyView.Daily.Normal;
+
+[Route("NonSportsGamesStatistics/DailyNormal")]
+public class DailyNormalModeController : BaseController<QueryModel>
 {
-    [Route("NonSportsGamesStatistics/DailyNormal")]
-    public class DailyNormalModeController : BaseController<QueryModel>
+    public DailyNormalModeController(IMediator mediator) : base(mediator)
     {
-        public DailyNormalModeController(IMediator mediator) : base(mediator)
-        {
-        }
+    }
 
-        [Route("Query")]
-        public override async Task<IActionResult> Query(QueryModel queryModel)
-        {
-            return await base.Query(queryModel).ConfigureAwait(false);
-        }
+    [Route("Query")]
+    public override async Task<IActionResult> Query(QueryModel queryModel)
+    {
+        return await base.Query(queryModel).ConfigureAwait(false);
+    }
 
-        [Route("Excel")]
-        public async Task<IActionResult> Excel(QueryModel queryModel)
-        {
-            var sheetName = $"{queryModel.ReportBy} Game Statistic";
-            return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
-        }
+    [Route("Excel")]
+    public async Task<IActionResult> Excel(QueryModel queryModel)
+    {
+        var sheetName = $"{queryModel.ReportBy} Game Statistic";
+        return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
     }
 }

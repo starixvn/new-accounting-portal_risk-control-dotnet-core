@@ -10,37 +10,36 @@ using SpecificMemberMain = RiskControl.NonSportsGamesStatistics.SpecificMember.U
 using SpecificMemberMonthly = RiskControl.NonSportsGamesStatistics.SpecificMember.Monthly;
 using SpecificMemberProduct = RiskControl.NonSportsGamesStatistics.SpecificMember.Product;
 
-namespace RiskControl.Sites.AutoMapperProfiles.NonSports
+namespace RiskControl.Sites.AutoMapperProfiles.NonSports;
+
+public class SpecificMemberProfile : Profile
 {
-    public class SpecificMemberProfile : Profile
+    public SpecificMemberProfile()
     {
-        public SpecificMemberProfile()
-        {
-            CreateMap<SpecificMemberMain.QueryModel, SpecificMemberCommon.UsernameHistoryCriteria>();
-            CreateMap<SpecificMemberCommon.UsernameHistoryCriteria, SpecificMemberCommon.UsernameNormalCriteria>();
+        CreateMap<SpecificMemberMain.QueryModel, SpecificMemberCommon.UsernameHistoryCriteria>();
+        CreateMap<SpecificMemberCommon.UsernameHistoryCriteria, SpecificMemberCommon.UsernameNormalCriteria>();
 
-            CreateMap<SpecificMemberDaily.QueryModel, SpecificMemberDaily.HistoryCriteria>();
-            CreateMap<SpecificMemberDaily.HistoryCriteria, SpecificMemberDaily.NormalCriteria>();
+        CreateMap<SpecificMemberDaily.QueryModel, SpecificMemberDaily.HistoryCriteria>();
+        CreateMap<SpecificMemberDaily.HistoryCriteria, SpecificMemberDaily.NormalCriteria>();
 
-            CreateMap<SpecificMemberAssociatedAccount.QueryModel, SpecificMemberCommon.UsernameHistoryCriteria>();
+        CreateMap<SpecificMemberAssociatedAccount.QueryModel, SpecificMemberCommon.UsernameHistoryCriteria>();
 
-            CreateMap<SpecificMemberProduct.QueryModel, SpecificMemberProduct.HistoryCriteria>();
-            CreateMap<SpecificMemberProduct.HistoryCriteria, SpecificMemberProduct.NormalCriteria>();
+        CreateMap<SpecificMemberProduct.QueryModel, SpecificMemberProduct.HistoryCriteria>();
+        CreateMap<SpecificMemberProduct.HistoryCriteria, SpecificMemberProduct.NormalCriteria>();
 
-            CreateMap<SpecificMemberCasinoProduct.QueryModel, SpecificMemberCasinoProduct.HistoryCriteria>();
-            CreateMap<SpecificMemberCasinoProduct.HistoryCriteria, SpecificMemberCasinoProduct.NormalCriteria>();
+        CreateMap<SpecificMemberCasinoProduct.QueryModel, SpecificMemberCasinoProduct.HistoryCriteria>();
+        CreateMap<SpecificMemberCasinoProduct.HistoryCriteria, SpecificMemberCasinoProduct.NormalCriteria>();
 
-            CreateMap<SpecificMemberGrandTotalProduct.QueryModel, SpecificMemberGrandTotalProduct.HistoryCriteria>();
-            CreateMap<SpecificMemberGrandTotalProduct.HistoryCriteria, SpecificMemberGrandTotalProduct.NormalCriteria>();
+        CreateMap<SpecificMemberGrandTotalProduct.QueryModel, SpecificMemberGrandTotalProduct.HistoryCriteria>();
+        CreateMap<SpecificMemberGrandTotalProduct.HistoryCriteria, SpecificMemberGrandTotalProduct.NormalCriteria>();
 
-            CreateMap<SpecificMemberGrandTotalDaily.QueryModel, SpecificMemberGrandTotalDaily.HistoryCriteria>();
-            CreateMap<SpecificMemberGrandTotalDaily.HistoryCriteria, SpecificMemberGrandTotalDaily.NormalCriteria>();
+        CreateMap<SpecificMemberGrandTotalDaily.QueryModel, SpecificMemberGrandTotalDaily.HistoryCriteria>();
+        CreateMap<SpecificMemberGrandTotalDaily.HistoryCriteria, SpecificMemberGrandTotalDaily.NormalCriteria>();
 
-            CreateMap<SpecificMemberGrandTotalCasinoProduct.QueryModel, SpecificMemberGrandTotalCasinoProduct.HistoryCriteria>();
-            CreateMap<SpecificMemberGrandTotalCasinoProduct.HistoryCriteria, SpecificMemberGrandTotalCasinoProduct.NormalCriteria>();
+        CreateMap<SpecificMemberGrandTotalCasinoProduct.QueryModel, SpecificMemberGrandTotalCasinoProduct.HistoryCriteria>();
+        CreateMap<SpecificMemberGrandTotalCasinoProduct.HistoryCriteria, SpecificMemberGrandTotalCasinoProduct.NormalCriteria>();
 
-            CreateMap<SpecificMemberMonthly.QueryModel, SpecificMemberMonthly.HistoryCriteria>();
-            CreateMap<SpecificMemberMonthly.HistoryCriteria, SpecificMemberMonthly.NormalCriteria>();
-        }
+        CreateMap<SpecificMemberMonthly.QueryModel, SpecificMemberMonthly.HistoryCriteria>();
+        CreateMap<SpecificMemberMonthly.HistoryCriteria, SpecificMemberMonthly.NormalCriteria>();
     }
 }

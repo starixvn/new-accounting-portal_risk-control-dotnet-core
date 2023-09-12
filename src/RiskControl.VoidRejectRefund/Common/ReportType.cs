@@ -1,13 +1,12 @@
-﻿namespace RiskControl.VoidRejectRefund.Common
+﻿namespace RiskControl.VoidRejectRefund.Common;
+
+public enum ReportType
 {
-    public enum ReportType
-    {
-        None,
-        Daily,
-        Monthly,
-        Product,
-        Company,
-        Currency,
-        Device
-    }
+    None,
+    Daily,
+    Monthly,
+    Product,
+    Company,
+    Currency,
+    Device
 }

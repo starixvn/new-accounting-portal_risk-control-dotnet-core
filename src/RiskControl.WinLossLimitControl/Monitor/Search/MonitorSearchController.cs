@@ -3,29 +3,28 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.Core.Model;
 
-namespace RiskControl.WinLossLimitControl.Monitor.Search
+namespace RiskControl.WinLossLimitControl.Monitor.Search;
+
+using Fanex.NAP.Client.Attributes;
+using Fanex.NAP.Client.Helpers.Business;
+
+[ApiController]
+[Route("api/win-limit-control/monitor")]
+public class MonitorSearchController : ControllerBase
 {
-    using Fanex.NAP.Client.Attributes;
-    using Fanex.NAP.Client.Helpers.Business;
+    private readonly IMediator mediator;
 
-    [ApiController]
-    [Route("api/win-limit-control/monitor")]
-    public class MonitorSearchController : ControllerBase
+    public MonitorSearchController(IMediator mediator)
     {
-        private readonly IMediator mediator;
+        this.mediator = mediator;
+    }
 
-        public MonitorSearchController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
-        [NapAuth(FunctionKey = FunctionKeys.WinLimitMonitor, Policy = Constant.Policy.Read)]
-        [Route("search")]
-        [HttpPost]
-        public async Task<IActionResult> Post(Request parameter)
-        {
-            var viewModel = await mediator.Send(parameter);
-            return Ok(viewModel);
-        }
+    [NapAuth(FunctionKey = FunctionKeys.WinLimitMonitor, Policy = Constant.Policy.Read)]
+    [Route("search")]
+    [HttpPost]
+    public async Task<IActionResult> Post(Request parameter)
+    {
+        var viewModel = await mediator.Send(parameter);
+        return Ok(viewModel);
     }
 }

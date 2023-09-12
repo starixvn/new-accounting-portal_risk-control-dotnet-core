@@ -1,11 +1,10 @@
-﻿namespace RiskControl.Dashboard.Model
+﻿namespace RiskControl.Dashboard.Model;
+
+public class TopMemberWinning
 {
-    public class TopMemberWinning
-    {
-        public string Username { get; set; }
+    public string Username { get; set; }
 
-        public string Currency { get; set; }
+    public string Currency { get; set; }
 
-        public decimal GameIncome { get; set; }
-    }
+    public decimal GameIncome { get; set; }
 }

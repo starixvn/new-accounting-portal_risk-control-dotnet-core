@@ -10,107 +10,106 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.Daily
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.Daily;
+
+public class HandlerUnitTests
 {
-    public class HandlerUnitTests
+    [Fact]
+    public async Task Handle_DailyWithSortColummNameAndSortDirectionIsNotNullOrEmpty_AllwayCallSortDataFunction()
     {
-        [Fact]
-        public async Task Handle_DailyWithSortColummNameAndSortDirectionIsNotNullOrEmpty_AllwayCallSortDataFunction()
-        {
-            // Arrange
-            var fakeDailyReportModel = new DailyViewReportModel();
+        // Arrange
+        var fakeDailyReportModel = new DailyViewReportModel();
 
-            var service = Substitute.For<Service<DailyViewReportModel, HistoryCriteria>>();
-            service.Query(Arg.Compat.Any<HistoryCriteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeDailyReportModel);
+        var service = Substitute.For<Service<DailyViewReportModel, HistoryCriteria>>();
+        service.Query(Arg.Compat.Any<HistoryCriteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeDailyReportModel);
 
-            var sortingService = Substitute.For<SortingService<DailyViewReportModel>>();
+        var sortingService = Substitute.For<SortingService<DailyViewReportModel>>();
 
-            var gridOptionService = Substitute.For<GridOptionBuilderService<DailyViewReportModel, QueryModel>>();
+        var gridOptionService = Substitute.For<GridOptionBuilderService<DailyViewReportModel, QueryModel>>();
 
-            var handler = new Handler(service, sortingService, gridOptionService);
+        var handler = new Handler(service, sortingService, gridOptionService);
 
-            // Act
-            await handler.Handle(
-                new QueryModel
-                {
-                    FromDate = new DateTime(2017, 1, 1),
-                    ToDate = new DateTime(2017, 3, 1),
-                    SortColumnName = "Any Column",
-                    SortDirection = "Any Direction",
-                    IsDrillDown = false,
-                    IsGrandTotal = false,
-                    UsernameDrillDown = false
-                },
-                new CancellationToken());
+        // Act
+        await handler.Handle(
+            new QueryModel
+            {
+                FromDate = new DateTime(2017, 1, 1),
+                ToDate = new DateTime(2017, 3, 1),
+                SortColumnName = "Any Column",
+                SortDirection = "Any Direction",
+                IsDrillDown = false,
+                IsGrandTotal = false,
+                UsernameDrillDown = false
+            },
+            new CancellationToken());
 
-            // Assert
-            sortingService.Received().SortData(fakeDailyReportModel, "Any Direction", "Any Column");
-        }
+        // Assert
+        sortingService.Received().SortData(fakeDailyReportModel, "Any Direction", "Any Column");
+    }
 
-        [Fact]
-        public async Task Handle_DailyWithSortColummNameAndSortDirectionIsNullOrEmpty_DoesNotCallSortDataFunction()
-        {
-            // Arrange           
-            var service = Substitute.For<Service<DailyViewReportModel, HistoryCriteria>>();
+    [Fact]
+    public async Task Handle_DailyWithSortColummNameAndSortDirectionIsNullOrEmpty_DoesNotCallSortDataFunction()
+    {
+        // Arrange           
+        var service = Substitute.For<Service<DailyViewReportModel, HistoryCriteria>>();
 
-            var sortingService = Substitute.For<SortingService<DailyViewReportModel>>();
+        var sortingService = Substitute.For<SortingService<DailyViewReportModel>>();
 
-            var gridOptionService = Substitute.For<GridOptionBuilderService<DailyViewReportModel, QueryModel>>();
+        var gridOptionService = Substitute.For<GridOptionBuilderService<DailyViewReportModel, QueryModel>>();
 
-            var handler = new Handler(service, sortingService, gridOptionService);
+        var handler = new Handler(service, sortingService, gridOptionService);
 
-            // Act
-            await handler.Handle(
-                new QueryModel
-                {
-                    FromDate = new DateTime(2017, 1, 1),
-                    ToDate = new DateTime(2017, 3, 1),
-                    SortColumnName = string.Empty,
-                    SortDirection = string.Empty,
-                    IsDrillDown = false,
-                    IsGrandTotal = false,
-                    UsernameDrillDown = false
-                },
-                new CancellationToken());
+        // Act
+        await handler.Handle(
+            new QueryModel
+            {
+                FromDate = new DateTime(2017, 1, 1),
+                ToDate = new DateTime(2017, 3, 1),
+                SortColumnName = string.Empty,
+                SortDirection = string.Empty,
+                IsDrillDown = false,
+                IsGrandTotal = false,
+                UsernameDrillDown = false
+            },
+            new CancellationToken());
 
-            // Assert
-            sortingService.DidNotReceive().SortData(Arg.Compat.Any<DailyViewReportModel>(), string.Empty, string.Empty);
-        }
+        // Assert
+        sortingService.DidNotReceive().SortData(Arg.Compat.Any<DailyViewReportModel>(), string.Empty, string.Empty);
+    }
 
-        [Fact]
-        public async Task Handle_DailyWithAnyQueryModel_ReturnRightGridOptions()
-        {
-            // Arrange
-            var fakeDailyReportModel = TestDataProvider.Load<DailyViewReportModel>("fake-service-data", dateTimeFormat: "MMM dd, yyyy");
-            var fakeSortDailyReportModel = TestDataProvider.Load<DailyViewReportModel>("fake-sorting-service-data", dateTimeFormat: "MMM dd, yyyy");
-            var fakeGridOptions = TestDataProvider.Load<GridOptions>("fake-gridOptions");
-            var expectedGridOptions = TestDataProvider.Load<GridOptions>("expected-gridOptions");
+    [Fact]
+    public async Task Handle_DailyWithAnyQueryModel_ReturnRightGridOptions()
+    {
+        // Arrange
+        var fakeDailyReportModel = TestDataProvider.Load<DailyViewReportModel>("fake-service-data", dateTimeFormat: "MMM dd, yyyy");
+        var fakeSortDailyReportModel = TestDataProvider.Load<DailyViewReportModel>("fake-sorting-service-data", dateTimeFormat: "MMM dd, yyyy");
+        var fakeGridOptions = TestDataProvider.Load<GridOptions>("fake-gridOptions");
+        var expectedGridOptions = TestDataProvider.Load<GridOptions>("expected-gridOptions");
 
-            var service = Substitute.For<Service<DailyViewReportModel, HistoryCriteria>>();
-            service.Query(Arg.Compat.Any<HistoryCriteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeDailyReportModel);
+        var service = Substitute.For<Service<DailyViewReportModel, HistoryCriteria>>();
+        service.Query(Arg.Compat.Any<HistoryCriteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeDailyReportModel);
 
-            var sortingService = Substitute.For<SortingService<DailyViewReportModel>>();
-            sortingService.SortData(Arg.Compat.Any<DailyViewReportModel>(), Arg.Compat.Any<string>(), Arg.Compat.Any<string>()).Returns(fakeSortDailyReportModel);
+        var sortingService = Substitute.For<SortingService<DailyViewReportModel>>();
+        sortingService.SortData(Arg.Compat.Any<DailyViewReportModel>(), Arg.Compat.Any<string>(), Arg.Compat.Any<string>()).Returns(fakeSortDailyReportModel);
 
-            var gridOptionService = Substitute.For<GridOptionBuilderService<DailyViewReportModel, QueryModel>>();
-            gridOptionService.BuildGridOptions(Arg.Compat.Any<DailyViewReportModel>(), Arg.Compat.Any<QueryModel>()).Returns(fakeGridOptions);
+        var gridOptionService = Substitute.For<GridOptionBuilderService<DailyViewReportModel, QueryModel>>();
+        gridOptionService.BuildGridOptions(Arg.Compat.Any<DailyViewReportModel>(), Arg.Compat.Any<QueryModel>()).Returns(fakeGridOptions);
 
-            var handler = new Handler(service, sortingService, gridOptionService);
+        var handler = new Handler(service, sortingService, gridOptionService);
 
-            // Act
-            var actualResult = await handler.Handle(
-                new QueryModel
-                {
-                    FromDate = new DateTime(2017, 1, 1),
-                    ToDate = new DateTime(2017, 3, 1),
-                    SortColumnName = "TotalBets",
-                    SortDirection = "Asc",
-                    UsernameDrillDown = false
-                },
-                new CancellationToken());
+        // Act
+        var actualResult = await handler.Handle(
+            new QueryModel
+            {
+                FromDate = new DateTime(2017, 1, 1),
+                ToDate = new DateTime(2017, 3, 1),
+                SortColumnName = "TotalBets",
+                SortDirection = "Asc",
+                UsernameDrillDown = false
+            },
+            new CancellationToken());
 
-            // Assert
-            DeepAssert.Equal(expectedGridOptions, actualResult);
-        }
+        // Assert
+        DeepAssert.Equal(expectedGridOptions, actualResult);
     }
 }

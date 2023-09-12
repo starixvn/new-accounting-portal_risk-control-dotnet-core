@@ -9,36 +9,36 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.Groups
+namespace RiskControl.WinLossLimitControl.UnitTests.Groups;
+
+public class HandlerUnitTests
 {
-    public class HandlerUnitTests
+    [Fact]
+    public async Task Handle_Always_ReturnsProductGroupSettingList()
     {
-        [Fact]
-        public async Task Handle_Always_ReturnsProductGroupSettingList()
+        // Arrange
+        var groupSetting = new GroupSetting
         {
-            // Arrange
-            var groupSetting = new GroupSetting
-            {
-                BetTypeId = 1,
-                GroupId = 1,
-                ProductId = 1
-            };
-            var fakeRawSettings = new List<GroupSetting> { groupSetting };
-            var repository = Substitute.For<IDynamicRepository>();
-            repository.FetchAsync<GroupSetting>(Arg.Compat.Any<ICriteria>()).Returns(fakeRawSettings);
+            BetTypeId = 1,
+            GroupId = 1,
+            ProductId = 1
+        };
+        var fakeRawSettings = new List<GroupSetting> { groupSetting };
+        var repository = Substitute.For<IDynamicRepository>();
+        repository.FetchAsync<GroupSetting>(Arg.Compat.Any<ICriteria>()).Returns(fakeRawSettings);
 
-            var cacheRefService = Substitute.For<CacheRefService>();
-            cacheRefService.GetGroupName(Arg.Compat.Any<int>()).Returns("Group 1");
-            cacheRefService.GetProductName(Arg.Compat.Any<int>()).Returns("Product 1");
-            cacheRefService.GetBetTypeName(Arg.Compat.Any<int>()).Returns("BetType 1");
-            cacheRefService.GetSportName(Arg.Compat.Any<int>()).Returns("Any Sport");
+        var cacheRefService = Substitute.For<CacheRefService>();
+        cacheRefService.GetGroupName(Arg.Compat.Any<int>()).Returns("Group 1");
+        cacheRefService.GetProductName(Arg.Compat.Any<int>()).Returns("Product 1");
+        cacheRefService.GetBetTypeName(Arg.Compat.Any<int>()).Returns("BetType 1");
+        cacheRefService.GetSportName(Arg.Compat.Any<int>()).Returns("Any Sport");
 
-            // Act
-            var readService = new Handler(repository, cacheRefService);
-            var productGroupSettings = await readService.Handle(new Request(), new CancellationToken());
+        // Act
+        var readService = new Handler(repository, cacheRefService);
+        var productGroupSettings = await readService.Handle(new Request(), new CancellationToken());
 
-            // Assert
-            const string ExpectedSettingJson = @"[
+        // Assert
+        const string ExpectedSettingJson = @"[
                 {
                   ProductId: 1,
                   ProductName: 'Product 1',
@@ -53,9 +53,8 @@ namespace RiskControl.WinLossLimitControl.UnitTests.Groups
                 }
             ]
             ";
-            var expectedSettings = JsonConvert.DeserializeObject<List<ProductGroupSetting>>(ExpectedSettingJson);
+        var expectedSettings = JsonConvert.DeserializeObject<List<ProductGroupSetting>>(ExpectedSettingJson);
 
-            DeepAssert.Equal(productGroupSettings, expectedSettings);
-        }
+        DeepAssert.Equal(productGroupSettings, expectedSettings);
     }
 }

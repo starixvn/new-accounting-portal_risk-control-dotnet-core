@@ -1,8 +1,7 @@
 ﻿using MediatR;
 
-namespace RiskControl.VoidRejectRefund.Common
+namespace RiskControl.VoidRejectRefund.Common;
+
+public class HttpParameterGroupJson : HttpParameterJsonBase, IRequest<GroupStatisticReportModel>
 {
-    public class HttpParameterGroupJson : HttpParameterJsonBase, IRequest<GroupStatisticReportModel>
-    {
-    }
 }

@@ -9,27 +9,26 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.PlayerSettings.Delete
+namespace RiskControl.WinLossLimitControl.UnitTests.PlayerSettings.Delete;
+
+public class HandlerUnitTests
 {
-    public class HandlerUnitTests
+    [Fact]
+    public async Task Handle_Always_ExecuteSuccessfully()
     {
-        [Fact]
-        public async Task Handle_Always_ExecuteSuccessfully()
+        // Arrange
+        var userHttpContext = Substitute.For<UserHttpContext>();
+        var repository = Substitute.For<IDynamicRepository>();
+        var mapper = new MapperConfiguration(mcf =>
         {
-            // Arrange
-            var userHttpContext = Substitute.For<UserHttpContext>();
-            var repository = Substitute.For<IDynamicRepository>();
-            var mapper = new MapperConfiguration(mcf =>
-            {
-                mcf.CreateMap<Request, DeleteCriteria>();
-            }).CreateMapper();
+            mcf.CreateMap<Request, DeleteCriteria>();
+        }).CreateMapper();
 
-            // Act
-            var handler = new Handler(userHttpContext, repository, mapper);
-            var result = await handler.Handle(new Request(), new CancellationToken());
+        // Act
+        var handler = new Handler(userHttpContext, repository, mapper);
+        var result = await handler.Handle(new Request(), new CancellationToken());
 
-            // Assert
-            DeepAssert.Equal(result, new ExecuteResult());
-        }
+        // Assert
+        DeepAssert.Equal(result, new ExecuteResult());
     }
 }

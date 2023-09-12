@@ -4,41 +4,40 @@ using AutoMapper;
 using Fanex.Excel.Models;
 using MediatR;
 
-namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Main.History
+namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Main.History;
+
+public class Handler : IRequestHandler<QueryModel, GridOptions>
 {
-    public class Handler : IRequestHandler<QueryModel, GridOptions>
+    private readonly Service service;
+    private readonly SortingService sortingService;
+    private readonly GridOptionBuilderService gridOptionService;
+    private readonly IMapper mapper;
+
+    public Handler(
+        Service service,
+        SortingService sortingService,
+        GridOptionBuilderService gridOptionService,
+        IMapper mapper)
     {
-        private readonly Service service;
-        private readonly SortingService sortingService;
-        private readonly GridOptionBuilderService gridOptionService;
-        private readonly IMapper mapper;
+        this.service = service;
+        this.sortingService = sortingService;
+        this.gridOptionService = gridOptionService;
+        this.mapper = mapper;
+    }
 
-        public Handler(
-            Service service,
-            SortingService sortingService,
-            GridOptionBuilderService gridOptionService,
-            IMapper mapper)
+    public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
+    {
+        var criteria = mapper.Map<Criteria>(request);
+
+        var reportModel = await service.Query(criteria, criteria.FromDate).ConfigureAwait(false);
+
+        if (!string.IsNullOrEmpty(request.SortColumnName) && !string.IsNullOrEmpty(request.SortDirection))
         {
-            this.service = service;
-            this.sortingService = sortingService;
-            this.gridOptionService = gridOptionService;
-            this.mapper = mapper;
+            reportModel = sortingService.SortData(reportModel, request.SortDirection, request.SortColumnName);
         }
 
-        public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
-        {
-            var criteria = mapper.Map<Criteria>(request);
+        var gridOptions = gridOptionService.BuildGridOptions(reportModel, request, request.DrillDownCurrency);
 
-            var reportModel = await service.Query(criteria, criteria.FromDate).ConfigureAwait(false);
-
-            if (!string.IsNullOrEmpty(request.SortColumnName) && !string.IsNullOrEmpty(request.SortDirection))
-            {
-                reportModel = sortingService.SortData(reportModel, request.SortDirection, request.SortColumnName);
-            }
-
-            var gridOptions = gridOptionService.BuildGridOptions(reportModel, request, request.DrillDownCurrency);
-
-            return gridOptions;
-        }
+        return gridOptions;
     }
 }

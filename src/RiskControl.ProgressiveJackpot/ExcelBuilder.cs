@@ -5,39 +5,38 @@ using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
 using RiskControl.Core.Configuration;
 
-namespace RiskControl.ProgressiveJackpot
+namespace RiskControl.ProgressiveJackpot;
+
+public interface ExcelBuilder
 {
-    public interface ExcelBuilder
+    ExcelPackage Build<T>(string template, IEnumerable<T> models);
+}
+
+public class ExcelBuilderImp : ExcelBuilder
+{
+    private const int StartRowIndex = 5;
+
+    private readonly ConfigurationService configurationService;
+
+    public ExcelBuilderImp(ConfigurationService configurationService)
     {
-        ExcelPackage Build<T>(string template, IEnumerable<T> models);
+        this.configurationService = configurationService;
     }
 
-    public class ExcelBuilderImp : ExcelBuilder
+    public ExcelPackage Build<T>(string template, IEnumerable<T> models)
     {
-        private const int StartRowIndex = 5;
+        var excelPackage = LoadTemplate(template);
+        var sheet = excelPackage.Workbook.Worksheets.First();
+        sheet.ApplyVertical(models, StartRowIndex);
 
-        private readonly ConfigurationService configurationService;
+        return excelPackage;
+    }
 
-        public ExcelBuilderImp(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
-
-        public ExcelPackage Build<T>(string template, IEnumerable<T> models)
-        {
-            var excelPackage = LoadTemplate(template);
-            var sheet = excelPackage.Workbook.Worksheets.First();
-            sheet.ApplyVertical(models, StartRowIndex);
-
-            return excelPackage;
-        }
-
-        private ExcelPackage LoadTemplate(string template)
-        {
-            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/Templates/ProgressiveJackpot/{template}.xlsx";
-            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
-            var excelPackage = new ExcelPackage(stream);
-            return excelPackage;
-        }
+    private ExcelPackage LoadTemplate(string template)
+    {
+        var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/Templates/ProgressiveJackpot/{template}.xlsx";
+        using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+        var excelPackage = new ExcelPackage(stream);
+        return excelPackage;
     }
 }

@@ -4,38 +4,37 @@ using RiskControl.NonSportsGamesStatistics.SpecificMember.GrandTotal.CasinoProdu
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.GrandTotal.CasinoProduct
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.GrandTotal.CasinoProduct;
+
+public class SpecificMemberCasinoProductGrandTotalControllerUnitTests
 {
-    public class SpecificMemberCasinoProductGrandTotalControllerUnitTests
+    [Fact]
+    public async Task Query_CasinoProductGrandTotalWithQueryModel_AlwaysCallMediatorSend()
     {
-        [Fact]
-        public async Task Query_CasinoProductGrandTotalWithQueryModel_AlwaysCallMediatorSend()
-        {
-            // Arrange
-            var mediator = Substitute.For<IMediator>();
-            var queryModel = new QueryModel();
+        // Arrange
+        var mediator = Substitute.For<IMediator>();
+        var queryModel = new QueryModel();
 
-            // Act
-            var controller = new SpecificMemberCasinoProductGrandTotalController(mediator);
-            await controller.Query(queryModel);
+        // Act
+        var controller = new SpecificMemberCasinoProductGrandTotalController(mediator);
+        await controller.Query(queryModel);
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<QueryModel>());
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<QueryModel>());
+    }
 
-        [Fact]
-        public async Task Excel_CasinoProductGrandTotalWithQueryModel_AlwaysCallMediatorSend()
-        {
-            // Arrange
-            var mediator = Substitute.For<IMediator>();
-            var queryModel = new QueryModel();
+    [Fact]
+    public async Task Excel_CasinoProductGrandTotalWithQueryModel_AlwaysCallMediatorSend()
+    {
+        // Arrange
+        var mediator = Substitute.For<IMediator>();
+        var queryModel = new QueryModel();
 
-            // Act
-            var controller = new SpecificMemberCasinoProductGrandTotalController(mediator);
-            await controller.Excel(queryModel);
+        // Act
+        var controller = new SpecificMemberCasinoProductGrandTotalController(mediator);
+        await controller.Excel(queryModel);
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<QueryModel>());
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<QueryModel>());
     }
 }

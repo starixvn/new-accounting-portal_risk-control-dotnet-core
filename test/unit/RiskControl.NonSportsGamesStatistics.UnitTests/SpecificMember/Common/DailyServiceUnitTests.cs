@@ -8,36 +8,35 @@ using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.Common
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.Common;
+
+public class DailyServiceUnitTests
 {
-    public class DailyServiceUnitTests
+    [Fact]
+    public async Task Query_DailyWithAnyCriteria_ReturnRightStatistics()
     {
-        [Fact]
-        public async Task Query_DailyWithAnyCriteria_ReturnRightStatistics()
+        // Arrange
+        var fakeRawData = TestDataProvider.Load<GenericRawData<BaseRawStatistic>>("full-fake-raw-data");
+        var expectedResult = TestDataProvider.Load<DailyViewReportModel>("expected-statistic", dateTimeFormat: "MMM dd, yyyy");
+
+        var rawService = Substitute.For<RawService>();
+        rawService.QueryDataFromBettransAndWarehouse<BaseRawStatistic>(
+            Arg.Compat.Any<BaseHistoryCriteria>(),
+            Arg.Compat.Any<BaseNormalCriteria>()).Returns(fakeRawData);
+
+        var mapper = new MapperConfiguration(cf =>
         {
-            // Arrange
-            var fakeRawData = TestDataProvider.Load<GenericRawData<BaseRawStatistic>>("full-fake-raw-data");
-            var expectedResult = TestDataProvider.Load<DailyViewReportModel>("expected-statistic", dateTimeFormat: "MMM dd, yyyy");
+            cf.CreateMap<BaseRawStatistic, DailyViewStatisticsModel>();
+        }).CreateMapper();
 
-            var rawService = Substitute.For<RawService>();
-            rawService.QueryDataFromBettransAndWarehouse<BaseRawStatistic>(
-                Arg.Compat.Any<BaseHistoryCriteria>(),
-                Arg.Compat.Any<BaseNormalCriteria>()).Returns(fakeRawData);
+        var calculationService = new CalculationServiceImp(mapper);
 
-            var mapper = new MapperConfiguration(cf =>
-            {
-                cf.CreateMap<BaseRawStatistic, DailyViewStatisticsModel>();
-            }).CreateMapper();
+        var service = new DailyServiceImp(rawService, calculationService);
 
-            var calculationService = new CalculationServiceImp(mapper);
+        // Act
+        var actualResult = await service.Query(new BaseHistoryCriteria(), new BaseNormalCriteria());
 
-            var service = new DailyServiceImp(rawService, calculationService);
-
-            // Act
-            var actualResult = await service.Query(new BaseHistoryCriteria(), new BaseNormalCriteria());
-
-            // Assert
-            DeepAssert.Equal(expectedResult, actualResult);
-        }
+        // Assert
+        DeepAssert.Equal(expectedResult, actualResult);
     }
 }

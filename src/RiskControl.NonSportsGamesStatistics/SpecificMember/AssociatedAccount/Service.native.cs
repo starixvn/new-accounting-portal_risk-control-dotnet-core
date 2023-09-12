@@ -8,48 +8,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RiskControl.NonSportsGamesStatistics.SpecificMember.AssociatedAccount
+namespace RiskControl.NonSportsGamesStatistics.SpecificMember.AssociatedAccount;
+
+public class ServiceImp<TCriteria> : Service<UserNameViewReportModel, TCriteria>
+    where TCriteria: BaseStatisticCriteria
 {
-    public class ServiceImp<TCriteria> : Service<UserNameViewReportModel, TCriteria>
-        where TCriteria: BaseStatisticCriteria
+    private readonly UsernameService service;
+    private readonly AssociatedAccountService associatedAccountService;
+    private readonly IMapper mapper;
+
+    public ServiceImp(
+        UsernameService service,
+        AssociatedAccountService associatedAccountService,
+        IMapper mapper)
     {
-        private readonly UsernameService service;
-        private readonly AssociatedAccountService associatedAccountService;
-        private readonly IMapper mapper;
+        this.service = service;
+        this.associatedAccountService = associatedAccountService;
+        this.mapper = mapper;
+    }
 
-        public ServiceImp(
-            UsernameService service,
-            AssociatedAccountService associatedAccountService,
-            IMapper mapper)
-        {
-            this.service = service;
-            this.associatedAccountService = associatedAccountService;
-            this.mapper = mapper;
-        }
+    public async Task<UserNameViewReportModel> Query(TCriteria criteria, DateTime winLossDate)
+    {
+        var associatedAccounts = await GetAssociatedAccounts(criteria.CustId).ConfigureAwait(false);
+        criteria.UserName = string.Join(",", associatedAccounts);
+        criteria.Site = "All";
 
-        public async Task<UserNameViewReportModel> Query(TCriteria criteria, DateTime winLossDate)
-        {
-            var associatedAccounts = await GetAssociatedAccounts(criteria.CustId).ConfigureAwait(false);
-            criteria.UserName = string.Join(",", associatedAccounts);
-            criteria.Site = "All";
+        var historyCriteria = mapper.Map<UsernameHistoryCriteria>(criteria);
+        var normalCriteria = mapper.Map<UsernameNormalCriteria>(criteria);
+        normalCriteria.IsNormalMode = true;
 
-            var historyCriteria = mapper.Map<UsernameHistoryCriteria>(criteria);
-            var normalCriteria = mapper.Map<UsernameNormalCriteria>(criteria);
-            normalCriteria.IsNormalMode = true;
+        return await service.Query(historyCriteria, normalCriteria).ConfigureAwait(false);
+    }
 
-            return await service.Query(historyCriteria, normalCriteria).ConfigureAwait(false);
-        }
+    private async Task<IEnumerable<string>> GetAssociatedAccounts(int custId)
+    {
+        var associatedByDevice = await associatedAccountService.GetAssociatedByDevice(custId);
+        var associatedByManual = await associatedAccountService.GetAssociatedByManual(custId);
+        var associatedByIp = await associatedAccountService.GetAssociateddByIp(custId);
 
-        private async Task<IEnumerable<string>> GetAssociatedAccounts(int custId)
-        {
-            var associatedByDevice = await associatedAccountService.GetAssociatedByDevice(custId);
-            var associatedByManual = await associatedAccountService.GetAssociatedByManual(custId);
-            var associatedByIp = await associatedAccountService.GetAssociateddByIp(custId);
+        var associatedAccounts = associatedByDevice.Concat(associatedByManual).Concat(associatedByIp);
+        var usenames = associatedAccounts.Select(x => x.Username);
 
-            var associatedAccounts = associatedByDevice.Concat(associatedByManual).Concat(associatedByIp);
-            var usenames = associatedAccounts.Select(x => x.Username);
-
-            return usenames;
-        }
+        return usenames;
     }
 }

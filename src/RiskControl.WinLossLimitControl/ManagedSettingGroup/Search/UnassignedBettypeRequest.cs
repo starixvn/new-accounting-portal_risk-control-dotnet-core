@@ -1,10 +1,9 @@
 ﻿using MediatR;
 using System.Collections.Generic;
 
-namespace RiskControl.WinLossLimitControl.ManagedSettingGroup.Search
+namespace RiskControl.WinLossLimitControl.ManagedSettingGroup.Search;
+
+public class UnassignedBettypeRequest : IRequest<IEnumerable<UnassignedBettypeModel>>
 {
-    public class UnassignedBettypeRequest : IRequest<IEnumerable<UnassignedBettypeModel>>
-    {
-        public int ProductID { get; set; }
-    }
+    public int ProductID { get; set; }
 }

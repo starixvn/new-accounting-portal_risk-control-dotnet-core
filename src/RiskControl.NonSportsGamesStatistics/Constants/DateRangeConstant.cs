@@ -1,7 +1,6 @@
-﻿namespace RiskControl.NonSportsGamesStatistics.Constants
+﻿namespace RiskControl.NonSportsGamesStatistics.Constants;
+
+public static class DateRangeConstant
 {
-    public static class DateRangeConstant
-    {
-        public const byte MAX_MONTH = 12;
-    }
+    public const byte MAX_MONTH = 12;
 }

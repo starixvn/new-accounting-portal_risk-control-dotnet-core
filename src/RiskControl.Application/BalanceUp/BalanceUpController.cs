@@ -3,30 +3,29 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using RiskControl.Core.BalanceUp;
 
-namespace RiskControl.Application.BalanceUp
-{
-    [ApiController]
-    public class BalanceUpController : ControllerBase
-    {
-        private readonly BalanceUpService balanceUpService;
+namespace RiskControl.Application.BalanceUp;
 
-        public BalanceUpController(BalanceUpService balanceUpService)
-        {
-            this.balanceUpService = balanceUpService;
-        }
+[ApiController]
+public class BalanceUpController : ControllerBase
+{
+    private readonly BalanceUpService balanceUpService;
+
+    public BalanceUpController(BalanceUpService balanceUpService)
+    {
+        this.balanceUpService = balanceUpService;
+    }
 
 #if DEBUG
 
-        [AllowAnonymous]
+    [AllowAnonymous]
 #endif
-        [Route("api/application/balance-up")]
-        public ViewModel Index()
+    [Route("api/application/balance-up")]
+    public ViewModel Index()
+    {
+        return new ViewModel
         {
-            return new ViewModel
-            {
-                Today = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day),
-                BalanceUpRange = balanceUpService.Query()
-            };
-        }
+            Today = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day),
+            BalanceUpRange = balanceUpService.Query()
+        };
     }
 }

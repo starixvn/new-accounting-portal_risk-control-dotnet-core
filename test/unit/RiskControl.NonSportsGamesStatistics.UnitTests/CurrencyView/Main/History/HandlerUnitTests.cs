@@ -11,120 +11,119 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.CurrencyView.Main.History
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.CurrencyView.Main.History;
+
+public class HandlerUnitTests
 {
-    public class HandlerUnitTests
+    private readonly IMapper mapper;
+
+    public HandlerUnitTests()
     {
-        private readonly IMapper mapper;
-
-        public HandlerUnitTests()
+        var mockMapper = new MapperConfiguration(mc =>
         {
-            var mockMapper = new MapperConfiguration(mc =>
+            mc.CreateMap<QueryModel, Criteria>();
+        });
+        mapper = mockMapper.CreateMapper();
+    }
+
+    [Fact]
+    public async Task Handle_MainHistoryModeWithSortColummNameAndSortDirectionIsNotNullOrEmpty_AllwayCallSortDataFunction()
+    {
+        // Arrange
+        var fakeCurrencyReportModel = new CurrencyViewStatisticsReportModel();
+
+        var service = Substitute.For<Service>();
+        service.Query(Arg.Compat.Any<Criteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeCurrencyReportModel);
+
+        var sortingService = Substitute.For<SortingService>();
+
+        var gridOptionService = Substitute.For<GridOptionBuilderService>();
+
+        var handler = new Handler(service, sortingService, gridOptionService, mapper);
+
+        // Act
+        await handler.Handle(
+            new QueryModel
             {
-                mc.CreateMap<QueryModel, Criteria>();
-            });
-            mapper = mockMapper.CreateMapper();
-        }
+                FromDate = new DateTime(2017, 1, 1),
+                ToDate = new DateTime(2017, 3, 1),
+                SortColumnName = "Any Column",
+                SortDirection = "Any Direction",
+                UserName = "Any name",
+                GameIncomeType = 0,
+                GameIncomeValue = 0
+            },
+            new CancellationToken());
 
-        [Fact]
-        public async Task Handle_MainHistoryModeWithSortColummNameAndSortDirectionIsNotNullOrEmpty_AllwayCallSortDataFunction()
-        {
-            // Arrange
-            var fakeCurrencyReportModel = new CurrencyViewStatisticsReportModel();
+        // Assert
+        sortingService.Received().SortData(fakeCurrencyReportModel, "Any Direction", "Any Column");
+    }
 
-            var service = Substitute.For<Service>();
-            service.Query(Arg.Compat.Any<Criteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeCurrencyReportModel);
+    [Fact]
+    public async Task Handle_MainHistoryModeWithSortColummNameAndSortDirectionIsNullOrEmpty_DoesNotCallSortDataFunction()
+    {
+        // Arrange         
+        var service = Substitute.For<Service>();
 
-            var sortingService = Substitute.For<SortingService>();
+        var sortingService = Substitute.For<SortingService>();
 
-            var gridOptionService = Substitute.For<GridOptionBuilderService>();
+        var gridOptionService = Substitute.For<GridOptionBuilderService>();
 
-            var handler = new Handler(service, sortingService, gridOptionService, mapper);
+        var handler = new Handler(service, sortingService, gridOptionService, mapper);
 
-            // Act
-            await handler.Handle(
-                new QueryModel
-                {
-                    FromDate = new DateTime(2017, 1, 1),
-                    ToDate = new DateTime(2017, 3, 1),
-                    SortColumnName = "Any Column",
-                    SortDirection = "Any Direction",
-                    UserName = "Any name",
-                    GameIncomeType = 0,
-                    GameIncomeValue = 0
-                },
-                new CancellationToken());
+        // Act
+        await handler.Handle(
+            new QueryModel
+            {
+                FromDate = new DateTime(2017, 1, 1),
+                ToDate = new DateTime(2017, 3, 1),
+                SortColumnName = string.Empty,
+                SortDirection = string.Empty,
+                UserName = "Any name",
+                GameIncomeType = 0,
+                GameIncomeValue = 0
+            },
+            new CancellationToken());
 
-            // Assert
-            sortingService.Received().SortData(fakeCurrencyReportModel, "Any Direction", "Any Column");
-        }
+        // Assert
+        sortingService.DidNotReceive().SortData(Arg.Compat.Any<CurrencyViewStatisticsReportModel>(), string.Empty, string.Empty);
+    }
 
-        [Fact]
-        public async Task Handle_MainHistoryModeWithSortColummNameAndSortDirectionIsNullOrEmpty_DoesNotCallSortDataFunction()
-        {
-            // Arrange         
-            var service = Substitute.For<Service>();
+    [Fact]
+    public async Task Handle_MainHistoryModeWithAnyQueryModel_ReturnRightGridOptions()
+    {
+        // Arrange
+        var fakeCurrencyViewReportModel = TestDataProvider.Load<CurrencyViewStatisticsReportModel>("fake-service-data");
+        var fakeSortCurrencyViewReportModel = TestDataProvider.Load<CurrencyViewStatisticsReportModel>("fake-sorting-service-data");
+        var fakeGridOptions = TestDataProvider.Load<GridOptions>("fake-gridOptions");
+        var expectedGridOptions = TestDataProvider.Load<GridOptions>("expected-gridOptions");
 
-            var sortingService = Substitute.For<SortingService>();
+        var service = Substitute.For<Service>();
+        service.Query(Arg.Compat.Any<Criteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeCurrencyViewReportModel);
 
-            var gridOptionService = Substitute.For<GridOptionBuilderService>();
+        var sortingService = Substitute.For<SortingService>();
+        sortingService.SortData(Arg.Compat.Any<CurrencyViewStatisticsReportModel>(), Arg.Compat.Any<string>(), Arg.Compat.Any<string>()).Returns(fakeSortCurrencyViewReportModel);
 
-            var handler = new Handler(service, sortingService, gridOptionService, mapper);
+        var gridOptionService = Substitute.For<GridOptionBuilderService>();
+        gridOptionService.BuildGridOptions(Arg.Compat.Any<CurrencyViewStatisticsReportModel>(), Arg.Compat.Any<QueryModel>(), Arg.Compat.Any<int>()).Returns(fakeGridOptions);
 
-            // Act
-            await handler.Handle(
-                new QueryModel
-                {
-                    FromDate = new DateTime(2017, 1, 1),
-                    ToDate = new DateTime(2017, 3, 1),
-                    SortColumnName = string.Empty,
-                    SortDirection = string.Empty,
-                    UserName = "Any name",
-                    GameIncomeType = 0,
-                    GameIncomeValue = 0
-                },
-                new CancellationToken());
+        var handler = new Handler(service, sortingService, gridOptionService, mapper);
 
-            // Assert
-            sortingService.DidNotReceive().SortData(Arg.Compat.Any<CurrencyViewStatisticsReportModel>(), string.Empty, string.Empty);
-        }
+        // Act
+        var actualResult = await handler.Handle(
+            new QueryModel
+            {
+                FromDate = new DateTime(2017, 1, 1),
+                ToDate = new DateTime(2017, 3, 1),
+                SortColumnName = "TotalBets",
+                SortDirection = "Desc",
+                UserName = "Any name",
+                GameIncomeType = 0,
+                GameIncomeValue = 0
+            },
+            new CancellationToken());
 
-        [Fact]
-        public async Task Handle_MainHistoryModeWithAnyQueryModel_ReturnRightGridOptions()
-        {
-            // Arrange
-            var fakeCurrencyViewReportModel = TestDataProvider.Load<CurrencyViewStatisticsReportModel>("fake-service-data");
-            var fakeSortCurrencyViewReportModel = TestDataProvider.Load<CurrencyViewStatisticsReportModel>("fake-sorting-service-data");
-            var fakeGridOptions = TestDataProvider.Load<GridOptions>("fake-gridOptions");
-            var expectedGridOptions = TestDataProvider.Load<GridOptions>("expected-gridOptions");
-
-            var service = Substitute.For<Service>();
-            service.Query(Arg.Compat.Any<Criteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeCurrencyViewReportModel);
-
-            var sortingService = Substitute.For<SortingService>();
-            sortingService.SortData(Arg.Compat.Any<CurrencyViewStatisticsReportModel>(), Arg.Compat.Any<string>(), Arg.Compat.Any<string>()).Returns(fakeSortCurrencyViewReportModel);
-
-            var gridOptionService = Substitute.For<GridOptionBuilderService>();
-            gridOptionService.BuildGridOptions(Arg.Compat.Any<CurrencyViewStatisticsReportModel>(), Arg.Compat.Any<QueryModel>(), Arg.Compat.Any<int>()).Returns(fakeGridOptions);
-
-            var handler = new Handler(service, sortingService, gridOptionService, mapper);
-
-            // Act
-            var actualResult = await handler.Handle(
-                new QueryModel
-                {
-                    FromDate = new DateTime(2017, 1, 1),
-                    ToDate = new DateTime(2017, 3, 1),
-                    SortColumnName = "TotalBets",
-                    SortDirection = "Desc",
-                    UserName = "Any name",
-                    GameIncomeType = 0,
-                    GameIncomeValue = 0
-                },
-                new CancellationToken());
-
-            // Assert
-            DeepAssert.Equal(actualResult, expectedGridOptions);
-        }
+        // Assert
+        DeepAssert.Equal(actualResult, expectedGridOptions);
     }
 }

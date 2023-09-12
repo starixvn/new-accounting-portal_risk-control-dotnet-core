@@ -5,19 +5,18 @@ using MediatR;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 
-namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.DailyGrandTotalNormal
-{
-    public class Handler : BaseHandlerWithoutSorting<QueryModel, Criteria, CurrencyViewStatisticsReportModel>, IRequestHandler<QueryModel, GridOptions>
-    {
-        public Handler(
-            Service<CurrencyViewStatisticsReportModel, Criteria> service,
-            GridOptionBuilderService<CurrencyViewStatisticsReportModel, QueryModel> gridOptionService) : base(service, gridOptionService)
-        {
-        }
+namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.DailyGrandTotalNormal;
 
-        public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
-        {
-            return await base.Handle(request, request.WinLostDate).ConfigureAwait(false);
-        }
+public class Handler : BaseHandlerWithoutSorting<QueryModel, Criteria, CurrencyViewStatisticsReportModel>, IRequestHandler<QueryModel, GridOptions>
+{
+    public Handler(
+        Service<CurrencyViewStatisticsReportModel, Criteria> service,
+        GridOptionBuilderService<CurrencyViewStatisticsReportModel, QueryModel> gridOptionService) : base(service, gridOptionService)
+    {
+    }
+
+    public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
+    {
+        return await base.Handle(request, request.WinLostDate).ConfigureAwait(false);
     }
 }

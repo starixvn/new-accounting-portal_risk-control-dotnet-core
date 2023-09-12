@@ -7,24 +7,23 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.Search
+namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.Search;
+
+public class MonitorSearchControllerUnitTests
 {
-    public class MonitorSearchControllerUnitTests
+    [Fact]
+    public async Task Post_Always_ReturnsResultFromMediator()
     {
-        [Fact]
-        public async Task Post_Always_ReturnsResultFromMediator()
-        {
-            // Arrange
-            var monitorModels = new List<MonitorModel>();
-            var mediator = Substitute.For<IMediator>();
-            mediator.Send(Arg.Compat.Any<Request>()).Returns(monitorModels);
+        // Arrange
+        var monitorModels = new List<MonitorModel>();
+        var mediator = Substitute.For<IMediator>();
+        mediator.Send(Arg.Compat.Any<Request>()).Returns(monitorModels);
 
-            // Act
-            var controller = new MonitorSearchController(mediator);
-            var actionResult = await controller.Post(new Request()) as OkObjectResult;
+        // Act
+        var controller = new MonitorSearchController(mediator);
+        var actionResult = await controller.Post(new Request()) as OkObjectResult;
 
-            // Assert
-            DeepAssert.Equal(actionResult.Value, monitorModels);
-        }
+        // Assert
+        DeepAssert.Equal(actionResult.Value, monitorModels);
     }
 }

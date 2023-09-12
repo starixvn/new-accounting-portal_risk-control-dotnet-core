@@ -4,46 +4,45 @@ using AutoMapper;
 using MediatR;
 using OfficeOpenXml;
 
-namespace RiskControl.VoidRejectRefund.Common
+namespace RiskControl.VoidRejectRefund.Common;
+
+public class GroupHandlerExcel : IRequestHandler<HttpParameterGroupExcel, ExcelPackage>
 {
-    public class GroupHandlerExcel : IRequestHandler<HttpParameterGroupExcel, ExcelPackage>
+    private readonly GroupService service;
+
+    private readonly SortingService<GroupStatisticReportModel> sortingService;
+
+    private readonly GroupExcelBuilder excelBuilder;
+
+    private readonly IMapper mapper;
+
+    public GroupHandlerExcel(GroupService service,
+        SortingService<GroupStatisticReportModel> sortingService,
+        GroupExcelBuilder excelBuilder,
+        IMapper mapper)
     {
-        private readonly GroupService service;
+        this.service = service;
+        this.sortingService = sortingService;
+        this.excelBuilder = excelBuilder;
+        this.mapper = mapper;
+    }
 
-        private readonly SortingService<GroupStatisticReportModel> sortingService;
+    public async Task<ExcelPackage> Handle(HttpParameterGroupExcel request, CancellationToken cancellationToken)
+    {
+        var sortColumnName = request.SortColumnName;
+        var sortDirection = request.SortDirection;
 
-        private readonly GroupExcelBuilder excelBuilder;
+        var jsonMessage = mapper.Map<HttpParameterGroupJson>(request);
+        var statisticModel = await service.Query(jsonMessage).ConfigureAwait(false);
 
-        private readonly IMapper mapper;
-
-        public GroupHandlerExcel(GroupService service,
-            SortingService<GroupStatisticReportModel> sortingService,
-            GroupExcelBuilder excelBuilder,
-            IMapper mapper)
+        if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
         {
-            this.service = service;
-            this.sortingService = sortingService;
-            this.excelBuilder = excelBuilder;
-            this.mapper = mapper;
+            statisticModel = sortingService.SortData(statisticModel, sortDirection, sortColumnName);
         }
 
-        public async Task<ExcelPackage> Handle(HttpParameterGroupExcel request, CancellationToken cancellationToken)
-        {
-            var sortColumnName = request.SortColumnName;
-            var sortDirection = request.SortDirection;
+        var excelModel = mapper.Map<GroupStatisticExcelReportModel>(statisticModel);
 
-            var jsonMessage = mapper.Map<HttpParameterGroupJson>(request);
-            var statisticModel = await service.Query(jsonMessage).ConfigureAwait(false);
-
-            if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
-            {
-                statisticModel = sortingService.SortData(statisticModel, sortDirection, sortColumnName);
-            }
-
-            var excelModel = mapper.Map<GroupStatisticExcelReportModel>(statisticModel);
-
-            var excelPackage = excelBuilder.Build(request, excelModel);
-            return excelPackage;
-        }
+        var excelPackage = excelBuilder.Build(request, excelModel);
+        return excelPackage;
     }
 }

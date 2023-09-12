@@ -1,31 +1,30 @@
 ﻿using KellermanSoftware.CompareNetObjects;
 using System.Collections.Generic;
 
-namespace RiskControl.UnitTest.Core.xUnit.Asserts.Compare
+namespace RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
+
+public static class DeepAssert
 {
-    public static class DeepAssert
+    public static void Equal<T>(T expected, T actual, params string[] propertiesToIgnore)
     {
-        public static void Equal<T>(T expected, T actual, params string[] propertiesToIgnore)
+        var compareLogic = new CompareLogic
         {
-            var compareLogic = new CompareLogic
+            Config =
             {
-                Config =
-                {
-                    MembersToIgnore = new List<string>()
-                }
-            };
-
-            foreach (var property in propertiesToIgnore)
-            {
-                compareLogic.Config.MembersToIgnore.Add(property);
+                MembersToIgnore = new List<string>()
             }
+        };
 
-            var comparisonResult = compareLogic.Compare(expected, actual);
+        foreach (var property in propertiesToIgnore)
+        {
+            compareLogic.Config.MembersToIgnore.Add(property);
+        }
 
-            if (!comparisonResult.AreEqual)
-            {
-                throw new ObjectEqualException(expected, actual, comparisonResult.DifferencesString);
-            }
+        var comparisonResult = compareLogic.Compare(expected, actual);
+
+        if (!comparisonResult.AreEqual)
+        {
+            throw new ObjectEqualException(expected, actual, comparisonResult.DifferencesString);
         }
     }
 }

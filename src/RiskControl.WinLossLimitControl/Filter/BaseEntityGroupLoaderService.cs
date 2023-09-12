@@ -5,59 +5,58 @@ using RiskControl.WinLossLimitControl.Filter.Criteria;
 using RiskControl.WinLossLimitControl.Filter.Model;
 using RiskControl.WinLossLimitControl.Models;
 
-namespace RiskControl.WinLossLimitControl.Filter
+namespace RiskControl.WinLossLimitControl.Filter;
+
+public interface BaseEntityGroupLoaderService
 {
-    public interface BaseEntityGroupLoaderService
+    BaseEntityGroup GetBaseEntityGroup();
+}
+
+public class BaseEntityGroupLoaderServiceImp : BaseEntityGroupLoaderService
+{
+    private readonly IDynamicRepository repository;
+
+    public BaseEntityGroupLoaderServiceImp(IDynamicRepository repository)
     {
-        BaseEntityGroup GetBaseEntityGroup();
+        this.repository = repository;
     }
 
-    public class BaseEntityGroupLoaderServiceImp : BaseEntityGroupLoaderService
+    public BaseEntityGroup GetBaseEntityGroup()
     {
-        private readonly IDynamicRepository repository;
-
-        public BaseEntityGroupLoaderServiceImp(IDynamicRepository repository)
+        return new BaseEntityGroup
         {
-            this.repository = repository;
-        }
+            Currencies = GetAllCurrencies(),
+            Groups = GetAllGroups(),
+            Products = GetAllProducts(),
+            Sites = GetAllSites()
+        };
+    }
 
-        public BaseEntityGroup GetBaseEntityGroup()
-        {
-            return new BaseEntityGroup
-            {
-                Currencies = GetAllCurrencies(),
-                Groups = GetAllGroups(),
-                Products = GetAllProducts(),
-                Sites = GetAllSites()
-            };
-        }
+    private IDictionary<int, string> GetAllCurrencies()
+    {
+        var criteria = new GetAllCurrencyCriteria();
+        return repository.Fetch<BaseEntity>(criteria)
+            .ToDictionary(x => x.Id, x => x.Name);
+    }
 
-        private IDictionary<int, string> GetAllCurrencies()
-        {
-            var criteria = new GetAllCurrencyCriteria();
-            return repository.Fetch<BaseEntity>(criteria)
-                    .ToDictionary(x => x.Id, x => x.Name);
-        }
+    private IDictionary<int, string> GetAllGroups()
+    {
+        var criteria = new GetAllGroupCriteria();
+        return repository.Fetch<BaseEntity>(criteria)
+            .ToDictionary(x => x.Id, x => x.Name);
+    }
 
-        private IDictionary<int, string> GetAllGroups()
-        {
-            var criteria = new GetAllGroupCriteria();
-            return repository.Fetch<BaseEntity>(criteria)
-                    .ToDictionary(x => x.Id, x => x.Name);
-        }
+    private IDictionary<int, string> GetAllProducts()
+    {
+        var criteria = new GetAllProductCriteria();
+        return repository.Fetch<BaseEntity>(criteria)
+            .ToDictionary(x => x.Id, x => x.Name);
+    }
 
-        private IDictionary<int, string> GetAllProducts()
-        {
-            var criteria = new GetAllProductCriteria();
-            return repository.Fetch<BaseEntity>(criteria)
-                    .ToDictionary(x => x.Id, x => x.Name);
-        }
-
-        private IDictionary<int, string> GetAllSites()
-        {
-            var criteria = new GetAllSiteCriteria();
-            return repository.Fetch<BaseEntity>(criteria)
-                    .ToDictionary(x => x.Id, x => x.Name);
-        }
+    private IDictionary<int, string> GetAllSites()
+    {
+        var criteria = new GetAllSiteCriteria();
+        return repository.Fetch<BaseEntity>(criteria)
+            .ToDictionary(x => x.Id, x => x.Name);
     }
 }

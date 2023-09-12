@@ -2,33 +2,32 @@
 using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Models.ParameterObject;
 
-namespace RiskControl.WinLossLimitControl.Services
+namespace RiskControl.WinLossLimitControl.Services;
+
+public interface UserHttpContext
 {
-    public interface UserHttpContext
+    string IP { get; }
+
+    int SiteId { get; }
+
+    int UserId { get; }
+}
+
+public class UserHttpContextImp : UserHttpContext
+{
+    private readonly INapSession currentSession;
+
+    private readonly INapSettings napSettings;
+
+    public UserHttpContextImp(INapSession currentSession, INapSettings napSettings)
     {
-        string IP { get; }
-
-        int SiteId { get; }
-
-        int UserId { get; }
+        this.currentSession = currentSession;
+        this.napSettings = napSettings;
     }
 
-    public class UserHttpContextImp : UserHttpContext
-    {
-        private readonly INapSession currentSession;
+    public string IP => new LoginParameter().Ip;
 
-        private readonly INapSettings napSettings;
+    public int UserId => currentSession.UserId;
 
-        public UserHttpContextImp(INapSession currentSession, INapSettings napSettings)
-        {
-            this.currentSession = currentSession;
-            this.napSettings = napSettings;
-        }
-
-        public string IP => new LoginParameter().Ip;
-
-        public int UserId => currentSession.UserId;
-
-        public int SiteId => napSettings.SiteId;
-    }
+    public int SiteId => napSettings.SiteId;
 }

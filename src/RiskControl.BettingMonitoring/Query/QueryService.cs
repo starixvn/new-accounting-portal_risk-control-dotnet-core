@@ -5,41 +5,40 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RiskControl.BettingMonitoring.Query
+namespace RiskControl.BettingMonitoring.Query;
+
+public interface QueryService
 {
-    public interface QueryService
+    Task<BettingMonitoringModel> Execute();
+}
+
+public class QueryServiceImp : QueryService
+{
+    private readonly IDynamicRepository dynamicRepository;
+
+    public QueryServiceImp(IDynamicRepository dynamicRepository)
     {
-        Task<BettingMonitoringModel> Execute();
+        this.dynamicRepository = dynamicRepository;
     }
 
-    public class QueryServiceImp : QueryService
+    public async Task<BettingMonitoringModel> Execute()
     {
-        private readonly IDynamicRepository dynamicRepository;
+        var criteria = new BettingMonitoringQueryCriteria();
 
-        public QueryServiceImp(IDynamicRepository dynamicRepository)
+        var rawData = await dynamicRepository.FetchAsync<RawSelectModel>(criteria).ConfigureAwait(false);
+        var minimumTickets = string.Empty;
+        var threshold = string.Empty;
+
+        if (rawData.Any())
         {
-            this.dynamicRepository = dynamicRepository;
+            minimumTickets = rawData.FirstOrDefault(x => x.SettingName == "MinimumTickets").Value;
+            threshold = rawData.FirstOrDefault(x => x.SettingName == "Threshold").Value;
         }
 
-        public async Task<BettingMonitoringModel> Execute()
+        return new BettingMonitoringModel
         {
-            var criteria = new BettingMonitoringQueryCriteria();
-
-            var rawData = await dynamicRepository.FetchAsync<RawSelectModel>(criteria).ConfigureAwait(false);
-            var minimumTickets = string.Empty;
-            var threshold = string.Empty;
-
-            if (rawData.Any())
-            {
-                minimumTickets = rawData.FirstOrDefault(x => x.SettingName == "MinimumTickets").Value;
-                threshold = rawData.FirstOrDefault(x => x.SettingName == "Threshold").Value;
-            }
-
-            return new BettingMonitoringModel
-            {
-                MinimumTickets = string.IsNullOrEmpty(minimumTickets) ? 0 : int.Parse(minimumTickets, CultureInfo.CurrentCulture.NumberFormat),
-                Threshold = string.IsNullOrEmpty(threshold) ? 0 : int.Parse(threshold, CultureInfo.CurrentCulture.NumberFormat)
-            };
-        }
+            MinimumTickets = string.IsNullOrEmpty(minimumTickets) ? 0 : int.Parse(minimumTickets, CultureInfo.CurrentCulture.NumberFormat),
+            Threshold = string.IsNullOrEmpty(threshold) ? 0 : int.Parse(threshold, CultureInfo.CurrentCulture.NumberFormat)
+        };
     }
 }

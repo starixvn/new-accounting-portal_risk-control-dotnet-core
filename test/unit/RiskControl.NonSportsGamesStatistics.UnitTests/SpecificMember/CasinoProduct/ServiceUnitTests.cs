@@ -10,32 +10,31 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.CasinoProduct
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.CasinoProduct;
+
+public class ServiceUnitTests
 {
-    public class ServiceUnitTests
+    [Fact]
+    public async Task Query_CasinoProductWithAnyCriteria_ReturnRightStatistics()
     {
-        [Fact]
-        public async Task Query_CasinoProductWithAnyCriteria_ReturnRightStatistics()
-        {
-            // Arrange
-            var fakeCasinoProductData = TestDataProvider.Load<DailyViewReportModel>("fake-product-data");
-            var expectedResult = TestDataProvider.Load<DailyViewReportModel>("expected-statistic");
+        // Arrange
+        var fakeCasinoProductData = TestDataProvider.Load<DailyViewReportModel>("fake-product-data");
+        var expectedResult = TestDataProvider.Load<DailyViewReportModel>("expected-statistic");
 
-            var dailyService = Substitute.For<DailyService>();
-            dailyService.Query(Arg.Compat.Any<HistoryCriteria>(), Arg.Compat.Any<NormalCriteria>()).Returns(fakeCasinoProductData);
+        var dailyService = Substitute.For<DailyService>();
+        dailyService.Query(Arg.Compat.Any<HistoryCriteria>(), Arg.Compat.Any<NormalCriteria>()).Returns(fakeCasinoProductData);
 
-            var mapper = new MapperConfiguration(cf => {
-                cf.CreateMap<BaseStatisticCriteria, HistoryCriteria>();
-                cf.CreateMap<BaseStatisticCriteria, NormalCriteria>();
-            }).CreateMapper();
+        var mapper = new MapperConfiguration(cf => {
+            cf.CreateMap<BaseStatisticCriteria, HistoryCriteria>();
+            cf.CreateMap<BaseStatisticCriteria, NormalCriteria>();
+        }).CreateMapper();
 
-            var service = new ServiceImp<BaseStatisticCriteria>(dailyService, mapper);
+        var service = new ServiceImp<BaseStatisticCriteria>(dailyService, mapper);
 
-            // Act
-            var actualResult = await service.Query(new HistoryCriteria(), DateTime.Now);
+        // Act
+        var actualResult = await service.Query(new HistoryCriteria(), DateTime.Now);
 
-            // Assert
-            DeepAssert.Equal(expectedResult, actualResult);
-        }
+        // Assert
+        DeepAssert.Equal(expectedResult, actualResult);
     }
 }

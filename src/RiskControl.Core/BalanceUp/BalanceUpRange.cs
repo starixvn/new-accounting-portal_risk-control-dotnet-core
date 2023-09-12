@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace RiskControl.Core.BalanceUp
-{
-    public class BalanceUpRange
-    {
-        public DateTime BalanceUpDay { get; set; }
+namespace RiskControl.Core.BalanceUp;
 
-        public DateTime MoveBetsDay { get; set; }
-    }
+public class BalanceUpRange
+{
+    public DateTime BalanceUpDay { get; set; }
+
+    public DateTime MoveBetsDay { get; set; }
 }

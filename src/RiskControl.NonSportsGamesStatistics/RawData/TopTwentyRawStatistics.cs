@@ -1,7 +1,6 @@
-﻿namespace RiskControl.NonSportsGamesStatistics.RawData
+﻿namespace RiskControl.NonSportsGamesStatistics.RawData;
+
+public class TopTwentyRawStatistics : UserNameViewRawStatistics
 {
-    public class TopTwentyRawStatistics : UserNameViewRawStatistics
-    {
-        public string TopType { get; set; }
-    }
+    public string TopType { get; set; }
 }

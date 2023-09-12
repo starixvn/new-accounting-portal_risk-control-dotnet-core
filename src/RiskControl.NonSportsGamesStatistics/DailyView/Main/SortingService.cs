@@ -4,38 +4,37 @@ using RiskControl.Core.Sort;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 
-namespace RiskControl.NonSportsGamesStatistics.DailyView.Main
+namespace RiskControl.NonSportsGamesStatistics.DailyView.Main;
+
+public class SortingServiceImp : SortingService<DailyViewReportModel>
 {
-    public class SortingServiceImp : SortingService<DailyViewReportModel>
+    public DailyViewReportModel SortData(DailyViewReportModel reportModel, string sortDirection, string sortColumnName)
     {
-        public DailyViewReportModel SortData(DailyViewReportModel reportModel, string sortDirection, string sortColumnName)
-        {
-            SortStatisticsForPerChildGroup(reportModel, sortDirection, sortColumnName);
-            SortStatisticsForParentGroup(reportModel, sortDirection, sortColumnName);
-            return reportModel;
-        }
+        SortStatisticsForPerChildGroup(reportModel, sortDirection, sortColumnName);
+        SortStatisticsForParentGroup(reportModel, sortDirection, sortColumnName);
+        return reportModel;
+    }
 
-        private static void SortStatisticsForPerChildGroup(DailyViewReportModel reportModel, string sortDirection, string sortColumnName)
+    private static void SortStatisticsForPerChildGroup(DailyViewReportModel reportModel, string sortDirection, string sortColumnName)
+    {
+        foreach (var row in reportModel.Statistics)
         {
-            foreach (var row in reportModel.Statistics)
-            {
-                Sort.SortByProperty(row.DailyViewStatistics, sortDirection, sortColumnName);
-            }
+            Sort.SortByProperty(row.DailyViewStatistics, sortDirection, sortColumnName);
         }
+    }
 
-        private static void SortStatisticsForParentGroup(DailyViewReportModel reportModel, string sortDirection, string sortColumnName)
-        {
-            var propInfo = typeof(DailyViewStatisticsModel).GetProperty(sortColumnName);
-            var isAsc = string.Equals(sortDirection, SortingInformation.Ascending, StringComparison.OrdinalIgnoreCase);
-            reportModel.Statistics = isAsc ?
+    private static void SortStatisticsForParentGroup(DailyViewReportModel reportModel, string sortDirection, string sortColumnName)
+    {
+        var propInfo = typeof(DailyViewStatisticsModel).GetProperty(sortColumnName);
+        var isAsc = string.Equals(sortDirection, SortingInformation.Ascending, StringComparison.OrdinalIgnoreCase);
+        reportModel.Statistics = isAsc ?
             reportModel
                 .Statistics
                 .OrderBy(s => propInfo.GetValue(s.DailyViewStatistics[0], null))
                 .ToList() :
             reportModel
-                 .Statistics
+                .Statistics
                 .OrderByDescending(s => propInfo.GetValue(s.DailyViewStatistics[0], null))
                 .ToList();
-        }
     }
 }

@@ -1,42 +1,41 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 
-namespace RiskControl.Core.Configuration
+namespace RiskControl.Core.Configuration;
+
+public interface ConfigurationService
 {
-    public interface ConfigurationService
+    string FraudSystemAPI { get; }
+
+    string CurrentDirectory { get; }
+
+    string FileServerDirectory { get; }
+
+    string FileServerUsername { get; }
+
+    string ProgressiveJackpotAPI { get; }
+
+    string FraudSystemCTSAPI { get; }
+}
+
+public class ConfigurationServiceImp : ConfigurationService
+{
+    private readonly IConfiguration configuration;
+
+    public ConfigurationServiceImp(IConfiguration configuration)
     {
-        string FraudSystemAPI { get; }
-
-        string CurrentDirectory { get; }
-
-        string FileServerDirectory { get; }
-
-        string FileServerUsername { get; }
-
-        string ProgressiveJackpotAPI { get; }
-
-        string FraudSystemCTSAPI { get; }
+        this.configuration = configuration;
     }
 
-    public class ConfigurationServiceImp : ConfigurationService
-    {
-        private readonly IConfiguration configuration;
+    public string FraudSystemAPI => configuration["FraudSystemAPI"];
 
-        public ConfigurationServiceImp(IConfiguration configuration)
-        {
-            this.configuration = configuration;
-        }
+    public string CurrentDirectory => AppDomain.CurrentDomain.BaseDirectory;
 
-        public string FraudSystemAPI => configuration["FraudSystemAPI"];
+    public string FileServerDirectory => configuration["FileServerDirectory"];
 
-        public string CurrentDirectory => AppDomain.CurrentDomain.BaseDirectory;
+    public string FileServerUsername => configuration["FileServerUserName"];
 
-        public string FileServerDirectory => configuration["FileServerDirectory"];
+    public string ProgressiveJackpotAPI => configuration["ProgressiveJackpotAPI"];
 
-        public string FileServerUsername => configuration["FileServerUserName"];
-
-        public string ProgressiveJackpotAPI => configuration["ProgressiveJackpotAPI"];
-
-        public string FraudSystemCTSAPI => configuration["FraudSystemCTSAPI"];
-    }
+    public string FraudSystemCTSAPI => configuration["FraudSystemCTSAPI"];
 }

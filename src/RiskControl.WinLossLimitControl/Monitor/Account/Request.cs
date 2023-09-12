@@ -1,9 +1,8 @@
 ﻿using MediatR;
 
-namespace RiskControl.WinLossLimitControl.Monitor.Account
+namespace RiskControl.WinLossLimitControl.Monitor.Account;
+
+public class Request : IRequest<AccountModel>
 {
-    public class Request : IRequest<AccountModel>
-    {
-        public int CustId { get; set; }
-    }
+    public int CustId { get; set; }
 }

@@ -1,7 +1,6 @@
-﻿namespace RiskControl.NonSportsGamesStatistics.Common
+﻿namespace RiskControl.NonSportsGamesStatistics.Common;
+
+public interface SortingService<TReportModel> where TReportModel : class
 {
-    public interface SortingService<TReportModel> where TReportModel : class
-    {
-        TReportModel SortData(TReportModel reportModel, string sortDirection, string sortColumnName);
-    }
+    TReportModel SortData(TReportModel reportModel, string sortDirection, string sortColumnName);
 }

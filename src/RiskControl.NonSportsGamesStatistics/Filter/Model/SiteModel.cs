@@ -1,11 +1,10 @@
-﻿namespace RiskControl.NonSportsGamesStatistics.Filter.Model
+﻿namespace RiskControl.NonSportsGamesStatistics.Filter.Model;
+
+public class SiteModel
 {
-    public class SiteModel
-    {
-        public string Site { get; set; }
+    public string Site { get; set; }
 
-        public int OrderId { get; set; }
+    public int OrderId { get; set; }
 
-        public int SortId { get; set; }
-    }
+    public int SortId { get; set; }
 }

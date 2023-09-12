@@ -3,34 +3,33 @@ using RiskControl.WinLossLimitControl.Services;
 using RiskControl.WinLossLimitControl.Filter.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace RiskControl.WinLossLimitControl.Filter
+namespace RiskControl.WinLossLimitControl.Filter;
+
+using Fanex.NAP.Client.Helpers.Business;
+
+[Route("state-api/win-limit-control/authorization")]
+public class AuthorizationController : ControllerBase
 {
-    using Fanex.NAP.Client.Helpers.Business;
+    private readonly AuthorizationService authorizationService;
 
-    [Route("state-api/win-limit-control/authorization")]
-    public class AuthorizationController : ControllerBase
+    public AuthorizationController(AuthorizationService authorizationService)
     {
-        private readonly AuthorizationService authorizationService;
+        this.authorizationService = authorizationService;
+    }
 
-        public AuthorizationController(AuthorizationService authorizationService)
+    [Route("host-permission")]
+    [HttpPost]
+    public IActionResult HasHostPermission()
+    {
+        var playerWinLimitManagement = authorizationService.HasPermission(FunctionKeys.PlayerWinLimitManagement, Constant.Policy.Host);
+        var currencyWinLimitSetting = authorizationService.HasPermission(FunctionKeys.CurrencyWinLimitSetting, Constant.Policy.Host);
+        var winLimitMonitor = authorizationService.HasPermission(FunctionKeys.WinLimitMonitor, Constant.Policy.Host);
+        var hostPermission = new HostPermission
         {
-            this.authorizationService = authorizationService;
-        }
-
-        [Route("host-permission")]
-        [HttpPost]
-        public IActionResult HasHostPermission()
-        {
-            var playerWinLimitManagement = authorizationService.HasPermission(FunctionKeys.PlayerWinLimitManagement, Constant.Policy.Host);
-            var currencyWinLimitSetting = authorizationService.HasPermission(FunctionKeys.CurrencyWinLimitSetting, Constant.Policy.Host);
-            var winLimitMonitor = authorizationService.HasPermission(FunctionKeys.WinLimitMonitor, Constant.Policy.Host);
-            var hostPermission = new HostPermission
-            {
-                PlayerWinLimitManagement = playerWinLimitManagement,
-                CurrencyWinLimitSetting = currencyWinLimitSetting,
-                WinLimitMonitor = winLimitMonitor
-            };
-            return Ok(hostPermission);
-        }
+            PlayerWinLimitManagement = playerWinLimitManagement,
+            CurrencyWinLimitSetting = currencyWinLimitSetting,
+            WinLimitMonitor = winLimitMonitor
+        };
+        return Ok(hostPermission);
     }
 }

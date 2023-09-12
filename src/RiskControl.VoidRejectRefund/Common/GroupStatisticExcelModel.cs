@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace RiskControl.VoidRejectRefund.Common
-{
-    public class GroupStatisticExcelModel
-    {
-        public CurrencyStatisticExcelModel Total { get; set; }
+namespace RiskControl.VoidRejectRefund.Common;
 
-        public List<ChildGroupStatisticExcelModel> Statistics { get; set; }
-    }
+public class GroupStatisticExcelModel
+{
+    public CurrencyStatisticExcelModel Total { get; set; }
+
+    public List<ChildGroupStatisticExcelModel> Statistics { get; set; }
 }

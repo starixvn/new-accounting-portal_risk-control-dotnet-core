@@ -1,18 +1,17 @@
 ﻿using System;
 using RiskControl.NonSportsGamesStatistics.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.DailyView.Main.ProductHistory
+namespace RiskControl.NonSportsGamesStatistics.DailyView.Main.ProductHistory;
+
+public class Criteria : BaseStatisticCriteria
 {
-    public class Criteria : BaseStatisticCriteria
-    {
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+    public DateTime ToDate { get; set; }
 
-        public bool IsDrillDown { get; set; }
+    public bool IsDrillDown { get; set; }
 
-        public bool IsGrandTotal { get; set; }
+    public bool IsGrandTotal { get; set; }
 
-        public int CasinoType { get; set; }
-    }
+    public int CasinoType { get; set; }
 }

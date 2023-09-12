@@ -4,38 +4,37 @@ using RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.DailyViewGrandTo
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.DailyView.GrandTotal.DailyViewGrandTotalNormal
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.DailyView.GrandTotal.DailyViewGrandTotalNormal;
+
+public class DailyViewGrandTotalNormalModeControllerUnitTests
 {
-    public class DailyViewGrandTotalNormalModeControllerUnitTests
+    [Fact]
+    public async Task Query_DailyViewGrandTotalNormalModeAlways_CallMediatorSend()
     {
-        [Fact]
-        public async Task Query_DailyViewGrandTotalNormalModeAlways_CallMediatorSend()
-        {
-            // Arrange
-            var mediator = Substitute.For<IMediator>();
-            var queryModel = new QueryModel();
+        // Arrange
+        var mediator = Substitute.For<IMediator>();
+        var queryModel = new QueryModel();
 
-            // Act
-            var controller = new DailyViewGrandTotalNormalModeController(mediator);
-            await controller.Query(queryModel);
+        // Act
+        var controller = new DailyViewGrandTotalNormalModeController(mediator);
+        await controller.Query(queryModel);
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<QueryModel>());
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<QueryModel>());
+    }
 
-        [Fact]
-        public async Task Excel_DailyViewGrandTotalNormalModeAlways_CallMediatorSend()
-        {
-            // Arrange
-            var mediator = Substitute.For<IMediator>();
-            var queryModel = new QueryModel();
+    [Fact]
+    public async Task Excel_DailyViewGrandTotalNormalModeAlways_CallMediatorSend()
+    {
+        // Arrange
+        var mediator = Substitute.For<IMediator>();
+        var queryModel = new QueryModel();
 
-            // Act
-            var controller = new DailyViewGrandTotalNormalModeController(mediator);
-            await controller.Excel(queryModel);
+        // Act
+        var controller = new DailyViewGrandTotalNormalModeController(mediator);
+        await controller.Excel(queryModel);
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<QueryModel>());
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<QueryModel>());
     }
 }

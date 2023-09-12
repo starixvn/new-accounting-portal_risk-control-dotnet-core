@@ -2,24 +2,23 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace RiskControl.WinLossLimitControl.Groups
+namespace RiskControl.WinLossLimitControl.Groups;
+
+[Route("api/win-limit-control/group-settings")]
+public class GroupSettingController : ControllerBase
 {
-    [Route("api/win-limit-control/group-settings")]
-    public class GroupSettingController : ControllerBase
+    private readonly IMediator mediator;
+
+    public GroupSettingController(IMediator mediator)
     {
-        private readonly IMediator mediator;
+        this.mediator = mediator;
+    }
 
-        public GroupSettingController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
-        [HttpPost]
-        [Route("")]
-        public async Task<IActionResult> Post()
-        {
-            var viewModel = await mediator.Send(new Request());
-            return Ok(viewModel);
-        }
+    [HttpPost]
+    [Route("")]
+    public async Task<IActionResult> Post()
+    {
+        var viewModel = await mediator.Send(new Request());
+        return Ok(viewModel);
     }
 }

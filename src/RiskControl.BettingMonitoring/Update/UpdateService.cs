@@ -4,31 +4,30 @@ using RiskControl.BettingMonitoring.Criteria;
 using RiskControl.BettingMonitoring.Models;
 using System.Threading.Tasks;
 
-namespace RiskControl.BettingMonitoring.Update
+namespace RiskControl.BettingMonitoring.Update;
+
+public interface UpdateService
 {
-    public interface UpdateService
+    Task<bool> Execute(BettingMonitoringModel model);
+}
+
+public class UpdateServiceImp : UpdateService
+{
+    private readonly IDynamicRepository dynamicRepository;
+    private readonly IMapper mapper;
+
+    public UpdateServiceImp(IDynamicRepository dynamicRepository, IMapper mapper)
     {
-        Task<bool> Execute(BettingMonitoringModel model);
+        this.dynamicRepository = dynamicRepository;
+        this.mapper = mapper;
     }
 
-    public class UpdateServiceImp : UpdateService
+    public async Task<bool> Execute(BettingMonitoringModel model)
     {
-        private readonly IDynamicRepository dynamicRepository;
-        private readonly IMapper mapper;
+        var criteria = mapper.Map<BettingMonitoringUpdateCriteria>(model);
 
-        public UpdateServiceImp(IDynamicRepository dynamicRepository, IMapper mapper)
-        {
-            this.dynamicRepository = dynamicRepository;
-            this.mapper = mapper;
-        }
+        await dynamicRepository.ExecuteAsync(criteria).ConfigureAwait(false);
 
-        public async Task<bool> Execute(BettingMonitoringModel model)
-        {
-            var criteria = mapper.Map<BettingMonitoringUpdateCriteria>(model);
-
-            await dynamicRepository.ExecuteAsync(criteria).ConfigureAwait(false);
-
-            return true;
-        }
+        return true;
     }
 }

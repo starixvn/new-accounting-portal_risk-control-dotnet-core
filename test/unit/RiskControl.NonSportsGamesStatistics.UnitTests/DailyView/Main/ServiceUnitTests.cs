@@ -8,30 +8,29 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.DailyView.Main
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.DailyView.Main;
+
+public class ServiceUnitTests
 {
-    public class ServiceUnitTests
+    [Fact]
+    public async Task Query_DailyViewWithAnyCriteria_ReturnRightStatistics()
     {
-        [Fact]
-        public async Task Query_DailyViewWithAnyCriteria_ReturnRightStatistics()
-        {
-            // Arrange
-            var rawData = TestDataProvider.Load<GenericRawData<BaseRawStatistic>>("full-fake-raw-data");
-            var fakeCalculationDailyViewReport = TestDataProvider.Load<DailyViewReportModel>("fake-calculation-dailyview-statistic");
-            var expectedResult = TestDataProvider.Load<DailyViewReportModel>("expected-statistic");
+        // Arrange
+        var rawData = TestDataProvider.Load<GenericRawData<BaseRawStatistic>>("full-fake-raw-data");
+        var fakeCalculationDailyViewReport = TestDataProvider.Load<DailyViewReportModel>("fake-calculation-dailyview-statistic");
+        var expectedResult = TestDataProvider.Load<DailyViewReportModel>("expected-statistic");
 
-            var rawService = Substitute.For<RawService>();
-            rawService.QueryMultipleData<BaseRawStatistic>(Arg.Compat.Any<BaseStatisticCriteria>(), Arg.Compat.Any<DateTime>()).Returns(rawData);
+        var rawService = Substitute.For<RawService>();
+        rawService.QueryMultipleData<BaseRawStatistic>(Arg.Compat.Any<BaseStatisticCriteria>(), Arg.Compat.Any<DateTime>()).Returns(rawData);
 
-            var calculationService = Substitute.For<CalculationService>();
-            calculationService.CalculateDailyViewReport(Arg.Compat.Any<GenericRawData<BaseRawStatistic>>()).Returns(fakeCalculationDailyViewReport);
-            var service = new ServiceImp<BaseStatisticCriteria>(rawService, calculationService);
+        var calculationService = Substitute.For<CalculationService>();
+        calculationService.CalculateDailyViewReport(Arg.Compat.Any<GenericRawData<BaseRawStatistic>>()).Returns(fakeCalculationDailyViewReport);
+        var service = new ServiceImp<BaseStatisticCriteria>(rawService, calculationService);
 
-            // Act
-            var actualResult = await service.Query(Arg.Compat.Any<BaseStatisticCriteria>(), Arg.Compat.Any<DateTime>());
+        // Act
+        var actualResult = await service.Query(Arg.Compat.Any<BaseStatisticCriteria>(), Arg.Compat.Any<DateTime>());
 
-            // Assert
-            DeepAssert.Equal(actualResult, expectedResult);
-        }
+        // Assert
+        DeepAssert.Equal(actualResult, expectedResult);
     }
 }

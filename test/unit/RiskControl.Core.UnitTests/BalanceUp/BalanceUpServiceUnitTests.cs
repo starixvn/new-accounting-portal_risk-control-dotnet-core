@@ -6,32 +6,31 @@ using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System;
 using Xunit;
 
-namespace RiskControl.Core.UnitTests.BalanceUp
+namespace RiskControl.Core.UnitTests.BalanceUp;
+
+public class BalanceUpServiceUnitTests
 {
-    public class BalanceUpServiceUnitTests
-    {
-        private static BalanceUpRange BalanceUpRangeData =>
-            new()
-            {
-                BalanceUpDay = new DateTime(2022, 10, 10),
-                MoveBetsDay = new DateTime(2022, 10, 10)
-            };
-
-        [Fact]
-        public void Query_Always_ReturnExpectedData()
+    private static BalanceUpRange BalanceUpRangeData =>
+        new()
         {
-            // Arrange
-            var repository = Substitute.For<IDynamicRepository>();
+            BalanceUpDay = new DateTime(2022, 10, 10),
+            MoveBetsDay = new DateTime(2022, 10, 10)
+        };
 
-            var cacheService = Substitute.For<ICacheService>();
-            cacheService.GetOrSet(Arg.Compat.Any<string>(), Arg.Compat.Any<Func<BalanceUpRange>>()).Returns(BalanceUpRangeData);
+    [Fact]
+    public void Query_Always_ReturnExpectedData()
+    {
+        // Arrange
+        var repository = Substitute.For<IDynamicRepository>();
 
-            // Act
-            var balanceUpService = new BalanceUpServiceImp(repository, cacheService);
-            var expectedData = balanceUpService.Query();
+        var cacheService = Substitute.For<ICacheService>();
+        cacheService.GetOrSet(Arg.Compat.Any<string>(), Arg.Compat.Any<Func<BalanceUpRange>>()).Returns(BalanceUpRangeData);
 
-            // Assert
-            DeepAssert.Equal(expectedData, BalanceUpRangeData);
-        }
+        // Act
+        var balanceUpService = new BalanceUpServiceImp(repository, cacheService);
+        var expectedData = balanceUpService.Query();
+
+        // Assert
+        DeepAssert.Equal(expectedData, BalanceUpRangeData);
     }
 }

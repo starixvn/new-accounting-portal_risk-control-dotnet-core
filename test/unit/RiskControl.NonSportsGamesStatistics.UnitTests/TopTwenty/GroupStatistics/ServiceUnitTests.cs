@@ -9,31 +9,30 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.TopTwenty.GroupStatistics
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.TopTwenty.GroupStatistics;
+
+public class ServiceUnitTests
 {
-    public class ServiceUnitTests
+    [Fact]
+    public async Task Query_TopTwentyWinnerOrLoserWithAnyCriteria_ReturnRightStatistics()
     {
-        [Fact]
-        public async Task Query_TopTwentyWinnerOrLoserWithAnyCriteria_ReturnRightStatistics()
-        {
-            // Arrange
-            var rawData = TestDataProvider.Load<GenericRawData<TopTwentyRawStatistics>>("full-fake-raw-data");
-            var fakeCalculationTopTwentyGroupReport = TestDataProvider.Load<UserNameViewGroupStatisticsWithTotalModel>("fake-calculation-toptwenty-group-report");
-            var expectedResult = TestDataProvider.Load<UserNameViewGroupStatisticsWithTotalModel>("expected-statistic");
+        // Arrange
+        var rawData = TestDataProvider.Load<GenericRawData<TopTwentyRawStatistics>>("full-fake-raw-data");
+        var fakeCalculationTopTwentyGroupReport = TestDataProvider.Load<UserNameViewGroupStatisticsWithTotalModel>("fake-calculation-toptwenty-group-report");
+        var expectedResult = TestDataProvider.Load<UserNameViewGroupStatisticsWithTotalModel>("expected-statistic");
 
-            var rawService = Substitute.For<RawService>();
-            rawService.QueryMultipleData<TopTwentyRawStatistics>(Arg.Compat.Any<BaseStatisticCriteria>(), Arg.Compat.Any<DateTime>()).Returns(rawData);
+        var rawService = Substitute.For<RawService>();
+        rawService.QueryMultipleData<TopTwentyRawStatistics>(Arg.Compat.Any<BaseStatisticCriteria>(), Arg.Compat.Any<DateTime>()).Returns(rawData);
 
-            var calculationService = Substitute.For<CalculationService>();
-            calculationService.CalculateTopTwentyGroupReport(Arg.Compat.Any<GenericRawData<TopTwentyRawStatistics>>()).Returns(fakeCalculationTopTwentyGroupReport);
+        var calculationService = Substitute.For<CalculationService>();
+        calculationService.CalculateTopTwentyGroupReport(Arg.Compat.Any<GenericRawData<TopTwentyRawStatistics>>()).Returns(fakeCalculationTopTwentyGroupReport);
 
-            var service = new ServiceImp<BaseStatisticCriteria>(rawService, calculationService);
+        var service = new ServiceImp<BaseStatisticCriteria>(rawService, calculationService);
 
-            // Act
-            var actualResult = await service.Query(Arg.Compat.Any<BaseStatisticCriteria>(), Arg.Compat.Any<DateTime>());
+        // Act
+        var actualResult = await service.Query(Arg.Compat.Any<BaseStatisticCriteria>(), Arg.Compat.Any<DateTime>());
 
-            // Assert
-            DeepAssert.Equal(expectedResult, actualResult);
-        }
+        // Assert
+        DeepAssert.Equal(expectedResult, actualResult);
     }
 }

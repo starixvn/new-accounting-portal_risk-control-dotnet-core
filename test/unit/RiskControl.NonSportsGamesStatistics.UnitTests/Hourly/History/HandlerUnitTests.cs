@@ -10,39 +10,38 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.NonSportsGamesStatistics.UnitTests.Hourly.History
+namespace RiskControl.NonSportsGamesStatistics.UnitTests.Hourly.History;
+
+public class HandlerUnitTests
 {
-    public class HandlerUnitTests
+    [Fact]
+    public async Task Handle_HistoryModeWithAnyQueryModel_ReturnRightStatistics()
     {
-        [Fact]
-        public async Task Handle_HistoryModeWithAnyQueryModel_ReturnRightStatistics()
+        // Arrange
+        var fakeHourlyReportModel = TestDataProvider.Load<HourlyReportModel>("fake-service-data");
+        var expectedHourlyReportModel = TestDataProvider.Load<HourlyReportModel>("expected-report-statistics");
+
+        var service = Substitute.For<Service>();
+        service.CalculateHourlyReport(Arg.Compat.Any<Criteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeHourlyReportModel);
+
+        var mapper = new MapperConfiguration(cf =>
         {
-            // Arrange
-            var fakeHourlyReportModel = TestDataProvider.Load<HourlyReportModel>("fake-service-data");
-            var expectedHourlyReportModel = TestDataProvider.Load<HourlyReportModel>("expected-report-statistics");
+            cf.CreateMap<QueryModel, Criteria>();
+        }).CreateMapper();
 
-            var service = Substitute.For<Service>();
-            service.CalculateHourlyReport(Arg.Compat.Any<Criteria>(), Arg.Compat.Any<DateTime>()).Returns(fakeHourlyReportModel);
+        var handler = new Handler(service, mapper);
 
-            var mapper = new MapperConfiguration(cf =>
+        // Act
+        var actualResult = await handler.Handle(
+            new QueryModel
             {
-                cf.CreateMap<QueryModel, Criteria>();
-            }).CreateMapper();
+                FromDate = new DateTime(2017, 1, 1),
+                ToDate = new DateTime(2017, 3, 1),
+                UsernameDrillDown = false
+            },
+            new CancellationToken());
 
-            var handler = new Handler(service, mapper);
-
-            // Act
-            var actualResult = await handler.Handle(
-                new QueryModel
-                {
-                    FromDate = new DateTime(2017, 1, 1),
-                    ToDate = new DateTime(2017, 3, 1),
-                    UsernameDrillDown = false
-                },
-                new CancellationToken());
-
-            // Assert
-            DeepAssert.Equal(expectedHourlyReportModel, actualResult);
-        }
+        // Assert
+        DeepAssert.Equal(expectedHourlyReportModel, actualResult);
     }
 }
