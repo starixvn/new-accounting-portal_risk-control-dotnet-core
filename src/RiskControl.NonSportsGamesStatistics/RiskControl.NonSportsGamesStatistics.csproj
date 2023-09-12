@@ -19,7 +19,7 @@
     <PackageReference Include="FanexExcel.AspNetCore" Version="1.0.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Olympus.FPSAPI.Client.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Olympus.WebApi.Attributes.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Olympus.WebApi.Epplus.AspNetCore" Version="1.0.1" />
