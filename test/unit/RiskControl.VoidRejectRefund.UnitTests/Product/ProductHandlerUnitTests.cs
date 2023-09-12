@@ -1,6 +1,5 @@
 ﻿using NSubstitute;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.VoidRejectRefund.Common;
 using RiskControl.VoidRejectRefund.Product;
 using System.Threading;
@@ -8,6 +7,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.VoidRejectRefund.UnitTests.Product;
+
+using Xunit.Asserts.Compare;
 
 public class ProductHandlerUnitTests
 {

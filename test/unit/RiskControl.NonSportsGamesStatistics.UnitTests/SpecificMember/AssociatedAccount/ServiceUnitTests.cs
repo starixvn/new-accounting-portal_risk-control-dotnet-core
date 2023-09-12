@@ -6,13 +6,14 @@ using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.SpecificMember.AssociatedAccount;
 using RiskControl.NonSportsGamesStatistics.SpecificMember.Common;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.AssociatedAccount;
+
+using Xunit.Asserts.Compare;
 
 public class ServiceUnitTests
 {

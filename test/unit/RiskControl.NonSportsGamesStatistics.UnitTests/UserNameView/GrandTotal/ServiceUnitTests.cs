@@ -4,12 +4,13 @@ using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.RawData;
 using RiskControl.NonSportsGamesStatistics.UserNameView.GrandTotal;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.UserNameView.GrandTotal;
+
+using Xunit.Asserts.Compare;
 
 public class ServiceUnitTests
 {

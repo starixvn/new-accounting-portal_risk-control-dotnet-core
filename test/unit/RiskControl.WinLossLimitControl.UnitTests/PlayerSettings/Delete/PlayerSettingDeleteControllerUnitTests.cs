@@ -1,13 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.WinLossLimitControl.Models;
 using RiskControl.WinLossLimitControl.PlayerSettings.Delete;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.PlayerSettings.Delete;
+
+using Xunit.Asserts.Compare;
 
 public class PlayerSettingDeleteControllerUnitTests
 {

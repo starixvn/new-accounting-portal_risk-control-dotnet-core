@@ -5,13 +5,14 @@ using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.SpecificMember.Common;
 using RiskControl.NonSportsGamesStatistics.SpecificMember.Username;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.Username;
+
+using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests
 {

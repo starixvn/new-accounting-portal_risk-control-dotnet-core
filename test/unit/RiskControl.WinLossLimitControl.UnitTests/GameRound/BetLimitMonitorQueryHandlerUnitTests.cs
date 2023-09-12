@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using NSubstitute;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.WinLossLimitControl.GameRound;
 using RiskControl.WinLossLimitControl.GameRound.Criteria;
 using RiskControl.WinLossLimitControl.GameRound.Model;
@@ -12,6 +11,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.GameRound;
+
+using Xunit.Asserts.Compare;
 
 public class BetLimitMonitorQueryHandlerUnitTests
 {

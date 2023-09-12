@@ -1,6 +1,5 @@
 ﻿using Fanex.Data.Repository;
 using NSubstitute;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.WinLossLimitControl.Filter;
 using RiskControl.WinLossLimitControl.Filter.Criteria;
 using RiskControl.WinLossLimitControl.Filter.Model;
@@ -11,6 +10,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Filter;
+
+using Xunit.Asserts.Compare;
 
 public class FilterServiceUnitTests
 {

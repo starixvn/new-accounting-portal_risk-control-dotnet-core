@@ -5,13 +5,14 @@ using RiskControl.NonSportsGamesStatistics.CurrencyView.GrandTotal;
 using RiskControl.NonSportsGamesStatistics.CurrencyView.GrandTotal.Normal;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.CurrencyView.GrandTotal.Normal;
+
+using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests
 {

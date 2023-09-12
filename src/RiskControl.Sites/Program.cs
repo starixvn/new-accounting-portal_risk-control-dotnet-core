@@ -1,11 +1,6 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using RiskControl.Sites;
-using System;
-using System.IO;
 using Fanex.NAP.Signin.AspNetCore.Attribute;
 using Microsoft.AspNetCore.Mvc;
 using ONEbook.UM.AspNetCore.Filters;
@@ -14,7 +9,6 @@ using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client;
 using Microsoft.AspNetCore.Http;
 using RiskControl.Sites.Extensions;
-using SharpRaven.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;

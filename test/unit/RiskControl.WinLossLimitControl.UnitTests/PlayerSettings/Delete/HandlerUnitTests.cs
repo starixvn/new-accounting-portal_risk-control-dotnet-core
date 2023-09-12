@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
 using NSubstitute;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.WinLossLimitControl.Models;
 using RiskControl.WinLossLimitControl.PlayerSettings.Delete;
 using RiskControl.WinLossLimitControl.Services;
@@ -10,6 +9,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.PlayerSettings.Delete;
+
+using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests
 {

@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using RiskControl.Dashboard.Criteria;
 using RiskControl.Dashboard.Model;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.Dashboard.UnitTests;
+
+using Xunit.Asserts.Compare;
 
 public class DashboardControllerUnitTests
 {

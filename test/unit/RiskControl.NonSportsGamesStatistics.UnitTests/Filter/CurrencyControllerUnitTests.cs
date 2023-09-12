@@ -3,13 +3,14 @@ using NSubstitute;
 using RiskControl.NonSportsGamesStatistics.Filter;
 using RiskControl.NonSportsGamesStatistics.Filter.Criteria;
 using RiskControl.NonSportsGamesStatistics.Filter.Model;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter;
+
+using Xunit.Asserts.Compare;
 
 public class CurrencyControllerUnitTests
 {

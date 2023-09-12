@@ -1,7 +1,6 @@
 ﻿using Fanex.Data.Repository;
 using Newtonsoft.Json;
 using NSubstitute;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.WinLossLimitControl.Filter;
 using RiskControl.WinLossLimitControl.Groups;
 using System.Collections.Generic;
@@ -10,6 +9,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Groups;
+
+using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests
 {

@@ -1,12 +1,13 @@
 ﻿using NSubstitute;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.VoidRejectRefund.Common;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.VoidRejectRefund.UnitTests.Common;
+
+using Xunit.Asserts.Compare;
 
 public class GroupHandlerUnitTests
 {

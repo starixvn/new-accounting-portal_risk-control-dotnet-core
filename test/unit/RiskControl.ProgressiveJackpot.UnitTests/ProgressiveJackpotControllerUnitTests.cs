@@ -5,12 +5,13 @@ using Olympus.WebApi.Results;
 using RiskControl.Core.Configuration;
 using RiskControl.ProgressiveJackpot.ApiModel;
 using RiskControl.ProgressiveJackpot.Model;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.ProgressiveJackpot.UnitTests;
+
+using Xunit.Asserts.Compare;
 
 public class ProgressiveJackpotControllerUnitTests
 {

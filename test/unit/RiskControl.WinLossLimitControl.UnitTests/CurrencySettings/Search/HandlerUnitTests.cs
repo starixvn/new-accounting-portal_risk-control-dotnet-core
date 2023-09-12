@@ -2,7 +2,6 @@
 using Fanex.Data.Repository;
 using NSubstitute;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.WinLossLimitControl.CurrencySettings.Search;
 using RiskControl.WinLossLimitControl.Services;
 using RiskControl.WinLossLimitControl.UnitTests.Mocks;
@@ -12,6 +11,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.CurrencySettings.Search;
+
+using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests
 {

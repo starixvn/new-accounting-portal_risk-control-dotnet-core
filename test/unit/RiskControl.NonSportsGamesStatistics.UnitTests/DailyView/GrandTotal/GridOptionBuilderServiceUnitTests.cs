@@ -5,11 +5,12 @@ using RiskControl.NonSportsGamesStatistics.DailyView.Common;
 using RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System.Collections.Generic;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.DailyView.GrandTotal;
+
+using Xunit.Asserts.Compare;
 
 public class GridOptionBuilderServiceUnitTests
 {

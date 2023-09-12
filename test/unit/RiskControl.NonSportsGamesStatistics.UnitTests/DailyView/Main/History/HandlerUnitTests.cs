@@ -4,13 +4,14 @@ using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.DailyView.Main.History;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.DailyView.Main.History;
+
+using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests
 {

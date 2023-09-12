@@ -1,8 +1,9 @@
-﻿using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
-using RiskControl.WinLossLimitControl.Monitor.Parser;
+﻿using RiskControl.WinLossLimitControl.Monitor.Parser;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.Parser;
+
+using Xunit.Asserts.Compare;
 
 public class WinLimitSettingXmlParserUnitTests
 {

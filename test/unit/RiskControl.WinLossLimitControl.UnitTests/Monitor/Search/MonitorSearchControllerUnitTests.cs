@@ -1,13 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.WinLossLimitControl.Monitor.Search;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.Search;
+
+using Xunit.Asserts.Compare;
 
 public class MonitorSearchControllerUnitTests
 {

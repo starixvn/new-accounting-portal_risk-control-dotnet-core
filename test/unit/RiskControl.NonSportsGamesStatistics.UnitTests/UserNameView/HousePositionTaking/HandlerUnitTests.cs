@@ -4,13 +4,14 @@ using NSubstitute;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.UserNameView.HousePositionTaking;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.UserNameView.HousePositionTaking;
+
+using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests
 {

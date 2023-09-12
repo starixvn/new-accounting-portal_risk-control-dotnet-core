@@ -2,11 +2,12 @@
 using Fanex.Data.Repository;
 using NSubstitute;
 using RiskControl.Core.BalanceUp;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System;
 using Xunit;
 
 namespace RiskControl.Core.UnitTests.BalanceUp;
+
+using Xunit.Asserts.Compare;
 
 public class BalanceUpServiceUnitTests
 {

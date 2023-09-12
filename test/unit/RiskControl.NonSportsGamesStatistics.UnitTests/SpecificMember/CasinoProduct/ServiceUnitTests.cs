@@ -5,12 +5,13 @@ using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.SpecificMember.CasinoProduct;
 using RiskControl.NonSportsGamesStatistics.SpecificMember.Common;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.SpecificMember.CasinoProduct;
+
+using Xunit.Asserts.Compare;
 
 public class ServiceUnitTests
 {

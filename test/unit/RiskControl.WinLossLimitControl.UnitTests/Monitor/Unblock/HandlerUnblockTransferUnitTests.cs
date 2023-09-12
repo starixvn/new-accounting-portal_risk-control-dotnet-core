@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using NSubstitute;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.WinLossLimitControl.Models;
 using RiskControl.WinLossLimitControl.Monitor.Unblock;
 using RiskControl.WinLossLimitControl.Services;
@@ -9,6 +8,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.Unblock;
+
+using Xunit.Asserts.Compare;
 
 public class HandlerUnblockTransferUnitTests
 {

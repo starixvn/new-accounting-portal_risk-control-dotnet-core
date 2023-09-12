@@ -1,9 +1,10 @@
 ﻿using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.VoidRejectRefund.Product;
 using Xunit;
 
 namespace RiskControl.VoidRejectRefund.UnitTests.Product;
+
+using Xunit.Asserts.Compare;
 
 public class ProductSortingServiceUnitTests
 {

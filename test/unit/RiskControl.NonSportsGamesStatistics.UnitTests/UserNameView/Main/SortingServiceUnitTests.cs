@@ -1,10 +1,11 @@
 ﻿using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.UserNameView.Main;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.UserNameView.Main;
+
+using Xunit.Asserts.Compare;
 
 public class SortingServiceUnitTests
 {

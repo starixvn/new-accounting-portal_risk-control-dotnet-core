@@ -2,7 +2,6 @@
 using NSubstitute;
 using RiskControl.Core.AssociatedAcccount;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.WinLossLimitControl.Monitor.Account;
 using RiskControl.WinLossLimitControl.Monitor.Account.Criteria;
 using RiskControl.WinLossLimitControl.Monitor.Account.Model;
@@ -11,6 +10,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.Account;
+
+using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests
 {
