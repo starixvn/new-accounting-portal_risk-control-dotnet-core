@@ -151,7 +151,7 @@ public class GridOptionDataRowBuilderServiceImp : GridOptionDataRowBuilderServic
                     CellAlignment = HAlignment.Right,
                     CustomCellType = ExcelCellType.Integer
                 });
-            var groupName = $"{dailyStatistics.GroupName:MMM dd, yyyy}";
+            var groupName = dailyStatistics.GroupName;
             var customGroupAttributes = new { groupName };
             dataRow.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
 
