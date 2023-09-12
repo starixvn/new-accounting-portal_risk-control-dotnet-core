@@ -7,7 +7,6 @@ COPY ./src/RiskControl.Core ./RiskControl.Core
 COPY ./src/RiskControl.Dashboard ./RiskControl.Dashboard
 COPY ./src/RiskControl.NonSportsGamesStatistics ./RiskControl.NonSportsGamesStatistics
 COPY ./src/RiskControl.ProgressiveJackpot ./RiskControl.ProgressiveJackpot
-COPY ./src/RiskControl.VoidRejectRefund ./RiskControl.VoidRejectRefund
 COPY ./src/RiskControl.WinLossLimitControl ./RiskControl.WinLossLimitControl
 COPY ./src/RiskControl.Sites/RiskControl.Sites.csproj ./RiskControl.Sites/RiskControl.Sites.csproj
 

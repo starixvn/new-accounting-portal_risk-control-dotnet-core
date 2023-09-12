@@ -69,14 +69,7 @@ public class HomeController : Controller
     {
         return View("~/wwwroot/progressive-jackpot/index.cshtml");
     }
-
-    [Route("Reports/VoidRejectRefund/Index")]
-    [NapAuth(FunctionKey = FunctionKeys.VoidRejectRefund, Policy = Constant.Policy.Read)]
-    public ActionResult VoidRejectRefund()
-    {
-        return View("~/wwwroot/void-reject-refund/index.cshtml");
-    }
-
+    
     [Route("GameRound/Setting")]
     [NapAuth(FunctionKey = FunctionKeys.GameRoundBetLimitSetting, Policy = Constant.Policy.Read)]
     public ActionResult GameRoundSetting()

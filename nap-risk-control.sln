@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30804.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5186ACE3-6F85-42AC-8C58-28004B503E91}"
 EndProject
@@ -14,8 +14,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.NonSportsGamesStatistics", "src\RiskControl.NonSportsGamesStatistics\RiskControl.NonSportsGamesStatistics.csproj", "{B8B3341A-A309-4940-AB11-AFCF095721E9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.ProgressiveJackpot", "src\RiskControl.ProgressiveJackpot\RiskControl.ProgressiveJackpot.csproj", "{9F0B30EB-EEF9-4B34-AEF7-EEFE320CAF8D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.VoidRejectRefund", "src\RiskControl.VoidRejectRefund\RiskControl.VoidRejectRefund.csproj", "{A61E493D-C82D-44F8-A3EB-C39B8092DD24}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.WinLossLimitControl", "src\RiskControl.WinLossLimitControl\RiskControl.WinLossLimitControl.csproj", "{638653A3-D7B7-4DA6-B0D6-35AB035AA5C4}"
 EndProject
@@ -41,9 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.ProgressiveJack
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.NonSportsGamesStatistics.UnitTests", "test\unit\RiskControl.NonSportsGamesStatistics.UnitTests\RiskControl.NonSportsGamesStatistics.UnitTests.csproj", "{2CB8927D-7F3C-4544-A489-C56A69BAE80A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.VoidRejectRefund.UnitTests", "test\unit\RiskControl.VoidRejectRefund.UnitTests\RiskControl.VoidRejectRefund.UnitTests.csproj", "{6B1FB0A1-444A-4760-94AD-C35B388AB2D9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskControl.WinLossLimitControl.UnitTests", "test\unit\RiskControl.WinLossLimitControl.UnitTests\RiskControl.WinLossLimitControl.UnitTests.csproj", "{35755745-0470-4238-8E2E-B0A531EECA85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.WinLossLimitControl.UnitTests", "test\unit\RiskControl.WinLossLimitControl.UnitTests\RiskControl.WinLossLimitControl.UnitTests.csproj", "{35755745-0470-4238-8E2E-B0A531EECA85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,10 +67,6 @@ Global
 		{9F0B30EB-EEF9-4B34-AEF7-EEFE320CAF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F0B30EB-EEF9-4B34-AEF7-EEFE320CAF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F0B30EB-EEF9-4B34-AEF7-EEFE320CAF8D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A61E493D-C82D-44F8-A3EB-C39B8092DD24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A61E493D-C82D-44F8-A3EB-C39B8092DD24}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A61E493D-C82D-44F8-A3EB-C39B8092DD24}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A61E493D-C82D-44F8-A3EB-C39B8092DD24}.Release|Any CPU.Build.0 = Release|Any CPU
 		{638653A3-D7B7-4DA6-B0D6-35AB035AA5C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{638653A3-D7B7-4DA6-B0D6-35AB035AA5C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{638653A3-D7B7-4DA6-B0D6-35AB035AA5C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -115,10 +107,6 @@ Global
 		{2CB8927D-7F3C-4544-A489-C56A69BAE80A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CB8927D-7F3C-4544-A489-C56A69BAE80A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CB8927D-7F3C-4544-A489-C56A69BAE80A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B1FB0A1-444A-4760-94AD-C35B388AB2D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B1FB0A1-444A-4760-94AD-C35B388AB2D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B1FB0A1-444A-4760-94AD-C35B388AB2D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B1FB0A1-444A-4760-94AD-C35B388AB2D9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{35755745-0470-4238-8E2E-B0A531EECA85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{35755745-0470-4238-8E2E-B0A531EECA85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35755745-0470-4238-8E2E-B0A531EECA85}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -133,7 +121,6 @@ Global
 		{300A5326-ED97-4870-95E7-54B7ED7E71DB} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
 		{B8B3341A-A309-4940-AB11-AFCF095721E9} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
 		{9F0B30EB-EEF9-4B34-AEF7-EEFE320CAF8D} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
-		{A61E493D-C82D-44F8-A3EB-C39B8092DD24} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
 		{638653A3-D7B7-4DA6-B0D6-35AB035AA5C4} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
 		{955BFEA9-C843-48E0-BD4A-161ED861B972} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
 		{D6DB9C85-1B0E-4C33-9250-C85531FE0CCC} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
@@ -145,7 +132,6 @@ Global
 		{DA26BF4E-31E7-4FDD-8DB3-BC86AAA1CAE1} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
 		{4D160AB6-1C2E-4790-878F-8EE41AB3ACD2} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
 		{2CB8927D-7F3C-4544-A489-C56A69BAE80A} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
-		{6B1FB0A1-444A-4760-94AD-C35B388AB2D9} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
 		{35755745-0470-4238-8E2E-B0A531EECA85} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

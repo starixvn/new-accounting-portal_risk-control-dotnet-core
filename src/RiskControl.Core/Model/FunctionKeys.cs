@@ -56,8 +56,6 @@ public static class FunctionKeys
 
     public const string NormalMode = "NormalMode";
 
-    public const string VoidRejectRefund = "VoidRejectRefund";
-
     public const string RiskControlDashboard = "RiskControlDashboard";
 
     public const string NonSportGameStatisticsSpecificMember = "Non_SportGameStatisticsSpecificMember";
