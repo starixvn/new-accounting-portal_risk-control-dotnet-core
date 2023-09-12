@@ -9,32 +9,16 @@ public class ReportModeServiceImp : ReportModeService
 {
     public string GetReportMode(ReportType reportBy)
     {
-        string reportMode;
-
-        switch (reportBy)
+        var reportMode = reportBy switch
         {
-            case ReportType.Daily:
-                reportMode = "Daily";
-                break;
-            case ReportType.Monthly:
-                reportMode = "Monthly";
-                break;
-            case ReportType.Product:
-                reportMode = "Product";
-                break;
-            case ReportType.Currency:
-                reportMode = "Currency";
-                break;
-            case ReportType.Company:
-                reportMode = "Company";
-                break;
-            case ReportType.Device:
-                reportMode = "Device";
-                break;
-            default:
-                reportMode = string.Empty;
-                break;
-        }
+            ReportType.Daily => "Daily",
+            ReportType.Monthly => "Monthly",
+            ReportType.Product => "Product",
+            ReportType.Currency => "Currency",
+            ReportType.Company => "Company",
+            ReportType.Device => "Device",
+            _ => string.Empty
+        };
 
         return reportMode;
     }

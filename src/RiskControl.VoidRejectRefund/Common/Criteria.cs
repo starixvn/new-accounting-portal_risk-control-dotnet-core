@@ -33,38 +33,16 @@ public class Criteria : CriteriaBase
 
     public override string GetSettingKey()
     {
-        string settingKey;
-
-        switch (ReportBy)
+        var settingKey = ReportBy switch
         {
-            case ReportType.Daily:
-                settingKey = "Void_Recject_Refund_Daily";
-                break;
-
-            case ReportType.Monthly:
-                settingKey = "Void_Recject_Refund_Monthly";
-                break;
-
-            case ReportType.Product:
-                settingKey = "Void_Recject_Refund_Product";
-                break;
-
-            case ReportType.Currency:
-                settingKey = "Void_Recject_Refund_Currency";
-                break;
-
-            case ReportType.Company:
-                settingKey = "Void_Recject_Refund_Company";
-                break;
-
-            case ReportType.Device:
-                settingKey = "Void_Recject_Refund_Device";
-                break;
-
-            default:
-                settingKey = string.Empty;
-                break;
-        }
+            ReportType.Daily => "Void_Reject_Refund_Daily",
+            ReportType.Monthly => "Void_Reject_Refund_Monthly",
+            ReportType.Product => "Void_Reject_Refund_Product",
+            ReportType.Currency => "Void_Reject_Refund_Currency",
+            ReportType.Company => "Void_Reject_Refund_Company",
+            ReportType.Device => "Void_Reject_Refund_Device",
+            _ => string.Empty
+        };
 
         return settingKey;
     }

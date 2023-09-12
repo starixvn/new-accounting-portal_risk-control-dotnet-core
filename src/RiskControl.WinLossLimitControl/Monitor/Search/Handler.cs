@@ -32,16 +32,16 @@ public class Handler : IRequestHandler<Request, List<MonitorModel>>
     {
         var criteria = mapper.Map<MonitorSearchCriteria>(request);
         criteria.ToDate = criteria.ToDate.AddDays(1).AddSeconds(-1);
-        var rawData = await repository.FetchAsync<MonitorModelRaw>(criteria);
+        var rawData = await repository.FetchAsync<MonitorModelRaw>(criteria, cancellationToken);
         return FromRawWinLimitMonitor(rawData).ToList();
     }
 
     private IEnumerable<MonitorModel> FromRawWinLimitMonitor(IEnumerable<MonitorModelRaw> rawData)
     {
-        foreach (var item in rawData)
+        return rawData.Select(item =>
         {
             var winLimitSetting = winLimitSettingXmlParser.Parse(item.MaxWinLimitSetting);
-            yield return new MonitorModel
+            return new MonitorModel
             {
                 CustId = item.CustId,
                 UserName = item.UserName,
@@ -68,6 +68,6 @@ public class Handler : IRequestHandler<Request, List<MonitorModel>>
                 YellowLimit = winLimitSetting.YellowLimit,
                 RedLimit = winLimitSetting.RedLimit
             };
-        }
+        });
     }
 }

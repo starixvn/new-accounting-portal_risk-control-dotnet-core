@@ -29,6 +29,6 @@ public class Handler : IRequestHandler<QueryModel, IEnumerable<HousePositionTaki
     {
         var criteria = mapper.Map<Criteria>(request);
         criteria.Source = dataSourceChooser.GetDataSource(criteria.IsNormalMode);
-        return repository.FetchAsync<HousePositionTakingModel>(criteria);
+        return repository.FetchAsync<HousePositionTakingModel>(criteria, cancellationToken);
     }
 }

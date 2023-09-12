@@ -39,7 +39,7 @@ public class Handler : IRequestHandler<Request, ExecuteResult>
             return new ExecuteResult(1);
         }
 
-        await repository.ExecuteAsync(criteria);
+        await repository.ExecuteAsync(criteria, cancellationToken);
 
         return new ExecuteResult();
     }

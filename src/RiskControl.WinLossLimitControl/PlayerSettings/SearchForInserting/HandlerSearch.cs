@@ -27,7 +27,7 @@ public class HandlerSearch : HandlerBase, IRequestHandler<RequestSearch, List<Pl
     public async Task<List<PlayerSettingCurrency>> Handle(RequestSearch request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<SearchCriteria>(request);
-        var rawSettings = await dynamicRepository.FetchAsync<PlayerSettingRaw>(criteria);
+        var rawSettings = await dynamicRepository.FetchAsync<PlayerSettingRaw>(criteria, cancellationToken);
 
         var settings = FromRawPlayerSetting(rawSettings);
 

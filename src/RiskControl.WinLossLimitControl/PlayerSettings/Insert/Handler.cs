@@ -31,9 +31,7 @@ public class Handler : IRequestHandler<Request, ExecuteResult>
             await insertService.Execute(request, userContext);
             return new ExecuteResult();
         }
-        else
-        {
-            return new ExecuteResult(validattionResult);
-        }
+
+        return new ExecuteResult(validattionResult);
     }
 }

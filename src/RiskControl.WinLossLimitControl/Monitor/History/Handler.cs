@@ -34,17 +34,17 @@ public class Handler : IRequestHandler<Request, List<WinLimitHistory>>
     public async Task<List<WinLimitHistory>> Handle(Request request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<HistoryCriteria>(request);
-        var rawData = await repository.FetchAsync<WinLimitHistoryRaw>(criteria);
+        var rawData = await repository.FetchAsync<WinLimitHistoryRaw>(criteria, cancellationToken);
         return FromRawWinLimitHistory(rawData).ToList();
     }
 
     private IEnumerable<WinLimitHistory> FromRawWinLimitHistory(IEnumerable<WinLimitHistoryRaw> rawData)
     {
-        foreach (var item in rawData)
+        return rawData.Select(item =>
         {
             var winLimitSetting = winLimitSettingXmlParser.Parse(item.MaxWinLimitSetting);
 
-            yield return new WinLimitHistory
+            return new WinLimitHistory
             {
                 GroupName = cacheRefService.GetGroupName(item.GroupId),
                 GroupId = item.GroupId,
@@ -63,6 +63,6 @@ public class Handler : IRequestHandler<Request, List<WinLimitHistory>>
                 LogID = item.LogID,
                 IsNotified = item.IsNotified
             };
-        }
+        });
     }
 }

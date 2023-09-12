@@ -26,7 +26,7 @@ public class HandlerUnitTests
         };
         var fakeRawSettings = new List<GroupSetting> { groupSetting };
         var repository = Substitute.For<IDynamicRepository>();
-        repository.FetchAsync<GroupSetting>(Arg.Compat.Any<ICriteria>()).Returns(fakeRawSettings);
+        repository.FetchAsync<GroupSetting>(Arg.Compat.Any<ICriteria>(), Arg.Compat.Any<CancellationToken>()).Returns(fakeRawSettings);
 
         var cacheRefService = Substitute.For<CacheRefService>();
         cacheRefService.GetGroupName(Arg.Compat.Any<int>()).Returns("Group 1");

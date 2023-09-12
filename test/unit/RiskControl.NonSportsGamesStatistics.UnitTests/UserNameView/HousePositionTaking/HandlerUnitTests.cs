@@ -29,7 +29,7 @@ public class HandlerUnitTests
         dataSourceChooser.GetDataSource(Arg.Compat.Any<bool>()).Returns("WH");
 
         var repository = Substitute.For<IDynamicRepository>();
-        repository.FetchAsync<HousePositionTakingModel>(Arg.Compat.Any<Criteria>()).Returns(expectedResult);
+        repository.FetchAsync<HousePositionTakingModel>(Arg.Compat.Any<Criteria>(), Arg.Compat.Any<CancellationToken>()).Returns(expectedResult);
 
         var mapper = new MapperConfiguration(cf =>
         {

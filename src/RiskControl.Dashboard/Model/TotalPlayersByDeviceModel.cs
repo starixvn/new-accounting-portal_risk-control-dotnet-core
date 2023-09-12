@@ -2,9 +2,9 @@
 
 public class TotalPlayersByDeviceModel
 {
-    public string Weekly { get; }
+    public string Weekly { get; set; }
 
-    public int MobilePlayers { get; }
+    public int MobilePlayers { get; set; }
 
-    public int NonMobilePlayers { get; }
+    public int NonMobilePlayers { get; set; }
 }

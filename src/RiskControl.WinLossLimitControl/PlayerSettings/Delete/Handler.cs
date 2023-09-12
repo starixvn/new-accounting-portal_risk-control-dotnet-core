@@ -29,7 +29,7 @@ public class Handler : IRequestHandler<Request, ExecuteResult>
         criteria.UserId = userHttpContext.UserId;
         criteria.IP = userHttpContext.IP;
 
-        await repository.ExecuteAsync(criteria);
+        await repository.ExecuteAsync(criteria, cancellationToken);
         return new ExecuteResult();
     }
 }

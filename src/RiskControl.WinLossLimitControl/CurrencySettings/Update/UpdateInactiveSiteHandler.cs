@@ -23,7 +23,7 @@ public class UpdateInactiveSiteHandler : IRequestHandler<UpdateInactiveSiteReque
     public async Task<ExecuteResult> Handle(UpdateInactiveSiteRequest request, CancellationToken cancellationToken)
     {
         var criteriaList = mapper.Map<List<UpdateInactiveSiteCriteria>>(request.Settings);
-        var executeResults = criteriaList.Select(c => repository.ExecuteAsync(c)).ToArray();
+        var executeResults = criteriaList.Select(c => repository.ExecuteAsync(c, cancellationToken)).ToArray();
         await Task.WhenAll(executeResults);
         return new ExecuteResult();
     }

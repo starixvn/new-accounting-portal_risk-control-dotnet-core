@@ -22,7 +22,7 @@ public class HandlerUnitTests
         // Arrange
         var fakeRawData = TestDataProvider.Load<List<WinLimitHistoryRaw>>("win-limit-history-raw");
         var repository = Substitute.For<IDynamicRepository>();
-        repository.FetchAsync<WinLimitHistoryRaw>(Arg.Compat.Any<ICriteria>()).Returns(fakeRawData);
+        repository.FetchAsync<WinLimitHistoryRaw>(Arg.Compat.Any<ICriteria>(), Arg.Compat.Any<CancellationToken>()).Returns(fakeRawData);
 
         var cacheRefService = new CacheRefServiceMockImp();
         var winLimitSettingXmlParserImp = new WinLimitSettingXmlParserImp();

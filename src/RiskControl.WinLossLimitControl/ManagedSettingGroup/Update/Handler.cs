@@ -29,7 +29,7 @@ public class Handler : IRequestHandler<GameGroupSettingRequest, ExecuteResult>
     {
         var userContext = new UserContext { UserId = userHttpContext.UserId, IP = userHttpContext.IP };
         var criteriaList = GetGameGroupSettingCriteriaList(request.Settings, userContext);
-        var executeResults = criteriaList.Select(c => repository.ExecuteAsync(c)).ToArray();
+        var executeResults = criteriaList.Select(c => repository.ExecuteAsync(c, cancellationToken)).ToArray();
 
         await Task.WhenAll(executeResults);
 

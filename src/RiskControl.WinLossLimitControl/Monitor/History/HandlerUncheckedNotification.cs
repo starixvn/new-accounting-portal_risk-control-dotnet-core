@@ -26,7 +26,7 @@ public class HandlerUncheckedNotification : IRequestHandler<RequestUncheckedNoti
     {
         var criteria = mapper.Map<UncheckedNotificationCriteria>(request);
         criteria.UserID = sessionService.UserId;
-        await repository.ExecuteAsync(criteria);
+        await repository.ExecuteAsync(criteria, cancellationToken);
         return new ExecuteResult();
     }
 }

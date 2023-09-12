@@ -66,29 +66,29 @@ public class CacheRefServiceImp : CacheRefService
 
     public string GetProductName(int productId)
     {
-        return BaseEntityGroup.Products.ContainsKey(productId)
-            ? BaseEntityGroup.Products[productId]
+        return BaseEntityGroup.Products.TryGetValue(productId, out var product)
+            ? product
             : $"Product {productId} does not exist";
     }
 
     public string GetCurrencyName(int currencyId)
     {
-        return BaseEntityGroup.Currencies.ContainsKey(currencyId)
-            ? BaseEntityGroup.Currencies[currencyId]
+        return BaseEntityGroup.Currencies.TryGetValue(currencyId, out var currency)
+            ? currency
             : $"Currency {currencyId} does not exist";
     }
 
     public string GetGroupName(int groupId)
     {
-        return BaseEntityGroup.Groups.ContainsKey(groupId)
-            ? BaseEntityGroup.Groups[groupId]
+        return BaseEntityGroup.Groups.TryGetValue(groupId, out var group)
+            ? group
             : $"Group {groupId} does not exist";
     }
 
     public string GetSiteName(int siteId)
     {
-        return BaseEntityGroup.Sites.ContainsKey(siteId)
-            ? BaseEntityGroup.Sites[siteId]
+        return BaseEntityGroup.Sites.TryGetValue(siteId, out var site)
+            ? site
             : $"Site {siteId} does not exist";
     }
 

@@ -86,21 +86,16 @@ public class FilterServiceImp : FilterService
 
     private static List<SiteGroupModel> CreateSpecialChild(IEnumerable<LicenseeEntity> licenseeEntities)
     {
-        var result = new List<SiteGroupModel>();
         var licensees = licenseeEntities.Where(x => x.GroupId == 0);
-        foreach (var item in licensees)
+        return licensees.Select(item => new SiteGroupModel
         {
-            var group = new SiteGroupModel
-            {
-                ParentId = 0,
-                GroupId = 0,
-                GroupName = item.LicenseeName,
-                LicenseeName = item.LicenseeName,
-                LicenseeId = item.LicenseeId
-            };
-            result.Add(group);
-        }
-        return result;
+            ParentId = 0,
+            GroupId = 0,
+            GroupName = item.LicenseeName,
+            LicenseeName = item.LicenseeName,
+            LicenseeId = item.LicenseeId
+        })
+        .ToList();
     }
 
     private void CreateChild(List<SiteGroupModel> siteGroups, IEnumerable<LicenseeEntity> licenseeEntities)

@@ -29,7 +29,7 @@ public class BetLimitSettingUpdateHandler : IRequestHandler<BetLimitSettingUpdat
         var command = mapper.Map<BetLimitSettingUpdateCommand>(request);
         command.UserId = userHttpContext.UserId;
         command.IP = userHttpContext.IP;
-        await repository.ExecuteAsync(command);
+        await repository.ExecuteAsync(command, cancellationToken);
 
         return string.Empty;
     }

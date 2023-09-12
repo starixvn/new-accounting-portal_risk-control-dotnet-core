@@ -19,7 +19,7 @@ public class FilterControllerUnitTests
     public async Task GetSiteLicensees_Always_ReturnsDataFromFilterService()
     {
         // Arrange
-        var siteGroups = new List<SiteGroup>();
+        var siteGroups = Enumerable.Empty<SiteGroup>();
         var filterService = Substitute.For<FilterService>();
         filterService.GetSiteByProduct(Arg.Compat.Any<GetSiteCriteria>()).Returns(siteGroups);
 
@@ -36,7 +36,7 @@ public class FilterControllerUnitTests
     public async Task GetCurrencies_Always_ReturnsDataFromFilterService()
     {
         // Arrange
-        var currencies = new List<BaseEntity>();
+        var currencies = Enumerable.Empty<BaseEntity>();
         var filterService = Substitute.For<FilterService>();
         filterService.GetCurrencies(Arg.Compat.Any<GetCurrencyCriteria>()).Returns(currencies);
 
@@ -54,7 +54,7 @@ public class FilterControllerUnitTests
     public void GetProducts_Always_ReturnsDataFromFilterService()
     {
         // Arrange
-        var products = new List<BaseEntity>();
+        var products = Enumerable.Empty<BaseEntity>(); 
         var filterService = Substitute.For<FilterService>();
         filterService.GetProducts().Returns(products);
 

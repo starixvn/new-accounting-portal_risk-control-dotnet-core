@@ -23,7 +23,7 @@ public class Handler : IRequestHandler<Request, List<ProductGroupSetting>>
     public async Task<List<ProductGroupSetting>> Handle(Request request, CancellationToken cancellationToken)
     {
         var criteria = new ReadCriteria();
-        var settings = await repository.FetchAsync<GroupSetting>(criteria);
+        var settings = await repository.FetchAsync<GroupSetting>(criteria, cancellationToken);
 
         var result = new List<ProductGroupSetting>();
         var productIds = settings.Select(s => s.ProductId).Distinct();

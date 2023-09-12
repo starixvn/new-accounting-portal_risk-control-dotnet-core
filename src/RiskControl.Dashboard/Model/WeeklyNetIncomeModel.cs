@@ -4,9 +4,9 @@ public class WeeklyNetIncomeModel
 {
     public string Week { get; set; }
 
-    public decimal CreditNetIncome { get; }
+    public decimal CreditNetIncome { get; set; }
 
-    public decimal DepositNetIncome { get; }
+    public decimal DepositNetIncome { get; set; }
 
     public decimal NetIncome => CreditNetIncome + DepositNetIncome;
 }

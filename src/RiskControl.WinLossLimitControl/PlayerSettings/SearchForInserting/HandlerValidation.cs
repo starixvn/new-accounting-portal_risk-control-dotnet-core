@@ -21,6 +21,6 @@ public class HandlerValidation : IRequestHandler<RequestValidation, ExecuteResul
     public async Task<ExecuteResult> Handle(RequestValidation request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<ValidationCriteria>(request);
-        return await repository.GetAsync<ExecuteResult>(criteria);
+        return await repository.GetAsync<ExecuteResult>(criteria, cancellationToken);
     }
 }
