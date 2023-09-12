@@ -29,12 +29,6 @@
     <None Remove="Templates\ProgressiveJackpot\Monthly.xlsx" />
     <None Remove="Templates\ProgressiveJackpot\RealTime.xlsx" />
     <None Remove="Templates\ProgressiveJackpot\WinRecord.xlsx" />
-    <None Remove="Templates\VoidRejectRefund\Company.xlsx" />
-    <None Remove="Templates\VoidRejectRefund\Currency.xlsx" />
-    <None Remove="Templates\VoidRejectRefund\Daily.xlsx" />
-    <None Remove="Templates\VoidRejectRefund\Device.xlsx" />
-    <None Remove="Templates\VoidRejectRefund\Monthly.xlsx" />
-    <None Remove="Templates\VoidRejectRefund\Product.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,24 +61,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\ProgressiveJackpot\WinRecord.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\VoidRejectRefund\Company.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\VoidRejectRefund\Currency.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\VoidRejectRefund\Daily.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\VoidRejectRefund\Device.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\VoidRejectRefund\Monthly.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\VoidRejectRefund\Product.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
