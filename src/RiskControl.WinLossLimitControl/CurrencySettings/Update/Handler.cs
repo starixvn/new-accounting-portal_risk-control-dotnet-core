@@ -4,35 +4,34 @@ using MediatR;
 using RiskControl.WinLossLimitControl.Models;
 using RiskControl.WinLossLimitControl.Services;
 
-namespace RiskControl.WinLossLimitControl.CurrencySettings.Update
+namespace RiskControl.WinLossLimitControl.CurrencySettings.Update;
+
+public class Handler : IRequestHandler<Request, ExecuteResult>
 {
-    public class Handler : IRequestHandler<Request, ExecuteResult>
+    private readonly ValidationService validationService;
+
+    private readonly UpdateService updateService;
+
+    private readonly UserHttpContext userHttpContext;
+
+    public Handler(UserHttpContext userHttpContext, ValidationService validationService, UpdateService updateService)
     {
-        private readonly ValidationService validationService;
+        this.userHttpContext = userHttpContext;
+        this.validationService = validationService;
+        this.updateService = updateService;
+    }
 
-        private readonly UpdateService updateService;
+    public async Task<ExecuteResult> Handle(Request request, CancellationToken cancellationToken)
+    {
+        var userContext = new UserContext { UserId = userHttpContext.UserId, IP = userHttpContext.IP };
 
-        private readonly UserHttpContext userHttpContext;
-
-        public Handler(UserHttpContext userHttpContext, ValidationService validationService, UpdateService updateService)
+        var validationResult = validationService.Execute(request);
+        if (validationResult > 0)
         {
-            this.userHttpContext = userHttpContext;
-            this.validationService = validationService;
-            this.updateService = updateService;
+            return new ExecuteResult(validationResult);
         }
 
-        public async Task<ExecuteResult> Handle(Request request, CancellationToken cancellationToken)
-        {
-            var userContext = new UserContext { UserId = userHttpContext.UserId, IP = userHttpContext.IP };
-
-            var validationResult = validationService.Execute(request);
-            if (validationResult > 0)
-            {
-                return new ExecuteResult(validationResult);
-            }
-
-            await updateService.Execute(request, userContext);
-            return new ExecuteResult();
-        }
+        await updateService.Execute(request, userContext);
+        return new ExecuteResult();
     }
 }

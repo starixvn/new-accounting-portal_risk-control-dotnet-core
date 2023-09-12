@@ -3,33 +3,32 @@ using System.Threading.Tasks;
 using MediatR;
 using RiskControl.VoidRejectRefund.Common;
 
-namespace RiskControl.VoidRejectRefund.Product
+namespace RiskControl.VoidRejectRefund.Product;
+
+public class ProductHandler : IRequestHandler<HttpParameterJson, ProductModel>
 {
-    public class ProductHandler : IRequestHandler<HttpParameterJson, ProductModel>
+    private readonly ProductService service;
+
+    private readonly SortingService<ProductModel> sortingService;
+
+    public ProductHandler(ProductService service, SortingService<ProductModel> sortingService)
     {
-        private readonly ProductService service;
+        this.service = service;
+        this.sortingService = sortingService;
+    }
 
-        private readonly SortingService<ProductModel> sortingService;
+    public async Task<ProductModel> Handle(HttpParameterJson request, CancellationToken cancellationToken)
+    {
+        var sortColumnName = request.SortColumnName;
+        var sortDirection = request.SortDirection;
 
-        public ProductHandler(ProductService service, SortingService<ProductModel> sortingService)
+        var reportModel = await service.Query(request).ConfigureAwait(false);
+
+        if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
         {
-            this.service = service;
-            this.sortingService = sortingService;
+            reportModel = sortingService.SortData(reportModel, sortDirection, sortColumnName);
         }
 
-        public async Task<ProductModel> Handle(HttpParameterJson request, CancellationToken cancellationToken)
-        {
-            var sortColumnName = request.SortColumnName;
-            var sortDirection = request.SortDirection;
-
-            var reportModel = await service.Query(request).ConfigureAwait(false);
-
-            if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
-            {
-                reportModel = sortingService.SortData(reportModel, sortDirection, sortColumnName);
-            }
-
-            return reportModel;
-        }
+        return reportModel;
     }
 }

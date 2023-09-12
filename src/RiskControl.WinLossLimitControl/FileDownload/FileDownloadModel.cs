@@ -1,7 +1,6 @@
-﻿namespace RiskControl.WinLossLimitControl.FileDownload
+﻿namespace RiskControl.WinLossLimitControl.FileDownload;
+
+public class FileDownloadModel
 {
-    public class FileDownloadModel
-    {
-        public string FileName { get; set; }
-    }
+    public string FileName { get; set; }
 }

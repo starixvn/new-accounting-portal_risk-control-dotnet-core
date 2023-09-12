@@ -1,7 +1,6 @@
-﻿namespace RiskControl.NonSportsGamesStatistics.Filter.Model
+﻿namespace RiskControl.NonSportsGamesStatistics.Filter.Model;
+
+public class ValidationUsernameQueryModel
 {
-    public class ValidationUsernameQueryModel
-    {
-        public string Username { get; set; }
-    }
+    public string Username { get; set; }
 }

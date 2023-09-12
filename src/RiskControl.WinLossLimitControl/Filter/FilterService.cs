@@ -6,69 +6,68 @@ using RiskControl.WinLossLimitControl.Filter.Criteria;
 using RiskControl.WinLossLimitControl.Filter.Model;
 using RiskControl.WinLossLimitControl.Models;
 
-namespace RiskControl.WinLossLimitControl.Filter
+namespace RiskControl.WinLossLimitControl.Filter;
+
+public interface FilterService
 {
-    public interface FilterService
+    Task<IEnumerable<BaseEntity>> GetCurrencies(GetCurrencyCriteria criteria);
+
+    IEnumerable<BaseEntity> GetProducts();
+
+    Task<IEnumerable<SiteGroup>> GetSiteByProduct(GetSiteCriteria criteria);
+
+    Task<IEnumerable<Customer>> SearchUsers(CustomerSuggestionCriteria criteria);
+
+    Task<IEnumerable<Group>> GetGroupByProduct(GetGroupCriteria criteria);
+}
+
+public class FilterServiceImp : FilterService
+{
+    private readonly CacheRefService cacheRefService;
+    private readonly IDynamicRepository repository;
+
+    public FilterServiceImp(IDynamicRepository repository, CacheRefService cacheRefService)
     {
-        Task<IEnumerable<BaseEntity>> GetCurrencies(GetCurrencyCriteria criteria);
-
-        IEnumerable<BaseEntity> GetProducts();
-
-        Task<IEnumerable<SiteGroup>> GetSiteByProduct(GetSiteCriteria criteria);
-
-        Task<IEnumerable<Customer>> SearchUsers(CustomerSuggestionCriteria criteria);
-
-        Task<IEnumerable<Group>> GetGroupByProduct(GetGroupCriteria criteria);
+        this.repository = repository;
+        this.cacheRefService = cacheRefService;
     }
 
-    public class FilterServiceImp : FilterService
+    public async Task<IEnumerable<BaseEntity>> GetCurrencies(GetCurrencyCriteria criteria)
     {
-        private readonly CacheRefService cacheRefService;
-        private readonly IDynamicRepository repository;
+        return await repository.FetchAsync<BaseEntity>(criteria);
+    }
 
-        public FilterServiceImp(IDynamicRepository repository, CacheRefService cacheRefService)
-        {
-            this.repository = repository;
-            this.cacheRefService = cacheRefService;
-        }
+    public async Task<IEnumerable<Group>> GetGroupByProduct(GetGroupCriteria criteria)
+    {
+        return await repository.FetchAsync<Group>(criteria);
+    }
 
-        public async Task<IEnumerable<BaseEntity>> GetCurrencies(GetCurrencyCriteria criteria)
-        {
-            return await repository.FetchAsync<BaseEntity>(criteria);
-        }
-
-        public async Task<IEnumerable<Group>> GetGroupByProduct(GetGroupCriteria criteria)
-        {
-            return await repository.FetchAsync<Group>(criteria);
-        }
-
-        public IEnumerable<BaseEntity> GetProducts()
-        {
-            return cacheRefService
-                .BaseEntityGroup
-                .Products
-                .Select(e => new BaseEntity
-                {
-                    Id = e.Key,
-                    Name = e.Value
-                });
-        }
-
-        public async Task<IEnumerable<SiteGroup>> GetSiteByProduct(GetSiteCriteria criteria)
-        {
-            var rawData = await repository.FetchAsync<Site>(criteria);
-            var groups = rawData.GroupBy(x => x.GroupName).ToList();
-
-            return groups.Select(group => new SiteGroup
+    public IEnumerable<BaseEntity> GetProducts()
+    {
+        return cacheRefService
+            .BaseEntityGroup
+            .Products
+            .Select(e => new BaseEntity
             {
-                GroupName = group.Key,
-                Sites = group.ToList()
+                Id = e.Key,
+                Name = e.Value
             });
-        }
+    }
 
-        public async Task<IEnumerable<Customer>> SearchUsers(CustomerSuggestionCriteria criteria)
+    public async Task<IEnumerable<SiteGroup>> GetSiteByProduct(GetSiteCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<Site>(criteria);
+        var groups = rawData.GroupBy(x => x.GroupName).ToList();
+
+        return groups.Select(group => new SiteGroup
         {
-            return await repository.FetchAsync<Customer>(criteria);
-        }
+            GroupName = group.Key,
+            Sites = group.ToList()
+        });
+    }
+
+    public async Task<IEnumerable<Customer>> SearchUsers(CustomerSuggestionCriteria criteria)
+    {
+        return await repository.FetchAsync<Customer>(criteria);
     }
 }

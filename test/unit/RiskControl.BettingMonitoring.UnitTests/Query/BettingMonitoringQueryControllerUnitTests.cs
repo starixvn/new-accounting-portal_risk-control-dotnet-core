@@ -4,23 +4,22 @@ using RiskControl.BettingMonitoring.Query;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.BettingMonitoring.UnitTests.Query
+namespace RiskControl.BettingMonitoring.UnitTests.Query;
+
+public class BettingMonitoringQueryControllerUnitTests
 {
-    public class BettingMonitoringQueryControllerUnitTests
+    [Fact]
+    public async Task Query_BetMonitoringModel_AlwaysCallMediatorSend()
     {
-        [Fact]
-        public async Task Query_BetMonitoringModel_AlwaysCallMediatorSend()
-        {
-            // Arrange
-            var mediator = Substitute.For<IMediator>();
+        // Arrange
+        var mediator = Substitute.For<IMediator>();
 
-            // Act
-            var message = new Message();
-            var controller = new BettingMonitoringQueryController(mediator);
-            await controller.Query(message);
+        // Act
+        var message = new Message();
+        var controller = new BettingMonitoringQueryController(mediator);
+        await controller.Query(message);
 
-            // Assert
-            await mediator.Received().Send(message);
-        }
+        // Assert
+        await mediator.Received().Send(message);
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace RiskControl.WinLossLimitControl.Models
-{
-    public class UserContext
-    {
-        public int UserId { get; set; }
+﻿namespace RiskControl.WinLossLimitControl.Models;
 
-        public string IP { get; set; }
-    }
+public class UserContext
+{
+    public int UserId { get; set; }
+
+    public string IP { get; set; }
 }

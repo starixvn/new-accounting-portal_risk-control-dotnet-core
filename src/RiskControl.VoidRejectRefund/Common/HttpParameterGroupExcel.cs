@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using OfficeOpenXml;
 
-namespace RiskControl.VoidRejectRefund.Common
+namespace RiskControl.VoidRejectRefund.Common;
+
+public class HttpParameterGroupExcel : HttpParameterExcelBase, IRequest<ExcelPackage>
 {
-    public class HttpParameterGroupExcel : HttpParameterExcelBase, IRequest<ExcelPackage>
-    {
-    }
 }

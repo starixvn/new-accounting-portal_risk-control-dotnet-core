@@ -6,42 +6,41 @@ using MediatR;
 using RiskControl.WinLossLimitControl.Models;
 using RiskControl.WinLossLimitControl.Services;
 
-namespace RiskControl.WinLossLimitControl.PlayerSettings.Update
+namespace RiskControl.WinLossLimitControl.PlayerSettings.Update;
+
+public class Handler : IRequestHandler<Request, ExecuteResult>
 {
-    public class Handler : IRequestHandler<Request, ExecuteResult>
+    private readonly ValidationService validationService;
+
+    private readonly IDynamicRepository repository;
+
+    private readonly UserHttpContext userHttpContext;
+
+    private readonly IMapper mapper;
+
+    public Handler(UserHttpContext userHttpContext, ValidationService validationService, IDynamicRepository repository, IMapper mapper)
     {
-        private readonly ValidationService validationService;
+        this.userHttpContext = userHttpContext;
+        this.validationService = validationService;
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 
-        private readonly IDynamicRepository repository;
+    public async Task<ExecuteResult> Handle(Request request, CancellationToken cancellationToken)
+    {
+        var criteria = mapper.Map<UpdateCriteria>(request);
+        criteria.UserId = userHttpContext.UserId;
+        criteria.IP = userHttpContext.IP;
+        criteria.MaxWinLimit = request.Limit;
 
-        private readonly UserHttpContext userHttpContext;
-
-        private readonly IMapper mapper;
-
-        public Handler(UserHttpContext userHttpContext, ValidationService validationService, IDynamicRepository repository, IMapper mapper)
+        var valid = await validationService.Execute(request);
+        if (!valid)
         {
-            this.userHttpContext = userHttpContext;
-            this.validationService = validationService;
-            this.repository = repository;
-            this.mapper = mapper;
+            return new ExecuteResult(1);
         }
 
-        public async Task<ExecuteResult> Handle(Request request, CancellationToken cancellationToken)
-        {
-            var criteria = mapper.Map<UpdateCriteria>(request);
-            criteria.UserId = userHttpContext.UserId;
-            criteria.IP = userHttpContext.IP;
-            criteria.MaxWinLimit = request.Limit;
+        await repository.ExecuteAsync(criteria, cancellationToken);
 
-            var valid = await validationService.Execute(request);
-            if (!valid)
-            {
-                return new ExecuteResult(1);
-            }
-
-            await repository.ExecuteAsync(criteria);
-
-            return new ExecuteResult();
-        }
+        return new ExecuteResult();
     }
 }

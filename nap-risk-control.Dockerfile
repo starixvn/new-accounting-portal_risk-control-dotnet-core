@@ -1,4 +1,4 @@
-FROM hub.nexdev.net/base/dotnet/core/sdk:5.0.102-ca-patch-buster-slim AS builder
+FROM hub.nexdev.net/base/dotnet/core/sdk:7.0-alpine AS builder
 WORKDIR /src
 
 COPY ./src/RiskControl.Application ./RiskControl.Application
@@ -13,14 +13,14 @@ COPY ./src/RiskControl.Sites/RiskControl.Sites.csproj ./RiskControl.Sites/RiskCo
 
 RUN ls /src -l
 WORKDIR /src/RiskControl.Sites
-RUN dotnet nuget add source http://nuget.nexdev.net/api/v2
+RUN dotnet nuget add source https://nuget.nexdev.net/api/v2
 RUN dotnet restore -v n
 
 COPY ./src/RiskControl.Sites .
 
-RUN dotnet publish -r linux-x64 --self-contained false -c Release -o /app 
+RUN dotnet publish -r linux-x64 --self-contained false -c Release -o /app
 
-FROM hub.nexdev.net/rebuild-baseimage/dotnetcore/aspnet:5.0-alpine AS base
+FROM hub.nexdev.net/base/dotnet/core/aspnet:7.0-alpine AS base
 
 ENV TZ="America/La_Paz" 
 

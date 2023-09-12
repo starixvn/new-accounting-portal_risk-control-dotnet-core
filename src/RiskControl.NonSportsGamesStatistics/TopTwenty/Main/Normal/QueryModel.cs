@@ -3,16 +3,15 @@ using Fanex.Excel.Models;
 using MediatR;
 using RiskControl.NonSportsGamesStatistics.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.TopTwenty.Main.Normal
+namespace RiskControl.NonSportsGamesStatistics.TopTwenty.Main.Normal;
+
+public class QueryModel : BaseStatisticQueryModel, IRequest<GridOptions>
 {
-    public class QueryModel : BaseStatisticQueryModel, IRequest<GridOptions>
-    {
-        public DateTime WinLostDate { get; set; }
+    public DateTime WinLostDate { get; set; }
 
-        public bool IsDrillDown { get; set; }
+    public bool IsDrillDown { get; set; }
 
-        public int TopType { get; set; }
+    public int TopType { get; set; }
 
-        public int RoleId { get; set; }
-    }
+    public int RoleId { get; set; }
 }

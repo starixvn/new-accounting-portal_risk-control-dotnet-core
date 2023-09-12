@@ -7,32 +7,31 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.History
+namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.History;
+
+public class HandlerUncheckedNotificationUnitTests
 {
-    public class HandlerUncheckedNotificationUnitTests
+    [Fact]
+    public async Task Handle_Always_CallRepositoryExecuteAsync()
     {
-        [Fact]
-        public async Task Handle_Always_CallRepositoryExecuteAsync()
+        // Arrange
+        var repository = Substitute.For<IDynamicRepository>();
+        repository.ExecuteAsync(Arg.Compat.Any<UncheckedNotificationCriteria>(), Arg.Compat.Any<CancellationToken>()).Returns(1);
+
+        var sessionService = Substitute.For<INapSession>();
+        sessionService.UserId.Returns(8);
+
+        var mapper = new MapperConfiguration(mcf =>
         {
-            // Arrange
-            var repository = Substitute.For<IDynamicRepository>();
-            repository.ExecuteAsync(Arg.Compat.Any<UncheckedNotificationCriteria>()).Returns(1);
+            mcf.CreateMap<RequestUncheckedNotification, UncheckedNotificationCriteria>();
+        }).CreateMapper();
 
-            var sessionService = Substitute.For<INapSession>();
-            sessionService.UserId.Returns(8);
+        var handle = new HandlerUncheckedNotification(repository, sessionService, mapper);
 
-            var mapper = new MapperConfiguration(mcf =>
-            {
-                mcf.CreateMap<RequestUncheckedNotification, UncheckedNotificationCriteria>();
-            }).CreateMapper();
+        // Act
+        await handle.Handle(new RequestUncheckedNotification(), new CancellationToken());
 
-            var handle = new HandlerUncheckedNotification(repository, sessionService, mapper);
-
-            // Act
-            await handle.Handle(new RequestUncheckedNotification(), new CancellationToken());
-
-            // Assert
-            await repository.Received().ExecuteAsync(Arg.Compat.Any<UncheckedNotificationCriteria>());
-        }
+        // Assert
+        await repository.Received().ExecuteAsync(Arg.Compat.Any<UncheckedNotificationCriteria>(), Arg.Compat.Any<CancellationToken>());
     }
 }

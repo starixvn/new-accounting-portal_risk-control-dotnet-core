@@ -1,14 +1,13 @@
 ﻿using MediatR;
 using RiskControl.WinLossLimitControl.Models;
 
-namespace RiskControl.WinLossLimitControl.PlayerSettings.Delete
+namespace RiskControl.WinLossLimitControl.PlayerSettings.Delete;
+
+public class Request : IRequest<ExecuteResult>
 {
-    public class Request : IRequest<ExecuteResult>
-    {
-        public int CustId { get; set; }
+    public int CustId { get; set; }
 
-        public int ProductId { get; set; }
+    public int ProductId { get; set; }
 
-        public int GroupId { get; set; }
-    }
+    public int GroupId { get; set; }
 }

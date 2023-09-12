@@ -1,24 +1,23 @@
-﻿namespace RiskControl.BettingMonitoring.Models
+﻿namespace RiskControl.BettingMonitoring.Models;
+
+public class BettingMonitoringModel
 {
-    public class BettingMonitoringModel
+    public int MinimumTickets { get; set; }
+
+    public int Threshold { get; set; }
+
+    public int UserId { get; set; }
+
+    public override bool Equals(object obj)
     {
-        public int MinimumTickets { get; set; }
+        var betMonitoring = obj as BettingMonitoringModel;
 
-        public int Threshold { get; set; }
+        return Equals(MinimumTickets, betMonitoring.MinimumTickets) &&
+               Equals(Threshold, betMonitoring.Threshold);
+    }
 
-        public int UserId { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            var betMonitoring = obj as BettingMonitoringModel;
-
-            return Equals(MinimumTickets, betMonitoring.MinimumTickets) &&
-                   Equals(Threshold, betMonitoring.Threshold);
-        }
-
-        public override int GetHashCode()
-        {
-            return 0;
-        }
+    public override int GetHashCode()
+    {
+        return 0;
     }
 }

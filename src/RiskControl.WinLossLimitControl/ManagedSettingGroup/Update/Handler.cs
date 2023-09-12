@@ -8,45 +8,44 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RiskControl.WinLossLimitControl.ManagedSettingGroup.Update
+namespace RiskControl.WinLossLimitControl.ManagedSettingGroup.Update;
+
+public class Handler : IRequestHandler<GameGroupSettingRequest, ExecuteResult>
 {
-    public class Handler : IRequestHandler<GameGroupSettingRequest, ExecuteResult>
+    private readonly IDynamicRepository repository;
+
+    private readonly UserHttpContext userHttpContext;
+
+    private readonly IMapper mapper;
+
+    public Handler(IDynamicRepository repository, UserHttpContext userHttpContext, IMapper mapper)
     {
-        private readonly IDynamicRepository repository;
+        this.userHttpContext = userHttpContext;
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 
-        private readonly UserHttpContext userHttpContext;
+    public async Task<ExecuteResult> Handle(GameGroupSettingRequest request, CancellationToken cancellationToken)
+    {
+        var userContext = new UserContext { UserId = userHttpContext.UserId, IP = userHttpContext.IP };
+        var criteriaList = GetGameGroupSettingCriteriaList(request.Settings, userContext);
+        var executeResults = criteriaList.Select(c => repository.ExecuteAsync(c, cancellationToken)).ToArray();
 
-        private readonly IMapper mapper;
+        await Task.WhenAll(executeResults);
 
-        public Handler(IDynamicRepository repository, UserHttpContext userHttpContext, IMapper mapper)
+        return new ExecuteResult();
+    }
+
+    public IEnumerable<GameGroupSettingCriteria> GetGameGroupSettingCriteriaList(IEnumerable<GameGroupSettingModel> settings, UserContext userContext)
+    {
+        var criteriaList = new List<GameGroupSettingCriteria>();
+        foreach (var setting in settings)
         {
-            this.userHttpContext = userHttpContext;
-            this.repository = repository;
-            this.mapper = mapper;
+            var criteria = mapper.Map<GameGroupSettingCriteria>(setting);
+            criteria.UserID = userContext.UserId;
+            criteria.IP = userContext.IP;
+            criteriaList.Add(criteria);
         }
-
-        public async Task<ExecuteResult> Handle(GameGroupSettingRequest request, CancellationToken cancellationToken)
-        {
-            var userContext = new UserContext { UserId = userHttpContext.UserId, IP = userHttpContext.IP };
-            var criteriaList = GetGameGroupSettingCriteriaList(request.Settings, userContext);
-            var executeResults = criteriaList.Select(c => repository.ExecuteAsync(c)).ToArray();
-
-            await Task.WhenAll(executeResults);
-
-            return new ExecuteResult();
-        }
-
-        public IEnumerable<GameGroupSettingCriteria> GetGameGroupSettingCriteriaList(IEnumerable<GameGroupSettingModel> settings, UserContext userContext)
-        {
-            var criteriaList = new List<GameGroupSettingCriteria>();
-            foreach (var setting in settings)
-            {
-                var criteria = mapper.Map<GameGroupSettingCriteria>(setting);
-                criteria.UserID = userContext.UserId;
-                criteria.IP = userContext.IP;
-                criteriaList.Add(criteria);
-            }
-            return criteriaList;
-        }
+        return criteriaList;
     }
 }

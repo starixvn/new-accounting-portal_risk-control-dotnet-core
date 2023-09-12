@@ -1,8 +1,7 @@
 ﻿using RiskControl.NonSportsGamesStatistics.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Product
+namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Product;
+
+public class HistoryCriteria : BaseHistoryCriteria
 {
-    public class HistoryCriteria : BaseHistoryCriteria
-    {
-    }
 }

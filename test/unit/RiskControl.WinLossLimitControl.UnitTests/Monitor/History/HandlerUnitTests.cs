@@ -2,7 +2,6 @@
 using Fanex.Data.Repository;
 using NSubstitute;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.WinLossLimitControl.Monitor.History;
 using RiskControl.WinLossLimitControl.Monitor.Parser;
 using RiskControl.WinLossLimitControl.UnitTests.Mocks;
@@ -11,33 +10,34 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.History
+namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.History;
+
+using Xunit.Asserts.Compare;
+
+public class HandlerUnitTests
 {
-    public class HandlerUnitTests
+    [Fact]
+    public async Task Handle_Always_ReturnsDataFromRepository()
     {
-        [Fact]
-        public async Task Handle_Always_ReturnsDataFromRepository()
+        // Arrange
+        var fakeRawData = TestDataProvider.Load<List<WinLimitHistoryRaw>>("win-limit-history-raw");
+        var repository = Substitute.For<IDynamicRepository>();
+        repository.FetchAsync<WinLimitHistoryRaw>(Arg.Compat.Any<ICriteria>(), Arg.Compat.Any<CancellationToken>()).Returns(fakeRawData);
+
+        var cacheRefService = new CacheRefServiceMockImp();
+        var winLimitSettingXmlParserImp = new WinLimitSettingXmlParserImp();
+
+        var mapper = new MapperConfiguration(mcf =>
         {
-            // Arrange
-            var fakeRawData = TestDataProvider.Load<List<WinLimitHistoryRaw>>("win-limit-history-raw");
-            var repository = Substitute.For<IDynamicRepository>();
-            repository.FetchAsync<WinLimitHistoryRaw>(Arg.Compat.Any<ICriteria>()).Returns(fakeRawData);
+            mcf.CreateMap<Request, HistoryCriteria>();
+        }).CreateMapper();
 
-            var cacheRefService = new CacheRefServiceMockImp();
-            var winLimitSettingXmlParserImp = new WinLimitSettingXmlParserImp();
+        // Act
+        var handler = new Handler(repository, cacheRefService, winLimitSettingXmlParserImp, mapper);
+        var result = await handler.Handle(new Request(), new CancellationToken());
 
-            var mapper = new MapperConfiguration(mcf =>
-            {
-                mcf.CreateMap<Request, HistoryCriteria>();
-            }).CreateMapper();
-
-            // Act
-            var handler = new Handler(repository, cacheRefService, winLimitSettingXmlParserImp, mapper);
-            var result = await handler.Handle(new Request(), new CancellationToken());
-
-            // Assert
-            var expected = TestDataProvider.Load<List<WinLimitHistory>>("win-limit-history");
-            DeepAssert.Equal(result, expected);
-        }
+        // Assert
+        var expected = TestDataProvider.Load<List<WinLimitHistory>>("win-limit-history");
+        DeepAssert.Equal(result, expected);
     }
 }

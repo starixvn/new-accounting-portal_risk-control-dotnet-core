@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <CodeAnalysisRuleSet>..\..\.sonarlint\nap-riskcontrolcsharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" Version="6.0.3" />
-    <PackageReference Include="Epplus.Mapper" Version="1.0.0.13" />
+    <PackageReference Include="EPPlus" Version="6.2.9" />
+    <PackageReference Include="Epplus.Mapper" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Olympus.WebApi.Epplus.AspNetCore" Version="1.0.1" />
     <PackageReference Include="Olympus.WebApiClient.AspNetCore" Version="1.0.0" />

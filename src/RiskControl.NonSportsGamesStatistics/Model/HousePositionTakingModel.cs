@@ -1,9 +1,8 @@
-﻿namespace RiskControl.NonSportsGamesStatistics.Model
-{
-    public class HousePositionTakingModel
-    {
-        public string Product { get; set; }
+﻿namespace RiskControl.NonSportsGamesStatistics.Model;
 
-        public decimal HousePositionTaking { get; set; }
-    }
+public class HousePositionTakingModel
+{
+    public string Product { get; set; }
+
+    public decimal HousePositionTaking { get; set; }
 }

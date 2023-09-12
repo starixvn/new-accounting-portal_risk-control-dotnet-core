@@ -2,33 +2,32 @@
 using System.Threading.Tasks;
 using MediatR;
 
-namespace RiskControl.VoidRejectRefund.Common
+namespace RiskControl.VoidRejectRefund.Common;
+
+public class Handler : IRequestHandler<HttpParameterJson, StatisticReportModel>
 {
-    public class Handler : IRequestHandler<HttpParameterJson, StatisticReportModel>
+    private readonly Service service;
+
+    private readonly SortingService<StatisticReportModel> sortingService;
+
+    public Handler(Service service, SortingService<StatisticReportModel> sortingService)
     {
-        private readonly Service service;
+        this.service = service;
+        this.sortingService = sortingService;
+    }
 
-        private readonly SortingService<StatisticReportModel> sortingService;
+    public async Task<StatisticReportModel> Handle(HttpParameterJson request, CancellationToken cancellationToken)
+    {
+        var sortColumnName = request.SortColumnName;
+        var sortDirection = request.SortDirection;
 
-        public Handler(Service service, SortingService<StatisticReportModel> sortingService)
+        var reportModel = await service.Query(request).ConfigureAwait(false);
+
+        if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
         {
-            this.service = service;
-            this.sortingService = sortingService;
+            reportModel = sortingService.SortData(reportModel, sortDirection, sortColumnName);
         }
 
-        public async Task<StatisticReportModel> Handle(HttpParameterJson request, CancellationToken cancellationToken)
-        {
-            var sortColumnName = request.SortColumnName;
-            var sortDirection = request.SortDirection;
-
-            var reportModel = await service.Query(request).ConfigureAwait(false);
-
-            if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
-            {
-                reportModel = sortingService.SortData(reportModel, sortDirection, sortColumnName);
-            }
-
-            return reportModel;
-        }
+        return reportModel;
     }
 }

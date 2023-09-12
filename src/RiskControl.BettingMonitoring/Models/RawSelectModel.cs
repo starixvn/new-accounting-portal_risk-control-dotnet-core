@@ -1,11 +1,10 @@
-﻿namespace RiskControl.BettingMonitoring.Models
+﻿namespace RiskControl.BettingMonitoring.Models;
+
+public class RawSelectModel
 {
-    public class RawSelectModel
-    {
-        public int SettingId { get; set; }
+    public int SettingId { get; set; }
 
-        public string SettingName { get; set; }
+    public string SettingName { get; set; }
 
-        public string Value { get; set; }
-    }
+    public string Value { get; set; }
 }

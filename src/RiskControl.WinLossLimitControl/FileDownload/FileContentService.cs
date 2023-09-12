@@ -1,26 +1,25 @@
 ﻿using System.IO;
 using RiskControl.Core.Configuration;
 
-namespace RiskControl.WinLossLimitControl.FileDownload
+namespace RiskControl.WinLossLimitControl.FileDownload;
+
+public interface FileContentService
 {
-    public interface FileContentService
+    byte[] ReadAllBytes(string filename);
+}
+
+public class FileContentServiceImp : FileContentService
+{
+    private readonly ConfigurationService configurationService;
+
+    public FileContentServiceImp(ConfigurationService configurationService)
     {
-        byte[] ReadAllBytes(string filename);
+        this.configurationService = configurationService;
     }
 
-    public class FileContentServiceImp : FileContentService
+    public byte[] ReadAllBytes(string filename)
     {
-        private readonly ConfigurationService configurationService;
-
-        public FileContentServiceImp(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
-
-        public byte[] ReadAllBytes(string filename)
-        {
-            var filePath = $"{configurationService.FileServerDirectory}/{filename}";
-            return File.ReadAllBytes(filePath);
-        }
+        var filePath = $"{configurationService.FileServerDirectory}/{filename}";
+        return File.ReadAllBytes(filePath);
     }
 }

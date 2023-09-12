@@ -1,11 +1,10 @@
-﻿namespace RiskControl.NonSportsGamesStatistics.Filter.Entities
+﻿namespace RiskControl.NonSportsGamesStatistics.Filter.Entities;
+
+public class LicenseeEntity
 {
-    public class LicenseeEntity
-    {
-        public int LicenseeId { get; set; }
+    public int LicenseeId { get; set; }
 
-        public string LicenseeName { get; set; }
+    public string LicenseeName { get; set; }
 
-        public int GroupId { get; set; }
-    }
+    public int GroupId { get; set; }
 }

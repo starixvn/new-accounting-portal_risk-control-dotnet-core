@@ -1,11 +1,10 @@
-﻿namespace RiskControl.WinLossLimitControl.Filter.Model
+﻿namespace RiskControl.WinLossLimitControl.Filter.Model;
+
+public class HostPermission
 {
-    public class HostPermission
-    {
-        public bool PlayerWinLimitManagement { get; set; }
+    public bool PlayerWinLimitManagement { get; set; }
 
-        public bool CurrencyWinLimitSetting { get; set; }
+    public bool CurrencyWinLimitSetting { get; set; }
 
-        public bool WinLimitMonitor { get; set; }
-    }
+    public bool WinLimitMonitor { get; set; }
 }

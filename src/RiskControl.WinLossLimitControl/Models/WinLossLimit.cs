@@ -1,15 +1,14 @@
-﻿namespace RiskControl.WinLossLimitControl.Models
+﻿namespace RiskControl.WinLossLimitControl.Models;
+
+public interface WinLossLimit
 {
-    public interface WinLossLimit
-    {
-        decimal BlackLimit { get; set; }
+    decimal BlackLimit { get; set; }
 
-        decimal GreyLimit { get; set; }
+    decimal GreyLimit { get; set; }
 
-        decimal OrangeLimit { get; set; }
+    decimal OrangeLimit { get; set; }
 
-        decimal YellowLimit { get; set; }
+    decimal YellowLimit { get; set; }
 
-        decimal RedLimit { get; set; }
-    }
+    decimal RedLimit { get; set; }
 }

@@ -1,11 +1,10 @@
-﻿namespace RiskControl.NonSportsGamesStatistics.Model
+﻿namespace RiskControl.NonSportsGamesStatistics.Model;
+
+public class DailyViewStatisticsModel : StatisticModel
 {
-    public class DailyViewStatisticsModel : StatisticModel
-    {
-        public int NoOfPlayers { get; set; }
+    public int NoOfPlayers { get; set; }
 
-        public string ReportBy { get; set; }
+    public string ReportBy { get; set; }
 
-        public string ReportById { get; set; }
-    }
+    public string ReportById { get; set; }
 }

@@ -5,25 +5,24 @@ using RiskControl.NonSportsGamesStatistics.Filter.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RiskControl.NonSportsGamesStatistics.Filter
+namespace RiskControl.NonSportsGamesStatistics.Filter;
+
+[ApiController]
+[Route("NonSportsGamesStatistics/Product")]
+public class ProductController : ControllerBase
 {
-    [ApiController]
-    [Route("NonSportsGamesStatistics/Product")]
-    public class ProductController : ControllerBase
+    private readonly IDynamicRepository repository;
+
+    public ProductController(IDynamicRepository repository)
     {
-        private readonly IDynamicRepository repository;
+        this.repository = repository;
+    }
 
-        public ProductController(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-
-        [Route("Query")]
-        [HttpGet]
-        public async Task<List<ProductModel>> Query()
-        {
-            var criteria = new ProductCriteria();
-            return await repository.FetchAsync<ProductModel>(criteria).ConfigureAwait(false) as List<ProductModel>;
-        }
+    [Route("Query")]
+    [HttpGet]
+    public async Task<List<ProductModel>> Query()
+    {
+        var criteria = new ProductCriteria();
+        return await repository.FetchAsync<ProductModel>(criteria).ConfigureAwait(false) as List<ProductModel>;
     }
 }

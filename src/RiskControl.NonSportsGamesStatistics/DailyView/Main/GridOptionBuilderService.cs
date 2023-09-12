@@ -5,61 +5,60 @@ using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.DailyView.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 
-namespace RiskControl.NonSportsGamesStatistics.DailyView.Main
+namespace RiskControl.NonSportsGamesStatistics.DailyView.Main;
+
+public class GridOptionBuilderServiceImp<TQuery> : GridOptionBuilderService<DailyViewReportModel, TQuery>
+    where TQuery: BaseStatisticQueryModel
 {
-    public class GridOptionBuilderServiceImp<TQuery> : GridOptionBuilderService<DailyViewReportModel, TQuery>
-        where TQuery: BaseStatisticQueryModel
+    private readonly GridOptionDataRowBuilderService gridDataRowBuilderService;
+    private readonly GridOptionRemoveColumnService gridOptionRemoveColumnService;
+    private readonly GridOptionHeaderBuilderService headerBuilderService;
+
+    public GridOptionBuilderServiceImp(
+        GridOptionDataRowBuilderService gridDataRowBuilderService,
+        GridOptionHeaderBuilderService headerBuilderService,
+        GridOptionRemoveColumnService gridOptionRemoveColumnService)
     {
-        private readonly GridOptionDataRowBuilderService gridDataRowBuilderService;
-        private readonly GridOptionRemoveColumnService gridOptionRemoveColumnService;
-        private readonly GridOptionHeaderBuilderService headerBuilderService;
+        this.gridDataRowBuilderService = gridDataRowBuilderService;
+        this.headerBuilderService = headerBuilderService;
+        this.gridOptionRemoveColumnService = gridOptionRemoveColumnService;
+    }
 
-        public GridOptionBuilderServiceImp(
-            GridOptionDataRowBuilderService gridDataRowBuilderService,
-            GridOptionHeaderBuilderService headerBuilderService,
-            GridOptionRemoveColumnService gridOptionRemoveColumnService)
+    public GridOptions BuildGridOptions(DailyViewReportModel statistics, TQuery queryModel)
+    {
+        var gridOptions = new GridOptions
         {
-            this.gridDataRowBuilderService = gridDataRowBuilderService;
-            this.headerBuilderService = headerBuilderService;
-            this.gridOptionRemoveColumnService = gridOptionRemoveColumnService;
+            ShowTitle = true,
+            TitleType = TitleType.TwoLineBlue,
+            TitleInfoText = queryModel.Title,
+            BodyRows = BuildBodyRows(statistics.Statistics, queryModel.ViewByInteger),
+            FooterRows = BuildFooter(statistics.GrandTotal, queryModel.ViewByInteger),
+            Columns = headerBuilderService.BuildHeaderColumns(queryModel),
+            ShowFooter = true,
+            ShowHighlightRow = false,
+            ShowDistinctRow = false
+        };
+
+        gridOptions = gridOptionRemoveColumnService.RemoveColumn(gridOptions, queryModel.RemovalColumns);
+
+        return gridOptions;
+    }
+
+    private List<GridDataRow> BuildBodyRows(List<DailyViewGroupStatisticsModel> statistics, bool viewByInteger)
+    {
+        var dataRows = new List<GridDataRow>();
+        foreach (var item in statistics)
+        {
+            var groupDataRow = gridDataRowBuilderService.BuildDailyViewGroupDataRow(item, viewByInteger);
+            dataRows.AddRange(groupDataRow);
         }
 
-        public GridOptions BuildGridOptions(DailyViewReportModel statistics, TQuery queryModel)
-        {
-            var gridOptions = new GridOptions
-            {
-                ShowTitle = true,
-                TitleType = TitleType.TwoLineBlue,
-                TitleInfoText = queryModel.Title,
-                BodyRows = BuildBodyRows(statistics.Statistics, queryModel.ViewByInteger),
-                FooterRows = BuildFooter(statistics.GrandTotal, queryModel.ViewByInteger),
-                Columns = headerBuilderService.BuildHeaderColumns(queryModel),
-                ShowFooter = true,
-                ShowHighlightRow = false,
-                ShowDistinctRow = false
-            };
+        return dataRows;
+    }
 
-            gridOptions = gridOptionRemoveColumnService.RemoveColumn(gridOptions, queryModel.RemovalColumns);
-
-            return gridOptions;
-        }
-
-        private List<GridDataRow> BuildBodyRows(List<DailyViewGroupStatisticsModel> statistics, bool viewByInteger)
-        {
-            var dataRows = new List<GridDataRow>();
-            foreach (var item in statistics)
-            {
-                var groupDataRow = gridDataRowBuilderService.BuildDailyViewGroupDataRow(item, viewByInteger);
-                dataRows.AddRange(groupDataRow);
-            }
-
-            return dataRows;
-        }
-
-        private List<GridDataRow> BuildFooter(DailyViewStatisticsModel grandTotal, bool viewByInteger)
-        {
-            var dataRow = gridDataRowBuilderService.BuildFullColumnDataRow(grandTotal, HAlignment.Right, viewByInteger);
-            return new List<GridDataRow> { dataRow };
-        }
+    private List<GridDataRow> BuildFooter(DailyViewStatisticsModel grandTotal, bool viewByInteger)
+    {
+        var dataRow = gridDataRowBuilderService.BuildFullColumnDataRow(grandTotal, HAlignment.Right, viewByInteger);
+        return new List<GridDataRow> { dataRow };
     }
 }

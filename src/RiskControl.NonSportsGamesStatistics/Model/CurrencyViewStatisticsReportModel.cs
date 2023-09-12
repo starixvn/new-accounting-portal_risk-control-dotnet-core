@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace RiskControl.NonSportsGamesStatistics.Model
-{
-    public class CurrencyViewStatisticsReportModel
-    {
-        public List<DailyViewStatisticsModel> Statistics { get; set; } = new();
+namespace RiskControl.NonSportsGamesStatistics.Model;
 
-        public DailyViewStatisticsModel GrandTotal { get; set; } = new();
-    }
+public class CurrencyViewStatisticsReportModel
+{
+    public List<DailyViewStatisticsModel> Statistics { get; set; } = new();
+
+    public DailyViewStatisticsModel GrandTotal { get; set; } = new();
 }

@@ -9,31 +9,30 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.CurrencySettings.Update
+namespace RiskControl.WinLossLimitControl.UnitTests.CurrencySettings.Update;
+
+public class UpdateInactiveSiteHandlerUnitTests
 {
-    public class UpdateInactiveSiteHandlerUnitTests
+    [Fact]
+    public async Task Handle_Always_CallExecuteAsyncFromRepositoryTwoTime()
     {
-        [Fact]
-        public async Task Handle_Always_CallExecuteAsyncFromRepositoryTwoTime()
+        // Arrange
+        var settings = TestDataProvider.Load<IEnumerable<UpdateInactiveSiteModel>>("update-inactive-site-model");
+        var request = new UpdateInactiveSiteRequest { Settings = settings };
+
+        var repository = Substitute.For<IDynamicRepository>();
+        repository.ExecuteAsync(Arg.Compat.Any<UpdateInactiveSiteCriteria>()).Returns(0);
+
+        var mapper = new MapperConfiguration(cf =>
         {
-            // Arrange
-            var settings = TestDataProvider.Load<IEnumerable<UpdateInactiveSiteModel>>("update-inactive-site-model");
-            var request = new UpdateInactiveSiteRequest { Settings = settings };
+            cf.CreateMap<UpdateInactiveSiteModel, UpdateInactiveSiteCriteria>();
+        }).CreateMapper();
 
-            var repository = Substitute.For<IDynamicRepository>();
-            repository.ExecuteAsync(Arg.Compat.Any<UpdateInactiveSiteCriteria>()).Returns(0);
+        // Act
+        var handle = new UpdateInactiveSiteHandler(repository, mapper);
+        await handle.Handle(request, new CancellationToken());
 
-            var mapper = new MapperConfiguration(cf =>
-            {
-                cf.CreateMap<UpdateInactiveSiteModel, UpdateInactiveSiteCriteria>();
-            }).CreateMapper();
-
-            // Act
-            var handle = new UpdateInactiveSiteHandler(repository, mapper);
-            await handle.Handle(request, new CancellationToken());
-
-            // Assert
-            await repository.Received(2).ExecuteAsync(Arg.Compat.Any<UpdateInactiveSiteCriteria>());
-        }
+        // Assert
+        await repository.Received(2).ExecuteAsync(Arg.Compat.Any<UpdateInactiveSiteCriteria>(), Arg.Compat.Any<CancellationToken>());
     }
 }

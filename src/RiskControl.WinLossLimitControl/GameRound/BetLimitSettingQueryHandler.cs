@@ -9,26 +9,25 @@ using RiskControl.WinLossLimitControl.GameRound.Criteria;
 using RiskControl.WinLossLimitControl.GameRound.Model;
 using RiskControl.WinLossLimitControl.GameRound.Request;
 
-namespace RiskControl.WinLossLimitControl.GameRound
+namespace RiskControl.WinLossLimitControl.GameRound;
+
+public class BetLimitSettingQueryHandler : IRequestHandler<BetLimitSettingQueryRequest, List<BetLimitSettingModel>>
 {
-    public class BetLimitSettingQueryHandler : IRequestHandler<BetLimitSettingQueryRequest, List<BetLimitSettingModel>>
+    private readonly IDynamicRepository dynamicRepository;
+
+    private readonly IMapper mapper;
+
+    public BetLimitSettingQueryHandler(IDynamicRepository dynamicRepository, IMapper mapper)
     {
-        private readonly IDynamicRepository dynamicRepository;
+        this.dynamicRepository = dynamicRepository;
+        this.mapper = mapper;
+    }
 
-        private readonly IMapper mapper;
+    public async Task<List<BetLimitSettingModel>> Handle(BetLimitSettingQueryRequest request, CancellationToken cancellationToken)
+    {
+        var criteria = mapper.Map<BetLimitSettingQueryCriteria>(request);
 
-        public BetLimitSettingQueryHandler(IDynamicRepository dynamicRepository, IMapper mapper)
-        {
-            this.dynamicRepository = dynamicRepository;
-            this.mapper = mapper;
-        }
-
-        public async Task<List<BetLimitSettingModel>> Handle(BetLimitSettingQueryRequest request, CancellationToken cancellationToken)
-        {
-            var criteria = mapper.Map<BetLimitSettingQueryCriteria>(request);
-
-            var models = (await dynamicRepository.FetchAsync<BetLimitSettingModel>(criteria)).ToList();
-            return models;
-        }
+        var models = (await dynamicRepository.FetchAsync<BetLimitSettingModel>(criteria, cancellationToken)).ToList();
+        return models;
     }
 }

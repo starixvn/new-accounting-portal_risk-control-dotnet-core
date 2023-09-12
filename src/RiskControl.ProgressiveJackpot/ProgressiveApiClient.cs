@@ -2,32 +2,31 @@
 using Olympus.WebApiClient;
 using RiskControl.ProgressiveJackpot.ApiModel;
 
-namespace RiskControl.ProgressiveJackpot
+namespace RiskControl.ProgressiveJackpot;
+
+public interface ProgressiveApiClient
 {
-    public interface ProgressiveApiClient
+    Task<T> PostJson<T>(string request, object postData);
+}
+
+public class ProgressiveApiClientImp : ProgressiveApiClient
+{
+    private readonly RichHttpClient richHttpClient;
+
+    public ProgressiveApiClientImp(RichHttpClient richHttpClient)
     {
-        Task<T> PostJson<T>(string request, object postData);
+        this.richHttpClient = richHttpClient;
     }
 
-    public class ProgressiveApiClientImp : ProgressiveApiClient
+    public async Task<T> PostJson<T>(string request, object postData)
     {
-        private readonly RichHttpClient richHttpClient;
-
-        public ProgressiveApiClientImp(RichHttpClient richHttpClient)
+        var apiResult = await richHttpClient.PostJson<ApiResult<T>>(request, postData).ConfigureAwait(false);
+        if (apiResult.Result.ErrorCode != 0)
         {
-            this.richHttpClient = richHttpClient;
+            throw new ApiException(apiResult.Result.ErrorDescription);
         }
 
-        public async Task<T> PostJson<T>(string request, object postData)
-        {
-            var apiResult = await richHttpClient.PostJson<ApiResult<T>>(request, postData).ConfigureAwait(false);
-            if (apiResult.Result.ErrorCode != 0)
-            {
-                throw new ApiException(apiResult.Result.ErrorDescription);
-            }
-
-            return apiResult.Content;
-        }
-
+        return apiResult.Content;
     }
+
 }

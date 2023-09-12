@@ -4,27 +4,26 @@ using Microsoft.AspNetCore.Mvc;
 using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.UserNameView.GrandTotal.History
+namespace RiskControl.NonSportsGamesStatistics.UserNameView.GrandTotal.History;
+
+[Route("NonSportsGamesStatistics/UserNameViewGrandTotalHistory")]
+[ValidationActionFilter]
+public class UserNameViewGrandTotalHistoryModeController : BaseController<QueryModel>
 {
-    [Route("NonSportsGamesStatistics/UserNameViewGrandTotalHistory")]
-    [ValidationActionFilter]
-    public class UserNameViewGrandTotalHistoryModeController : BaseController<QueryModel>
+    public UserNameViewGrandTotalHistoryModeController(IMediator mediator) : base(mediator)
     {
-        public UserNameViewGrandTotalHistoryModeController(IMediator mediator) : base(mediator)
-        {
-        }
+    }
 
-        [HttpPost, Route("Query")]
-        public override async Task<IActionResult> Query(QueryModel queryModel)
-        {
-            return await base.Query(queryModel).ConfigureAwait(false);
-        }
+    [HttpPost, Route("Query")]
+    public override async Task<IActionResult> Query(QueryModel queryModel)
+    {
+        return await base.Query(queryModel).ConfigureAwait(false);
+    }
 
-        [HttpPost, Route("Excel")]
-        public async Task<IActionResult> Excel(QueryModel queryModel)
-        {
-            var sheetName = $"{queryModel.ReportBy} Game Statistic";
-            return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
-        }
+    [HttpPost, Route("Excel")]
+    public async Task<IActionResult> Excel(QueryModel queryModel)
+    {
+        var sheetName = $"{queryModel.ReportBy} Game Statistic";
+        return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
     }
 }

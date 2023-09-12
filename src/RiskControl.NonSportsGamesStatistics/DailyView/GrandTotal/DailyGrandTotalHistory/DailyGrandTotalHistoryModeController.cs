@@ -4,26 +4,25 @@ using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using System.Threading.Tasks;
 
-namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.DailyGrandTotalHistory
+namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.DailyGrandTotalHistory;
+
+[Route("NonSportsGamesStatistics/DailyGrandTotalHistory")]
+[ValidationActionFilter]
+public class DailyGrandTotalHistoryModeController : BaseController<QueryModel>
 {
-    [Route("NonSportsGamesStatistics/DailyGrandTotalHistory")]
-    [ValidationActionFilter]
-    public class DailyGrandTotalHistoryModeController : BaseController<QueryModel>
+    public DailyGrandTotalHistoryModeController(IMediator mediator) : base(mediator)
     {
-        public DailyGrandTotalHistoryModeController(IMediator mediator) : base(mediator)
-        {
-        }
+    }
 
-        [HttpPost, Route("Query")]
-        public override async Task<IActionResult> Query(QueryModel queryModel)
-        {
-            return await base.Query(queryModel).ConfigureAwait(false);
-        }
+    [HttpPost, Route("Query")]
+    public override async Task<IActionResult> Query(QueryModel queryModel)
+    {
+        return await base.Query(queryModel).ConfigureAwait(false);
+    }
 
-        [HttpPost, Route("Excel")]
-        public async Task<IActionResult> Excel(QueryModel queryModel)
-        {
-            return await base.Excel(queryModel, "Grand Total by Currency").ConfigureAwait(false);
-        }
+    [HttpPost, Route("Excel")]
+    public async Task<IActionResult> Excel(QueryModel queryModel)
+    {
+        return await base.Excel(queryModel, "Grand Total by Currency").ConfigureAwait(false);
     }
 }

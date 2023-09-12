@@ -2,14 +2,13 @@
 using RiskControl.NonSportsGamesStatistics.SpecificMember.Common;
 using AssociatedAccount = RiskControl.NonSportsGamesStatistics.SpecificMember.AssociatedAccount;
 
-namespace RiskControl.Sites.AutoMapperProfiles.NonSports
+namespace RiskControl.Sites.AutoMapperProfiles.NonSports;
+
+public class AssociatedAccountProfile : Profile
 {
-    public class AssociatedAccountProfile : Profile
+    public AssociatedAccountProfile()
     {
-        public AssociatedAccountProfile()
-        {
-            CreateMap<AssociatedAccount.Criteria, UsernameHistoryCriteria>();
-            CreateMap<AssociatedAccount.Criteria, UsernameNormalCriteria>();
-        }
+        CreateMap<AssociatedAccount.Criteria, UsernameHistoryCriteria>();
+        CreateMap<AssociatedAccount.Criteria, UsernameNormalCriteria>();
     }
 }

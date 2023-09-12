@@ -1,11 +1,10 @@
-﻿namespace RiskControl.WinLossLimitControl.ManagedSettingGroup.Search
+﻿namespace RiskControl.WinLossLimitControl.ManagedSettingGroup.Search;
+
+public class UnassignedBettypeModel
 {
-    public class UnassignedBettypeModel
-    {
-        public int Bettype { get; set; }
+    public int Bettype { get; set; }
 
-        public string Typenamee { get; set; }
+    public string Typenamee { get; set; }
 
-        public bool Selected { get; set; }
-    }
+    public bool Selected { get; set; }
 }

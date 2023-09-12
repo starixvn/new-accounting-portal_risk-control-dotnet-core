@@ -1,9 +1,8 @@
 ﻿using RiskControl.NonSportsGamesStatistics.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.SpecificMember.GrandTotal.CasinoProduct
+namespace RiskControl.NonSportsGamesStatistics.SpecificMember.GrandTotal.CasinoProduct;
+
+public class NormalCriteria : BaseNormalCriteria
 {
-    public class NormalCriteria : BaseNormalCriteria
-    {
-        public int CasinoType { get; set; }
-    }
+    public int CasinoType { get; set; }
 }

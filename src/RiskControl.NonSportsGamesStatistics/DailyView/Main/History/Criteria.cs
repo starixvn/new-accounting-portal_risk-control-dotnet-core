@@ -1,16 +1,15 @@
 ﻿using System;
 using RiskControl.NonSportsGamesStatistics.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.DailyView.Main.History
+namespace RiskControl.NonSportsGamesStatistics.DailyView.Main.History;
+
+public class Criteria : BaseStatisticCriteria
 {
-    public class Criteria : BaseStatisticCriteria
-    {
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+    public DateTime ToDate { get; set; }
 
-        public bool IsDrillDown { get; set; }
+    public bool IsDrillDown { get; set; }
 
-        public bool IsGrandTotal { get; set; }
-    }
+    public bool IsGrandTotal { get; set; }
 }

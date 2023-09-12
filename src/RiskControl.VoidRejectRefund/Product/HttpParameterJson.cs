@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using RiskControl.VoidRejectRefund.Common;
 
-namespace RiskControl.VoidRejectRefund.Product
+namespace RiskControl.VoidRejectRefund.Product;
+
+public class HttpParameterJson : HttpParameterJsonBase, IRequest<ProductModel>
 {
-    public class HttpParameterJson : HttpParameterJsonBase, IRequest<ProductModel>
-    {
-    }
 }

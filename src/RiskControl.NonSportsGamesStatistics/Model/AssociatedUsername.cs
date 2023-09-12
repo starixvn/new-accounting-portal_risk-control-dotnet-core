@@ -1,7 +1,6 @@
-﻿namespace RiskControl.NonSportsGamesStatistics.Model
+﻿namespace RiskControl.NonSportsGamesStatistics.Model;
+
+public class AssociatedUsername
 {
-    public class AssociatedUsername
-    {
-        public string Username { get; set; }
-    }
+    public string Username { get; set; }
 }

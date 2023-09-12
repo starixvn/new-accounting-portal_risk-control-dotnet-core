@@ -8,56 +8,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RiskControl.NonSportsGamesStatistics.Filter
+namespace RiskControl.NonSportsGamesStatistics.Filter;
+
+[ApiController]
+public class UsernameController : ControllerBase
 {
-    [ApiController]
-    public class UsernameController : ControllerBase
+    private readonly INapSession session;
+
+    private readonly IDynamicRepository repository;
+
+    private readonly IMapper mapper;
+
+    public UsernameController(INapSession session, IDynamicRepository repository, IMapper mapper)
     {
-        private readonly INapSession session;
+        this.repository = repository;
+        this.session = session;
+        this.mapper = mapper;
+    }
 
-        private readonly IDynamicRepository repository;
-
-        private readonly IMapper mapper;
-
-        public UsernameController(INapSession session, IDynamicRepository repository, IMapper mapper)
+    [Route("state-api/NonSportsGamesStatistics/Filter/UserName/Suggest")]
+    [HttpPost]
+    public async Task<IEnumerable<string>> Suggest(UsernameSuggestionQueryModel queryModel)
+    {
+        var criteria = new UsernameSuggestionCriteria
         {
-            this.repository = repository;
-            this.session = session;
-            this.mapper = mapper;
-        }
+            CustId = session.UserId,
+            UserName = queryModel.UserName,
+            System = "Accounting",
+            IsAllowFISearch = true,
+            RoleId = queryModel.RoleId
+        };
 
-        [Route("state-api/NonSportsGamesStatistics/Filter/UserName/Suggest")]
-        [HttpPost]
-        public async Task<IEnumerable<string>> Suggest(UsernameSuggestionQueryModel queryModel)
-        {
-            var criteria = new UsernameSuggestionCriteria
-            {
-                CustId = session.UserId,
-                UserName = queryModel.UserName,
-                System = "Accounting",
-                IsAllowFISearch = true,
-                RoleId = queryModel.RoleId
-            };
+        return await repository.FetchAsync<string>(criteria).ConfigureAwait(false);
+    }
 
-            return await repository.FetchAsync<string>(criteria).ConfigureAwait(false);
-        }
+    [Route("api/NonSportsGamesStatistics/Filter/UserName/GetValidUserNames")]
+    [HttpPost]
+    public async Task<string> GetValidUserNames(UsernameValidationQueryModel queryModel)
+    {
+        var criteria = mapper.Map<ValidUsernameCriteria>(queryModel);
+        var userNames = await repository.FetchAsync<string>(criteria).ConfigureAwait(false);
+        return userNames.FirstOrDefault();
+    }
 
-        [Route("api/NonSportsGamesStatistics/Filter/UserName/GetValidUserNames")]
-        [HttpPost]
-        public async Task<string> GetValidUserNames(UsernameValidationQueryModel queryModel)
-        {
-            var criteria = mapper.Map<ValidUsernameCriteria>(queryModel);
-            var userNames = await repository.FetchAsync<string>(criteria).ConfigureAwait(false);
-            return userNames.FirstOrDefault();
-        }
-
-        [Route("api/NonSportsGamesStatistics/Filter/UserName/ValidateUsername")]
-        [HttpPost]
-        public async Task<List<UsernameValidationModel>> ValidateUsername(ValidationUsernameQueryModel queryModel)
-        {
-            var criteria = mapper.Map<ValidationUsernameCriteria>(queryModel);
-            var usernames = await repository.FetchAsync<UsernameValidationModel>(criteria).ConfigureAwait(false);
-            return usernames.Where(x => x.IsCust).ToList();
-        }
+    [Route("api/NonSportsGamesStatistics/Filter/UserName/ValidateUsername")]
+    [HttpPost]
+    public async Task<List<UsernameValidationModel>> ValidateUsername(ValidationUsernameQueryModel queryModel)
+    {
+        var criteria = mapper.Map<ValidationUsernameCriteria>(queryModel);
+        var usernames = await repository.FetchAsync<UsernameValidationModel>(criteria).ConfigureAwait(false);
+        return usernames.Where(x => x.IsCust).ToList();
     }
 }

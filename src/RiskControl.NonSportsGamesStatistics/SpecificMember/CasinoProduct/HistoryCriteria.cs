@@ -1,9 +1,8 @@
 ﻿using RiskControl.NonSportsGamesStatistics.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.SpecificMember.CasinoProduct
+namespace RiskControl.NonSportsGamesStatistics.SpecificMember.CasinoProduct;
+
+public class HistoryCriteria : BaseHistoryCriteria
 {
-    public class HistoryCriteria : BaseHistoryCriteria
-    {
-        public int CasinoType { get; set; }
-    }
+    public int CasinoType { get; set; }
 }

@@ -1,13 +1,12 @@
 ﻿using Fanex.Data.Repository;
 
-namespace RiskControl.WinLossLimitControl.Filter.Criteria
+namespace RiskControl.WinLossLimitControl.Filter.Criteria;
+
+public class GetGroupCriteria : CriteriaBase
 {
-    public class GetGroupCriteria : CriteriaBase
-    {
-        public int ProductId { get; set; }
+    public int ProductId { get; set; }
 
-        public override string GetSettingKey() => "NAP_WinLimit_GroupByProductSel";
+    public override string GetSettingKey() => "NAP_WinLimit_GroupByProductSel";
 
-        public override bool IsValid() => true;
-    }
+    public override bool IsValid() => true;
 }

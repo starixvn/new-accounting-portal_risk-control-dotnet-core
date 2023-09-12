@@ -4,36 +4,35 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Fanex.Data.Repository;
 
-namespace RiskControl.VoidRejectRefund.Common
+namespace RiskControl.VoidRejectRefund.Common;
+
+public interface Service
 {
-    public interface Service
+    Task<StatisticReportModel> Query(HttpParameterJsonBase message);
+}
+
+public class ServiceImp : Service
+{
+    private readonly IDynamicRepository repository;
+
+    private readonly IMapper mapper;
+
+    public ServiceImp(IDynamicRepository repository, IMapper mapper)
     {
-        Task<StatisticReportModel> Query(HttpParameterJsonBase message);
+        this.repository = repository;
+        this.mapper = mapper;
     }
 
-    public class ServiceImp : Service
+    public async Task<StatisticReportModel> Query(HttpParameterJsonBase message)
     {
-        private readonly IDynamicRepository repository;
+        var criteria = mapper.Map<Criteria>(message);
+        var statisticEntities = await repository.FetchMultipleAsync<StatisticEntity, StatisticEntity>(criteria).ConfigureAwait(false);
 
-        private readonly IMapper mapper;
-
-        public ServiceImp(IDynamicRepository repository, IMapper mapper)
+        return new StatisticReportModel
         {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
+            Statistics = mapper.Map<List<StatisticModel>>(statisticEntities.Item1),
+            GrandTotal = mapper.Map<StatisticModel>(statisticEntities.Item2.FirstOrDefault())
+        };
 
-        public async Task<StatisticReportModel> Query(HttpParameterJsonBase message)
-        {
-            var criteria = mapper.Map<Criteria>(message);
-            var statisticEntities = await repository.FetchMultipleAsync<StatisticEntity, StatisticEntity>(criteria).ConfigureAwait(false);
-
-            return new StatisticReportModel
-            {
-                Statistics = mapper.Map<List<StatisticModel>>(statisticEntities.Item1),
-                GrandTotal = mapper.Map<StatisticModel>(statisticEntities.Item2.FirstOrDefault())
-            };
-
-        }
     }
 }

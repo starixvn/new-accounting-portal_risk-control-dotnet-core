@@ -3,42 +3,41 @@ using System.Linq;
 using RiskControl.Core.Sort;
 using RiskControl.VoidRejectRefund.Common;
 
-namespace RiskControl.VoidRejectRefund.Product
+namespace RiskControl.VoidRejectRefund.Product;
+
+public class ProductSortingServiceImp : SortingService<ProductModel>
 {
-    public class ProductSortingServiceImp : SortingService<ProductModel>
+    public ProductModel SortData(ProductModel reportModel, string sortDirection, string sortColumnName)
     {
-        public ProductModel SortData(ProductModel reportModel, string sortDirection, string sortColumnName)
+        foreach (var productStatistic in reportModel.ProductStatistics)
         {
-            foreach (var productStatistic in reportModel.ProductStatistics)
-            {
-                SortStatisticsForPerChildGroup(productStatistic, sortDirection, sortColumnName);
-                SortStatisticsForChildGroups(productStatistic, sortDirection, sortColumnName);
-            }
-
-            return reportModel;
+            SortStatisticsForPerChildGroup(productStatistic, sortDirection, sortColumnName);
+            SortStatisticsForChildGroups(productStatistic, sortDirection, sortColumnName);
         }
 
-        private static void SortStatisticsForPerChildGroup(ProductStatistic productStatistic, string sortDirection, string sortColumnName)
-        {
-            foreach (var row in productStatistic.LeagueSportBettypes)
-            {
-                Sort.SortByProperty(row.Bettypes, sortDirection, sortColumnName);
-            }
-        }
+        return reportModel;
+    }
 
-        private static void SortStatisticsForChildGroups(ProductStatistic productStatistic, string sortDirection, string sortColumnName)
+    private static void SortStatisticsForPerChildGroup(ProductStatistic productStatistic, string sortDirection, string sortColumnName)
+    {
+        foreach (var row in productStatistic.LeagueSportBettypes)
         {
-            var propInfo = typeof(ProductLeagueSportBettypeStatistic).GetProperty(sortColumnName);
-            var isAsc = string.Equals(sortDirection, SortingInformation.Ascending, StringComparison.OrdinalIgnoreCase);
-            productStatistic.LeagueSportBettypes = isAsc ?
+            Sort.SortByProperty(row.Bettypes, sortDirection, sortColumnName);
+        }
+    }
+
+    private static void SortStatisticsForChildGroups(ProductStatistic productStatistic, string sortDirection, string sortColumnName)
+    {
+        var propInfo = typeof(ProductLeagueSportBettypeStatistic).GetProperty(sortColumnName);
+        var isAsc = string.Equals(sortDirection, SortingInformation.Ascending, StringComparison.OrdinalIgnoreCase);
+        productStatistic.LeagueSportBettypes = isAsc ?
             productStatistic
                 .LeagueSportBettypes
                 .OrderBy(s => propInfo.GetValue(s.Total, null))
                 .ToList() :
             productStatistic
-                 .LeagueSportBettypes
+                .LeagueSportBettypes
                 .OrderByDescending(s => propInfo.GetValue(s.Total, null))
                 .ToList();
-        }
     }
 }

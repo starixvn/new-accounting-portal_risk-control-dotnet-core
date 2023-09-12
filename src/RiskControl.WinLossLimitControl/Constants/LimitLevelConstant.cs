@@ -1,25 +1,24 @@
-﻿namespace RiskControl.WinLossLimitControl.Constants
+﻿namespace RiskControl.WinLossLimitControl.Constants;
+
+public static class LimitLevelConstant
 {
-    public static class LimitLevelConstant
+    public const int OrangeLevel = 1;
+
+    public const int YellowLevel = 2;
+
+    public const int RedLevel = 3;
+
+    public const int GreyLevel = 101;
+
+    public const int BlackLevel = 102;
+
+    public static bool IsWinLimitLevel(int level)
     {
-        public const int OrangeLevel = 1;
+        return level == OrangeLevel || level == YellowLevel || level == RedLevel;
+    }
 
-        public const int YellowLevel = 2;
-
-        public const int RedLevel = 3;
-
-        public const int GreyLevel = 101;
-
-        public const int BlackLevel = 102;
-
-        public static bool IsWinLimitLevel(int level)
-        {
-            return level == OrangeLevel || level == YellowLevel || level == RedLevel;
-        }
-
-        public static bool IsLossLimitLevel(int level)
-        {
-            return level == GreyLevel || level == BlackLevel;
-        }
+    public static bool IsLossLimitLevel(int level)
+    {
+        return level == GreyLevel || level == BlackLevel;
     }
 }

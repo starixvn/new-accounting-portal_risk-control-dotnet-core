@@ -1,11 +1,10 @@
-﻿namespace RiskControl.ProgressiveJackpot.ApiModel
+﻿namespace RiskControl.ProgressiveJackpot.ApiModel;
+
+public class ResultDescription
 {
-    public class ResultDescription
-    {
-        public string Seq { get; set; }
+    public string Seq { get; set; }
 
-        public int ErrorCode { get; set; }
+    public int ErrorCode { get; set; }
 
-        public string ErrorDescription { get; set; }
-    }
+    public string ErrorDescription { get; set; }
 }

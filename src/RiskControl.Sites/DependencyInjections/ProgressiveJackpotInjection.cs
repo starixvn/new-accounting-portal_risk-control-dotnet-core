@@ -2,15 +2,14 @@
 using Olympus.WebApiClient;
 using RiskControl.ProgressiveJackpot;
 
-namespace RiskControl.Sites.DependencyInjections
+namespace RiskControl.Sites.DependencyInjections;
+
+public static class ProgressiveJackpotInjection
 {
-    public static class ProgressiveJackpotInjection
+    public static void RegisterProgressiveJackpotService(this IServiceCollection service)
     {
-        public static void RegisterProgressiveJackpotService(this IServiceCollection service)
-        {
-            service.AddTransient<RichHttpClient, RichHttpClientImp>();
-            service.AddTransient<ProgressiveApiClient, ProgressiveApiClientImp>();
-            service.AddTransient<ExcelBuilder, ExcelBuilderImp>();
-        }
+        service.AddTransient<RichHttpClient, RichHttpClientImp>();
+        service.AddTransient<ProgressiveApiClient, ProgressiveApiClientImp>();
+        service.AddTransient<ExcelBuilder, ExcelBuilderImp>();
     }
 }

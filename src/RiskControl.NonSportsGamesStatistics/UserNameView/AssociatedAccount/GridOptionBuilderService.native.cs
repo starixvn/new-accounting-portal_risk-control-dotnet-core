@@ -7,8 +7,8 @@ using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.UserNameView.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount
-{
+    namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount; 
+
     public class GridOptionBuilderServiceImp<TQuery> : GridOptionBuilderService<UserNameViewReportModel, TQuery>
         where TQuery: BaseStatisticQueryModel
     {
@@ -113,4 +113,3 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount
             return dataRow;
         }
     }
-}

@@ -1,7 +1,6 @@
-﻿namespace RiskControl.ProgressiveJackpot.ApiModel
+﻿namespace RiskControl.ProgressiveJackpot.ApiModel;
+
+public class EnglishName
 {
-    public class EnglishName
-    {
-        public string EN { get; set; }
-    }
+    public string EN { get; set; }
 }

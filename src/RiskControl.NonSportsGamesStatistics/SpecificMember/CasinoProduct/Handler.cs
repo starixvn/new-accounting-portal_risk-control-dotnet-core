@@ -5,20 +5,19 @@ using MediatR;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 
-namespace RiskControl.NonSportsGamesStatistics.SpecificMember.CasinoProduct
-{
-    public class Handler : BaseHandlerWithSorting<QueryModel, HistoryCriteria, DailyViewReportModel>, IRequestHandler<QueryModel, GridOptions>
-    {
-        public Handler(
-            Service<DailyViewReportModel, HistoryCriteria> service,
-            SortingService<DailyViewReportModel> sortingService,
-            GridOptionBuilderService<DailyViewReportModel, QueryModel> gridOptionService) : base(service, sortingService, gridOptionService)
-        {
-        }
+namespace RiskControl.NonSportsGamesStatistics.SpecificMember.CasinoProduct;
 
-        public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
-        {
-            return await base.Handle(request, request.ToDate).ConfigureAwait(false);
-        }
+public class Handler : BaseHandlerWithSorting<QueryModel, HistoryCriteria, DailyViewReportModel>, IRequestHandler<QueryModel, GridOptions>
+{
+    public Handler(
+        Service<DailyViewReportModel, HistoryCriteria> service,
+        SortingService<DailyViewReportModel> sortingService,
+        GridOptionBuilderService<DailyViewReportModel, QueryModel> gridOptionService) : base(service, sortingService, gridOptionService)
+    {
+    }
+
+    public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
+    {
+        return await base.Handle(request, request.ToDate).ConfigureAwait(false);
     }
 }

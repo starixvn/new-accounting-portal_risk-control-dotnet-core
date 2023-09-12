@@ -1,8 +1,7 @@
 ﻿using RiskControl.NonSportsGamesStatistics.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Monthly
+namespace RiskControl.NonSportsGamesStatistics.SpecificMember.Monthly;
+
+public class NormalCriteria : BaseNormalCriteria
 {
-    public class NormalCriteria : BaseNormalCriteria
-    {
-    }
 }

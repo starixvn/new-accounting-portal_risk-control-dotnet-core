@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using NSubstitute;
 using RiskControl.UnitTest.Core.TestUtilities;
-using RiskControl.UnitTest.Core.xUnit.Asserts.Compare;
 using RiskControl.WinLossLimitControl.GameRound;
 using RiskControl.WinLossLimitControl.GameRound.Criteria;
 using RiskControl.WinLossLimitControl.GameRound.Model;
@@ -11,31 +10,32 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.GameRound
+namespace RiskControl.WinLossLimitControl.UnitTests.GameRound;
+
+using Xunit.Asserts.Compare;
+
+public class BetLimitMonitorQueryHandlerUnitTests
 {
-    public class BetLimitMonitorQueryHandlerUnitTests
+    [Fact]
+    public async Task Handle_Always_ReturnExpectedData()
     {
-        [Fact]
-        public async Task Handle_Always_ReturnExpectedData()
+        // Arrange
+        var expectedBetLimitMonitorModelList = TestDataProvider.Load<List<BetLimitMonitorModel>>("bet-limit-monitor-model");
+
+        var betLimitMonitorDataService = Substitute.For<BetLimitMonitorDataService>();
+        betLimitMonitorDataService.Query(Arg.Compat.Any<BetLimitMonitorQueryCriteria>()).Returns(expectedBetLimitMonitorModelList);
+
+        var mapper = new MapperConfiguration(mcf =>
         {
-            // Arrange
-            var expectedBetLimitMonitorModelList = TestDataProvider.Load<List<BetLimitMonitorModel>>("bet-limit-monitor-model");
+            mcf.CreateMap<BetLimitMonitorQueryRequest, BetLimitMonitorQueryCriteria>();
+        }).CreateMapper();
 
-            var betLimitMonitorDataService = Substitute.For<BetLimitMonitorDataService>();
-            betLimitMonitorDataService.Query(Arg.Compat.Any<BetLimitMonitorQueryCriteria>()).Returns(expectedBetLimitMonitorModelList);
+        var handle = new BetLimitMonitorQueryHandler(betLimitMonitorDataService, mapper);
 
-            var mapper = new MapperConfiguration(mcf =>
-            {
-                mcf.CreateMap<BetLimitMonitorQueryRequest, BetLimitMonitorQueryCriteria>();
-            }).CreateMapper();
+        // Act
+        var actualResult = await handle.Handle(new BetLimitMonitorQueryRequest(), new CancellationToken());
 
-            var handle = new BetLimitMonitorQueryHandler(betLimitMonitorDataService, mapper);
-
-            // Act
-            var actualResult = await handle.Handle(new BetLimitMonitorQueryRequest(), new CancellationToken());
-
-            // Assert
-            DeepAssert.Equal(expectedBetLimitMonitorModelList, actualResult);
-        }
+        // Assert
+        DeepAssert.Equal(expectedBetLimitMonitorModelList, actualResult);
     }
 }

@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using RiskControl.WinLossLimitControl.Models;
 
-namespace RiskControl.WinLossLimitControl.Monitor.Unblock
+namespace RiskControl.WinLossLimitControl.Monitor.Unblock;
+
+public class RequestUnblockTransfer : Request, IRequest<ExecuteResult>
 {
-    public class RequestUnblockTransfer : Request, IRequest<ExecuteResult>
-    {
-    }
 }

@@ -1,9 +1,8 @@
-﻿namespace RiskControl.WinLossLimitControl.Filter.Model
-{
-    public class Group
-    {
-        public int GroupId { get; set; }
+﻿namespace RiskControl.WinLossLimitControl.Filter.Model;
 
-        public string GroupName { get; set; }
-    }
+public class Group
+{
+    public int GroupId { get; set; }
+
+    public string GroupName { get; set; }
 }

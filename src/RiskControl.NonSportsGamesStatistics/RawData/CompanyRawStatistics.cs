@@ -1,9 +1,8 @@
 ﻿using RiskControl.NonSportsGamesStatistics.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.RawData
+namespace RiskControl.NonSportsGamesStatistics.RawData;
+
+public class CompanyRawStatistics : BaseRawStatistic
 {
-    public class CompanyRawStatistics : BaseRawStatistic
-    {
-        public bool IsDeposit { get; set; }
-    }
+    public bool IsDeposit { get; set; }
 }

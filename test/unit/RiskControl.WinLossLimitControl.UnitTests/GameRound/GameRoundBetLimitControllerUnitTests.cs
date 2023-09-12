@@ -6,88 +6,88 @@ using RiskControl.WinLossLimitControl.GameRound.Request;
 using RiskControl.WinLossLimitControl.Services;
 using System.Threading.Tasks;
 using Xunit;
-using static Fanex.NAP.Core.Business.Constant;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.GameRound
+namespace RiskControl.WinLossLimitControl.UnitTests.GameRound;
+
+using Fanex.NAP.Client.Helpers.Business;
+
+public class GameRoundBetLimitControllerUnitTests
 {
-    public class GameRoundBetLimitControllerUnitTests
+    private readonly IMediator mediator;
+
+    private readonly GameRoundBetLimitController controller;
+
+    public GameRoundBetLimitControllerUnitTests()
     {
-        private readonly IMediator mediator;
+        mediator = Substitute.For<IMediator>();
+        var authorizationService = Substitute.For<AuthorizationService>();
+        authorizationService.HasPermission(Arg.Compat.Any<string>(), Arg.Compat.Any<Constant.Policy>()).Returns(true);
+        controller = new GameRoundBetLimitController(mediator, authorizationService);
+    }
 
-        private readonly GameRoundBetLimitController controller;
+    [Fact]
+    public async Task SettingQueryAsync_Always_CallMediatorSend()
+    {
+        // Arrange
+        // Act
+        await controller.SettingQueryAsync(new BetLimitSettingQueryRequest());
 
-        public GameRoundBetLimitControllerUnitTests()
-        {
-            mediator = Substitute.For<IMediator>();
-            var authorizationService = Substitute.For<AuthorizationService>();
-            authorizationService.HasPermission(Arg.Compat.Any<string>(), Arg.Compat.Any<Policy>()).Returns(true);
-            controller = new GameRoundBetLimitController(mediator, authorizationService);
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<BetLimitSettingQueryRequest>());
+    }
 
-        [Fact]
-        public async Task SettingQueryAsync_Always_CallMediatorSend()
-        {
-            // Arrange
-            // Act
-            await controller.SettingQueryAsync(new BetLimitSettingQueryRequest());
+    [Fact]
+    public async Task SettingUpdateAsync_Always_CallMediatorSend()
+    {
+        // Arrange
+        // Act
+        await controller.SettingUpdateAsync(new BetLimitSettingUpdateRequest());
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<BetLimitSettingQueryRequest>());
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<BetLimitSettingUpdateRequest>());
+    }
 
-        [Fact]
-        public async Task SettingUpdateAsync_Always_CallMediatorSend()
-        {
-            // Arrange
-            // Act
-            await controller.SettingUpdateAsync(new BetLimitSettingUpdateRequest());
+    [Fact]
+    public async Task ProductGameType_Always_CallMediatorSend()
+    {
+        // Arrange
+        // Act
+        await controller.ProductGameType();
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<BetLimitSettingUpdateRequest>());
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<ProductGameTypeRequest>());
+    }
 
-        [Fact]
-        public async Task ProductGameType_Always_CallMediatorSend()
-        {
-            // Arrange
-            // Act
-            await controller.ProductGameType();
+    [Fact]
+    public async Task MonitorExcelAsync_Always_CallMediatorSend()
+    {
+        // Arrange
+        // Act
+        await controller.MonitorExcelAsync(new BetLimitMonitorQueryExcelRequest());
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<ProductGameTypeRequest>());
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<BetLimitMonitorQueryExcelRequest>());
+    }
 
-        [Fact]
-        public async Task MonitorExcelAsync_Always_CallMediatorSend()
-        {
-            // Arrange
-            // Act
-            await controller.MonitorExcelAsync(new BetLimitMonitorQueryExcelRequest());
+    [Fact]
+    public async Task MonitorAsync_Always_CallMediatorSend()
+    {
+        // Arrange
+        // Act
+        await controller.MonitorAsync(new BetLimitMonitorQueryRequest());
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<BetLimitMonitorQueryExcelRequest>());
-        }
+        // Assert
+        await mediator.Received().Send(Arg.Compat.Any<BetLimitMonitorQueryRequest>());
+    }
 
-        [Fact]
-        public async Task MonitorAsync_Always_CallMediatorSend()
-        {
-            // Arrange
-            // Act
-            await controller.MonitorAsync(new BetLimitMonitorQueryRequest());
+    [Fact]
+    public void HasHostPermission_Always_ReturnTrue()
+    {
+        // Arrange
+        // Act
+        var actualResult = controller.HasHostPermission() as OkObjectResult;
 
-            // Assert
-            await mediator.Received().Send(Arg.Compat.Any<BetLimitMonitorQueryRequest>());
-        }
-
-        [Fact]
-        public void HasHostPermission_Always_ReturnTrue()
-        {
-            // Arrange
-            // Act
-            var actualResult = controller.HasHostPermission() as OkObjectResult;
-
-            // Assert
-            Assert.True((bool)actualResult.Value);
-        }
+        // Assert
+        Assert.True((bool)actualResult.Value);
     }
 }

@@ -1,30 +1,30 @@
 ﻿using System.Threading.Tasks;
-using Fanex.NAP.Client.AspNetCore.Attributes;
-using Fanex.NAP.Core.Business;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.Core.Model;
 
-namespace RiskControl.WinLossLimitControl.PlayerSettings.Update
+namespace RiskControl.WinLossLimitControl.PlayerSettings.Update;
+
+using Fanex.NAP.Client.Attributes;
+using Fanex.NAP.Client.Helpers.Business;
+
+[ApiController]
+[Route("state-api/win-limit-control/player-setting")]
+public class PlayerSettingUpdateController : ControllerBase
 {
-    [ApiController]
-    [Route("state-api/win-limit-control/player-setting")]
-    public class PlayerSettingUpdateController : ControllerBase
+    private readonly IMediator mediator;
+
+    public PlayerSettingUpdateController(IMediator mediator)
     {
-        private readonly IMediator mediator;
+        this.mediator = mediator;
+    }
 
-        public PlayerSettingUpdateController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
-        [HttpPost]
-        [NapAuth(FunctionKey = FunctionKeys.PlayerWinLimitManagement, Policy = Constant.Policy.Host)]
-        [Route("Update")]
-        public async Task<IActionResult> Post(Request request)
-        {
-            var viewModel = await mediator.Send(request);
-            return Ok(viewModel);
-        }
+    [HttpPost]
+    [NapAuth(FunctionKey = FunctionKeys.PlayerWinLimitManagement, Policy = Constant.Policy.Host)]
+    [Route("Update")]
+    public async Task<IActionResult> Post(Request request)
+    {
+        var viewModel = await mediator.Send(request);
+        return Ok(viewModel);
     }
 }

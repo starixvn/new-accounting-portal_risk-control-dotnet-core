@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using RiskControl.BettingMonitoring.Models;
 
-namespace RiskControl.BettingMonitoring.Query
+namespace RiskControl.BettingMonitoring.Query;
+
+public class Message : IRequest<BettingMonitoringModel>
 {
-    public class Message : IRequest<BettingMonitoringModel>
-    {
-    }
 }

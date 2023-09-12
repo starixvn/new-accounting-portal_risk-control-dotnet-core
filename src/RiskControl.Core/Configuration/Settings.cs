@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace RiskControl.Core.Configuration
+namespace RiskControl.Core.Configuration;
+
+public static class Settings
 {
-    public static class Settings
-    {
-        public static DateTime CachedDate { get; set; }
-    }
+    public static DateTime CachedDate { get; set; }
 }

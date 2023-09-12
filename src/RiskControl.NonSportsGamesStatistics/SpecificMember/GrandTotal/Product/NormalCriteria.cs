@@ -1,8 +1,7 @@
 ﻿using RiskControl.NonSportsGamesStatistics.Common;
 
-namespace RiskControl.NonSportsGamesStatistics.SpecificMember.GrandTotal.Product
+namespace RiskControl.NonSportsGamesStatistics.SpecificMember.GrandTotal.Product;
+
+public class NormalCriteria : BaseNormalCriteria
 {
-    public class NormalCriteria : BaseNormalCriteria
-    {
-    }
 }

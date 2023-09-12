@@ -1,7 +1,6 @@
-﻿namespace RiskControl.Core.Sort
+﻿namespace RiskControl.Core.Sort;
+
+public static class SortingInformation
 {
-    public static class SortingInformation
-    {
-        public const string Ascending = "Asc";
-    }
+    public const string Ascending = "Asc";
 }

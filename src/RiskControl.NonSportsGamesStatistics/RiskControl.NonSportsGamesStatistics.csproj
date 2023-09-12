@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <CodeAnalysisRuleSet>..\..\.sonarlint\nap-riskcontrolcsharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
@@ -10,16 +10,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="11.0.1" />
-    <PackageReference Include="EPPlus" Version="6.0.3" />
-    <PackageReference Include="Epplus.Mapper" Version="1.0.0.13" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="EPPlus" Version="6.2.9" />
+    <PackageReference Include="Epplus.Mapper" Version="6.0.0" />
     <PackageReference Include="Fanex.Data.Repository" Version="4.2.2" />
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1" />
-    <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.2" />
+    <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.10" />
     <PackageReference Include="FanexExcel.AspNetCore" Version="1.0.0" />
-    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Olympus.FPSAPI.Client.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Olympus.WebApi.Attributes.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Olympus.WebApi.Epplus.AspNetCore" Version="1.0.1" />

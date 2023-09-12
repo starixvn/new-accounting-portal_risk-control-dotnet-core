@@ -9,29 +9,28 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RiskControl.WinLossLimitControl.UnitTests.CurrencySettings.Update
+namespace RiskControl.WinLossLimitControl.UnitTests.CurrencySettings.Update;
+
+public class UpdateServiceUnitTests
 {
-    public class UpdateServiceUnitTests
+    [Fact]
+    public async Task Execute_Always_CallExecuteAsyncFromRepositoryOnlyOneTime()
     {
-        [Fact]
-        public async Task Execute_Always_CallExecuteAsyncFromRepositoryOnlyOneTime()
-        {
-            // Arrange
-            var currencySettingList = TestDataProvider.Load<List<CurrencySetting>>("currency-setting");
+        // Arrange
+        var currencySettingList = TestDataProvider.Load<List<CurrencySetting>>("currency-setting");
 
-            var repository = Substitute.For<IDynamicRepository>();
-            repository.ExecuteAsync(Arg.Compat.Any<UpdateCriteria>()).Returns(0);
+        var repository = Substitute.For<IDynamicRepository>();
+        repository.ExecuteAsync(Arg.Compat.Any<UpdateCriteria>()).Returns(0);
 
-            var configuration = Substitute.For<IConfiguration>();
-            configuration["ItemsPerBatch"].Returns("200");
+        var configuration = Substitute.For<IConfiguration>();
+        configuration["ItemsPerBatch"].Returns("200");
 
-            var service = new UpdateServiceImp(repository, configuration);
+        var service = new UpdateServiceImp(repository, configuration);
 
-            // Act
-            await service.Execute(currencySettingList, new UserContext());
+        // Act
+        await service.Execute(currencySettingList, new UserContext());
 
-            // Assert
-            await repository.Received().ExecuteAsync(Arg.Compat.Any<UpdateCriteria>());
-        }
+        // Assert
+        await repository.Received().ExecuteAsync(Arg.Compat.Any<UpdateCriteria>());
     }
 }

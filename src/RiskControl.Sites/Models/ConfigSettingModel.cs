@@ -1,9 +1,8 @@
 ﻿using ONEbook.UM.Configurations;
 
-namespace RiskControl.Sites.Models
+namespace RiskControl.Sites.Models;
+
+public class ConfigSettingModel
 {
-    public class ConfigSettingModel
-    {
-        public UMClientConfiguration UMConfig { get; set; }
-    }
+    public UMClientConfiguration UMConfig { get; set; }
 }

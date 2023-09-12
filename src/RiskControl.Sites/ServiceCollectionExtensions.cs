@@ -19,31 +19,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RiskControl.Sites
+namespace RiskControl.Sites;
+
+using System.Reflection;
+using BettingMonitoring;
+using NonSportsGamesStatistics;
+using ProgressiveJackpot;
+using VoidRejectRefund;
+using WinLossLimitControl;
+
+public static class ServiceCollectionExtensions
 {
-    public static class ServiceCollectionExtensions
+    public static void RegisterFanexData(this IServiceCollection services, IConfiguration configuration)
     {
-        public static void RegisterFanexData(this IServiceCollection services, IConfiguration configuration)
-        {
-            var connections = configuration.GetSection("ConnectionStrings")
-                                   .GetChildren()
-                                   .AsEnumerable()
-                                   .ToDictionary(
-                                            x => x.Key,
-                                            y => new ConnectionConfiguration(y.Key, y.Value)
-                                    );
+        var connections = configuration.GetSection("ConnectionStrings")
+            .GetChildren()
+            .AsEnumerable()
+            .ToDictionary(
+                x => x.Key,
+                y => new ConnectionConfiguration(y.Key, y.Value)
+            );
 
-            DbSettingProviderManager
-                .StartNewSession()
-                .Use(connections)
-                .WithSqlServer()
-                .UseDefaultDbSettingProvider(configuration.GetSection("StoredProcedurePath").Value)
-                .Run();
-        }
+        DbSettingProviderManager
+            .StartNewSession()
+            .Use(connections)
+            .WithSqlServer()
+            .UseDefaultDbSettingProvider(configuration.GetSection("StoredProcedurePath").Value)
+            .Run();
+    }
 
-        public static void RegisterSentry(this IServiceCollection services, IConfiguration configuration)
-        {
-            LogManager
+    public static void RegisterSentry(this IServiceCollection services, IConfiguration configuration)
+    {
+        LogManager
             .SetDefaultLogCategory(configuration.GetSection("CategorySentryLog").Value)
             .Use(new List<ILogEngine>
             {
@@ -52,81 +59,95 @@ namespace RiskControl.Sites
                     Dsn = new Dsn(configuration.GetSection("SentryClientKey").Value)
                 })
             });
-        }
+    }
 
-        public static void RegisterRemotingRef(this IServiceCollection services, IConfiguration configuration)
-        {
-            RefDataTypeContainer.ConnectTo(new Uri(configuration["Fanex.RemotingRef.Service.Url"]))
-                                .FromApplication("Risk Controls");
-        }
+    public static void RegisterRemotingRef(this IServiceCollection services, IConfiguration configuration)
+    {
+        RefDataTypeContainer.ConnectTo(new Uri(configuration["Fanex.RemotingRef.Service.Url"]))
+            .FromApplication("Risk Controls");
+    }
 
-        private static IMapper CreateMapper
+    private static IMapper CreateMapper
+    {
+        get
         {
-            get
+            var mapperConfig = new MapperConfiguration(mc =>
             {
-                var mapperConfig = new MapperConfiguration(mc =>
-                {
-                    mc.AddProfile(new BettingMonitoringProfile());
-                    mc.AddProfile(new CommonProfile());
-                    mc.AddProfile(new CurrencyViewProfile());
-                    mc.AddProfile(new DailyViewProfile());
-                    mc.AddProfile(new HourlyProfile());
-                    mc.AddProfile(new SpecificMemberProfile());
-                    mc.AddProfile(new TopTwentyProfile());
-                    mc.AddProfile(new UserNameViewProfile());
-                    mc.AddProfile(new AssociatedAccountProfile());
-                    mc.AddProfile(new CurrencySettingProfile());
-                    mc.AddProfile(new ManagedSettingGroupProfile());
-                    mc.AddProfile(new GameRoundProfile());
-                    mc.AddProfile(new MonitorProfile());
-                    mc.AddProfile(new PlayerSettingProfile());
-                    mc.AddProfile(new VoidRejectRefundProfile());
-                });
-
-                return mapperConfig.CreateMapper();
-            }
-        }
-
-        public static void RegisterInternalServices(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.RegisterGlobalServices();
-            services.RegisterNonSportsServices();
-            services.RegisterBetMonitoringServices();
-            services.RegisterProgressiveJackpotService();
-            services.RegisterVoidRejectRefundService();
-            services.RegisterWinLimitControlServices();
-            services.AddSingleton(CreateMapper);
-            OnebookUMInitializer.RegisterServiceCollection(services, configuration);
-            OnebookUMInitializer.InitializeUMClientManager();
-        }
-
-        public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = configuration.GetSection("AuthSettings:LoginPath").Value;
-                    options.LogoutPath = configuration.GetSection("AuthSettings:LogoutPath").Value;
-                    options.ExpireTimeSpan = TimeSpan.FromMinutes(int.Parse(configuration.GetSection("AuthSettings:CookieTimeOut").Value));
-                    options.Cookie = new CookieBuilder
-                    {
-                        Name = "RiskControl.Cookie",
-                        SecurePolicy = CookieSecurePolicy.SameAsRequest
-                    };
-
-                    options.Events.OnSigningOut = context =>
-                    {
-                        context.Response.Redirect(options.LoginPath);
-                        return Task.CompletedTask;
-                    };
-                });
-
-            services.AddSession(options =>
-            {
-                options.Cookie.IsEssential = true;
-                options.IdleTimeout = TimeSpan.FromMinutes(int.Parse(configuration.GetSection("AuthSettings:SessionTimeOut").Value));
-                options.Cookie.Name = "RiskControl.Session";
+                mc.AddProfile(new BettingMonitoringProfile());
+                mc.AddProfile(new CommonProfile());
+                mc.AddProfile(new CurrencyViewProfile());
+                mc.AddProfile(new DailyViewProfile());
+                mc.AddProfile(new HourlyProfile());
+                mc.AddProfile(new SpecificMemberProfile());
+                mc.AddProfile(new TopTwentyProfile());
+                mc.AddProfile(new UserNameViewProfile());
+                mc.AddProfile(new AssociatedAccountProfile());
+                mc.AddProfile(new CurrencySettingProfile());
+                mc.AddProfile(new ManagedSettingGroupProfile());
+                mc.AddProfile(new GameRoundProfile());
+                mc.AddProfile(new MonitorProfile());
+                mc.AddProfile(new PlayerSettingProfile());
+                mc.AddProfile(new VoidRejectRefundProfile());
             });
+
+            return mapperConfig.CreateMapper();
         }
+    }
+
+    public static void RegisterAssemblyForMediatR(this IServiceCollection services)
+    {
+        void ConfigAssembly(MediatRServiceConfiguration configuration, Type type)
+        {
+            configuration.RegisterServicesFromAssemblies(type.GetTypeInfo().Assembly);
+        }
+
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(BettingMonitoringMarker)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(NonSportsGamesStatisticsMarker)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(ProgressiveJackpotMarker)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(VoidRejectRefundMarker)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(WinLossLimitControlMarker)));
+    }
+
+
+    public static void RegisterInternalServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.RegisterGlobalServices();
+        services.RegisterNonSportsServices();
+        services.RegisterBetMonitoringServices();
+        services.RegisterProgressiveJackpotService();
+        services.RegisterVoidRejectRefundService();
+        services.RegisterWinLimitControlServices();
+        services.AddSingleton(CreateMapper);
+        OnebookUMInitializer.RegisterServiceCollection(services, configuration);
+        OnebookUMInitializer.InitializeUMClientManager();
+    }
+
+    public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = configuration.GetSection("AuthSettings:LoginPath").Value;
+                options.LogoutPath = configuration.GetSection("AuthSettings:LogoutPath").Value;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(int.Parse(configuration.GetSection("AuthSettings:CookieTimeOut").Value));
+                options.Cookie = new CookieBuilder
+                {
+                    Name = "RiskControl.Cookie",
+                    SecurePolicy = CookieSecurePolicy.SameAsRequest
+                };
+
+                options.Events.OnSigningOut = context =>
+                {
+                    context.Response.Redirect(options.LoginPath);
+                    return Task.CompletedTask;
+                };
+            });
+
+        services.AddSession(options =>
+        {
+            options.Cookie.IsEssential = true;
+            options.IdleTimeout = TimeSpan.FromMinutes(int.Parse(configuration.GetSection("AuthSettings:SessionTimeOut").Value));
+            options.Cookie.Name = "RiskControl.Session";
+        });
     }
 }

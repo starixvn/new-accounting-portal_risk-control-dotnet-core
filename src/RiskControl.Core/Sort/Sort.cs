@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RiskControl.Core.Sort
+namespace RiskControl.Core.Sort;
+
+public static class Sort
 {
-    public static class Sort
+    private const string Ascending = "Asc";
+
+    public static void SortByProperty<T>(List<T> dataSource, string sortDirection, string sortColumnName)
     {
-        private const string Ascending = "Asc";
+        var propInfo = typeof(T).GetProperty(sortColumnName);
 
-        public static void SortByProperty<T>(List<T> dataSource, string sortDirection, string sortColumnName)
+        int Compare(T a, T b)
         {
-            var propInfo = typeof(T).GetProperty(sortColumnName);
-
-            int Compare(T a, T b)
-            {
-                var isAsc = string.Equals(sortDirection, Ascending, StringComparison.OrdinalIgnoreCase);
-                var valueA = isAsc ? propInfo.GetValue(a, null) : propInfo.GetValue(b, null);
-                var valueB = isAsc ? propInfo.GetValue(b, null) : propInfo.GetValue(a, null);
-                return (valueA as IComparable)?.CompareTo(valueB) ?? 0;
-            }
-
-            dataSource.Sort((Comparison<T>)Compare);
+            var isAsc = string.Equals(sortDirection, Ascending, StringComparison.OrdinalIgnoreCase);
+            var valueA = isAsc ? propInfo.GetValue(a, null) : propInfo.GetValue(b, null);
+            var valueB = isAsc ? propInfo.GetValue(b, null) : propInfo.GetValue(a, null);
+            return (valueA as IComparable)?.CompareTo(valueB) ?? 0;
         }
+
+        dataSource.Sort((Comparison<T>)Compare);
     }
 }
