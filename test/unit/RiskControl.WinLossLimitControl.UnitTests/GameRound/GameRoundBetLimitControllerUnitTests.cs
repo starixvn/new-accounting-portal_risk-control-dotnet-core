@@ -6,10 +6,11 @@ using RiskControl.WinLossLimitControl.GameRound.Request;
 using RiskControl.WinLossLimitControl.Services;
 using System.Threading.Tasks;
 using Xunit;
-using static Fanex.NAP.Core.Business.Constant;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.GameRound
 {
+    using Fanex.NAP.Client.Helpers.Business;
+
     public class GameRoundBetLimitControllerUnitTests
     {
         private readonly IMediator mediator;
@@ -20,7 +21,7 @@ namespace RiskControl.WinLossLimitControl.UnitTests.GameRound
         {
             mediator = Substitute.For<IMediator>();
             var authorizationService = Substitute.For<AuthorizationService>();
-            authorizationService.HasPermission(Arg.Compat.Any<string>(), Arg.Compat.Any<Policy>()).Returns(true);
+            authorizationService.HasPermission(Arg.Compat.Any<string>(), Arg.Compat.Any<Constant.Policy>()).Returns(true);
             controller = new GameRoundBetLimitController(mediator, authorizationService);
         }
 

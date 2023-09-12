@@ -1,12 +1,13 @@
-﻿using Fanex.NAP.Client.AspNetCore.Attributes;
-using Fanex.NAP.Core.Business;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.Core.Model;
 using System.Threading.Tasks;
 
 namespace RiskControl.BettingMonitoring.Update
 {
+    using Fanex.NAP.Client.Attributes;
+    using Fanex.NAP.Client.Helpers.Business;
+
     [ApiController]
     [Route("state-api/betting-monitoring")]
     public class BettingMonitoringUpdateController : ControllerBase

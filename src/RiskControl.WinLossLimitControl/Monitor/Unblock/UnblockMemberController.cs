@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
-using Fanex.NAP.Client.AspNetCore.Attributes;
-using Fanex.NAP.Core.Business;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.Core.Model;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Unblock
 {
+    using Fanex.NAP.Client.Attributes;
+    using Fanex.NAP.Client.Helpers.Business;
+
     [ApiController]
     [Route("state-api/win-limit-control/monitor")]
     public class UnblockMemberController : ControllerBase

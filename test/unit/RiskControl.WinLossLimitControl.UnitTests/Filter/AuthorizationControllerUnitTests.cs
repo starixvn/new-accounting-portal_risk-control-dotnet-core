@@ -1,5 +1,4 @@
-﻿using Fanex.NAP.Core.Business;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using RiskControl.WinLossLimitControl.Filter;
 using RiskControl.WinLossLimitControl.Filter.Model;
@@ -8,6 +7,8 @@ using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Filter
 {
+    using Fanex.NAP.Client.Helpers.Business;
+
     public class AuthorizationControllerUnitTests
     {
         [Fact]

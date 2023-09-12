@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Fanex.NAP.Client.AspNetCore.Attributes;
-using Fanex.NAP.Core.Business;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.Core.Model;
 
 namespace RiskControl.WinLossLimitControl.FileDownload
 {
+    using Fanex.NAP.Client.Attributes;
+    using Fanex.NAP.Client.Helpers.Business;
+
     [Route("WinLimitControl/FileDownload")]
     public class FileDownloadController : Controller
     {

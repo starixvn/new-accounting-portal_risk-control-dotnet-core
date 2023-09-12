@@ -1,10 +1,11 @@
-﻿using Fanex.NAP.Client.AspNetCore.Attributes;
-using Fanex.NAP.Core.Business;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RiskControl.Core.Model;
 
 namespace RiskControl.Sites.Controllers
 {
+    using Fanex.NAP.Client.Attributes;
+    using Fanex.NAP.Client.Helpers.Business;
+
     public class HomeController : Controller
     {
         public ActionResult Index()

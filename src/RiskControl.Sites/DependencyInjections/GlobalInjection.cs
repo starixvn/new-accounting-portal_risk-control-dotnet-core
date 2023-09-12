@@ -1,8 +1,6 @@
 ﻿using Fanex.Caching;
 using Fanex.Caching.Memory;
 using Fanex.Data.Repository;
-using Fanex.NAP.Client.AspNetCore.Configuration;
-using Fanex.NAP.Client.AspNetCore.Session;
 using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
@@ -15,6 +13,8 @@ using RiskControl.Core.Configuration;
 
 namespace RiskControl.Sites.DependencyInjections
 {
+    using Fanex.NAP.Client.Session;
+
     public static class GlobalInjection
     {
         public static void RegisterGlobalServices(this IServiceCollection service)

@@ -1,11 +1,12 @@
-﻿using Fanex.NAP.Core.Business;
-using RiskControl.Core.Model;
+﻿using RiskControl.Core.Model;
 using RiskControl.WinLossLimitControl.Services;
 using RiskControl.WinLossLimitControl.Filter.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RiskControl.WinLossLimitControl.Filter
 {
+    using Fanex.NAP.Client.Helpers.Business;
+
     [Route("state-api/win-limit-control/authorization")]
     public class AuthorizationController : ControllerBase
     {

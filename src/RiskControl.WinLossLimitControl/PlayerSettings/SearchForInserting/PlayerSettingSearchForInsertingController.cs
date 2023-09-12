@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
-using Fanex.NAP.Client.AspNetCore.Attributes;
-using Fanex.NAP.Core.Business;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.Core.Model;
 
 namespace RiskControl.WinLossLimitControl.PlayerSettings.SearchForInserting
 {
+    using Fanex.NAP.Client.Attributes;
+    using Fanex.NAP.Client.Helpers.Business;
+
     [ApiController]
     [Route("api/win-limit-control/player-setting")]
     public class PlayerSettingSearchForInsertingController : ControllerBase

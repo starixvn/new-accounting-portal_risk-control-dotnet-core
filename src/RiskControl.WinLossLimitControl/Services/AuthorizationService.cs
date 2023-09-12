@@ -1,9 +1,10 @@
 ﻿using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
-using Fanex.NAP.Core.Business;
 
 namespace RiskControl.WinLossLimitControl.Services
 {
+    using Fanex.NAP.Client.Helpers.Business;
+
     public interface AuthorizationService
     {
         bool HasPermission(string functionKey, Constant.Policy policy);
