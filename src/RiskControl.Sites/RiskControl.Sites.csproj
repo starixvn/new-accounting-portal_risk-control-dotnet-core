@@ -114,7 +114,6 @@
     <ProjectReference Include="..\RiskControl.Dashboard\RiskControl.Dashboard.csproj" />
     <ProjectReference Include="..\RiskControl.NonSportsGamesStatistics\RiskControl.NonSportsGamesStatistics.csproj" />
     <ProjectReference Include="..\RiskControl.ProgressiveJackpot\RiskControl.ProgressiveJackpot.csproj" />
-    <ProjectReference Include="..\RiskControl.VoidRejectRefund\RiskControl.VoidRejectRefund.csproj" />
     <ProjectReference Include="..\RiskControl.WinLossLimitControl\RiskControl.WinLossLimitControl.csproj" />
   </ItemGroup>
 

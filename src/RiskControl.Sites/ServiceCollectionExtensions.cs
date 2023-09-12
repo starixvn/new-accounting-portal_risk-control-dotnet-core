@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RiskControl.Sites.AutoMapperProfiles.BettingMonitoring;
 using RiskControl.Sites.AutoMapperProfiles.NonSports;
-using RiskControl.Sites.AutoMapperProfiles.VoidRejectRefund;
 using RiskControl.Sites.AutoMapperProfiles.WinLossLimitControl;
 using RiskControl.Sites.DependencyInjections;
 using SharpRaven;
@@ -25,7 +24,6 @@ using System.Reflection;
 using BettingMonitoring;
 using NonSportsGamesStatistics;
 using ProgressiveJackpot;
-using VoidRejectRefund;
 using WinLossLimitControl;
 
 public static class ServiceCollectionExtensions
@@ -87,7 +85,6 @@ public static class ServiceCollectionExtensions
                 mc.AddProfile(new GameRoundProfile());
                 mc.AddProfile(new MonitorProfile());
                 mc.AddProfile(new PlayerSettingProfile());
-                mc.AddProfile(new VoidRejectRefundProfile());
             });
 
             return mapperConfig.CreateMapper();
@@ -104,7 +101,6 @@ public static class ServiceCollectionExtensions
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(BettingMonitoringMarker)));
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(NonSportsGamesStatisticsMarker)));
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(ProgressiveJackpotMarker)));
-        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(VoidRejectRefundMarker)));
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(WinLossLimitControlMarker)));
     }
 
@@ -115,7 +111,6 @@ public static class ServiceCollectionExtensions
         services.RegisterNonSportsServices();
         services.RegisterBetMonitoringServices();
         services.RegisterProgressiveJackpotService();
-        services.RegisterVoidRejectRefundService();
         services.RegisterWinLimitControlServices();
         services.AddSingleton(CreateMapper);
         OnebookUMInitializer.RegisterServiceCollection(services, configuration);
