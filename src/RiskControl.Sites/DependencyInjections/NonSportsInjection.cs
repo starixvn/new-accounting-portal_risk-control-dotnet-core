@@ -12,14 +12,12 @@ using DailyViewDaily = RiskControl.NonSportsGamesStatistics.DailyView.Daily;
 using DailyViewGrandTotal = RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal;
 using DailyViewGroupStatistics = RiskControl.NonSportsGamesStatistics.DailyView.GroupStatistics;
 using Hourly = RiskControl.NonSportsGamesStatistics.Hourly;
-using SpecificMemberCommon = RiskControl.NonSportsGamesStatistics.SpecificMember.Common;
 using TopTwentyCommon = RiskControl.NonSportsGamesStatistics.TopTwenty.Common;
 using TopTwentyGroupStatistics = RiskControl.NonSportsGamesStatistics.TopTwenty.GroupStatistics;
 using TopTwentyMain = RiskControl.NonSportsGamesStatistics.TopTwenty.Main;
 using UserNameViewCommon = RiskControl.NonSportsGamesStatistics.UserNameView.Common;
 using UserNameViewMain = RiskControl.NonSportsGamesStatistics.UserNameView.Main;
 using DailyViewHandler = RiskControl.NonSportsGamesStatistics.DailyView.Daily;
-using SpecificMember = RiskControl.NonSportsGamesStatistics.SpecificMember;
 using UserNameView = RiskControl.NonSportsGamesStatistics.UserNameView;
 
 namespace RiskControl.Sites.DependencyInjections;
@@ -29,7 +27,6 @@ public static class NonSportsInjection
     public static void RegisterNonSportsServices(this IServiceCollection service)
     {
         service.RegisterDailyViewServices();
-        service.RegisterSpecificMembers();
         service.RegisterUserNameViewServices();
         service.RegisterCurrencyViewServices();
         service.RegisterTopTwentyServices();
@@ -50,11 +47,6 @@ public static class NonSportsInjection
         services.AddTransient<GridOptionBuilderService<DailyViewReportModel, DailyView.Normal.QueryModel>, DailyView.GridOptionBuilderServiceImp<DailyView.Normal.QueryModel>>();
         services.AddTransient<GridOptionBuilderService<DailyViewReportModel, DailyView.ProductHistory.QueryModel>, DailyView.GridOptionBuilderServiceImp<DailyView.ProductHistory.QueryModel>>();
         services.AddTransient<GridOptionBuilderService<DailyViewReportModel, DailyView.ProductNormal.QueryModel>, DailyView.GridOptionBuilderServiceImp<DailyView.ProductNormal.QueryModel>>();
-        services.AddTransient<GridOptionBuilderService<DailyViewReportModel, SpecificMember.CasinoProduct.QueryModel>,
-            DailyView.GridOptionBuilderServiceImp<SpecificMember.CasinoProduct.QueryModel>>();
-        services.AddTransient<GridOptionBuilderService<DailyViewReportModel, SpecificMember.Daily.QueryModel>, DailyView.GridOptionBuilderServiceImp<SpecificMember.Daily.QueryModel>>();
-        services.AddTransient<GridOptionBuilderService<DailyViewReportModel, SpecificMember.Monthly.QueryModel>, DailyView.GridOptionBuilderServiceImp<SpecificMember.Monthly.QueryModel>>();
-        services.AddTransient<GridOptionBuilderService<DailyViewReportModel, SpecificMember.Product.QueryModel>, DailyView.GridOptionBuilderServiceImp<SpecificMember.Product.QueryModel>>();
         services.AddTransient<GridOptionBuilderService<CurrencyViewStatisticsReportModel, DailyViewGrandTotal.DailyViewGrandTotalHistory.QueryModel>,
             DailyViewGrandTotal.GridOptionBuilderServiceImp<DailyViewGrandTotal.DailyViewGrandTotalHistory.QueryModel>>();
         services.AddTransient<GridOptionBuilderService<CurrencyViewStatisticsReportModel, DailyViewGrandTotal.DailyViewGrandTotalNormal.QueryModel>,
@@ -110,40 +102,7 @@ public static class NonSportsInjection
         services.AddTransient<Service<CurrencyViewStatisticsReportModel, DailyViewGrandTotal.ProductGrandTotalNormal.Criteria>,
             DailyViewGrandTotal.ServiceImp<DailyViewGrandTotal.ProductGrandTotalNormal.Criteria>>();
     }
-
-    private static void RegisterSpecificMembers(this IServiceCollection services)
-    {
-        services.AddTransient<GridOptionBuilderService<CurrencyViewStatisticsReportModel, SpecificMember.GrandTotal.CasinoProduct.QueryModel>,
-            DailyViewGrandTotal.GridOptionBuilderServiceImp<SpecificMember.GrandTotal.CasinoProduct.QueryModel>>();
-        services.AddTransient<GridOptionBuilderService<CurrencyViewStatisticsReportModel, SpecificMember.GrandTotal.Daily.QueryModel>,
-            DailyViewGrandTotal.GridOptionBuilderServiceImp<SpecificMember.GrandTotal.Daily.QueryModel>>();
-        services.AddTransient<GridOptionBuilderService<CurrencyViewStatisticsReportModel, SpecificMember.GrandTotal.Product.QueryModel>,
-            DailyViewGrandTotal.GridOptionBuilderServiceImp<SpecificMember.GrandTotal.Product.QueryModel>>();
-        services.AddTransient<GridOptionBuilderService<UserNameViewReportModel, SpecificMember.AssociatedAccount.QueryModel>,
-            UserNameView.AssociatedAccount.GridOptionBuilderServiceImp<SpecificMember.AssociatedAccount.QueryModel>>();
-        services.AddTransient<GridOptionBuilderService<UserNameViewReportModel, SpecificMember.Username.QueryModel>,
-            UserNameViewMain.GridOptionBuilderServiceImp<SpecificMember.Username.QueryModel>>();
-        services.AddTransient<Service<UserNameViewReportModel, SpecificMember.Common.UsernameHistoryCriteria>,
-            SpecificMember.Username.ServiceImp<SpecificMember.Common.UsernameHistoryCriteria>>();
-        services.AddTransient<Service<DailyViewReportModel, SpecificMember.Daily.HistoryCriteria>, SpecificMember.Daily.ServiceImp<SpecificMember.Daily.HistoryCriteria>>();
-        services.AddTransient<Service<DailyViewReportModel, SpecificMember.Product.HistoryCriteria>, SpecificMember.Product.ServiceImp<SpecificMember.Product.HistoryCriteria>>();
-        services.AddTransient<SpecificMemberCommon.UsernameService, SpecificMemberCommon.UsernameServiceImp>();
-        services.AddTransient<Service<UserNameViewReportModel, SpecificMember.AssociatedAccount.Criteria>,
-            SpecificMember.AssociatedAccount.ServiceImp<SpecificMember.AssociatedAccount.Criteria>>();
-        services.AddTransient<SpecificMemberCommon.DailyService, SpecificMemberCommon.DailyServiceImp>();
-        services.AddTransient<Service<DailyViewReportModel, SpecificMember.CasinoProduct.HistoryCriteria>,
-            SpecificMember.CasinoProduct.ServiceImp<SpecificMember.CasinoProduct.HistoryCriteria>>();
-        services.AddTransient<Service<DailyViewReportModel, SpecificMember.Monthly.HistoryCriteria>,
-            SpecificMember.Monthly.ServiceImp<SpecificMember.Monthly.HistoryCriteria>>();
-        services.AddTransient<Service<CurrencyViewStatisticsReportModel, SpecificMember.GrandTotal.CasinoProduct.HistoryCriteria>,
-            SpecificMember.GrandTotal.CasinoProduct.ServiceImp<SpecificMember.GrandTotal.CasinoProduct.HistoryCriteria>>();
-        services.AddTransient<Service<CurrencyViewStatisticsReportModel, SpecificMember.GrandTotal.Daily.HistoryCriteria>,
-            SpecificMember.GrandTotal.Daily.ServiceImp<SpecificMember.GrandTotal.Daily.HistoryCriteria>>();
-        services.AddTransient<Service<CurrencyViewStatisticsReportModel, SpecificMember.GrandTotal.Product.HistoryCriteria>,
-            SpecificMember.GrandTotal.Product.ServiceImp<SpecificMember.GrandTotal.Product.HistoryCriteria>>();
-        services.AddTransient<SpecificMemberCommon.GrandTotalService, SpecificMemberCommon.GrandTotalServiceImp>();
-    }
-
+    
     private static void RegisterUserNameViewServices(this IServiceCollection services)
     {
         services.AddTransient<UserNameViewCommon.GridOptionHeaderBuilderService, UserNameViewCommon.GridOptionHeaderBuilderServiceImp>();
