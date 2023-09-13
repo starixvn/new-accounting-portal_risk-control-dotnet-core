@@ -119,13 +119,6 @@ export class DailyComponent implements OnInit, ModeGenerate {
     const yesterday = moment(DATE_CONFIG.reportDate.yesterday);
 
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
-
-    if (filterModel.reportType === ReportType.SpecificMemberDaily) {
-      _.remove(filterModel.removalColumns, function (columnName) {
-        return columnName === 'NoOfPlayers';
-      });
-    }
-
     filterModel.reportType = ReportType.Hourly;
     filterModel.startDate = date;
     filterModel.endDate = date;

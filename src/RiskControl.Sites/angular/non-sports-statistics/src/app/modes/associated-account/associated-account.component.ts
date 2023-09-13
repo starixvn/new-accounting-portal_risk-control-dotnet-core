@@ -65,8 +65,7 @@ export class AssociatedAccountComponent {
         };
         if (gridOptions.footerRows.length > 0 &&
             !queryModel.isBaseRM &&
-            !queryModel.isGrandTotal &&
-            queryModel.reportBy !== 'SpecificMember') {
+            !queryModel.isGrandTotal) {
             this.updateGrandTotal(gridOptions);
         }
         this.gridOptions = gridOptions;

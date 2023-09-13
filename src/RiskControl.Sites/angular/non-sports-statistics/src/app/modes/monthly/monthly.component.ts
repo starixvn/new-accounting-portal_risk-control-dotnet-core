@@ -97,9 +97,7 @@ export class MonthlyComponent implements OnInit, ModeGenerate {
 
   private drillDownDaily(title: string, date: moment.Moment) {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
-    filterModel.reportType = filterModel.reportType === ReportType.SpecificMemberMonthly ?
-      ReportType.SpecificMemberDaily :
-      ReportType.Daily;
+    filterModel.reportType = ReportType.Daily;
     filterModel.startDate = moment.max(moment.utc(date).startOf('month'), filterModel.startDate);
     filterModel.endDate = moment.min(moment.utc(date).endOf('month'), filterModel.endDate);
     const modeContext = ModeContext.create(title, filterModel, false);

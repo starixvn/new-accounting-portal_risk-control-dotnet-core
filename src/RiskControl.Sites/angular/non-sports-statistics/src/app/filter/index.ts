@@ -7,7 +7,6 @@ export * from './device-treeview.pipe';
 export * from './filter.model';
 export * from './filter.config';
 export * from './filter.component';
-export * from './specific-member-filter.component';
 export * from './filter.service';
 export * from './filter-helper';
 export * from './filter.module';

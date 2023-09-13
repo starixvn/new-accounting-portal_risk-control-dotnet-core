@@ -31,18 +31,10 @@ export class CasinoProductService {
 
   private getUrl(model: CasinoProductQueryModel, isGrandTotal = false): string {
     if (!isGrandTotal) {
-      if (model.reportBy === 'SpecificMemberProductSubProduct') {
-        return 'NonSportsGamesStatistics/SpecificMember/CasinoProduct/';
-      }
-
       return model.isNormalMode
         ? 'NonSportsGamesStatistics/ProductNormal/'
         : 'NonSportsGamesStatistics/ProductHistory/';
     } else {
-      if (model.reportBy === 'SpecificMemberProductSubProduct') {
-        return 'NonSportsGamesStatistics/SpecificMember/CasinoProductGrandTotal/';
-      }
-
       return model.isNormalMode
         ? 'NonSportsGamesStatistics/ProductGrandTotalNormal/'
         : 'NonSportsGamesStatistics/ProductGrandTotalHistory/';

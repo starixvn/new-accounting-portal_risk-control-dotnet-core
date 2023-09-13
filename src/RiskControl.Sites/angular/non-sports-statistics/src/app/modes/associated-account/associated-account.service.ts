@@ -23,10 +23,6 @@ export class AssociatedAccountService {
     }
 
     private getAssociatedAccountsUrl(model: UserNameQueryModel) {
-        if(model.reportBy === 'SpecificMember') {
-            return 'NonSportsGamesStatistics/SpecificMember/AssociatedAccount/';
-        }
-
         return model.isNormalMode
             ? `${this.url}/AssociatedAccountNormal/`
             : `${this.url}/AssociatedAccountHistory/`;

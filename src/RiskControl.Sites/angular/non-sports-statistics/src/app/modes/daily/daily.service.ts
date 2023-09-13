@@ -20,10 +20,6 @@ export class DailyService {
     }
 
     private getUrl(model: DailyQueryModel): string {
-        if (model.reportBy === 'SpecificMemberDaily') {
-            return 'NonSportsGamesStatistics/SpecificMember/Daily/';
-        }
-
         return model.isNormalMode
             ? 'NonSportsGamesStatistics/DailyNormal/'
             : 'NonSportsGamesStatistics/DailyHistory/';

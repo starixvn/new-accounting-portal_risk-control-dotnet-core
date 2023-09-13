@@ -217,9 +217,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
   private drillDownDaily(userName: string) {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
 
-    filterModel.reportType = filterModel.reportType === ReportType.SpecificMember ?
-      ReportType.SpecificMemberDaily :
-      ReportType.Daily;
+    filterModel.reportType = ReportType.Daily;
 
     filterModel.userName = userName;
     const gridModel = new DailyGridModel(false, true);
@@ -287,9 +285,8 @@ export class UserNameComponent implements OnInit, ModeGenerate {
       if (this.hasDrillDownOnUserName()) {
         this.updateUserNameColumn(gridOptions);
       }
-      if (queryModel.reportBy !== 'SpecificMember') {
-        this.updateGrandTotalCell(gridOptions);
-      }
+
+      this.updateGrandTotalCell(gridOptions);
     }
 
     gridOptions.showPager = true;
@@ -385,11 +382,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
   }
 
   private excel(queryModel: UserNameQueryModel) {
-    const isSpecificMemberReport = queryModel.reportBy === 'SpecificMember';
-    const extensionFileName = isSpecificMemberReport ? 'xls' : 'xlsx';
-    if (isSpecificMemberReport) {
-      queryModel.removalColumns.push('AssociatedAccounts');
-    }
+    const extensionFileName = 'xlsx';
 
     this.userNameService.excel(queryModel)
       .subscribe(response => {

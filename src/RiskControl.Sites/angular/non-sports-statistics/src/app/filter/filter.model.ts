@@ -10,11 +10,7 @@ export enum ReportType {
     Currency,
     Device,
     Top20,
-    UserName,
-    SpecificMember,
-    SpecificMemberDaily,
-    SpecificMemberMonthly,
-    SpecificMemberProduct
+    UserName
 }
 
 export enum CompareType {
