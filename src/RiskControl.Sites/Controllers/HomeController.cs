@@ -83,11 +83,4 @@ public class HomeController : Controller
     {
         return View("~/wwwroot/game-round-bet-limit-monitor/index.cshtml");
     }
-
-    [Route("Reports/NonSportsSpecificMember")]
-    [NapAuth(FunctionKey = FunctionKeys.NonSportGameStatisticsSpecificMember, Policy = Constant.Policy.Read)]
-    public ActionResult NonSportsSpecificMember()
-    {
-        return View("~/wwwroot/non-sports-specific-member/index.cshtml");
-    }
 }

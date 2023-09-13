@@ -57,6 +57,4 @@ public static class FunctionKeys
     public const string NormalMode = "NormalMode";
 
     public const string RiskControlDashboard = "RiskControlDashboard";
-
-    public const string NonSportGameStatisticsSpecificMember = "Non_SportGameStatisticsSpecificMember";
 }
