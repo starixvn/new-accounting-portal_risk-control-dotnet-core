@@ -12,7 +12,7 @@ using ONEbook.UM.Helpers;
 using ONEbook.UM.Services;
 using ONEbook.UM.Transport;
 
-namespace RiskControl.Sites;
+namespace RiskControl.Sites.DependencyInjections;
 
 public static class OnebookUMInitializer
 {
@@ -23,7 +23,7 @@ public static class OnebookUMInitializer
             .UseConfig(umConfig)
             .UseCacheService(new UMCacheService(new CacheService()))
             .UseRestClient(new UMRestClient(umConfig))
-            .UseHttpContext(new HttpContextHelper());
+            .UseHttpContext(new TempHttpContextHelper());
     }
 
     public static void RegisterServiceCollection(IServiceCollection services, IConfiguration configuration)
@@ -33,14 +33,14 @@ public static class OnebookUMInitializer
         services.AddSingleton<CheckUMFilterAttribute>();
         services.AddSingleton<IUMCacheService, MemoryUMCacheService>();
         services.AddSingleton<IUMRestClient, UMRestClient>();
-        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); 
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddSingleton<IHttpContextHelper, HttpContextHelper>();
         services.AddSingleton<IMaintenanceService, MaintenanceService>();
 
     }
 }
 
-public class HttpContextHelper : IHttpContextHelper
+public class TempHttpContextHelper : IHttpContextHelper
 {
     public string GetSession(string key)
     {
