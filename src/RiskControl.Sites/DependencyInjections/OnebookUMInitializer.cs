@@ -16,19 +16,9 @@ namespace RiskControl.Sites.DependencyInjections;
 
 public static class OnebookUMInitializer
 {
-    private static UMClientConfiguration umConfig;
-    public static void InitializeUMClientManager()
-    {
-        UMClientManager
-            .UseConfig(umConfig)
-            .UseCacheService(new UMCacheService(new CacheService()))
-            .UseRestClient(new UMRestClient(umConfig))
-            .UseHttpContext(new TempHttpContextHelper());
-    }
-
     public static void RegisterServiceCollection(IServiceCollection services, IConfiguration configuration)
     {
-        umConfig = new UMClientConfiguration();
+       var umConfig = new UMClientConfiguration();
         services.AddSingleton(umConfig.Initialize(configuration));
         services.AddSingleton<CheckUMFilterAttribute>();
         services.AddSingleton<IUMCacheService, MemoryUMCacheService>();
@@ -36,25 +26,6 @@ public static class OnebookUMInitializer
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddSingleton<IHttpContextHelper, HttpContextHelper>();
         services.AddSingleton<IMaintenanceService, MaintenanceService>();
-
-    }
-}
-
-public class TempHttpContextHelper : IHttpContextHelper
-{
-    public string GetSession(string key)
-    {
-        return string.Empty;
-    }
-
-    public string GetValueFromQueryString(string queryKey)
-    {
-        return string.Empty;
-    }
-
-    public void SetSession(string key, string value)
-    {
-        // Method intentionally left empty.
     }
 }
 

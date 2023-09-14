@@ -114,7 +114,6 @@ public static class ServiceCollectionExtensions
         services.RegisterWinLimitControlServices();
         services.AddSingleton(CreateMapper);
         OnebookUMInitializer.RegisterServiceCollection(services, configuration);
-        OnebookUMInitializer.InitializeUMClientManager();
     }
 
     public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
