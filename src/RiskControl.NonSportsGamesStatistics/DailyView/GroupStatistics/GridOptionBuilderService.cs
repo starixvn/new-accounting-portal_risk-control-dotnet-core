@@ -8,6 +8,8 @@ using RiskControl.NonSportsGamesStatistics.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.GroupStatistics;
 
+using System.Linq;
+
 public class GridOptionBuilderServiceImp<TQueryModel> : GridOptionBuilderService<DailyViewGroupStatisticWithTotalReportModel, TQueryModel>
     where TQueryModel: BaseStatisticQueryModel
 {
@@ -59,9 +61,9 @@ public class GridOptionBuilderServiceImp<TQueryModel> : GridOptionBuilderService
             totalRow.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
             totalRow.RowType = RowType.ParentLevelOne;
             totalRow.Columns.ForEach(x => x.Bold = true);
-            foreach (var item in group.Statistics)
+            var groupDataRows = group.Statistics.Select(item => gridDataRowBuilderService.BuildDailyViewGroupDataRow(item, viewByInteger));
+            foreach (var groupDataRow in groupDataRows)
             {
-                var groupDataRow = gridDataRowBuilderService.BuildDailyViewGroupDataRow(item, viewByInteger);
                 totalRow.SubRows.AddRange(groupDataRow);
             }
 

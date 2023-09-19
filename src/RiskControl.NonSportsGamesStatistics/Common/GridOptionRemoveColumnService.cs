@@ -27,13 +27,13 @@ public class GridOptionRemoveColumnServiceImp : GridOptionRemoveColumnService
 
     private static void RemoveHeaderColumns(List<HeaderColumns> headerColumns, List<string> removalColumns)
     {
-        foreach (var item in removalColumns)
+        var removingColumns = removalColumns
+            .Select(item => headerColumns.FirstOrDefault(x => x.Name == item))
+            .Where(column => column != null);
+
+        foreach (var column in removingColumns)
         {
-            var column = headerColumns.FirstOrDefault(x => x.Name == item);
-            if (column != null)
-            {
-                headerColumns.Remove(column);
-            }
+            headerColumns.Remove(column);
         }
     }
 
@@ -54,13 +54,10 @@ public class GridOptionRemoveColumnServiceImp : GridOptionRemoveColumnService
 
     private static void RemoveRowColumns(GridDataRow bodyRow, List<string> removalColumns)
     {
-        foreach (var item in removalColumns)
+        var removingColumns = removalColumns.Select(item => bodyRow.Columns.FirstOrDefault(x => x.Name == item)).Where(column => column != null);
+        foreach (var column in removingColumns)
         {
-            var column = bodyRow.Columns.FirstOrDefault(x => x.Name == item);
-            if (column != null)
-            {
-                bodyRow.Columns.Remove(column);
-            }
+            bodyRow.Columns.Remove(column);
         }
     }
 }

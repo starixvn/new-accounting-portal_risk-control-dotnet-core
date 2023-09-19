@@ -1,10 +1,8 @@
 ﻿using System;
-using Fanex.Caching;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ONEbook.UM;
 using ONEbook.UM.AspNetCore;
 using ONEbook.UM.AspNetCore.Filters;
 using ONEbook.UM.Configurations;

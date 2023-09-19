@@ -14,11 +14,11 @@ public static class LimitLevelConstant
 
     public static bool IsWinLimitLevel(int level)
     {
-        return level == OrangeLevel || level == YellowLevel || level == RedLevel;
+        return level is OrangeLevel or YellowLevel or RedLevel;
     }
 
     public static bool IsLossLimitLevel(int level)
     {
-        return level == GreyLevel || level == BlackLevel;
+        return level is GreyLevel or BlackLevel;
     }
 }
