@@ -33,10 +33,6 @@ export class GrandTotalService {
       return isNormalMode
         ? `${this.url}/DailyViewGrandTotalNormal/`
         : `${this.url}/DailyViewGrandTotalHistory/`;
-    } else if (reportType === ReportType.SpecificMemberDaily) {
-      return `${this.url}/SpecificMember/DailyGrandTotal/`;
-    } else if (this.productViewList.includes(reportType)) {
-      return `${this.url}/SpecificMember/ProductGrandTotal/`;
     } else {
       throw new Error('Not implemented yet');
     }

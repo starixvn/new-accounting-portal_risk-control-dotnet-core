@@ -18,7 +18,6 @@ import { ProductTreeviewPipe } from './product-treeview.pipe';
 import { GametypeTreeviewPipe } from './gametype-treeview.pipe';
 import { DeviceTreeviewPipe } from './device-treeview.pipe';
 import { UserNameSuggestionModule } from './user-name-suggestion';
-import { SpecificMemberFilterComponent } from './specific-member-filter.component';
 import { SiteTreeviewPipe } from './site-treeview.pipe';
 
 @NgModule({
@@ -38,7 +37,6 @@ import { SiteTreeviewPipe } from './site-treeview.pipe';
     ],
     declarations: [
         FilterComponent,
-        SpecificMemberFilterComponent,
         ExcludeTestPipe,
         ExcludeTest2Pipe,
         ProductTreeviewPipe,
@@ -50,7 +48,7 @@ import { SiteTreeviewPipe } from './site-treeview.pipe';
         FilterService
     ],
     exports: [
-        FilterComponent, SpecificMemberFilterComponent
+        FilterComponent
     ]
 })
 export class FilterModule {

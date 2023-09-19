@@ -20,10 +20,6 @@ export class ProductService {
     }
 
     private getUrl(model: QueryModel): string {
-        if (model.reportBy.includes('SpecificMember')) {
-            return 'NonSportsGamesStatistics/SpecificMember/Product/';
-        }
-
         return model.isNormalMode
             ? 'NonSportsGamesStatistics/DailyViewNormal/'
             : 'NonSportsGamesStatistics/DailyViewHistory/';

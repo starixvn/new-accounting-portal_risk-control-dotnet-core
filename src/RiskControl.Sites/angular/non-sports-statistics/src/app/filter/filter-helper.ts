@@ -30,21 +30,12 @@ const reportSelectItems: SelectItem[] = [
   { text: 'Top 20', value: ReportType.Top20 }
 ];
 
-const specificMemberReportSelectItems: SelectItem[] = [
-  { text: 'Hourly', value: ReportType.Hourly },
-  { text: 'Daily', value: ReportType.SpecificMemberDaily },
-  { text: 'Monthly', value: ReportType.SpecificMemberMonthly },
-  { text: 'Product', value: ReportType.SpecificMemberProduct },
-  { text: 'Member', value: ReportType.SpecificMember },
-];
-
 export const FilterHelper = {
   getRoleSelectItems: getRoleSelectItems,
   getRoleName: getRoleName,
   getReportSelectItems: getReportSelectItems,
   getReportName: getReportName,
   calculateGameTypes: calculateGameTypes,
-  getSpecificMemberReportSelectItems: getSpecificMemberReportSelectItems
 };
 
 function getRoleSelectItems(): SelectItem[] {
@@ -60,25 +51,7 @@ function getReportSelectItems(): SelectItem[] {
 }
 
 function getReportName(reportType: ReportType): string {
-  let reportName = '';
-
-  switch (reportType) {
-    case ReportType.SpecificMember:
-      reportName = 'Specific Member';
-      break;
-    case ReportType.SpecificMemberDaily:
-      reportName = 'Specific Member Daily';
-      break;
-    case ReportType.SpecificMemberProduct:
-      reportName = 'Specific Member Product';
-      break;
-    case ReportType.SpecificMemberMonthly:
-      reportName = 'Specific Member Monthly';
-      break;
-    default:
-      reportName = reportSelectItems.filter(item => item.value === reportType)[0].text;
-      break;
-  }
+  let reportName = reportSelectItems.filter(item => item.value === reportType)[0].text;
 
   return reportName;
 }
@@ -135,10 +108,6 @@ function calculateGameTypes(model: GameTypeModel): GameTypeResult {
     leagueIds: leagueIds,
     sportBetTypes: sportBetTypes
   } as GameTypeResult;
-}
-
-function getSpecificMemberReportSelectItems(): SelectItem[] {
-  return specificMemberReportSelectItems;
 }
 
 function getLeagueIds(model: GameTypeModel): NumberGameLeagueBetType[] {

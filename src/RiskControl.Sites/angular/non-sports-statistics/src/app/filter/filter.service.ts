@@ -158,15 +158,4 @@ export class FilterService {
     };
     return this.httpService.post<UsernameValidationModel[]>(url, model);
   }
-
-  getSpecificMemberReportSelectItems(): VisibleSelectItem[] {
-    const reportSelectItems = FilterHelper.getSpecificMemberReportSelectItems();
-    return reportSelectItems.map(item => {
-      return {
-        text: item.text,
-        value: item.value,
-        visible: item.value !== ReportType.Hourly
-      } as VisibleSelectItem;
-    });
-  }
 }

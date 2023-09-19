@@ -49,23 +49,6 @@ export class TitleService {
   }
 
   getTitleWithPrefix(prefix: string): string {
-    const filterModel = this.modeContext.filterModel;
-    if (filterModel.reportType === ReportType.SpecificMemberDaily) {
-      prefix = 'Daily';
-    }
-
-    if (filterModel.reportType === ReportType.SpecificMemberProduct) {
-      prefix = 'Product';
-    }
-
-    if (filterModel.reportType === ReportType.SpecificMember) {
-      prefix = 'Member';
-    }
-
-    if (filterModel.reportType === ReportType.SpecificMemberMonthly) {
-      prefix = 'Monthly';
-    }
-
     const gridModel = this.modeContext.gridModel;
     const titleDateFormat = this.getTitleDateFormat();
     const dateString = this.getDateString(titleDateFormat, false);
@@ -109,14 +92,6 @@ export class TitleService {
         return FilterHelper.getRoleName(filterModel.roleId);
       case ReportType.Top20:
         return FilterHelper.getReportName(filterModel.reportType) + ' ' + FilterHelper.getRoleName(filterModel.roleId);
-      case ReportType.SpecificMember:
-        return 'Member';
-      case ReportType.SpecificMemberDaily:
-        return 'Daily';
-      case ReportType.SpecificMemberProduct:
-        return 'Product';
-      case ReportType.SpecificMemberMonthly:
-        return 'Monthly';
       default:
         return FilterHelper.getReportName(filterModel.reportType);
     }

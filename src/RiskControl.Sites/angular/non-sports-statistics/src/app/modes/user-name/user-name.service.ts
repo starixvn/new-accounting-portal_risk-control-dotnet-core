@@ -30,14 +30,9 @@ export class UserNameService {
     }
 
     private getMainUrl(model: UserNameQueryModel): string {
-
-        if (model.reportBy === 'SpecificMember') {
-            return 'NonSportsGamesStatistics/SpecificMember/Username/';
-        }
-
-        return model.isNormalMode
-            ? 'NonSportsGamesStatistics/UserNameViewNormal/'
-            : 'NonSportsGamesStatistics/UserNameViewHistory/';
+      return model.isNormalMode
+        ? 'NonSportsGamesStatistics/UserNameViewNormal/'
+        : 'NonSportsGamesStatistics/UserNameViewHistory/';
     }
 
     private getGrandTotalUrl(model: UserNameQueryModel): string {

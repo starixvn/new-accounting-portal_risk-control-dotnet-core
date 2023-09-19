@@ -18,16 +18,12 @@ export class ModeService {
   private readonly componentListItems = [
     { reportType: ReportType.Hourly, componentName: HourlyComponent },
     { reportType: ReportType.Daily, componentName: DailyComponent },
-    { reportType: ReportType.SpecificMemberDaily, componentName: DailyComponent },
     { reportType: ReportType.Monthly, componentName: MonthlyComponent },
-    { reportType: ReportType.SpecificMemberMonthly, componentName: MonthlyComponent },
     { reportType: ReportType.Company, componentName: CompanyComponent },
     { reportType: ReportType.Currency, componentName: CurrencyComponent },
     { reportType: ReportType.Product, componentName: ProductComponent },
-    { reportType: ReportType.SpecificMemberProduct, componentName: ProductComponent },
     { reportType: ReportType.Device, componentName: DeviceComponent },
     { reportType: ReportType.UserName, componentName: UserNameComponent },
-    { reportType: ReportType.SpecificMember, componentName: UserNameComponent },
     { reportType: ReportType.Top20, componentName: Top20Component }
   ];
   getComponent(reportType: ReportType): Type<ModeGenerate> {

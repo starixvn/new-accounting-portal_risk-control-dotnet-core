@@ -20,8 +20,6 @@ export class MonthlyService {
     }
 
     private getUrl(model: QueryModel): string {
-        return model.reportBy === 'SpecificMemberMonthly' ?
-            'NonSportsGamesStatistics/SpecificMember/Monthly/' :
-            'NonSportsGamesStatistics/DailyViewHistory/';
+        return 'NonSportsGamesStatistics/DailyViewHistory/';
     }
 }

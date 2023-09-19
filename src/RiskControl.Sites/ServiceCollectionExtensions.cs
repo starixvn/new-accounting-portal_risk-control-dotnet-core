@@ -76,10 +76,8 @@ public static class ServiceCollectionExtensions
                 mc.AddProfile(new CurrencyViewProfile());
                 mc.AddProfile(new DailyViewProfile());
                 mc.AddProfile(new HourlyProfile());
-                mc.AddProfile(new SpecificMemberProfile());
                 mc.AddProfile(new TopTwentyProfile());
                 mc.AddProfile(new UserNameViewProfile());
-                mc.AddProfile(new AssociatedAccountProfile());
                 mc.AddProfile(new CurrencySettingProfile());
                 mc.AddProfile(new ManagedSettingGroupProfile());
                 mc.AddProfile(new GameRoundProfile());
