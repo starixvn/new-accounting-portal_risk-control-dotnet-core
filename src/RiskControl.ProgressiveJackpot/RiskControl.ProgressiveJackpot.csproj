@@ -8,7 +8,9 @@
   <ItemGroup>
     <AdditionalFiles Include="..\..\.sonarlint\nap-riskcontrol\CSharp\SonarLint.xml" Link="SonarLint.xml" />
   </ItemGroup>
-
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="ApiModel\" />
@@ -17,7 +19,6 @@
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="6.2.9" />
     <PackageReference Include="Epplus.Mapper" Version="6.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Olympus.WebApi.Epplus.AspNetCore" Version="1.0.1" />
     <PackageReference Include="Olympus.WebApiClient.AspNetCore" Version="1.0.0" />
   </ItemGroup>
