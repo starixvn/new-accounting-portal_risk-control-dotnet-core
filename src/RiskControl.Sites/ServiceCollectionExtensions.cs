@@ -28,24 +28,6 @@ using WinLossLimitControl;
 
 public static class ServiceCollectionExtensions
 {
-    public static void RegisterFanexData(this IServiceCollection services, IConfiguration configuration)
-    {
-        var connections = configuration.GetSection("ConnectionStrings")
-            .GetChildren()
-            .AsEnumerable()
-            .ToDictionary(
-                x => x.Key,
-                y => new ConnectionConfiguration(y.Key, y.Value)
-            );
-
-        DbSettingProviderManager
-            .StartNewSession()
-            .Use(connections)
-            .WithSqlServer()
-            .UseDefaultDbSettingProvider(configuration.GetSection("StoredProcedurePath").Value)
-            .Run();
-    }
-
     public static void RegisterSentry(this IServiceCollection services, IConfiguration configuration)
     {
         LogManager
