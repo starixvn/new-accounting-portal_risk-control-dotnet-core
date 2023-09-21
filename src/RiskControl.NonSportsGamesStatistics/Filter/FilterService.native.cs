@@ -123,12 +123,11 @@ public class FilterServiceImp : FilterService
 
         for (var i = 0; i < result.Count; i++)
         {
-            foreach (var group in childItems)
+            var groupId = result[i].GroupId;
+            var siteGroupModels = childItems.Where(group => group.GroupId == groupId);
+            foreach (var group in siteGroupModels)
             {
-                if (group.GroupId == result[i].GroupId)
-                {
-                    result[i] = group;
-                }
+                result[i] = group;
             }
         }
 

@@ -1,3 +1,4 @@
+using Fanex.Data.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using RiskControl.Sites;
@@ -22,7 +23,7 @@ services.AddControllersWithViews(options =>
 }).AddNewtonsoftJson();
 services.AddHttpContextAccessor();
 services.RegisterRemotingRef(configuration);
-services.RegisterFanexData(configuration);
+services.AddFanexSql(configuration);
 services.RegisterSentry(configuration);
 services.RegisterInternalServices(configuration);
 services.RegisterAssemblyForMediatR();

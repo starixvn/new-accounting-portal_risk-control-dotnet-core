@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Common;
 
-public interface Service<TReportModel, TCriteria>
+public interface Service<TReportModel, in TCriteria>
     where TReportModel : class
     where TCriteria: BaseStatisticCriteria
 {

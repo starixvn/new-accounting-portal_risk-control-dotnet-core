@@ -7,6 +7,8 @@ using RiskControl.NonSportsGamesStatistics.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.Daily;
 
+using System.Linq;
+
 public class GridOptionBuilderServiceImp<TQueryModel> : GridOptionBuilderService<DailyReportModel, TQueryModel>
     where TQueryModel: BaseStatisticQueryModel
 {
@@ -47,9 +49,9 @@ public class GridOptionBuilderServiceImp<TQueryModel> : GridOptionBuilderService
     private List<GridDataRow> BuildBodyRows(List<DailyGroupStatisticsModel> statistics, bool viewByInteger)
     {
         var dataRows = new List<GridDataRow>();
-        foreach (var item in statistics)
+        var groupDataRows = statistics.Select(item => gridDataRowBuilderService.BuildDailyGroupDataRow(item, viewByInteger));
+        foreach (var groupDataRow in groupDataRows)
         {
-            var groupDataRow = gridDataRowBuilderService.BuildDailyGroupDataRow(item, viewByInteger);
             dataRows.AddRange(groupDataRow);
         }
 

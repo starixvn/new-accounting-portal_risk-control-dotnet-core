@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Results;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main.Normal;
+
+using Olympus.WebApi.Epplus;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/UserNameViewNormal")]

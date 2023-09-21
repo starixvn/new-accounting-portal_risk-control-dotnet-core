@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Olympus.WebApi.Attributes;
-using Olympus.WebApi.Results;
 using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Hourly.History;
+
+using Olympus.WebApi.Epplus;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/HourlyHistory")]

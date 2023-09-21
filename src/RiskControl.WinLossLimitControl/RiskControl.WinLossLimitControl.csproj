@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -10,22 +10,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Constants\" />
-    <Folder Include="CurrencySettings\Model\" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="EPPlus" Version="6.2.9" />
     <PackageReference Include="Epplus.Mapper" Version="6.0.0" />
     <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.3" />
-    <PackageReference Include="Fanex.Data.Repository" Version="4.2.2" />
-    <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.10" />
+    <PackageReference Include="Fanex.Data.Repository" Version="4.2.3" />
+    <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.13" />
     <PackageReference Include="Fanex.RemotingRef" Version="1.5.0.1" />
     <PackageReference Include="MediatR" Version="12.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Olympus.FPSAPI.Client.AspNetCore" Version="1.0.0" />
-    <PackageReference Include="Olympus.WebApi.Epplus.AspNetCore" Version="1.0.1" />
+    <PackageReference Include="Olympus.FPSAPI.Client" Version="1.0.0.16" />
+    <PackageReference Include="Olympus.WebApi.Epplus" Version="1.0.0.4" />
   </ItemGroup>
 
   <ItemGroup>

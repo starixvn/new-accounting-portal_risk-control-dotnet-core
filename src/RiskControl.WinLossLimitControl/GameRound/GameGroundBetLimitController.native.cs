@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Results;
 using RiskControl.Core.Model;
 using RiskControl.WinLossLimitControl.GameRound.Request;
 using RiskControl.WinLossLimitControl.Services;
@@ -8,6 +7,7 @@ using System.Threading.Tasks;
 namespace RiskControl.WinLossLimitControl.GameRound;
 
 using Fanex.NAP.Client.Helpers.Business;
+using Olympus.WebApi.Epplus;
 
 [ApiController]
 public class GameRoundBetLimitController : ControllerBase
