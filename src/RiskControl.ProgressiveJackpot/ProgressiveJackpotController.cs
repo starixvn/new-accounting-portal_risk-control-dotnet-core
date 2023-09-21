@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Results;
 using RiskControl.Core.Configuration;
 using RiskControl.ProgressiveJackpot.ApiModel;
 using RiskControl.ProgressiveJackpot.Model;
 
 namespace RiskControl.ProgressiveJackpot;
+
+using Olympus.WebApi.Epplus;
 
 [ApiController]
 [Route("api/progressive-jackpot")]

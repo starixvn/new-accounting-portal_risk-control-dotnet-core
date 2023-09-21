@@ -19,8 +19,8 @@
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="6.2.9" />
     <PackageReference Include="Epplus.Mapper" Version="6.0.0" />
-    <PackageReference Include="Olympus.WebApi.Epplus.AspNetCore" Version="1.0.1" />
-    <PackageReference Include="Olympus.WebApiClient.AspNetCore" Version="1.0.0" />
+    <PackageReference Include="Olympus.WebApi.Epplus" Version="1.0.0.4" />
+    <PackageReference Include="Olympus.WebApiClient" Version="1.0.9" />
   </ItemGroup>
 
   <ItemGroup>

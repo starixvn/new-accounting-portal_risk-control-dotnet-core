@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Results;
 using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Hourly.Normal;
+
+using Olympus.WebApi.Epplus;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/HourlyNormal")]

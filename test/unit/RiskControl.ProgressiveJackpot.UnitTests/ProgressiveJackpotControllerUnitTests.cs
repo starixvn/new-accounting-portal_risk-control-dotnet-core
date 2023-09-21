@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using OfficeOpenXml;
-using Olympus.WebApi.Results;
 using RiskControl.Core.Configuration;
 using RiskControl.ProgressiveJackpot.ApiModel;
 using RiskControl.ProgressiveJackpot.Model;
@@ -11,6 +10,7 @@ using Xunit;
 
 namespace RiskControl.ProgressiveJackpot.UnitTests;
 
+using Olympus.WebApi.Epplus;
 using Xunit.Asserts.Compare;
 
 public class ProgressiveJackpotControllerUnitTests

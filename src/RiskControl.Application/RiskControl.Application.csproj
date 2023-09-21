@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -12,8 +12,8 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Fanex.Data.Repository" Version="4.2.3-beta2" />
-    <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.10" />
+    <PackageReference Include="Fanex.Data.Repository" Version="4.2.3" />
+    <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.13" />
   </ItemGroup>
 
   <ItemGroup>
