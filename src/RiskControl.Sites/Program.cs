@@ -2,7 +2,7 @@ using Fanex.Data.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using RiskControl.Sites;
-using Fanex.NAP.Signin.AspNetCore.Attribute;
+using Fanex.NAP.SignIn.Attribute;
 using Microsoft.AspNetCore.Mvc;
 using ONEbook.UM.AspNetCore.Filters;
 using Fanex.NAP.Client.Configuration;
