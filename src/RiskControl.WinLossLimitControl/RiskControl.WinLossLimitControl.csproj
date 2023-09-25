@@ -16,9 +16,9 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="EPPlus" Version="6.2.9" />
     <PackageReference Include="Epplus.Mapper" Version="6.0.0" />
-    <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.3" />
+    <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.4" />
     <PackageReference Include="Fanex.Data.Repository" Version="4.2.3" />
-    <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.13" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.0" />
     <PackageReference Include="Fanex.RemotingRef" Version="1.5.0.1" />
     <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Olympus.FPSAPI.Client" Version="1.0.0.16" />
