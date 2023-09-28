@@ -187,6 +187,10 @@ export class GridComponent implements OnInit, OnChanges {
         }
     }
 
+    onIsSuspendAccountChange() {
+
+    }
+
     private search() {
         this.productSettings = undefined;
         this.clickedAllPageModel = {} as ClickedAllPageModel;

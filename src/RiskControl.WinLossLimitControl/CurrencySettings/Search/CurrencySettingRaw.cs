@@ -21,4 +21,6 @@ public class CurrencySettingRaw : WinLossLimitRaw
     public bool IsBlockedTransfer { get; set; }
 
     public bool IsCreditSite { get; set; }
+
+    public bool IsSuspendedAccount { get; set; }
 }

@@ -12,6 +12,7 @@ export interface ProductSettingGroup {
     orangeLimit: number;
     yellowLimit: number;
     redLimit: number;
+    isSuspendedAccount: boolean;
 }
 
 export interface ProductSetting {
@@ -19,6 +20,7 @@ export interface ProductSetting {
     currencyName: string;
     siteName: string;
     groups: ProductSettingGroup[];
+    isSuspendedAccount: boolean;
 }
 
 export interface CommandResult {

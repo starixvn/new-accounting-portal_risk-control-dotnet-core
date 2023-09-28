@@ -59,7 +59,7 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
     private IEnumerable<CurrencySetting> FromRawCurrencySetting(IEnumerable<CurrencySettingRaw> rawCurrencySetting)
     {
         var currencyGroups =
-            rawCurrencySetting.GroupBy(x => new { x.ProductId, x.GroupId, x.CurrencyId, x.SiteId, x.IsCreditSite });
+            rawCurrencySetting.GroupBy(x => new { x.ProductId, x.GroupId, x.CurrencyId, x.SiteId, x.IsCreditSite, x.IsSuspendedAccount });
 
         foreach (var group in currencyGroups)
         {
@@ -81,7 +81,8 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
                 IsBlockedTransferRedLevel =
                     group.Where(x => x.LevelId == LimitLevelConstant.RedLevel)
                         .Select(x => x.IsBlockedTransfer)
-                        .FirstOrDefault()
+                        .FirstOrDefault(),
+                IsSuspendedAccount = group.Key.IsSuspendedAccount
             };
 
             dataTransformService.UpdateFromRaw(currencySetting, group.ToList<WinLossLimitRaw>());
@@ -94,7 +95,7 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
     {
         var groups =
             settings.GroupBy(
-                s => new { s.ProductId, s.ProductName, s.SiteId, s.SiteName, s.CurrencyId, s.CurrencyName });
+                s => new { s.ProductId, s.ProductName, s.SiteId, s.SiteName, s.CurrencyId, s.CurrencyName, s.IsSuspendedAccount });
         foreach (var group in groups)
         {
             var settingByGroup = group
@@ -121,7 +122,8 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
                 ProductName = group.Key.ProductName,
                 SiteName = group.Key.SiteName,
                 CurrencyName = group.Key.CurrencyName,
-                Groups = settingByGroup
+                Groups = settingByGroup,
+                IsSuspendedAccount = group.Key.IsSuspendedAccount
             };
 
             yield return settingSite;
