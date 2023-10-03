@@ -113,7 +113,8 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
                     GreyLimit = g.GreyLimit,
                     OrangeLimit = g.OrangeLimit,
                     YellowLimit = g.YellowLimit,
-                    RedLimit = g.RedLimit
+                    RedLimit = g.RedLimit,
+                    IsSuspendedAccount = group.Key.IsSuspendedAccount
                 })
                 .OrderBy(g => g.GroupName)
                 .ToList();
