@@ -13,4 +13,5 @@ public class SettingSite
     public List<SettingGroup> Groups { get; set; }
 
     public bool IsSuspendedAccount { get; set; }    
+
 }
