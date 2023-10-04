@@ -1,7 +1,7 @@
 function ReCheckin() {
-    var urlRecheckIn = window.rootUrl + 'Auth/ReCheckIn';
-    var urlLogout = window.rootUrl + 'Auth/LogOut';
-    var urlOffline = window.rootUrl + 'Auth/Offline';
+    var urlRecheckIn = document.body.getAttribute('root-url') + 'Auth/ReCheckIn';
+    var urlLogout = document.body.getAttribute('old-site-root-url') + 'Auth/LogOut';
+    var urlOffline = document.body.getAttribute('root-url') + 'Auth/Offline';
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function () {
@@ -9,7 +9,7 @@ function ReCheckin() {
             var result = JSON.parse(xmlhttp.responseText);
 
             if (xmlhttp.status === 200) {
-                if (result.IsKickedOut) {
+                if (result.isKickedOut) {
                     alert('You have logged in from another session or your login session has expired!');
                     window.location.href = urlLogout;
                 }

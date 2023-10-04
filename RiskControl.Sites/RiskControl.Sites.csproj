@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <CodeAnalysisRuleSet>..\..\.sonarlint\nap-riskcontrolcsharp.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\.sonarlint\nap-riskcontrolcsharp.ruleset</CodeAnalysisRuleSet>
 	<!-- Exclude the project from analysis -->
 	<SonarQubeExclude>true</SonarQubeExclude>
   </PropertyGroup>
@@ -83,13 +83,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RiskControl.Application\RiskControl.Application.csproj" />
-    <ProjectReference Include="..\RiskControl.BettingMonitoring\RiskControl.BettingMonitoring.csproj" />
-    <ProjectReference Include="..\RiskControl.Core\RiskControl.Core.csproj" />
-    <ProjectReference Include="..\RiskControl.Dashboard\RiskControl.Dashboard.csproj" />
-    <ProjectReference Include="..\RiskControl.NonSportsGamesStatistics\RiskControl.NonSportsGamesStatistics.csproj" />
-    <ProjectReference Include="..\RiskControl.ProgressiveJackpot\RiskControl.ProgressiveJackpot.csproj" />
-    <ProjectReference Include="..\RiskControl.WinLossLimitControl\RiskControl.WinLossLimitControl.csproj" />
+    <ProjectReference Include="..\src\RiskControl.Application\RiskControl.Application.csproj" />
+    <ProjectReference Include="..\src\RiskControl.BettingMonitoring\RiskControl.BettingMonitoring.csproj" />
+    <ProjectReference Include="..\src\RiskControl.Core\RiskControl.Core.csproj" />
+    <ProjectReference Include="..\src\RiskControl.Dashboard\RiskControl.Dashboard.csproj" />
+    <ProjectReference Include="..\src\RiskControl.NonSportsGamesStatistics\RiskControl.NonSportsGamesStatistics.csproj" />
+    <ProjectReference Include="..\src\RiskControl.ProgressiveJackpot\RiskControl.ProgressiveJackpot.csproj" />
+    <ProjectReference Include="..\src\RiskControl.WinLossLimitControl\RiskControl.WinLossLimitControl.csproj" />
   </ItemGroup>
 
 </Project>
