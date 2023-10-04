@@ -154,7 +154,7 @@
                                     </td>
                                     <td class="text-center">
                                       <label class="form-check">
-                                      <input type="checkbox" [disabled]="group.isCreditSite || !hasHostPermission" class="form-check-input position-static" [(ngModel)]="group.isSuspendedAccount" (ngModelChange)="onIsSuspendAccountChange()">
+                                      <input type="checkbox" [disabled]="!group.isCreditSite || !hasHostPermission" class="form-check-input position-static" [(ngModel)]="group.isSuspendedAccount" (ngModelChange)="onIsSuspendAccountChange()">
                                   </label>
                                   </td>
                                 </tr>

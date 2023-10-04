@@ -196,7 +196,7 @@ export class GridComponent implements OnInit, OnChanges {
             isSuspendAccount = false;
           }
           if (!group.isCreditSite) {
-              this.isAllDisabledBlockedTransferRedLevel = false;
+              this.isSuspendAccount = false;
           }
       });
       this.isSuspendAccount = isSuspendAccount;
