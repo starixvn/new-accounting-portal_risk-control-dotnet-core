@@ -59,10 +59,14 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
     private IEnumerable<CurrencySetting> FromRawCurrencySetting(IEnumerable<CurrencySettingRaw> rawCurrencySetting)
     {
         var currencyGroups =
-            rawCurrencySetting.GroupBy(x => new { x.ProductId, x.GroupId, x.CurrencyId, x.SiteId, x.IsCreditSite, x.IsSuspendedAccount });
+            rawCurrencySetting.GroupBy(x => new { x.ProductId, x.GroupId, x.CurrencyId, x.SiteId, x.IsCreditSite });
 
         foreach (var group in currencyGroups)
         {
+            var groupHaveSuspendedAccount = group.FirstOrDefault(x => x.IsSuspendedAccount);
+           
+            var isSuspededAccount = groupHaveSuspendedAccount != null;
+            
             var currencySetting = new CurrencySetting
             {
                 ProductId = group.Key.ProductId,
@@ -82,7 +86,7 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
                     group.Where(x => x.LevelId == LimitLevelConstant.RedLevel)
                         .Select(x => x.IsBlockedTransfer)
                         .FirstOrDefault(),
-                IsSuspendedAccount = group.Key.IsSuspendedAccount
+                IsSuspendedAccount = isSuspededAccount
             };
 
             dataTransformService.UpdateFromRaw(currencySetting, group.ToList<WinLossLimitRaw>());
@@ -95,9 +99,13 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
     {
         var groups =
             settings.GroupBy(
-                s => new { s.ProductId, s.ProductName, s.SiteId, s.SiteName, s.CurrencyId, s.CurrencyName, s.IsSuspendedAccount });
+                s => new { s.ProductId, s.ProductName, s.SiteId, s.SiteName, s.CurrencyId, s.CurrencyName });
         foreach (var group in groups)
         {
+            var groupHaveSuspendedAccount = group.FirstOrDefault(x => x.IsSuspendedAccount);
+
+            var isSuspededAccount = groupHaveSuspendedAccount != null;
+
             var settingByGroup = group
                 .Select(g => new SettingGroup
                 {
@@ -114,17 +122,18 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
                     OrangeLimit = g.OrangeLimit,
                     YellowLimit = g.YellowLimit,
                     RedLimit = g.RedLimit,
-                    IsSuspendedAccount = group.Key.IsSuspendedAccount
+                    IsSuspendedAccount = isSuspededAccount
                 })
                 .OrderBy(g => g.GroupName)
                 .ToList();
+            
             var settingSite = new SettingSite
             {
                 ProductName = group.Key.ProductName,
                 SiteName = group.Key.SiteName,
                 CurrencyName = group.Key.CurrencyName,
                 Groups = settingByGroup,
-                IsSuspendedAccount = group.Key.IsSuspendedAccount
+                IsSuspendedAccount = isSuspededAccount
             };
 
             yield return settingSite;
