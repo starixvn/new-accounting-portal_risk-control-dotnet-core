@@ -19,50 +19,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="App_Data\SpName.xml" />
-    <None Remove="Templates\GameRound\Monitor.xlsx" />
-    <None Remove="Templates\NonSport\HourlyTemplate.xlsx" />
-    <None Remove="Templates\NonSport\Template.xlsx" />
-    <None Remove="Templates\NonSport\ViewByIntegerHourlyTemplate.xlsx" />
-    <None Remove="Templates\NonSport\ViewByIntegerTemplate.xlsx" />
-    <None Remove="Templates\ProgressiveJackpot\Daily.xlsx" />
-    <None Remove="Templates\ProgressiveJackpot\Monthly.xlsx" />
-    <None Remove="Templates\ProgressiveJackpot\RealTime.xlsx" />
-    <None Remove="Templates\ProgressiveJackpot\WinRecord.xlsx" />
+    <Content Include="App_Data\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Views\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
     <AdditionalFiles Include="..\..\.sonarlint\nap-riskcontrol\CSharp\SonarLint.xml" Link="SonarLint.xml" />
-    <Content Include="App_Data\SpName.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\GameRound\Monitor.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\NonSport\HourlyTemplate.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\NonSport\Template.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\NonSport\ViewByIntegerHourlyTemplate.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\NonSport\ViewByIntegerTemplate.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\ProgressiveJackpot\Daily.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\ProgressiveJackpot\Monthly.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\ProgressiveJackpot\RealTime.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\ProgressiveJackpot\WinRecord.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
