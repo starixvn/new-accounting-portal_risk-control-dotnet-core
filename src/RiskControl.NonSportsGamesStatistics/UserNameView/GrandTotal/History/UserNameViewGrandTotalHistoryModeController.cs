@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
+using RiskControl.NonSportsGamesStatistics.Constants;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.GrandTotal.History;
 
@@ -23,7 +24,6 @@ public class UserNameViewGrandTotalHistoryModeController : BaseController<QueryM
     [HttpPost, Route("Excel")]
     public async Task<IActionResult> Excel(QueryModel queryModel)
     {
-        var sheetName = $"{queryModel.ReportBy} Game Statistic";
-        return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
+        return await base.Excel(queryModel, SheetNameConstant.SHEETNAME).ConfigureAwait(false);
     }
 }

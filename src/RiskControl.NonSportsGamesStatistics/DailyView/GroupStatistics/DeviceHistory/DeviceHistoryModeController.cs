@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using System.Threading.Tasks;
+using RiskControl.NonSportsGamesStatistics.Constants;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.GroupStatistics.DeviceHistory;
 
@@ -23,7 +24,6 @@ public class DeviceHistoryModeController : BaseController<QueryModel>
     [HttpPost, Route("Excel")]
     public async Task<IActionResult> Excel(QueryModel queryModel)
     {
-        var sheetName = $"{queryModel.ReportBy} Game Statistic";
-        return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
+        return await base.Excel(queryModel, SheetNameConstant.SHEETNAME).ConfigureAwait(false);
     }
 }

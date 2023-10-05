@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.NonSportsGamesStatistics.Common;
 using System.Threading.Tasks;
+using RiskControl.NonSportsGamesStatistics.Constants;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.Main.Normal;
 
@@ -21,7 +22,6 @@ public class DailyViewNormalModeController : BaseController<QueryModel>
     [HttpPost, Route("Excel")]
     public async Task<IActionResult> Excel(QueryModel queryModel)
     {
-        var sheetName = $"{queryModel.ReportBy} Game Statistic";
-        return await base.Excel(queryModel, sheetName).ConfigureAwait(false);
+        return await base.Excel(queryModel, SheetNameConstant.SHEETNAME).ConfigureAwait(false);
     }
 }
