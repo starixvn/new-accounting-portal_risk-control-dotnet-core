@@ -43,6 +43,7 @@ export class GridComponent implements OnInit, OnChanges {
     clickedAllPageModel = {} as ClickedAllPageModel;
     isSuspendAccount = false;
     private paginatePipe: PaginatePipe;
+    isSuspendAllAccount = false;
 
     constructor(
         private modalService: NgbModal,
@@ -195,14 +196,25 @@ export class GridComponent implements OnInit, OnChanges {
           if (isSuspendAccount && !group.isSuspendedAccount && !group.isCreditSite) {
             isSuspendAccount = false;
           }
+
           if (!group.isCreditSite) {
               this.isSuspendAccount = false;
           }
       });
+
       this.isSuspendAccount = isSuspendAccount;
+
       if (this.isSuspendAccount) {
           this.isSuspendAccount = false;
       }
+    }
+
+    applySuspendAllAccount() {
+      this.populateGroupSettingOnAllPage(group => {
+        if (group.isCreditSite) {
+            group.isSuspendedAccount = this.isSuspendAllAccount;
+        }
+      });
     }
 
     private search() {

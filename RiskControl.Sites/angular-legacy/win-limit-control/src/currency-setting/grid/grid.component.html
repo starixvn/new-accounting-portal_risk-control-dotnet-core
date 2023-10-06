@@ -29,7 +29,14 @@
                             <th rowspan="3">Setting Group</th>
                             <th colspan="2">Currency Loss Limit</th>
                             <th colspan="5">Currency Win Limit</th>
-                            <th rowspan="3">Allow Suspend Account</th>
+                            <th rowspan="3">
+                              Allow Suspend Account
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" [disabled]="!hasHostPermission" class="form-check-input position-static" [(ngModel)]="isSuspendAllAccount" (ngModelChange)="applySuspendAllAccount()">
+                                </label>
+                            </div>
+                            </th>
                         </tr>
                         <tr>
                             <th>Black level <i class="fa fa-flag text-black" aria-hidden="true"></i></th>
