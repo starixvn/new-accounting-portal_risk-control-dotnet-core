@@ -20,7 +20,6 @@ export interface ProductSetting {
     currencyName: string;
     siteName: string;
     groups: ProductSettingGroup[];
-    isSuspendedAccount: boolean;
 }
 
 export interface CommandResult {

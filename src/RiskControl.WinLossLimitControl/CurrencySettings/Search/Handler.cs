@@ -99,7 +99,7 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
     {
         var groups =
             settings.GroupBy(
-                s => new { s.ProductId, s.ProductName, s.SiteId, s.SiteName, s.CurrencyId, s.CurrencyName, s.IsSuspendedAccount });
+                s => new { s.ProductId, s.ProductName, s.SiteId, s.SiteName, s.CurrencyId, s.CurrencyName });
         foreach (var group in groups)
         {
             var settingByGroup = group
@@ -118,18 +118,17 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
                     OrangeLimit = g.OrangeLimit,
                     YellowLimit = g.YellowLimit,
                     RedLimit = g.RedLimit,
-                    IsSuspendedAccount = group.Key.IsSuspendedAccount
+                    IsSuspendedAccount = g.IsSuspendedAccount
                 })
                 .OrderBy(g => g.GroupName)
                 .ToList();
-            
+
             var settingSite = new SettingSite
             {
                 ProductName = group.Key.ProductName,
                 SiteName = group.Key.SiteName,
                 CurrencyName = group.Key.CurrencyName,
-                Groups = settingByGroup,
-                IsSuspendedAccount = group.Key.IsSuspendedAccount
+                Groups = settingByGroup
             };
 
             yield return settingSite;
