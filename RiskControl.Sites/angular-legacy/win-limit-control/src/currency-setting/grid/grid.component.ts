@@ -159,6 +159,7 @@ export class GridComponent implements OnInit, OnChanges {
         this.generateDisplayedProductSettings();
         this.onIsBlockedPlacebetRedLevelChange();
         this.onIsBlockedTransferRedLevelChange();
+        this.onIsSuspendAccountChange();
     }
 
     onIsBlockedPlacebetRedLevelChange() {
@@ -192,20 +193,16 @@ export class GridComponent implements OnInit, OnChanges {
       let isSuspendAccount = true;
       this.isSuspendAccount = true;
       this.populateGroupSettingOnAllPage(group => {
-          if (isSuspendAccount && !group.isSuspendedAccount && !group.isCreditSite) {
+          if (isSuspendAccount && !group.isSuspendedAccount && group.isCreditSite) {
             isSuspendAccount = false;
           }
 
           if (!group.isCreditSite) {
-              this.isSuspendAccount = false;
+            isSuspendAccount = false;
           }
       });
 
       this.isSuspendAccount = isSuspendAccount;
-
-      if (this.isSuspendAccount) {
-          this.isSuspendAccount = false;
-      }
     }
 
     applySuspendAllAccount() {
