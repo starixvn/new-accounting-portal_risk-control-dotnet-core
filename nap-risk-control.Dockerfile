@@ -15,10 +15,11 @@ RUN dotnet nuget add source https://nuget.nexdev.net/api/v2
 RUN --mount=type=cache,target=/root/.nuget/packages \
     dotnet restore RiskControl.Sites/RiskControl.Sites.csproj
 
-COPY src/. ./src/
-COPY RiskControl.Sites/. ./RiskControl.Sites/
+COPY src ./src
+COPY RiskControl.Sites ./RiskControl.Sites
 
 WORKDIR /src/RiskControl.Sites
+
 RUN --mount=type=cache,target=/root/.nuget/packages \
     dotnet publish -c Release -o /app --no-restore
 
