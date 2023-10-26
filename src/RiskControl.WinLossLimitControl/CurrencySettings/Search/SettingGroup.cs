@@ -27,4 +27,6 @@ public class SettingGroup
     public bool IsBlockedTransferRedLevel { get; set; }
 
     public bool IsCreditSite { get; set; }
+
+    public bool IsSuspendedAccount { get; set; }
 }

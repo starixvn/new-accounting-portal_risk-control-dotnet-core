@@ -95,6 +95,7 @@ public class UpdateServiceImp : UpdateService
         var defaultLevel = GetUpdateCurrencyDefaultLevel(currencySetting);
         defaultLevel.LevelId = LimitLevelConstant.YellowLevel;
         defaultLevel.MaxWinLimit = currencySetting.YellowLimit;
+        defaultLevel.IsSuspendedAccount = currencySetting.IsSuspendedAccount;
 
         return defaultLevel;
     }
@@ -104,6 +105,7 @@ public class UpdateServiceImp : UpdateService
         var defaultLevel = GetUpdateCurrencyDefaultLevel(currencySetting);
         defaultLevel.LevelId = LimitLevelConstant.RedLevel;
         defaultLevel.MaxWinLimit = currencySetting.RedLimit;
+        defaultLevel.IsSuspendedAccount = currencySetting.IsSuspendedAccount;
 
         return defaultLevel;
     }
@@ -117,7 +119,7 @@ public class UpdateServiceImp : UpdateService
             CurrencyId = currencySetting.CurrencyId,
             SiteId = currencySetting.SiteId,
             IsBlockedPlaceBet = currencySetting.IsBlockedPlacebetRedLevel,
-            IsBlockedTransfer = currencySetting.IsBlockedTransferRedLevel
+            IsBlockedTransfer = currencySetting.IsBlockedTransferRedLevel,
         };
     }
 }

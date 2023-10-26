@@ -1,13 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <CodeAnalysisRuleSet>..\..\.sonarlint\nap-riskcontrolcsharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\.sonarlint\nap-riskcontrol\CSharp\SonarLint.xml" Link="SonarLint.xml" />
-  </ItemGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
@@ -16,7 +11,7 @@
     <PackageReference Include="EPPlus" Version="6.2.9" />
     <PackageReference Include="Epplus.Mapper" Version="6.0.0" />
     <PackageReference Include="Fanex.Data.Repository" Version="4.2.3" />
-    <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1" />
+    <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1.1" />
     <PackageReference Include="Fanex.NAP.Client" Version="2.0.0" />
     <PackageReference Include="Fanex.Excel" Version="2.6.2" />
     <PackageReference Include="MediatR" Version="12.1.1" />

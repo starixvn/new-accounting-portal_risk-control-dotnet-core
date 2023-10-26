@@ -63,6 +63,10 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
 
         foreach (var group in currencyGroups)
         {
+            var groupHaveSuspendedAccount = group.FirstOrDefault(x => x.IsSuspendedAccount);
+           
+            var isSuspededAccount = groupHaveSuspendedAccount != null;
+            
             var currencySetting = new CurrencySetting
             {
                 ProductId = group.Key.ProductId,
@@ -81,7 +85,8 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
                 IsBlockedTransferRedLevel =
                     group.Where(x => x.LevelId == LimitLevelConstant.RedLevel)
                         .Select(x => x.IsBlockedTransfer)
-                        .FirstOrDefault()
+                        .FirstOrDefault(),
+                IsSuspendedAccount = isSuspededAccount
             };
 
             dataTransformService.UpdateFromRaw(currencySetting, group.ToList<WinLossLimitRaw>());
@@ -112,10 +117,12 @@ public class Handler : IRequestHandler<Request, List<SettingSite>>
                     GreyLimit = g.GreyLimit,
                     OrangeLimit = g.OrangeLimit,
                     YellowLimit = g.YellowLimit,
-                    RedLimit = g.RedLimit
+                    RedLimit = g.RedLimit,
+                    IsSuspendedAccount = g.IsSuspendedAccount
                 })
                 .OrderBy(g => g.GroupName)
                 .ToList();
+
             var settingSite = new SettingSite
             {
                 ProductName = group.Key.ProductName,

@@ -33,4 +33,6 @@ public class UpdateSiteModel
 
         set => isBlockedTransfer = value;
     }
+
+    public bool IsSuspendedAccount { get; set; }
 }

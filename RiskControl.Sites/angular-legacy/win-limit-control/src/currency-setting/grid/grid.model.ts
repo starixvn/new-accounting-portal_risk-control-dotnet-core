@@ -12,6 +12,7 @@ export interface ProductSettingGroup {
     orangeLimit: number;
     yellowLimit: number;
     redLimit: number;
+    isSuspendedAccount: boolean;
 }
 
 export interface ProductSetting {

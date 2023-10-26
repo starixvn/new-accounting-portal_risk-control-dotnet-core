@@ -41,6 +41,7 @@ export class GridComponent implements OnInit, OnChanges {
     hasHostPermission: boolean;
     isAllDisabledBlockedTransferRedLevel = true;
     clickedAllPageModel = {} as ClickedAllPageModel;
+    isSuspendAccount = false;
     private paginatePipe: PaginatePipe;
 
     constructor(
@@ -158,6 +159,7 @@ export class GridComponent implements OnInit, OnChanges {
         this.generateDisplayedProductSettings();
         this.onIsBlockedPlacebetRedLevelChange();
         this.onIsBlockedTransferRedLevelChange();
+        this.onIsSuspendAccountChange();
     }
 
     onIsBlockedPlacebetRedLevelChange() {
@@ -185,6 +187,30 @@ export class GridComponent implements OnInit, OnChanges {
         if (this.isAllDisabledBlockedTransferRedLevel) {
             this.isBlockedTransferRedLevel = false;
         }
+    }
+
+    onIsSuspendAccountChange() {
+      let isSuspendAccount = true;
+      this.isSuspendAccount = true;
+      this.populateGroupSettingOnAllPage(group => {
+          if (isSuspendAccount && !group.isSuspendedAccount && group.isCreditSite) {
+            isSuspendAccount = false;
+          }
+
+          if (!group.isCreditSite) {
+            isSuspendAccount = false;
+          }
+      });
+
+      this.isSuspendAccount = isSuspendAccount;
+    }
+
+    applySuspendAllAccount() {
+      this.populateGroupSettingOnAllPage(group => {
+        if (group.isCreditSite) {
+            group.isSuspendedAccount = this.isSuspendAccount;
+        }
+      });
     }
 
     private search() {
@@ -224,6 +250,7 @@ export class GridComponent implements OnInit, OnChanges {
         this.orangeLimit = undefined;
         this.yellowLimit = undefined;
         this.redLimit = undefined;
+        this.isSuspendAccount = false;
     }
 
     private generateDisplayedProductSettings() {

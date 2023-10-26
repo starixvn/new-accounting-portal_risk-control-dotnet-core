@@ -23,7 +23,8 @@ public static class ObjectToXMLExtension
                        + $"Level='{model.LevelId}' "
                        + $"WinLimit='{model.MaxWinLimit}' "
                        + $"PlaceBet='{model.IsBlockedPlaceBet}' "
-                       + $"Transfer='{model.IsBlockedTransfer}' />";
+                       + $"Transfer='{model.IsBlockedTransfer}' "
+                       + $"Suspend='{model.IsSuspendedAccount}' />";
             stringBuilder.AppendLine(line);
         }
 

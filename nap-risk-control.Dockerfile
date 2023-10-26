@@ -1,24 +1,27 @@
 FROM hub.nexdev.net/base/dotnet/core/sdk:7.0-alpine AS builder
 WORKDIR /src
 
-COPY ./src/RiskControl.Application ./src/RiskControl.Application
-COPY ./src/RiskControl.BettingMonitoring ./src/RiskControl.BettingMonitoring
-COPY ./src/RiskControl.Core ./src/RiskControl.Core
-COPY ./src/RiskControl.Dashboard ./src/RiskControl.Dashboard
-COPY ./src/RiskControl.NonSportsGamesStatistics ./src/RiskControl.NonSportsGamesStatistics
-COPY ./src/RiskControl.ProgressiveJackpot ./src/RiskControl.ProgressiveJackpot
-COPY ./src/RiskControl.WinLossLimitControl ./src/RiskControl.WinLossLimitControl
-COPY ./RiskControl.Sites/RiskControl.Sites.csproj ./RiskControl.Sites/RiskControl.Sites.csproj
+COPY src/RiskControl.Application/*.csproj ./src/RiskControl.Application/
+COPY src/RiskControl.BettingMonitoring/*.csproj ./src/RiskControl.BettingMonitoring/
+COPY src/RiskControl.Core/*.csproj ./src/RiskControl.Core/
+COPY src/RiskControl.Dashboard/*.csproj ./src/RiskControl.Dashboard/
+COPY src/RiskControl.NonSportsGamesStatistics/*.csproj ./src/RiskControl.NonSportsGamesStatistics/
+COPY src/RiskControl.ProgressiveJackpot/*.csproj ./src/RiskControl.ProgressiveJackpot/
+COPY src/RiskControl.WinLossLimitControl/*.csproj ./src/RiskControl.WinLossLimitControl/
+COPY RiskControl.Sites/*.csproj ./RiskControl.Sites/
 
-RUN ls /src -l
-WORKDIR /src/RiskControl.Sites
+
 RUN dotnet nuget add source https://nuget.nexdev.net/api/v2
 RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet restore -v n
+    dotnet restore RiskControl.Sites/RiskControl.Sites.csproj
 
-COPY ./RiskControl.Sites .
+COPY src ./src
+COPY RiskControl.Sites ./RiskControl.Sites
+
+WORKDIR /src/RiskControl.Sites
+
 RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet publish -r linux-x64 --self-contained false -c Release -o /app
+    dotnet publish -c Release -o /app --no-restore
 
 FROM hub.nexdev.net/base/dotnet/core/aspnet:7.0-alpine AS base
 
