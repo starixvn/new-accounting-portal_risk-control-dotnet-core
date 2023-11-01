@@ -1,6 +1,6 @@
-﻿using System;
+﻿namespace RiskControl.Configuration;
 
-namespace RiskControl.Core.Configuration;
+using System;
 
 public static class Settings
 {

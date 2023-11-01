@@ -4,7 +4,7 @@ using Fanex.Data.Repository;
 using MediatR;
 using RiskControl.WinLossLimitControl.Monitor.Account.Criteria;
 using RiskControl.WinLossLimitControl.Monitor.Account.Model;
-using RiskControl.Core.AssociatedAcccount;
+using RiskControl.AssociatedAcccount;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Account;
 

@@ -1,6 +1,6 @@
-﻿using System;
+﻿namespace RiskControl.BalanceUp;
 
-namespace RiskControl.Core.BalanceUp;
+using System;
 
 public class BalanceUpRange
 {

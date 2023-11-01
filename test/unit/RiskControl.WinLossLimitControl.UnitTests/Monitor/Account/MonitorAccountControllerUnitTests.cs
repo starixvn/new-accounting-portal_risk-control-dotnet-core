@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
-using RiskControl.Core.AssociatedAcccount;
+using RiskControl.AssociatedAcccount;
 using RiskControl.WinLossLimitControl.Monitor.Account;
 using RiskControl.WinLossLimitControl.Monitor.Account.Model;
 using System.Collections.Generic;

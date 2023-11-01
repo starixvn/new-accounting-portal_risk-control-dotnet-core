@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RiskControl.Core.Model;
+using RiskControl.Model;
 
 namespace RiskControl.Sites.Controllers;
 

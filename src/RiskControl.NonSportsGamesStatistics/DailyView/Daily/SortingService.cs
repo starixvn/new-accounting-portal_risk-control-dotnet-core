@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using RiskControl.Core.Sort;
+using RiskControl.Sort;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 
@@ -19,7 +19,7 @@ public class SortingServiceImp : SortingService<DailyReportModel>
     {
         foreach (var row in reportModel.Statistics)
         {
-            Sort.SortByProperty(row.DailyStatistics, sortDirection, sortColumnName);
+            SortUtility.SortByProperty(row.DailyStatistics, sortDirection, sortColumnName);
         }
     }
 

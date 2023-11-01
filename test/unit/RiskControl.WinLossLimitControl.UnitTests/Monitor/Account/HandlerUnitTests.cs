@@ -1,6 +1,6 @@
 ﻿using Fanex.Data.Repository;
 using NSubstitute;
-using RiskControl.Core.AssociatedAcccount;
+using RiskControl.AssociatedAcccount;
 using RiskControl.UnitTest.Core.TestUtilities;
 using RiskControl.WinLossLimitControl.Monitor.Account;
 using RiskControl.WinLossLimitControl.Monitor.Account.Criteria;

@@ -1,6 +1,6 @@
-﻿using System;
+﻿namespace RiskControl.AssociatedAcccount;
 
-namespace RiskControl.Core.AssociatedAcccount;
+using System;
 
 public class TopAssociatedAccount
 {

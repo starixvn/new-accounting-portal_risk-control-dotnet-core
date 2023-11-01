@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RiskControl.Core.Model;
+using RiskControl.Model;
 
 namespace RiskControl.WinLossLimitControl.PlayerSettings.Search;
 

@@ -1,4 +1,4 @@
-﻿using RiskControl.Core.AssociatedAcccount;
+﻿using RiskControl.AssociatedAcccount;
 using RiskControl.WinLossLimitControl.Monitor.Account.Model;
 using System.Collections.Generic;
 

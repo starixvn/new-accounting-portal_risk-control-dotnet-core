@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using RiskControl.Core.Configuration;
+using RiskControl.Configuration;
 
 namespace RiskControl.WinLossLimitControl.FileDownload;
 

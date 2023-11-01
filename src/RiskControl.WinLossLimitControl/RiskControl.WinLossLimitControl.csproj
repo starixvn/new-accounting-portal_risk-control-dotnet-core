@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RiskControl.Core\RiskControl.Core.csproj" />
+    <ProjectReference Include="..\RiskControl\RiskControl.csproj" />
   </ItemGroup>
 
 </Project>

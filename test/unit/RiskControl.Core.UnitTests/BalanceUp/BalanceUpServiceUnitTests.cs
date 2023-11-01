@@ -1,11 +1,11 @@
 ﻿using Fanex.Caching;
 using Fanex.Data.Repository;
 using NSubstitute;
-using RiskControl.Core.BalanceUp;
+using RiskControl.BalanceUp;
 using System;
 using Xunit;
 
-namespace RiskControl.Core.UnitTests.BalanceUp;
+namespace RiskControl.UnitTests.BalanceUp;
 
 using Xunit.Asserts.Compare;
 

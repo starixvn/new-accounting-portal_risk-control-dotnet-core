@@ -1,5 +1,5 @@
 ﻿using System;
-using RiskControl.Core.BalanceUp;
+using RiskControl.BalanceUp;
 
 namespace RiskControl.Application.BalanceUp;
 

@@ -1,5 +1,5 @@
 ﻿using NSubstitute;
-using RiskControl.Core.Configuration;
+using RiskControl.Configuration;
 using RiskControl.WinLossLimitControl.FileDownload;
 using System.IO;
 using System.Runtime.CompilerServices;

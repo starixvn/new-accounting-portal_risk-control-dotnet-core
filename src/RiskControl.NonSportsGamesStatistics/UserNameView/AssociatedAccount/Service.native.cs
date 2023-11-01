@@ -1,4 +1,4 @@
-﻿using RiskControl.Core.AssociatedAcccount;
+﻿using RiskControl.AssociatedAcccount;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.RawData;
