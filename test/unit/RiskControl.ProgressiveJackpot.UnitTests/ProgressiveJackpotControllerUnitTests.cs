@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using OfficeOpenXml;
-using RiskControl.Core.Configuration;
+using RiskControl.Configuration;
 using RiskControl.ProgressiveJackpot.ApiModel;
 using RiskControl.ProgressiveJackpot.Model;
 using System.Collections.Generic;

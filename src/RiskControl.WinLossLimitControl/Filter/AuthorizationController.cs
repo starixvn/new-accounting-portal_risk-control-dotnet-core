@@ -1,4 +1,4 @@
-﻿using RiskControl.Core.Model;
+﻿using RiskControl.Model;
 using RiskControl.WinLossLimitControl.Services;
 using RiskControl.WinLossLimitControl.Filter.Model;
 using Microsoft.AspNetCore.Mvc;

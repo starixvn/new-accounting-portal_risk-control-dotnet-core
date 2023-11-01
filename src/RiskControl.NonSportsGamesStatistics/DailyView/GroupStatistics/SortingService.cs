@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using RiskControl.Core.Sort;
+using RiskControl.Sort;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 
@@ -24,7 +24,7 @@ public class SortingServiceImp : SortingService<DailyViewGroupStatisticWithTotal
     {
         foreach (var item in statistics)
         {
-            Sort.SortByProperty(item.DailyViewStatistics, sortDirection, sortColumnName);
+            SortUtility.SortByProperty(item.DailyViewStatistics, sortDirection, sortColumnName);
         }
     }
 

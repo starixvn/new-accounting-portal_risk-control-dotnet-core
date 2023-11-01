@@ -1,4 +1,4 @@
-﻿namespace RiskControl.Core.Sort;
+﻿namespace RiskControl.Sort;
 
 public static class SortingInformation
 {

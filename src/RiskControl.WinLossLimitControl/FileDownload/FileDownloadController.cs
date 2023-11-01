@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using RiskControl.Core.Model;
+using RiskControl.Model;
 
 namespace RiskControl.WinLossLimitControl.FileDownload;
 

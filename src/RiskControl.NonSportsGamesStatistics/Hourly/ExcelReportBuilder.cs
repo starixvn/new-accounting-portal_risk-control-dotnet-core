@@ -5,7 +5,7 @@ using System.IO;
 using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
-using RiskControl.Core.Configuration;
+using RiskControl.Configuration;
 using RiskControl.NonSportsGamesStatistics.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.Hourly;

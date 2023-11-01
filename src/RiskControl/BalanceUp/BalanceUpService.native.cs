@@ -1,7 +1,7 @@
-﻿using Fanex.Caching;
-using Fanex.Data.Repository;
+﻿namespace RiskControl.BalanceUp;
 
-namespace RiskControl.Core.BalanceUp;
+using Fanex.Caching;
+using Fanex.Data.Repository;
 
 public interface BalanceUpService
 {

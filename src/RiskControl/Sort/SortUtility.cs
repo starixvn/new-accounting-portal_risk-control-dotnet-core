@@ -1,9 +1,9 @@
-﻿using System;
+﻿namespace RiskControl.Sort;
+
+using System;
 using System.Collections.Generic;
 
-namespace RiskControl.Core.Sort;
-
-public static class Sort
+public static class SortUtility
 {
     private const string Ascending = "Asc";
 

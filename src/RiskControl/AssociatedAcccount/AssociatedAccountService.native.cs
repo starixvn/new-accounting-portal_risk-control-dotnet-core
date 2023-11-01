@@ -1,11 +1,11 @@
-﻿using Fanex.Data.Repository;
-using Olympus.FPSAPI.Client;
-using RiskControl.Core.Configuration;
+﻿namespace RiskControl.AssociatedAcccount;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace RiskControl.Core.AssociatedAcccount;
+using Configuration;
+using Fanex.Data.Repository;
+using Olympus.FPSAPI.Client;
 
 public interface AssociatedAccountService
 {

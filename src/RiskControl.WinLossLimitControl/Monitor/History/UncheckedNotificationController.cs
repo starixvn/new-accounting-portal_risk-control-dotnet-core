@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RiskControl.Core.Model;
+using RiskControl.Model;
 using System.Threading.Tasks;
 
 namespace RiskControl.WinLossLimitControl.Monitor.History;

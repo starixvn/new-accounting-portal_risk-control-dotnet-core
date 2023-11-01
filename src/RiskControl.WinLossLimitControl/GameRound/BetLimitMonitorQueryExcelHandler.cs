@@ -6,7 +6,7 @@ using AutoMapper;
 using Epplus.Mapper.Extensions;
 using MediatR;
 using OfficeOpenXml;
-using RiskControl.Core.Configuration;
+using RiskControl.Configuration;
 using RiskControl.WinLossLimitControl.GameRound.Criteria;
 using RiskControl.WinLossLimitControl.GameRound.Request;
 

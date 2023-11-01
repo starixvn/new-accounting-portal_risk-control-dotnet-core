@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using NSubstitute;
-using RiskControl.Core.Configuration;
+using RiskControl.Configuration;
 using RiskControl.ProgressiveJackpot.Model;
 using System;
 using System.Linq;

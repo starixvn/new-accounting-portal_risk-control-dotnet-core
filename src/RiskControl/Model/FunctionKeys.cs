@@ -1,4 +1,4 @@
-﻿namespace RiskControl.Core.Model;
+﻿namespace RiskControl.Model;
 
 public static class FunctionKeys
 {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RiskControl.Core.Configuration;
+using RiskControl.Configuration;
 using RiskControl.ProgressiveJackpot.ApiModel;
 using RiskControl.ProgressiveJackpot.Model;
 

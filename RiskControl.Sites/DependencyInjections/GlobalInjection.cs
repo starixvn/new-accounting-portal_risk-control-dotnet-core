@@ -7,9 +7,9 @@ using Fanex.NAP.Client.Services;
 using Fanex.RemotingRef;
 using Microsoft.Extensions.DependencyInjection;
 using Olympus.FPSAPI.Client;
-using RiskControl.Core.AssociatedAcccount;
-using RiskControl.Core.BalanceUp;
-using RiskControl.Core.Configuration;
+using RiskControl.AssociatedAcccount;
+using RiskControl.BalanceUp;
+using RiskControl.Configuration;
 
 namespace RiskControl.Sites.DependencyInjections;
 

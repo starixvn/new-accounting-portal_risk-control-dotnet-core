@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace RiskControl.BalanceUp;
 
-namespace RiskControl.Core.BalanceUp;
+using Fanex.Data.Repository;
 
 public class Criteria : CriteriaBase
 {

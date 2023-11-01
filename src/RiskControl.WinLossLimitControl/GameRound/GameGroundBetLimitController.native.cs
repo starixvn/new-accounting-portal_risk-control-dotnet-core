@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RiskControl.Core.Model;
+using RiskControl.Model;
 using RiskControl.WinLossLimitControl.GameRound.Request;
 using RiskControl.WinLossLimitControl.Services;
 using System.Threading.Tasks;

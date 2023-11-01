@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
-using RiskControl.Core.Configuration;
+using RiskControl.Configuration;
 
 namespace RiskControl.ProgressiveJackpot;
 

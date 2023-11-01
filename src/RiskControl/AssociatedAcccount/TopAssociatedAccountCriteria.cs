@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace RiskControl.AssociatedAcccount;
 
-namespace RiskControl.Core.AssociatedAcccount;
+using Fanex.Data.Repository;
 
 public class TopAssociatedAccountCriteria : CriteriaBase
 {

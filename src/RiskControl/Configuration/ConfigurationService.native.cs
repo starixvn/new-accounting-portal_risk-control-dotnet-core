@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
+﻿namespace RiskControl.Configuration;
 
-namespace RiskControl.Core.Configuration;
+using System;
+using Microsoft.Extensions.Configuration;
 
 public interface ConfigurationService
 {

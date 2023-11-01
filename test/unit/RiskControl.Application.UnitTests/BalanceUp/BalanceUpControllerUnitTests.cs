@@ -1,6 +1,6 @@
 ﻿using NSubstitute;
 using RiskControl.Application.BalanceUp;
-using RiskControl.Core.BalanceUp;
+using RiskControl.BalanceUp;
 using System;
 using Xunit;
 
