@@ -66,7 +66,8 @@ public class Handler : IRequestHandler<Request, List<MonitorModel>>
                 GreyLimit = winLimitSetting.GreyLimit,
                 OrangeLimit = winLimitSetting.OrangeLimit,
                 YellowLimit = winLimitSetting.YellowLimit,
-                RedLimit = winLimitSetting.RedLimit
+                RedLimit = winLimitSetting.RedLimit,
+                IsSuspendedAccount = item.IsSuspendedAccount
             };
         });
     }
