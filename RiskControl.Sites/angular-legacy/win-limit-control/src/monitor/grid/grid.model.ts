@@ -13,6 +13,7 @@ export interface MonitorModel {
     winningAmountRM: number;
     reachedLimitTime: string;
     reachedLimitLevel: number;
+    isSuspendedAccount: boolean;
     numberReachedLimit: number;
     isNotified: boolean;
     isBlockedPlaceBet: boolean;

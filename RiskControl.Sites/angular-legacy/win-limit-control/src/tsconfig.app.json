@@ -20,7 +20,7 @@
     }
   },
   "files": [
-    "currency-setting.ts",
+    "monitor.ts",
     "polyfills.ts"
   ],
   "include": [
