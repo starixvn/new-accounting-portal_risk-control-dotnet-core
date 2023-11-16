@@ -3,7 +3,7 @@ WORKDIR /src
 
 COPY src/RiskControl.Application/*.csproj ./src/RiskControl.Application/
 COPY src/RiskControl.BettingMonitoring/*.csproj ./src/RiskControl.BettingMonitoring/
-COPY src/RiskControl.Core/*.csproj ./src/RiskControl.Core/
+COPY src/RiskControl/*.csproj ./src/RiskControl/
 COPY src/RiskControl.Dashboard/*.csproj ./src/RiskControl.Dashboard/
 COPY src/RiskControl.NonSportsGamesStatistics/*.csproj ./src/RiskControl.NonSportsGamesStatistics/
 COPY src/RiskControl.ProgressiveJackpot/*.csproj ./src/RiskControl.ProgressiveJackpot/
