@@ -13,22 +13,11 @@ public interface GridOptionBuilderService
     GridOptions BuildGridOptions(CurrencyViewStatisticsReportModel statistics, BaseStatisticQueryModel queryModel, int drillDownCurrency);
 }
 
-public class GridOptionBuilderServiceImp : GridOptionBuilderService
-{
-    private readonly GridOptionDataRowBuilderService gridDataRowBuilderService;
-    private readonly GridOptionHeaderBuilderService headerBuilderService;
-    private readonly GridOptionRemoveColumnService gridOptionRemoveColumnService;
-
-    public GridOptionBuilderServiceImp(
-        GridOptionDataRowBuilderService gridDataRowBuilderService,
+public class GridOptionBuilderServiceImp(GridOptionDataRowBuilderService gridDataRowBuilderService,
         GridOptionHeaderBuilderService headerBuilderService,
         GridOptionRemoveColumnService gridOptionRemoveColumnService)
-    {
-        this.gridDataRowBuilderService = gridDataRowBuilderService;
-        this.headerBuilderService = headerBuilderService;
-        this.gridOptionRemoveColumnService = gridOptionRemoveColumnService;
-    }
-
+    : GridOptionBuilderService
+{
     public GridOptions BuildGridOptions(CurrencyViewStatisticsReportModel statistics, BaseStatisticQueryModel queryModel, int drillDownCurrency)
     {
         var gridOptions = new GridOptions

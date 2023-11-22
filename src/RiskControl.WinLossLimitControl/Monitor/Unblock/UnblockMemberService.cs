@@ -12,21 +12,11 @@ public interface UnblockMemberService
     Task UnblockTransfer(ServiceParameter parameter);
 }
 
-public class UnblockMemberServiceImp : UnblockMemberService
+public class UnblockMemberServiceImp(IDynamicRepository repository, IMapper mapper) : UnblockMemberService
 {
     private const int UnblockPlaceBetActionId = 2;
 
     private const int UnblockTransferActionId = 4;
-
-    private readonly IDynamicRepository repository;
-
-    private readonly IMapper mapper;
-
-    public UnblockMemberServiceImp(IDynamicRepository repository, IMapper mapper)
-    {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
 
     public async Task UnblockPlaceBet(ServiceParameter parameter)
     {

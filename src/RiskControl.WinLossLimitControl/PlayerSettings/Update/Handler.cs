@@ -8,24 +8,10 @@ using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.WinLossLimitControl.PlayerSettings.Update;
 
-public class Handler : IRequestHandler<Request, ExecuteResult>
+public class Handler(UserHttpContext userHttpContext, ValidationService validationService,
+        IDynamicRepository repository, IMapper mapper)
+    : IRequestHandler<Request, ExecuteResult>
 {
-    private readonly ValidationService validationService;
-
-    private readonly IDynamicRepository repository;
-
-    private readonly UserHttpContext userHttpContext;
-
-    private readonly IMapper mapper;
-
-    public Handler(UserHttpContext userHttpContext, ValidationService validationService, IDynamicRepository repository, IMapper mapper)
-    {
-        this.userHttpContext = userHttpContext;
-        this.validationService = validationService;
-        this.repository = repository;
-        this.mapper = mapper;
-    }
-
     public async Task<ExecuteResult> Handle(Request request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<UpdateCriteria>(request);

@@ -11,17 +11,8 @@ public interface UpdateService
     Task<bool> Execute(BettingMonitoringModel model);
 }
 
-public class UpdateServiceImp : UpdateService
+public class UpdateServiceImp(IDynamicRepository dynamicRepository, IMapper mapper) : UpdateService
 {
-    private readonly IDynamicRepository dynamicRepository;
-    private readonly IMapper mapper;
-
-    public UpdateServiceImp(IDynamicRepository dynamicRepository, IMapper mapper)
-    {
-        this.dynamicRepository = dynamicRepository;
-        this.mapper = mapper;
-    }
-
     public async Task<bool> Execute(BettingMonitoringModel model)
     {
         var criteria = mapper.Map<BettingMonitoringUpdateCriteria>(model);

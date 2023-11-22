@@ -12,15 +12,9 @@ public interface GridOptionDataRowBuilderService
     GridDataRow BuildDataRow(DailyViewStatisticsModel statistic, int drillDownCurrency, bool viewByInteger);
 }
 
-public class GridOptionDataRowBuilderServiceImp : GridOptionDataRowBuilderService
+public class GridOptionDataRowBuilderServiceImp(GridOptionCustomExcelCellStyleService customCellStyleService)
+    : GridOptionDataRowBuilderService
 {
-    private readonly GridOptionCustomExcelCellStyleService customCellStyleService;
-
-    public GridOptionDataRowBuilderServiceImp(GridOptionCustomExcelCellStyleService customCellStyleService)
-    {
-        this.customCellStyleService = customCellStyleService;
-    }
-
     public GridDataRow BuildDataRow(DailyViewStatisticsModel statistic, int drillDownCurrency, bool viewByInteger)
     {
         var gamePayout = viewByInteger

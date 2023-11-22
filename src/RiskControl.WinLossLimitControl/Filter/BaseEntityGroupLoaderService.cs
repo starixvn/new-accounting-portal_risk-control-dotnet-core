@@ -12,15 +12,8 @@ public interface BaseEntityGroupLoaderService
     BaseEntityGroup GetBaseEntityGroup();
 }
 
-public class BaseEntityGroupLoaderServiceImp : BaseEntityGroupLoaderService
+public class BaseEntityGroupLoaderServiceImp(IDynamicRepository repository) : BaseEntityGroupLoaderService
 {
-    private readonly IDynamicRepository repository;
-
-    public BaseEntityGroupLoaderServiceImp(IDynamicRepository repository)
-    {
-        this.repository = repository;
-    }
-
     public BaseEntityGroup GetBaseEntityGroup()
     {
         return new BaseEntityGroup

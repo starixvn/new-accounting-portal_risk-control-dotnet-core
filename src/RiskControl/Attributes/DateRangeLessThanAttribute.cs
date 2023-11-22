@@ -4,18 +4,11 @@ using System;
 using System.ComponentModel.DataAnnotations;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-public sealed class DateRangeLessThanAttribute : ValidationAttribute
+public sealed class DateRangeLessThanAttribute(string dateFromFieldName, int months) : ValidationAttribute(string.Empty)
 {
-    public DateRangeLessThanAttribute(string dateFromFieldName, int months)
-        : base(string.Empty)
-    {
-        DateFromFieldName = dateFromFieldName;
-        Months = months;
-    }
+    public string DateFromFieldName { get; } = dateFromFieldName;
 
-    public string DateFromFieldName { get; }
-
-    public int Months { get; }
+    public int Months { get; } = months;
 
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {

@@ -8,15 +8,10 @@ namespace RiskControl.NonSportsGamesStatistics.Common;
 using Results;
 
 [ApiController]
-public class BaseController<TQueryModel> : ControllerBase
+public class BaseController<TQueryModel>(IMediator mediator) : ControllerBase
     where TQueryModel : BaseStatisticQueryModel, IRequest<GridOptions>
 {
-    protected readonly IMediator Mediator;
-
-    public BaseController(IMediator mediator)
-    {
-        Mediator = mediator;
-    }
+    protected readonly IMediator Mediator = mediator;
 
     public virtual async Task<IActionResult> Query(TQueryModel queryModel)
     {

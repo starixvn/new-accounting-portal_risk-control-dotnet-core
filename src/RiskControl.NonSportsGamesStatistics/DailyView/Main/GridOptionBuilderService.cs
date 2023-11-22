@@ -9,23 +9,12 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.Main;
 
 using System.Linq;
 
-public class GridOptionBuilderServiceImp<TQuery> : GridOptionBuilderService<DailyViewReportModel, TQuery>
-    where TQuery: BaseStatisticQueryModel
-{
-    private readonly GridOptionDataRowBuilderService gridDataRowBuilderService;
-    private readonly GridOptionRemoveColumnService gridOptionRemoveColumnService;
-    private readonly GridOptionHeaderBuilderService headerBuilderService;
-
-    public GridOptionBuilderServiceImp(
-        GridOptionDataRowBuilderService gridDataRowBuilderService,
+public class GridOptionBuilderServiceImp<TQuery>(GridOptionDataRowBuilderService gridDataRowBuilderService,
         GridOptionHeaderBuilderService headerBuilderService,
         GridOptionRemoveColumnService gridOptionRemoveColumnService)
-    {
-        this.gridDataRowBuilderService = gridDataRowBuilderService;
-        this.headerBuilderService = headerBuilderService;
-        this.gridOptionRemoveColumnService = gridOptionRemoveColumnService;
-    }
-
+    : GridOptionBuilderService<DailyViewReportModel, TQuery>
+    where TQuery: BaseStatisticQueryModel
+{
     public GridOptions BuildGridOptions(DailyViewReportModel statistics, TQuery queryModel)
     {
         var gridOptions = new GridOptions

@@ -8,19 +8,11 @@ using System.Threading.Tasks;
 
 namespace RiskControl.WinLossLimitControl.ManagedSettingGroup.Search;
 
-public class Handler : IRequestHandler<RepresentativeBettypeRequest, RepresentativeBettypeModel>,
+public class Handler(IDynamicRepository repository, IMapper mapper) :
+    IRequestHandler<RepresentativeBettypeRequest, RepresentativeBettypeModel>,
     IRequestHandler<UnassignedBettypeRequest, IEnumerable<UnassignedBettypeModel>>,
     IRequestHandler<GroupSettingRequest, IEnumerable<GroupGroupSettingModel>>
 {
-    private readonly IDynamicRepository repository;
-    private readonly IMapper mapper;
-
-    public Handler(IDynamicRepository repository, IMapper mapper)
-    {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
-
     public async Task<RepresentativeBettypeModel> Handle(RepresentativeBettypeRequest request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<RepresentativeBettypeCriteria>(request);

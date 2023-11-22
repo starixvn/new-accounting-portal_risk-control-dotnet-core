@@ -11,15 +11,8 @@ namespace RiskControl.NonSportsGamesStatistics.Filter;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/GameType")]
-public class GameTypeController : ControllerBase
+public class GameTypeController(IDynamicRepository repository) : ControllerBase
 {
-    private readonly IDynamicRepository repository;
-
-    public GameTypeController(IDynamicRepository repository)
-    {
-        this.repository = repository;
-    }
-
     [Route("Query")]
     [HttpGet]
     public async Task<List<GameTypeModel>> Query()

@@ -10,15 +10,8 @@ using Results;
 [ApiController]
 [Route("NonSportsGamesStatistics/HourlyHistory")]
 [ValidationActionFilter]
-public class HourlyHistoryModeController : ControllerBase
+public class HourlyHistoryModeController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public HourlyHistoryModeController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [HttpPost, Route("Query")]
     public async Task<IActionResult> Query(QueryModel queryModel)
     {

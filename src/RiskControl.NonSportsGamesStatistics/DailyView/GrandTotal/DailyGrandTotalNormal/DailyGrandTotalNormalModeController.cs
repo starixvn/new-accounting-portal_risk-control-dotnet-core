@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.DailyGrandTotalNormal;
 
 [Route("NonSportsGamesStatistics/DailyGrandTotalNormal")]
-public class DailyGrandTotalNormalModeController : BaseController<QueryModel>
+public class DailyGrandTotalNormalModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public DailyGrandTotalNormalModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [HttpPost, Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {

@@ -16,24 +16,14 @@ public interface AssociatedAccountService
     Task<IEnumerable<TopAssociatedAccount>> GetAssociateddByIp(int custId);
 }
 
-public class AssociatedAccountServiceImp : AssociatedAccountService
+public class AssociatedAccountServiceImp(ConfigurationService configurationService,
+        FraudServiceWrapper fraudServiceWrapper,
+        IDynamicRepository repository)
+    : AssociatedAccountService
 {
     private const int AssociatedByDevice = 1;
     private const int AssociatedByManual = 2;
     private const int AssociatedByIp = 3;
-
-    private readonly ConfigurationService configurationService;
-    private readonly FraudServiceWrapper fraudServiceWrapper;
-    private readonly IDynamicRepository repository;
-
-    public AssociatedAccountServiceImp(ConfigurationService configurationService,
-        FraudServiceWrapper fraudServiceWrapper,
-        IDynamicRepository repository)
-    {
-        this.configurationService = configurationService;
-        this.fraudServiceWrapper = fraudServiceWrapper;
-        this.repository = repository;
-    }
 
     public async Task<IEnumerable<TopAssociatedAccount>> GetAssociatedByDevice(int custId)
     {

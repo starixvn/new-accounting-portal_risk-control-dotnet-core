@@ -12,23 +12,15 @@ public interface ValidationService
     Task<int> Execute(List<PlayerSetting> playerSettings);
 }
 
-public class ValidationServiceImp : ValidationService
+public class ValidationServiceImp(IDynamicRepository repository,
+        IncreamentedSeriesContrainService increamentedSeriesContrainService)
+    : ValidationService
 {
     private const int ValidCode = 0;
 
     private const int InvalidPlayerSettingErrorCode = 2;
 
     public const int InvalidCurrencySettingErrorCode = 1;
-
-    private readonly IDynamicRepository repository;
-
-    private readonly IncreamentedSeriesContrainService increamentedSeriesContrainService;
-
-    public ValidationServiceImp(IDynamicRepository repository, IncreamentedSeriesContrainService increamentedSeriesContrainService)
-    {
-        this.repository = repository;
-        this.increamentedSeriesContrainService = increamentedSeriesContrainService;
-    }
 
     public async Task<int> Execute(List<PlayerSetting> playerSettings)
     {

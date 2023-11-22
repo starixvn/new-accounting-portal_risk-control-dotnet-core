@@ -10,19 +10,9 @@ namespace RiskControl.NonSportsGamesStatistics.Filter;
 
 [ApiController]
 [Route("state-api/NonSportsGamesStatistics/Permission")]
-public class PermissionController : ControllerBase
+public class PermissionController(IUserService userService, INapSession napSession, INapSettings napSettings)
+    : ControllerBase
 {
-    private readonly IUserService userService;
-    private readonly INapSession napSession;
-    private readonly INapSettings napSettings;
-
-    public PermissionController(IUserService userService, INapSession napSession, INapSettings napSettings)
-    {
-        this.userService = userService;
-        this.napSession = napSession;
-        this.napSettings = napSettings;
-    }
-
     [Route("Query")]
     [HttpGet]
     public Permission Query()

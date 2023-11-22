@@ -11,21 +11,9 @@ using System.Threading.Tasks;
 namespace RiskControl.NonSportsGamesStatistics.Filter;
 
 [ApiController]
-public class UsernameController : ControllerBase
+public class UsernameController(INapSession session, IDynamicRepository repository, IMapper mapper)
+    : ControllerBase
 {
-    private readonly INapSession session;
-
-    private readonly IDynamicRepository repository;
-
-    private readonly IMapper mapper;
-
-    public UsernameController(INapSession session, IDynamicRepository repository, IMapper mapper)
-    {
-        this.repository = repository;
-        this.session = session;
-        this.mapper = mapper;
-    }
-
     [Route("state-api/NonSportsGamesStatistics/Filter/UserName/Suggest")]
     [HttpPost]
     public async Task<IEnumerable<string>> Suggest(UsernameSuggestionQueryModel queryModel)

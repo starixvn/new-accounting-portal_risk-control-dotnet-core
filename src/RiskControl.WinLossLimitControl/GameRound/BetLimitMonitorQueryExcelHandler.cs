@@ -12,22 +12,11 @@ using RiskControl.WinLossLimitControl.GameRound.Request;
 
 namespace RiskControl.WinLossLimitControl.GameRound;
 
-public class BetLimitMonitorQueryExcelHandler : IRequestHandler<BetLimitMonitorQueryExcelRequest, ExcelPackage>
+public class BetLimitMonitorQueryExcelHandler(BetLimitMonitorDataService betLimitMonitorDataService,
+        ConfigurationService configurationService, IMapper mapper)
+    : IRequestHandler<BetLimitMonitorQueryExcelRequest, ExcelPackage>
 {
     private const int ExcelStartRow = 5;
-
-    private readonly ConfigurationService configurationService;
-
-    private readonly BetLimitMonitorDataService betLimitMonitorDataService;
-
-    private readonly IMapper mapper;
-
-    public BetLimitMonitorQueryExcelHandler(BetLimitMonitorDataService betLimitMonitorDataService, ConfigurationService configurationService, IMapper mapper)
-    {
-        this.betLimitMonitorDataService = betLimitMonitorDataService;
-        this.configurationService = configurationService;
-        this.mapper = mapper;
-    }
 
     public async Task<ExcelPackage> Handle(BetLimitMonitorQueryExcelRequest request, CancellationToken cancellationToken)
     {

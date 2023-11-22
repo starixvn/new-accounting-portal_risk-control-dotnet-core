@@ -6,21 +6,9 @@ using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.WinLossLimitControl.PlayerSettings.Insert;
 
-public class Handler : IRequestHandler<Request, ExecuteResult>
+public class Handler(UserHttpContext userHttpContext, ValidationService validationService, InsertService insertService)
+    : IRequestHandler<Request, ExecuteResult>
 {
-    private readonly UserHttpContext userHttpContext;
-
-    private readonly ValidationService validationService;
-
-    private readonly InsertService insertService;
-
-    public Handler(UserHttpContext userHttpContext, ValidationService validationService, InsertService insertService)
-    {
-        this.insertService = insertService;
-        this.validationService = validationService;
-        this.userHttpContext = userHttpContext;
-    }
-
     public async Task<ExecuteResult> Handle(Request request, CancellationToken cancellationToken)
     {
         var userContext = new UserContext { UserId = userHttpContext.UserId, IP = userHttpContext.IP };

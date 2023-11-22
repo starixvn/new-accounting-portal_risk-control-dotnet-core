@@ -7,21 +7,10 @@ using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Unblock;
 
-public class HandlerUnblockPlaceBet : IRequestHandler<RequestUnblockPlaceBet, ExecuteResult>
+public class HandlerUnblockPlaceBet(UserHttpContext userHttpContext, UnblockMemberService unblockMemberService,
+        IMapper mapper)
+    : IRequestHandler<RequestUnblockPlaceBet, ExecuteResult>
 {
-    private readonly UserHttpContext userHttpContext;
-
-    private readonly UnblockMemberService unblockMemberService;
-
-    private readonly IMapper mapper;
-
-    public HandlerUnblockPlaceBet(UserHttpContext userHttpContext, UnblockMemberService unblockMemberService, IMapper mapper)
-    {
-        this.unblockMemberService = unblockMemberService;
-        this.userHttpContext = userHttpContext;
-        this.mapper = mapper;
-    }
-
     public async Task<ExecuteResult> Handle(RequestUnblockPlaceBet request, CancellationToken cancellationToken)
     {
         var parameter = mapper.Map<ServiceParameter>(request);

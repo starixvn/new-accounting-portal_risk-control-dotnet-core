@@ -13,15 +13,9 @@ public interface GridOptionHeaderBuilderService
     List<HeaderColumns> BuildGrandTotalHeaderColumns(bool viewByInteger);
 }
 
-public class GridOptionHeaderBuilderServiceImp : GridOptionHeaderBuilderService
+public class GridOptionHeaderBuilderServiceImp
+    (HeaderTextByReportService headerTextByReportService) : GridOptionHeaderBuilderService
 {
-    private readonly HeaderTextByReportService headerTextByReportService;
-
-    public GridOptionHeaderBuilderServiceImp(HeaderTextByReportService headerTextByReportService)
-    {
-        this.headerTextByReportService = headerTextByReportService;
-    }
-
     public List<HeaderColumns> BuildHeaderColumns(BaseStatisticQueryModel queryModel)
     {
         var firstHeaderText = headerTextByReportService.GetHeaderText(queryModel.ReportBy);

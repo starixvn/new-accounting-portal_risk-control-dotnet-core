@@ -8,15 +8,8 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.HousePositionTaking;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/HousePostitionTaking")]
-public class HousePostitionTakingController : ControllerBase
+public class HousePostitionTakingController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public HousePostitionTakingController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [HttpPost, Route("Query")]
     public async Task<IEnumerable<HousePositionTakingModel>> Query(QueryModel queryModel)
     {

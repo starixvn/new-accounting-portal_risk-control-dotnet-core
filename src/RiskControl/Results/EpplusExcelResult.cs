@@ -7,17 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 
-public class EpplusExcelResult : IActionResult
+public class EpplusExcelResult(ExcelPackage excelPackage, string password = "") : IActionResult
 {
-    private readonly string password;
-
-    public EpplusExcelResult(ExcelPackage excelPackage, string password = "")
-    {
-        ExcelPackage = excelPackage;
-        this.password = password;
-    }
-
-    public ExcelPackage ExcelPackage { get; }
+    public ExcelPackage ExcelPackage { get; } = excelPackage;
 
     public string FileName { get; set; } = "Excel.xlsx";
 

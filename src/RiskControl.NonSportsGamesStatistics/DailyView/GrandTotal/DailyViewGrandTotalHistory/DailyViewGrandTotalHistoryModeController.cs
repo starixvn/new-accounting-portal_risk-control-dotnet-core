@@ -9,12 +9,8 @@ using Attributes;
 
 [Route("NonSportsGamesStatistics/DailyViewGrandTotalHistory")]
 [ValidationActionFilter]
-public class DailyViewGrandTotalHistoryModeController : BaseController<QueryModel>
+public class DailyViewGrandTotalHistoryModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public DailyViewGrandTotalHistoryModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [HttpPost, Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {

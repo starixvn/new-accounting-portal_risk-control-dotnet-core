@@ -10,15 +10,8 @@ using Fanex.NAP.Client.Helpers.Business;
 
 [ApiController]
 [Route("state-api/win-limit-control/player-setting")]
-public class PlayerSettingDeleteController : ControllerBase
+public class PlayerSettingDeleteController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public PlayerSettingDeleteController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [HttpPost]
     [NapAuth(FunctionKey = FunctionKeys.PlayerWinLimitManagement, Policy = Constant.Policy.Host)]
     [Route("delete")]

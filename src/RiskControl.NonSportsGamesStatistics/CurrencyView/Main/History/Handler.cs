@@ -6,25 +6,12 @@ using MediatR;
 
 namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Main.History;
 
-public class Handler : IRequestHandler<QueryModel, GridOptions>
-{
-    private readonly Service service;
-    private readonly SortingService sortingService;
-    private readonly GridOptionBuilderService gridOptionService;
-    private readonly IMapper mapper;
-
-    public Handler(
-        Service service,
+public class Handler(Service service,
         SortingService sortingService,
         GridOptionBuilderService gridOptionService,
         IMapper mapper)
-    {
-        this.service = service;
-        this.sortingService = sortingService;
-        this.gridOptionService = gridOptionService;
-        this.mapper = mapper;
-    }
-
+    : IRequestHandler<QueryModel, GridOptions>
+{
     public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<Criteria>(request);

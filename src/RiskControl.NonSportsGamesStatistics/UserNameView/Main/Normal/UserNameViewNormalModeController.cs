@@ -8,15 +8,8 @@ using Results;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/UserNameViewNormal")]
-public class UserNameViewNormalModeController : ControllerBase
+public class UserNameViewNormalModeController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public UserNameViewNormalModeController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [HttpPost, Route("Query")]
     public async Task<IActionResult> Query(QueryModel queryModel)
     {

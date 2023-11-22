@@ -4,6 +4,4 @@ using RiskControl.WinLossLimitControl.Models;
 
 namespace RiskControl.WinLossLimitControl.PlayerSettings.Insert;
 
-public class Request : List<PlayerSetting>, IRequest<ExecuteResult>
-{
-}
+public class Request : List<PlayerSetting>, IRequest<ExecuteResult>;

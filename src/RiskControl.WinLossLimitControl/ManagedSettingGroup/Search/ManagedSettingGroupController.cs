@@ -10,15 +10,8 @@ using Fanex.NAP.Client.Helpers.Business;
 
 [ApiController]
 [Route("api/win-limit-control/manage-setting-group")]
-public class ManagedSettingGroupController : ControllerBase
+public class ManagedSettingGroupController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public ManagedSettingGroupController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [NapAuth(FunctionKey = FunctionKeys.CurrencyWinLimitSetting, Policy = Constant.Policy.Read)]
     [Route("representative-bettype")]
     [HttpPost]

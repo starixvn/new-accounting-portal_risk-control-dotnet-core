@@ -12,15 +12,8 @@ public interface BetLimitMonitorDataService
     Task<List<BetLimitMonitorModel>> Query(BetLimitMonitorQueryCriteria criteria);
 
 }
-public class BetLimitMonitorDataServiceImp : BetLimitMonitorDataService
+public class BetLimitMonitorDataServiceImp(IDynamicRepository dynamicRepository) : BetLimitMonitorDataService
 {
-    private readonly IDynamicRepository dynamicRepository;
-
-    public BetLimitMonitorDataServiceImp(IDynamicRepository dynamicRepository)
-    {
-        this.dynamicRepository = dynamicRepository;
-    }
-
     public async Task<List<BetLimitMonitorModel>> Query(BetLimitMonitorQueryCriteria criteria)
     {
         var models = (await dynamicRepository.FetchAsync<BetLimitMonitorModel>(criteria)).ToList();

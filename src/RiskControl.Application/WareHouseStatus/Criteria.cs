@@ -4,12 +4,7 @@ namespace RiskControl.Application.WareHouseStatus;
 
 public class Criteria : CriteriaBase
 {
-    public Criteria()
-    {
-        Cube = "DW";
-    }
-
-    public string Cube { get; }
+    public string Cube => "DW";
 
     public override bool IsValid() => true;
 

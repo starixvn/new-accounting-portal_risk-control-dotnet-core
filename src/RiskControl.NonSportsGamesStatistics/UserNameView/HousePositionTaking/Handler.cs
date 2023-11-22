@@ -9,22 +9,11 @@ using RiskControl.NonSportsGamesStatistics.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.HousePositionTaking;
 
-public class Handler : IRequestHandler<QueryModel, IEnumerable<HousePositionTakingModel>>
-{
-    private readonly DataSourceChooser dataSourceChooser;
-    private readonly IDynamicRepository repository;
-    private readonly IMapper mapper;
-
-    public Handler(
-        DataSourceChooser dataSourceChooser,
+public class Handler(DataSourceChooser dataSourceChooser,
         IDynamicRepository repository,
         IMapper mapper)
-    {
-        this.dataSourceChooser = dataSourceChooser;
-        this.repository = repository;
-        this.mapper = mapper;
-    }
-
+    : IRequestHandler<QueryModel, IEnumerable<HousePositionTakingModel>>
+{
     public Task<IEnumerable<HousePositionTakingModel>> Handle(QueryModel request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<Criteria>(request);

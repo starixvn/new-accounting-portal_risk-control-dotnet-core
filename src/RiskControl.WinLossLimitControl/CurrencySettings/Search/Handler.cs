@@ -13,25 +13,10 @@ using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.WinLossLimitControl.CurrencySettings.Search;
 
-public class Handler : IRequestHandler<Request, List<SettingSite>>
-{
-    private readonly CacheRefService cacheRefService;
-
-    private readonly DataTransformService dataTransformService;
-
-    private readonly IDynamicRepository repository;
-
-    private readonly IMapper mapper;
-
-    public Handler(IDynamicRepository repository, CacheRefService cacheRefService,
+public class Handler(IDynamicRepository repository, CacheRefService cacheRefService,
         DataTransformService dataTransformService, IMapper mapper)
-    {
-        this.repository = repository;
-        this.cacheRefService = cacheRefService;
-        this.dataTransformService = dataTransformService;
-        this.mapper = mapper;
-    }
-
+    : IRequestHandler<Request, List<SettingSite>>
+{
     public async Task<List<SettingSite>> Handle(Request request, CancellationToken cancellationToken)
     {
         var rawCurerncySettings = await QueryFromDatabase(request);

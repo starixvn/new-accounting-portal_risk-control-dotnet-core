@@ -10,15 +10,8 @@ using Model;
 
 [ApiController]
 [Route("state-api/betting-monitoring")]
-public class BettingMonitoringUpdateController : ControllerBase
+public class BettingMonitoringUpdateController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public BettingMonitoringUpdateController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [Route("update")]
     [NapAuth(FunctionKey = FunctionKeys.BetSettingMonitoring, Policy = Constant.Policy.Host)]
     public async Task<IActionResult> Update(Message message)

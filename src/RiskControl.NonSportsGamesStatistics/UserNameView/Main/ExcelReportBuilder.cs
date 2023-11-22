@@ -13,11 +13,11 @@ public interface ExcelReportBuilder
     ExcelPackage CreateExcelPackage(UserNameViewReportModel model, BaseStatisticQueryModel queryModel);
 }
 
-public class ExcelReportBuilderImp : ExcelReportBuilder
+public class ExcelReportBuilderImp(ConfigurationService configurationService) : ExcelReportBuilder
 {
-    private const string TemplatePath = @"Templates/NonSport/Template.xlsx";
+    private const string TemplatePath = "Templates/NonSport/Template.xlsx";
 
-    private const string ViewByIntegerTemplatePath = @"Templates/NonSport/ViewByIntegerTemplate.xlsx";
+    private const string ViewByIntegerTemplatePath = "Templates/NonSport/ViewByIntegerTemplate.xlsx";
 
     private const int StartRowIndex = 5;
 
@@ -27,18 +27,11 @@ public class ExcelReportBuilderImp : ExcelReportBuilder
 
     private const int TitleEndColumn = 16;
 
-    private readonly ConfigurationService configurationService;
-
     private ExcelWorksheet statisticSheet;
 
     private ExcelWorksheet totalTemplateSheet;
 
     private int endRowIndex;
-
-    public ExcelReportBuilderImp(ConfigurationService configurationService)
-    {
-        this.configurationService = configurationService;
-    }
 
     public ExcelPackage CreateExcelPackage(UserNameViewReportModel model, BaseStatisticQueryModel queryModel)
     {

@@ -22,23 +22,12 @@ public interface CacheRefService
     string GetSportName(int sportId);
 }
 
-public class CacheRefServiceImp : CacheRefService
+public class CacheRefServiceImp(BaseEntityGroupLoaderService baseEntityGroupLoaderService, ICacheService cacheService,
+        IRemotingRefService remotingRefService)
+    : CacheRefService
 {
     private const int CacheDurationInMinutes = 15;
     private const string CacheKey = "RiskControl.Settings.BaseEntityGroup";
-
-    private readonly BaseEntityGroupLoaderService baseEntityGroupLoaderService;
-
-    private readonly ICacheService cacheService;
-
-    private readonly IRemotingRefService remotingRefService;
-
-    public CacheRefServiceImp(BaseEntityGroupLoaderService baseEntityGroupLoaderService, ICacheService cacheService, IRemotingRefService remotingRefService)
-    {
-        this.baseEntityGroupLoaderService = baseEntityGroupLoaderService;
-        this.cacheService = cacheService;
-        this.remotingRefService = remotingRefService;
-    }
 
     public BaseEntityGroup BaseEntityGroup
     {

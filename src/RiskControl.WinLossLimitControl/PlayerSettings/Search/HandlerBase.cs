@@ -7,18 +7,8 @@ using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.WinLossLimitControl.PlayerSettings.Search;
 
-public class HandlerBase
+public class HandlerBase(CacheRefService cacheRefService, DataTransformService dataTransformService)
 {
-    private readonly CacheRefService cacheRefService;
-
-    private readonly DataTransformService dataTransformService;
-
-    public HandlerBase(CacheRefService cacheRefService, DataTransformService dataTransformService)
-    {
-        this.cacheRefService = cacheRefService;
-        this.dataTransformService = dataTransformService;
-    }
-
     protected IEnumerable<PlayerSetting> FromRawPlayerSetting(IEnumerable<PlayerSettingRaw> settings)
     {
         var groups = settings.GroupBy(x => new

@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace RiskControl.Application.WareHouseStatus;
 
-public class WareHouseStatusController : ControllerBase
+public class WareHouseStatusController(IDynamicRepository repository) : ControllerBase
 {
-    private readonly IDynamicRepository repository;
-
-    public WareHouseStatusController(IDynamicRepository repository)
-    {
-        this.repository = repository;
-    }
-
     [Route("api/application/is-data-warehouse-ready")]
     public async Task<IActionResult> Post()
     {

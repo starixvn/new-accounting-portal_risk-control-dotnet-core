@@ -8,20 +8,10 @@ using RiskControl.AssociatedAcccount;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Account;
 
-public class Handler : IRequestHandler<Request, AccountModel>
-{
-    private readonly IDynamicRepository repository;
-
-    private readonly AssociatedAccountService associatedAccountService;
-
-    public Handler(
-        IDynamicRepository repository,
+public class Handler(IDynamicRepository repository,
         AssociatedAccountService associatedAccountService)
-    {
-        this.repository = repository;
-        this.associatedAccountService = associatedAccountService;
-    }
-
+    : IRequestHandler<Request, AccountModel>
+{
     public async Task<AccountModel> Handle(Request request, CancellationToken cancellationToken)
     {
         var customer = await GetCustomer(request.CustId);

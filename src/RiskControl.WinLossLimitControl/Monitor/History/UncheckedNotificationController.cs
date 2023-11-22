@@ -10,15 +10,8 @@ using Fanex.NAP.Client.Helpers.Business;
 
 [ApiController]
 [Route("state-api/win-limit-control/monitor")]
-public class UncheckedNotificationController : ControllerBase
+public class UncheckedNotificationController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public UncheckedNotificationController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [NapAuth(FunctionKey = FunctionKeys.WinLimitMonitor, Policy = Constant.Policy.Host)]
     [Route("uncheck-notification")]
     [HttpPost]

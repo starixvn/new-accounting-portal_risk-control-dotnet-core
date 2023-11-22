@@ -10,15 +10,8 @@ using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 
 [Route("WinLimitControl/FileDownload")]
-public class FileDownloadController : Controller
+public class FileDownloadController(FileContentService fileContentService) : Controller
 {
-    private readonly FileContentService fileContentService;
-
-    public FileDownloadController(FileContentService fileContentService)
-    {
-        this.fileContentService = fileContentService;
-    }
-
     [NapAuth(FunctionKey = FunctionKeys.WinLimitControl, Policy = Constant.Policy.Read)]
     [Route("Index")]
     public ActionResult Index(string hash)

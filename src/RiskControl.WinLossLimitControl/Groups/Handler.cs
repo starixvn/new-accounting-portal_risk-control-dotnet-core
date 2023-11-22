@@ -8,18 +8,9 @@ using RiskControl.WinLossLimitControl.Filter;
 
 namespace RiskControl.WinLossLimitControl.Groups;
 
-public class Handler : IRequestHandler<Request, List<ProductGroupSetting>>
+public class Handler(IDynamicRepository repository, CacheRefService cacheRefService)
+    : IRequestHandler<Request, List<ProductGroupSetting>>
 {
-    private readonly IDynamicRepository repository;
-
-    private readonly CacheRefService cacheRefService;
-
-    public Handler(IDynamicRepository repository, CacheRefService cacheRefService)
-    {
-        this.repository = repository;
-        this.cacheRefService = cacheRefService;
-    }
-
     public async Task<List<ProductGroupSetting>> Handle(Request request, CancellationToken cancellationToken)
     {
         var criteria = new ReadCriteria();

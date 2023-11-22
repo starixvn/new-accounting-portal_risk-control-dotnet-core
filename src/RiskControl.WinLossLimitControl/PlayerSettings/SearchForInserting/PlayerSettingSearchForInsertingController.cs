@@ -10,15 +10,8 @@ using Fanex.NAP.Client.Helpers.Business;
 
 [ApiController]
 [Route("api/win-limit-control/player-setting")]
-public class PlayerSettingSearchForInsertingController : ControllerBase
+public class PlayerSettingSearchForInsertingController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public PlayerSettingSearchForInsertingController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [NapAuth(FunctionKey = FunctionKeys.PlayerWinLimitManagement, Policy = Constant.Policy.Read)]
     [HttpPost]
     [Route("search-for-inserting")]

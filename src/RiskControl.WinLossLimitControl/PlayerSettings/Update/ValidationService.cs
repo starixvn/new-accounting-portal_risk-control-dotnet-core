@@ -16,18 +16,10 @@ public interface ValidationService
     Task<bool> CheckLossContrains(Request request);
 }
 
-public class ValidationServiceImp : ValidationService
+public class ValidationServiceImp(IDynamicRepository repository,
+        IncreamentedSeriesContrainService increamentedSeriesContrainService)
+    : ValidationService
 {
-    private readonly IDynamicRepository repository;
-
-    private readonly IncreamentedSeriesContrainService increamentedSeriesContrainService;
-
-    public ValidationServiceImp(IDynamicRepository repository, IncreamentedSeriesContrainService increamentedSeriesContrainService)
-    {
-        this.repository = repository;
-        this.increamentedSeriesContrainService = increamentedSeriesContrainService;
-    }
-
     public async Task<bool> Execute(Request request)
     {
         var winLimit = request.Limit;

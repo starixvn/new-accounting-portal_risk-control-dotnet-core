@@ -7,12 +7,8 @@ using RiskControl.NonSportsGamesStatistics.Constants;
 namespace RiskControl.NonSportsGamesStatistics.DailyView.GroupStatistics.DeviceNormal;
 
 [Route("NonSportsGamesStatistics/DeviceNormal")]
-public class DeviceNormalModeController : BaseController<QueryModel>
+public class DeviceNormalModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public DeviceNormalModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [HttpPost, Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {

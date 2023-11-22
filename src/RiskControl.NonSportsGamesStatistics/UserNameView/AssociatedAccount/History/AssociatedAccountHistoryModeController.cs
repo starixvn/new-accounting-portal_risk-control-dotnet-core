@@ -10,12 +10,8 @@ using Attributes;
 
 [Route("NonSportsGamesStatistics/AssociatedAccountHistory")]
 [ValidationActionFilter]
-public class AssociatedAccountHistoryModeController : BaseController<QueryModel>
+public class AssociatedAccountHistoryModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public AssociatedAccountHistoryModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [HttpPost, Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {

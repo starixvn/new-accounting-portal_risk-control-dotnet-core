@@ -2,6 +2,4 @@
 
 namespace RiskControl.ProgressiveJackpot.Model;
 
-public class GameGroupCallMessage : BaseCallMessage
-{
-}
+public class GameGroupCallMessage : BaseCallMessage;

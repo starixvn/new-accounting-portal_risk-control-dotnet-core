@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace RiskControl.Sites.ViewComponents;
 
-public class MenuViewComponent : ViewComponent
+public class MenuViewComponent(INapSession napSession) : ViewComponent
 {
-    private readonly INapSession napSession;
-
-    public MenuViewComponent(INapSession napSession)
-    {
-        this.napSession = napSession;
-    }
-
     public async Task<IViewComponentResult> InvokeAsync()
     {
         var model = napSession.MenuItemList ?? new List<MenuItem>();

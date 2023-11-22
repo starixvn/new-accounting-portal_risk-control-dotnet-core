@@ -3,14 +3,9 @@ namespace RiskControl.WebApiClient;
 using System;
 using System.Net;
 
-public class RichHttpClientException : Exception
+public class RichHttpClientException(HttpStatusCode statusCode) : Exception
 {
-    public RichHttpClientException(HttpStatusCode statusCode)
-    {
-        StatusCode = (int)statusCode;
-    }
-
-    public int StatusCode { get; set; }
+    public int StatusCode { get; set; } = (int)statusCode;
 
     public override string Message => StatusCode.ToString();
 }

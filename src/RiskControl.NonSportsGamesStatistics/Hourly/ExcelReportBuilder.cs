@@ -15,11 +15,11 @@ public interface ExcelReportBuilder
     ExcelPackage CreateExcelPackage(HourlyReportModel model, DateTime winLossDate, bool viewByInteger);
 }
 
-public class ExcelReportBuilderImp : ExcelReportBuilder
+public class ExcelReportBuilderImp(ConfigurationService configurationService) : ExcelReportBuilder
 {
-    private const string TemplatePath = @"Templates/NonSport/HourlyTemplate.xlsx";
+    private const string TemplatePath = "Templates/NonSport/HourlyTemplate.xlsx";
 
-    private const string ViewByIntegerTemplatePath = @"Templates/NonSport/ViewByIntegerHourlyTemplate.xlsx";
+    private const string ViewByIntegerTemplatePath = "Templates/NonSport/ViewByIntegerHourlyTemplate.xlsx";
 
     private const int HourlyAccumulatedStartRowIndex = 5;
 
@@ -35,16 +35,9 @@ public class ExcelReportBuilderImp : ExcelReportBuilder
 
     private const int MaxPercent = 105;
 
-    private readonly ConfigurationService configurationService;
-
     private ExcelWorksheet averageSheet;
 
     private ExcelWorksheet statisticSheet;
-
-    public ExcelReportBuilderImp(ConfigurationService configurationService)
-    {
-        this.configurationService = configurationService;
-    }
 
     public ExcelPackage CreateExcelPackage(HourlyReportModel model, DateTime winLossDate, bool viewByInteger)
     {

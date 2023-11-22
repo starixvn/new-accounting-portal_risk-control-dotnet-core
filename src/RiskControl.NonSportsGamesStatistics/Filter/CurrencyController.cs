@@ -10,15 +10,8 @@ namespace RiskControl.NonSportsGamesStatistics.Filter;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/Currency")]
-public class CurrencyController : ControllerBase
+public class CurrencyController(IDynamicRepository repository) : ControllerBase
 {
-    private readonly IDynamicRepository repository;
-
-    public CurrencyController(IDynamicRepository repository)
-    {
-        this.repository = repository;
-    }
-
     [Route("Query")]
     public async Task<IEnumerable<CurrencyModel>> Query(CurrencyCriteria criteria)
     {

@@ -10,27 +10,12 @@ using RiskControl.WinLossLimitControl.Monitor.Parser;
 
 namespace RiskControl.WinLossLimitControl.Monitor.History;
 
-public class Handler : IRequestHandler<Request, List<WinLimitHistory>>
-{
-    private readonly IDynamicRepository repository;
-
-    private readonly CacheRefService cacheRefService;
-
-    private readonly WinLimitSettingXmlParser winLimitSettingXmlParser;
-
-    private readonly IMapper mapper;
-
-    public Handler(IDynamicRepository repository,
+public class Handler(IDynamicRepository repository,
         CacheRefService cacheRefService,
         WinLimitSettingXmlParser winLimitSettingXmlParser,
         IMapper mapper)
-    {
-        this.repository = repository;
-        this.cacheRefService = cacheRefService;
-        this.winLimitSettingXmlParser = winLimitSettingXmlParser;
-        this.mapper = mapper;
-    }
-
+    : IRequestHandler<Request, List<WinLimitHistory>>
+{
     public async Task<List<WinLimitHistory>> Handle(Request request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<HistoryCriteria>(request);
