@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main.Normal;
 
-using Olympus.WebApi.Epplus;
+using Results;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/UserNameViewNormal")]

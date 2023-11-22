@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Olympus.WebApiClient;
 using RiskControl.ProgressiveJackpot.ApiModel;
 
 namespace RiskControl.ProgressiveJackpot;
+
+using WebApiClient;
 
 public interface ProgressiveApiClient
 {

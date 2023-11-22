@@ -2,9 +2,10 @@
 using Fanex.Excel.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.FanexGridExcel;
 
 namespace RiskControl.NonSportsGamesStatistics.Common;
+
+using Results;
 
 [ApiController]
 public class BaseController<TQueryModel> : ControllerBase

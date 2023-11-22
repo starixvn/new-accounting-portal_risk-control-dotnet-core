@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Hourly.Normal;
 
-using Olympus.WebApi.Epplus;
+using Results;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/HourlyNormal")]

@@ -6,7 +6,7 @@ using RiskControl.ProgressiveJackpot.Model;
 
 namespace RiskControl.ProgressiveJackpot;
 
-using Olympus.WebApi.Epplus;
+using Results;
 
 [ApiController]
 [Route("api/progressive-jackpot")]

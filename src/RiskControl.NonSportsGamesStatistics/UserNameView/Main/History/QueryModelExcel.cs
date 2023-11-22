@@ -1,11 +1,12 @@
 ﻿using System;
 using MediatR;
 using OfficeOpenXml;
-using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Constants;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main.History;
+
+using Attributes;
 
 public class QueryModelExcel : BaseStatisticQueryModel, IRequest<ExcelPackage>
 {

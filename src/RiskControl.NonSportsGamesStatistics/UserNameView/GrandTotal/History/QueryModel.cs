@@ -1,11 +1,12 @@
 ﻿using System;
 using Fanex.Excel.Models;
 using MediatR;
-using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Constants;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.GrandTotal.History;
+
+using Attributes;
 
 public class QueryModel : BaseStatisticQueryModel, IRequest<GridOptions>
 {

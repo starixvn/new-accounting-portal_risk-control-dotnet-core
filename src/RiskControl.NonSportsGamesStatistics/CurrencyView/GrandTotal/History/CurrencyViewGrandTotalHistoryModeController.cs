@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Constants;
 using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.CurrencyView.GrandTotal.History;
+
+using Attributes;
 
 [Route("NonSportsGamesStatistics/CurrencyViewGrandTotalHistory")]
 [ValidationActionFilter]

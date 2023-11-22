@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Constants;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.GrandTotal.History;
+
+using Attributes;
 
 [Route("NonSportsGamesStatistics/UserNameViewGrandTotalHistory")]
 [ValidationActionFilter]

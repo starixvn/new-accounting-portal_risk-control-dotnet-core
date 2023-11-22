@@ -10,7 +10,7 @@ using Xunit;
 
 namespace RiskControl.ProgressiveJackpot.UnitTests;
 
-using Olympus.WebApi.Epplus;
+using Results;
 using Xunit.Asserts.Compare;
 
 public class ProgressiveJackpotControllerUnitTests

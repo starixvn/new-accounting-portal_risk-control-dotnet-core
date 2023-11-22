@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RiskControl.WinLossLimitControl.GameRound;
 
 using Fanex.NAP.Client.Helpers.Business;
-using Olympus.WebApi.Epplus;
+using Results;
 
 [ApiController]
 public class GameRoundBetLimitController : ControllerBase

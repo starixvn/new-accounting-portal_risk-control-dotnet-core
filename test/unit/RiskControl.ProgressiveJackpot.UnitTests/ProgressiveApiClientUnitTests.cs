@@ -1,5 +1,4 @@
 ﻿using NSubstitute;
-using Olympus.WebApiClient;
 using RiskControl.ProgressiveJackpot.ApiModel;
 using RiskControl.ProgressiveJackpot.Model;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using Xunit;
 
 namespace RiskControl.ProgressiveJackpot.UnitTests;
 
+using WebApiClient;
 using Xunit.Asserts.Compare;
 
 public class ProgressiveApiClientUnitTests
