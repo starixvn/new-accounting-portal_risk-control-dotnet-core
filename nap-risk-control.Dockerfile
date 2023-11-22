@@ -1,4 +1,4 @@
-FROM hub.nexdev.net/base/dotnet/core/sdk:7.0-alpine AS builder
+FROM hub.nexdev.net/base/dotnet/core/sdk:8.0-alpine AS builder
 WORKDIR /src
 
 COPY src/RiskControl.Application/*.csproj ./src/RiskControl.Application/
@@ -23,7 +23,7 @@ WORKDIR /src/RiskControl.Sites
 RUN --mount=type=cache,target=/root/.nuget/packages \
     dotnet publish -c Release -o /app --no-restore
 
-FROM hub.nexdev.net/base/dotnet/core/aspnet:7.0-alpine AS base
+FROM hub.nexdev.net/base/dotnet/core/aspnet:8.0-alpine AS base
 
 ENV TZ="America/La_Paz" 
 ENV COMPlus_EnableDiagnostics=0
