@@ -151,7 +151,7 @@ export class FilterComponent implements OnInit {
   private currencyHelper: CurrencyHelper;
   private isGenerate: boolean;
   private readonly valueRequired = 'Value is required!';
-  private readonly lastWeekStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).startOf('week').subtract(1, 'week');
+  private readonly lastWeekStartDate = moment.utc(DATE_CONFIG.reportDate.today).startOf('isoWeek').subtract(1, 'week');
   private readonly lastMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(1, 'month').startOf('month');
   private readonly lastThreeMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(3, 'month').startOf('month');
   private readonly lastSixMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(6, 'month').startOf('month');
@@ -166,13 +166,13 @@ export class FilterComponent implements OnInit {
     },
     {
       timePeriodType: TimePeriod.CurrentWeek,
-      startDate: moment.utc(DATE_CONFIG.reportDate.yesterday).startOf('week'),
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('isoWeek'),
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
       timePeriodType: TimePeriod.LastWeek,
-      startDate: this.lastWeekStartDate,
-      endDate: moment.utc(this.lastWeekStartDate).endOf('week')
+      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('isoWeek').subtract(1, 'week'),
+      endDate: moment.utc(this.lastWeekStartDate).endOf('isoWeek')
     },
     {
       timePeriodType: TimePeriod.CurrentMonth,
@@ -497,7 +497,7 @@ export class FilterComponent implements OnInit {
     {
       this.filterService.writeLog(this.gameTypes, this.selectedProducts, this.selectedGameTypes).subscribe();
     }
-    
+
     this.generate.emit(model);
   }
 
