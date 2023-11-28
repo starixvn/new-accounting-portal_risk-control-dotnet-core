@@ -20,15 +20,9 @@ public interface GridOptionDataRowBuilderService
         bool viewByInteger);
 }
 
-public class GridOptionDataRowBuilderServiceImp : GridOptionDataRowBuilderService
+public class GridOptionDataRowBuilderServiceImp(GridOptionCustomExcelCellStyleService customCellStyleService)
+    : GridOptionDataRowBuilderService
 {
-    private readonly GridOptionCustomExcelCellStyleService customCellStyleService;
-
-    public GridOptionDataRowBuilderServiceImp(GridOptionCustomExcelCellStyleService customCellStyleService)
-    {
-        this.customCellStyleService = customCellStyleService;
-    }
-
     public GridDataRow BuildFullColumnDataRow(DailyViewStatisticsModel statistic, HAlignment alignment,
         bool viewByInteger)
     {

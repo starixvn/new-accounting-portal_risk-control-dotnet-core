@@ -1,19 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.ProductGrandTotalHistory;
 
+using Attributes;
+
 [Route("NonSportsGamesStatistics/ProductGrandTotalHistory")]
 [ValidationActionFilter]
-public class ProductGrandTotalHistoryModeController : BaseController<QueryModel>
+public class ProductGrandTotalHistoryModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public ProductGrandTotalHistoryModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [HttpPost, Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {

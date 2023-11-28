@@ -7,12 +7,8 @@ using RiskControl.NonSportsGamesStatistics.Constants;
 namespace RiskControl.NonSportsGamesStatistics.TopTwenty.Main.Normal;
 
 [Route("NonSportsGamesStatistics/TopTwentyNormal")]
-public class TopTwentyNormalModeController : BaseController<QueryModel>
+public class TopTwentyNormalModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public TopTwentyNormalModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [HttpPost, Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {

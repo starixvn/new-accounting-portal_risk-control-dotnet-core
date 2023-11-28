@@ -9,15 +9,8 @@ namespace RiskControl.NonSportsGamesStatistics.Filter;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/Product")]
-public class ProductController : ControllerBase
+public class ProductController(IDynamicRepository repository) : ControllerBase
 {
-    private readonly IDynamicRepository repository;
-
-    public ProductController(IDynamicRepository repository)
-    {
-        this.repository = repository;
-    }
-
     [Route("Query")]
     [HttpGet]
     public async Task<List<ProductModel>> Query()

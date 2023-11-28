@@ -11,18 +11,8 @@ using RiskControl.WinLossLimitControl.GameRound.Request;
 
 namespace RiskControl.WinLossLimitControl.GameRound;
 
-public class BetLimitSettingQueryHandler : IRequestHandler<BetLimitSettingQueryRequest, List<BetLimitSettingModel>>
+public class BetLimitSettingQueryHandler(IDynamicRepository dynamicRepository, IMapper mapper) : IRequestHandler<BetLimitSettingQueryRequest, List<BetLimitSettingModel>>
 {
-    private readonly IDynamicRepository dynamicRepository;
-
-    private readonly IMapper mapper;
-
-    public BetLimitSettingQueryHandler(IDynamicRepository dynamicRepository, IMapper mapper)
-    {
-        this.dynamicRepository = dynamicRepository;
-        this.mapper = mapper;
-    }
-
     public async Task<List<BetLimitSettingModel>> Handle(BetLimitSettingQueryRequest request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<BetLimitSettingQueryCriteria>(request);

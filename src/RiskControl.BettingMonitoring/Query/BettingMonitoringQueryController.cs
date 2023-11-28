@@ -6,15 +6,8 @@ namespace RiskControl.BettingMonitoring.Query;
 
 [ApiController]
 [Route("api/betting-monitoring")]
-public class BettingMonitoringQueryController : ControllerBase
+public class BettingMonitoringQueryController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public BettingMonitoringQueryController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [Route("query")]
     public async Task<IActionResult> Query(Message message)
     {

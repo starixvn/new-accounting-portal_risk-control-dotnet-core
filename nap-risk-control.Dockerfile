@@ -1,9 +1,9 @@
-FROM hub.nexdev.net/base/dotnet/core/sdk:7.0-alpine AS builder
+FROM hub.nexdev.net/base/dotnet/core/sdk:8.0-alpine AS builder
 WORKDIR /src
 
 COPY src/RiskControl.Application/*.csproj ./src/RiskControl.Application/
 COPY src/RiskControl.BettingMonitoring/*.csproj ./src/RiskControl.BettingMonitoring/
-COPY src/RiskControl.Core/*.csproj ./src/RiskControl.Core/
+COPY src/RiskControl/*.csproj ./src/RiskControl/
 COPY src/RiskControl.Dashboard/*.csproj ./src/RiskControl.Dashboard/
 COPY src/RiskControl.NonSportsGamesStatistics/*.csproj ./src/RiskControl.NonSportsGamesStatistics/
 COPY src/RiskControl.ProgressiveJackpot/*.csproj ./src/RiskControl.ProgressiveJackpot/
@@ -23,7 +23,7 @@ WORKDIR /src/RiskControl.Sites
 RUN --mount=type=cache,target=/root/.nuget/packages \
     dotnet publish -c Release -o /app --no-restore
 
-FROM hub.nexdev.net/base/dotnet/core/aspnet:7.0-alpine AS base
+FROM hub.nexdev.net/base/dotnet/core/aspnet:8.0-alpine AS base
 
 ENV TZ="America/La_Paz" 
 ENV COMPlus_EnableDiagnostics=0

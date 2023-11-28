@@ -49,4 +49,6 @@ public class MonitorModel
     public decimal YellowLimit { get; set; }
 
     public decimal RedLimit { get; set; }
+
+    public bool IsSuspendedAccount { get; set; }
 }

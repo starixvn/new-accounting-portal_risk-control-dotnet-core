@@ -7,15 +7,12 @@ using RiskControl.NonSportsGamesStatistics.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.Daily.History;
 
-public class Handler : BaseHandlerWithSorting<QueryModel, Criteria, DailyReportModel>, IRequestHandler<QueryModel, GridOptions>
-{
-    public Handler(
-        Service<DailyReportModel, Criteria> service,
+public class Handler(Service<DailyReportModel, Criteria> service,
         SortingService<DailyReportModel> sortingService,
-        GridOptionBuilderService<DailyReportModel, QueryModel> gridOptionService) : base(service, sortingService, gridOptionService)
-    {
-    }
-
+        GridOptionBuilderService<DailyReportModel, QueryModel> gridOptionService)
+    : BaseHandlerWithSorting<QueryModel, Criteria, DailyReportModel>(service, sortingService, gridOptionService),
+        IRequestHandler<QueryModel, GridOptions>
+{
     public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
     {
         return await base.Handle(request, request.FromDate).ConfigureAwait(false);

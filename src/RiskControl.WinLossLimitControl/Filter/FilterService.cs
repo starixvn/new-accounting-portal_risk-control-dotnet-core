@@ -21,17 +21,9 @@ public interface FilterService
     Task<IEnumerable<Group>> GetGroupByProduct(GetGroupCriteria criteria);
 }
 
-public class FilterServiceImp : FilterService
+public class FilterServiceImp(IDynamicRepository repository, CacheRefService cacheRefService)
+    : FilterService
 {
-    private readonly CacheRefService cacheRefService;
-    private readonly IDynamicRepository repository;
-
-    public FilterServiceImp(IDynamicRepository repository, CacheRefService cacheRefService)
-    {
-        this.repository = repository;
-        this.cacheRefService = cacheRefService;
-    }
-
     public async Task<IEnumerable<BaseEntity>> GetCurrencies(GetCurrencyCriteria criteria)
     {
         return await repository.FetchAsync<BaseEntity>(criteria);

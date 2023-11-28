@@ -8,15 +8,8 @@ namespace RiskControl.Dashboard;
 
 [ApiController]
 [Route("api/dashboard")]
-public class DashboardController : ControllerBase
+public class DashboardController(IDynamicRepository repository) : ControllerBase
 {
-    private readonly IDynamicRepository repository;
-
-    public DashboardController(IDynamicRepository repository)
-    {
-        this.repository = repository;
-    }
-
     [Route("weekly-net-income")]
     [HttpGet]
     public async Task<IActionResult> WeeklyNetIncome()

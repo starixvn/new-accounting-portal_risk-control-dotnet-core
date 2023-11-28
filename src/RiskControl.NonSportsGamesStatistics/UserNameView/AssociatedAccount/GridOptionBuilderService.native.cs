@@ -9,25 +9,15 @@ using RiskControl.NonSportsGamesStatistics.UserNameView.Common;
 
     namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount; 
 
-    public class GridOptionBuilderServiceImp<TQuery> : GridOptionBuilderService<UserNameViewReportModel, TQuery>
+    public class GridOptionBuilderServiceImp<TQuery>(GridOptionDataRowBuilderService gridDataRowBuilderService,
+            GridOptionHeaderBuilderService headerBuilderService,
+            GridOptionRemoveColumnService gridOptionRemoveColumnService)
+        : GridOptionBuilderService<UserNameViewReportModel, TQuery>
         where TQuery: BaseStatisticQueryModel
     {
         private const int UserNameColumnIndex = 0;
         private const int CustIdColumnIndex = 1;
         private const int RoleColumnIndex = 2;
-        private readonly GridOptionDataRowBuilderService gridDataRowBuilderService;
-        private readonly GridOptionHeaderBuilderService headerBuilderService;
-        private readonly GridOptionRemoveColumnService gridOptionRemoveColumnService;
-
-        public GridOptionBuilderServiceImp(
-            GridOptionDataRowBuilderService gridDataRowBuilderService,
-            GridOptionHeaderBuilderService headerBuilderService,
-            GridOptionRemoveColumnService gridOptionRemoveColumnService)
-        {
-            this.gridDataRowBuilderService = gridDataRowBuilderService;
-            this.headerBuilderService = headerBuilderService;
-            this.gridOptionRemoveColumnService = gridOptionRemoveColumnService;
-        }
 
         public GridOptions BuildGridOptions(UserNameViewReportModel statistics, TQuery queryModel)
         {

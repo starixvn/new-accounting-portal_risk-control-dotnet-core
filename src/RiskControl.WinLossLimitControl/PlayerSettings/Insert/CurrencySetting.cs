@@ -2,31 +2,19 @@
 
 public class CurrencySetting
 {
-    public CurrencySetting()
-    {
-        ProductId = 0;
-        GroupId = 0;
-        CurrencyId = 0;
-        SiteId = 0;
-        LevelId = 0;
-        MaxWinLimit = 0;
-        IsBlockedPlaceBet = false;
-        IsBlockedTransfer = false;
-    }
+    public int ProductId { get; set; } = 0;
 
-    public int ProductId { get; set; }
+    public int GroupId { get; set; } = 0;
 
-    public int GroupId { get; set; }
+    public int CurrencyId { get; set; } = 0;
 
-    public int CurrencyId { get; set; }
+    public int SiteId { get; set; } = 0;
 
-    public int SiteId { get; set; }
+    public int LevelId { get; set; } = 0;
 
-    public int LevelId { get; set; }
+    public decimal MaxWinLimit { get; set; } = 0;
 
-    public decimal MaxWinLimit { get; set; }
+    public bool IsBlockedPlaceBet { get; set; } = false;
 
-    public bool IsBlockedPlaceBet { get; set; }
-
-    public bool IsBlockedTransfer { get; set; }
+    public bool IsBlockedTransfer { get; set; } = false;
 }

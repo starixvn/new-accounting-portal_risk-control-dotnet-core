@@ -6,25 +6,14 @@ using RiskControl.ProgressiveJackpot.Model;
 
 namespace RiskControl.ProgressiveJackpot;
 
-using Olympus.WebApi.Epplus;
+using Results;
 
 [ApiController]
 [Route("api/progressive-jackpot")]
-public class ProgressiveJackpotController : ControllerBase
+public class ProgressiveJackpotController(ConfigurationService configurationService,
+        ProgressiveApiClient progressiveApiClient, ExcelBuilder excelBuilder)
+    : ControllerBase
 {
-    private readonly ProgressiveApiClient progressiveApiClient;
-
-    private readonly ConfigurationService configurationService;
-
-    private readonly ExcelBuilder excelBuilder;
-
-    public ProgressiveJackpotController(ConfigurationService configurationService, ProgressiveApiClient progressiveApiClient, ExcelBuilder excelBuilder)
-    {
-        this.configurationService = configurationService;
-        this.progressiveApiClient = progressiveApiClient;
-        this.excelBuilder = excelBuilder;
-    }
-
     [Route("game-group")]
     [HttpPost]
     public async Task<IActionResult> GameGroup(GameGroupCallMessage call)

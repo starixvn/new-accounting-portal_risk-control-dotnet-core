@@ -13,15 +13,8 @@ public interface InsertService
     Task Execute(List<PlayerSetting> playerSettings, UserContext userContext);
 }
 
-public class InsertServiceImp : InsertService
+public class InsertServiceImp(IDynamicRepository repository) : InsertService
 {
-    private readonly IDynamicRepository repository;
-
-    public InsertServiceImp(IDynamicRepository repository)
-    {
-        this.repository = repository;
-    }
-
     public async Task Execute(List<PlayerSetting> playerSettings, UserContext userContext)
     {
         var criteriaList = playerSettings
@@ -29,7 +22,7 @@ public class InsertServiceImp : InsertService
             .SelectMany(c => c);
 
         var executeResuls = criteriaList
-            .Select(c => repository.ExecuteAsync(c))
+            .Select(repository.ExecuteAsync)
             .ToArray();
         await Task
             .WhenAll(executeResuls);

@@ -7,27 +7,21 @@ public class TopGameTypeWinningCriteria : CriteriaBase
 {
     private const int NEGATIVE_SEVEN = -7;
 
-    public TopGameTypeWinningCriteria()
-    {
-        FromDate = new DateTime(
-            DateTime.Now.AddDays(NEGATIVE_SEVEN).Year,
-            DateTime.Now.AddDays(NEGATIVE_SEVEN).Month,
-            DateTime.Now.AddDays(NEGATIVE_SEVEN).Day,
-            0,
-            0,
-            0);
-        ToDate = new DateTime(
-            DateTime.Now.AddDays(-1).Year,
-            DateTime.Now.AddDays(-1).Month,
-            DateTime.Now.AddDays(-1).Day,
-            23,
-            59,
-            59);
-    }
+    public DateTime FromDate { get; set; } = new(
+        DateTime.Now.AddDays(NEGATIVE_SEVEN).Year,
+        DateTime.Now.AddDays(NEGATIVE_SEVEN).Month,
+        DateTime.Now.AddDays(NEGATIVE_SEVEN).Day,
+        0,
+        0,
+        0);
 
-    public DateTime FromDate { get; set; }
-
-    public DateTime ToDate { get; set; }
+    public DateTime ToDate { get; set; } = new(
+        DateTime.Now.AddDays(-1).Year,
+        DateTime.Now.AddDays(-1).Month,
+        DateTime.Now.AddDays(-1).Day,
+        23,
+        59,
+        59);
 
     public override bool IsValid() => true;
 

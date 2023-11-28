@@ -8,15 +8,8 @@ namespace RiskControl.WinLossLimitControl.Filter;
 using Fanex.NAP.Client.Helpers.Business;
 
 [Route("state-api/win-limit-control/authorization")]
-public class AuthorizationController : ControllerBase
+public class AuthorizationController(AuthorizationService authorizationService) : ControllerBase
 {
-    private readonly AuthorizationService authorizationService;
-
-    public AuthorizationController(AuthorizationService authorizationService)
-    {
-        this.authorizationService = authorizationService;
-    }
-
     [Route("host-permission")]
     [HttpPost]
     public IActionResult HasHostPermission()

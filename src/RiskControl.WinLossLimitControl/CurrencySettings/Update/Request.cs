@@ -5,6 +5,4 @@ using RiskControl.WinLossLimitControl.Models;
 
 namespace RiskControl.WinLossLimitControl.CurrencySettings.Update;
 
-public class Request : List<CurrencySetting>, IRequest<ExecuteResult>
-{
-}
+public class Request : List<CurrencySetting>, IRequest<ExecuteResult>;

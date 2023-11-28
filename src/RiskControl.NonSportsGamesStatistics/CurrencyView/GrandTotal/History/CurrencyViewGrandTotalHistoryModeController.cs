@@ -1,20 +1,17 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Constants;
 using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.CurrencyView.GrandTotal.History;
 
+using Attributes;
+
 [Route("NonSportsGamesStatistics/CurrencyViewGrandTotalHistory")]
 [ValidationActionFilter]
-public class CurrencyViewGrandTotalHistoryModeController : BaseController<QueryModel>
+public class CurrencyViewGrandTotalHistoryModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public CurrencyViewGrandTotalHistoryModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [HttpPost, Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {
@@ -24,7 +21,6 @@ public class CurrencyViewGrandTotalHistoryModeController : BaseController<QueryM
     [HttpPost, Route("Excel")]
     public async Task<IActionResult> Excel(QueryModel queryModel)
     {
-        var sheetName = $"{queryModel.ReportBy} Game Statistic";
         return await base.Excel(queryModel, SheetNameConstant.SHEETNAME).ConfigureAwait(false);
     }
 }

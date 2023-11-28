@@ -1,5 +1,4 @@
 ﻿using NSubstitute;
-using Olympus.WebApiClient;
 using RiskControl.ProgressiveJackpot.ApiModel;
 using RiskControl.ProgressiveJackpot.Model;
 using System.Collections.Generic;
@@ -8,6 +7,8 @@ using Xunit;
 
 namespace RiskControl.ProgressiveJackpot.UnitTests;
 
+using System;
+using WebApiClient;
 using Xunit.Asserts.Compare;
 
 public class ProgressiveApiClientUnitTests
@@ -25,11 +26,12 @@ public class ProgressiveApiClientUnitTests
 
         var progresiveApiClient = new ProgressiveApiClientImp(richHttpClient);
 
+        // Assert
+        await Assert.ThrowsAsync<InvalidOperationException>(testCode);
+        return;
+
         // Act
         async Task testCode() => await progresiveApiClient.PostJson<GameGroupResultContent>(string.Empty, string.Empty);
-
-        // Assert
-        await Assert.ThrowsAsync<ApiException>(testCode);
     }
 
     [Fact]

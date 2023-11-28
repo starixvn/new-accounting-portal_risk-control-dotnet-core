@@ -1,24 +1,17 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Attributes;
 using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Hourly.History;
 
-using Olympus.WebApi.Epplus;
+using Attributes;
+using Results;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/HourlyHistory")]
 [ValidationActionFilter]
-public class HourlyHistoryModeController : ControllerBase
+public class HourlyHistoryModeController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public HourlyHistoryModeController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [HttpPost, Route("Query")]
     public async Task<IActionResult> Query(QueryModel queryModel)
     {

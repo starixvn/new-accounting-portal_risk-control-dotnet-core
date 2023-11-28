@@ -13,18 +13,8 @@ public interface UserHttpContext
     int UserId { get; }
 }
 
-public class UserHttpContextImp : UserHttpContext
+public class UserHttpContextImp(INapSession currentSession, INapSettings napSettings) : UserHttpContext
 {
-    private readonly INapSession currentSession;
-
-    private readonly INapSettings napSettings;
-
-    public UserHttpContextImp(INapSession currentSession, INapSettings napSettings)
-    {
-        this.currentSession = currentSession;
-        this.napSettings = napSettings;
-    }
-
     public string IP => new LoginParameter().Ip;
 
     public int UserId => currentSession.UserId;

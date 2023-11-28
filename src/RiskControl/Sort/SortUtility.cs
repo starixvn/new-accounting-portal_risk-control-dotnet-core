@@ -11,6 +11,9 @@ public static class SortUtility
     {
         var propInfo = typeof(T).GetProperty(sortColumnName);
 
+        dataSource.Sort((Comparison<T>)Compare);
+        return;
+
         int Compare(T a, T b)
         {
             var isAsc = string.Equals(sortDirection, Ascending, StringComparison.OrdinalIgnoreCase);
@@ -18,7 +21,5 @@ public static class SortUtility
             var valueB = isAsc ? propInfo.GetValue(b, null) : propInfo.GetValue(a, null);
             return (valueA as IComparable)?.CompareTo(valueB) ?? 0;
         }
-
-        dataSource.Sort((Comparison<T>)Compare);
     }
 }

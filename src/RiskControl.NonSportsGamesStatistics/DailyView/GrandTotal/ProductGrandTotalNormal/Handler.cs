@@ -7,14 +7,11 @@ using RiskControl.NonSportsGamesStatistics.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.ProductGrandTotalNormal;
 
-public class Handler : BaseHandlerWithoutSorting<QueryModel, Criteria, CurrencyViewStatisticsReportModel>, IRequestHandler<QueryModel, GridOptions>
+public class Handler(Service<CurrencyViewStatisticsReportModel, Criteria> service,
+        GridOptionBuilderService<CurrencyViewStatisticsReportModel, QueryModel> gridOptionService)
+    : BaseHandlerWithoutSorting<QueryModel, Criteria, CurrencyViewStatisticsReportModel>(service, gridOptionService),
+        IRequestHandler<QueryModel, GridOptions>
 {
-    public Handler(
-        Service<CurrencyViewStatisticsReportModel, Criteria> service,
-        GridOptionBuilderService<CurrencyViewStatisticsReportModel, QueryModel> gridOptionService) : base(service, gridOptionService)
-    {
-    }
-
     public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
     {
         return await base.Handle(request, request.WinLostDate).ConfigureAwait(false);

@@ -1,20 +1,17 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using System.Threading.Tasks;
 using RiskControl.NonSportsGamesStatistics.Constants;
 
 namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Main.History;
 
+using Attributes;
+
 [Route("NonSportsGamesStatistics/CurrencyViewHistory")]
 [ValidationActionFilter]
-public class CurrencyViewHistoryModeController : BaseController<QueryModel>
+public class CurrencyViewHistoryModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public CurrencyViewHistoryModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [HttpPost, Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {

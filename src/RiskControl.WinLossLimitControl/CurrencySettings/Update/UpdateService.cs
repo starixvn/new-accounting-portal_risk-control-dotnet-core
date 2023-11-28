@@ -15,21 +15,13 @@ public interface UpdateService
     Task Execute(List<CurrencySetting> currencySettings, UserContext userContext);
 }
 
-public class UpdateServiceImp : UpdateService
+public class UpdateServiceImp(IDynamicRepository repository, IConfiguration configuration)
+    : UpdateService
 {
-    private readonly IDynamicRepository repository;
-    private readonly IConfiguration configuration;
-
-    public UpdateServiceImp(IDynamicRepository repository, IConfiguration configuration)
-    {
-        this.repository = repository;
-        this.configuration = configuration;
-    }
-
     public async Task Execute(List<CurrencySetting> currencySettings, UserContext userContext)
     {
         var criteriaList = GetUpdateCurrencyWinLimitCriteria(currencySettings, userContext);
-        var executeResults = criteriaList.Select(c => repository.ExecuteAsync(c)).ToArray();
+        var executeResults = criteriaList.Select(repository.ExecuteAsync).ToArray();
 
         await Task.WhenAll(executeResults);
     }
@@ -119,7 +111,7 @@ public class UpdateServiceImp : UpdateService
             CurrencyId = currencySetting.CurrencyId,
             SiteId = currencySetting.SiteId,
             IsBlockedPlaceBet = currencySetting.IsBlockedPlacebetRedLevel,
-            IsBlockedTransfer = currencySetting.IsBlockedTransferRedLevel,
+            IsBlockedTransfer = currencySetting.IsBlockedTransferRedLevel
         };
     }
 }

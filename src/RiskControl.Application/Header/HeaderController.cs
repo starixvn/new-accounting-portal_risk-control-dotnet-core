@@ -6,15 +6,8 @@ using System.Linq;
 
 namespace RiskControl.Application.Header;
 
-public class HeaderController : ControllerBase
+public class HeaderController(INapSession napSession) : ControllerBase
 {
-    private readonly INapSession napSession;
-
-    public HeaderController(INapSession napSession)
-    {
-        this.napSession = napSession;
-    }
-
     [Route("state-api/application/header")]
     public Header Index()
     {

@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Fanex.Data;
-using Fanex.Data.SqlServer;
 using Fanex.Logging;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.RemotingRef;
@@ -15,7 +13,6 @@ using RiskControl.Sites.DependencyInjections;
 using SharpRaven;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RiskControl.Sites;
@@ -73,15 +70,16 @@ public static class ServiceCollectionExtensions
 
     public static void RegisterAssemblyForMediatR(this IServiceCollection services)
     {
-        void ConfigAssembly(MediatRServiceConfiguration configuration, Type type)
-        {
-            configuration.RegisterServicesFromAssemblies(type.GetTypeInfo().Assembly);
-        }
-
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(BettingMonitoringMarker)));
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(NonSportsGamesStatisticsMarker)));
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(ProgressiveJackpotMarker)));
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(WinLossLimitControlMarker)));
+        return;
+
+        void ConfigAssembly(MediatRServiceConfiguration configuration, Type type)
+        {
+            configuration.RegisterServicesFromAssemblies(type.GetTypeInfo().Assembly);
+        }
     }
 
 

@@ -1,20 +1,17 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using System.Threading.Tasks;
 using RiskControl.NonSportsGamesStatistics.Constants;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.Main.History;
 
+using Attributes;
+
 [Route("NonSportsGamesStatistics/DailyViewHistory")]
 [ValidationActionFilter]
-public class DailyViewHistoryModeController : BaseController<QueryModel>
+public class DailyViewHistoryModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public DailyViewHistoryModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [HttpPost, Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {

@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Olympus.WebApiClient;
 using RiskControl.ProgressiveJackpot;
 
 namespace RiskControl.Sites.DependencyInjections;
+
+using WebApiClient;
 
 public static class ProgressiveJackpotInjection
 {

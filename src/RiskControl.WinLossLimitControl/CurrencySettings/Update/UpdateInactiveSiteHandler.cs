@@ -9,17 +9,8 @@ using System.Threading.Tasks;
 
 namespace RiskControl.WinLossLimitControl.CurrencySettings.Update;
 
-public class UpdateInactiveSiteHandler : IRequestHandler<UpdateInactiveSiteRequest, ExecuteResult>
+public class UpdateInactiveSiteHandler(IDynamicRepository repository, IMapper mapper) : IRequestHandler<UpdateInactiveSiteRequest, ExecuteResult>
 {
-    private readonly IDynamicRepository repository;
-
-    private readonly IMapper mapper;
-
-    public UpdateInactiveSiteHandler(IDynamicRepository repository, IMapper mapper)
-    {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
     public async Task<ExecuteResult> Handle(UpdateInactiveSiteRequest request, CancellationToken cancellationToken)
     {
         var criteriaList = mapper.Map<List<UpdateInactiveSiteCriteria>>(request.Settings);

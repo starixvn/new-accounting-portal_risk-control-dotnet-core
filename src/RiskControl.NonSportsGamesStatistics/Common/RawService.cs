@@ -17,17 +17,9 @@ public interface RawService
         where T : class;
 }
 
-public class RawServiceImp : RawService
+public class RawServiceImp(DataSourceChooser dataSourceChooser, IDynamicRepository repository)
+    : RawService
 {
-    private readonly DataSourceChooser dataSourceChooser;
-    private readonly IDynamicRepository repository;
-
-    public RawServiceImp(DataSourceChooser dataSourceChooser, IDynamicRepository repository)
-    {
-        this.dataSourceChooser = dataSourceChooser;
-        this.repository = repository;
-    }
-
     public async Task<IEnumerable<T>> QueryData<T>(BaseStatisticCriteria criteria, DateTime winLossDate)
         where T : class
     {

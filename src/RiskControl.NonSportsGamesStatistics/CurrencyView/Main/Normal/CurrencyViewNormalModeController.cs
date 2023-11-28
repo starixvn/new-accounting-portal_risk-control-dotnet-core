@@ -7,12 +7,8 @@ using RiskControl.NonSportsGamesStatistics.Constants;
 namespace RiskControl.NonSportsGamesStatistics.CurrencyView.Main.Normal;
 
 [Route("NonSportsGamesStatistics/CurrencyViewNormal")]
-public class CurrencyViewNormalModeController : BaseController<QueryModel>
+public class CurrencyViewNormalModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public CurrencyViewNormalModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {

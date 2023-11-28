@@ -35,4 +35,6 @@ public class MonitorModelRaw
     public bool IsEnableUnblock { get; set; }
 
     public string MaxWinLimitSetting { get; set; }
+
+    public bool IsSuspendedAccount { get; set; }
 }

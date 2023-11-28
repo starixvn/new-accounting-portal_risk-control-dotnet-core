@@ -7,12 +7,8 @@ using RiskControl.NonSportsGamesStatistics.Constants;
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.GrandTotal.Normal;
 
 [Route("NonSportsGamesStatistics/UserNameViewGrandTotalNormal")]
-public class UserNameViewGrandTotalNormalModeController : BaseController<QueryModel>
+public class UserNameViewGrandTotalNormalModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public UserNameViewGrandTotalNormalModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [HttpPost, Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {

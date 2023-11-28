@@ -10,15 +10,8 @@ using Fanex.NAP.Client.Helpers.Business;
 
 [ApiController]
 [Route("api/win-limit-control/monitor")]
-public class MonitorSearchController : ControllerBase
+public class MonitorSearchController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public MonitorSearchController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [NapAuth(FunctionKey = FunctionKeys.WinLimitMonitor, Policy = Constant.Policy.Read)]
     [Route("search")]
     [HttpPost]

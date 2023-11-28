@@ -10,24 +10,10 @@ using RiskControl.WinLossLimitControl.Monitor.Parser;
 
 namespace RiskControl.WinLossLimitControl.Monitor.Search;
 
-public class Handler : IRequestHandler<Request, List<MonitorModel>>
+public class Handler(IDynamicRepository repository, CacheRefService cacheRefService,
+        WinLimitSettingXmlParser winLimitSettingXmlParser, IMapper mapper)
+    : IRequestHandler<Request, List<MonitorModel>>
 {
-    private readonly IDynamicRepository repository;
-
-    private readonly CacheRefService cacheRefService;
-
-    private readonly WinLimitSettingXmlParser winLimitSettingXmlParser;
-
-    private readonly IMapper mapper;
-
-    public Handler(IDynamicRepository repository, CacheRefService cacheRefService, WinLimitSettingXmlParser winLimitSettingXmlParser, IMapper mapper)
-    {
-        this.repository = repository;
-        this.cacheRefService = cacheRefService;
-        this.winLimitSettingXmlParser = winLimitSettingXmlParser;
-        this.mapper = mapper;
-    }
-
     public async Task<List<MonitorModel>> Handle(Request request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<MonitorSearchCriteria>(request);
@@ -66,7 +52,8 @@ public class Handler : IRequestHandler<Request, List<MonitorModel>>
                 GreyLimit = winLimitSetting.GreyLimit,
                 OrangeLimit = winLimitSetting.OrangeLimit,
                 YellowLimit = winLimitSetting.YellowLimit,
-                RedLimit = winLimitSetting.RedLimit
+                RedLimit = winLimitSetting.RedLimit,
+                IsSuspendedAccount = item.IsSuspendedAccount
             };
         });
     }

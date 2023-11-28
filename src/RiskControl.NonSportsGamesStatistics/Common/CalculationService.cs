@@ -65,14 +65,8 @@ public interface CalculationService
     BaseRawStatistic CalculateSum(IEnumerable<BaseRawStatistic> baseRawStatistics);
 }
 
-public class CalculationServiceImp : CalculationService
+public class CalculationServiceImp(IMapper mapper) : CalculationService
 {
-    private readonly IMapper mapper;
-
-    public CalculationServiceImp(IMapper mapper)
-    {
-        this.mapper = mapper;
-    }
     public List<DailyViewGroupStatisticsModel> CalculateDailyViewStatisticsGroup(
         IEnumerable<BaseRawStatistic> rawData)
     {

@@ -7,12 +7,8 @@ using RiskControl.NonSportsGamesStatistics.Constants;
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount.Normal;
 
 [Route("NonSportsGamesStatistics/AssociatedAccountNormal")]
-public class AssociatedAccountNormalModeController : BaseController<QueryModel>
+public class AssociatedAccountNormalModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
-    public AssociatedAccountNormalModeController(IMediator mediator) : base(mediator)
-    {
-    }
-
     [HttpPost, Route("Query")]
     public override async Task<IActionResult> Query(QueryModel queryModel)
     {

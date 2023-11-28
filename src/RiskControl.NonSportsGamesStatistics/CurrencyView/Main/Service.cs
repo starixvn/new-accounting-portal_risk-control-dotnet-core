@@ -10,17 +10,9 @@ public interface Service
     Task<CurrencyViewStatisticsReportModel> Query(BaseStatisticCriteria criteria, DateTime winLossDate);
 }
 
-public class ServiceImp : Service
+public class ServiceImp(RawService rawService, CalculationService calculationService)
+    : Service
 {
-    private readonly RawService rawService;
-    private readonly CalculationService calculationService;
-
-    public ServiceImp(RawService rawService, CalculationService calculationService)
-    {
-        this.rawService = rawService;
-        this.calculationService = calculationService;
-    }
-
     public async Task<CurrencyViewStatisticsReportModel> Query(BaseStatisticCriteria criteria, DateTime winLossDate)
     {
         var rawData = await rawService.QueryMultipleData<BaseRawStatistic>(criteria, winLossDate).ConfigureAwait(false);

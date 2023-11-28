@@ -6,17 +6,8 @@ using RiskControl.NonSportsGamesStatistics.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.Hourly.Normal;
 
-public class Handler : IRequestHandler<QueryModel, HourlyReportModel>
+public class Handler(Service service, IMapper mapper) : IRequestHandler<QueryModel, HourlyReportModel>
 {
-    private readonly Service service;
-    private readonly IMapper mapper;
-
-    public Handler(Service service, IMapper mapper)
-    {
-        this.service = service;
-        this.mapper = mapper;
-    }
-
     public async Task<HourlyReportModel> Handle(QueryModel request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<Criteria>(request);

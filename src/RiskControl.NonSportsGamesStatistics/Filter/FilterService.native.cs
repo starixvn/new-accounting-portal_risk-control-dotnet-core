@@ -14,18 +14,8 @@ public interface FilterService
     Task<List<SiteGroupModel>> GetSiteGroups(string productId);
 }
 
-public class FilterServiceImp : FilterService
+public class FilterServiceImp(IDynamicRepository repository, IMapper mapper) : FilterService
 {
-    private readonly IDynamicRepository repository;
-
-    private readonly IMapper mapper;
-
-    public FilterServiceImp(IDynamicRepository repository, IMapper mapper)
-    {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
-
     public async Task<List<SiteGroupModel>> GetSiteGroups(string productId)
     {
         const int NEGATIVE_ONE_THOUSAND = -1000;

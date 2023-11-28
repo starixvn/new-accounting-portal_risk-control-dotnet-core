@@ -10,15 +10,8 @@ using Fanex.NAP.Client.Helpers.Business;
 
 [ApiController]
 [Route("api/win-limit-control/currency-setting")]
-public class CurrencySettingSearchController : ControllerBase
+public class CurrencySettingSearchController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public CurrencySettingSearchController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [NapAuth(FunctionKey = FunctionKeys.CurrencyWinLimitSetting, Policy = Constant.Policy.Read)]
     [Route("search")]
     [HttpPost]

@@ -10,21 +10,9 @@ using System.Threading.Tasks;
 
 namespace RiskControl.WinLossLimitControl.ManagedSettingGroup.Update;
 
-public class Handler : IRequestHandler<GameGroupSettingRequest, ExecuteResult>
+public class Handler(IDynamicRepository repository, UserHttpContext userHttpContext, IMapper mapper)
+    : IRequestHandler<GameGroupSettingRequest, ExecuteResult>
 {
-    private readonly IDynamicRepository repository;
-
-    private readonly UserHttpContext userHttpContext;
-
-    private readonly IMapper mapper;
-
-    public Handler(IDynamicRepository repository, UserHttpContext userHttpContext, IMapper mapper)
-    {
-        this.userHttpContext = userHttpContext;
-        this.repository = repository;
-        this.mapper = mapper;
-    }
-
     public async Task<ExecuteResult> Handle(GameGroupSettingRequest request, CancellationToken cancellationToken)
     {
         var userContext = new UserContext { UserId = userHttpContext.UserId, IP = userHttpContext.IP };

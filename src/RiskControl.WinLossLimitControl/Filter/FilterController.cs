@@ -7,15 +7,8 @@ namespace RiskControl.WinLossLimitControl.Filter;
 
 [ApiController]
 [Route("api/win-limit-control/filter")]
-public class FilterController : ControllerBase
+public class FilterController(FilterService filterService) : ControllerBase
 {
-    private readonly FilterService filterService;
-
-    public FilterController(FilterService filterService)
-    {
-        this.filterService = filterService;
-    }
-
     [Route("get-sites")]
     [HttpPost]
     public async Task<IActionResult> GetSiteLicensees(GetSiteCriteria criteria)

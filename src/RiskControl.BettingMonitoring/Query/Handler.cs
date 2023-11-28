@@ -5,15 +5,8 @@ using System.Threading.Tasks;
 
 namespace RiskControl.BettingMonitoring.Query;
 
-public class Handler : IRequestHandler<Message, BettingMonitoringModel>
+public class Handler(QueryService queryService) : IRequestHandler<Message, BettingMonitoringModel>
 {
-    private readonly QueryService queryService;
-
-    public Handler(QueryService queryService)
-    {
-        this.queryService = queryService;
-    }
-
     public async Task<BettingMonitoringModel> Handle(Message request, CancellationToken cancellationToken)
     {
         return await queryService.Execute().ConfigureAwait(false);

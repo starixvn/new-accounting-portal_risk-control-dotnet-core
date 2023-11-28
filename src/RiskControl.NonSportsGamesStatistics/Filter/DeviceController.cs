@@ -9,15 +9,8 @@ namespace RiskControl.NonSportsGamesStatistics.Filter;
 
 [ApiController]
 [Route("NonSportsGamesStatistics/Device")]
-public class DeviceController : ControllerBase
+public class DeviceController(IDynamicRepository repository) : ControllerBase
 {
-    private readonly IDynamicRepository repository;
-
-    public DeviceController(IDynamicRepository repository)
-    {
-        this.repository = repository;
-    }
-
     [Route("Query")]
     [HttpGet]
     public async Task<List<DeviceModel>> Query()

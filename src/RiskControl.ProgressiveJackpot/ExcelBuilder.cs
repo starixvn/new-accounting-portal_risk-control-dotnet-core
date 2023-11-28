@@ -12,16 +12,9 @@ public interface ExcelBuilder
     ExcelPackage Build<T>(string template, IEnumerable<T> models);
 }
 
-public class ExcelBuilderImp : ExcelBuilder
+public class ExcelBuilderImp(ConfigurationService configurationService) : ExcelBuilder
 {
     private const int StartRowIndex = 5;
-
-    private readonly ConfigurationService configurationService;
-
-    public ExcelBuilderImp(ConfigurationService configurationService)
-    {
-        this.configurationService = configurationService;
-    }
 
     public ExcelPackage Build<T>(string template, IEnumerable<T> models)
     {

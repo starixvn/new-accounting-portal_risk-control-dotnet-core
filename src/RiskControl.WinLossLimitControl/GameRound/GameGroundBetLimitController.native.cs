@@ -7,21 +7,12 @@ using System.Threading.Tasks;
 namespace RiskControl.WinLossLimitControl.GameRound;
 
 using Fanex.NAP.Client.Helpers.Business;
-using Olympus.WebApi.Epplus;
+using Results;
 
 [ApiController]
-public class GameRoundBetLimitController : ControllerBase
+public class GameRoundBetLimitController(IMediator mediator, AuthorizationService authorizationService)
+    : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    private readonly AuthorizationService authorizationService;
-
-    public GameRoundBetLimitController(IMediator mediator, AuthorizationService authorizationService)
-    {
-        this.mediator = mediator;
-        this.authorizationService = authorizationService;
-    }
-
     [Route("api/game-ground-bet-limit/setting-query")]
     public async Task<IActionResult> SettingQueryAsync(BetLimitSettingQueryRequest request)
     {

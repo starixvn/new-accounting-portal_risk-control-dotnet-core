@@ -39,21 +39,23 @@ public class HandlerUnitTests
         var productGroupSettings = await readService.Handle(new Request(), new CancellationToken());
 
         // Assert
-        const string ExpectedSettingJson = @"[
-                {
-                  ProductId: 1,
-                  ProductName: 'Product 1',
-                  Groups: [
-                    {
-                      GroupName: 'Group 1',
-                      BetTypes: [
-                        'BetType 1 (Any Sport)'
-                      ]
-                    }
-                  ]
-                }
-            ]
-            ";
+        const string ExpectedSettingJson = """
+                                           [
+                                                           {
+                                                             ProductId: 1,
+                                                             ProductName: 'Product 1',
+                                                             Groups: [
+                                                               {
+                                                                 GroupName: 'Group 1',
+                                                                 BetTypes: [
+                                                                   'BetType 1 (Any Sport)'
+                                                                 ]
+                                                               }
+                                                             ]
+                                                           }
+                                                       ]
+                                                       
+                                           """;
         var expectedSettings = JsonConvert.DeserializeObject<List<ProductGroupSetting>>(ExpectedSettingJson);
 
         DeepAssert.Equal(productGroupSettings, expectedSettings);

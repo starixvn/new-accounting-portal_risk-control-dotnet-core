@@ -29,6 +29,7 @@ export interface GridColumns extends TableColumns {
     winningLosingAmountInPlayerCurrency: TableColumn;
     reachedLimitTime: TableColumn;
     reachedLimitLevel: TableColumn;
+    suspendedAccount: TableColumn;
     blockPlaceBet: TableColumn;
     blockTransferWithdraw: TableColumn;
     history: TableColumn;
@@ -47,6 +48,7 @@ export const Columns: GridColumns = {
     winningLosingAmountInPlayerCurrency: new TableColumn('Winning/Losing<br>Amount<br>in Player Currency', 130),
     reachedLimitTime: new TableColumn('Reached Limit Time', 90),
     reachedLimitLevel: new TableColumn('Reached Limit Level', 70),
+    suspendedAccount: new TableColumn('Suspended Account', 70),
     blockPlaceBet: new TableColumn('Block<br/>Place Bet', 80),
     blockTransferWithdraw: new TableColumn('Block<br/>Transfer/Withdraw', 130),
     history: new TableColumn('', 40, true, true)

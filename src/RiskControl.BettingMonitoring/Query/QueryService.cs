@@ -12,15 +12,8 @@ public interface QueryService
     Task<BettingMonitoringModel> Execute();
 }
 
-public class QueryServiceImp : QueryService
+public class QueryServiceImp(IDynamicRepository dynamicRepository) : QueryService
 {
-    private readonly IDynamicRepository dynamicRepository;
-
-    public QueryServiceImp(IDynamicRepository dynamicRepository)
-    {
-        this.dynamicRepository = dynamicRepository;
-    }
-
     public async Task<BettingMonitoringModel> Execute()
     {
         var criteria = new BettingMonitoringQueryCriteria();

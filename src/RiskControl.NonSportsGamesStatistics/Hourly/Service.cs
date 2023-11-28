@@ -14,18 +14,8 @@ public interface Service
     Task<HourlyReportModel> CalculateHourlyReport(BaseStatisticCriteria criteria, DateTime winlostDate);
 }
 
-public class ServiceImp : Service
+public class ServiceImp(RawService rawService, IMapper mapper) : Service
 {
-    private readonly RawService rawService;
-
-    private readonly IMapper mapper;
-
-    public ServiceImp(RawService rawService, IMapper mapper)
-    {
-        this.rawService = rawService;
-        this.mapper = mapper;
-    }
-
     public HourlyRawStatistics SumRawData(IEnumerable<HourlyRawStatistics> rawData)
     {
         return new HourlyRawStatistics

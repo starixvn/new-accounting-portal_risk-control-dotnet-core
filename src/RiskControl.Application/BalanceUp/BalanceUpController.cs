@@ -7,15 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-public class BalanceUpController : ControllerBase
+public class BalanceUpController(BalanceUpService balanceUpService) : ControllerBase
 {
-    private readonly BalanceUpService balanceUpService;
-
-    public BalanceUpController(BalanceUpService balanceUpService)
-    {
-        this.balanceUpService = balanceUpService;
-    }
-
 #if DEBUG
 
     [AllowAnonymous]

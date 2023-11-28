@@ -8,15 +8,8 @@ public interface FileContentService
     byte[] ReadAllBytes(string filename);
 }
 
-public class FileContentServiceImp : FileContentService
+public class FileContentServiceImp(ConfigurationService configurationService) : FileContentService
 {
-    private readonly ConfigurationService configurationService;
-
-    public FileContentServiceImp(ConfigurationService configurationService)
-    {
-        this.configurationService = configurationService;
-    }
-
     public byte[] ReadAllBytes(string filename)
     {
         var filePath = $"{configurationService.FileServerDirectory}/{filename}";

@@ -8,22 +8,12 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.UserNameView.AssociatedAccount;
 
-public class ServiceImp<TCriteria> : Service<UserNameViewReportModel, TCriteria>
-    where TCriteria: BaseStatisticCriteria
-{
-    private readonly RawService rawService;
-    private readonly CalculationService service;
-    private readonly AssociatedAccountService associatedAccountService;
-
-    public ServiceImp(RawService rawService,
+public class ServiceImp<TCriteria>(RawService rawService,
         CalculationService service,
         AssociatedAccountService associatedAccountService)
-    {
-        this.rawService = rawService;
-        this.service = service;
-        this.associatedAccountService = associatedAccountService;
-    }
-
+    : Service<UserNameViewReportModel, TCriteria>
+    where TCriteria: BaseStatisticCriteria
+{
     public async Task<UserNameViewReportModel> Query(TCriteria criteria, DateTime winLossDate)
     {
         var associatedByDevice = await associatedAccountService.GetAssociatedByDevice(criteria.CustId);

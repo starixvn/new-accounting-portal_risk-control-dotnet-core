@@ -12,18 +12,10 @@ using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.WinLossLimitControl.PlayerSettings.SearchForInserting;
 
-public class HandlerSearch : HandlerBase, IRequestHandler<RequestSearch, List<PlayerSettingCurrency>>
+public class HandlerSearch(IDynamicRepository dynamicRepository, CacheRefService cacheRefService,
+        DataTransformService dataTransformService, IMapper mapper)
+    : HandlerBase(cacheRefService, dataTransformService), IRequestHandler<RequestSearch, List<PlayerSettingCurrency>>
 {
-    private readonly IDynamicRepository dynamicRepository;
-    private readonly IMapper mapper;
-
-    public HandlerSearch(IDynamicRepository dynamicRepository, CacheRefService cacheRefService, DataTransformService dataTransformService, IMapper mapper)
-        : base(cacheRefService, dataTransformService)
-    {
-        this.dynamicRepository = dynamicRepository;
-        this.mapper = mapper;
-    }
-
     public async Task<List<PlayerSettingCurrency>> Handle(RequestSearch request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<SearchCriteria>(request);

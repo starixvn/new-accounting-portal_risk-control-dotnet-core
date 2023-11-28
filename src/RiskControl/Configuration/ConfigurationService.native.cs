@@ -18,15 +18,8 @@ public interface ConfigurationService
     string FraudSystemCTSAPI { get; }
 }
 
-public class ConfigurationServiceImp : ConfigurationService
+public class ConfigurationServiceImp(IConfiguration configuration) : ConfigurationService
 {
-    private readonly IConfiguration configuration;
-
-    public ConfigurationServiceImp(IConfiguration configuration)
-    {
-        this.configuration = configuration;
-    }
-
     public string FraudSystemAPI => configuration["FraudSystemAPI"];
 
     public string CurrentDirectory => AppDomain.CurrentDomain.BaseDirectory;

@@ -10,15 +10,8 @@ using Fanex.NAP.Client.Helpers.Business;
 
 [ApiController]
 [Route("api/win-limit-control/monitor")]
-public class MonitorHistoryController : ControllerBase
+public class MonitorHistoryController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public MonitorHistoryController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [NapAuth(FunctionKey = FunctionKeys.WinLimitMonitor, Policy = Constant.Policy.Read)]
     [Route("history")]
     [HttpPost]

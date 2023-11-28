@@ -10,15 +10,9 @@ public interface ValidationService
     int Execute(List<CurrencySetting> currencySetting);
 }
 
-public class ValidationServiceImp : ValidationService
+public class ValidationServiceImp(IncreamentedSeriesContrainService increamentedSeriesContrainService)
+    : ValidationService
 {
-    private readonly IncreamentedSeriesContrainService increamentedSeriesContrainService;
-
-    public ValidationServiceImp(IncreamentedSeriesContrainService increamentedSeriesContrainService)
-    {
-        this.increamentedSeriesContrainService = increamentedSeriesContrainService;
-    }
-
     public int Execute(List<CurrencySetting> currencySetting)
     {
         var isContrainsValid = currencySetting.All(IsValidLevelContrains);

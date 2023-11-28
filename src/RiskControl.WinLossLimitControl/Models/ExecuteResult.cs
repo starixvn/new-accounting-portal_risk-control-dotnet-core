@@ -1,18 +1,12 @@
 ﻿namespace RiskControl.WinLossLimitControl.Models;
 
-public class ExecuteResult
+public class ExecuteResult(int errorCode)
 {
-    public ExecuteResult()
+    public ExecuteResult() : this(0)
     {
-        ErrorCode = 0;
     }
 
-    public ExecuteResult(int errorCode)
-    {
-        ErrorCode = errorCode;
-    }
-
-    public int ErrorCode { get; set; }
+    public int ErrorCode { get; set; } = errorCode;
 
     public bool IsValid => ErrorCode == 0;
 }

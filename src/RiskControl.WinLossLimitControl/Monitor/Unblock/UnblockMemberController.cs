@@ -10,15 +10,8 @@ using Fanex.NAP.Client.Helpers.Business;
 
 [ApiController]
 [Route("state-api/win-limit-control/monitor")]
-public class UnblockMemberController : ControllerBase
+public class UnblockMemberController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public UnblockMemberController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
-
     [Route("unblock-transfer")]
     [HttpPost]
     [NapAuth(FunctionKey = FunctionKeys.WinLimitMonitor, Policy = Constant.Policy.Host)]
