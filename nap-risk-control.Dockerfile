@@ -21,7 +21,7 @@ COPY RiskControl.Sites ./RiskControl.Sites
 WORKDIR /src/RiskControl.Sites
 
 RUN --mount=type=cache,target=/root/.nuget/packages \
-    dotnet publish -c Release -o /app --no-restore
+    dotnet publish -c Release -o /app
 
 FROM hub.nexdev.net/base/dotnet/core/aspnet:8.0-alpine AS base
 
