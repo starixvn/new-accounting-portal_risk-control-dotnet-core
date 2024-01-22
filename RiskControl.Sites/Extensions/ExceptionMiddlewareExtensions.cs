@@ -1,6 +1,5 @@
 ﻿using Fanex.Logging;
 using Fanex.Logging.Extensions;
-using Fanex.Logging.Extensions.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
@@ -23,7 +22,6 @@ public static class ExceptionMiddlewareExtensions
                 if (contextFeature != null)
                 {
                     var logMessage = new LogMessage(contextFeature.Error.Message)
-                        .AddSection("Database Info", DatabaseInfoGetters.GetDbExceptionInfo(contextFeature.Error))
                         .AddSection("Server Info", CommonInfoGetters.GetServerInfo())
                         .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(contextFeature.Error.InnerException))
                         .ToString();

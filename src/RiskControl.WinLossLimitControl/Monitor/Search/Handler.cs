@@ -18,7 +18,7 @@ public class Handler(IDynamicRepository repository, CacheRefService cacheRefServ
     {
         var criteria = mapper.Map<MonitorSearchCriteria>(request);
         criteria.ToDate = criteria.ToDate.AddDays(1).AddSeconds(-1);
-        var rawData = await repository.FetchAsync<MonitorModelRaw>(criteria, cancellationToken);
+        var rawData = await repository.FetchAsync<MonitorModelRaw>(criteria);
         return FromRawWinLimitMonitor(rawData).ToList();
     }
 

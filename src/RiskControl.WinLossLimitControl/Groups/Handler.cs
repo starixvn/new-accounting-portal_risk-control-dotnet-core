@@ -14,7 +14,7 @@ public class Handler(IDynamicRepository repository, CacheRefService cacheRefServ
     public async Task<List<ProductGroupSetting>> Handle(Request request, CancellationToken cancellationToken)
     {
         var criteria = new ReadCriteria();
-        var settings = await repository.FetchAsync<GroupSetting>(criteria, cancellationToken);
+        var settings = await repository.FetchAsync<GroupSetting>(criteria);
 
         var result = new List<ProductGroupSetting>();
         var productIds = settings.Select(s => s.ProductId).Distinct();

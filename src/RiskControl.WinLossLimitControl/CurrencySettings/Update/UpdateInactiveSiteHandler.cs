@@ -14,7 +14,7 @@ public class UpdateInactiveSiteHandler(IDynamicRepository repository, IMapper ma
     public async Task<ExecuteResult> Handle(UpdateInactiveSiteRequest request, CancellationToken cancellationToken)
     {
         var criteriaList = mapper.Map<List<UpdateInactiveSiteCriteria>>(request.Settings);
-        var executeResults = criteriaList.Select(c => repository.ExecuteAsync(c, cancellationToken)).ToArray();
+        var executeResults = criteriaList.Select(c => repository.ExecuteAsync(c)).ToArray();
         await Task.WhenAll(executeResults);
         return new ExecuteResult();
     }

@@ -15,6 +15,6 @@ public class FilterHandler(IDynamicRepository repository, IMapper mapper) : IReq
     public async Task<IEnumerable<ProductGameTypeModel>> Handle(ProductGameTypeRequest request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<ProductGameTypeCriteria>(request);
-        return await repository.FetchAsync<ProductGameTypeModel>(criteria, cancellationToken);
+        return await repository.FetchAsync<ProductGameTypeModel>(criteria);
     }
 }

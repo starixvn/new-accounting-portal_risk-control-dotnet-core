@@ -35,6 +35,6 @@ public class BetLimitSettingUpdateHandlerUnitTests
         await handle.Handle(new BetLimitSettingUpdateRequest(), new CancellationToken());
 
         // Assert
-        await repository.Received().ExecuteAsync(Arg.Compat.Any<BetLimitSettingUpdateCommand>(), Arg.Compat.Any<CancellationToken>());
+        await repository.Received().ExecuteAsync(Arg.Compat.Any<BetLimitSettingUpdateCommand>());
     }
 }

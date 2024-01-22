@@ -33,6 +33,6 @@ public class UpdateInactiveSiteHandlerUnitTests
         await handle.Handle(request, new CancellationToken());
 
         // Assert
-        await repository.Received(2).ExecuteAsync(Arg.Compat.Any<UpdateInactiveSiteCriteria>(), Arg.Compat.Any<CancellationToken>());
+        await repository.Received(2).ExecuteAsync(Arg.Compat.Any<UpdateInactiveSiteCriteria>());
     }
 }

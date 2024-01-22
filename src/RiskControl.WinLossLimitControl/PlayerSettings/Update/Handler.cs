@@ -25,7 +25,7 @@ public class Handler(UserHttpContext userHttpContext, ValidationService validati
             return new ExecuteResult(1);
         }
 
-        await repository.ExecuteAsync(criteria, cancellationToken);
+        await repository.ExecuteAsync(criteria);
 
         return new ExecuteResult();
     }

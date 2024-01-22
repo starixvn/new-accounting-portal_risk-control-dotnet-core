@@ -18,7 +18,7 @@ public class Handler(IDynamicRepository repository, CacheRefService cacheRefServ
     public async Task<List<PlayerSettingCurrency>> Handle(Request request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<SearchCriteria>(request);
-        var rawSettings = await repository.FetchAsync<PlayerSettingRaw>(criteria, cancellationToken);
+        var rawSettings = await repository.FetchAsync<PlayerSettingRaw>(criteria);
         var settings = FromRawPlayerSetting(rawSettings);
 
         return GetPlayerSettingCurrencies(settings)
