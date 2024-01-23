@@ -23,7 +23,7 @@ public class HandlerUnitTests
 
         // Act
         var handler = new Handler(userHttpContext, validationService, updateService);
-        var actualResult = await handler.Handle(new Request(), new CancellationToken());
+        var actualResult = await handler.Handle([], new CancellationToken());
 
         // Assert
         Assert.Equal(InvalidErrorCode, actualResult.ErrorCode);
@@ -43,7 +43,7 @@ public class HandlerUnitTests
 
         // Act
         var handler = new Handler(userHttpContext, validationService, updateService);
-        var actualResult = await handler.Handle(new Request(), new CancellationToken());
+        var actualResult = await handler.Handle([], new CancellationToken());
 
         // Assert
         Assert.Equal(0, actualResult.ErrorCode);

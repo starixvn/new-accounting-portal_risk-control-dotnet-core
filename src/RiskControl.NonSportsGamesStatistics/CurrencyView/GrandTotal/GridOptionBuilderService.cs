@@ -53,6 +53,6 @@ public class GridOptionBuilderServiceImp(GridOptionDataRowBuilderService gridDat
             dataRow.Columns[0].CellAlignment = HAlignment.Right;
         }
 
-        return new List<GridDataRow> { dataRow };
+        return [dataRow];
     }
 }

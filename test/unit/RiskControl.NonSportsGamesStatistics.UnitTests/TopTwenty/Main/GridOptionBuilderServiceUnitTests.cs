@@ -1,7 +1,6 @@
 ﻿using Fanex.Excel.Models;
 using NSubstitute;
 using RiskControl.NonSportsGamesStatistics.Common;
-using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.TopTwenty.Common;
 using RiskControl.NonSportsGamesStatistics.TopTwenty.Main;
 using RiskControl.UnitTest.Core.TestUtilities;
@@ -31,7 +30,7 @@ public class GridOptionBuilderServiceUnitTests
 
         // Act
         var actualResult = service.BuildGridOptions(
-            new List<UserNameViewGroupStatisticsWithTotalModel>(),
+            [],
             new BaseStatisticQueryModel
             {
                 ProductId = "0",
@@ -47,7 +46,7 @@ public class GridOptionBuilderServiceUnitTests
                 TotalBetValue = 0,
                 HousePTType = 0,
                 HousePTValue = 0,
-                RemovalColumns = new List<string> { "a", "b" },
+                RemovalColumns = ["a", "b"],
                 SortDirection = "asc",
                 SortColumnName = "any name",
                 ReportBy = "top 20",

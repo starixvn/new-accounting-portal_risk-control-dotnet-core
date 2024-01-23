@@ -74,14 +74,14 @@ public class ProgressiveJackpotController(ConfigurationService configurationServ
         return new EpplusExcelResult(excelPackage);
     }
 
-    private async Task<ReportRealTimeResultContent> GetRealTimeData(ReportCallMessage call)
+    private Task<ReportRealTimeResultContent> GetRealTimeData(ReportCallMessage call)
     {
         var postData = new HttpRequestMessage<ReportCallMessage>
         {
             Call = call
         };
         var requestUri = $"{configurationService.ProgressiveJackpotAPI}/PJRealtimeReport/";
-        return await progressiveApiClient.PostJson<ReportRealTimeResultContent>(requestUri, postData).ConfigureAwait(false);
+        return progressiveApiClient.PostJson<ReportRealTimeResultContent>(requestUri, postData);
     }
 
     [Route("monthly")]
@@ -102,14 +102,14 @@ public class ProgressiveJackpotController(ConfigurationService configurationServ
         return new EpplusExcelResult(excelPackage);
     }
 
-    private async Task<ReportMonthlyResultContent> GetMonthlyData(ReportMonthlyCallMessage call)
+    private Task<ReportMonthlyResultContent> GetMonthlyData(ReportMonthlyCallMessage call)
     {
         var postData = new HttpRequestMessage<ReportMonthlyCallMessage>
         {
             Call = call
         };
         var requestUri = $"{configurationService.ProgressiveJackpotAPI}/PJMonthlyReport/";
-        return await progressiveApiClient.PostJson<ReportMonthlyResultContent>(requestUri, postData).ConfigureAwait(false);
+        return progressiveApiClient.PostJson<ReportMonthlyResultContent>(requestUri, postData);
     }
 
     [Route("daily")]
@@ -130,14 +130,14 @@ public class ProgressiveJackpotController(ConfigurationService configurationServ
         return new EpplusExcelResult(excelPackage);
     }
 
-    private async Task<ReportDailyResultContent> GetDailyData(ReportDailyCallMessage call)
+    private Task<ReportDailyResultContent> GetDailyData(ReportDailyCallMessage call)
     {
         var postData = new HttpRequestMessage<ReportDailyCallMessage>
         {
             Call = call
         };
         var requestUri = $"{configurationService.ProgressiveJackpotAPI}/PJDailyReport/";
-        return await progressiveApiClient.PostJson<ReportDailyResultContent>(requestUri, postData).ConfigureAwait(false);
+        return progressiveApiClient.PostJson<ReportDailyResultContent>(requestUri, postData);
     }
 
     [Route("win-record")]
@@ -158,13 +158,13 @@ public class ProgressiveJackpotController(ConfigurationService configurationServ
         return new EpplusExcelResult(excelPackage);
     }
 
-    private async Task<ReportWinnerRecordResultContent> GetWinRecordData(ReportCallMessage call)
+    private Task<ReportWinnerRecordResultContent> GetWinRecordData(ReportCallMessage call)
     {
         var postData = new HttpRequestMessage<ReportCallMessage>
         {
             Call = call
         };
         var requestUri = $"{configurationService.ProgressiveJackpotAPI}/PJWinnerReport/";
-        return await progressiveApiClient.PostJson<ReportWinnerRecordResultContent>(requestUri, postData).ConfigureAwait(false);
+        return progressiveApiClient.PostJson<ReportWinnerRecordResultContent>(requestUri, postData);
     }
 }

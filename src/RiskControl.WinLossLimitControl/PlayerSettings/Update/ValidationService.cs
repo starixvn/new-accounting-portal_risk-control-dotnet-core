@@ -35,7 +35,7 @@ public class ValidationServiceImp(IDynamicRepository repository,
         return isValid;
     }
 
-    private async Task<IEnumerable<PlayerSetting>> GetPlayerSettings(int custId, int productId, int groupId)
+    private Task<IEnumerable<PlayerSetting>> GetPlayerSettings(int custId, int productId, int groupId)
     {
         var criteria = new ReadCriteria
         {
@@ -44,7 +44,7 @@ public class ValidationServiceImp(IDynamicRepository repository,
             ProductId = productId
         };
 
-        return await repository.FetchAsync<PlayerSetting>(criteria);
+        return repository.FetchAsync<PlayerSetting>(criteria);
     }
 
     public async Task<bool> CheckWinContrains(Request request)

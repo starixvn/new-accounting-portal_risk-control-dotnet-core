@@ -47,7 +47,7 @@ public class GridOptionBuilderServiceImp<TQuery>(GridOptionDataRowBuilderService
     private List<GridDataRow> BuildFooter(UserNameViewStatisticsModel grandTotal, bool viewByInteger)
     {
         var dataRow = BuildDataRow(grandTotal, HAlignment.Right, viewByInteger);
-        return new List<GridDataRow> { dataRow };
+        return [dataRow];
     }
 
     private GridDataRow BuildDataRow(UserNameViewStatisticsModel statistic, HAlignment alignment, bool viewByInteger)

@@ -16,7 +16,7 @@ public class UsernameController(INapSession session, IDynamicRepository reposito
 {
     [Route("state-api/NonSportsGamesStatistics/Filter/UserName/Suggest")]
     [HttpPost]
-    public async Task<IEnumerable<string>> Suggest(UsernameSuggestionQueryModel queryModel)
+    public Task<IEnumerable<string>> Suggest(UsernameSuggestionQueryModel queryModel)
     {
         var criteria = new UsernameSuggestionCriteria
         {
@@ -27,7 +27,7 @@ public class UsernameController(INapSession session, IDynamicRepository reposito
             RoleId = queryModel.RoleId
         };
 
-        return await repository.FetchAsync<string>(criteria).ConfigureAwait(false);
+        return repository.FetchAsync<string>(criteria);
     }
 
     [Route("api/NonSportsGamesStatistics/Filter/UserName/GetValidUserNames")]

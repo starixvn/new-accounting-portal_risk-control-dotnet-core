@@ -13,8 +13,8 @@ public class Handler(Service<UserNameViewReportModel, Criteria> service,
     : BaseHandlerWithSorting<QueryModel, Criteria, UserNameViewReportModel>(service, sortingService, gridOptionService),
         IRequestHandler<QueryModel, GridOptions>
 {
-    public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
+    public Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
     {
-        return await base.Handle(request, request.WinLostDate).ConfigureAwait(false);
+        return base.Handle(request, request.WinLostDate);
     }
 }

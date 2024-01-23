@@ -10,14 +10,14 @@ namespace RiskControl.NonSportsGamesStatistics.CurrencyView.GrandTotal.Normal;
 public class CurrencyViewGrandTotalNormalModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
     [HttpPost, Route("Query")]
-    public override async Task<IActionResult> Query(QueryModel queryModel)
+    public override Task<IActionResult> Query(QueryModel queryModel)
     {
-        return await base.Query(queryModel).ConfigureAwait(false);
+        return base.Query(queryModel);
     }
 
     [HttpPost, Route("Excel")]
-    public async Task<IActionResult> Excel(QueryModel queryModel)
+    public Task<IActionResult> Excel(QueryModel queryModel)
     {
-	    return await base.Excel(queryModel, SheetNameConstant.SHEETNAME).ConfigureAwait(false);
+	    return base.Excel(queryModel, SheetNameConstant.SHEETNAME);
     }
 }

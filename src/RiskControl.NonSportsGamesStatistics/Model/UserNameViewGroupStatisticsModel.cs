@@ -8,5 +8,5 @@ public class UserNameViewGroupStatisticsModel
 
     public string GroupName { get; set; }
 
-    public List<UserNameViewStatisticsModel> UserNameViewStatistics { get; set; } = new();
+    public List<UserNameViewStatisticsModel> UserNameViewStatistics { get; set; } = [];
 }

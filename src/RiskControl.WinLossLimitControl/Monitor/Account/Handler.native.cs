@@ -28,9 +28,9 @@ public class Handler(IDynamicRepository repository,
         };
     }
 
-    private async Task<Customer> GetCustomer(int customerId)
+    private Task<Customer> GetCustomer(int customerId)
     {
         var criteria = new CustomerQueryCriteria { CustomerId = customerId };
-        return await repository.GetAsync<Customer>(criteria);
+        return repository.GetAsync<Customer>(criteria);
     }
 }

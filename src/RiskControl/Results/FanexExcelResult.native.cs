@@ -21,7 +21,7 @@ public class FanexExcelResult : IActionResult
 
     public FanexExcelResult(List<GridOptions> listGridOptions, string sheetName)
     {
-        var excel = new FanexExcel(listGridOptions ?? new List<GridOptions>());
+        var excel = new FanexExcel(listGridOptions ?? []);
         Workbook = excel.ToExcel2003(sheetName);
     }
 

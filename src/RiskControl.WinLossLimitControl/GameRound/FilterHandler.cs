@@ -12,9 +12,9 @@ namespace RiskControl.WinLossLimitControl.GameRound;
 
 public class FilterHandler(IDynamicRepository repository, IMapper mapper) : IRequestHandler<ProductGameTypeRequest, IEnumerable<ProductGameTypeModel>>
 {
-    public async Task<IEnumerable<ProductGameTypeModel>> Handle(ProductGameTypeRequest request, CancellationToken cancellationToken)
+    public Task<IEnumerable<ProductGameTypeModel>> Handle(ProductGameTypeRequest request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<ProductGameTypeCriteria>(request);
-        return await repository.FetchAsync<ProductGameTypeModel>(criteria);
+        return repository.FetchAsync<ProductGameTypeModel>(criteria);
     }
 }

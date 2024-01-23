@@ -6,5 +6,5 @@ public class UserNameViewGroupStatisticsWithTotalModel
 {
     public UserNameViewStatisticsModel Total { get; set; } = new();
 
-    public List<UserNameViewGroupStatisticsModel> Statistics { get; set; } = new();
+    public List<UserNameViewGroupStatisticsModel> Statistics { get; set; } = [];
 }

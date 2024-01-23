@@ -53,10 +53,7 @@ internal static class ValidationServiceUnitTestsFactory
             RedLimit = seed
         };
 
-        return new List<CurrencySetting>
-        {
-            setting
-        };
+        return [setting];
     }
 
     public static ValidationService CreateValidationService(bool increamentedContrainsResult)

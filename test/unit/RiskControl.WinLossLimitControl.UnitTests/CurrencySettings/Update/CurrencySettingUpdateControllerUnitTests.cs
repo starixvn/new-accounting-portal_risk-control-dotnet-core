@@ -16,7 +16,7 @@ public class CurrencySettingUpdateControllerUnitTests
 
         // Act
         var controller = new CurrencySettingUpdateController(mediator);
-        await controller.Post(new Request());
+        await controller.Post([]);
 
         // Assert
         await mediator.Received().Send(Arg.Compat.Any<Request>());

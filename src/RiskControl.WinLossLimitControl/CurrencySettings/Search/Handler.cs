@@ -28,7 +28,7 @@ public class Handler(IDynamicRepository repository, CacheRefService cacheRefServ
             .ToList();
     }
 
-    private async Task<IEnumerable<CurrencySettingRaw>> QueryFromDatabase(Request parameter)
+    private Task<IEnumerable<CurrencySettingRaw>> QueryFromDatabase(Request parameter)
     {
         var processingCriteria = parameter.MultiSite == "0"
             ? (ICriteria)new AllSiteSearchCriteria
@@ -38,7 +38,7 @@ public class Handler(IDynamicRepository repository, CacheRefService cacheRefServ
                 GroupId = parameter.GroupId
             }
             : mapper.Map<SearchCriteria>(parameter);
-        return await repository.FetchAsync<CurrencySettingRaw>(processingCriteria);
+        return repository.FetchAsync<CurrencySettingRaw>(processingCriteria);
     }
 
     private IEnumerable<CurrencySetting> FromRawCurrencySetting(IEnumerable<CurrencySettingRaw> rawCurrencySetting)

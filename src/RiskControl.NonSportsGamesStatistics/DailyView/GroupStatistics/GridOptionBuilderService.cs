@@ -72,9 +72,6 @@ public class GridOptionBuilderServiceImp<TQueryModel>(GridOptionDataRowBuilderSe
             dataRow.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
         }
 
-        return new List<GridDataRow>
-        {
-            gridDataRowBuilderService.BuildFullColumnDataRow(grandTotal, HAlignment.Right, viewByInteger)
-        };
+        return [gridDataRowBuilderService.BuildFullColumnDataRow(grandTotal, HAlignment.Right, viewByInteger)];
     }
 }

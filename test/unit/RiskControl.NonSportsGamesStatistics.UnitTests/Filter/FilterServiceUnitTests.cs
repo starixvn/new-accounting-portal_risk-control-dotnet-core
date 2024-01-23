@@ -56,86 +56,88 @@ public class FilterServiceUnitTests
         };
 
     private static List<SiteGroupModel>  ExpectedData =>
-        new()
+    [
+        new SiteGroupModel
         {
-            new SiteGroupModel
-            {
-                ChildGroups = new List<SiteGroupModel>
+            ChildGroups =
+            [
+                new SiteGroupModel
                 {
-                    new()
-                    {
-                        ChildGroups = new List<SiteGroupModel> { 
-                            new()
-                            {
-                                ChildGroups = null,
-                                ChildItems = null,
-                                GroupId = -1000,
-                                GroupName = null,
-                                LicenseeId = -1,
-                                LicenseeName = "y789",
-                                ParentId = 0
-                            },
-                            new()
-                            {
-                                ChildGroups = null,
-                                ChildItems = null,
-                                GroupId = -1000,
-                                GroupName = null,
-                                LicenseeId = -1,
-                                LicenseeName = "y889",
-                                ParentId = 0
-                            }
+                    ChildGroups =
+                    [
+                        new SiteGroupModel
+                        {
+                            ChildGroups = null,
+                            ChildItems = null,
+                            GroupId = -1000,
+                            GroupName = null,
+                            LicenseeId = -1,
+                            LicenseeName = "y789",
+                            ParentId = 0
                         },
-                        ChildItems = new List<LicenseeModel>(),
-                        GroupId = -1000,
-                        GroupName = "789y",
-                        LicenseeId = 0,
-                        LicenseeName = null,
-                        ParentId = 0
-                    }
-                },
-                ChildItems = null,
-                GroupId = 0,
-                GroupName = "Credit Group",
-                LicenseeId = 0,
-                LicenseeName = null,
-                ParentId = 0
-            },
-            new SiteGroupModel
-            {
-                ChildGroups = new List<SiteGroupModel>
+
+                        new SiteGroupModel
+                        {
+                            ChildGroups = null,
+                            ChildItems = null,
+                            GroupId = -1000,
+                            GroupName = null,
+                            LicenseeId = -1,
+                            LicenseeName = "y889",
+                            ParentId = 0
+                        }
+                    ],
+                    ChildItems = [],
+                    GroupId = -1000,
+                    GroupName = "789y",
+                    LicenseeId = 0,
+                    LicenseeName = null,
+                    ParentId = 0
+                }
+            ],
+            ChildItems = null,
+            GroupId = 0,
+            GroupName = "Credit Group",
+            LicenseeId = 0,
+            LicenseeName = null,
+            ParentId = 0
+        },
+
+        new SiteGroupModel
+        {
+            ChildGroups =
+            [
+                new SiteGroupModel
                 {
-                    new()
-                    {
-                        ChildGroups = new List<SiteGroupModel>
-                        { 
-                            new()
-                            {
-                                ChildGroups = null,
-                                ChildItems = null,
-                                GroupId = 3,
-                                GroupName = null,
-                                LicenseeId = 137,
-                                LicenseeName = "Baobet",
-                                ParentId = 0
-                            }
-                        },
-                        ChildItems = new List<LicenseeModel>(),
-                        GroupId = 3,
-                        GroupName = "Alek's Group",
-                        LicenseeId = 0,
-                        LicenseeName = null,
-                        ParentId = 0
-                    }
-                },
-                ChildItems = null,
-                GroupId = 0,
-                GroupName = "Licensee Group",
-                LicenseeId = 0,
-                LicenseeName = null,
-                ParentId = 0
-            }
-        };
+                    ChildGroups =
+                    [
+                        new SiteGroupModel
+                        {
+                            ChildGroups = null,
+                            ChildItems = null,
+                            GroupId = 3,
+                            GroupName = null,
+                            LicenseeId = 137,
+                            LicenseeName = "Baobet",
+                            ParentId = 0
+                        }
+                    ],
+                    ChildItems = [],
+                    GroupId = 3,
+                    GroupName = "Alek's Group",
+                    LicenseeId = 0,
+                    LicenseeName = null,
+                    ParentId = 0
+                }
+            ],
+            ChildItems = null,
+            GroupId = 0,
+            GroupName = "Licensee Group",
+            LicenseeId = 0,
+            LicenseeName = null,
+            ParentId = 0
+        }
+    ];
 
     private readonly IMapper mapper;
 

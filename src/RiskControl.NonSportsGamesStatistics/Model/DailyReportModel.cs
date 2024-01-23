@@ -4,7 +4,7 @@ namespace RiskControl.NonSportsGamesStatistics.Model;
 
 public class DailyReportModel
 {
-    public List<DailyGroupStatisticsModel> Statistics { get; set; } = new();
+    public List<DailyGroupStatisticsModel> Statistics { get; set; } = [];
 
     public DailyViewStatisticsModel GrandTotal { get; set; } = new();
 }

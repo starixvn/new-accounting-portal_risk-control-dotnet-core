@@ -13,18 +13,18 @@ public class Handler(IDynamicRepository repository, IMapper mapper) :
     IRequestHandler<UnassignedBettypeRequest, IEnumerable<UnassignedBettypeModel>>,
     IRequestHandler<GroupSettingRequest, IEnumerable<GroupGroupSettingModel>>
 {
-    public async Task<RepresentativeBettypeModel> Handle(RepresentativeBettypeRequest request, CancellationToken cancellationToken)
+    public Task<RepresentativeBettypeModel> Handle(RepresentativeBettypeRequest request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<RepresentativeBettypeCriteria>(request);
 
-        return await repository.GetAsync<RepresentativeBettypeModel>(criteria);
+        return repository.GetAsync<RepresentativeBettypeModel>(criteria);
     }
 
-    public async Task<IEnumerable<UnassignedBettypeModel>> Handle(UnassignedBettypeRequest request, CancellationToken cancellationToken)
+    public Task<IEnumerable<UnassignedBettypeModel>> Handle(UnassignedBettypeRequest request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<UnassignedBettypeCriteria>(request);
 
-        return await repository.FetchAsync<UnassignedBettypeModel>(criteria);
+        return repository.FetchAsync<UnassignedBettypeModel>(criteria);
     }
 
     public async Task<IEnumerable<GroupGroupSettingModel>> Handle(GroupSettingRequest request, CancellationToken cancellationToken)

@@ -10,14 +10,14 @@ namespace RiskControl.NonSportsGamesStatistics.DailyView.Daily.Normal;
 public class DailyNormalModeController(IMediator mediator) : BaseController<QueryModel>(mediator)
 {
     [Route("Query")]
-    public override async Task<IActionResult> Query(QueryModel queryModel)
+    public override Task<IActionResult> Query(QueryModel queryModel)
     {
-        return await base.Query(queryModel).ConfigureAwait(false);
+        return base.Query(queryModel);
     }
 
     [Route("Excel")]
-    public async Task<IActionResult> Excel(QueryModel queryModel)
+    public Task<IActionResult> Excel(QueryModel queryModel)
     {
-        return await base.Excel(queryModel, SheetNameConstant.SHEETNAME).ConfigureAwait(false);
+        return base.Excel(queryModel, SheetNameConstant.SHEETNAME);
     }
 }

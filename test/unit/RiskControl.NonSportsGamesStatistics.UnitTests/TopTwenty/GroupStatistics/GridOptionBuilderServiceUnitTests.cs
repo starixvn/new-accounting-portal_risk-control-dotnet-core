@@ -47,7 +47,7 @@ public class GridOptionBuilderServiceUnitTests
                 TotalBetValue = 0,
                 HousePTType = 0,
                 HousePTValue = 0,
-                RemovalColumns = new List<string> { "a", "b" },
+                RemovalColumns = ["a", "b"],
                 SortDirection = "asc",
                 SortColumnName = "any name",
                 ReportBy = "top 20",

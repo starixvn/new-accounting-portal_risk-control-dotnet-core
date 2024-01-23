@@ -101,8 +101,8 @@ public class RichHttpClientImp : RichHttpClient
         await JsonHttpClient.PostAsync(requestUri, stringContent).ConfigureAwait(false);
     }
 
-    public async Task<Stream> Download(string requestUri)
+    public Task<Stream> Download(string requestUri)
     {
-        return await OctetStreamHttpClient.GetStreamAsync(requestUri).ConfigureAwait(false);
+        return OctetStreamHttpClient.GetStreamAsync(requestUri);
     }
 }

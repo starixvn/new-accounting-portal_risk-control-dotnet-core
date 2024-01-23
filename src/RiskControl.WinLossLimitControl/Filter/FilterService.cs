@@ -24,14 +24,14 @@ public interface FilterService
 public class FilterServiceImp(IDynamicRepository repository, CacheRefService cacheRefService)
     : FilterService
 {
-    public async Task<IEnumerable<BaseEntity>> GetCurrencies(GetCurrencyCriteria criteria)
+    public Task<IEnumerable<BaseEntity>> GetCurrencies(GetCurrencyCriteria criteria)
     {
-        return await repository.FetchAsync<BaseEntity>(criteria);
+        return repository.FetchAsync<BaseEntity>(criteria);
     }
 
-    public async Task<IEnumerable<Group>> GetGroupByProduct(GetGroupCriteria criteria)
+    public Task<IEnumerable<Group>> GetGroupByProduct(GetGroupCriteria criteria)
     {
-        return await repository.FetchAsync<Group>(criteria);
+        return repository.FetchAsync<Group>(criteria);
     }
 
     public IEnumerable<BaseEntity> GetProducts()
@@ -58,8 +58,8 @@ public class FilterServiceImp(IDynamicRepository repository, CacheRefService cac
         });
     }
 
-    public async Task<IEnumerable<Customer>> SearchUsers(CustomerSuggestionCriteria criteria)
+    public Task<IEnumerable<Customer>> SearchUsers(CustomerSuggestionCriteria criteria)
     {
-        return await repository.FetchAsync<Customer>(criteria);
+        return repository.FetchAsync<Customer>(criteria);
     }
 }

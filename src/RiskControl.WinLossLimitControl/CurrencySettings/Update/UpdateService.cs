@@ -21,7 +21,7 @@ public class UpdateServiceImp(IDynamicRepository repository, IConfiguration conf
     public async Task Execute(List<CurrencySetting> currencySettings, UserContext userContext)
     {
         var criteriaList = GetUpdateCurrencyWinLimitCriteria(currencySettings, userContext);
-        var executeResults = criteriaList.Select(repository.ExecuteAsync).ToArray();
+        var executeResults = criteriaList.Select(a => repository.ExecuteAsync(a)).ToArray();
 
         await Task.WhenAll(executeResults);
     }
