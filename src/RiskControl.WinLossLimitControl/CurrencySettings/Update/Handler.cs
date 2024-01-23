@@ -16,7 +16,7 @@ public class Handler(UserHttpContext userHttpContext, ValidationService validati
         var validationResult = validationService.Execute(request);
         if (validationResult > 0)
         {
-            return new ExecuteResult(validationResult);
+            return new ExecuteResult { ErrorCode = validationResult };
         }
 
         await updateService.Execute(request, userContext);

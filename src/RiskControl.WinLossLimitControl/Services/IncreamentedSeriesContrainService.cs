@@ -15,12 +15,12 @@ public class IncreamentedSeriesContrainServiceImp : IncreamentedSeriesContrainSe
 {
     public bool IsPositiveIncreamented(params decimal[] values)
     {
-        return !values.Any(v => v < 0) && IsIncreamented(values);
+        return values.ToList().TrueForAll(v => v >= 0) && IsIncreamented(values);
     }
 
     public bool IsNegativeIncreamented(params decimal[] values)
     {
-        return !values.Any(v => v > 0) && IsIncreamented(values);
+        return values.ToList().TrueForAll(v => v <= 0) && IsIncreamented(values);
     }
 
     public bool IsIncreamented(params decimal[] values)

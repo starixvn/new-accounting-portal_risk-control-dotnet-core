@@ -18,6 +18,6 @@ public class CurrencyViewGrandTotalNormalModeController(IMediator mediator) : Ba
     [HttpPost, Route("Excel")]
     public Task<IActionResult> Excel(QueryModel queryModel)
     {
-	    return base.Excel(queryModel, SheetNameConstant.SHEETNAME);
+        return base.Excel(queryModel, SheetNameConstant.SHEETNAME);
     }
 }

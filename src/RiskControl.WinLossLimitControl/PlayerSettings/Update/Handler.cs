@@ -22,7 +22,7 @@ public class Handler(UserHttpContext userHttpContext, ValidationService validati
         var valid = await validationService.Execute(request);
         if (!valid)
         {
-            return new ExecuteResult(1);
+            return new ExecuteResult{ErrorCode = 1};
         }
 
         await repository.ExecuteAsync(criteria);

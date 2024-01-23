@@ -24,7 +24,7 @@ public class ValidationServiceImp(IDynamicRepository repository,
 
     public async Task<int> Execute(List<PlayerSetting> playerSettings)
     {
-        var isContrainsValid = playerSettings.All(IsValidLevelContrains);
+        var isContrainsValid = playerSettings.TrueForAll(IsValidLevelContrains);
         if (!isContrainsValid)
         {
             return InvalidCurrencySettingErrorCode;

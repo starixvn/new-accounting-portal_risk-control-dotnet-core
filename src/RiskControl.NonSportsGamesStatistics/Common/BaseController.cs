@@ -11,17 +11,15 @@ using Results;
 public class BaseController<TQueryModel>(IMediator mediator) : ControllerBase
     where TQueryModel : BaseStatisticQueryModel, IRequest<GridOptions>
 {
-    protected readonly IMediator Mediator = mediator;
-
     public virtual async Task<IActionResult> Query(TQueryModel queryModel)
     {
-        var result = await Mediator.Send(queryModel).ConfigureAwait(false);
+        var result = await mediator.Send(queryModel).ConfigureAwait(false);
         return Ok(result);
     }
 
     public virtual async Task<IActionResult> Excel(TQueryModel queryModel, string sheetName)
     {
-        var result = await Mediator.Send(queryModel).ConfigureAwait(false);
+        var result = await mediator.Send(queryModel).ConfigureAwait(false);
         return new FanexExcelResult(result, sheetName);
     }
 }

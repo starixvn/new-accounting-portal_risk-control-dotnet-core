@@ -387,12 +387,14 @@ public class CalculationServiceImp(IMapper mapper) : CalculationService
 
     public BaseRawStatistic CalculateSum(IEnumerable<BaseRawStatistic> baseRawStatistics)
     {
+        var firstModel = baseRawStatistics.FirstOrDefault()?? new BaseRawStatistic();
+
         return new BaseRawStatistic
         {
-            ReportBy = baseRawStatistics.FirstOrDefault().ReportBy,
-            ReportById = baseRawStatistics.FirstOrDefault().ReportById,
-            CurrencyId = baseRawStatistics.FirstOrDefault().CurrencyId,
-            Currency = baseRawStatistics.FirstOrDefault().Currency,
+            ReportBy = firstModel.ReportBy,
+            ReportById = firstModel.ReportById,
+            CurrencyId = firstModel.CurrencyId,
+            Currency = firstModel.Currency,
             BetCount = baseRawStatistics.Sum(x => x.BetCount),
             TotalBets = baseRawStatistics.Sum(x => x.TotalBets),
             TotalWins = baseRawStatistics.Sum(x => x.TotalWins),

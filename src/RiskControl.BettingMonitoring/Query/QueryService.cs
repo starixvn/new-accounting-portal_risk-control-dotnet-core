@@ -1,7 +1,6 @@
 ﻿using Fanex.Data.Repository;
 using RiskControl.BettingMonitoring.Criteria;
 using RiskControl.BettingMonitoring.Models;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,19 +18,21 @@ public class QueryServiceImp(IDynamicRepository dynamicRepository) : QueryServic
         var criteria = new BettingMonitoringQueryCriteria();
 
         var rawData = await dynamicRepository.FetchAsync<RawSelectModel>(criteria).ConfigureAwait(false);
-        var minimumTickets = string.Empty;
-        var threshold = string.Empty;
+        var minimumTickets = rawData
+            .Where(x => x.SettingName == "MinimumTickets")
+            .Select(x=>x.Value)
+            .FirstOrDefault();
+        var threshold = rawData.Where(x => x.SettingName == "Threshold")
+            .Select(x => x.Value)
+            .FirstOrDefault();
 
-        if (rawData.Any())
-        {
-            minimumTickets = rawData.FirstOrDefault(x => x.SettingName == "MinimumTickets").Value;
-            threshold = rawData.FirstOrDefault(x => x.SettingName == "Threshold").Value;
-        }
+        int.TryParse(minimumTickets, out var minimumTicketsIntValue);
+        int.TryParse(threshold, out var thresholdIntValue);
 
         return new BettingMonitoringModel
         {
-            MinimumTickets = string.IsNullOrEmpty(minimumTickets) ? 0 : int.Parse(minimumTickets, CultureInfo.CurrentCulture.NumberFormat),
-            Threshold = string.IsNullOrEmpty(threshold) ? 0 : int.Parse(threshold, CultureInfo.CurrentCulture.NumberFormat)
+            MinimumTickets = minimumTicketsIntValue,
+            Threshold = thresholdIntValue
         };
     }
 }

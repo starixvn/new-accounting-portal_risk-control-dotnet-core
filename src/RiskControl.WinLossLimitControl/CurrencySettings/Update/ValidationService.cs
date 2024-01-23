@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using RiskControl.WinLossLimitControl.CurrencySettings.Model;
 using RiskControl.WinLossLimitControl.Services;
 
@@ -15,7 +14,7 @@ public class ValidationServiceImp(IncreamentedSeriesContrainService increamented
 {
     public int Execute(List<CurrencySetting> currencySetting)
     {
-        var isContrainsValid = currencySetting.All(IsValidLevelContrains);
+        var isContrainsValid = currencySetting.TrueForAll(IsValidLevelContrains);
         return isContrainsValid ? 0 : 1;
     }
 
