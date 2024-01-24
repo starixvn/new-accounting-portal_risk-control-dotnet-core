@@ -11,7 +11,7 @@ public class HeaderController(INapSession napSession) : ControllerBase
     [Route("state-api/application/header")]
     public Header Index()
     {
-        var sessionMenus = napSession.MenuItemList ?? new List<MenuItem>();
+        var sessionMenus = napSession.MenuItemList;
         var menus = GetMenus(sessionMenus);
         return new Header
         {
