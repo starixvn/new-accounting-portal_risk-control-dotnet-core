@@ -55,4 +55,8 @@
     <ProjectReference Include="..\src\RiskControl.WinLossLimitControl\RiskControl.WinLossLimitControl.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

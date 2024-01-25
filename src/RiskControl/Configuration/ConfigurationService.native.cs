@@ -11,8 +11,6 @@ public interface ConfigurationService
 
     string FileServerDirectory { get; }
 
-    string FileServerUsername { get; }
-
     string ProgressiveJackpotAPI { get; }
 
     string FraudSystemCTSAPI { get; }
@@ -25,8 +23,6 @@ public class ConfigurationServiceImp(IConfiguration configuration) : Configurati
     public string CurrentDirectory => AppDomain.CurrentDomain.BaseDirectory;
 
     public string FileServerDirectory => configuration["FileServerDirectory"];
-
-    public string FileServerUsername => configuration["FileServerUserName"];
 
     public string ProgressiveJackpotAPI => configuration["ProgressiveJackpotAPI"];
 
