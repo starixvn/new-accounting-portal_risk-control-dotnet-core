@@ -15,16 +15,12 @@ public class Handler(IDynamicRepository repository,
     public async Task<AccountModel> Handle(Request request, CancellationToken cancellationToken)
     {
         var customer = await GetCustomer(request.CustId);
-        var accountsByDevice = await associatedAccountService.GetAssociatedByDevice(request.CustId);
-        var accountsByIP = await associatedAccountService.GetAssociateddByIp(request.CustId);
-        var accountsByManual = await associatedAccountService.GetAssociatedByManual(request.CustId);
+        var associationModel = await associatedAccountService.GetAssociatedCustomer(request.CustId);
 
         return new AccountModel
         {
             Customer = customer,
-            UsersByDevice = accountsByDevice,
-            UsersByIP = accountsByIP,
-            UsersByManual = accountsByManual
+            Associations = associationModel
         };
     }
 
