@@ -7,8 +7,8 @@ namespace RiskControl.BettingMonitoring.Query;
 
 public class Handler(QueryService queryService) : IRequestHandler<Message, BettingMonitoringModel>
 {
-    public async Task<BettingMonitoringModel> Handle(Message request, CancellationToken cancellationToken)
+    public Task<BettingMonitoringModel> Handle(Message request, CancellationToken cancellationToken)
     {
-        return await queryService.Execute().ConfigureAwait(false);
+        return queryService.Execute();
     }
 }

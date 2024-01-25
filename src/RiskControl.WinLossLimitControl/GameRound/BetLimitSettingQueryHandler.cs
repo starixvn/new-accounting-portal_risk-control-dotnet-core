@@ -17,7 +17,7 @@ public class BetLimitSettingQueryHandler(IDynamicRepository dynamicRepository, I
     {
         var criteria = mapper.Map<BetLimitSettingQueryCriteria>(request);
 
-        var models = (await dynamicRepository.FetchAsync<BetLimitSettingModel>(criteria, cancellationToken)).ToList();
+        var models = (await dynamicRepository.FetchAsync<BetLimitSettingModel>(criteria)).ToList();
         return models;
     }
 }

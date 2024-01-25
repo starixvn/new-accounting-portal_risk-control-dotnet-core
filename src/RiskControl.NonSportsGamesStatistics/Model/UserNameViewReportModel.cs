@@ -4,7 +4,7 @@ namespace RiskControl.NonSportsGamesStatistics.Model;
 
 public class UserNameViewReportModel
 {
-    public List<UserNameViewStatisticsModel> Statistics { get; set; } = new();
+    public List<UserNameViewStatisticsModel> Statistics { get; set; } = [];
 
     public UserNameViewStatisticsModel GrandTotal { get; set; } = new();
 }

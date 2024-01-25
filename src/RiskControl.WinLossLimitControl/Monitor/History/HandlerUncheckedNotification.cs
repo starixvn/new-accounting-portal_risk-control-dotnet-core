@@ -15,7 +15,7 @@ public class HandlerUncheckedNotification(IDynamicRepository repository, INapSes
     {
         var criteria = mapper.Map<UncheckedNotificationCriteria>(request);
         criteria.UserID = sessionService.UserId;
-        await repository.ExecuteAsync(criteria, cancellationToken);
+        await repository.ExecuteAsync(criteria);
         return new ExecuteResult();
     }
 }

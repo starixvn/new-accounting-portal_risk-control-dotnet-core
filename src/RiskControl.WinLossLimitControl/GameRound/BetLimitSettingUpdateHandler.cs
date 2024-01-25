@@ -18,7 +18,7 @@ public class BetLimitSettingUpdateHandler(IDynamicRepository repository, UserHtt
         var command = mapper.Map<BetLimitSettingUpdateCommand>(request);
         command.UserId = userHttpContext.UserId;
         command.IP = userHttpContext.IP;
-        await repository.ExecuteAsync(command, cancellationToken);
+        await repository.ExecuteAsync(command);
 
         return string.Empty;
     }

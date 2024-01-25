@@ -8,9 +8,9 @@ namespace RiskControl.NonSportsGamesStatistics.Hourly.History;
 
 public class Handler(Service service, IMapper mapper) : IRequestHandler<QueryModel, HourlyReportModel>
 {
-    public async Task<HourlyReportModel> Handle(QueryModel request, CancellationToken cancellationToken)
+    public Task<HourlyReportModel> Handle(QueryModel request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<Criteria>(request);
-        return await service.CalculateHourlyReport(criteria, criteria.FromDate).ConfigureAwait(false);
+        return service.CalculateHourlyReport(criteria, criteria.FromDate);
     }
 }

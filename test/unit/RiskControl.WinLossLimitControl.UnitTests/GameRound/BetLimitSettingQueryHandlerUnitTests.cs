@@ -24,7 +24,7 @@ public class BetLimitSettingQueryHandlerUnitTests
         var expectedBetLimitSettingModelList = TestDataProvider.Load<List<BetLimitSettingModel>>("bet-limit-setting-model");
 
         var repository = Substitute.For<IDynamicRepository>();
-        repository.FetchAsync<BetLimitSettingModel>(Arg.Compat.Any<BetLimitSettingQueryCriteria>(), Arg.Compat.Any<CancellationToken>()).Returns(expectedBetLimitSettingModelList);
+        repository.FetchAsync<BetLimitSettingModel>(Arg.Compat.Any<BetLimitSettingQueryCriteria>()).Returns(expectedBetLimitSettingModelList);
 
         var mapper = new MapperConfiguration(mcf =>
         {

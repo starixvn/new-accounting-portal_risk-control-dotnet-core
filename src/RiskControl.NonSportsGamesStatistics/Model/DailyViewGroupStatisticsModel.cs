@@ -8,5 +8,5 @@ public class DailyViewGroupStatisticsModel
 
     public string GroupName { get; set; }
 
-    public List<DailyViewStatisticsModel> DailyViewStatistics { get; set; } = new();
+    public List<DailyViewStatisticsModel> DailyViewStatistics { get; set; } = [];
 }

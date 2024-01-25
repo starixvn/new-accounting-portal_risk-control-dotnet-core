@@ -16,7 +16,7 @@ public class HandlerUncheckedNotificationUnitTests
     {
         // Arrange
         var repository = Substitute.For<IDynamicRepository>();
-        repository.ExecuteAsync(Arg.Compat.Any<UncheckedNotificationCriteria>(), Arg.Compat.Any<CancellationToken>()).Returns(1);
+        repository.ExecuteAsync(Arg.Compat.Any<UncheckedNotificationCriteria>()).Returns(1);
 
         var sessionService = Substitute.For<INapSession>();
         sessionService.UserId.Returns(8);
@@ -32,6 +32,6 @@ public class HandlerUncheckedNotificationUnitTests
         await handle.Handle(new RequestUncheckedNotification(), new CancellationToken());
 
         // Assert
-        await repository.Received().ExecuteAsync(Arg.Compat.Any<UncheckedNotificationCriteria>(), Arg.Compat.Any<CancellationToken>());
+        await repository.Received().ExecuteAsync(Arg.Compat.Any<UncheckedNotificationCriteria>());
     }
 }

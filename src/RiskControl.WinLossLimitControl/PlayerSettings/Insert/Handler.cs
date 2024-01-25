@@ -20,6 +20,6 @@ public class Handler(UserHttpContext userHttpContext, ValidationService validati
             return new ExecuteResult();
         }
 
-        return new ExecuteResult(validattionResult);
+        return new ExecuteResult{ErrorCode = validattionResult };
     }
 }

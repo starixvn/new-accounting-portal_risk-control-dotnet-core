@@ -44,10 +44,7 @@ public class BaseEntityGroupLoaderServiceUnitTests
     private static List<BaseEntity> CreateBaseEntityList()
     {
         var baseEntity = new BaseEntity { Id = 1, Name = "Item 1" };
-        return new List<BaseEntity>
-        {
-            baseEntity
-        };
+        return [baseEntity];
     }
 
     private static Dictionary<int, string> CreateExpectedDictionary()

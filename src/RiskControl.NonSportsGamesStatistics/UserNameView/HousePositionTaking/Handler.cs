@@ -18,6 +18,6 @@ public class Handler(DataSourceChooser dataSourceChooser,
     {
         var criteria = mapper.Map<Criteria>(request);
         criteria.Source = dataSourceChooser.GetDataSource(criteria.IsNormalMode);
-        return repository.FetchAsync<HousePositionTakingModel>(criteria, cancellationToken);
+        return repository.FetchAsync<HousePositionTakingModel>(criteria);
     }
 }

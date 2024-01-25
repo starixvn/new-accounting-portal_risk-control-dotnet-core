@@ -1,7 +1,5 @@
 ﻿using NSubstitute;
 using RiskControl.ProgressiveJackpot.ApiModel;
-using RiskControl.ProgressiveJackpot.Model;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -42,7 +40,7 @@ public class ProgressiveApiClientUnitTests
         var apiResult = new ApiResult<GameGroupResultContent>
         {
             Result = resultDescription,
-            Content = new GameGroupResultContent { GameGroups = new List<GameGroupModel>() }
+            Content = new GameGroupResultContent { GameGroups = [] }
         };
 
         var richHttpClient = Substitute.For<RichHttpClient>();

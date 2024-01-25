@@ -19,7 +19,7 @@ public class HandlerSearch(IDynamicRepository dynamicRepository, CacheRefService
     public async Task<List<PlayerSettingCurrency>> Handle(RequestSearch request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<SearchCriteria>(request);
-        var rawSettings = await dynamicRepository.FetchAsync<PlayerSettingRaw>(criteria, cancellationToken);
+        var rawSettings = await dynamicRepository.FetchAsync<PlayerSettingRaw>(criteria);
 
         var settings = FromRawPlayerSetting(rawSettings);
 

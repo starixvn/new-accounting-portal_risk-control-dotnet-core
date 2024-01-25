@@ -22,7 +22,7 @@ public class HandlerUnitTests
         // Arrange
         var fakeRawData = TestDataProvider.Load<List<MonitorModelRaw>>("monitor-model-raw");
         var repository = Substitute.For<IDynamicRepository>();
-        repository.FetchAsync<MonitorModelRaw>(Arg.Compat.Any<ICriteria>(), Arg.Compat.Any<CancellationToken>()).Returns(fakeRawData);
+        repository.FetchAsync<MonitorModelRaw>(Arg.Compat.Any<ICriteria>()).Returns(fakeRawData);
 
         var cacheRefService = new CacheRefServiceMockImp();
         var winLimitSettingXmlParser = new WinLimitSettingXmlParserImp();

@@ -12,9 +12,9 @@ namespace RiskControl.WinLossLimitControl.GameRound;
 public class BetLimitMonitorQueryHandler(BetLimitMonitorDataService betLimitMonitorDataService, IMapper mapper)
     : IRequestHandler<BetLimitMonitorQueryRequest, List<BetLimitMonitorModel>>
 {
-    public async Task<List<BetLimitMonitorModel>> Handle(BetLimitMonitorQueryRequest request, CancellationToken cancellationToken)
+    public Task<List<BetLimitMonitorModel>> Handle(BetLimitMonitorQueryRequest request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<BetLimitMonitorQueryCriteria>(request);
-        return await betLimitMonitorDataService.Query(criteria);
+        return betLimitMonitorDataService.Query(criteria);
     }
 }

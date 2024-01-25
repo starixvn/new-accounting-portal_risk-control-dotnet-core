@@ -14,9 +14,9 @@ public interface RichHttpClient
 
     Task<T> Post<T>(string requestUri, object postData) where T : class;
 
-    Task<T> PostJson<T>(string requestUri, object postData) where T : class;
-
     Task Post(string requestUri, object postData);
+
+    Task<T> PostJson<T>(string requestUri, object postData) where T : class;
 
     Task<Stream> Download(string requestUri);
 }
@@ -63,6 +63,13 @@ public class RichHttpClientImp : RichHttpClient
         return await TryReadObjectFromResponse<T>(response, httpLog).ConfigureAwait(false);
     }
 
+    public async Task Post(string requestUri, object postData)
+    {
+        var jsonRequest = JsonConvert.SerializeObject(postData);
+        using var stringContent = new StringContent(jsonRequest);
+        await JsonHttpClient.PostAsync(requestUri, stringContent).ConfigureAwait(false);
+    }
+
     public async Task<T> PostJson<T>(string requestUri, object postData) where T : class
     {
         var jsonRequest = JsonConvert.SerializeObject(postData);
@@ -90,19 +97,12 @@ public class RichHttpClientImp : RichHttpClient
         catch (Exception exception)
         {
             var logDataMessage = JsonConvert.SerializeObject(httpLog);
-            throw new Exception(logDataMessage, exception);
+            throw new ArgumentException(logDataMessage, exception);
         }
     }
 
-    public async Task Post(string requestUri, object postData)
+    public Task<Stream> Download(string requestUri)
     {
-        var jsonRequest = JsonConvert.SerializeObject(postData);
-        using var stringContent = new StringContent(jsonRequest);
-        await JsonHttpClient.PostAsync(requestUri, stringContent).ConfigureAwait(false);
-    }
-
-    public async Task<Stream> Download(string requestUri)
-    {
-        return await OctetStreamHttpClient.GetStreamAsync(requestUri).ConfigureAwait(false);
+        return OctetStreamHttpClient.GetStreamAsync(requestUri);
     }
 }

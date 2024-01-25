@@ -18,10 +18,10 @@ using System.Threading.Tasks;
 namespace RiskControl.Sites;
 
 using System.Reflection;
-using BettingMonitoring;
-using NonSportsGamesStatistics;
 using ProgressiveJackpot;
-using WinLossLimitControl;
+using RiskControl.BettingMonitoring.Query;
+using RiskControl.NonSportsGamesStatistics.CurrencyView.Main.History;
+using RiskControl.WinLossLimitControl.PlayerSettings.Insert;
 
 public static class ServiceCollectionExtensions
 {
@@ -70,10 +70,10 @@ public static class ServiceCollectionExtensions
 
     public static void RegisterAssemblyForMediatR(this IServiceCollection services)
     {
-        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(BettingMonitoringMarker)));
-        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(NonSportsGamesStatisticsMarker)));
-        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(ProgressiveJackpotMarker)));
-        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(WinLossLimitControlMarker)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(BettingMonitoringQueryController)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(CurrencyViewHistoryModeController)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(ProgressiveJackpotController)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(PlayerSettingInsertController)));
         return;
 
         void ConfigAssembly(MediatRServiceConfiguration configuration, Type type)

@@ -61,7 +61,7 @@ public class FilterServiceImp(IDynamicRepository repository, IMapper mapper) : F
             {
                 var childGroups = mapper.Map<List<SiteGroupModel>>(item.ChildItems);
 
-                item.ChildGroups ??= new List<SiteGroupModel>();
+                item.ChildGroups ??= [];
 
                 item.ChildGroups.AddRange(childGroups);
                 item.ChildItems.RemoveRange(0, item.ChildItems.Count);

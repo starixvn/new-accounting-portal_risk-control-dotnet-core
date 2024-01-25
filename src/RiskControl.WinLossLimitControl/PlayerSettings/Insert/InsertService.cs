@@ -22,7 +22,7 @@ public class InsertServiceImp(IDynamicRepository repository) : InsertService
             .SelectMany(c => c);
 
         var executeResuls = criteriaList
-            .Select(repository.ExecuteAsync)
+            .Select(c => repository.ExecuteAsync(c))
             .ToArray();
         await Task
             .WhenAll(executeResuls);

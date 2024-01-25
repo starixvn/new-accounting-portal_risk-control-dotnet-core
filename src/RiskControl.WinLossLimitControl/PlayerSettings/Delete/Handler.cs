@@ -17,7 +17,7 @@ public class Handler(UserHttpContext userHttpContext, IDynamicRepository reposit
         criteria.UserId = userHttpContext.UserId;
         criteria.IP = userHttpContext.IP;
 
-        await repository.ExecuteAsync(criteria, cancellationToken);
+        await repository.ExecuteAsync(criteria);
         return new ExecuteResult();
     }
 }

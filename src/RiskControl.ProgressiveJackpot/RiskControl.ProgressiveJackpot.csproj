@@ -14,6 +14,8 @@
   <ItemGroup>
     
     <PackageReference Include="Epplus.Mapper" Version="7.0.0" />
+    
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2" />
   </ItemGroup>
 
   <ItemGroup>

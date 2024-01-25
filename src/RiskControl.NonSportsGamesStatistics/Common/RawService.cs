@@ -20,11 +20,11 @@ public interface RawService
 public class RawServiceImp(DataSourceChooser dataSourceChooser, IDynamicRepository repository)
     : RawService
 {
-    public async Task<IEnumerable<T>> QueryData<T>(BaseStatisticCriteria criteria, DateTime winLossDate)
+    public Task<IEnumerable<T>> QueryData<T>(BaseStatisticCriteria criteria, DateTime winLossDate)
         where T : class
     {
         criteria.Source = dataSourceChooser.GetDataSource(criteria.IsNormalMode);
-        return await repository.FetchAsync<T>(criteria).ConfigureAwait(false);
+        return repository.FetchAsync<T>(criteria);
     }
 
     public async Task<GenericRawData<T>> QueryMultipleData<T>(BaseStatisticCriteria criteria, DateTime winLossDate)

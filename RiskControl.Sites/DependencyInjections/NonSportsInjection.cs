@@ -17,7 +17,6 @@ using TopTwentyGroupStatistics = RiskControl.NonSportsGamesStatistics.TopTwenty.
 using TopTwentyMain = RiskControl.NonSportsGamesStatistics.TopTwenty.Main;
 using UserNameViewCommon = RiskControl.NonSportsGamesStatistics.UserNameView.Common;
 using UserNameViewMain = RiskControl.NonSportsGamesStatistics.UserNameView.Main;
-using DailyViewHandler = RiskControl.NonSportsGamesStatistics.DailyView.Daily;
 using UserNameView = RiskControl.NonSportsGamesStatistics.UserNameView;
 
 namespace RiskControl.Sites.DependencyInjections;

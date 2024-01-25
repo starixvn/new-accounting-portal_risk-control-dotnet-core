@@ -23,7 +23,7 @@ public class FilterHandlerUnitTests
         // Arrange
         var expectedData = TestDataProvider.Load<IEnumerable<ProductGameTypeModel>>("product-game-type-model");
         var repository = Substitute.For<IDynamicRepository>();
-        repository.FetchAsync<ProductGameTypeModel>(Arg.Compat.Any<ProductGameTypeCriteria>(), Arg.Compat.Any<CancellationToken>()).Returns(expectedData);
+        repository.FetchAsync<ProductGameTypeModel>(Arg.Compat.Any<ProductGameTypeCriteria>()).Returns(expectedData);
 
         var mapper = new MapperConfiguration(mcf =>
         {

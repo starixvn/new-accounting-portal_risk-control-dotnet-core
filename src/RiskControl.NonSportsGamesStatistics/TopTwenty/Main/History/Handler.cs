@@ -13,8 +13,8 @@ public class Handler(Service<List<UserNameViewGroupStatisticsWithTotalModel>, Cr
     : BaseHandlerWithoutSorting<QueryModel, Criteria, List<UserNameViewGroupStatisticsWithTotalModel>>(service,
         gridOptionService), IRequestHandler<QueryModel, GridOptions>
 {
-    public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
+    public Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
     {
-        return await base.Handle(request, request.FromDate).ConfigureAwait(false);
+        return base.Handle(request, request.FromDate);
     }
 }

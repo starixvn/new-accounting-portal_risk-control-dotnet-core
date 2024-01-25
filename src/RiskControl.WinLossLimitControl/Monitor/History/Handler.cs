@@ -19,7 +19,7 @@ public class Handler(IDynamicRepository repository,
     public async Task<List<WinLimitHistory>> Handle(Request request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<HistoryCriteria>(request);
-        var rawData = await repository.FetchAsync<WinLimitHistoryRaw>(criteria, cancellationToken);
+        var rawData = await repository.FetchAsync<WinLimitHistoryRaw>(criteria);
         return FromRawWinLimitHistory(rawData).ToList();
     }
 

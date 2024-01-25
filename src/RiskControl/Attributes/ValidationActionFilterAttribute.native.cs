@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Mvc.Filters;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
 public sealed class ValidationActionFilterAttribute : ActionFilterAttribute
 {
-    public override void OnActionExecuting(ActionExecutingContext actionContext)
+    public override void OnActionExecuting(ActionExecutingContext context)
     {
-        if (!actionContext.ModelState.IsValid)
+        if (!context.ModelState.IsValid)
         {
-            actionContext.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            context.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
     }
 }

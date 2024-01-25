@@ -12,8 +12,8 @@ public class Handler(Service<CurrencyViewStatisticsReportModel, Criteria> servic
     : BaseHandlerWithoutSorting<QueryModel, Criteria, CurrencyViewStatisticsReportModel>(service, gridOptionService),
         IRequestHandler<QueryModel, GridOptions>
 {
-    public async Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
+    public Task<GridOptions> Handle(QueryModel request, CancellationToken cancellationToken)
     {
-        return await base.Handle(request, request.WinLostDate).ConfigureAwait(false);
+        return base.Handle(request, request.WinLostDate);
     }
 }

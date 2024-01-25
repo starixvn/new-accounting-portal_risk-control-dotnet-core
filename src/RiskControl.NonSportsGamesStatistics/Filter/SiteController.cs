@@ -11,8 +11,8 @@ public class SiteController(FilterService service) : ControllerBase
 {
     [Route("Query")]
     [HttpGet]
-    public async Task<List<SiteGroupModel>> Query(string productId)
+    public Task<List<SiteGroupModel>> Query(string productId)
     {
-        return await service.GetSiteGroups(productId);
+        return service.GetSiteGroups(productId);
     }
 }

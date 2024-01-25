@@ -50,6 +50,6 @@ public class GridOptionBuilderServiceImp<TQueryModel>(GridOptionDataRowBuilderSe
     private List<GridDataRow> BuildFooter(DailyViewStatisticsModel grandTotal, bool viewByInteger)
     {
         var dataRow = gridDataRowBuilderService.BuildFullColumnDataRow(grandTotal, HAlignment.Right, viewByInteger);
-        return new List<GridDataRow> { dataRow };
+        return [dataRow];
     }
 }

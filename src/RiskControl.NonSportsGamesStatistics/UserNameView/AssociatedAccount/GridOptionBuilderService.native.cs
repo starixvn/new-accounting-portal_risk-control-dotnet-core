@@ -66,7 +66,7 @@ using RiskControl.NonSportsGamesStatistics.UserNameView.Common;
         private List<GridDataRow> BuildFooter(UserNameViewStatisticsModel grandTotal, bool isNormalMode, bool viewByInteger)
         {
             var dataRow = BuildFooterDataRow(grandTotal, isNormalMode, viewByInteger);
-            return new List<GridDataRow> { dataRow };
+            return [dataRow];
         }
 
         private GridDataRow BuildDataRow(UserNameViewStatisticsModel statistic, bool isNormalMode, bool viewByInteger)

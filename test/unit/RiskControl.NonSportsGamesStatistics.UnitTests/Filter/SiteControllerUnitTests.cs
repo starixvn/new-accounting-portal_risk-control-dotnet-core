@@ -20,14 +20,14 @@ public class SiteControllerUnitTests
             new()
             {
                 GroupId = 0, GroupName = "Credit Group", LicenseeId = 0, LicenseeName = null,
-                ChildGroups = new List<SiteGroupModel>(),
-                ChildItems = new List<LicenseeModel>()
+                ChildGroups = [],
+                ChildItems = []
             },
             new()
             {
                 GroupId = 0, GroupName = "Licensee Group", LicenseeId = 0, LicenseeName = null,
-                ChildGroups = new List<SiteGroupModel>(),
-                ChildItems = new List<LicenseeModel>()
+                ChildGroups = [],
+                ChildItems = []
             }
         };
 
