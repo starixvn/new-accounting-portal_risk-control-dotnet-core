@@ -12,16 +12,14 @@ export interface Customer {
 }
 
 
-export interface AssociatedUser {
-    custId: number;
-    username: string;
+export interface AssociationAccountModel {
+    account: string;
     site: string;
-    lastBettingDate: Date;
+    lastTicketDate: Date;
+    associationTypeName: string;
 }
 
 export interface AccountModel {
     customer: Customer;
-    usersByDevice: AssociatedUser[];
-    usersByIP: AssociatedUser[];
-    usersByManual: AssociatedUser[];
+    associations: AssociationAccountModel[];
 }

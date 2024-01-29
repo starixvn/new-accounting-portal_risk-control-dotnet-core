@@ -10,7 +10,7 @@ import { AccountModel } from './account.model';
   ]
 })
 export class AccountComponent {
-  userByDeviceIsExpanded: boolean;
+  isExpanded: boolean;
   userByIPIsExpanded: boolean;
   userByManualIsExpanded: boolean;
   accountModel: AccountModel;
@@ -21,14 +21,14 @@ export class AccountComponent {
 
   show(accountModel: AccountModel) {
     this.accountModel = accountModel;
-    this.userByDeviceIsExpanded = true;
+    this.isExpanded = true;
     this.userByIPIsExpanded = true;
     this.userByManualIsExpanded = true;
 
   }
 
   toggleUserByDevice() {
-    this.userByDeviceIsExpanded = !this.userByDeviceIsExpanded;
+    this.isExpanded = !this.isExpanded;
   }
 
   toggleUserByIP() {

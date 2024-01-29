@@ -8,5 +8,5 @@ public class AccountModel
 {
     public Customer Customer { get; set; } = new();
 
-    public List<AssociationModel> Associations { get; set; } = new List<AssociationModel>();
+    public List<AssociationAccountModel> Associations { get; set; } = new List<AssociationAccountModel>();
 }

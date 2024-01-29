@@ -3,12 +3,14 @@
         <col style="width: 130px" />
         <col style="width: 170px" />
         <col style="width: 240px" />
+        <col style="width: 200px" />
     </colgroup>
 </ng-template>
 <ng-template #headerRowOfAssociatedAccounts>
     <tr>
         <th>Site</th>
         <th>Account</th>
+        <th>Association Type Name</th>
         <th>Last Betting Date</th>
     </tr>
 </ng-template>
@@ -29,8 +31,9 @@
     <tbody>
         <tr *ngFor="let user of users">
             <td class="word-break-all">{{user.site}}</td>
-            <td class="word-break-all">{{user.username}}</td>
-            <td class="text-center">{{user.lastBettingDate | date:'MM/dd/yyyy HH:mm:ss a'}}</td>
+            <td class="word-break-all">{{user.account}}</td>
+            <td class="text-center">{{user.associationTypeName}}</td>
+            <td class="text-center">{{user.lastTicketDate | date:'MM/dd/yyyy HH:mm:ss a'}}</td>
         </tr>
     </tbody>
 </ng-template>
@@ -67,83 +70,30 @@
             </tbody>
         </table>
     </div>
-    <div class="nap-grid">
-        <div style="width: 560px">
+    <div class="nap-grid account-association">
+        <div style="width: 760px">
             <div class="header">
                 <table>
                     <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                     <thead>
                         <tr>
                             <td colspan="4" class="title">
-                                <i class="fa test-toggle-user-by-device" [ngClass]="{'fa-plus-square': !userByDeviceIsExpanded, 'fa-minus-square': userByDeviceIsExpanded}"
+                                <i class="fa" [ngClass]="{'fa-plus-square': !isExpanded, 'fa-minus-square': isExpanded}"
                                     (click)="toggleUserByDevice()">&nbsp;</i>
-                                <strong>Associated Account by Device</strong>
+                                <strong>Associated Account</strong>
                             </td>
                         </tr>
-                        <ng-template *ngIf="userByDeviceIsExpanded" [ngTemplateOutlet]="headerRowOfAssociatedAccounts"></ng-template>
+                        <ng-template *ngIf="isExpanded" [ngTemplateOutlet]="headerRowOfAssociatedAccounts"></ng-template>
                     </thead>
                 </table>
             </div>
-            <div *ngIf="userByDeviceIsExpanded && accountModel.usersByDevice.length > 0" class="body">
+            <div *ngIf="isExpanded && accountModel.associations.length > 0" class="body">
                 <table class="table-striped test-associated-users-by-device">
                     <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
-                    <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.usersByDevice}"></ng-template>
+                    <ng-template [ngTemplateOutlet]="tbody" [ngTemplateOutletContext]="{users: accountModel.associations}"></ng-template>
                 </table>
             </div>
-            <ng-template *ngIf="userByDeviceIsExpanded && accountModel.usersByDevice.length === 0" [ngTemplateOutlet]="noData"></ng-template>
+            <ng-template *ngIf="isExpanded && accountModel.associations.length === 0" [ngTemplateOutlet]="noData"></ng-template>
         </div>
     </div>
-    <div class="nap-grid">
-        <div style="width: 560px">
-            <div class="header">
-                <table>
-                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
-                    <thead>
-                        <tr>
-                            <td colspan="4" class="title">
-                                <i class="fa test-toggle-user-by-ip" [ngClass]="{'fa-plus-square': !userByIPIsExpanded, 'fa-minus-square': userByIPIsExpanded}"
-                                    (click)="toggleUserByIP()">&nbsp;</i>
-                                <strong>Associated Account by IP</strong>
-                            </td>
-                        </tr>
-                        <ng-template *ngIf="userByIPIsExpanded" [ngTemplateOutlet]="headerRowOfAssociatedAccounts"></ng-template>
-                    </thead>
-                </table>
-            </div>
-            <div *ngIf="userByIPIsExpanded && accountModel.usersByIP.length > 0" class="body">
-                <table class="table-striped test-associated-users-by-ip">
-                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
-                    <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.usersByIP}"></ng-template>
-                </table>
-            </div>
-            <ng-template *ngIf="userByIPIsExpanded && accountModel.usersByIP.length === 0" [ngTemplateOutlet]="noData"></ng-template>
-        </div>
-    </div>
-
-    <div class="nap-grid">
-      <div style="width: 560px">
-          <div class="header">
-              <table>
-                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
-                  <thead>
-                      <tr>
-                          <td colspan="4" class="title">
-                              <i class="fa test-toggle-user-by-ip" [ngClass]="{'fa-plus-square': !userByManualIsExpanded, 'fa-minus-square': userByManualIsExpanded}"
-                                  (click)="toggleUserByManual()">&nbsp;</i>
-                              <strong>Associated Account by Manual Detection</strong>
-                          </td>
-                      </tr>
-                      <ng-template *ngIf="userByManualIsExpanded" [ngTemplateOutlet]="headerRowOfAssociatedAccounts"></ng-template>
-                  </thead>
-              </table>
-          </div>
-          <div *ngIf="userByManualIsExpanded && accountModel.usersByManual.length > 0" class="body">
-              <table class="table-striped test-associated-users-by-ip">
-                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
-                  <ng-template [ngTemplateOutlet]="tbody" [ngOutletContext]="{users: accountModel.usersByManual}"></ng-template>
-              </table>
-          </div>
-          <ng-template *ngIf="userByManualIsExpanded && accountModel.usersByManual.length === 0" [ngTemplateOutlet]="noData"></ng-template>
-      </div>
-  </div>
 </div>

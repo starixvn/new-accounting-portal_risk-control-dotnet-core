@@ -15,7 +15,7 @@ public class Handler(IDynamicRepository repository,
     public async Task<AccountModel> Handle(Request request, CancellationToken cancellationToken)
     {
         var customer = await GetCustomer(request.CustId);
-        var associationModel = await associatedAccountService.GetAssociatedCustomer(request.CustId);
+        var associationModel = await associatedAccountService.GetAssociatedAccount(request.CustId);
 
         return new AccountModel
         {

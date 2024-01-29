@@ -1,4 +1,7 @@
-﻿namespace RiskControl.AssociatedAcccount;
+﻿using Fanex.Data.Repository;
+using System.Linq;
+
+namespace RiskControl.AssociatedAcccount;
 
 using Configuration;
 using System.Collections.Generic;
@@ -7,10 +10,12 @@ using System.Threading.Tasks;
 public interface AssociatedAccountService
 {
     Task <List<AssociationModel>> GetAssociatedCustomer(int custId);
+
+    Task<List<AssociationAccountModel>> GetAssociatedAccount(int custId);
 }
 
 public class AssociatedAccountServiceImp(ConfigurationService configurationService,
-        CustomerTrackingSystemApiService customerTrackingSystemApiService): AssociatedAccountService
+        CustomerTrackingSystemApiService customerTrackingSystemApiService, IDynamicRepository repository) : AssociatedAccountService
 {
     public async Task<List<AssociationModel>> GetAssociatedCustomer(int custId)
     {
@@ -24,5 +29,21 @@ public class AssociatedAccountServiceImp(ConfigurationService configurationServi
         }
 
         return associationModel;
+    }
+
+    public async Task<List<AssociationAccountModel>> GetAssociatedAccount(int custId)
+    {
+        var associatedCustomers = await GetAssociatedCustomer(custId);
+        var custIds = associatedCustomers.Select(x => x.CustId).Distinct();
+        var customerSites =  await repository.FetchAsync<CustomerSiteModel>(new CustomerSiteCriteria { CustIdList = string.Join(",", custIds) });
+
+        var result = (from a in associatedCustomers
+            join ct in customerSites on a.CustId equals ct.CustId
+            select new AssociationAccountModel
+            {
+                Account = ct.Username, Site = ct.SiteName, AssociationTypeName = a.AssociationTypeName, LastTicketDate = a.LastTicketDate
+
+            }).Distinct();
+        return result.ToList();
     }
 }

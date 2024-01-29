@@ -35,6 +35,7 @@ public static class GlobalInjection
 
         service.AddTransient<FraudServiceWrapper, FraudServiceWrapperImp>();
         service.AddTransient<AssociatedAccountService, AssociatedAccountServiceImp>();
+        service.AddTransient<CustomerTrackingSystemApiService, CustomerTrackingSystemApiServiceImp>();
         service.AddSingleton<ICacheService>(new CacheService());
     }
 }
