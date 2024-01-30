@@ -37,13 +37,20 @@ public class AssociatedAccountServiceImp(ConfigurationService configurationServi
         var custIds = associatedCustomers.Select(x => x.CustId).Distinct();
         var customerSites =  await repository.FetchAsync<CustomerSiteModel>(new CustomerSiteCriteria { CustIdList = string.Join(",", custIds) });
 
-        var result = (from a in associatedCustomers
+        var data = (from a in associatedCustomers
             join ct in customerSites on a.CustId equals ct.CustId
             select new AssociationAccountModel
             {
                 Account = ct.Username, Site = ct.SiteName, AssociationTypeName = a.AssociationTypeName, LastTicketDate = a.LastTicketDate
 
             }).Distinct();
+        var result = data.GroupBy(g => new { g.Site, g.Account, g.LastTicketDate }).Select(r => new AssociationAccountModel
+        {
+            Account = r.Key.Account,
+            Site = r.Key.Site,
+            LastTicketDate = r.Key.LastTicketDate,
+            AssociationTypeName = string.Join(", ", r.ToList().Select(x => x.AssociationTypeName))
+        }).OrderBy(o => o.Account);
         return result.ToList();
     }
 }
