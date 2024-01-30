@@ -9,26 +9,22 @@ using System.Threading.Tasks;
 
 public interface AssociatedAccountService
 {
-    Task <List<AssociationModel>> GetAssociatedCustomer(int custId);
+    Task<IEnumerable<string>> GetAssociatedCustomerUsername(int custId);
 
     Task<List<AssociationAccountModel>> GetAssociatedAccount(int custId);
 }
 
-public class AssociatedAccountServiceImp(ConfigurationService configurationService,
-        CustomerTrackingSystemApiService customerTrackingSystemApiService, IDynamicRepository repository) : AssociatedAccountService
+public class AssociatedAccountServiceImp(
+        ConfigurationService configurationService,
+        CustomerTrackingSystemApiService customerTrackingSystemApiService,
+        IDynamicRepository repository) : AssociatedAccountService
 {
-    public async Task<List<AssociationModel>> GetAssociatedCustomer(int custId)
+    public async Task<IEnumerable<string>> GetAssociatedCustomerUsername(int custId)
     {
-        var associationModel = await customerTrackingSystemApiService.GetAssociatedCustomer(
-            configurationService.FraudSystemCTSAPI,
-            custId).ConfigureAwait(false);
-
-        if (associationModel == null)
-        {
-            return new List<AssociationModel>();
-        }
-
-        return associationModel;
+        var associationModel = await GetAssociatedCustomer(custId);
+        var customerSites = await repository.FetchAsync<CustomerSiteModel>(new CustomerSiteCriteria { CustIdList = string.Join(",", associationModel.Select(x => x.CustId)) });
+        
+        return customerSites.Select(x => x.Username);
     }
 
     public async Task<List<AssociationAccountModel>> GetAssociatedAccount(int custId)
@@ -52,5 +48,19 @@ public class AssociatedAccountServiceImp(ConfigurationService configurationServi
             AssociationTypeName = string.Join(", ", r.ToList().Select(x => x.AssociationTypeName))
         }).OrderBy(o => o.Account);
         return result.ToList();
+    }
+
+    private async Task<List<AssociationModel>> GetAssociatedCustomer(int custId)
+    {
+        var associationModel = await customerTrackingSystemApiService.GetAssociatedCustomer(
+            configurationService.FraudSystemCTSAPI,
+            custId).ConfigureAwait(false);
+
+        if (associationModel == null)
+        {
+            return new List<AssociationModel>();
+        }
+
+        return associationModel;
     }
 }
