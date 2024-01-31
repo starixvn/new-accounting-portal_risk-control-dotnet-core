@@ -24,7 +24,7 @@ public class AssociatedAccountServiceImp(
         var associationModel = await GetAssociatedCustomer(custId);
         var customerSites = await repository.FetchAsync<CustomerSiteModel>(new CustomerSiteCriteria { CustIdList = string.Join(",", associationModel.Select(x => x.CustId)) });
         
-        return customerSites.Select(x => x.Username);
+        return customerSites.Select(x => x.Username).Distinct();
     }
 
     public async Task<List<AssociationAccountModel>> GetAssociatedAccount(int custId)
