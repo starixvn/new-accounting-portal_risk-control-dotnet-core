@@ -144,8 +144,8 @@ export class UserNameComponent implements OnInit, ModeGenerate {
     let currency = FilterConfig.currencyBaseRM.toString();
     let currencyName = 'Base RM';
     if (!filterModel.isBaseRM) {
-      currency = '0';
-      currencyName = 'Original Currency';
+      currency = filterModel.collection.currencies.map(c => c.exchangeId).join(',');
+      currencyName = 'All Currency';
     }
     const gameTypeModel: GameTypeModel = {
       products: filterModel.collection.products,
