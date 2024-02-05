@@ -1,95 +1,66 @@
-﻿namespace RiskControl.AssociatedAcccount;
-
-using System.Collections.Generic;
+﻿using Fanex.Data.Repository;
 using System.Linq;
-using System.Threading.Tasks;
+
+namespace RiskControl.AssociatedAcccount;
+
 using Configuration;
-using Fanex.Data.Repository;
-using Olympus.FPSAPI.Client;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public interface AssociatedAccountService
 {
-    Task<IEnumerable<TopAssociatedAccount>> GetAssociatedByDevice(int custId);
+    Task<IEnumerable<string>> GetAssociatedCustomerUsername(int custId);
 
-    Task<IEnumerable<TopAssociatedAccount>> GetAssociatedByManual(int custId);
-
-    Task<IEnumerable<TopAssociatedAccount>> GetAssociateddByIp(int custId);
+    Task<List<AssociationAccountModel>> GetAssociatedAccount(int custId);
 }
 
-public class AssociatedAccountServiceImp(ConfigurationService configurationService,
-        FraudServiceWrapper fraudServiceWrapper,
-        IDynamicRepository repository)
-    : AssociatedAccountService
+public class AssociatedAccountServiceImp(
+        ConfigurationService configurationService,
+        CustomerTrackingSystemApiService customerTrackingSystemApiService,
+        IDynamicRepository repository) : AssociatedAccountService
 {
-    private const int AssociatedByDevice = 1;
-    private const int AssociatedByManual = 2;
-    private const int AssociatedByIp = 3;
-
-    public async Task<IEnumerable<TopAssociatedAccount>> GetAssociatedByDevice(int custId)
+    public async Task<IEnumerable<string>> GetAssociatedCustomerUsername(int custId)
     {
-        var associatedByDevice = await fraudServiceWrapper.GetAssociatedCustomerByDeviceOrManual(
-            configurationService.FraudSystemCTSAPI,
-            custId,
-            AssociatedByDevice).ConfigureAwait(false);
-
-        if (associatedByDevice == null)
-        {
-            return new List<TopAssociatedAccount>();
-        }
-
-        var usernames = associatedByDevice.Select(x => x.Username);
-        var usernameValues = string.Join(",", usernames);
-        var criteria = new TopAssociatedAccountCriteria
-        {
-            Username = usernameValues,
-            Type = AssociatedByDevice
-        };
-
-        return await repository.FetchAsync<TopAssociatedAccount>(criteria);
+        var associationModel = await GetAssociatedCustomer(custId);
+        var customerSites = await repository.FetchAsync<CustomerSiteModel>(new CustomerSiteCriteria { CustIdList = string.Join(",", associationModel.Select(x => x.CustId)) });
+        
+        return customerSites.Select(x => x.Username).Distinct();
     }
 
-    public async Task<IEnumerable<TopAssociatedAccount>> GetAssociatedByManual(int custId)
+    public async Task<List<AssociationAccountModel>> GetAssociatedAccount(int custId)
     {
-        var associatedByManual = await fraudServiceWrapper.GetAssociatedCustomerByDeviceOrManual(
-            configurationService.FraudSystemCTSAPI,
-            custId,
-            AssociatedByManual).ConfigureAwait(false);
+        var associatedCustomers = await GetAssociatedCustomer(custId);
+        var custIds = associatedCustomers.Select(x => x.CustId).Distinct();
+        var customerSites =  await repository.FetchAsync<CustomerSiteModel>(new CustomerSiteCriteria { CustIdList = string.Join(",", custIds) });
 
-        if (associatedByManual == null)
+        var data = (from a in associatedCustomers
+            join ct in customerSites on a.CustId equals ct.CustId
+            select new AssociationAccountModel
+            {
+                Account = ct.Username, Site = ct.SiteName, AssociationTypeName = a.AssociationTypeName, LastTicketDate = a.LastTicketDate
+
+            }).Distinct();
+        var result = data.GroupBy(g => new { g.Site, g.Account, g.LastTicketDate }).Select(r => new AssociationAccountModel
         {
-            return new List<TopAssociatedAccount>();
-        }
-
-        var usernames = associatedByManual.Select(x => x.Username);
-        var usernameValues = string.Join(",", usernames);
-        var criteria = new TopAssociatedAccountCriteria
-        {
-            Username = usernameValues,
-            Type = AssociatedByManual
-        };
-
-        return await repository.FetchAsync<TopAssociatedAccount>(criteria);
+            Account = r.Key.Account,
+            Site = r.Key.Site,
+            LastTicketDate = r.Key.LastTicketDate,
+            AssociationTypeName = string.Join(", ", r.ToList().Select(x => x.AssociationTypeName))
+        }).OrderBy(o => o.Account);
+        return result.ToList();
     }
 
-    public async Task<IEnumerable<TopAssociatedAccount>> GetAssociateddByIp(int custId)
+    private async Task<List<AssociationModel>> GetAssociatedCustomer(int custId)
     {
-        var associatedByIp = await fraudServiceWrapper.GetAssociatedCustomersByIp(
+        var associationModel = await customerTrackingSystemApiService.GetAssociatedCustomer(
             configurationService.FraudSystemCTSAPI,
             custId).ConfigureAwait(false);
 
-        if (associatedByIp == null)
+        if (associationModel == null)
         {
-            return new List<TopAssociatedAccount>();
+            return new List<AssociationModel>();
         }
 
-        var custIds = associatedByIp.Select(x => x.CustID.ToString());
-        var custIdValues = string.Join(",", custIds);
-        var criteria = new TopAssociatedAccountCriteria
-        {
-            Username = custIdValues,
-            Type = AssociatedByIp
-        };
-
-        return await repository.FetchAsync<TopAssociatedAccount>(criteria);
+        return associationModel;
     }
 }

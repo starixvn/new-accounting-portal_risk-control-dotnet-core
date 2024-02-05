@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Fanex.Excel.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Common;
 

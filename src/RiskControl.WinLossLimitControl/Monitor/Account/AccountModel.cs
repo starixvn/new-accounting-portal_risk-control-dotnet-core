@@ -8,9 +8,5 @@ public class AccountModel
 {
     public Customer Customer { get; set; } = new();
 
-    public IEnumerable<TopAssociatedAccount> UsersByDevice { get; set; } = new List<TopAssociatedAccount>();
-
-    public IEnumerable<TopAssociatedAccount> UsersByIP { get; set; } = new List<TopAssociatedAccount>();
-
-    public IEnumerable<TopAssociatedAccount> UsersByManual { get; set; } = new List<TopAssociatedAccount>();
+    public List<AssociationAccountModel> Associations { get; set; } = new List<AssociationAccountModel>();
 }
