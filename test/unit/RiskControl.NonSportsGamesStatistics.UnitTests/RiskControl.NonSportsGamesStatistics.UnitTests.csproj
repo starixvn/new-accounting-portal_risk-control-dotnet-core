@@ -27,19 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CurrencyView\GrandTotal\History\HandlerUnitTests.expected-gridOptions.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="CurrencyView\GrandTotal\History\HandlerUnitTests.fake-gridOptions.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="CurrencyView\GrandTotal\History\HandlerUnitTests.fake-service-data.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Hourly\History\" />
+    <Folder Include="DailyView\GrandTotal\DailyGrandTotal\" />
+    <Folder Include="DailyView\GrandTotal\DailyViewGrandTotal\" />
+    <Folder Include="DailyView\GrandTotal\ProductGrandTotal\" />
+    <Folder Include="DailyView\GroupStatistics\Company\" />
+    <Folder Include="DailyView\GroupStatistics\Device\" />
+    <Folder Include="DailyView\Main\Product\" />
     <Folder Include="TopTwenty\Common\" />
   </ItemGroup>
 

@@ -12,17 +12,17 @@ import { GridService } from '../common/grid.service';
 import { RowAttribute, ModeGenerate } from '../mode.model';
 import { ModeController } from '../mode-controller';
 import { ModeContext } from '../mode-context';
-import { UserNameQueryModel, UserNameBaseQueryModel, UserNameGridModel } from '../user-name/user-name.model';
+import { UserNameBaseQueryModel, UserNameGridModel } from '../user-name/user-name.model';
 import { UserNameService } from '../user-name/user-name.service';
 import { DailyGridModel } from '../daily/daily.model';
 import { HourlyGridModel } from '../hourly/hourly.model';
 import { HousePositionTakingService } from '../house-position-taking/house-position-taking.service';
 import { HousePositionTakingQueryModel } from '../house-position-taking/house-position-taking.model';
-import { AssociatedAccountService } from '../associated-account';
 import { Top20Service } from './top20.service';
-import { Top20QueryModel, TopType, Top20GridModel, Top20NormalQueryModel } from './top20.model';
+import { Top20BaseQueryModel, TopType, Top20GridModel } from './top20.model';
 import { AssociatedAccountComponent } from '../associated-account/associated-account.component';
 import { LocalStorageKey } from 'app/common/constants';
+import { DATE_CONFIG } from 'app/common';
 
 interface SubRowCustomAttribute {
   ReportBy: string;
@@ -129,9 +129,9 @@ export class Top20Component implements OnInit, ModeGenerate {
     }
   }
 
-  private createQueryModel(): Top20QueryModel {
+  private createQueryModel(): Top20BaseQueryModel {
     const filterModel = this.modeContext.filterModel;
-    const queryModel = this.modelService.createQueryModel() as Top20QueryModel;
+    const queryModel = this.modelService.createQueryModel() as Top20BaseQueryModel;
     queryModel.sortColumnName = 'GameIncome';
     const gridModel = this.modeContext.gridModel;
     let topType = TopType.All;
@@ -145,10 +145,10 @@ export class Top20Component implements OnInit, ModeGenerate {
   }
 
   private showHousePositionTaking(custId: number, userName: string) {
-    const queryModel = this.createQueryModel() as Top20NormalQueryModel;
+    const queryModel = this.createQueryModel() as Top20BaseQueryModel;
     const housePositionTakingQueryModel: HousePositionTakingQueryModel = {
       isNormalMode: queryModel.isNormalMode,
-      winLostDate: queryModel.winlostDate,
+      winLostDate: queryModel.fromDate,
       productId: queryModel.productId,
       custId: custId,
       betType: queryModel.betType,
@@ -209,10 +209,14 @@ export class Top20Component implements OnInit, ModeGenerate {
       custId: custId,
       isBaseRM: filterModel.isBaseRM,
       sportBettype: gameTypeResult.sportBetTypes.map(s => `${s.sportType}-${s.betType}`).join(','),
-      isExactly: filterModel.isExactly
+      isExactly: filterModel.isExactly,
+      fromDate: filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
+      toDate: filterModel.isNormalMode ? filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD)
+                :filterModel.endDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
+      housePTType: filterModel.housePTType,
+      housePTValue: filterModel.housePTValue
     };
-    const model: UserNameQueryModel = Helper.extend(baseModel, this.modelService.createCriteria(filterModel));
-    this.modalService.open(AssociatedAccountComponent, { size: { width: 1200 } }, model);
+    this.modalService.open(AssociatedAccountComponent, { size: { width: 1200 } }, baseModel);
   }
 
   private drillDownUserName(userName: string, roleId: RoleId) {
@@ -258,7 +262,7 @@ export class Top20Component implements OnInit, ModeGenerate {
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
-  private updateGridOptions(gridOptions: GridOptions, queryModel: Top20QueryModel, isBack: boolean) {
+  private updateGridOptions(gridOptions: GridOptions, queryModel: Top20BaseQueryModel, isBack: boolean) {
     if (!isBack && gridOptions.bodyRows.length > 0 && !this.gridService.isDrilldown()) {
       if (this.hasDrillDownOnUserName()) {
         this.updateUserNameColumn(gridOptions);
@@ -368,7 +372,7 @@ export class Top20Component implements OnInit, ModeGenerate {
     });
   }
 
-  private excel(queryModel: Top20QueryModel) {
+  private excel(queryModel: Top20BaseQueryModel) {
     const filterModel = this.modeContext.filterModel;
     const maxDate = moment.utc(filterModel.startDate).add(1, 'month');
     if (filterModel.roleId === RoleId.Member && !filterModel.endDate.isBefore(maxDate)) {
@@ -377,7 +381,7 @@ export class Top20Component implements OnInit, ModeGenerate {
     }
 
     if (queryModel.topType === TopType.All) {
-      const userNameQueryModel: UserNameQueryModel = _.cloneDeep(queryModel);
+      const userNameQueryModel: UserNameBaseQueryModel = _.cloneDeep(queryModel);
       userNameQueryModel.reportBy = this.modelService.getReportBy(ReportType.UserName);
       this.userNameService.excel(userNameQueryModel)
         .subscribe(response => {
@@ -393,7 +397,7 @@ export class Top20Component implements OnInit, ModeGenerate {
     }
   }
 
-  private sort(queryModel: Top20QueryModel, sortColumnName: string, sortDirection: string) {
+  private sort(queryModel: Top20BaseQueryModel, sortColumnName: string, sortDirection: string) {
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
     localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}**${localStorage.getItem(LocalStorageKey.REPORT_TYPE)}`);

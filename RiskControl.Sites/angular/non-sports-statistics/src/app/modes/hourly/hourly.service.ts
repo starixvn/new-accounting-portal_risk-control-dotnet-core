@@ -5,23 +5,16 @@ import { HourlyData, HourlyQueryModel } from './hourly.model';
 
 @Injectable()
 export class HourlyService {
+    private readonly url = 'NonSportsGamesStatistics/Hourly';
     constructor(
         private readonly httpService: HttpService
     ) { }
 
     query(model: HourlyQueryModel): Observable<HourlyData> {
-        const url = this.getUrl(model) + 'Query';
-        return this.httpService.post<HourlyData>(url, model);
+        return this.httpService.post<HourlyData>(`${this.url}/Query`, model);
     }
 
     excel(model: HourlyQueryModel): Observable<Blob> {
-        const url = this.getUrl(model) + 'Excel';
-        return this.httpService.download(url, model);
-    }
-
-    private getUrl(model: HourlyQueryModel): string {
-        return model.isNormalMode
-            ? 'NonSportsGamesStatistics/HourlyNormal/'
-            : 'NonSportsGamesStatistics/HourlyHistory/';
+        return this.httpService.download(`${this.url}/Excel`, model);
     }
 }

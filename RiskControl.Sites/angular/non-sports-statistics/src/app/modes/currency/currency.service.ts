@@ -31,13 +31,9 @@ export class CurrencyService {
 
     private getUrl(model: CurrencyQueryModel, isGrandTotal = false): string {
       if (isGrandTotal) {
-          return model.isNormalMode
-              ? 'NonSportsGamesStatistics/CurrencyViewGrandTotalNormal/'
-              : 'NonSportsGamesStatistics/CurrencyViewGrandTotalHistory/';
+          return 'NonSportsGamesStatistics/CurrencyViewGrandTotal/';
       } else {
-          return model.isNormalMode
-              ? 'NonSportsGamesStatistics/CurrencyViewNormal/'
-              : 'NonSportsGamesStatistics/CurrencyViewHistory/';
+          return 'NonSportsGamesStatistics/CurrencyView/';
       }
   }
 }

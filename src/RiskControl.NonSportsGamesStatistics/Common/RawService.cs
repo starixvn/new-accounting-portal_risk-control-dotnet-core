@@ -23,7 +23,6 @@ public class RawServiceImp(DataSourceChooser dataSourceChooser, IDynamicReposito
     public Task<IEnumerable<T>> QueryData<T>(BaseStatisticCriteria criteria, DateTime winLossDate)
         where T : class
     {
-        criteria.Source = dataSourceChooser.GetDataSource(criteria.IsNormalMode);
         return repository.FetchAsync<T>(criteria);
     }
 
@@ -31,8 +30,6 @@ public class RawServiceImp(DataSourceChooser dataSourceChooser, IDynamicReposito
         where T : class
     {
         var statistics = new GenericRawData<T>();
-
-        criteria.Source = dataSourceChooser.GetDataSource(criteria.IsNormalMode);
         var rawData = await repository.FetchMultipleAsync<T, T>(criteria).ConfigureAwait(false);
 
         statistics.RawStatistics = rawData.Item1 ?? new List<T>();

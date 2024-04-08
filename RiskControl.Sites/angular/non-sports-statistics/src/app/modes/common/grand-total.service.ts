@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from 'nap-components/http';
-import { QueryModel } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 import { ReportType } from '../../filter';
 
 @Injectable()
@@ -14,25 +14,21 @@ export class GrandTotalService {
     private readonly httpService: HttpService
   ) { }
 
-  query(reportType: ReportType, model: QueryModel): Observable<GridOptions> {
+  query(reportType: ReportType, model: BaseQueryModel): Observable<GridOptions> {
     const url = this.getGrandTotalBaseUrl(reportType, model.isNormalMode) + 'Query';
     return this.httpService.post<GridOptions>(url, model);
   }
 
-  excel(reportType: ReportType, model: QueryModel): Observable<Blob> {
+  excel(reportType: ReportType, model: BaseQueryModel): Observable<Blob> {
     const url = this.getGrandTotalBaseUrl(reportType, model.isNormalMode) + 'Excel';
     return this.httpService.download(url, model);
   }
 
   private getGrandTotalBaseUrl(reportType: ReportType, isNormalMode: boolean): string {
     if (reportType === ReportType.Daily) {
-      return isNormalMode
-        ? `${this.url}/DailyGrandTotalNormal/`
-        : `${this.url}/DailyGrandTotalHistory/`;
+      return `${this.url}/DailyGrandTotal/`;
     } else if (this.dailyViewList.includes(reportType)) {
-      return isNormalMode
-        ? `${this.url}/DailyViewGrandTotalNormal/`
-        : `${this.url}/DailyViewGrandTotalHistory/`;
+      return `${this.url}/DailyViewGrandTotal/`;
     } else {
       throw new Error('Not implemented yet');
     }

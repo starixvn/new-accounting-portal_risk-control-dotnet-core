@@ -34,20 +34,8 @@ export interface BaseQueryModel {
     isBaseRM: boolean;
     sportBettype: string;
     isExactly: boolean;
-}
-
-export interface NormalCriteria {
-    winlostDate: string;
     housePTType: number;
     housePTValue: number;
-}
-export interface NormalQueryModel extends BaseQueryModel, NormalCriteria { }
-
-export interface HistoryCriteria {
     fromDate: string;
     toDate: string;
 }
-
-export interface HistoryQueryModel extends BaseQueryModel, HistoryCriteria { }
-
-export type QueryModel = NormalQueryModel | HistoryQueryModel;

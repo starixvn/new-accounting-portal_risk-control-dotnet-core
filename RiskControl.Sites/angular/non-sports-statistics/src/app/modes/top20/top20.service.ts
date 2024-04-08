@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from 'nap-components/http';
-import { Top20QueryModel, TopType } from './top20.model';
+import { Top20BaseQueryModel, TopType } from './top20.model';
 
 @Injectable()
 export class Top20Service {
@@ -9,24 +9,20 @@ export class Top20Service {
         private readonly httpService: HttpService
     ) { }
 
-    query(model: Top20QueryModel): Observable<GridOptions> {
+    query(model: Top20BaseQueryModel): Observable<GridOptions> {
         const url = this.getUrl(model) + 'Query';
         return this.httpService.post<GridOptions>(url, model);
     }
 
-    private getUrl(model: Top20QueryModel): string {
+    private getUrl(model: Top20BaseQueryModel): string {
         if (model.topType === TopType.All) {
-            return model.isNormalMode
-                ? 'NonSportsGamesStatistics/TopTwentyNormal/'
-                : 'NonSportsGamesStatistics/TopTwentyHistory/';
+            return 'NonSportsGamesStatistics/TopTwenty/';
         } else {
-            return model.isNormalMode
-                ? 'NonSportsGamesStatistics/TopTwentyGroupStatisticNormal/'
-                : 'NonSportsGamesStatistics/TopTwentyGroupStatisticHistory/';
+            return 'NonSportsGamesStatistics/TopTwentyGroupStatistic/';
         }
     }
 
-    excel(model: Top20QueryModel): Observable<Blob> {
+    excel(model: Top20BaseQueryModel): Observable<Blob> {
         const url = this.getUrl(model) + 'Excel';
         return this.httpService.download(url, model);
     }

@@ -4,7 +4,7 @@ import { Helper } from 'nap-components/helper';
 import { ModalContext, ModalService } from 'components/modal';
 import { GridModalComponent } from 'components/grid-modal';
 import { GridContext } from 'components/grid';
-import { UserNameQueryModel } from '../user-name';
+import { UserNameBaseQueryModel } from '../user-name';
 import { AssociatedAccountService } from './associated-account.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { AssociatedAccountService } from './associated-account.service';
     templateUrl: './associated-account.component.html'
 })
 export class AssociatedAccountComponent {
-    private readonly model: UserNameQueryModel;
+    private readonly model: UserNameBaseQueryModel;
     gridOptions: GridOptions;
     gridContext: GridContext = {
         isAutoResize: false
@@ -23,7 +23,7 @@ export class AssociatedAccountComponent {
         private readonly modalService: ModalService,
         private readonly associatedAccountService: AssociatedAccountService
     ) {
-        this.model = modalContext.data as UserNameQueryModel;
+        this.model = modalContext.data as UserNameBaseQueryModel;
         this.associatedAccountService.query(this.model).subscribe(gridOptions => {
             this.updateGridOptions(gridOptions, this.model);
         });
@@ -55,7 +55,7 @@ export class AssociatedAccountComponent {
         });
     }
 
-    private updateGridOptions(gridOptions: GridOptions, queryModel: UserNameQueryModel) {
+    private updateGridOptions(gridOptions: GridOptions, queryModel: UserNameBaseQueryModel) {
         gridOptions.fullHeight = false;
         gridOptions.gridHeight = 500;
         gridOptions.titleInfo = {
@@ -78,7 +78,7 @@ export class AssociatedAccountComponent {
         column.value = `<a href="javascript:;" grand-total>${value}</a>`;
     }
 
-    private exportExcelAssociatedAccounts(queryModel: UserNameQueryModel) {
+    private exportExcelAssociatedAccounts(queryModel: UserNameBaseQueryModel) {
         this.associatedAccountService.excel(queryModel)
             .subscribe(response => {
                 const fileName = `Associated_Accounts_With_${queryModel.username}.xls`;

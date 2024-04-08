@@ -1,15 +1,11 @@
-﻿import { NormalQueryModel, HistoryQueryModel } from '../../app.model';
+﻿import { BaseQueryModel } from '../../app.model';
 import { GridModel } from '../mode.model';
 
 interface DrillDownUserNameModel {
     usernameDrillDown: boolean;
 }
 
-export interface DailyNormalQueryModel extends NormalQueryModel, DrillDownUserNameModel { }
-
-export interface DailyHistoryQueryModel extends HistoryQueryModel, DrillDownUserNameModel { }
-
-export type DailyQueryModel = DailyNormalQueryModel | DailyHistoryQueryModel;
+export interface DailyQueryModel extends BaseQueryModel, DrillDownUserNameModel { }
 
 export class DailyGridModel extends GridModel {
     readonly isDrillDownFromUserName: boolean;

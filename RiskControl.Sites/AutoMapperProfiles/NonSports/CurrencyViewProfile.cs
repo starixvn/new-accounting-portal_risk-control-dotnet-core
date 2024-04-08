@@ -8,10 +8,8 @@ public class CurrencyViewProfile : Profile
 {
     public CurrencyViewProfile()
     {
-        CreateMap<Main.Normal.QueryModel, Main.Normal.Criteria>();
-        CreateMap<Main.History.QueryModel, Main.History.Criteria>();
+        CreateMap<Main.QueryModel, Main.Criteria>();
 
-        CreateMap<GrandTotal.Normal.QueryModel, GrandTotal.Normal.Criteria>();
-        CreateMap<GrandTotal.History.QueryModel, GrandTotal.History.Criteria>();
+        CreateMap<GrandTotal.QueryModel, GrandTotal.Criteria>();
     }
 }

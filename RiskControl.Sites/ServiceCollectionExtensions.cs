@@ -18,6 +18,7 @@ using System.Reflection;
 using ProgressiveJackpot;
 using BettingMonitoring.Query;
 using Microsoft.AspNetCore.DataProtection;
+using RiskControl.NonSportsGamesStatistics.CurrencyView.Main;
 using NonSportsGamesStatistics.CurrencyView.Main.History;
 using StackExchange.Redis;
 using WinLossLimitControl.PlayerSettings.Insert;
@@ -60,7 +61,7 @@ public static class ServiceCollectionExtensions
     public static void AddAssemblyForMediatR(this IServiceCollection services)
     {
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(BettingMonitoringQueryController)));
-        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(CurrencyViewHistoryModeController)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(CurrencyViewController)));
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(ProgressiveJackpotController)));
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(PlayerSettingInsertController)));
         return;

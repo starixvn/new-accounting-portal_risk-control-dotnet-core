@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CurrencyView\Main\" />
+    <Folder Include="DailyView\GrandTotal\DailyViewGrandTotal\" />
+    <Folder Include="DailyView\GrandTotal\ProductGrandTotal\" />
+    <Folder Include="DailyView\Main\Product\" />
     <Folder Include="Hourly\" />
     <Folder Include="UserNameView\" />
     <Folder Include="TopTwenty\" />

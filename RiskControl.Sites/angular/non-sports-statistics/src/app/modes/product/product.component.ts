@@ -5,7 +5,7 @@ import { Helper } from 'nap-components/helper';
 import { GridModalComponent } from 'components/grid-modal';
 import { ModalService } from 'components/modal';
 import { FilterConfig, FilterHelper, FilterModel, Product, ReportType } from '../../filter';
-import { QueryModel } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 import { CasinoType, GameTypeId, ProductId } from '../../common';
 import { GrandTotalService, ModelService, TitleService, GridService } from '../common';
 import { RowAttribute, ModeGenerate } from '../index';
@@ -104,7 +104,7 @@ export class ProductComponent implements OnInit, ModeGenerate {
     return this.titleService.getBreadcrumbTitleForReportProduct(isLast);
   }
 
-  private createQueryModel(): QueryModel {
+  private createQueryModel(): BaseQueryModel {
     const queryModel = this.modelService.createQueryModel();
     const gridModel = this.modeContext.gridModel;
     if (gridModel instanceof ProductGridModel) {
@@ -245,7 +245,7 @@ export class ProductComponent implements OnInit, ModeGenerate {
     return true;
   }
 
-  private updateGridOptions(gridOptions: GridOptions, queryModel: QueryModel, isBack: boolean) {
+  private updateGridOptions(gridOptions: GridOptions, queryModel: BaseQueryModel, isBack: boolean) {
     if (!isBack && gridOptions.bodyRows.length > 0 && !this.gridService.isDrilldown()) {
       this.updateGrandTotalCell(gridOptions);
       if (this.gridService.hasCurrencyColumn()) {
@@ -305,7 +305,7 @@ export class ProductComponent implements OnInit, ModeGenerate {
     column.value = `<a href="javascript:;" grand-total>${value}</a>`;
   }
 
-  private excel(queryModel: QueryModel) {
+  private excel(queryModel: BaseQueryModel) {
     const gridModel = this.modeContext.gridModel;
     const queryHandler = (response: Blob) => {
       const fileName = this.titleService.getExcelFileName();
@@ -322,7 +322,7 @@ export class ProductComponent implements OnInit, ModeGenerate {
     }
   }
 
-  private excelGrandTotal(queryModel: QueryModel) {
+  private excelGrandTotal(queryModel: BaseQueryModel) {
     const gridModel = this.modeContext.gridModel;
     const queryHandler = (response: Blob) => {
       const fileName = this.titleService.getExcelGrandTotalFileName();
@@ -340,7 +340,7 @@ export class ProductComponent implements OnInit, ModeGenerate {
     }
   }
 
-  private sort(queryModel: QueryModel, sortColumnName: string, sortDirection: string) {
+  private sort(queryModel: BaseQueryModel, sortColumnName: string, sortDirection: string) {
     const gridModel = this.modeContext.gridModel;
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;

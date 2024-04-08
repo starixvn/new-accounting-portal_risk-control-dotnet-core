@@ -1,5 +1,5 @@
 import { GridModel } from '../mode.model';
-import { NormalQueryModel, HistoryQueryModel } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 
 export class HourlyGridModel extends GridModel {
     readonly isDrillDownFromUserName: boolean;
@@ -37,8 +37,4 @@ export interface HourlyStatistics {
     extraPT: number;
 }
 
-export interface HourlyNormalQueryModel extends NormalQueryModel { usernameDrillDown: boolean; }
-
-export interface HourlyHistoryQueryModel extends HistoryQueryModel { usernameDrillDown: boolean;}
-
-export type HourlyQueryModel = HourlyNormalQueryModel | HourlyHistoryQueryModel;
+export interface HourlyQueryModel extends BaseQueryModel { usernameDrillDown: boolean; }
