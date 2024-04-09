@@ -15,6 +15,6 @@ export class DailyService {
     }
 
     excel(model: DailyQueryModel): Observable<Blob> {
-        return this.httpService.download(`${this.url}/Query`, model);
+        return this.httpService.download(`${this.url}/Excel`, model);
     }
 }

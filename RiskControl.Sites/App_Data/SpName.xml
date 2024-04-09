@@ -75,7 +75,7 @@
 		<Setting Key="NonSportsProductStatistics_UserNameSuggestion" SpName="Acc_CustomerSelUserSearch" DbName="DBAGE.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsStatistics_DeviceSel" SpName="Acc_Rpt_NonSportsStatistics_DeviceSel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Daily" SpName="Acc_Rpt_NonSportsStatistics_Daily" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
-		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Monthly_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Monthly" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Monthly" SpName="Acc_Rpt_NonSportsStatistics_Monthly" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Company" SpName="Acc_Rpt_NonSportsStatistics_Company" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Currency" SpName="Acc_Rpt_NonSportsStatistics_Currency" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Product" SpName="Acc_Rpt_NonSportsStatistics_ProductGroup" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
