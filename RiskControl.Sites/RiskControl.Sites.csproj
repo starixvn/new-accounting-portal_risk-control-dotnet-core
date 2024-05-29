@@ -9,12 +9,16 @@
   <ItemGroup>
     <Compile Remove="angular-legacy\**" />
     <Compile Remove="angular\**" />
+    <Compile Remove="Services\**" />
     <Content Remove="angular-legacy\**" />
     <Content Remove="angular\**" />
+    <Content Remove="Services\**" />
     <EmbeddedResource Remove="angular-legacy\**" />
     <EmbeddedResource Remove="angular\**" />
+    <EmbeddedResource Remove="Services\**" />
     <None Remove="angular-legacy\**" />
     <None Remove="angular\**" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,10 +57,6 @@
     <ProjectReference Include="..\src\RiskControl.NonSportsGamesStatistics\RiskControl.NonSportsGamesStatistics.csproj" />
     <ProjectReference Include="..\src\RiskControl.ProgressiveJackpot\RiskControl.ProgressiveJackpot.csproj" />
     <ProjectReference Include="..\src\RiskControl.WinLossLimitControl\RiskControl.WinLossLimitControl.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
