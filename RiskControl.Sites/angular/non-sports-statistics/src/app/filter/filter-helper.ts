@@ -27,7 +27,8 @@ const reportSelectItems: SelectItem[] = [
   { text: 'Currency', value: ReportType.Currency },
   { text: 'Device', value: ReportType.Device },
   { text: 'Username', value: ReportType.UserName },
-  { text: 'Top 20', value: ReportType.Top20 }
+  { text: 'Top 20', value: ReportType.Top20 },
+  { text: 'Product Detail', value: ReportType.ProductDetail }
 ];
 
 export const FilterHelper = {

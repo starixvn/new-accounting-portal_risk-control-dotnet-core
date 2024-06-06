@@ -11,6 +11,7 @@ import { Top20Component } from './top20/top20.component';
 import { ReportType } from 'app/filter/filter.model';
 import { ModeGenerate } from './mode.model';
 import * as _ from 'lodash';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @Injectable()
 export class ModeService {
@@ -24,7 +25,8 @@ export class ModeService {
     { reportType: ReportType.Product, componentName: ProductComponent },
     { reportType: ReportType.Device, componentName: DeviceComponent },
     { reportType: ReportType.UserName, componentName: UserNameComponent },
-    { reportType: ReportType.Top20, componentName: Top20Component }
+    { reportType: ReportType.Top20, componentName: Top20Component },
+    { reportType: ReportType.ProductDetail, componentName: ProductDetailComponent }
   ];
   getComponent(reportType: ReportType): Type<ModeGenerate> {
     const component = _.find(this.componentListItems, function (componentItem) {
