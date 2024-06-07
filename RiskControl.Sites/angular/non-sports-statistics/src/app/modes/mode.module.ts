@@ -16,7 +16,6 @@ import { Top20Module } from './top20';
 import { AssociatedAccountModule } from './associated-account';
 import { HousePositionTakingModule } from './house-position-taking';
 import { ModeService } from './mode.service';
-import { ProductDetailModule } from './product-detail/product-detail.module';
 
 @NgModule({
     imports: [
@@ -34,8 +33,7 @@ import { ProductDetailModule } from './product-detail/product-detail.module';
         ProductModule,
         DeviceModule,
         UserNameModule,
-        Top20Module,
-        ProductDetailModule
+        Top20Module
     ],
     declarations: [
         GridModalComponent
