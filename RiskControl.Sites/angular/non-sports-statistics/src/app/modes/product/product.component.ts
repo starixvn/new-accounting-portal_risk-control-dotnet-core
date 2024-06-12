@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import { Helper } from 'nap-components/helper';
 import { GridModalComponent } from 'components/grid-modal';
 import { ModalService } from 'components/modal';
-import { FilterConfig, FilterModel } from '../../filter';
+import { FilterConfig, FilterModel, Product } from '../../filter';
 import { QueryModel } from '../../app.model';
 import { CasinoType, GameTypeId, ProductId } from '../../common';
 import { GrandTotalService, ModelService, TitleService, GridService } from '../common';
@@ -21,6 +21,7 @@ import { RNGCasinoSetting } from './rng-casino-setting';
 import { NumberGameSetting } from './number-game-setting';
 import { VirtualSportsSetting } from './virtual-sports-setting';
 import { KenoSetting } from './keno-setting';
+import { ProductDetailSetting } from './product-detail-setting';
 
 @Component({
   selector: 'nap-product',
@@ -148,16 +149,14 @@ export class ProductComponent implements OnInit, ModeGenerate {
   }
 
   private drillDownProduct(typeId: number, typeName: string) {
-    const isNormalMode = this.modeContext.filterModel.isNormalMode;
-    const gridModel = this.createGridModel(false, isNormalMode, typeId, typeName);
+    const gridModel = this.createGridModel(false, typeId, typeName);
     const filterModel = this.createFilterModel(gridModel);
     const modeContext = ModeContext.create(typeName, filterModel, gridModel);
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
   private drillDownCurrency(currency: number, typeId: number, typeName: string) {
-    const isNormalMode = this.modeContext.filterModel.isNormalMode;
-    const gridModel = this.createGridModel(true, isNormalMode, typeId, typeName);
+    const gridModel = this.createGridModel(true, typeId, typeName);
     const filterModel = this.createFilterModel(gridModel);
     filterModel.currency = [currency];
     const modeContext = ModeContext.create(typeName, filterModel, gridModel);
@@ -181,7 +180,7 @@ export class ProductComponent implements OnInit, ModeGenerate {
     return filterModel;
   }
 
-  private createGridModel(isDrillDownCurrency: boolean, isNormalMode: boolean, typeId: number, typeName: string): ProductGridModel {
+  private createGridModel(isDrillDownCurrency: boolean, typeId: number, typeName: string): ProductGridModel {
     let productSetting: ProductSetting;
     const filterModel = this.modeContext.filterModel;
     const gridModel = this.modeContext.gridModel;
@@ -209,15 +208,19 @@ export class ProductComponent implements OnInit, ModeGenerate {
           break;
         default:
           // tslint:disable-next-line:max-line-length
-          const filterGameTypes = filterModel.selectedCollection.gameTypes.filter(gameType => gameType.productId === typeId);
-          const gameTypeId: GameTypeId = filterGameTypes[0].gameType;
+          if (this.isChildOfLiveRngCasino(filterModel.collection.products, typeId)) {
+            productSetting = new ProductDetailSetting(typeId, typeName);
+          } else {
+            const filterGameTypes = filterModel.selectedCollection.gameTypes.filter(gameType => gameType.productId === typeId);
+            const gameTypeId: GameTypeId = filterGameTypes[0].gameType;
 
-          if (gameTypeId === GameTypeId.SportType) {
-            productSetting = new VirtualSportsSetting(typeId, typeName);
-          }
+            if (gameTypeId === GameTypeId.SportType) {
+              productSetting = new VirtualSportsSetting(typeId, typeName);
+            }
 
-          if (gameTypeId === GameTypeId.BetType) {
-            productSetting = new KenoSetting(typeId, typeName);
+            if (gameTypeId === GameTypeId.BetType) {
+              productSetting = new KenoSetting(typeId, typeName);
+            }
           }
           break;
       }
@@ -346,5 +349,10 @@ export class ProductComponent implements OnInit, ModeGenerate {
     } else {
       this.productService.query(queryModel).subscribe(queryHandler);
     }
+  }
+
+  private isChildOfLiveRngCasino(products: Product[], productId: number): boolean {
+    const liveRngCasionList = products.filter(p => p.casinoType === CasinoType.RNG || p.casinoType === CasinoType.SLI);
+    return liveRngCasionList.findIndex(p => p.productId === productId) > 0;
   }
 }

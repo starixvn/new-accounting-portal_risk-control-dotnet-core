@@ -7,7 +7,7 @@ import { ReportType } from '../../filter';
 @Injectable()
 export class GrandTotalService {
   private readonly url = 'NonSportsGamesStatistics';
-  private readonly dailyViewList = [0, 2, 3, 4, 5, 6, 7, 8];
+  private readonly dailyViewList = [0, 2, 3, 4, 5, 6, 7, 8, 9];
   private readonly productViewList = [11, 12];
 
   constructor(
