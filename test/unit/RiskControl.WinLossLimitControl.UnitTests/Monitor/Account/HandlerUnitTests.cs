@@ -24,6 +24,7 @@ public class HandlerUnitTests
         repository.GetAsync<Customer>(Arg.Compat.Any<CustomerQueryCriteria>()).Returns(expectedAccountModel.Customer);
 
         var associatedAccountService = Substitute.For<AssociatedAccountService>();
+        associatedAccountService.GetAssociatedAccount(Arg.Compat.Any<int>()).Returns([]);
         //associatedAccountService.GetAssociatedByDevice(Arg.Compat.Any<int>()).Returns(expectedAccountModel.UsersByDevice);
         //associatedAccountService.GetAssociatedByManual(Arg.Compat.Any<int>()).Returns(expectedAccountModel.UsersByManual);
         //associatedAccountService.GetAssociateddByIp(Arg.Compat.Any<int>()).Returns(expectedAccountModel.UsersByIP);
