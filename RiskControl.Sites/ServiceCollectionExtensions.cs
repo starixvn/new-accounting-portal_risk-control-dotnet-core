@@ -19,9 +19,9 @@ namespace RiskControl.Sites;
 
 using System.Reflection;
 using ProgressiveJackpot;
-using RiskControl.BettingMonitoring.Query;
-using RiskControl.NonSportsGamesStatistics.CurrencyView.Main.History;
-using RiskControl.WinLossLimitControl.PlayerSettings.Insert;
+using BettingMonitoring.Query;
+using NonSportsGamesStatistics.CurrencyView.Main.History;
+using WinLossLimitControl.PlayerSettings.Insert;
 
 public static class ServiceCollectionExtensions
 {

@@ -56,11 +56,6 @@ public class AssociatedAccountServiceImp(
             configurationService.FraudSystemCTSAPI,
             custId).ConfigureAwait(false);
 
-        if (associationModel == null)
-        {
-            return new List<AssociationModel>();
-        }
-
-        return associationModel;
+        return associationModel ?? [];
     }
 }
