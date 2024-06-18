@@ -13,7 +13,7 @@ public interface CustomerTrackingSystemApiService
 
 public class CustomerTrackingSystemApiServiceImp : CustomerTrackingSystemApiService
 {
-    static HttpClient jsonClient = new();
+    private static readonly HttpClient jsonClient = new();
 
     public async Task<List<AssociationModel>> GetAssociatedCustomer(string host, int custId)
     {

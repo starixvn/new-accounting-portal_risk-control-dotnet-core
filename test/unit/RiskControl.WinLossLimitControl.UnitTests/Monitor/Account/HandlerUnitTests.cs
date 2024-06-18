@@ -25,10 +25,7 @@ public class HandlerUnitTests
 
         var associatedAccountService = Substitute.For<AssociatedAccountService>();
         associatedAccountService.GetAssociatedAccount(Arg.Compat.Any<int>()).Returns([]);
-        //associatedAccountService.GetAssociatedByDevice(Arg.Compat.Any<int>()).Returns(expectedAccountModel.UsersByDevice);
-        //associatedAccountService.GetAssociatedByManual(Arg.Compat.Any<int>()).Returns(expectedAccountModel.UsersByManual);
-        //associatedAccountService.GetAssociateddByIp(Arg.Compat.Any<int>()).Returns(expectedAccountModel.UsersByIP);
-
+        
         var handle = new Handler(repository, associatedAccountService);
 
         // Act
