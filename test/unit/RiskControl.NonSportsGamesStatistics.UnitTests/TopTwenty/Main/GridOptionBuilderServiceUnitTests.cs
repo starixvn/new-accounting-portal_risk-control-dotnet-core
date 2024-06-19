@@ -3,12 +3,12 @@ using NSubstitute;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.TopTwenty.Common;
 using RiskControl.NonSportsGamesStatistics.TopTwenty.Main;
-using RiskControl.UnitTest.Core.TestUtilities;
 using System.Collections.Generic;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.TopTwenty.Main;
 
+using RiskControl.UnitTests.TestUtilities;
 using Xunit.Asserts.Compare;
 
 public class GridOptionBuilderServiceUnitTests

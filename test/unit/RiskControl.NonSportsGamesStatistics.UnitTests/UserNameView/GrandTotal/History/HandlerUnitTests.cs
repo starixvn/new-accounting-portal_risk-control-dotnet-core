@@ -3,7 +3,6 @@ using NSubstitute;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.UserNameView.GrandTotal.History;
-using RiskControl.UnitTest.Core.TestUtilities;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +10,7 @@ using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.UserNameView.GrandTotal.History;
 
+using RiskControl.UnitTests.TestUtilities;
 using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests

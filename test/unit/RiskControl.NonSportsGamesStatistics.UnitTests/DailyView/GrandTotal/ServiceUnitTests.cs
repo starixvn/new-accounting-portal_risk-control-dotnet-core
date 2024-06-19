@@ -2,13 +2,13 @@
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal;
 using RiskControl.NonSportsGamesStatistics.Model;
-using RiskControl.UnitTest.Core.TestUtilities;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.DailyView.GrandTotal;
 
+using RiskControl.UnitTests.TestUtilities;
 using Xunit.Asserts.Compare;
 
 public class ServiceUnitTests

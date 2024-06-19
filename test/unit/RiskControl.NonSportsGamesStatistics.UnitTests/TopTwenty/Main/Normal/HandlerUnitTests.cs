@@ -3,7 +3,6 @@ using NSubstitute;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.TopTwenty.Main.Normal;
-using RiskControl.UnitTest.Core.TestUtilities;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -12,6 +11,7 @@ using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.TopTwenty.Main.Normal;
 
+using RiskControl.UnitTests.TestUtilities;
 using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests

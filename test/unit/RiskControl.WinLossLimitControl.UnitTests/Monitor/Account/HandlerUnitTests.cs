@@ -1,7 +1,6 @@
 ﻿using Fanex.Data.Repository;
 using NSubstitute;
 using RiskControl.AssociatedAcccount;
-using RiskControl.UnitTest.Core.TestUtilities;
 using RiskControl.WinLossLimitControl.Monitor.Account;
 using RiskControl.WinLossLimitControl.Monitor.Account.Criteria;
 using RiskControl.WinLossLimitControl.Monitor.Account.Model;
@@ -11,6 +10,7 @@ using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.Account;
 
+using RiskControl.UnitTests.TestUtilities;
 using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests

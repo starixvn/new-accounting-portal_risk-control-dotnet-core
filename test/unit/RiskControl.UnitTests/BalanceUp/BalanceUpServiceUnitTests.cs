@@ -1,4 +1,4 @@
-﻿namespace RiskControl.Core.UnitTests.BalanceUp;
+﻿namespace RiskControl.UnitTests.BalanceUp;
 
 using System;
 using Fanex.Caching;

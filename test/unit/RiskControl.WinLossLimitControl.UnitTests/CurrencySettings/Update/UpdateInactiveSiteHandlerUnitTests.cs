@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
 using NSubstitute;
-using RiskControl.UnitTest.Core.TestUtilities;
 using RiskControl.WinLossLimitControl.CurrencySettings.Model;
 using RiskControl.WinLossLimitControl.CurrencySettings.Update;
 using System.Collections.Generic;
@@ -10,6 +9,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.CurrencySettings.Update;
+
+using RiskControl.UnitTests.TestUtilities;
 
 public class UpdateInactiveSiteHandlerUnitTests
 {

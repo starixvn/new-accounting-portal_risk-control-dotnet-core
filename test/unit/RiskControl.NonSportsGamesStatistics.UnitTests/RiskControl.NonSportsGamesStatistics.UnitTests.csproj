@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\RiskControl.NonSportsGamesStatistics\RiskControl.NonSportsGamesStatistics.csproj" />
-    <ProjectReference Include="..\RiskControl.UnitTest.Core\RiskControl.UnitTest.Core.csproj" />
+    <ProjectReference Include="..\RiskControl.UnitTests\RiskControl.UnitTests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

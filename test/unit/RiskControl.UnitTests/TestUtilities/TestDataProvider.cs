@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿namespace RiskControl.UnitTests.TestUtilities;
+
 using System.IO;
 using System.Runtime.CompilerServices;
-
-namespace RiskControl.UnitTest.Core.TestUtilities;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 public static class TestDataProvider
 {

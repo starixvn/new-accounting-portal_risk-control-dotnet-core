@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AssociatedAcccount\**" />
+    <EmbeddedResource Remove="AssociatedAcccount\**" />
+    <None Remove="AssociatedAcccount\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="NSubstitute" Version="5.1.0" />
     <PackageReference Include="xunit" Version="2.6.2" />
@@ -23,11 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\RiskControl\RiskControl.csproj" />
-    <ProjectReference Include="..\RiskControl.UnitTest.Core\RiskControl.UnitTest.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="AssociatedAcccount\" />
   </ItemGroup>
 
 </Project>
