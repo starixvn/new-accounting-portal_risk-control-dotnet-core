@@ -21,7 +21,8 @@ import { RNGCasinoSetting } from './rng-casino-setting';
 import { NumberGameSetting } from './number-game-setting';
 import { VirtualSportsSetting } from './virtual-sports-setting';
 import { KenoSetting } from './keno-setting';
-import { ProductDetailSetting } from './product-detail-setting';
+import { ProductDetailRngCasinoSetting } from './product-detail-rng-casino-setting';
+import { ProductDetailLiveCasinoSetting } from './product-detail-live-casino-setting';
 
 @Component({
   selector: 'nap-product',
@@ -202,8 +203,10 @@ export class ProductComponent implements OnInit, ModeGenerate {
           break;
         default:
           // tslint:disable-next-line:max-line-length
-          if (this.isChildOfLiveRngCasino(filterModel.collection.products, typeId)) {
-            productSetting = new ProductDetailSetting(typeId, typeName);
+          var casinoProduct = this.getCasinoProduct(filterModel.collection.products, typeId);
+          if (!_.isNil(casinoProduct)) {
+            productSetting = casinoProduct.casinoType === RNGCasinoTypeId
+              ? new ProductDetailRngCasinoSetting(typeId, typeName) : new ProductDetailLiveCasinoSetting(typeId, typeName);
           } else {
             const filterGameTypes = filterModel.selectedCollection.gameTypes.filter(gameType => gameType.productId === typeId);
             const gameTypeId: GameTypeId = filterGameTypes[0].gameType;
@@ -345,8 +348,8 @@ export class ProductComponent implements OnInit, ModeGenerate {
     }
   }
 
-  private isChildOfLiveRngCasino(products: Product[], productId: number): boolean {
+  private getCasinoProduct(products: Product[], productId: number): Product {
     const liveRngCasionList = products.filter(p => p.casinoType === CasinoType.RNG || p.casinoType === CasinoType.SLI);
-    return liveRngCasionList.findIndex(p => p.productId === productId) > 0;
+    return liveRngCasionList.find(p => p.productId === productId);
   }
 }

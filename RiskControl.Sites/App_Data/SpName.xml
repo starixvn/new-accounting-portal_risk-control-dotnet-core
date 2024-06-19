@@ -102,6 +102,7 @@
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Product_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_ProductGroup" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetail_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Product" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSubProduct_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Product" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetailSubProduct_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Product" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSportType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_SportType" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetailSportType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_SportType" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductLeague_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_League" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
