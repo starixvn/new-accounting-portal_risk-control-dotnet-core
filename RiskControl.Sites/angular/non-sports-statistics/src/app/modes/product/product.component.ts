@@ -200,12 +200,6 @@ export class ProductComponent implements OnInit, ModeGenerate {
         case ProductId.NumberGame:
           productSetting = new NumberGameSetting(typeId, typeName);
           break;
-        case ProductId.SabaClub:
-          productSetting = new ProductSportBettypeSetting(typeId, typeName);
-          break;
-        case ProductId.VGaming:
-          productSetting = new ProductSportBettypeSetting(typeId, typeName);
-          break;
         default:
           // tslint:disable-next-line:max-line-length
           if (this.isChildOfLiveRngCasino(filterModel.collection.products, typeId)) {
