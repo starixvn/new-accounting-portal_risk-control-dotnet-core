@@ -1,39 +1,30 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using NSubstitute;
-using RiskControl.AssociatedAcccount;
-using RiskControl.WinLossLimitControl.Monitor.Account;
-using RiskControl.WinLossLimitControl.Monitor.Account.Model;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.Account;
 
-using Xunit.Asserts.Compare;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using NSubstitute;
+using WinLossLimitControl.Monitor.Account;
 
 public class MonitorAccountControllerUnitTests
 {
     [Fact]
-    public async Task Post_Always_ReturnsResultFromMediator()
+    public async Task Post_ReturnsOkResult_WhenCalledWithValidRequest()
     {
-        //// Arrange
-        //var accountModel = new AccountModel
-        //{
-        //    UsersByDevice = new List<TopAssociatedAccount>(),
-        //    UsersByIP = new List<TopAssociatedAccount>(),
-        //    UsersByManual = new List<TopAssociatedAccount>(),
-        //    Customer = new Customer()
-        //};
-        //var mediator = Substitute.For<IMediator>();
-        //mediator.Send(Arg.Compat.Any<Request>()).Returns(accountModel);
+        // Arrange
+        var mediator = Substitute.For<IMediator>();
+        var controller = new MonitorAccountController(mediator);
+        var request = new Request(); // Replace with your actual Request object
+        var expectedViewModel = new AccountModel(); // Replace with your actual ViewModel object
+        mediator.Send(request).Returns(expectedViewModel);
 
-        //// Act
-        //var controller = new MonitorAccountController(mediator);
-        //var actionResult = await controller.Post(new Request()) as OkObjectResult;
-        //var jsonResult = actionResult.Value as AccountModel;
+        // Act
+        var result = await controller.Post(request);
 
-        //// Assert
-        //DeepAssert.Equal(jsonResult, accountModel);
+        // Assert
+        var okResult = Assert.IsType<OkObjectResult>(result);
+        Assert.Equal(expectedViewModel, okResult.Value);
     }
 }

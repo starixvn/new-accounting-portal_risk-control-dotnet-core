@@ -7,9 +7,9 @@ import { FilterConfig } from './filter.config';
 
 @Injectable()
 export class ColumnService {
-  private readonly ReportTypeGroup1 = [0, 1, 2, 3, 4, 6];
+  private readonly ReportTypeGroup1 = [0, 1, 2, 3, 4, 6, 9];
   private readonly ReportTypeGroup2 = [5];
-  private readonly ReportTypeGroup3 = [7, 8, 9];
+  private readonly ReportTypeGroup3 = [7, 8];
   getColumns(reportType: ReportType, isNormalMode: boolean): Column[] {
     const service = this.getService(reportType);
     return service.getColumns(isNormalMode);

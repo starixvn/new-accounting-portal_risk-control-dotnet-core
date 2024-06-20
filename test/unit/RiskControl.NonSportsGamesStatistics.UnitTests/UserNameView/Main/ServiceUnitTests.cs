@@ -3,13 +3,13 @@ using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.RawData;
 using RiskControl.NonSportsGamesStatistics.UserNameView.Main;
-using RiskControl.UnitTest.Core.TestUtilities;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.UserNameView.Main;
 
+using RiskControl.UnitTests.TestUtilities;
 using Xunit.Asserts.Compare;
 
 public class ServiceUnitTests

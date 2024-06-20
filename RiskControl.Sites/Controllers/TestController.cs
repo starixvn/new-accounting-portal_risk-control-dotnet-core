@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RiskControl.Model;
 
 namespace RiskControl.Sites.Controllers;
 
@@ -10,11 +9,11 @@ using Microsoft.AspNetCore.Authorization;
 using ONEbook.UM.AspNetCore.Filters;
 
 [AllowAnonymous]
-
+[Route("Test")]
 public class TestController(ICache cache) : Controller
 {
     [SkipUMFilter]
-    [Route("Test/Index")]
+    [Route("Index")]
     public ActionResult Index()
     {
         return Content("Index");
@@ -22,7 +21,7 @@ public class TestController(ICache cache) : Controller
     }
 
     [SkipUMFilter]
-    [Route("Test/Redis")]
+    [Route("Redis")]
     public async Task<ActionResult> Redis()
     {
         var cacheItemOptions = new CacheItemOptions();

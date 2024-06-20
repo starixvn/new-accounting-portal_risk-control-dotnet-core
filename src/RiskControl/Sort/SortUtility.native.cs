@@ -12,6 +12,7 @@ public static class SortUtility
         var propInfo = typeof(T).GetProperty(sortColumnName);
 
         dataSource.Sort((Comparison<T>)Compare);
+        return;
 
         int Compare(T a, T b)
         {

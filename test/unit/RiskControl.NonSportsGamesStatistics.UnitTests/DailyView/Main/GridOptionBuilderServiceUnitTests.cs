@@ -4,12 +4,12 @@ using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.DailyView.Common;
 using RiskControl.NonSportsGamesStatistics.DailyView.Main;
 using RiskControl.NonSportsGamesStatistics.Model;
-using RiskControl.UnitTest.Core.TestUtilities;
 using System.Collections.Generic;
 using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.DailyView.Main;
 
+using RiskControl.UnitTests.TestUtilities;
 using Xunit.Asserts.Compare;
 
 public class GridOptionBuilderServiceUnitTests

@@ -24,7 +24,8 @@ export class ModeService {
     { reportType: ReportType.Product, componentName: ProductComponent },
     { reportType: ReportType.Device, componentName: DeviceComponent },
     { reportType: ReportType.UserName, componentName: UserNameComponent },
-    { reportType: ReportType.Top20, componentName: Top20Component }
+    { reportType: ReportType.Top20, componentName: Top20Component },
+    { reportType: ReportType.ProductDetail, componentName: ProductComponent }
   ];
   getComponent(reportType: ReportType): Type<ModeGenerate> {
     const component = _.find(this.componentListItems, function (componentItem) {

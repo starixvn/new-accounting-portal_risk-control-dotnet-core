@@ -46,7 +46,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\RiskControl.ProgressiveJackpot\RiskControl.ProgressiveJackpot.csproj" />
-    <ProjectReference Include="..\RiskControl.UnitTest.Core\RiskControl.UnitTest.Core.csproj" />
+    <ProjectReference Include="..\RiskControl.UnitTests\RiskControl.UnitTests.csproj" />
   </ItemGroup>
 
 </Project>

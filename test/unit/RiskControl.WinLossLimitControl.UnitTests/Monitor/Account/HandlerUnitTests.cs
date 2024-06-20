@@ -1,7 +1,6 @@
 ﻿using Fanex.Data.Repository;
 using NSubstitute;
 using RiskControl.AssociatedAcccount;
-using RiskControl.UnitTest.Core.TestUtilities;
 using RiskControl.WinLossLimitControl.Monitor.Account;
 using RiskControl.WinLossLimitControl.Monitor.Account.Criteria;
 using RiskControl.WinLossLimitControl.Monitor.Account.Model;
@@ -11,6 +10,7 @@ using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.Account;
 
+using RiskControl.UnitTests.TestUtilities;
 using Xunit.Asserts.Compare;
 
 public class HandlerUnitTests
@@ -24,10 +24,8 @@ public class HandlerUnitTests
         repository.GetAsync<Customer>(Arg.Compat.Any<CustomerQueryCriteria>()).Returns(expectedAccountModel.Customer);
 
         var associatedAccountService = Substitute.For<AssociatedAccountService>();
-        //associatedAccountService.GetAssociatedByDevice(Arg.Compat.Any<int>()).Returns(expectedAccountModel.UsersByDevice);
-        //associatedAccountService.GetAssociatedByManual(Arg.Compat.Any<int>()).Returns(expectedAccountModel.UsersByManual);
-        //associatedAccountService.GetAssociateddByIp(Arg.Compat.Any<int>()).Returns(expectedAccountModel.UsersByIP);
-
+        associatedAccountService.GetAssociatedAccount(Arg.Compat.Any<int>()).Returns([]);
+        
         var handle = new Handler(repository, associatedAccountService);
 
         // Act

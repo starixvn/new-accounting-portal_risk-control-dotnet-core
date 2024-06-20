@@ -1,7 +1,6 @@
 ﻿using Fanex.Data.Repository;
 using Microsoft.Extensions.Configuration;
 using NSubstitute;
-using RiskControl.UnitTest.Core.TestUtilities;
 using RiskControl.WinLossLimitControl.CurrencySettings.Model;
 using RiskControl.WinLossLimitControl.CurrencySettings.Update;
 using RiskControl.WinLossLimitControl.Models;
@@ -10,6 +9,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.CurrencySettings.Update;
+
+using RiskControl.UnitTests.TestUtilities;
 
 public class UpdateServiceUnitTests
 {
