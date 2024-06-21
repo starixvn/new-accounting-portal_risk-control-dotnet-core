@@ -16,6 +16,9 @@ import {
 } from './filter.model';
 import { FilterHelper } from './filter-helper';
 import { UserNameSuggestionTextboxComponent } from './user-name-suggestion/user-name-suggestion-textbox.component';
+import { ModalService } from 'components/modal';
+import { SaveFilterComponent } from './save-filter/save-filter.component';
+import { SavedFilterGridComponent } from 'components/saved-filter-grid/saved-filter-grid.component';
 
 class CurrencyHelper {
   private readonly currenciesWithoutAll: Currency[];
@@ -211,7 +214,8 @@ export class FilterComponent implements OnInit {
     private readonly filterService: FilterService,
     private readonly columnService: ColumnService,
     private readonly toastService: ToastService,
-    private readonly treeviewBuilderService: TreeViewBuilderService
+    private readonly treeviewBuilderService: TreeViewBuilderService,
+    private readonly modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -479,6 +483,14 @@ export class FilterComponent implements OnInit {
   onResetClick() {
     localStorage.clear();
     this.initFilter();
+  }
+
+  onSaveFilterClick() {
+    this.modalService.open(SaveFilterComponent, { size: { width: 340 } });
+  }
+
+  showSavedFilters() {
+    this.modalService.open(SavedFilterGridComponent, { size: { width: 500 } });
   }
 
   checkBaseRMValue(isCheck: boolean) {

@@ -37,4 +37,12 @@
     .col-search-exact {
       margin-left: 105px;
     }
+    .my-saved-filters {
+        position: absolute;
+        right: 30px;
+        span {
+            font-size: 15px;
+            color: black;
+        }
+    }
 }

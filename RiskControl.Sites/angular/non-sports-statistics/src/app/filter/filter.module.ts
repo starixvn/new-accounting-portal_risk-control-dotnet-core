@@ -19,6 +19,7 @@ import { GametypeTreeviewPipe } from './gametype-treeview.pipe';
 import { DeviceTreeviewPipe } from './device-treeview.pipe';
 import { UserNameSuggestionModule } from './user-name-suggestion';
 import { SiteTreeviewPipe } from './site-treeview.pipe';
+import { SaveFilterComponent } from './save-filter/save-filter.component';
 
 @NgModule({
     imports: [
@@ -42,7 +43,8 @@ import { SiteTreeviewPipe } from './site-treeview.pipe';
         ProductTreeviewPipe,
         GametypeTreeviewPipe,
         DeviceTreeviewPipe,
-        SiteTreeviewPipe
+        SiteTreeviewPipe,
+        SaveFilterComponent
     ],
     providers: [
         FilterService

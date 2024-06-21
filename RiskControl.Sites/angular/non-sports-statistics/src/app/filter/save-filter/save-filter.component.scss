@@ -1,0 +1,11 @@
+@import '~nap-theme/scss/filter';
+.modal-body {
+    background-color:#eceeef;
+    .nap-filter {
+        border: none;
+        margin-bottom: 0px;
+    }
+    input {
+        width: 200px;
+    }
+}
