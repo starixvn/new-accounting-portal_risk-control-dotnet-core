@@ -20,6 +20,8 @@ import { DeviceTreeviewPipe } from './device-treeview.pipe';
 import { UserNameSuggestionModule } from './user-name-suggestion';
 import { SiteTreeviewPipe } from './site-treeview.pipe';
 import { SaveFilterComponent } from './save-filter/save-filter.component';
+import { ConfirmationModule } from 'nap-components/confirmation';
+import { SavedFilterGridModule } from 'components/saved-filter-grid/saved-filter-grid.module';
 
 @NgModule({
     imports: [
@@ -34,7 +36,9 @@ import { SaveFilterComponent } from './save-filter/save-filter.component';
         TreeviewModule.forRoot(),
         ModalModule.forRoot(),
         DropdownTypeaheadModule,
-        DropdownSelectModule
+        DropdownSelectModule,
+        ConfirmationModule.forRoot(),
+        SavedFilterGridModule
     ],
     declarations: [
         FilterComponent,

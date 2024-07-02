@@ -1,7 +1,7 @@
 <ng-template #colgroup>
     <colgroup>
       <col style="width: 60px" />
-      <col style="width: 200px" />
+      <col style="width: 300px" />
       <col style="width: 100px" />
     </colgroup>
   </ng-template>
@@ -22,8 +22,8 @@
 </div>
 <div class="modal-body">
     <div class="d-inline-block">
-        <div *ngIf="data" class="nap-grid" [ngSwitch]="hasData">
-          <div style="width: 500px;">
+        <div *ngIf="data" class="nap-grid" [ngSwitch]="data.length > 0">
+          <div style="width: 480px;">
             <div class="header">
               <table>
                 <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
@@ -39,10 +39,10 @@
                       {{ i + 1 }}
                     </td>
                     <td class="text-center">
-                      {{ item.queryName }}
+                      <a href="#" (click)="reloadFilter(item.content)">{{item.queryName }}</a> 
                     </td>
                     <td class="text-center">
-                      
+                      <span class="deleted-filter fa fa-solid fa-times-circle-o" (click)="onDelete(item.queryId)"></span>
                     </td>
                   </tr>
                 </tbody>

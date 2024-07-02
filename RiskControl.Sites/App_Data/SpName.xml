@@ -130,6 +130,7 @@
 		<Setting Key="BI_GetDWStatusByCube" SpName="BI_GetDWStatusByCube" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_CustomerSelCustByUsername" SpName="Acc_CustomerSelCustByUsername" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsStatistics_TopAssociatedAccount_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_TopAssociatedAccount" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_ReportSavedFilter" SpName="Acc_Rpt_ReportSavedFilter" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 	</Function>
 	
 	<Function Name="Dashboard">

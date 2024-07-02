@@ -210,3 +210,35 @@ export interface NumberGameBetTypes {
   numberGameHappyFiveLinkedGamesBetTypes: GameType[];
   otherBetTypes: GameType[];
 }
+
+export interface SavedFilterQueryModel {
+    queryId?: number;
+    queryName?: string;
+    content?: string;
+    reportId?: number;
+    reportName?: string;
+    action: number;
+}
+
+export interface SavedFilterContentModel {
+    products: string;
+    sites: string;
+    currencies: string;
+    totalBetCompareType: string;
+    gameIncomeCompareType: string;
+    housePtCompareType: string;
+    housePtValue: string;
+    reportType: string;
+    mode: string;
+    roleId: string;
+    gameTypes: string;
+    devices: string;
+    columns: string;
+    gameIncomeValue: string;
+    totalBetValue: string;
+    isExcludeTest: string;
+    isViewByInteger: string;
+    exactMatching: string;
+    isBasermCheck: string;
+    date: string;
+}

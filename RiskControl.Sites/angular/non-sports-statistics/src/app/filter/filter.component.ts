@@ -12,13 +12,17 @@ import { FilterService } from './filter.service';
 import { ColumnService } from './column.service';
 import {
   Product, GameType, Device, Currency, CompareType, FilterMode, TimePeriod,
-  FilterModel, ReportType, GameTypeModel, NumberGameGameType, TimeRange, SiteGroupModel, SportGameType, Column
+  FilterModel, ReportType, GameTypeModel, NumberGameGameType, TimeRange, SiteGroupModel, SportGameType, Column,
+  SavedFilterQueryModel,
+  SavedFilterContentModel
 } from './filter.model';
 import { FilterHelper } from './filter-helper';
 import { UserNameSuggestionTextboxComponent } from './user-name-suggestion/user-name-suggestion-textbox.component';
 import { ModalService } from 'components/modal';
 import { SaveFilterComponent } from './save-filter/save-filter.component';
 import { SavedFilterGridComponent } from 'components/saved-filter-grid/saved-filter-grid.component';
+import { SavedFilterService } from './save-filter/saved-filter.service';
+import { ActionConstants, ReportConstants } from 'app/common/constants';
 
 class CurrencyHelper {
   private readonly currenciesWithoutAll: Currency[];
@@ -215,7 +219,8 @@ export class FilterComponent implements OnInit {
     private readonly columnService: ColumnService,
     private readonly toastService: ToastService,
     private readonly treeviewBuilderService: TreeViewBuilderService,
-    private readonly modalService: ModalService
+    private readonly modalService: ModalService,
+    private readonly savedFilterService: SavedFilterService
   ) { }
 
   ngOnInit() {
@@ -254,8 +259,6 @@ export class FilterComponent implements OnInit {
       if (event != null && event.length > 0) {
         localStorage.setItem('non-sport-sites', JSON.stringify(event));
       }
-
-
     }
 
     this.selectedSites = event;
@@ -486,11 +489,19 @@ export class FilterComponent implements OnInit {
   }
 
   onSaveFilterClick() {
-    this.modalService.open(SaveFilterComponent, { size: { width: 340 } });
+    const content = this.createContentForSavedFilter();
+    this.modalService.open(SaveFilterComponent, { size: { width: 340 } }, content);
   }
 
   showSavedFilters() {
-    this.modalService.open(SavedFilterGridComponent, { size: { width: 500 } });
+    const queryModel: SavedFilterQueryModel = {
+      reportId: ReportConstants.NON_SPORT,
+      reportName: ReportConstants.NON_SPORT_TEXT,
+      action: ActionConstants.SELECT
+    }
+    this.savedFilterService.queryFilters(queryModel).subscribe(data => {
+      this.modalService.open(SavedFilterGridComponent, { size: { width: 500 } }, data);
+    })
   }
 
   checkBaseRMValue(isCheck: boolean) {
@@ -932,5 +943,37 @@ export class FilterComponent implements OnInit {
 
       this.deviceTreeViewItems = this.treeviewBuilderService.buildDeviceTreeViewItems(devices, this.selectedDevices);
     });
+  }
+
+  private createContentForSavedFilter(): string {
+    const model: SavedFilterContentModel = {
+      columns: localStorage.getItem('non-sport-columns'),
+      currencies: localStorage.getItem('non-sport-currencies'),
+      devices: localStorage.getItem('non-sport-devices'),
+      exactMatching: localStorage.getItem('non-sport-exactMatching'),
+      gameIncomeCompareType: localStorage.getItem('non-sport-gameIncomeCompareType'),
+      gameIncomeValue: localStorage.getItem('non-sport-gameIncomeValue'),
+      gameTypes: localStorage.getItem('non-sport-gameTypes'),
+      housePtCompareType: localStorage.getItem('non-sport-housePtCompareType'),
+      housePtValue: localStorage.getItem('non-sport-housePtValue'),
+      isBasermCheck: localStorage.getItem('non-sport-isBasermCheck'),
+      isExcludeTest: localStorage.getItem('non-sport-isExcludeTest'),
+      isViewByInteger: localStorage.getItem('non-sport-isViewByInteger'),
+      mode: localStorage.getItem('non-sport-mode'),
+      products: localStorage.getItem('non-sport-products'),
+      reportType: localStorage.getItem('non-sport-reportType'),
+      roleId: localStorage.getItem('non-sport-roleId'),
+      sites: localStorage.getItem('non-sport-sites'),
+      totalBetCompareType: localStorage.getItem('non-sport-totalBetCompareType'),
+      totalBetValue: localStorage.getItem('non-sport-totalBetValue'),
+      date: this.isNormalMode ?
+        '' : this.timePeriod === TimePeriod.SpecificDate ?
+        `${DateHelper.convertDateStructToString(this.startDate)}**${DateHelper.convertDateStructToString(this.endDate)}` : ''
+    };
+    return JSON.stringify(model);
+  }
+
+  reloadFilter(content: string) {
+    console.log(content);
   }
 }

@@ -1,1 +1,11 @@
 @import '~nap-theme/scss/grid';
+
+.nap-grid {
+    .body {
+        overflow-x: hidden;
+    }
+    .deleted-filter {
+        font-size: 15px;
+        cursor: pointer;;
+    }
+}
