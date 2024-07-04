@@ -14,6 +14,7 @@ import { DailyQueryModel, DailyGridModel } from './daily.model';
 import { ModeGenerate, RowAttribute } from '../mode.model';
 import { ModeContext } from '../mode-context';
 import { DATE_CONFIG } from 'app/common';
+import { LocalStorageKey } from 'app/common/constants';
 
 @Component({
   selector: 'nap-daily',
@@ -142,6 +143,8 @@ export class DailyComponent implements OnInit, ModeGenerate {
     filterModel.currency = [currency];
     filterModel.startDate = date;
     filterModel.endDate = date;
+    filterModel.sortColumnName = '';
+    filterModel.sortDirection = '';
     let isDrillDownFromUserName = false;
     if (gridModel instanceof DailyGridModel) {
       isDrillDownFromUserName = gridModel.isDrillDownFromUserName;
@@ -228,6 +231,7 @@ export class DailyComponent implements OnInit, ModeGenerate {
   private sort(queryModel: DailyQueryModel, sortColumnName: string, sortDirection: string) {
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
+    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}`);
     this.dailyService.query(queryModel).subscribe(gridOptions => {
       this.updateGridOptions(gridOptions, queryModel, false);
     });

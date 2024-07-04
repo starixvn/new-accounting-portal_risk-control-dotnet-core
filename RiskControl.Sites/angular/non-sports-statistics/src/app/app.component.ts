@@ -1,12 +1,14 @@
 import {
   Component, ViewContainerRef, ComponentFactoryResolver,
-  Injector, ComponentRef, ViewChild, Type
+  Injector, ComponentRef, ViewChild, Type,
+  OnInit
 } from '@angular/core';
 import * as _ from 'lodash';
 import { GridService } from 'components/grid';
 import { BreadcrumbService } from './breadcrumb.service';
 import { FilterModel } from './filter';
 import { ModeContext, ModeGenerate, ModeController, ModeService } from './modes';
+import { LocalStorageKey } from './common/constants';
 
 @Component({
   selector: 'nap-app',
@@ -21,7 +23,7 @@ import { ModeContext, ModeGenerate, ModeController, ModeService } from './modes'
     BreadcrumbService
   ]
 })
-export class AppComponent implements ModeController {
+export class AppComponent implements ModeController, OnInit {
   @ViewChild('container', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
   isHideFilter = false;
   private componentRef: ComponentRef<ModeGenerate>;
@@ -35,6 +37,10 @@ export class AppComponent implements ModeController {
     private readonly breadcrumbService: BreadcrumbService,
     private readonly modeService: ModeService
   ) { }
+
+  ngOnInit() {
+    localStorage.removeItem(LocalStorageKey.SORT);
+  }
 
   reset() {
     this.removeCurrentComponent();
@@ -50,6 +56,7 @@ export class AppComponent implements ModeController {
       this.componentRef = this.createComponent(component, modeContext);
       this.instances = [this.componentRef.instance];
     }
+    localStorage.removeItem(LocalStorageKey.SORT);
   }
 
   toggleShowHideFilter() {

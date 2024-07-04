@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import { Helper } from 'nap-components/helper';
 import { GridModalComponent } from 'components/grid-modal';
 import { ModalService } from 'components/modal';
-import { FilterConfig, FilterModel, Product } from '../../filter';
+import { FilterConfig, FilterHelper, FilterModel, Product } from '../../filter';
 import { QueryModel } from '../../app.model';
 import { CasinoType, GameTypeId, ProductId } from '../../common';
 import { GrandTotalService, ModelService, TitleService, GridService } from '../common';
@@ -23,6 +23,7 @@ import { VirtualSportsSetting } from './virtual-sports-setting';
 import { KenoSetting } from './keno-setting';
 import { ProductDetailRngCasinoSetting } from './product-detail-rng-casino-setting';
 import { ProductDetailLiveCasinoSetting } from './product-detail-live-casino-setting';
+import { LocalStorageKey } from 'app/common/constants';
 
 @Component({
   selector: 'nap-product',
@@ -111,6 +112,10 @@ export class ProductComponent implements OnInit, ModeGenerate {
     }
 
     queryModel.reportBy += this.getReportBySuffix();
+    if (!this.isReportByOfProductDetailOrProduct(queryModel.reportBy)) {
+      queryModel.sortColumnName = '';
+      queryModel.sortDirection = '';
+    }
     return queryModel;
   }
 
@@ -334,6 +339,9 @@ export class ProductComponent implements OnInit, ModeGenerate {
     const gridModel = this.modeContext.gridModel;
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
+    if (this.isReportByOfProductDetailOrProduct(queryModel.reportBy)) {
+      localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}`);
+    }
     const queryHandler = (gridOptions: GridOptions) => {
       this.updateGridOptions(gridOptions, queryModel, false);
     };
@@ -351,5 +359,9 @@ export class ProductComponent implements OnInit, ModeGenerate {
   private getCasinoProduct(products: Product[], productId: number): Product {
     const liveRngCasionList = products.filter(p => p.casinoType === CasinoType.RNG || p.casinoType === CasinoType.SLI);
     return liveRngCasionList.find(p => p.productId === productId);
+  }
+
+  private isReportByOfProductDetailOrProduct(reportBy: string): boolean {
+    return reportBy === 'ProductDetail' || reportBy === 'Product';
   }
 }

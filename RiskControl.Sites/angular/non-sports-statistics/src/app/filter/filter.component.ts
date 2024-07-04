@@ -22,7 +22,8 @@ import { ModalService } from 'components/modal';
 import { SaveFilterComponent } from './save-filter/save-filter.component';
 import { SavedFilterGridComponent } from 'components/saved-filter-grid/saved-filter-grid.component';
 import { SavedFilterService } from './save-filter/saved-filter.service';
-import { ActionConstants, ReportConstants } from 'app/common/constants';
+import { ActionConstants, LocalStorageKey, ReportConstants } from 'app/common/constants';
+import { DataService } from 'app/common/data.service';
 
 class CurrencyHelper {
   private readonly currenciesWithoutAll: Currency[];
@@ -155,6 +156,9 @@ export class FilterComponent implements OnInit {
   hasNormalMode = false;
   hasHistoryMode = false;
   exactMatching = true;
+  sortColumnName = '';
+  sortDirection = '';
+  cachedReportType = ReportType.Product;
   private currencyHelper: CurrencyHelper;
   private isGenerate: boolean;
   private readonly valueRequired = 'Value is required!';
@@ -220,11 +224,17 @@ export class FilterComponent implements OnInit {
     private readonly toastService: ToastService,
     private readonly treeviewBuilderService: TreeViewBuilderService,
     private readonly modalService: ModalService,
-    private readonly savedFilterService: SavedFilterService
+    private readonly savedFilterService: SavedFilterService,
+    private readonly dataService: DataService
   ) { }
 
   ngOnInit() {
     this.initFilter();
+    this.dataService.selectedFilterData$.subscribe(filter => {
+      if (filter.length > 0) {
+        this.reloadFilter(filter);
+      }
+    })
   }
 
   get isNormalMode(): boolean {
@@ -242,7 +252,7 @@ export class FilterComponent implements OnInit {
       this.selectedProducts = event;
 
       if (event != null && event.length > 0) {
-        localStorage.setItem('non-sport-products', JSON.stringify(event));
+        localStorage.setItem(LocalStorageKey.PRODUCTS, JSON.stringify(event));
       }
     }
 
@@ -252,12 +262,12 @@ export class FilterComponent implements OnInit {
   }
 
   onSiteChange(event: SiteGroupModel[]) {
-    const cachedSites = JSON.parse(localStorage.getItem('non-sport-sites')) as SiteGroupModel[];
+    const cachedSites = JSON.parse(localStorage.getItem(LocalStorageKey.SITES)) as SiteGroupModel[];
     const isEqualSites = _.isEqual(event, cachedSites);
 
     if (!isEqualSites) {
       if (event != null && event.length > 0) {
-        localStorage.setItem('non-sport-sites', JSON.stringify(event));
+        localStorage.setItem(LocalStorageKey.SITES, JSON.stringify(event));
       }
     }
 
@@ -275,7 +285,7 @@ export class FilterComponent implements OnInit {
         const currenciesWithoutAllAndBaseRM = this.currencyHelper.getCurrenciesWithoutAllAndBaseRM();
         const currenciesData = currenciesWithoutAllAndBaseRM.filter(x => !x.isTest || x.isTest === !this.isExcludeTest);
         this.selectedCurrencies = isEqualSites ?
-          JSON.parse(localStorage.getItem("non-sport-currencies")) as Currency[] :
+          JSON.parse(localStorage.getItem(LocalStorageKey.CURRENCIES)) as Currency[] :
           currenciesData;
 
         if (this.selectedCurrencies == null || this.selectedCurrencies.length === 0) {
@@ -293,7 +303,7 @@ export class FilterComponent implements OnInit {
       this.totalBetsValue = undefined;
     }
 
-    localStorage.setItem('non-sport-totalbetcomparetype', JSON.stringify(this.totalBetsCompareType));
+    localStorage.setItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE, JSON.stringify(this.totalBetsCompareType));
   }
 
   onGameIncomeTypeChange() {
@@ -301,7 +311,7 @@ export class FilterComponent implements OnInit {
       this.gameIncomeValue = undefined;
     }
 
-    localStorage.setItem('non-sport-gameincomecomparetype', JSON.stringify(this.totalBetsCompareType));
+    localStorage.setItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE, JSON.stringify(this.totalBetsCompareType));
   }
 
   onHousePTTypeChange() {
@@ -309,23 +319,23 @@ export class FilterComponent implements OnInit {
       this.housePTValue = undefined;
     }
 
-    localStorage.setItem('non-sport-houseptcomparetype', JSON.stringify(this.totalBetsCompareType));
+    localStorage.setItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE, JSON.stringify(this.totalBetsCompareType));
   }
 
   onHousePTChange($event: number) {
     this.housePTValue = $event;
-    localStorage.setItem('non-sport-houseptvalue', JSON.stringify($event));
+    localStorage.setItem(LocalStorageKey.HOUSEPT_VALUE, JSON.stringify($event));
   }
 
   onReportTypeChange(newReportType: ReportType) {
-    let cachedReportType = JSON.parse(localStorage.getItem("non-sport-reporttype")) as ReportType;
+    let cachedReportType = JSON.parse(localStorage.getItem(LocalStorageKey.REPORT_TYPE)) as ReportType;
     const reportTypeChange = newReportType !== cachedReportType;
     const lastReportRoleId = this.reportRoleId;
     this.selectedReportType = newReportType;
     this.getColumns(reportTypeChange);
     if (this.selectedReportType === ReportType.Monthly && this.mode === FilterMode.Normal) {
       this.mode = FilterMode.History;
-      localStorage.setItem('non-sport-mode', JSON.stringify(this.mode));
+      localStorage.setItem(LocalStorageKey.MODE, JSON.stringify(this.mode));
       this.timePeriod = TimePeriod.LastMonth;
       this.onTimePeriodChange();
     }
@@ -335,13 +345,13 @@ export class FilterComponent implements OnInit {
       this.userNameSuggestion.reset();
     }
 
-    localStorage.setItem('non-sport-reporttype', JSON.stringify(newReportType));
+    localStorage.setItem(LocalStorageKey.REPORT_TYPE, JSON.stringify(newReportType));
   }
 
   onTop20RoleIdChange(roleId: RoleId) {
-    let cachedRoleId = JSON.parse(localStorage.getItem("non-sport-roleid")) as RoleId;
+    let cachedRoleId = JSON.parse(localStorage.getItem(LocalStorageKey.ROLEID)) as RoleId;
     if (roleId !== cachedRoleId) {
-      localStorage.setItem('non-sport-roleid', JSON.stringify(roleId));
+      localStorage.setItem(LocalStorageKey.ROLEID, JSON.stringify(roleId));
     }
 
     this.roleId = roleId;
@@ -351,7 +361,7 @@ export class FilterComponent implements OnInit {
 
   onGameTypeChange(selectedGameTypes: GameType[]) {
     if (selectedGameTypes != null && selectedGameTypes.length > 0) {
-      localStorage.setItem('non-sport-gametypes', JSON.stringify(selectedGameTypes));
+      localStorage.setItem(LocalStorageKey.GAME_TYPES, JSON.stringify(selectedGameTypes));
     }
 
     this.selectedGameTypes = selectedGameTypes;
@@ -359,7 +369,7 @@ export class FilterComponent implements OnInit {
 
   onDeviceChange($event: Device[]) {
     if ($event != null && $event.length > 0) {
-      localStorage.setItem('non-sport-devices', JSON.stringify($event));
+      localStorage.setItem(LocalStorageKey.DEVICES, JSON.stringify($event));
     }
 
     this.selectedDevices = $event;
@@ -367,7 +377,7 @@ export class FilterComponent implements OnInit {
 
   onCurrenciesChange($event: Currency[]) {
     if ($event != null && $event.length > 0) {
-      localStorage.setItem('non-sport-currencies', JSON.stringify($event));
+      localStorage.setItem(LocalStorageKey.CURRENCIES, JSON.stringify($event));
     }
 
     this.selectedCurrencies = $event;
@@ -375,7 +385,7 @@ export class FilterComponent implements OnInit {
 
   onColumnChange($event: Column[]) {
     if ($event != null && $event.length > 0) {
-      localStorage.setItem('non-sport-columns', JSON.stringify($event));
+      localStorage.setItem(LocalStorageKey.COLUMNS, JSON.stringify($event));
     }
 
     this.selectedColumns = $event;
@@ -383,17 +393,17 @@ export class FilterComponent implements OnInit {
 
   gameIncomeChange($event: number) {
     this.gameIncomeValue = $event;
-    localStorage.setItem('non-sport-gameincomevalue', JSON.stringify($event));
+    localStorage.setItem(LocalStorageKey.GAME_INCOME_VALUE, JSON.stringify($event));
   }
 
   totalBetChange($event: number) {
     this.totalBetsValue = $event;
-    localStorage.setItem('non-sport-totalbetvalue', JSON.stringify($event));
+    localStorage.setItem(LocalStorageKey.TOTAL_BET_VALUE, JSON.stringify($event));
   }
 
   excludeTestChangeEvent($event: boolean) {
     this.isExcludeTest = $event;
-    localStorage.setItem('non-sport-isexcludetest', JSON.stringify($event));
+    localStorage.setItem(LocalStorageKey.IS_EXCLUDE_TEST, JSON.stringify($event));
 
     const gameTypes = this.gameTypes.filter(x => !x.isTest || x.isTest === !$event);
     this.gameTypeTreeViewItems = this.treeviewBuilderService.buildGameTypeTreeViewItems(gameTypes, this.selectedProducts, gameTypes);
@@ -405,12 +415,12 @@ export class FilterComponent implements OnInit {
 
   viewByIntegerChange($event: boolean) {
     this.isViewByInteger = $event;
-    localStorage.setItem('non-sport-isviewbyinteger', JSON.stringify($event));
+    localStorage.setItem(LocalStorageKey.IS_VIEW_BY_INTEGER, JSON.stringify($event));
   }
 
   checkExactMatchingValue($event: boolean) {
     this.exactMatching = $event;
-    localStorage.setItem('non-sport-exactmatching', JSON.stringify($event));
+    localStorage.setItem(LocalStorageKey.EXACT_MATCHING, JSON.stringify($event));
   }
 
   onGenerateClick() {
@@ -462,7 +472,7 @@ export class FilterComponent implements OnInit {
       }
     }
 
-    localStorage.setItem('non-sport-mode', JSON.stringify(this.mode));
+    localStorage.setItem(LocalStorageKey.MODE, JSON.stringify(this.mode));
     this.getColumns(false);
     this.reset.emit();
   }
@@ -500,13 +510,14 @@ export class FilterComponent implements OnInit {
       action: ActionConstants.SELECT
     }
     this.savedFilterService.queryFilters(queryModel).subscribe(data => {
-      this.modalService.open(SavedFilterGridComponent, { size: { width: 500 } }, data);
+      const modalRef = this.modalService.open(SavedFilterGridComponent, { size: { width: 500 } }, data);
+      modalRef.contentViewRef
     })
   }
 
   checkBaseRMValue(isCheck: boolean) {
     this.isBaseRM = isCheck;
-    localStorage.setItem('non-sport-isbasermcheck', JSON.stringify(isCheck));
+    localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, JSON.stringify(isCheck));
   }
   private generateInternal() {
     this.reset.emit();
@@ -675,13 +686,15 @@ export class FilterComponent implements OnInit {
       },
       isBaseRM: this.isBaseRM,
       sportBettypes: gameTypeResult.sportBetTypes,
-      isExactly: this.exactMatching
+      isExactly: this.exactMatching,
+      sortColumnName: this.selectedReportType === this.cachedReportType ? this.sortColumnName : '',
+      sortDirection: this.selectedReportType === this.cachedReportType ? this.sortDirection : ''
     };
     return model;
   }
 
   private getReportRoleId(): RoleId {
-    let roleId = JSON.parse(localStorage.getItem("non-sport-roleid")) as RoleId;
+    let roleId = JSON.parse(localStorage.getItem(LocalStorageKey.ROLEID)) as RoleId;
     if (roleId === null) {
       roleId = RoleId.Member;
     }
@@ -769,7 +782,7 @@ export class FilterComponent implements OnInit {
         this.getDefaultSelectedSites(sites);
 
         this.selectedSites = isEqualProducts ?
-          JSON.parse(localStorage.getItem('non-sport-sites')) as SiteGroupModel[] :
+          JSON.parse(localStorage.getItem(LocalStorageKey.SITES)) as SiteGroupModel[] :
           this.defaultSelectedSite;
 
         if (this.selectedSites == null || this.numberLicensees === 0) {
@@ -804,7 +817,7 @@ export class FilterComponent implements OnInit {
     this.columns = columns;
     this.selectedColumns = reportTypeChange ?
       null :
-      JSON.parse(localStorage.getItem('non-sport-columns')) as Column[];
+      JSON.parse(localStorage.getItem(LocalStorageKey.COLUMNS)) as Column[];
     this.columnTreeViewItems = this.columnService.buildColumnTreeViewItems(this.columns, this.selectedColumns);
   }
 
@@ -815,7 +828,7 @@ export class FilterComponent implements OnInit {
       const defaultGameTypes = gameTypes.filter(x => !uncheckedGameTypes.includes(x.typeName));
 
       this.selectedGameTypes = isEqualProducts ?
-        JSON.parse(localStorage.getItem('non-sport-gametypes')) as GameType[] :
+        JSON.parse(localStorage.getItem(LocalStorageKey.GAME_TYPES)) as GameType[] :
         defaultGameTypes;
 
       if (this.selectedGameTypes == null || this.selectedGameTypes.length === 0) {
@@ -828,21 +841,21 @@ export class FilterComponent implements OnInit {
   }
 
   private initFilter() {
-    const isBaseRM = JSON.parse(localStorage.getItem("non-sport-isbasermcheck")) as boolean;
+    const isBaseRM = JSON.parse(localStorage.getItem(LocalStorageKey.IS_BASERM_CHECK)) as boolean;
     this.isBaseRM = isBaseRM === null ? true : isBaseRM;
 
-    let reportType = JSON.parse(localStorage.getItem("non-sport-reporttype")) as ReportType;
+    let reportType = JSON.parse(localStorage.getItem(LocalStorageKey.REPORT_TYPE)) as ReportType;
 
     if (reportType === null) {
       reportType = ReportType.Daily;
     }
-    let roleId = JSON.parse(localStorage.getItem("non-sport-roleid")) as RoleId;
+    let roleId = JSON.parse(localStorage.getItem(LocalStorageKey.ROLEID)) as RoleId;
 
     this.roleId = roleId === null ? RoleId.Member : roleId;
 
     this.onReportTypeChange(reportType);
 
-    const isExcludeTest = JSON.parse(localStorage.getItem("non-sport-isexcludetest")) as boolean;
+    const isExcludeTest = JSON.parse(localStorage.getItem(LocalStorageKey.IS_EXCLUDE_TEST)) as boolean;
 
     if (isExcludeTest !== null) {
       this.isExcludeTest = isExcludeTest;
@@ -850,7 +863,7 @@ export class FilterComponent implements OnInit {
       this.isExcludeTest = true;
     }
 
-    const viewByInteger = JSON.parse(localStorage.getItem('non-sport-isviewbyinteger')) as boolean;
+    const viewByInteger = JSON.parse(localStorage.getItem(LocalStorageKey.IS_VIEW_BY_INTEGER)) as boolean;
 
     if (viewByInteger !== null) {
       this.isViewByInteger = viewByInteger;
@@ -858,7 +871,7 @@ export class FilterComponent implements OnInit {
       this.isViewByInteger = false;
     }
 
-    const exactMatching = JSON.parse(localStorage.getItem('non-sport-exactmatching')) as boolean;
+    const exactMatching = JSON.parse(localStorage.getItem(LocalStorageKey.EXACT_MATCHING)) as boolean;
 
     if (exactMatching !== null) {
       this.exactMatching = exactMatching;
@@ -867,37 +880,37 @@ export class FilterComponent implements OnInit {
     }
 
 
-    this.totalBetsCompareType = JSON.parse(localStorage.getItem("non-sport-totalbetcomparetype")) as CompareType;
+    this.totalBetsCompareType = JSON.parse(localStorage.getItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE)) as CompareType;
 
     if (this.totalBetsCompareType === null) {
       this.totalBetsCompareType = CompareType.None;
     }
 
-    const totalBetsValue = JSON.parse(localStorage.getItem("non-sport-totalbetvalue")) as number;
+    const totalBetsValue = JSON.parse(localStorage.getItem(LocalStorageKey.TOTAL_BET_VALUE)) as number;
 
     this.totalBetsValue = totalBetsValue === null ? undefined : totalBetsValue;
 
-    this.gameIncomeCompareType = JSON.parse(localStorage.getItem("non-sport-gameincomecomparetype")) as CompareType;
+    this.gameIncomeCompareType = JSON.parse(localStorage.getItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE)) as CompareType;
 
     if (this.gameIncomeCompareType === null) {
       this.gameIncomeCompareType = CompareType.None;
     }
 
-    const gameIncomeValue = JSON.parse(localStorage.getItem("non-sport-gameincomevalue")) as number;
+    const gameIncomeValue = JSON.parse(localStorage.getItem(LocalStorageKey.GAME_INCOME_VALUE)) as number;
 
     this.gameIncomeValue = gameIncomeValue === null ? undefined : gameIncomeValue;
 
-    this.housePTCompareType = JSON.parse(localStorage.getItem("non-sport-houseptcomparetype")) as CompareType;
+    this.housePTCompareType = JSON.parse(localStorage.getItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE)) as CompareType;
     if (this.housePTCompareType === null) {
       this.housePTCompareType = CompareType.None;
     }
 
-    const housePTValue = JSON.parse(localStorage.getItem("non-sport-houseptvalue")) as number;
+    const housePTValue = JSON.parse(localStorage.getItem(LocalStorageKey.HOUSEPT_VALUE)) as number;
 
     this.housePTValue = housePTValue === null ? undefined : housePTValue;
 
     forkJoin([this.filterService.getPermission(), this.filterService.getProducts()]).subscribe(data => {
-      this.mode = JSON.parse(localStorage.getItem("non-sport-mode")) as FilterMode;
+      this.mode = JSON.parse(localStorage.getItem(LocalStorageKey.MODE)) as FilterMode;
 
       if (this.mode === null) {
         this.mode = FilterMode.Normal;
@@ -923,7 +936,7 @@ export class FilterComponent implements OnInit {
         this.products = productsHasPermission;
       }
 
-      this.selectedProducts = JSON.parse(localStorage.getItem("non-sport-products")) as Product[];
+      this.selectedProducts = JSON.parse(localStorage.getItem(LocalStorageKey.PRODUCTS)) as Product[];
 
       if (this.selectedProducts == null || this.selectedProducts.length === 0) {
         this.selectedProducts = this.products;
@@ -935,7 +948,7 @@ export class FilterComponent implements OnInit {
     this.filterService.getDevices().subscribe(devices => {
       this.devices = devices;
 
-      this.selectedDevices = JSON.parse(localStorage.getItem('non-sport-devices')) as Device[];
+      this.selectedDevices = JSON.parse(localStorage.getItem(LocalStorageKey.DEVICES)) as Device[];
 
       if (this.selectedDevices == null || this.selectedDevices.length === 0) {
         this.selectedDevices = devices;
@@ -947,33 +960,70 @@ export class FilterComponent implements OnInit {
 
   private createContentForSavedFilter(): string {
     const model: SavedFilterContentModel = {
-      columns: localStorage.getItem('non-sport-columns'),
-      currencies: localStorage.getItem('non-sport-currencies'),
-      devices: localStorage.getItem('non-sport-devices'),
-      exactMatching: localStorage.getItem('non-sport-exactMatching'),
-      gameIncomeCompareType: localStorage.getItem('non-sport-gameIncomeCompareType'),
-      gameIncomeValue: localStorage.getItem('non-sport-gameIncomeValue'),
-      gameTypes: localStorage.getItem('non-sport-gameTypes'),
-      housePtCompareType: localStorage.getItem('non-sport-housePtCompareType'),
-      housePtValue: localStorage.getItem('non-sport-housePtValue'),
-      isBasermCheck: localStorage.getItem('non-sport-isBasermCheck'),
-      isExcludeTest: localStorage.getItem('non-sport-isExcludeTest'),
-      isViewByInteger: localStorage.getItem('non-sport-isViewByInteger'),
-      mode: localStorage.getItem('non-sport-mode'),
-      products: localStorage.getItem('non-sport-products'),
-      reportType: localStorage.getItem('non-sport-reportType'),
-      roleId: localStorage.getItem('non-sport-roleId'),
-      sites: localStorage.getItem('non-sport-sites'),
-      totalBetCompareType: localStorage.getItem('non-sport-totalBetCompareType'),
-      totalBetValue: localStorage.getItem('non-sport-totalBetValue'),
+      columns: localStorage.getItem(LocalStorageKey.COLUMNS),
+      currencies: localStorage.getItem(LocalStorageKey.CURRENCIES),
+      devices: localStorage.getItem(LocalStorageKey.DEVICES),
+      exactMatching: localStorage.getItem(LocalStorageKey.EXACT_MATCHING),
+      gameIncomeCompareType: localStorage.getItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE),
+      gameIncomeValue: localStorage.getItem(LocalStorageKey.GAME_INCOME_VALUE),
+      gameTypes: localStorage.getItem(LocalStorageKey.GAME_TYPES),
+      housePtCompareType: localStorage.getItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE),
+      housePtValue: localStorage.getItem(LocalStorageKey.HOUSEPT_VALUE),
+      isBasermCheck: localStorage.getItem(LocalStorageKey.IS_BASERM_CHECK),
+      isExcludeTest: localStorage.getItem(LocalStorageKey.IS_EXCLUDE_TEST),
+      isViewByInteger: localStorage.getItem(LocalStorageKey.IS_VIEW_BY_INTEGER),
+      mode: localStorage.getItem(LocalStorageKey.MODE),
+      products: localStorage.getItem(LocalStorageKey.PRODUCTS),
+      reportType: localStorage.getItem(LocalStorageKey.REPORT_TYPE),
+      roleId: localStorage.getItem(LocalStorageKey.ROLEID),
+      sites: localStorage.getItem(LocalStorageKey.SITES),
+      totalBetCompareType: localStorage.getItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE),
+      totalBetValue: localStorage.getItem(LocalStorageKey.TOTAL_BET_VALUE),
       date: this.isNormalMode ?
-        '' : this.timePeriod === TimePeriod.SpecificDate ?
-        `${DateHelper.convertDateStructToString(this.startDate)}**${DateHelper.convertDateStructToString(this.endDate)}` : ''
+        '' : `${this.timePeriod}**${DateHelper.convertDateStructToString(this.startDate)}**${DateHelper.convertDateStructToString(this.endDate)}`,
+      sort: localStorage.getItem(LocalStorageKey.SORT)
     };
+    localStorage.removeItem(LocalStorageKey.SORT);
     return JSON.stringify(model);
   }
 
-  reloadFilter(content: string) {
-    console.log(content);
+  private reloadFilter(content: string) {
+    const model = JSON.parse(content) as SavedFilterContentModel;
+    localStorage.setItem(LocalStorageKey.COLUMNS, model.columns);
+    localStorage.setItem(LocalStorageKey.CURRENCIES, model.currencies);
+    localStorage.setItem(LocalStorageKey.DEVICES, model.devices);
+    localStorage.setItem(LocalStorageKey.EXACT_MATCHING, model.exactMatching);
+    localStorage.setItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE, model.gameIncomeCompareType);
+    localStorage.setItem(LocalStorageKey.GAME_INCOME_VALUE, model.gameIncomeValue);
+    localStorage.setItem(LocalStorageKey.GAME_TYPES, model.gameTypes);
+    localStorage.setItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE, model.housePtCompareType);
+    localStorage.setItem(LocalStorageKey.HOUSEPT_VALUE, model.housePtValue);
+    localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, model.isBasermCheck);
+    localStorage.setItem(LocalStorageKey.IS_EXCLUDE_TEST, model.isExcludeTest);
+    localStorage.setItem(LocalStorageKey.IS_VIEW_BY_INTEGER, model.isViewByInteger);
+    localStorage.setItem(LocalStorageKey.MODE, model.mode);
+    localStorage.setItem(LocalStorageKey.PRODUCTS, model.products);
+    localStorage.setItem(LocalStorageKey.REPORT_TYPE, model.reportType);
+    localStorage.setItem(LocalStorageKey.ROLEID, model.roleId);
+    localStorage.setItem(LocalStorageKey.SITES, model.sites);
+    localStorage.setItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE, model.totalBetCompareType);
+    localStorage.setItem(LocalStorageKey.TOTAL_BET_VALUE, model.totalBetValue);
+    if (!_.isNil(model.sort)) {
+      const sort = model.sort.split('**');
+      this.sortColumnName = sort[0];
+      this.sortDirection = sort[1];
+    }
+    this.cachedReportType = JSON.parse(model.reportType) as ReportType;
+    this.initFilter();
+    if (!this.isNormalMode) {
+      const date = model.date.split('**');
+      this.timePeriod = JSON.parse(date[0]) as TimePeriod;
+      if (this.timePeriod === TimePeriod.SpecificDate) {
+        this.startDate = DateHelper.convertStringToDateStruct(date[1]);
+        this.endDate = DateHelper.convertStringToDateStruct(date[2]);
+      } else {
+        this.onTimePeriodChange();
+      }
+    }
   }
 }

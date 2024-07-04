@@ -9,6 +9,7 @@ import { CurrencyQueryModel, CurrencyGridModel } from './currency.model';
 import { ModeContext } from '../mode-context';
 import { ModeController } from '../mode-controller';
 import { ModeGenerate } from '../mode.model';
+import { LocalStorageKey } from 'app/common/constants';
 
 @Component({
   selector: 'nap-company',
@@ -102,6 +103,8 @@ export class CurrencyComponent implements OnInit, ModeGenerate {
 
   private drillDownCompany(title: string, currency: number) {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
+    filterModel.sortColumnName = '';
+    filterModel.sortDirection = '';
     const modeContext = ModeContext.create(title, filterModel, new CurrencyGridModel(true, currency));
     this.modeController.forward(this.gridOptions, modeContext);
   }
@@ -163,6 +166,7 @@ export class CurrencyComponent implements OnInit, ModeGenerate {
   private sort(queryModel: CurrencyQueryModel, sortColumnName: string, sortDirection: string) {
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
+    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}`);
     this.currencyService.query(queryModel).subscribe(gridOptions => {
       this.updateGridOptions(gridOptions, queryModel, false);
     });

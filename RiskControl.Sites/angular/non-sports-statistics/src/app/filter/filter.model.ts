@@ -150,7 +150,8 @@ export interface FilterModel {
     isBaseRM: boolean,
     sportBettypes: SportBetType[];
     isExactly: boolean;
-
+    sortDirection: string;
+    sortColumnName: string;
 }
 
 export interface NumberGameGameType extends GameType {
@@ -241,4 +242,5 @@ export interface SavedFilterContentModel {
     exactMatching: string;
     isBasermCheck: string;
     date: string;
+    sort: string;
 }

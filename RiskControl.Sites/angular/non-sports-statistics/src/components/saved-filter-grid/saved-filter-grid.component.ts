@@ -5,6 +5,7 @@ import { SavedFilterService } from 'app/filter/save-filter/saved-filter.service'
 import { ConfirmationService } from 'nap-components/confirmation';
 import { SavedFilterQueryModel } from 'app/filter';
 import { ActionConstants } from 'app/common/constants';
+import { DataService } from 'app/common/data.service';
 
 @Component({
   selector: 'app-saved-filter-grid',
@@ -16,7 +17,8 @@ export class SavedFilterGridComponent implements OnInit {
 
   constructor(private readonly modalContext: ModalContext,
     private readonly confirmationService: ConfirmationService,
-    private readonly savedFilterService: SavedFilterService
+    private readonly savedFilterService: SavedFilterService,
+    private readonly dataService: DataService
   ) {
     this.data = modalContext.data as SavedFilterGridModel[];
    }
@@ -30,6 +32,7 @@ export class SavedFilterGridComponent implements OnInit {
 
   reloadFilter(content: string) {
     this.modalContext.close();
+    this.dataService.setFilterData(content);
   }
 
   onDelete(queryId: number) {

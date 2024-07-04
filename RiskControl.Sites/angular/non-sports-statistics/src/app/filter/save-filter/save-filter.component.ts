@@ -32,6 +32,11 @@ export class SaveFilterComponent implements OnInit {
   }
 
   onSave() {
+    if (this.filterName.trim().length <= 0) {
+      this.showNotification('#fff3cd', 'Filter name field is required!');
+      return;
+    }
+
     if (this.filterName.trim().length > 50) {
       this.showNotification('#fff3cd', 'Maximum 50 characters');
       return;

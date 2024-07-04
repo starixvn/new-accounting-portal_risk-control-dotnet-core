@@ -13,6 +13,7 @@ import { MonthlyService } from './monthly.service';
 import { ModeGenerate, RowAttribute } from '../mode.model';
 import { ModeContext } from '../mode-context';
 import { ModeController } from '../mode-controller';
+import { LocalStorageKey } from 'app/common/constants';
 
 @Component({
   selector: 'nap-monthly',
@@ -98,6 +99,8 @@ export class MonthlyComponent implements OnInit, ModeGenerate {
   private drillDownDaily(title: string, date: moment.Moment) {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
     filterModel.reportType = ReportType.Daily;
+    filterModel.sortColumnName = '';
+    filterModel.sortDirection = '';
     filterModel.startDate = moment.max(moment.utc(date).startOf('month'), filterModel.startDate);
     filterModel.endDate = moment.min(moment.utc(date).endOf('month'), filterModel.endDate);
     const modeContext = ModeContext.create(title, filterModel, false);
@@ -107,6 +110,8 @@ export class MonthlyComponent implements OnInit, ModeGenerate {
   private drillDownCurrency(title: string, currency: number, date: moment.Moment) {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
     filterModel.currency = [currency];
+    filterModel.sortColumnName = '';
+    filterModel.sortDirection = '';
     filterModel.startDate = moment.max(moment.utc(date).startOf('month'), filterModel.startDate);
     filterModel.endDate = moment.min(moment.utc(date).endOf('month'), filterModel.endDate);
     const modeContext = ModeContext.create(title, filterModel, true);
@@ -185,6 +190,7 @@ export class MonthlyComponent implements OnInit, ModeGenerate {
   private sort(queryModel: QueryModel, sortColumnName: string, sortDirection: string) {
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
+    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}`);
     this.monthlyService.query(queryModel).subscribe(gridOptions => {
       this.updateGridOptions(gridOptions, queryModel, false);
     });
