@@ -346,6 +346,7 @@ export class FilterComponent implements OnInit {
     }
 
     localStorage.setItem(LocalStorageKey.REPORT_TYPE, JSON.stringify(newReportType));
+    localStorage.removeItem(LocalStorageKey.SORT);
   }
 
   onTop20RoleIdChange(roleId: RoleId) {
@@ -1012,10 +1013,13 @@ export class FilterComponent implements OnInit {
       const sort = model.sort.split('**');
       this.sortColumnName = sort[0];
       this.sortDirection = sort[1];
+    } else {
+      this.sortColumnName = '';
+      this.sortDirection = '';
     }
     this.cachedReportType = JSON.parse(model.reportType) as ReportType;
     this.initFilter();
-    if (!this.isNormalMode) {
+    if (model.date.length > 0) {
       const date = model.date.split('**');
       this.timePeriod = JSON.parse(date[0]) as TimePeriod;
       if (this.timePeriod === TimePeriod.SpecificDate) {

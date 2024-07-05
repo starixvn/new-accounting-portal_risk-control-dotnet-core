@@ -4,6 +4,8 @@ import { SavedFilterContentModel, SavedFilterQueryModel } from '../filter.model'
 import { SavedFilterService } from './saved-filter.service';
 import { ConfirmationService } from 'nap-components/confirmation';
 import { ActionConstants, ReportConstants } from 'app/common/constants';
+import { TypeaheadQuery } from 'nap-components/dropdown-typeahead';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-save-filter',
@@ -16,6 +18,12 @@ export class SaveFilterComponent implements OnInit {
   notification = '';
   notificationColor = '#fff3cd';
   content = '';
+  filterNameTypeaheadQuery = this.buildFilterNameTypeaheadQuery();
+  queryModel: SavedFilterQueryModel = {
+    reportId: ReportConstants.NON_SPORT,
+    reportName: ReportConstants.NON_SPORT_TEXT,
+    action: ActionConstants.SELECT
+  };
 
   constructor(private readonly modalContext: ModalContext,
     private readonly savedFilterService: SavedFilterService,
@@ -42,17 +50,7 @@ export class SaveFilterComponent implements OnInit {
       return;
     }
 
-    const queryModel: SavedFilterQueryModel = {
-      reportId: ReportConstants.NON_SPORT,
-      reportName: ReportConstants.NON_SPORT_TEXT,
-      action: ActionConstants.SELECT
-    };
-
-    this.savedFilterService.queryFilters(queryModel).subscribe(data => {
-      if (data.length >= 10) {
-        this.showNotification('#fff3cd', 'Cannot save! Maximum 10 filters.');
-        return;
-      }
+    this.savedFilterService.queryFilters(this.queryModel).subscribe(data => {
       const filter = data.find(item => item.queryName === this.filterName);
       if (filter !== undefined) {
         this.confirmationService.openContent(
@@ -60,13 +58,28 @@ export class SaveFilterComponent implements OnInit {
           () => this.saveFilter(ActionConstants.UPDATE, filter.queryId)
         );
       } else {
-        this.saveFilter(ActionConstants.INSERT);
+        if (data.length >= 10) {
+          this.showNotification('#fff3cd', 'Cannot save! Maximum 10 filters.');
+        } else {
+          this.saveFilter(ActionConstants.INSERT);
+        }
       }
     });
   }
 
-  suggestFilter() {
-    console.log(this.filterName);
+  private buildFilterNameTypeaheadQuery(): TypeaheadQuery {
+    return new TypeaheadQuery(term => {
+      let searchText = term.replace(/,/g, '');
+      let words = searchText.split(' ');
+      words = words.filter(word => word.trim() !== '');
+      searchText = words.join(',');
+      const model = _.cloneDeep(this.queryModel);
+      model.queryName = searchText;
+      return this.savedFilterService.queryFilters(model)
+        .map(list => {
+          return list.map(item => item.queryName);
+        });
+    });
   }
 
   private saveFilter(action: number, queryId?: number) {
@@ -81,6 +94,7 @@ export class SaveFilterComponent implements OnInit {
 
     this.savedFilterService.executeFilter(saveModel).subscribe(() => {
       this.showNotification('#d4edda', 'Save Filter successfully!');
+      this.filterName = '';
     })
   }
 

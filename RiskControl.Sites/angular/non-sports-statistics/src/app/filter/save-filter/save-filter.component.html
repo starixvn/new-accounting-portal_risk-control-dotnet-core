@@ -14,7 +14,9 @@
         <div class="nap-group">
           <label>Filter name</label>
           <div class="nap-control">
-              <input [(ngModel)]="filterName" (keyup)="suggestFilter()" placeholder="Maximum is 50 characters" />
+              <nap-dropdown-typeahead [(text)]="filterName" [query]="filterNameTypeaheadQuery"
+                [placeholder]="'Maximum is 50 characters'">
+              </nap-dropdown-typeahead>
           </div>
           <button type="button" class="btn btn-primary ml-3" (click)="onSave()">Save</button>
         </div>
