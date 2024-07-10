@@ -311,7 +311,7 @@ export class FilterComponent implements OnInit {
       this.gameIncomeValue = undefined;
     }
 
-    localStorage.setItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE, JSON.stringify(this.totalBetsCompareType));
+    localStorage.setItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE, JSON.stringify(this.gameIncomeCompareType));
   }
 
   onHousePTTypeChange() {
@@ -319,7 +319,7 @@ export class FilterComponent implements OnInit {
       this.housePTValue = undefined;
     }
 
-    localStorage.setItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE, JSON.stringify(this.totalBetsCompareType));
+    localStorage.setItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE, JSON.stringify(this.housePTCompareType));
   }
 
   onHousePTChange($event: number) {
