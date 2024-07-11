@@ -496,6 +496,7 @@ export class FilterComponent implements OnInit {
 
   onResetClick() {
     localStorage.clear();
+    this.userNameSuggestion.reset();
     this.initFilter();
   }
 
@@ -1018,6 +1019,7 @@ export class FilterComponent implements OnInit {
       this.sortDirection = '';
     }
     this.cachedReportType = JSON.parse(model.reportType) as ReportType;
+    this.userNameSuggestion.reset();
     this.initFilter();
     if (model.date.length > 0) {
       const date = model.date.split('**');
