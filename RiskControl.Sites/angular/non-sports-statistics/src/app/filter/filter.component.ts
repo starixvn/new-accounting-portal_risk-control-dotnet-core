@@ -510,7 +510,7 @@ export class FilterComponent implements OnInit {
       reportName: ReportConstants.NON_SPORT_TEXT,
       action: ActionConstants.SELECT
     }
-    this.savedFilterService.queryFilters(queryModel).subscribe(data => {
+    this.savedFilterService.queryFilters(queryModel, false).subscribe(data => {
       const modalRef = this.modalService.open(SavedFilterGridComponent, { size: { width: 500 } }, data);
       modalRef.contentViewRef
     })

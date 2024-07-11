@@ -50,7 +50,7 @@ export class SaveFilterComponent implements OnInit {
       return;
     }
 
-    this.savedFilterService.queryFilters(this.queryModel).subscribe(data => {
+    this.savedFilterService.queryFilters(this.queryModel, false).subscribe(data => {
       const filter = data.find(item => item.queryName === this.filterName);
       if (filter !== undefined) {
         this.confirmationService.openContent(
@@ -75,7 +75,7 @@ export class SaveFilterComponent implements OnInit {
       searchText = words.join(',');
       const model = _.cloneDeep(this.queryModel);
       model.queryName = searchText;
-      return this.savedFilterService.queryFilters(model)
+      return this.savedFilterService.queryFilters(model, true)
         .map(list => {
           return list.map(item => item.queryName);
         });

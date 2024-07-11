@@ -17,7 +17,9 @@ export class SavedFilterService {
     return this.httpService.post(`${this.url}/Execute`, model);
   }
 
-  queryFilters(model: SavedFilterQueryModel): Observable<SavedFilterGridModel[]> {
-    return this.httpService.post(`${this.url}/Query`, model);
+  queryFilters(model: SavedFilterQueryModel, noSpinner: boolean): Observable<SavedFilterGridModel[]> {
+    return this.httpService.post(`${this.url}/Query`, model, {
+      noSpinner: noSpinner
+    });
   }
 }
