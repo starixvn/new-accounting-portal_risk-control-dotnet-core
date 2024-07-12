@@ -396,7 +396,7 @@ export class Top20Component implements OnInit, ModeGenerate {
   private sort(queryModel: Top20QueryModel, sortColumnName: string, sortDirection: string) {
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
-    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}`);
+    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}**${localStorage.getItem(LocalStorageKey.REPORT_TYPE)}`);
     this.top20Service.query(queryModel).subscribe(gridOptions => {
       this.updateGridOptions(gridOptions, queryModel, false);
     });

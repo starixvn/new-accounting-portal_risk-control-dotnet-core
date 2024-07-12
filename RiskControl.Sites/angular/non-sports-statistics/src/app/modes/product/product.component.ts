@@ -340,7 +340,7 @@ export class ProductComponent implements OnInit, ModeGenerate {
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
     if (this.isReportByOfProductDetailOrProduct(queryModel.reportBy)) {
-      localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}`);
+      localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}**${localStorage.getItem(LocalStorageKey.REPORT_TYPE)}`);
     }
     const queryHandler = (gridOptions: GridOptions) => {
       this.updateGridOptions(gridOptions, queryModel, false);

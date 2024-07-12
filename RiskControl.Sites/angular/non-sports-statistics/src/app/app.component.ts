@@ -39,7 +39,7 @@ export class AppComponent implements ModeController, OnInit {
   ) { }
 
   ngOnInit() {
-    localStorage.removeItem(LocalStorageKey.SORT);
+    
   }
 
   reset() {
@@ -56,7 +56,6 @@ export class AppComponent implements ModeController, OnInit {
       this.componentRef = this.createComponent(component, modeContext);
       this.instances = [this.componentRef.instance];
     }
-    localStorage.removeItem(LocalStorageKey.SORT);
   }
 
   toggleShowHideFilter() {

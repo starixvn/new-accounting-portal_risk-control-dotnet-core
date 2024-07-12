@@ -346,7 +346,6 @@ export class FilterComponent implements OnInit {
     }
 
     localStorage.setItem(LocalStorageKey.REPORT_TYPE, JSON.stringify(newReportType));
-    localStorage.removeItem(LocalStorageKey.SORT);
   }
 
   onTop20RoleIdChange(roleId: RoleId) {
@@ -851,6 +850,7 @@ export class FilterComponent implements OnInit {
     if (reportType === null) {
       reportType = ReportType.Daily;
     }
+
     let roleId = JSON.parse(localStorage.getItem(LocalStorageKey.ROLEID)) as RoleId;
 
     this.roleId = roleId === null ? RoleId.Member : roleId;
@@ -910,6 +910,18 @@ export class FilterComponent implements OnInit {
     const housePTValue = JSON.parse(localStorage.getItem(LocalStorageKey.HOUSEPT_VALUE)) as number;
 
     this.housePTValue = housePTValue === null ? undefined : housePTValue;
+
+    const sort = localStorage.getItem(LocalStorageKey.SORT);
+    if (!_.isNil(sort) && sort !== 'null') {
+      const detailedSort = sort.split('**');
+      this.sortColumnName = detailedSort[0];
+      this.sortDirection = detailedSort[1];
+      this.cachedReportType = JSON.parse(detailedSort[2]) as ReportType;
+    } else {
+      this.sortColumnName = '';
+      this.sortDirection = '';
+      this.cachedReportType = ReportType.Daily;
+    }
 
     forkJoin([this.filterService.getPermission(), this.filterService.getProducts()]).subscribe(data => {
       this.mode = JSON.parse(localStorage.getItem(LocalStorageKey.MODE)) as FilterMode;
@@ -985,7 +997,6 @@ export class FilterComponent implements OnInit {
         '' : `${this.timePeriod}**${DateHelper.convertDateStructToString(this.startDate)}**${DateHelper.convertDateStructToString(this.endDate)}`,
       sort: localStorage.getItem(LocalStorageKey.SORT)
     };
-    localStorage.removeItem(LocalStorageKey.SORT);
     return JSON.stringify(model);
   }
 
@@ -1010,15 +1021,7 @@ export class FilterComponent implements OnInit {
     localStorage.setItem(LocalStorageKey.SITES, model.sites);
     localStorage.setItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE, model.totalBetCompareType);
     localStorage.setItem(LocalStorageKey.TOTAL_BET_VALUE, model.totalBetValue);
-    if (!_.isNil(model.sort)) {
-      const sort = model.sort.split('**');
-      this.sortColumnName = sort[0];
-      this.sortDirection = sort[1];
-    } else {
-      this.sortColumnName = '';
-      this.sortDirection = '';
-    }
-    this.cachedReportType = JSON.parse(model.reportType) as ReportType;
+    localStorage.setItem(LocalStorageKey.SORT, model.sort);
     this.userNameSuggestion.reset();
     this.initFilter();
     if (model.date.length > 0) {

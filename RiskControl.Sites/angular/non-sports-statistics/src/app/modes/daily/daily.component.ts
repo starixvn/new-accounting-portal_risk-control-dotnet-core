@@ -231,7 +231,7 @@ export class DailyComponent implements OnInit, ModeGenerate {
   private sort(queryModel: DailyQueryModel, sortColumnName: string, sortDirection: string) {
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
-    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}`);
+    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}**${localStorage.getItem(LocalStorageKey.REPORT_TYPE)}`);
     this.dailyService.query(queryModel).subscribe(gridOptions => {
       this.updateGridOptions(gridOptions, queryModel, false);
     });

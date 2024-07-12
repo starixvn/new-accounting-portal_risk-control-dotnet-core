@@ -176,7 +176,7 @@ export class CompanyComponent implements OnInit, ModeGenerate {
     const gridModel = this.modeContext.gridModel;
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
-    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}`);
+    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}**${localStorage.getItem(LocalStorageKey.REPORT_TYPE)}`);
     this.companyService.query(queryModel, gridModel.isDrillDownCurrency).subscribe(gridOptions => {
       this.updateGridOptions(gridOptions, queryModel, false);
     });
