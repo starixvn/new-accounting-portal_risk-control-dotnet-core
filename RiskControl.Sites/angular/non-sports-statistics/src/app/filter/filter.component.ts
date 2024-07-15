@@ -301,6 +301,7 @@ export class FilterComponent implements OnInit {
   onTotalBetsTypeChange() {
     if (this.totalBetsCompareType === CompareType.None) {
       this.totalBetsValue = undefined;
+      localStorage.setItem(LocalStorageKey.TOTAL_BET_VALUE, JSON.stringify(null));
     }
 
     localStorage.setItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE, JSON.stringify(this.totalBetsCompareType));
@@ -309,6 +310,7 @@ export class FilterComponent implements OnInit {
   onGameIncomeTypeChange() {
     if (this.gameIncomeCompareType === CompareType.None) {
       this.gameIncomeValue = undefined;
+      localStorage.setItem(LocalStorageKey.GAME_INCOME_VALUE, JSON.stringify(null));
     }
 
     localStorage.setItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE, JSON.stringify(this.gameIncomeCompareType));
@@ -317,6 +319,7 @@ export class FilterComponent implements OnInit {
   onHousePTTypeChange() {
     if (this.housePTCompareType === CompareType.None) {
       this.housePTValue = undefined;
+      localStorage.setItem(LocalStorageKey.HOUSEPT_VALUE, JSON.stringify(-1));
     }
 
     localStorage.setItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE, JSON.stringify(this.housePTCompareType));
@@ -674,9 +677,9 @@ export class FilterComponent implements OnInit {
       isExcludeTest: this.isExcludeTest,
       isViewByInteger: this.isViewByInteger,
       totalBetType: this.totalBetsCompareType,
-      totalBetValue: this.totalBetsValue,
+      totalBetValue: this.totalBetsValue === null ? 0 : this.totalBetsValue,
       gameIncomeType: this.gameIncomeCompareType,
-      gameIncomeValue: this.gameIncomeValue,
+      gameIncomeValue: this.gameIncomeValue === null ? 0 : this.gameIncomeValue,
       housePTType: this.housePTCompareType,
       housePTValue: this.housePTValue,
       removalColumns: this.columnDropdownTreeview.items
