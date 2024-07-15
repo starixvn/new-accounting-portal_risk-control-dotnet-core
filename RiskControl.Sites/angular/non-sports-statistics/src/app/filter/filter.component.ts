@@ -647,9 +647,10 @@ export class FilterComponent implements OnInit {
     const sort = localStorage.getItem(LocalStorageKey.SORT);
     if (!_.isNil(sort) && sort !== 'null') {
       const detailedSort = sort.split('**');
-      this.sortColumnName = detailedSort[0];
-      this.sortDirection = detailedSort[1];
-      this.cachedReportType = JSON.parse(detailedSort[2]) as ReportType;
+      const reportBy = JSON.parse(detailedSort[2]) as ReportType
+      this.sortColumnName = reportBy !== ReportType.Top20 ? detailedSort[0] : '';
+      this.sortDirection = reportBy !== ReportType.Top20 ? detailedSort[1] : '';
+      this.cachedReportType = reportBy;
     } else {
       this.sortColumnName = '';
       this.sortDirection = '';
