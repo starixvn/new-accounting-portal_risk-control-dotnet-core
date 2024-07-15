@@ -644,6 +644,17 @@ export class FilterComponent implements OnInit {
     if (reportType === ReportType.Top20 && this.username !== '') {
       reportType = ReportType.UserName;
     }
+    const sort = localStorage.getItem(LocalStorageKey.SORT);
+    if (!_.isNil(sort) && sort !== 'null') {
+      const detailedSort = sort.split('**');
+      this.sortColumnName = detailedSort[0];
+      this.sortDirection = detailedSort[1];
+      this.cachedReportType = JSON.parse(detailedSort[2]) as ReportType;
+    } else {
+      this.sortColumnName = '';
+      this.sortDirection = '';
+      this.cachedReportType = ReportType.Daily;
+    }
     const model: FilterModel = {
       reportType: reportType,
       roleId: this.roleId,
@@ -910,18 +921,6 @@ export class FilterComponent implements OnInit {
     const housePTValue = JSON.parse(localStorage.getItem(LocalStorageKey.HOUSEPT_VALUE)) as number;
 
     this.housePTValue = housePTValue === null ? undefined : housePTValue;
-
-    const sort = localStorage.getItem(LocalStorageKey.SORT);
-    if (!_.isNil(sort) && sort !== 'null') {
-      const detailedSort = sort.split('**');
-      this.sortColumnName = detailedSort[0];
-      this.sortDirection = detailedSort[1];
-      this.cachedReportType = JSON.parse(detailedSort[2]) as ReportType;
-    } else {
-      this.sortColumnName = '';
-      this.sortDirection = '';
-      this.cachedReportType = ReportType.Daily;
-    }
 
     forkJoin([this.filterService.getPermission(), this.filterService.getProducts()]).subscribe(data => {
       this.mode = JSON.parse(localStorage.getItem(LocalStorageKey.MODE)) as FilterMode;
