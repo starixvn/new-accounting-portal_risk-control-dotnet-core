@@ -52,8 +52,8 @@ export class ModelService {
             gameIncomeType: filterModel.gameIncomeType,
             gameIncomeValue: filterModel.gameIncomeValue,
             removalColumns: filterModel.removalColumns,
-            sortDirection: '',
-            sortColumnName: '',
+            sortDirection: filterModel.sortDirection,
+            sortColumnName: filterModel.sortColumnName,
             reportBy: this.getReportBy(filterModel.reportType),
             isNormalMode: filterModel.isNormalMode,
             title: this.titleService.getTitle(),
@@ -70,6 +70,8 @@ export class ModelService {
     updateModelToQueryGrandTotal(queryModel: QueryModel) {
         queryModel.isDrillDown = true;
         queryModel.isGrandTotal = true;
+        queryModel.sortColumnName = '';
+        queryModel.sortDirection = '';
         queryModel.title = this.titleService.getGrandTotalByCurrencyTitle();
     }
 }

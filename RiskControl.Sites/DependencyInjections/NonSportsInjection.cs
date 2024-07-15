@@ -3,6 +3,7 @@ using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Filter;
 using RiskControl.NonSportsGamesStatistics.Model;
 using System.Collections.Generic;
+using RiskControl.NonSportsGamesStatistics.SavedFilter.Services;
 using CurrencyViewCommon = RiskControl.NonSportsGamesStatistics.CurrencyView.Common;
 using CurrencyViewGrandTotal = RiskControl.NonSportsGamesStatistics.CurrencyView.GrandTotal;
 using CurrencyViewMain = RiskControl.NonSportsGamesStatistics.CurrencyView.Main;
@@ -37,6 +38,7 @@ public static class NonSportsInjection
         service.AddTransient<GridOptionCustomExcelCellStyleService, GridOptionCustomExcelCellStyleServiceImp>();
         service.AddTransient<CalculationService, CalculationServiceImp>();
         service.AddTransient<FilterService, FilterServiceImp>();
+        service.AddTransient<SavedFilterService, SavedFilterServiceImp>();
     }
 
     private static void RegisterDailyViewServices(this IServiceCollection services)

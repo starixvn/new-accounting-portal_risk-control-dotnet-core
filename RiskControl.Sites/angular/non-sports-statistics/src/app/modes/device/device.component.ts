@@ -10,6 +10,7 @@ import { DeviceService } from './device.service';
 import { ModeGenerate, RowAttribute } from '../mode.model';
 import { ModeContext } from '../mode-context';
 import { ModeController } from '../mode-controller';
+import { LocalStorageKey } from 'app/common/constants';
 
 @Component({
   selector: 'nap-daily',
@@ -88,6 +89,8 @@ export class DeviceComponent implements OnInit, ModeGenerate {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
     filterModel.currency = [currency];
     filterModel.devices = [device];
+    filterModel.sortColumnName = '';
+    filterModel.sortDirection = '';
     const modeContext = ModeContext.create(device, filterModel, true);
     this.modeController.forward(this.gridOptions, modeContext);
   }
@@ -155,6 +158,7 @@ export class DeviceComponent implements OnInit, ModeGenerate {
   private sort(queryModel: QueryModel, sortColumnName: string, sortDirection: string) {
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
+    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}**${localStorage.getItem(LocalStorageKey.REPORT_TYPE)}`);
     this.deviceService.query(queryModel).subscribe(gridOptions => {
       this.updateGridOptions(gridOptions, queryModel, false);
     });

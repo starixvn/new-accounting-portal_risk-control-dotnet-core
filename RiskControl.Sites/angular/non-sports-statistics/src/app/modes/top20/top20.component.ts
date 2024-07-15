@@ -22,6 +22,7 @@ import { AssociatedAccountService } from '../associated-account';
 import { Top20Service } from './top20.service';
 import { Top20QueryModel, TopType, Top20GridModel, Top20NormalQueryModel } from './top20.model';
 import { AssociatedAccountComponent } from '../associated-account/associated-account.component';
+import { LocalStorageKey } from 'app/common/constants';
 
 interface SubRowCustomAttribute {
   ReportBy: string;
@@ -220,6 +221,8 @@ export class Top20Component implements OnInit, ModeGenerate {
     filterModel.roleId = roleId;
     filterModel.userName = userName;
     filterModel.isDrillDown = true;
+    filterModel.sortColumnName = '';
+    filterModel.sortDirection = '';
     const modeContext = ModeContext.create(userName, filterModel, new Top20GridModel(false, true));
     this.modeController.forward(this.gridOptions, modeContext);
   }
@@ -228,6 +231,8 @@ export class Top20Component implements OnInit, ModeGenerate {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
     filterModel.reportType = ReportType.Daily;
     filterModel.userName = userName;
+    filterModel.sortColumnName = '';
+    filterModel.sortDirection = '';
     const gridModel = new DailyGridModel(false, true);
     const modeContext = ModeContext.create(userName, filterModel, gridModel);
     this.modeController.forward(this.gridOptions, modeContext);
@@ -237,6 +242,8 @@ export class Top20Component implements OnInit, ModeGenerate {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
     filterModel.reportType = ReportType.Hourly;
     filterModel.userName = userName;
+    filterModel.sortColumnName = '';
+    filterModel.sortDirection = '';
     const gridModel = new HourlyGridModel(false, true);
     const modeContext = ModeContext.create(userName, filterModel, gridModel);
     this.modeController.forward(this.gridOptions, modeContext);
@@ -245,6 +252,8 @@ export class Top20Component implements OnInit, ModeGenerate {
   private drillDownCurrency(title: string, currency: number, topType: TopType) {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
     filterModel.currency = [currency];
+    filterModel.sortColumnName = '';
+    filterModel.sortDirection = '';
     const modeContext = ModeContext.create(title, filterModel, new Top20GridModel(true, false, topType));
     this.modeController.forward(this.gridOptions, modeContext);
   }
@@ -387,6 +396,7 @@ export class Top20Component implements OnInit, ModeGenerate {
   private sort(queryModel: Top20QueryModel, sortColumnName: string, sortDirection: string) {
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
+    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}**${localStorage.getItem(LocalStorageKey.REPORT_TYPE)}`);
     this.top20Service.query(queryModel).subscribe(gridOptions => {
       this.updateGridOptions(gridOptions, queryModel, false);
     });

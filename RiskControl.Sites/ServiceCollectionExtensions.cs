@@ -62,6 +62,7 @@ public static class ServiceCollectionExtensions
                 mc.AddProfile(new GameRoundProfile());
                 mc.AddProfile(new MonitorProfile());
                 mc.AddProfile(new PlayerSettingProfile());
+                mc.AddProfile(new SavedFilterProfile());
             });
 
             return mapperConfig.CreateMapper();

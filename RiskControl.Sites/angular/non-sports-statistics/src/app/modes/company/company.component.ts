@@ -10,6 +10,7 @@ import { CompanyService } from './company.service';
 import { ModeGenerate, RowAttribute } from '../mode.model';
 import { ModeContext } from '../mode-context';
 import { ModeController } from '../mode-controller';
+import { LocalStorageKey } from 'app/common/constants';
 
 @Component({
   selector: 'nap-company',
@@ -88,6 +89,8 @@ export class CompanyComponent implements OnInit, ModeGenerate {
   private drillDownCurrency(currency: number, company: string) {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
     filterModel.currency = [currency];
+    filterModel.sortColumnName = '';
+    filterModel.sortDirection = '';
     if (company === 'Credit Group' && !_.isEqual(filterModel.sites, ['All'])
       || company === 'Licensee Group' && !_.isEqual(filterModel.sites, ['All'])) {
       filterModel.sites.push(company);
@@ -173,6 +176,7 @@ export class CompanyComponent implements OnInit, ModeGenerate {
     const gridModel = this.modeContext.gridModel;
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
+    localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}**${localStorage.getItem(LocalStorageKey.REPORT_TYPE)}`);
     this.companyService.query(queryModel, gridModel.isDrillDownCurrency).subscribe(gridOptions => {
       this.updateGridOptions(gridOptions, queryModel, false);
     });
