@@ -32,7 +32,6 @@ const scrollWidth = 20;
 })
 export class GridComponent implements OnInit, OnChanges, OnDestroy {
     @Input() filterModel: FilterModel;
-    @Input() downFileApi: string = '';
     @ViewChild(CountdownTimerComponent) countdownTimerComponent: CountdownTimerComponent;
     breadcrumbItems = ['Win Loss Limit Monitor'];
     paginationInstance: PaginationInstance;
@@ -232,8 +231,10 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
             reachedLimitTime: monitorModel.reachedLimitTime,
             username: monitorModel.userName
         };
-        this.gridService.exportExcel(winLossAnalysisExcel, this.downFileApi).subscribe(response => {
-          Helper.downloadFile(response, `${winLossAnalysisExcel.custId}.xlsx`);
+        this.gridService.exportExcel(winLossAnalysisExcel).subscribe(response => {
+          var contentDisposition = response.headers.get('content-disposition');
+          var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
+          Helper.downloadFile(response.body, `${filename}`);
         });
     }
 }

@@ -5,9 +5,8 @@ namespace RiskControl.Sites.Controllers;
 
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
-using RiskControl.Configuration;
 
-public class HomeController(ConfigurationService configurationService) : Controller
+public class HomeController() : Controller
 {
     public ActionResult Index()
     {
@@ -54,7 +53,6 @@ public class HomeController(ConfigurationService configurationService) : Control
     [NapAuth(FunctionKey = FunctionKeys.WinLimitMonitor, Policy = Constant.Policy.Read)]
     public ActionResult WinLimitMonitor()
     {
-        ViewBag.DownfileApi = configurationService.DownFileApi;
         return View("~/wwwroot/monitor/index.cshtml");
     }
 
