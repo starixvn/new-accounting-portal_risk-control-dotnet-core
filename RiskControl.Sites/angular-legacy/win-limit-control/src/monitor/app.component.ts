@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { FilterModel } from './filter';
 
 @Component({
@@ -11,4 +11,9 @@ import { FilterModel } from './filter';
 })
 export class AppComponent {
   filterModel: FilterModel;
+  downFileApi: string;
+
+  constructor(private elementRef: ElementRef) {
+    this.downFileApi = this.elementRef.nativeElement.getAttribute('downfileapi');
+  }
 }

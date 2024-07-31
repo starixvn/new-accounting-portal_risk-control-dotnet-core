@@ -32,6 +32,7 @@ export interface GridColumns extends TableColumns {
     suspendedAccount: TableColumn;
     blockPlaceBet: TableColumn;
     blockTransferWithdraw: TableColumn;
+    winLossAnalysis: TableColumn;
     history: TableColumn;
 }
 
@@ -51,5 +52,6 @@ export const Columns: GridColumns = {
     suspendedAccount: new TableColumn('Suspended Account', 70),
     blockPlaceBet: new TableColumn('Block<br/>Place Bet', 80),
     blockTransferWithdraw: new TableColumn('Block<br/>Transfer/Withdraw', 130),
+    winLossAnalysis: new TableColumn('Win Loss Analysis', 70, true, true),
     history: new TableColumn('', 40, true, true)
 };

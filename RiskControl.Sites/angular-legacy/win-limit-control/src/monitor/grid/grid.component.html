@@ -19,6 +19,7 @@
         <col *ngIf="columns.reachedLimitLevel.checked" [ngStyle]="{'width.px': columns.reachedLimitLevel.width}" />
         <col *ngIf="columns.blockPlaceBet.checked" [ngStyle]="{'width.px': columns.blockPlaceBet.width}" />
         <col *ngIf="columns.blockTransferWithdraw.checked" [ngStyle]="{'width.px': columns.blockTransferWithdraw.width}" />
+        <col *ngIf="columns.winLossAnalysis.checked" [ngStyle]="{'width.px': columns.winLossAnalysis.width}" />
         <col *ngIf="columns.history.checked" [ngStyle]="{'width.px': columns.history.width}" />
     </colgroup>
 </ng-template>
@@ -56,6 +57,7 @@
                             <th *ngIf="columns.suspendedAccount.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.suspendedAccount.text"></th>
                             <th *ngIf="columns.blockPlaceBet.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.blockPlaceBet.text"></th>
                             <th *ngIf="columns.blockTransferWithdraw.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.blockTransferWithdraw.text"></th>
+                            <th *ngIf="columns.winLossAnalysis.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.winLossAnalysis.text"></th>
                             <th *ngIf="columns.history.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.history.text"></th>
                         </tr>
                         <tr *ngIf="columns.lossLimitLevel.checked || columns.winLimitLevel.checked">
@@ -102,6 +104,9 @@
                             <td *ngIf="columns.blockTransferWithdraw.checked" class="text-center">
                                 <input class="test-unblock-transfer" type="checkbox" [disabled]="!hostPermission.winLimitMonitor || !(item.isEnableUnblock && item.isBlockedTransfer)"
                                     [checked]="item.isBlockedTransfer" (click)="onUnblockTransfer(item)" /></td>
+                            <td class="text-center">
+                                <input *ngIf="isRedLimitLevel(item.reachedLimitLevel)" type="button" class="btnExcel" (click)="exportExcel(item)">
+                            </td>
                             <td *ngIf="columns.history.checked" class="text-center">
                                 <i class="fa fa-history fa-2x test-history-link" title="View History" aria-hidden="true" (click)="onShowHistory(item, hostPermission.winLimitMonitor)"></i>
                             </td>

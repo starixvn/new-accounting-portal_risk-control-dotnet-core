@@ -14,6 +14,8 @@ public interface ConfigurationService
     string ProgressiveJackpotAPI { get; }
 
     string FraudSystemCTSAPI { get; }
+
+    string DownFileApi { get; }
 }
 
 public class ConfigurationServiceImp(IConfiguration configuration) : ConfigurationService
@@ -27,4 +29,6 @@ public class ConfigurationServiceImp(IConfiguration configuration) : Configurati
     public string ProgressiveJackpotAPI => configuration["ProgressiveJackpotAPI"];
 
     public string FraudSystemCTSAPI => configuration["FraudSystemCTSAPI"];
+
+    public string DownFileApi => configuration["DownfileApi"];
 }

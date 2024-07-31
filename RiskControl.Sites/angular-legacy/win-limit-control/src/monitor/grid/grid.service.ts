@@ -4,7 +4,7 @@ import { HttpService } from 'nap-components/http';
 import { DateHelper } from 'nap-components/date';
 import { CommandResult } from '../../common/model';
 import { FilterModel } from '../filter';
-import { MonitorModel, UnblockCommand } from './grid.model';
+import { MonitorModel, UnblockCommand, WinLossAnalysisExcel } from './grid.model';
 
 @Injectable()
 export class GridService {
@@ -40,5 +40,9 @@ export class GridService {
     unCheckNotification(logID: number, custId: number): Observable<CommandResult> {
         const url = 'state-api/win-limit-control/monitor/uncheck-notification';
         return this.httpService.post<CommandResult>(url, { LogID: logID, CustID: custId });
+    }
+
+    exportExcel(model: WinLossAnalysisExcel, downfileApi: string): Observable<Blob> {
+        return this.httpService.download(`${downfileApi}/Download`, model);
     }
 }
