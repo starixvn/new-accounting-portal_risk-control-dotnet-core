@@ -220,8 +220,8 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    isRedLimitLevel(level: number): boolean {
-        return level === LimitLevel.Red;
+    isRedOrYellowLimitLevel(level: number): boolean {
+        return level === LimitLevel.Red || level === LimitLevel.Yellow;
     }
 
     exportExcel(monitorModel: MonitorModel): void {
