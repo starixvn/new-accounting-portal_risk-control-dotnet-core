@@ -71,7 +71,7 @@ public class ProgressiveJackpotController(ConfigurationService configurationServ
     {
         var viewModel = await GetRealTimeData(call).ConfigureAwait(false);
         var excelPackage = excelBuilder.Build("RealTime", viewModel.PJRealtimeReports);
-        return new EpplusExcelResult(excelPackage);
+        return new EpplusExcelResult(excelPackage, configurationService.ExcelPassword);
     }
 
     private Task<ReportRealTimeResultContent> GetRealTimeData(ReportCallMessage call)
@@ -99,7 +99,7 @@ public class ProgressiveJackpotController(ConfigurationService configurationServ
         var viewModel = await GetMonthlyData(call).ConfigureAwait(false);
         var excelPackage = excelBuilder.Build("Monthly", viewModel.PJMonthlyReports);
 
-        return new EpplusExcelResult(excelPackage);
+        return new EpplusExcelResult(excelPackage, configurationService.ExcelPassword);
     }
 
     private Task<ReportMonthlyResultContent> GetMonthlyData(ReportMonthlyCallMessage call)
@@ -127,7 +127,7 @@ public class ProgressiveJackpotController(ConfigurationService configurationServ
         var viewModel = await GetDailyData(call).ConfigureAwait(false);
         var excelPackage = excelBuilder.Build("Daily", viewModel.PJDailyReports);
 
-        return new EpplusExcelResult(excelPackage);
+        return new EpplusExcelResult(excelPackage, configurationService.ExcelPassword);
     }
 
     private Task<ReportDailyResultContent> GetDailyData(ReportDailyCallMessage call)
@@ -155,7 +155,7 @@ public class ProgressiveJackpotController(ConfigurationService configurationServ
         var viewModel = await GetWinRecordData(call).ConfigureAwait(false);
         var excelPackage = excelBuilder.Build("WinRecord", viewModel.PJWinnerReports);
 
-        return new EpplusExcelResult(excelPackage);
+        return new EpplusExcelResult(excelPackage, configurationService.ExcelPassword);
     }
 
     private Task<ReportWinnerRecordResultContent> GetWinRecordData(ReportCallMessage call)
