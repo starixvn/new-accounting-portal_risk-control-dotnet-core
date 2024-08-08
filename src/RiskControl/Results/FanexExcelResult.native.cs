@@ -1,15 +1,15 @@
 namespace RiskControl.Results;
 
+using Fanex.Excel;
+using Fanex.Excel.Models;
+using Microsoft.AspNetCore.Mvc;
+using NPOI.SS.UserModel;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Fanex.Excel;
-using Fanex.Excel.Models;
-using Microsoft.AspNetCore.Mvc;
-using NPOI.SS.UserModel;
 
 public class FanexExcelResult : IActionResult
 {

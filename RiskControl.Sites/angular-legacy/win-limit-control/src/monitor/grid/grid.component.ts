@@ -1,20 +1,22 @@
-import { Component, Input, OnInit, OnChanges, ViewChild, Injectable, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewChild, OnDestroy } from '@angular/core';
 import * as _ from 'lodash';
 import { PaginationService as NgxPaginationService, PaginatePipe } from 'ngx-pagination';
 import { PaginationInstance, PaginationService, PaginationConfig } from 'nap-components/pagination';
 import { ToastService, MessageType } from 'nap-components/toast';
 import { CountdownTimerComponent } from 'nap-components/countdown-timer';
 import { ConfirmationService } from 'nap-components/confirmation';
-import { CommandResult, HostPermission } from '../../common/model';
+import { HostPermission } from '../../common/model';
 import { AuthorizationService } from '../../common/authorization';
 import { TableColumn } from '../common/column';
 import { FilterModel } from '../filter';
 import { HistoryService } from '../history';
 import { AccountService } from '../account';
 import { GridColumns } from '../common/column';
-import { MonitorModel, UnblockCommand } from './grid.model';
+import { MonitorModel, UnblockCommand, WinLossAnalysisExcel } from './grid.model';
 import { GridService } from './grid.service';
 import { AudioWrapper } from './audio-wrapper';
+import { LimitLevel } from '../../common/filter';
+import { Helper } from 'nap-components/helper';
 
 const scrollWidth = 20;
 
@@ -55,7 +57,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
         private authorizationService: AuthorizationService,
         private historyService: HistoryService,
         private accountService: AccountService,
-        private audioWrapper: AudioWrapper
+        private audioWrapper: AudioWrapper,
     ) {
         this.paginatePipe = new PaginatePipe(this.ngxPaginationService);
         this.audioWrapper.create('monitor/assets/koekoeksklok.mp3');
@@ -216,5 +218,23 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
                 }
             }
         }
+    }
+
+    isRedOrYellowLimitLevel(level: number): boolean {
+        return level === LimitLevel.Red || level === LimitLevel.Yellow;
+    }
+
+    exportExcel(monitorModel: MonitorModel): void {
+        const winLossAnalysisExcel: WinLossAnalysisExcel = {
+            custId: monitorModel.custId,
+            productId: monitorModel.productId,
+            reachedLimitTime: monitorModel.reachedLimitTime,
+            username: monitorModel.userName
+        };
+        this.gridService.exportExcel(winLossAnalysisExcel).subscribe(response => {
+          var contentDisposition = response.headers.get('content-disposition');
+          var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
+          Helper.downloadFile(response.body, `${filename}`);
+        });
     }
 }

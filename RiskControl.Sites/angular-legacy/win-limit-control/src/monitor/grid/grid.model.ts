@@ -31,3 +31,10 @@ export interface UnblockCommand {
     productId: number;
     groupId: number;
 }
+
+export interface WinLossAnalysisExcel {
+    custId: number;
+    productId: number;
+    reachedLimitTime: string;
+    username: string;
+}

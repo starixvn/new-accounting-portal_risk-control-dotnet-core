@@ -4,12 +4,17 @@ import { HttpService } from 'nap-components/http';
 import { DateHelper } from 'nap-components/date';
 import { CommandResult } from '../../common/model';
 import { FilterModel } from '../filter';
-import { MonitorModel, UnblockCommand } from './grid.model';
+import { MonitorModel, UnblockCommand, WinLossAnalysisExcel } from './grid.model';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { SpinnerService } from 'nap-components/spinner';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class GridService {
     constructor(
-        private httpService: HttpService
+        private httpService: HttpService,
+        private httpClient: HttpClient,
+        private spinnerService: SpinnerService
     ) { }
 
     query(filterModel: FilterModel): Observable<MonitorModel[]> {
@@ -40,5 +45,12 @@ export class GridService {
     unCheckNotification(logID: number, custId: number): Observable<CommandResult> {
         const url = 'state-api/win-limit-control/monitor/uncheck-notification';
         return this.httpService.post<CommandResult>(url, { LogID: logID, CustID: custId });
+    }
+
+    exportExcel(model: WinLossAnalysisExcel): Observable<HttpResponse<Blob>> {
+        this.spinnerService.show();
+        const observable =
+         this.httpClient.post('api/win-limit-control/download/excel', model, { observe: 'response', responseType: 'blob' });
+        return observable.pipe(tap(() => this.spinnerService.hide()));
     }
 }

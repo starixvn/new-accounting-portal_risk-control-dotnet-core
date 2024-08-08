@@ -6,6 +6,6 @@
     <% files.css.forEach(function(css){ %>
     <link href="<%= css%>" rel="stylesheet"/><% }) %>
 }
-<nap-root>Loading...</nap-root>
+<nap-root downfileapi="@ViewBag.DownfileApi">Loading...</nap-root>
 <% files.js.forEach(function(js){ %>
 <script src="<%= js%>"></script><% }) %>

@@ -8,9 +8,10 @@ namespace RiskControl.WinLossLimitControl.GameRound;
 
 using Fanex.NAP.Client.Helpers.Business;
 using Results;
+using RiskControl.Configuration;
 
 [ApiController]
-public class GameRoundBetLimitController(IMediator mediator, AuthorizationService authorizationService)
+public class GameRoundBetLimitController(IMediator mediator, AuthorizationService authorizationService, ConfigurationService configurationService)
     : ControllerBase
 {
     [Route("api/game-ground-bet-limit/setting-query")]
@@ -38,7 +39,7 @@ public class GameRoundBetLimitController(IMediator mediator, AuthorizationServic
     public async Task<IActionResult> MonitorExcelAsync(BetLimitMonitorQueryExcelRequest request)
     {
         var viewModel = await mediator.Send(request);
-        return new EpplusExcelResult(viewModel);
+        return new EpplusExcelResult(viewModel, configurationService.ExcelPassword);
     }
 
     [Route("state-api/game-ground-bet-limit/host-permission")]

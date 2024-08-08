@@ -81,3 +81,16 @@ body {
       box-shadow: 0 0 0 2px hsla(0,0%,80%,.5);
      }
   }
+
+  .btnExcel {
+    background: url("assets/excel-icon.png") 0px -26px no-repeat;
+    border: 0 solid red;
+    cursor: pointer;
+    font-size: 11px;
+    height: 17px;
+    margin: 0 2px;
+    overflow: visible;
+    padding-left: 6px;
+    padding-right: 6px;
+    width: 18px;
+}
