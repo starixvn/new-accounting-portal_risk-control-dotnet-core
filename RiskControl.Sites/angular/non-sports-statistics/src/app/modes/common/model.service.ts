@@ -5,6 +5,7 @@ import { BaseQueryModel, QueryModel, NormalCriteria, HistoryCriteria } from '../
 import { ModeContext } from '../mode-context';
 import { TitleService } from './title.service';
 import { DATE_CONFIG } from 'app/common';
+import { ProductConstants } from 'app/common/constants';
 
 @Injectable()
 export class ModelService {
@@ -41,7 +42,9 @@ export class ModelService {
             username: filterModel.userName,
             site: filterModel.sites.join(','),
             betType: filterModel.betTypes.join(','),
-            leagueId: filterModel.leagueIds.map(l => `${l.leagueId}-${l.betType}`).join(','),
+            leagueId: filterModel.productIds.join(',') === ProductConstants.VIRTUAL_SPORT_5.toString() ?
+             filterModel.leagueIds.map(l => l.leagueId).join(',')
+             : filterModel.leagueIds.map(l => `${l.leagueId}-${l.betType}`).join(','),
             sportType: filterModel.sportTypes.join(','),
             currency: filterModel.currency.join(','),
             device: filterModel.devices.join(','),

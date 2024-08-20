@@ -32,3 +32,7 @@ export class LocalStorageKey {
     static readonly TOTAL_BET_VALUE = 'non-sport-totalbetvalue';
     static readonly SORT = 'non-sport-sort';
 }
+
+export class ProductConstants {
+    static readonly VIRTUAL_SPORT_5 = 88;
+}
