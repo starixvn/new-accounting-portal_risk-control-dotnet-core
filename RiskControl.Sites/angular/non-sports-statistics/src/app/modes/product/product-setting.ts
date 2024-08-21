@@ -3,6 +3,7 @@ import { ProductLevel } from './product.model';
 
 export abstract class ProductSetting {
   private levelIndex = 0;
+  public isDrillDownCurrency = false;
 
   private readonly viewBetTypeList = [4, 6, 7, 12];
   private readonly viewLeagueList = [5, 8, 11];
@@ -34,6 +35,7 @@ export abstract class ProductSetting {
     this.typeId = typeId;
     this.typeName = typeName;
     this.levelIndex++;
+    this.isDrillDownCurrency = isDrillDownCurrency;
   }
 
   getReportBySuffix(isDrillDownCurrency: boolean): string {

@@ -4,6 +4,7 @@ import { ProductSetting } from './product-setting';
 import { ProductConstants } from 'app/common/constants';
 
 export class VirtualSportsSetting extends ProductSetting {
+    
     constructor(typeId: number, typeName: string) {
         const commonLevels = [
             ProductLevel.ProductViewSportType,
@@ -36,7 +37,9 @@ export class VirtualSportsSetting extends ProductSetting {
                 }
                 break;
             case ProductLevel.League:
-                if (filterModel.productIds.join(',') === ProductConstants.VIRTUAL_SPORT_5.toString() && filterModel.isNormalMode) {
+                if (filterModel.productIds.join(',') === ProductConstants.VIRTUAL_SPORT_5.toString()
+                    && filterModel.isNormalMode
+                    && !this.isDrillDownCurrency) {
                     filterModel.leagueIds = [{leagueId: 0, betType: 0}];
                 } else {
                     filterModel.leagueIds = [];
