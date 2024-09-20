@@ -1,0 +1,66 @@
+<ng-template #colgroup>
+    <colgroup>
+      <col style="width: 60px" />
+      <col style="width: 300px" />
+      <col style="width: 100px" />
+    </colgroup>
+  </ng-template>
+  <ng-template #thead>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Filter Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+  </ng-template>
+<div class="modal-header">
+    <p class="modal-title">My Saved Filters</p>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="d-inline-block">
+        <div *ngIf="data" class="nap-grid" [ngSwitch]="data.length > 0">
+          <div style="width: 480px;">
+            <div class="header">
+              <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <ng-template [ngTemplateOutlet]="thead"></ng-template>
+              </table>
+            </div>
+            <div *ngSwitchCase="true" class="body">
+              <table class="table-striped">
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <tbody>
+                  <tr *ngFor="let item of data; let i = index">
+                    <td class="text-center">
+                      {{ i + 1 }}
+                    </td>
+                    <td class="text-center">
+                      <a href="javascript:;" (click)="reloadFilter(item.content)">{{item.queryName }}</a> 
+                    </td>
+                    <td class="text-center">
+                      <span class="deleted-filter fa fa-solid fa-times-circle-o" (click)="onDelete(item.queryId)"></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+      
+            <div *ngSwitchCase="false" class="body stretch">
+              <table>
+                <tbody>
+                  <tr>
+                    <th class="no-data" colspan="4">
+                      There is no data
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

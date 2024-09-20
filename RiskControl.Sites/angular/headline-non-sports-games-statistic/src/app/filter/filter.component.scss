@@ -1,0 +1,48 @@
+@import '~nap-theme/scss/filter';
+.nap-filter {
+    .nap-col {
+        .nap-group {
+            &>label {
+                float: left;
+                width: 100px;
+            }
+            &>.nap-control {
+                float: left;
+                width: 200px;
+            }
+            &>.disabledfield {
+              pointer-events: none;
+              opacity: 0.6;
+            }
+        }
+    }
+    .col-title {
+        width: 110px;
+        font-weight: bold;
+        padding-left: 15px;
+    }
+    .col-fixed-60px {
+        float: left;
+        width: 60px;
+    }
+    .col-offset-60px {
+        margin-left: 60px;
+    }
+    .col-buttons {
+        margin-left: 210px;
+        &>button {
+            margin-right: 5px;
+        }
+    }
+    .col-search-exact {
+      margin-left: 105px;
+    }
+    .my-saved-filters {
+        position: absolute;
+        right: 30px;
+        span {
+            font-size: 15px;
+            color: black;
+        }
+    }
+}
