@@ -1,5 +1,4 @@
 ﻿import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
 import { TreeviewItem } from 'ngx-treeview';
 import { Column } from './filter.model';
 import { FilterConfig } from './filter.config';

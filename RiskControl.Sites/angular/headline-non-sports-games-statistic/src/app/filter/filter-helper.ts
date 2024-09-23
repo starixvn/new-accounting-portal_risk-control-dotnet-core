@@ -45,19 +45,13 @@ function calculateGameTypes(model: GameTypeModel): GameTypeResult {
 
   leagueIds = getLeagueIds(model);
   sportBetTypes = getSportBetTypes(model);
-  otherProductIds.forEach(productId => {
+  otherProductIds.forEach((productId: number) => {
     const productGameTypes = model.gameTypes.filter(gameType => gameType.productId === productId);
     const productTypeIds = productGameTypes.map(gameType => gameType.typeId);
     const filterProducts = model.products.filter(product => product.productId === productId);
 
     if (filterProducts.length !== 1) {
-      return {
-        productIds: productIds,
-        betTypes: betTypes,
-        sportTypes: sportTypes,
-        leagueIds: leagueIds,
-        sportBetTypes: sportBetTypes
-      } as GameTypeResult;
+      return;
     }
 
     const casinoType = filterProducts[0].casinoType;

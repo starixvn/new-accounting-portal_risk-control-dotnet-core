@@ -9,10 +9,10 @@ import { ModalOptions } from './modal-options';
     ]
 })
 export class ModalWindowComponent {
-    @Input() windowClass: string = '';
-    @Input() width: number;
-    @Input() height: number;
-    @Input() backdrop: boolean;
+    @Input() windowClass?: string = '';
+    @Input() width?: number;
+    @Input() height?: number;
+    @Input() backdrop?: boolean;
     @Output() close = new EventEmitter();
     @HostBinding('attr.class') bindingClass = 'modal fade show' + (this.windowClass ? ` ${this.windowClass}` : '');
     @HostBinding('attr.role') bindingRole = 'dialog';

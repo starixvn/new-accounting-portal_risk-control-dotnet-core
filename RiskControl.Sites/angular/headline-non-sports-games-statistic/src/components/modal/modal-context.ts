@@ -2,7 +2,7 @@
 
 @Injectable()
 export class ModalContext {
-    data: Object;
+    data!: Object;
 
     static create(data: Object): ModalContext {
         const modalContext = new ModalContext();

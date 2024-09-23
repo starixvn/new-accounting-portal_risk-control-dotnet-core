@@ -20,8 +20,8 @@ export class SaveFilterComponent implements OnInit {
   content = '';
   filterNameTypeaheadQuery = this.buildFilterNameTypeaheadQuery();
   queryModel: SavedFilterQueryModel = {
-    reportId: ReportConstants.NON_SPORT,
-    reportName: ReportConstants.NON_SPORT_TEXT,
+    reportId: ReportConstants.HEADLINE_NON_SPORT,
+    reportName: ReportConstants.HEADLINE_NON_SPORT_TEXT,
     action: ActionConstants.SELECT
   };
 
@@ -87,8 +87,8 @@ export class SaveFilterComponent implements OnInit {
       queryId: queryId,
       queryName: this.filterName,
       content: this.content,
-      reportId: ReportConstants.NON_SPORT,
-      reportName: ReportConstants.NON_SPORT_TEXT,
+      reportId: ReportConstants.HEADLINE_NON_SPORT,
+      reportName: ReportConstants.HEADLINE_NON_SPORT_TEXT,
       action: action
     };
 

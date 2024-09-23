@@ -5,7 +5,7 @@ import { ModalOptions } from './modal-options';
 
 @Injectable()
 export class ModalStackService {
-    private modalContainerDirective: ModalContainerDirective;
+    private modalContainerDirective?: ModalContainerDirective;
 
     open(content: any, options: ModalOptions, data: Object): ModalRef {
         if (!this.modalContainerDirective) {

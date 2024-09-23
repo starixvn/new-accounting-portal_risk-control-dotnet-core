@@ -7,7 +7,7 @@
                 [title]="isHideFilter ? 'Show filter' : 'Hide filter'"></i>
         </div>
     </div>
-    <nap-filter [hidden]="isHideFilter" (generate)="generate($event)" (reset)="reset()"></nap-filter>
+    <app-filter [hidden]="isHideFilter" (generate)="generate($event)" (reset)="reset()"></app-filter>
     <nap-toast></nap-toast>
     <div #container></div>
 </div>

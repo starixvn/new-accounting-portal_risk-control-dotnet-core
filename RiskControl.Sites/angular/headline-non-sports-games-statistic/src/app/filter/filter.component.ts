@@ -54,7 +54,11 @@ class CurrencyHelper {
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss']
+  styleUrls: ['./filter.component.scss'],
+  providers: [
+    ColumnService,
+    TreeViewBuilderService
+  ]
 })
 export class FilterComponent implements OnInit {
   @ViewChild('siteDropdownTreeview') siteDropdownTreeview!: DropdownTreeviewComponent;
@@ -377,28 +381,6 @@ export class FilterComponent implements OnInit {
     this.generateInternal();
   }
 
-  toggleMode() {
-    // if (this.mode === FilterMode.Normal) {
-    //   this.mode = FilterMode.History;
-    //   this.filterService.checkYesterdayDataWarehouseIsReady().subscribe(isReady => this.isYerterdayDataWarehouseReady = isReady);
-    // } else {
-    //   this.mode = FilterMode.Normal;
-    //   this.housePTCompareType = CompareType.None;
-    //   this.housePTValue = this.housePTSelectItems[0].value;
-    //   if (this.selectedReportType === ReportType.Monthly) {
-    //     this.date = DateHelper.convertMomentToDateStruct(this.today);
-    //     if (this.products.length === this.selectedProducts.length) {
-    //       this.selectedReportType = ReportType.Product;
-    //     } else {
-    //       this.selectedReportType = ReportType.Daily;
-    //     }
-    //   }
-    // }
-
-    this.getColumns(false);
-    this.reset.emit();
-  }
-
   onTimePeriodChange() {
     const timePeriod = this.timePeriod;
     const timmePeriodData = _.find(this.TimeRanges, function (period) {
@@ -427,8 +409,8 @@ export class FilterComponent implements OnInit {
 
   showSavedFilters() {
     const queryModel: SavedFilterQueryModel = {
-      reportId: ReportConstants.NON_SPORT,
-      reportName: ReportConstants.NON_SPORT_TEXT,
+      reportId: ReportConstants.HEADLINE_NON_SPORT,
+      reportName: ReportConstants.HEADLINE_NON_SPORT_TEXT,
       action: ActionConstants.SELECT
     }
     this.savedFilterService.queryFilters(queryModel, false).subscribe(data => {
@@ -715,12 +697,10 @@ export class FilterComponent implements OnInit {
     });
   }
 
-  private getColumns(reportTypeChange: boolean) {
+  private getColumns() {
     const columns = this.columnService.getColumns();
     this.columns = columns;
-    this.selectedColumns = reportTypeChange ?
-      [] :
-      JSON.parse(localStorage.getItem(LocalStorageKey.COLUMNS)!) as Column[];
+    this.selectedColumns = JSON.parse(localStorage.getItem(LocalStorageKey.COLUMNS)!) as Column[]
     this.columnTreeViewItems = this.columnService.buildColumnTreeViewItems(this.columns, this.selectedColumns);
   }
 
@@ -836,6 +816,8 @@ export class FilterComponent implements OnInit {
 
       this.deviceTreeViewItems = this.treeviewBuilderService.buildDeviceTreeViewItems(devices, this.selectedDevices);
     });
+
+    this.getColumns();
   }
 
   private createContentForSavedFilter(): string {

@@ -29,4 +29,9 @@ export class AppComponent {
     //   this.instances = [this.componentRef.instance];
     // }
   }
+
+  toggleShowHideFilter() {
+    this.isHideFilter = !this.isHideFilter;
+    //this.gridService.resizeEvent.emit();
+  }
 }
