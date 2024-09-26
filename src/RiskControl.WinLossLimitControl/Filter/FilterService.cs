@@ -19,6 +19,8 @@ public interface FilterService
     Task<IEnumerable<Customer>> SearchUsers(CustomerSuggestionCriteria criteria);
 
     Task<IEnumerable<Group>> GetGroupByProduct(GetGroupCriteria criteria);
+
+    Task<IEnumerable<ProductModel>> GetProductForMemberWinLoss();
 }
 
 public class FilterServiceImp(IDynamicRepository repository, CacheRefService cacheRefService)
@@ -32,6 +34,11 @@ public class FilterServiceImp(IDynamicRepository repository, CacheRefService cac
     public Task<IEnumerable<Group>> GetGroupByProduct(GetGroupCriteria criteria)
     {
         return repository.FetchAsync<Group>(criteria);
+    }
+
+    public Task<IEnumerable<ProductModel>> GetProductForMemberWinLoss()
+    {
+        return repository.FetchAsync<ProductModel>(new ProductCriteria());
     }
 
     public IEnumerable<BaseEntity> GetProducts()

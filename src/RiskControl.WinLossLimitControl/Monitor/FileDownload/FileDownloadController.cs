@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using RiskControl.Configuration;
 using RiskControl.WebApiClient;
 using System.Threading.Tasks;
@@ -18,5 +19,18 @@ public class FileDownloadController(ConfigurationService configurationService, R
         var data = await richHttpClient.PostJson<ApiResultModel>(requestUri, model).ConfigureAwait(false);
 
         return File(data.FileContent, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", data.FilName);
+    }
+
+    [Route("member-wl-file")]
+    [HttpPost]
+    public async Task<IActionResult> MemberWLFile(MemberWLDownloadFileModel model)
+    {
+        var requestUri = $"{configurationService.CWLAnalysisApi}/File";
+
+        var data = await richHttpClient.PostJson<ApiResultModel>(requestUri, model).ConfigureAwait(false);
+
+        Response.Headers.Append("X-InvalidUsernames", data.InvalidUsernames);
+
+        return File(data.FileContent, "application/zip", data.FilName);
     }
 }

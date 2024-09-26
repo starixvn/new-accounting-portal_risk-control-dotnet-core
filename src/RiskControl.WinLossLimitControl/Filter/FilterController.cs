@@ -49,4 +49,12 @@ public class FilterController(FilterService filterService) : ControllerBase
         var groups = (await filterService.GetGroupByProduct(criteria)).ToList();
         return Ok(groups);
     }
+
+    [Route("get-products-member-winloss")]
+    [HttpPost]
+    public async Task<ActionResult> GetProductsForMemberWinLoss()
+    {
+        var products = await filterService.GetProductForMemberWinLoss();
+        return Ok(products);
+    }
 }

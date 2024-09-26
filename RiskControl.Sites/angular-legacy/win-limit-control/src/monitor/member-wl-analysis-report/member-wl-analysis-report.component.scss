@@ -1,0 +1,32 @@
+@import '~nap-theme/scss/filter';
+@import '~nap-theme/scss/grid';
+
+.nap-filter {
+    width: 580px !important;
+
+    .nap-col-1 {
+        label {
+            width: 90px;
+        }
+        .nap-control {
+            width: 180px;
+        }
+    }
+    
+    .nap-col-2 {
+        label {
+            width: 90px;
+        }
+        .nap-control {
+            width: 180px;
+        }
+    }
+
+    .width-180 {
+        width: 180px;
+    }
+
+    .ml-100 {
+        margin-left: 100px;
+    }
+}

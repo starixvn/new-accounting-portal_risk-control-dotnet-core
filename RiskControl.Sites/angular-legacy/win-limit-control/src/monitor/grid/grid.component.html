@@ -96,7 +96,7 @@
                                 <span>{{item.NumberReachedLimit | napReachedLimitCountPipe }}</span>
                             </td>
                             <td *ngIf="columns.suspendedAccount.checked" class="text-center">
-                              <input class="test-unblock-place-bet" type="checkbox" [disabled]="true"
+                              <input class="test-suspended" type="checkbox" [disabled]="true"
                                   [checked]="item.isSuspendedAccount" /></td>
                             <td *ngIf="columns.blockPlaceBet.checked" class="text-center">
                                 <input class="test-unblock-place-bet" type="checkbox" [disabled]="!hostPermission.winLimitMonitor || !(item.isEnableUnblock && item.isBlockedPlaceBet)"
