@@ -47,16 +47,6 @@ export class FilterService {
     return this.httpService.get<GameType[]>(url);
   }
 
-  writeLog(gametypes: GameType[], product: Product[], selectedGameTypes: GameType[]){
-    const url = 'NonSportsGamesStatistics/GameType/WriteGameTypeLog';
-    const model = {
-      gameTypes: gametypes,
-      product: product,
-      selectedGameTypes: selectedGameTypes
-    };
-    return this.httpService.post(url, model);
-  }
-
   getDevices(): Observable<Device[]> {
     const url = 'NonSportsGamesStatistics/Device/Query';
     return this.httpService.get<Device[]>(url);

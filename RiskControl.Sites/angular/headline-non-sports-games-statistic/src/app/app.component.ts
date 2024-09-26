@@ -12,10 +12,10 @@ import { FilterModel } from './filter/filter.model';
 export class AppComponent {
   @ViewChild('container', { read: ViewContainerRef, static: true }) container!: ViewContainerRef;
   isHideFilter = false;
-  private componentRef!: ComponentRef<any>;
+  private componentRef?: ComponentRef<any>;
 
   reset() {
-    //this.removeCurrentComponent();
+    this.removeCurrentComponent();
   }
 
   generate(filterModel: FilterModel) {
@@ -33,5 +33,12 @@ export class AppComponent {
   toggleShowHideFilter() {
     this.isHideFilter = !this.isHideFilter;
     //this.gridService.resizeEvent.emit();
+  }
+
+  private removeCurrentComponent() {
+    if (this.componentRef) {
+      this.container.remove(this.container.indexOf(this.componentRef.hostView));
+      this.componentRef = undefined;
+    }
   }
 }
