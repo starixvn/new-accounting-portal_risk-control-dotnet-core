@@ -29,4 +29,12 @@
     .ml-100 {
         margin-left: 100px;
     }
+
+    
+}
+
+:host ::ng-deep {
+    .toast-container {
+        max-width: 580px;
+    }
 }

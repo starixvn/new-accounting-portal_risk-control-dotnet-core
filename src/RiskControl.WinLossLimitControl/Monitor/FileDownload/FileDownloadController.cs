@@ -31,6 +31,10 @@ public class FileDownloadController(ConfigurationService configurationService, R
 
         Response.Headers.Append("X-InvalidUsernames", data.InvalidUsernames);
 
-        return File(data.FileContent, "application/zip", data.FilName);
+        var contentType = data.FilName == "NoData.xlsx"
+            ? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            : "application/zip";
+
+        return File(data.FileContent, contentType, data.FilName);
     }
 }
