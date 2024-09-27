@@ -18,7 +18,7 @@ export class ProductTreeviewPipe implements PipeTransform {
     const nonCasinoProducts: TreeviewItem[] = [];
 
     products.forEach(product => {
-        const item = new TreeviewItem({ text: product.productName, value: product.productId });
+        const item = new TreeviewItem({ text: product.productName, value: product.productId, checked: false });
         switch (product.casinoType) {
             case CasinoType.None:
                 nonCasinoProducts.push(item);
