@@ -12,7 +12,7 @@
     }
 }
 .nap-filter {
-    width: 580px !important;
+    width: 600px !important;
 
     .nap-col-1 {
         label {
@@ -40,11 +40,13 @@
         margin-left: 100px;
     }
 
-    
+    .row {
+        margin-top: 10px;
+    }
 }
 
 :host ::ng-deep {
     .toast-container {
-        max-width: 580px;
+        max-width: 600px;
     }
 }
