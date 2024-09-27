@@ -1,6 +1,16 @@
 @import '~nap-theme/scss/filter';
 @import '~nap-theme/scss/grid';
 
+.modal-body {
+    .header {
+        padding-bottom: 0.625rem;
+        .active {
+            color: #0136ac;
+            font-size: 15px;
+            text-shadow: 0 1px rgba(0, 0, 0, .25);
+        }
+    }
+}
 .nap-filter {
     width: 580px !important;
 

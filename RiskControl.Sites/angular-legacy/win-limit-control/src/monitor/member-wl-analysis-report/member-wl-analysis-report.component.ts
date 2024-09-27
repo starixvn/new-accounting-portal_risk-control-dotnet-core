@@ -65,12 +65,19 @@ export class MemberWlAnalysisReportComponent {
   }
 
   private isValid(): boolean {
+    if (this.selectedProducts.length <= 0) {
+      this.toastService.activate(`Product is required!`, MessageType.Warning);
+        return false;
+    }
+    if (this.userName.length <= 0) {
+      this.toastService.activate(`Username is required!`, MessageType.Warning);
+        return false;
+    }
     const maxDate = DateHelper.convertDateStructToMoment(this.fromDate).add(6, 'month');
     if (!DateHelper.convertDateStructToMoment(this.toDate).isBefore(maxDate)) {
         this.toastService.activate(`Maximum time range is 6 months.`, MessageType.Warning);
         return false;
     }
-
     return true;
   }
 
