@@ -55,7 +55,7 @@ export class MemberWlAnalysisReportComponent {
       this.memberWlAnalysisReportService.downloadFile(model).subscribe(response => {
         var contentDisposition = response.headers.get('content-disposition');
         var invalidUsernames = response.headers.get('X-InvalidUsernames');
-        if (invalidUsernames.length > 0 ) {
+        if (invalidUsernames?.length > 0 ) {
           this.toastService.activate(`Invalid member(s): ${invalidUsernames}`, MessageType.Warning);
         }
         var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
