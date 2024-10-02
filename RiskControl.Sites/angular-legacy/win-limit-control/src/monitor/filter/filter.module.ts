@@ -9,6 +9,7 @@ import { DropdownTypeaheadModule } from 'nap-components/dropdown-typeahead';
 import { DropdownTreeviewSelectModule } from 'nap-components/dropdown-treeview-select';
 import { FilterComponent } from './filter.component';
 import { SiteTreeviewPipe } from '../../common/filter/site-treeview.pipe';
+import { MemberWlAnalysisReportModule } from '../member-wl-analysis-report/member-wl-analysis-report.module';
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import { SiteTreeviewPipe } from '../../common/filter/site-treeview.pipe';
         TreeviewModule,
         DropdownTreeviewSelectModule,
         DropdownTypeaheadModule,
-        DropdownSelectModule
+        DropdownSelectModule,
+        MemberWlAnalysisReportModule
     ],
     declarations: [
         FilterComponent,

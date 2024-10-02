@@ -1,0 +1,52 @@
+@import '~nap-theme/scss/filter';
+@import '~nap-theme/scss/grid';
+
+.modal-body {
+    .header {
+        padding-bottom: 0.625rem;
+        .active {
+            color: #0136ac;
+            font-size: 15px;
+            text-shadow: 0 1px rgba(0, 0, 0, .25);
+        }
+    }
+}
+.nap-filter {
+    width: 600px !important;
+
+    .nap-col-1 {
+        label {
+            width: 90px;
+        }
+        .nap-control {
+            width: 180px;
+        }
+    }
+    
+    .nap-col-2 {
+        label {
+            width: 90px;
+        }
+        .nap-control {
+            width: 180px;
+        }
+    }
+
+    .width-180 {
+        width: 180px;
+    }
+
+    .ml-100 {
+        margin-left: 100px;
+    }
+
+    .row {
+        margin-top: 10px;
+    }
+}
+
+:host ::ng-deep {
+    .toast-container {
+        max-width: 600px;
+    }
+}

@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <p class="modal-title">Member WinLoss Analysis Report</p>
+    <button type="button" class="close" aria-label="Close" (click)="closePopup()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="header">
+        <span class="active">Member WinLoss Analysis Report</span>
+    </div>
+    <div class="nap-filter">
+        <div class="row">
+            <div class="nap-col nap-col-1">
+                <div class="nap-group">
+                    <label>Product</label>
+                    <div class="nap-control">
+                        <ngx-dropdown-treeview #productTreeview [items]="products | productTreeview : products"
+                        [config]="productTreeviewConfig" (selectedChange)="onProductSelectedChange($event)">
+                        </ngx-dropdown-treeview>
+                    </div>
+                </div>
+            </div>
+            <div class="nap-col nap-col-2">
+                <div class="nap-group">
+                    <label>Username</label>
+                    <div class="nap-control">
+                        <input type="text" class="width-180" [(ngModel)]="userName" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="nap-col nap-col-1">
+                <div class="nap-group">
+                    <label>From Date</label>
+                    <div class="nap-control">
+                        <nap-date-picker [(date)]="fromDate" [minDate]="minDate" [maxDate]="toDate"></nap-date-picker>
+                    </div>
+                </div>
+            </div>
+            <div class="nap-col nap-col-2">
+                <div class="nap-group">
+                    <label>To Date</label>
+                    <div class="nap-control">
+                        <nap-date-picker [(date)]="toDate" [minDate]="fromDate" [maxDate]="maxDate"></nap-date-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="nap-col ml-100">
+                <button type="button" class="btn btn-primary" (click)="generate()">GENERATE</button>
+            </div>
+        </div>
+    </div>
+    <nap-toast></nap-toast>
+</div>

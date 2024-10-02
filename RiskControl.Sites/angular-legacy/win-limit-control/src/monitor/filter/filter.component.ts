@@ -13,6 +13,7 @@ import {
 } from '../../common/filter';
 import { Columns, GridColumns } from '../common/column';
 import { FilterModel } from './filter.model';
+import { MemberWlAnalysisReportService } from '../member-wl-analysis-report/member-wl-analysis-report.service';
 
 @Component({
     selector: 'nap-filter',
@@ -52,7 +53,8 @@ export class FilterComponent implements OnInit {
 
     constructor(
         private toastService: ToastService,
-        private filterService: FilterService
+        private filterService: FilterService,
+        private readonly memberWlAnalysisReportService: MemberWlAnalysisReportService
     ) {
         const lastYear = new Date();
         lastYear.setFullYear(lastYear.getFullYear() - 1);
@@ -163,5 +165,9 @@ export class FilterComponent implements OnInit {
     private initCurrencies(currencies: Currency[]): void {
         this.currencies = FilterHelper.insertCurrencyAll(currencies);
         this.currencyId = this.currencies[0].id;
+    }
+
+    showMemberWinLossReprot(): void {
+        this.memberWlAnalysisReportService.showFilter();
     }
 }

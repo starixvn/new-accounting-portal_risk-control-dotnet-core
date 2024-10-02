@@ -17,6 +17,8 @@ public interface ConfigurationService
 
     string DownFileApi { get; }
 
+    string CWLAnalysisApi { get; }
+
     string ExcelPassword { get; }
 }
 
@@ -33,6 +35,8 @@ public class ConfigurationServiceImp(IConfiguration configuration) : Configurati
     public string FraudSystemCTSAPI => configuration["FraudSystemCTSAPI"];
 
     public string DownFileApi => configuration["DownfileApi"];
+
+    public string CWLAnalysisApi => configuration["CWLAnalysisApi"];
 
     public string ExcelPassword => configuration["ExcelPassword"];
 }

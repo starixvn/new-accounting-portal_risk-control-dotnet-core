@@ -17,6 +17,7 @@ import { GridService } from './grid.service';
 import { AudioWrapper } from './audio-wrapper';
 import { LimitLevel } from '../../common/filter';
 import { Helper } from 'nap-components/helper';
+import { SharedDataService } from '../../common/services/shared-data.service';
 
 const scrollWidth = 20;
 
@@ -58,6 +59,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
         private historyService: HistoryService,
         private accountService: AccountService,
         private audioWrapper: AudioWrapper,
+        private sharedDataService: SharedDataService
     ) {
         this.paginatePipe = new PaginatePipe(this.ngxPaginationService);
         this.audioWrapper.create('monitor/assets/koekoeksklok.mp3');
@@ -65,6 +67,14 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnInit() {
         this.queryHostPermission();
+        this.sharedDataService.clickedPopup$.subscribe(data => {
+            if (data && this.countdownTimerComponent && this.countdownTimerComponent.message !== 'Not Refresh') {
+                this.countdownTimerComponent.pause();
+            }
+            if (!data && this.countdownTimerComponent && this.countdownTimerComponent.message !== 'Not Refresh') {
+                this.countdownTimerComponent.continue();
+            }
+        });
     }
 
     ngOnDestroy() {
