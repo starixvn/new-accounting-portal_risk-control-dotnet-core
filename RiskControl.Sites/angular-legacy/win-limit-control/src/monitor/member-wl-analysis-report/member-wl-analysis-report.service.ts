@@ -7,6 +7,7 @@ import { MemberWlAnalysisReportComponent } from './member-wl-analysis-report.com
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { SpinnerService } from 'nap-components/spinner';
 import { tap } from 'rxjs/operators';
+import { SharedDataService } from '../../common/services/shared-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class MemberWlAnalysisReportService {
   constructor(private readonly httpService: HttpService,
     private readonly modalService: NgbModal,
     private readonly httpClient: HttpClient,
-    private readonly spinnerService: SpinnerService
+    private readonly spinnerService: SpinnerService,
+    private readonly sharedDataService: SharedDataService
   ) { }
 
   getProducts(): Observable<Product[]> {
@@ -25,6 +27,7 @@ export class MemberWlAnalysisReportService {
   }
 
   showFilter(): void {
+    this.sharedDataService.setPopupData(true);
     this.modalService.open(MemberWlAnalysisReportComponent, { backdrop: 'static', windowClass: 'modal-auto-size' });
   }
 

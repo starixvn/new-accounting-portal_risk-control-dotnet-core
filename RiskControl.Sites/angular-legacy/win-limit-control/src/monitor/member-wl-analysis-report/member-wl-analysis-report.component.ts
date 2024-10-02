@@ -6,6 +6,7 @@ import { MemberWlAnalysisReportService } from './member-wl-analysis-report.servi
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageType, ToastService } from 'nap-components/toast';
 import { Helper } from 'nap-components/helper';
+import { SharedDataService } from '../../common/services/shared-data.service';
 
 @Component({
   selector: 'nap-member-wl-analysis-report',
@@ -29,7 +30,8 @@ export class MemberWlAnalysisReportComponent {
 
   constructor(private readonly memberWlAnalysisReportService: MemberWlAnalysisReportService,
     public readonly activeModal: NgbActiveModal,
-    private readonly toastService: ToastService
+    private readonly toastService: ToastService,
+    private readonly sharedDataService: SharedDataService
   ) { 
     const lastYear = new Date();
     lastYear.setFullYear(2013, 0, 1);
@@ -62,6 +64,11 @@ export class MemberWlAnalysisReportComponent {
         Helper.downloadFile(response.body, `${filename}`);
       });
     }
+  }
+
+  closePopup() {
+    this.sharedDataService.setPopupData(false);
+    this.activeModal.dismiss('Cross click');
   }
 
   private isValid(): boolean {
