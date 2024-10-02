@@ -40,7 +40,7 @@ public class RichHttpClientImp : RichHttpClient
     private static HttpClient CreateHttpClient(string contentType)
     {
         var client = new HttpClient();
-        client.Timeout = TimeSpan.FromSeconds(300);
+        client.Timeout = TimeSpan.FromMinutes(15);
         client.DefaultRequestHeaders.Accept.Clear();
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
         client.DefaultRequestHeaders.Add("User-Agent", ".NET HttpClient");
