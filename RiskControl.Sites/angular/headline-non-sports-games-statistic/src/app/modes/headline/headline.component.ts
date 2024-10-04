@@ -80,7 +80,7 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
   private updateMonthColumn(gridOptions: GridOptions) {
     gridOptions.bodyRows.forEach(row => {
       const column = row.columns[0];
-      column.value = `<a href="javascript:;" drill-down-daily month="${column.value}">${column.value}</a>`;
+      column.value = `<a href="javascript:;" drill-down-headline headline="${column.value}">${column.value}</a>`;
     });
   }
 

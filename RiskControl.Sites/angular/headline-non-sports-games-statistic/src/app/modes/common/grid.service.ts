@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import {  ProductId } from '../../common';
-import { FilterConfig } from '../../filter';
 import { ModeContext } from '../mode-context';
+import { FilterConfig } from '../../filter/filter.config';
 
 @Injectable()
 export class GridService {
@@ -19,19 +19,9 @@ export class GridService {
         return filterModel.removalColumns.indexOf(FilterConfig.gridColumns.currency.value) === -1;
     }
 
-    hasShowAssociatedAccount() {
-        const filterModel = this.modeContext.filterModel;
-        return filterModel.removalColumns.indexOf(FilterConfig.gridColumns.associatedAccount.value) === -1;
-    }
-
-    hasShowHousePositionTaking() {
-        const filterModel = this.modeContext.filterModel;
-        return filterModel.isNormalMode && filterModel.removalColumns.indexOf(FilterConfig.gridColumns.housePositionTaking.value) === -1;
-    }
-
     hasDrillDownUserName() {
         const filterModel = this.modeContext.filterModel;
-        return !filterModel.isNormalMode;
+        return true;
     }
 
     hasDrillDownHourly(): boolean {

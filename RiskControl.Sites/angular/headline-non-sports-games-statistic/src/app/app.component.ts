@@ -3,6 +3,7 @@ import { FilterModel } from './filter/filter.model';
 import { ModeContext, ModeController, ModeGenerate, ModeService } from './modes';
 import { GridService } from 'components/grid';
 import { BreadcrumbService } from './breadcrumb.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,12 @@ import { BreadcrumbService } from './breadcrumb.service';
   styleUrls: [
     '../../node_modules/nap-theme/scss/header.scss',
     './app.component.scss'
+  ],
+  providers: [
+    ModeContext,
+    GridService,
+    BreadcrumbService,
+    ModeService
   ]
 })
 export class AppComponent {

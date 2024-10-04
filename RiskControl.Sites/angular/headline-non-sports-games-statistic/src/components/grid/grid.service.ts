@@ -6,12 +6,12 @@ export class GridService {
 
     resizeEvent = new EventEmitter();
 
-    calculateGridExpandHeight(grid: ElementRef, gridOptions: GridOptions = undefined): number {
+    calculateGridExpandHeight(grid: ElementRef, gridOptions: GridOptions): number {
         let jqueryElement = $(grid.nativeElement);
         if (gridOptions !== undefined && gridOptions.showTitle) {
             jqueryElement = jqueryElement.parent();
         }
 
-        return jqueryElement.offset().top + this.heightPadding;
+        return jqueryElement.offset()!.top + this.heightPadding;
     }
 }

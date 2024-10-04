@@ -31,7 +31,6 @@ export interface QueryModel {
     title: string;
     isDrillDown: boolean;
     isGrandTotal: boolean;
-    isNormalMode: boolean;
     isBaseRM: boolean;
     sportBettype: string;
     isExactly: boolean;

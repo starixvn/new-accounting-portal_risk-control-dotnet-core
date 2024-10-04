@@ -18,10 +18,10 @@ export class GridComponent implements OnInit, OnChanges {
     static counter = 0;
     gridId = `grid-${GridComponent.counter}`;
     rendered = false;
-    @Input() options: GridOptions;
-    @Input() context: GridContext;
+    @Input() options!: GridOptions;
+    @Input() context!: GridContext;
     @Output() afterGenerate = new EventEmitter<ElementRef>();
-    @ViewChild('grid', { static: true }) grid: ElementRef;
+    @ViewChild('grid', { static: true }) grid!: ElementRef;
 
     constructor(
         private readonly gridService: GridService,

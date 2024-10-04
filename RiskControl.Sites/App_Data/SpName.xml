@@ -131,6 +131,10 @@
 		<Setting Key="Acc_CustomerSelCustByUsername" SpName="Acc_CustomerSelCustByUsername" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsStatistics_TopAssociatedAccount_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_TopAssociatedAccount" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_ReportSavedFilter" SpName="Acc_Rpt_ReportSavedFilter" DbName="DBWH.bodb_account.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsStatistics_Headline" SpName="Acc_Rpt_NonSportsStatistics_Headline" DbName="DBWH.bodb_account.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsStatistics_SMA" SpName="Acc_Rpt_NonSportsStatistics_SMA" DbName="DBWH.bodb_account.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Headline" SpName="Acc_Rpt_NonSportsProductStatistics_Headline" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_SMA" SpName="Acc_Rpt_NonSportsProductStatistics_SMA" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
 	</Function>
 	
 	<Function Name="Dashboard">

@@ -77,11 +77,6 @@ public class GridOptionDataRowBuilderServiceImp(GridOptionCustomExcelCellStyleSe
             },
             new()
             {
-                Name = "TotalWins", Value = Math.Round(statistic.TotalWins, 2, MidpointRounding.AwayFromZero),
-                CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
-            },
-            new()
-            {
                 Name = "GameIncome", Value = Math.Round(statistic.GameIncome, 2, MidpointRounding.AwayFromZero),
                 CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
             },
@@ -89,16 +84,6 @@ public class GridOptionDataRowBuilderServiceImp(GridOptionCustomExcelCellStyleSe
             {
                 Name = "GamePayout", Value = gamePayout/100,
                 CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Percentage
-            },
-            new()
-            {
-                Name = "TotalRefund", Value = Math.Round(statistic.TotalRefund, 2, MidpointRounding.AwayFromZero),
-                CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
-            },
-            new()
-            {
-                Name = "HouseTurnover", Value = Math.Round(statistic.HouseTurnover, 2, MidpointRounding.AwayFromZero),
-                CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
             },
             new()
             {

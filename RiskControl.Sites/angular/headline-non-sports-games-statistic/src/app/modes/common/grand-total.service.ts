@@ -2,7 +2,6 @@
 import { Observable } from 'rxjs';
 import { HttpService } from 'nap-components/http';
 import { QueryModel } from '../../app.model';
-import { ReportType } from '../../filter';
 
 @Injectable()
 export class GrandTotalService {
@@ -14,27 +13,17 @@ export class GrandTotalService {
     private readonly httpService: HttpService
   ) { }
 
-  query(reportType: ReportType, model: QueryModel): Observable<GridOptions> {
-    const url = this.getGrandTotalBaseUrl(reportType, model.isNormalMode) + 'Query';
+  query( model: QueryModel): Observable<GridOptions> {
+    const url = this.getGrandTotalBaseUrl() + 'Query';
     return this.httpService.post<GridOptions>(url, model);
   }
 
-  excel(reportType: ReportType, model: QueryModel): Observable<Blob> {
-    const url = this.getGrandTotalBaseUrl(reportType, model.isNormalMode) + 'Excel';
+  excel(model: QueryModel): Observable<Blob> {
+    const url = this.getGrandTotalBaseUrl() + 'Excel';
     return this.httpService.download(url, model);
   }
 
-  private getGrandTotalBaseUrl(reportType: ReportType, isNormalMode: boolean): string {
-    if (reportType === ReportType.Daily) {
-      return isNormalMode
-        ? `${this.url}/DailyGrandTotalNormal/`
-        : `${this.url}/DailyGrandTotalHistory/`;
-    } else if (this.dailyViewList.includes(reportType)) {
-      return isNormalMode
-        ? `${this.url}/DailyViewGrandTotalNormal/`
-        : `${this.url}/DailyViewGrandTotalHistory/`;
-    } else {
-      throw new Error('Not implemented yet');
-    }
+  private getGrandTotalBaseUrl(): string {
+    return `${this.url}/DailyViewGrandTotalHistory/`;
   }
 }

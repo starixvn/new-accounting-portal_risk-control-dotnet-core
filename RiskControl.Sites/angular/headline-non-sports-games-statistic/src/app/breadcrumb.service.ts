@@ -18,10 +18,10 @@ export class BreadcrumbService {
     }
 
     compileBreadcrumb(element: HTMLElement, callbackfn: (index: number) => void) {
-        // $(element.parentElement).find('li.breadcrumb-item > a').on('click', (event: { target: any; }) => {
-        //     const index = parseInt($(event.target).data('index'), 10);
-        //     callbackfn(index);
-        // }, );
+        $(element.parentElement!).find('li.breadcrumb-item > a').on('click', (event: { target: any; }) => {
+            const index = parseInt($(event.target).data('index'), 10);
+            callbackfn(index);
+        }, );
     }
 
     generateText(list: string[]): string {

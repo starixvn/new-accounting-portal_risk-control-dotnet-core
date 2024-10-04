@@ -1,8 +1,8 @@
 ﻿import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { DATE_CONFIG } from '../../common';
-import { FilterConfig, ReportType, FilterModelWrapper, FilterHelper } from '../../filter';
 import { ModeContext } from '../mode-context';
+import { FilterModelWrapper } from '../../filter/filter.model';
 
 enum TitleDateFormat {
   FromTo,
@@ -86,25 +86,10 @@ export class TitleService {
   }
 
   private getReportName(): string {
-    const filterModel = this.modeContext.filterModel;
-    switch (filterModel.reportType) {
-      case ReportType.UserName:
-        return FilterHelper.getRoleName(filterModel.roleId);
-      case ReportType.Top20:
-        return FilterHelper.getReportName(filterModel.reportType) + ' ' + FilterHelper.getRoleName(filterModel.roleId);
-      default:
-        return FilterHelper.getReportName(filterModel.reportType);
-    }
+    return "";
   }
 
   private getTitleDateFormat(): TitleDateFormat {
-    const filterModel = this.modeContext.filterModel;
-    const gridModel = this.modeContext.gridModel;
-    if (filterModel.reportType === ReportType.Hourly ||
-      (filterModel.reportType === ReportType.Daily && (filterModel.isNormalMode || gridModel.isDrillDownCurrency))) {
-      return TitleDateFormat.On;
-    }
-
     return TitleDateFormat.FromTo;
   }
 
