@@ -33,7 +33,12 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/numeral/min/numeral.min.js",
+              "src/libs/fanex-grid/fanex.grid.js",
+              "src/libs/fanex-grid/fanex.pagination.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -101,7 +106,12 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/numeral/min/numeral.min.js",
+              "src/libs/fanex-grid/fanex.grid.js",
+              "src/libs/fanex-grid/fanex.pagination.js"
+            ]
           }
         }
       }

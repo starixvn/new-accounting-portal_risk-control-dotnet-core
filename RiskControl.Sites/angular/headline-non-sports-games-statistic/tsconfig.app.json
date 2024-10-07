@@ -9,6 +9,9 @@
       "node",
       "numeral"
     ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
   },
   "files": [
     "src/main.ts",

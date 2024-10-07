@@ -558,8 +558,8 @@ export class FilterComponent implements OnInit {
       removalColumns: this.columnDropdownTreeview.items
         .filter(item => item.checked === false)
         .map(item => item.value.value),
-      startDate: DateHelper.convertDateStructToMoment(this.startDate),
-      endDate: DateHelper.convertDateStructToMoment(this.endDate),
+      fromDate: DateHelper.convertDateStructToMoment(this.startDate),
+      toDate: DateHelper.convertDateStructToMoment(this.endDate),
       collection: {
         products: this.products,
         gameTypes: this.transformGameTypes(this.gameTypes),

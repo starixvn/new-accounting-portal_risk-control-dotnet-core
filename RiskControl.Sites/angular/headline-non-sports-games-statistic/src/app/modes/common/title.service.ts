@@ -19,56 +19,30 @@ export class TitleService {
     if (isLast) {
       return this.getTitle();
     } else {
-      const label = this.modeContext.label;
-      const reportName = this.getReportName();
-      if (_.isNil(label)) {
-        return reportName;
-      } else {
-        return `${reportName} (${label})`;
-      }
-    }
-  }
-
-  getBreadcrumbTitleForReportProduct(isLast: boolean): string {
-    if (isLast) {
-      return this.getTitle();
-    } else {
-      const label = this.modeContext.label;
-      if (_.isNil(label)) {
-        const reportName = this.getReportName();
-        return reportName;
-      } else {
-        return label;
-      }
+      return this.modeContext.label;
     }
   }
 
   getTitle(): string {
-    const reportName = this.getReportName();
-    return this.getTitleWithPrefix(reportName);
-  }
-
-  getTitleWithPrefix(prefix: string): string {
     const gridModel = this.modeContext.gridModel;
     const titleDateFormat = this.getTitleDateFormat();
     const dateString = this.getDateString(titleDateFormat, false);
     const currencyName = this.getCurrencyName();
     if (gridModel.isDrillDownCurrency) {
-      return `${prefix} Game Statistics Report ${dateString} By Currency (${currencyName})`;
+      return `Headline Game Statistics Report ${dateString} By Currency (${currencyName})`;
     } else {
-      return `${prefix} Game Statistics Report ${dateString} (${currencyName})`;
+      return `Headline Game Statistics Report ${dateString} (${currencyName})`;
     }
   }
 
   getExcelFileName(extension = 'xls'): string {
     const gridModel = this.modeContext.gridModel;
-    const reportName = this.getReportName().replace(/ /g, '_');
     const titleDateFormat = this.getTitleDateFormat();
     const dateString = this.getDateString(titleDateFormat, true);
     if (gridModel.isDrillDownCurrency) {
-      return `${reportName}_Game_Statistics_Report_${dateString}_By_Currency.${extension}`;
+      return `Headline_Game_Statistics_Report_${dateString}_By_Currency.${extension}`;
     } else {
-      return `${reportName}_Game_Statistics_Report_${dateString}.${extension}`;
+      return `Headline_Game_Statistics_Report_${dateString}.${extension}`;
     }
   }
 
@@ -83,10 +57,6 @@ export class TitleService {
     const titleDateFormat = this.getTitleDateFormat();
     const dateString = this.getDateString(titleDateFormat, true);
     return `Grand_Total_By_Currency_${dateString}.xls`;
-  }
-
-  private getReportName(): string {
-    return "";
   }
 
   private getTitleDateFormat(): TitleDateFormat {
@@ -112,13 +82,13 @@ export class TitleService {
     switch (titleDateFormat) {
       case TitleDateFormat.On:
         formatString = isExcel ? DATE_CONFIG.dateFormatString2 : DATE_CONFIG.dateFormatString;
-        dateString = filterModel.startDate.format(formatString);
+        dateString = filterModel.fromDate.format(formatString);
         result = isExcel ? `On_${dateString}` : `On ${dateString}`;
         break;
       case TitleDateFormat.FromTo:
         formatString = isExcel ? DATE_CONFIG.dateFormatString2 : DATE_CONFIG.dateFormatString;
-        const startDateString = filterModel.startDate.format(formatString);
-        const endDateString = filterModel.endDate.format(formatString);
+        const startDateString = filterModel.fromDate.format(formatString);
+        const endDateString = filterModel.toDate.format(formatString);
         result = isExcel ? `From_${startDateString}_To_${endDateString}` : `From ${startDateString} To ${endDateString}`;
         break;
       default:

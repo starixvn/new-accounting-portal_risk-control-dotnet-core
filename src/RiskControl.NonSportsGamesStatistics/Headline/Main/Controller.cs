@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Headline.Main;
 
+[ApiController]
 [Route("HeadlineNonSportsGamesStatistics")]
 [ValidationActionFilter]
 public class Controller(IMediator mediator) : ControllerBase

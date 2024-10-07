@@ -3,6 +3,10 @@
         "target": "https://localhost:44383/",
         "secure": false
     },
+    "/HeadlineNonSportsGamesStatistics": {
+        "target": "https://localhost:44383/",
+        "secure": false
+    },
     "/Login": {
         "target": "https://localhost:44383/",
         "secure": false

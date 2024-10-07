@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { ModeGenerate, RowAttribute } from '../mode.model';
+import { GridModel, ModeGenerate, RowAttribute } from '../mode.model';
 import { HeadlineService } from './headline.service';
 import { GrandTotalService, GridService, ModelService, TitleService } from '../common';
 import { ModalService } from 'components/modal';
@@ -10,6 +10,8 @@ import { QueryModel } from 'app/app.model';
 import { FilterConfig } from 'app/filter/filter.config';
 import { Helper } from 'nap-components/helper';
 import { LocalStorageKey } from 'app/common/constants';
+import { FilterModel } from '../../filter/filter.model';
+import { GridModalComponent } from 'components/grid-modal';
 
 @Component({
   selector: 'app-headline',
@@ -50,10 +52,77 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
   }
 
   onAfterGenerate(grid: ElementRef): void {
-    throw new Error('Method not implemented.');
+    $(grid.nativeElement).find('a[drill-down-headline]').on('click', (event) => {
+      const element = $(event.target);
+      const typeId = parseInt(element.attr('type-id')!, 10);
+      const typeName = element.attr('type-name')!;
+      this.drillDownHeadline(typeId, typeName);
+    });
+
+    $(grid.nativeElement).find('a[drill-down-currency]').on('click', (event) => {
+      const element = $(event.target);
+      const currency = parseInt(element.attr('currency')!, 10);
+      const typeId = parseInt(element.attr('type-id')!, 10);
+      const typeName = element.attr('type-name')!;
+      this.drillDownCurrency(currency, typeId, typeName);
+    });
+
+    $(grid.nativeElement).find('a[grand-total]').on('click', () => {
+      this.showGrandTotal();
+    });
+
+    this.modeController.compileBreadcrumb(grid.nativeElement);
   }
+
+  private drillDownHeadline(typeId: number, typeName: string) {
+    const gridModel = new GridModel(false);
+    const filterModel = this.createFilterModel(gridModel);
+    const modeContext = ModeContext.create(typeName, filterModel, gridModel);
+    this.modeController.forward(this.gridOptions, modeContext);
+  }
+
+  private createFilterModel(gridModel: GridModel): FilterModel {
+    const filterModel = _.cloneDeep(this.modeContext.filterModel);
+    return filterModel;
+  }
+
+  private drillDownCurrency(currency: number, typeId: number, typeName: string) {
+    const gridModel = new GridModel(true);
+    const filterModel = this.createFilterModel(gridModel);
+    filterModel.currency = [currency];
+    const modeContext = ModeContext.create(typeName, filterModel, gridModel);
+    this.modeController.forward(this.gridOptions, modeContext);
+  }
+
+  private showGrandTotal() {
+    const gridModel = this.modeContext.gridModel;
+    const queryModel = this.modelService.createQueryModel();
+    this.modelService.updateModelToQueryGrandTotal(queryModel);
+    const queryHandler = (gridOptions: GridOptions) => {
+      gridOptions.fullHeight = false;
+      gridOptions.gridHeight = 500;
+      gridOptions.titleInfo = {
+        text: gridOptions.titleInfoText,
+        showExcelButton: true,
+        exportExcelFunction: () => this.excelGrandTotal(queryModel)
+      };
+      this.modalService.open(GridModalComponent, { size: { width: 1200 } }, gridOptions);
+    };
+    const filterModel = this.modeContext.filterModel;
+    this.grandTotalService.query(queryModel).subscribe(queryHandler);
+  }
+
+  private excelGrandTotal(queryModel: QueryModel) {
+    const gridModel = this.modeContext.gridModel;
+    const queryHandler = (response: Blob) => {
+      const fileName = this.titleService.getExcelGrandTotalFileName();
+      Helper.downloadFile(response, fileName);
+    };
+    this.grandTotalService.excel(queryModel).subscribe(queryHandler);
+  }
+
   generateTitle(isLast: boolean): string {
-    throw new Error('Method not implemented.');
+    return this.titleService.getBreadcrumbTitle(isLast);
   }
 
   private updateGridOptions(gridOptions: GridOptions, queryModel: QueryModel, isBack: boolean) {

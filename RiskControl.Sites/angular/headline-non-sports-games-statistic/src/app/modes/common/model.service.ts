@@ -16,8 +16,8 @@ export class ModelService {
 
     createCriteria(filterModel: FilterModel) {
         return {
-            fromDate: filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
-            toDate: filterModel.endDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD)
+            fromDate: filterModel.fromDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
+            toDate: filterModel.toDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD)
         };
     }
 
@@ -50,8 +50,8 @@ export class ModelService {
             isBaseRM: filterModel.isBaseRM,
             sportBettype: filterModel.sportBettypes.map(s => `${s.sportType}-${s.betType}`).join(','),
             isExactly: filterModel.isExactly,
-            fromDate: '',
-            toDate: ''
+            fromDate: filterModel.fromDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
+            toDate: filterModel.toDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD)
         };
         const model: QueryModel = Helper.extend(baseModel, this.createCriteria(filterModel));
         return model;

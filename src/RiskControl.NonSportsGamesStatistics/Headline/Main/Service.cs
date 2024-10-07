@@ -52,11 +52,27 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
     private List<GridDataRow> BuildBodyRows(List<StatisticsModel> statistics, bool viewByInteger)
     {
         var dataRows = new List<GridDataRow>();
-        //var groupDataRows = statistics.Select(item => gridDataRowBuilderService.BuildDailyGroupDataRow(item, viewByInteger));
-        //foreach (var groupDataRow in groupDataRows)
-        //{
-        //    dataRows.AddRange(groupDataRow);
-        //}
+        foreach (var item in statistics)
+        {
+            var row = BuildBaseDataRow(item, viewByInteger);
+            row.Columns.Insert(0,
+                new Columns
+                {
+                    Name = "CustId",
+                    Value = item.CustId,
+                    CellAlignment = HAlignment.Right,
+                    CustomCellType = ExcelCellType.Integer
+                });
+            row.Columns.Insert(0,
+                new Columns
+                {
+                    Name = "UserName",
+                    Value = item.CustId,
+                    CellAlignment = HAlignment.Left,
+                    CustomAttributes = item.CustId.ToString()
+                });
+            dataRows.Add(row);
+        }
 
         return dataRows;
     }

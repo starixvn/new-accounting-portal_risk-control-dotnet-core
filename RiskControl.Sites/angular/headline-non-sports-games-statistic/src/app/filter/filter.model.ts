@@ -140,8 +140,8 @@ export interface FilterModel {
     housePTType: CompareType;
     housePTValue?: number;
     removalColumns: string[];
-    startDate: moment.Moment;
-    endDate: moment.Moment;
+    fromDate: moment.Moment;
+    toDate: moment.Moment;
     collection: FilterCollection,
     selectedCollection: FilterCollection,
     isBaseRM: boolean,

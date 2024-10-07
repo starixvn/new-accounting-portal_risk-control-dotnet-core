@@ -1,6 +1,4 @@
-﻿using MathNet.Numerics.Statistics;
-
-namespace RiskControl.NonSportsGamesStatistics.Headline.Main;
+﻿namespace RiskControl.NonSportsGamesStatistics.Headline.Main;
 
 public class BasicModel
 {
