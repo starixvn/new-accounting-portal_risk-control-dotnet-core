@@ -62,9 +62,9 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
     $(grid.nativeElement).find('a[drill-down-currency]').on('click', (event) => {
       const element = $(event.target);
       const currency = parseInt(element.attr('currency')!, 10);
-      const typeId = parseInt(element.attr('type-id')!, 10);
-      const typeName = element.attr('type-name')!;
-      this.drillDownCurrency(currency, typeId, typeName);
+      const custId = parseInt(element.attr('custid')!, 10);
+      const userName = element.attr('username')!;
+      this.drillDownCurrency(currency, custId, userName);
     });
 
     $(grid.nativeElement).find('a[grand-total]').on('click', () => {
@@ -86,11 +86,12 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
     return filterModel;
   }
 
-  private drillDownCurrency(currency: number, typeId: number, typeName: string) {
+  private drillDownCurrency(currency: number, custId: number, userName: string) {
     const gridModel = new GridModel(true);
     const filterModel = this.createFilterModel(gridModel);
     filterModel.currency = [currency];
-    const modeContext = ModeContext.create(typeName, filterModel, gridModel);
+    filterModel.custId = custId;
+    const modeContext = ModeContext.create(userName, filterModel, gridModel);
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
@@ -166,9 +167,10 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
       const rowAttribute = JSON.parse(row.customAttr) as RowAttribute;
       for (const column of row.columns) {
         if (column.name === currencyColumn.value) {
+          const custId = rowAttribute.custId;
+          const userName = rowAttribute.userName;
           const currency = column.customAttr;
-          const date = rowAttribute.groupName;
-          column.value = `<a href="javascript:;" drill-down-currency currency="${currency}" date="${date}">${column.value}</a>`;
+          column.value = `<a href="javascript:;" drill-down-currency username="${userName}" custid="${custId}" currency="${currency}">${column.value}</a>`;
           break;
         }
       }

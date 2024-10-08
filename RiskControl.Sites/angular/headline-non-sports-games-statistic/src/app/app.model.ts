@@ -34,4 +34,5 @@ export interface QueryModel {
     isBaseRM: boolean;
     sportBettype: string;
     isExactly: boolean;
+    custId: number;
 }

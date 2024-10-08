@@ -576,7 +576,8 @@ export class FilterComponent implements OnInit {
       sportBettypes: gameTypeResult.sportBetTypes,
       isExactly: this.exactMatching,
       sortColumnName: this.sortColumnName,
-      sortDirection: this.sortDirection
+      sortDirection: this.sortDirection,
+      custId: 0
     };
     return model;
   }

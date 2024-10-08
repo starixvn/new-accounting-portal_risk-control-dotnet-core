@@ -51,7 +51,8 @@ export class ModelService {
             sportBettype: filterModel.sportBettypes.map(s => `${s.sportType}-${s.betType}`).join(','),
             isExactly: filterModel.isExactly,
             fromDate: filterModel.fromDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
-            toDate: filterModel.toDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD)
+            toDate: filterModel.toDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
+            custId: filterModel.custId
         };
         const model: QueryModel = Helper.extend(baseModel, this.createCriteria(filterModel));
         return model;

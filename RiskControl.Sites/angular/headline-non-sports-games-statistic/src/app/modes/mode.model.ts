@@ -6,8 +6,8 @@ export interface ModeGenerate {
 }
 
 export interface RowAttribute {
-  groupId: string;
-  groupName: string;
+  custId: number;
+  userName: string;
 }
 
 export class GridModel {

@@ -19,7 +19,8 @@ export class TitleService {
     if (isLast) {
       return this.getTitle();
     } else {
-      return this.modeContext.label;
+      const label = this.modeContext.label;
+      return label;
     }
   }
 

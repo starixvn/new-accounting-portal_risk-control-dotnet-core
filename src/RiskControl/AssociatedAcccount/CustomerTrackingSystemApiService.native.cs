@@ -19,7 +19,6 @@ public class CustomerTrackingSystemApiServiceImp : CustomerTrackingSystemApiServ
     public async Task<List<AssociationModel>> GetAssociatedCustomer(string host, int custId)
     {
         jsonClient.DefaultRequestHeaders.Accept.Clear();
-        jsonClient.Timeout = TimeSpan.FromMinutes(5);
         jsonClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
         var path = $"{host}/Association/GetByCustId?custId={custId}";

@@ -149,6 +149,7 @@ export interface FilterModel {
     isExactly: boolean;
     sortDirection: string;
     sortColumnName: string;
+    custId: number;
 }
 
 export interface NumberGameGameType extends GameType {

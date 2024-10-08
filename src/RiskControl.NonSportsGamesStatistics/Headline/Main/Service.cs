@@ -2,10 +2,12 @@
 using Fanex.Excel.Enums;
 using Fanex.Excel.Models;
 using MathNet.Numerics.Statistics;
+using Newtonsoft.Json;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Constants;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,16 +63,22 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                     Name = "CustId",
                     Value = item.CustId,
                     CellAlignment = HAlignment.Right,
-                    CustomCellType = ExcelCellType.Integer
+                    CustomAttributes = item.CustId.ToString()
                 });
             row.Columns.Insert(0,
                 new Columns
                 {
                     Name = "UserName",
-                    Value = item.CustId,
+                    Value = item.UserName,
                     CellAlignment = HAlignment.Left,
-                    CustomAttributes = item.CustId.ToString()
+                    CustomAttributes = item.UserName
                 });
+            var customGroupAttributes = new
+            {
+                custId = item.CustId,
+                userName = item.UserName
+            };
+            row.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
             dataRows.Add(row);
         }
 
@@ -81,7 +89,7 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
     {
         var dataRow = BuildBaseDataRow(grandTotal, viewByInteger);
         dataRow.Columns.Insert(0,
-            new Columns { Name = "ReportBy", Value = grandTotal.ReportBy, CellAlignment = HAlignment.Right, MergeColNumber = mergedColNumberGrandTotal });
+            new Columns { Name = "UserName", Value = "Grand Total RM", CellAlignment = HAlignment.Right, MergeColNumber = mergedColNumberGrandTotal });
         return [dataRow];
     }
 
@@ -106,10 +114,9 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
         [
             new HeaderColumns
             {
-                HeaderText = "Group Headline",
+                HeaderText = "Headline",
                 Width = HeaderColumnConstant.WIDTH_200,
                 Name = "UserName",
-                CustomCellType = ExcelCellType.Integer,
                 Sort = true,
                 SortDirection = queryModel.SortColumnName == "UserName" ? queryModel.SortDirection : string.Empty
             },
@@ -119,7 +126,6 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 HeaderText = "CustId",
                 Width = HeaderColumnConstant.WIDTH_100,
                 Name = "CustId",
-                CustomCellType = ExcelCellType.Integer,
                 Sort = true,
                 SortDirection = queryModel.SortColumnName == "CustId" ? queryModel.SortDirection : string.Empty
             },
@@ -172,7 +178,7 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 HeaderText = "Game Payout",
                 Width = HeaderColumnConstant.WIDTH_120,
                 Name = "GamePayout",
-                CustomCellType = ExcelCellType.Percentage,
+                CustomCellType = ExcelCellType.PercentageRedPositive,
                 Sort = true,
                 SortDirection = queryModel.SortColumnName == "GamePayout" ? queryModel.SortDirection : string.Empty
             },
@@ -269,7 +275,7 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
             new()
             {
                 Name = "GamePayout", Value = gamePayout/100,
-                CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Percentage
+                CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.PercentageRedPositive
             },
             new()
             {
