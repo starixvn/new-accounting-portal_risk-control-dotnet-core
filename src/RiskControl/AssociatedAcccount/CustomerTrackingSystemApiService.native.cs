@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -13,7 +14,7 @@ public interface CustomerTrackingSystemApiService
 
 public class CustomerTrackingSystemApiServiceImp : CustomerTrackingSystemApiService
 {
-    private static readonly HttpClient jsonClient = new();
+    private static readonly HttpClient jsonClient = new() { Timeout = TimeSpan.FromMinutes(5) };
 
     public async Task<List<AssociationModel>> GetAssociatedCustomer(string host, int custId)
     {
