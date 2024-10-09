@@ -96,7 +96,6 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
   }
 
   private showGrandTotal() {
-    const gridModel = this.modeContext.gridModel;
     const queryModel = this.modelService.createQueryModel();
     this.modelService.updateModelToQueryGrandTotal(queryModel);
     const queryHandler = (gridOptions: GridOptions) => {
@@ -109,7 +108,6 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
       };
       this.modalService.open(GridModalComponent, { size: { width: 1200 } }, gridOptions);
     };
-    const filterModel = this.modeContext.filterModel;
     this.grandTotalService.query(queryModel).subscribe(queryHandler);
   }
 
@@ -128,7 +126,7 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
 
   private updateGridOptions(gridOptions: GridOptions, queryModel: QueryModel, isBack: boolean) {
     if (!isBack && gridOptions.bodyRows.length > 0 && !this.gridService.isDrilldown()) {
-      this.updateMonthColumn(gridOptions);
+      this.updateHeadlineColumn(gridOptions);
       this.updateGrandTotalCell(gridOptions);
       if (this.gridService.hasCurrencyColumn()) {
         this.updateCurrencyColumn(gridOptions);
@@ -147,10 +145,11 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
     this.gridOptions = gridOptions;
   }
 
-  private updateMonthColumn(gridOptions: GridOptions) {
+  private updateHeadlineColumn(gridOptions: GridOptions) {
     gridOptions.bodyRows.forEach(row => {
       const column = row.columns[0];
-      column.value = `<a href="javascript:;" drill-down-headline headline="${column.value}">${column.value}</a>`;
+      const value = row.columns[1].value;
+      column.value = `<a href="javascript:;" drill-down-headline headline="${value}">${column.value}</a>`;
     });
   }
 

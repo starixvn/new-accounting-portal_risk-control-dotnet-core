@@ -1,6 +1,6 @@
-﻿namespace RiskControl.NonSportsGamesStatistics.Headline.Main;
+﻿namespace RiskControl.NonSportsGamesStatistics.Headline;
 
-public class BasicModel
+public class BaseModel
 {
     public int CurrencyId { get; set; }
 

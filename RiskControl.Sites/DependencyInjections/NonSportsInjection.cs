@@ -175,6 +175,7 @@ public static class NonSportsInjection
 
     private static void RegisterHeadlineServices(this IServiceCollection services)
     {
-        services.AddTransient<Headline.Main.Service, Headline.Main.ServiceImp>();
+        services.AddTransient<Headline.GridOptionBuilderService, Headline.GridOptionBuilderServiceImp>();
+        services.AddTransient<Headline.Service, Headline.ServiceImp>();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RiskControl.NonSportsGamesStatistics.Headline.Main;
+namespace RiskControl.NonSportsGamesStatistics.Headline;
 
 public class ViewModel
 {

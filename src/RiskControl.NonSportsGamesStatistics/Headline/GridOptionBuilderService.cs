@@ -1,91 +1,97 @@
-﻿using Fanex.Data.Repository;
-using Fanex.Excel.Enums;
+﻿using Fanex.Excel.Enums;
 using Fanex.Excel.Models;
-using MathNet.Numerics.Statistics;
 using Newtonsoft.Json;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Constants;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace RiskControl.NonSportsGamesStatistics.Headline.Main;
+namespace RiskControl.NonSportsGamesStatistics.Headline;
 
-public interface Service
+public interface GridOptionBuilderService
 {
-    Task<ViewModel> QueryData(Criteria criteria);
+    List<GridDataRow> BuildBodyRows(List<StatisticsModel> statistics, bool viewByInteger, bool isDrillDown,
+        bool isGrandTotal);
 
-    GridOptions BuildGridOpions(ViewModel model, Request request);
+    List<GridDataRow> BuildFooter(TotalStatisticsModel grandTotal, bool viewByInteger);
+
+    List<HeaderColumns> BuildHeaderColumns(BaseRequestModel basicRequestModel);
 }
 
-public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomExcelCellStyleService customCellStyleService) : Service
+public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService customCellStyleService) : GridOptionBuilderService
 {
     private const int mergedColNumberGrandTotal = 2;
 
-    public async Task<ViewModel> QueryData(Criteria criteria)
-    {
-        var rawData = await dynamicRepository.FetchMultipleAsync<StatisticsModel, TotalStatisticsModel>(criteria);
-        return new ViewModel
-        {
-            Statistics = rawData.Item1,
-            Total = rawData.Item2.FirstOrDefault()
-        };
-    }
-
-    public GridOptions BuildGridOpions(ViewModel model, Request request)
-    {
-        var gridOptions = new GridOptions
-        {
-            ShowTitle = true,
-            TitleType = TitleType.TwoLineBlue,
-            TitleInfoText = request.Title,
-            BodyRows = BuildBodyRows(model.Statistics.ToList(), request.ViewByInteger),
-            FooterRows = BuildFooter(model.Total, request.ViewByInteger),
-            Columns = BuildHeaderColumns(request),
-            ShowFooter = true,
-            ShowHighlightRow = false,
-            ShowDistinctRow = false
-        };
-        return gridOptions;
-    }
-
-    private List<GridDataRow> BuildBodyRows(List<StatisticsModel> statistics, bool viewByInteger)
+    public List<GridDataRow> BuildBodyRows(List<StatisticsModel> statistics, bool viewByInteger, bool isDrillDown, bool isGrandTotal)
     {
         var dataRows = new List<GridDataRow>();
-        foreach (var item in statistics)
+        if (isDrillDown && !isGrandTotal)
         {
-            var row = BuildBaseDataRow(item, viewByInteger);
-            row.Columns.Insert(0,
-                new Columns
-                {
-                    Name = "CustId",
-                    Value = item.CustId,
-                    CellAlignment = HAlignment.Right,
-                    CustomAttributes = item.CustId.ToString()
-                });
-            row.Columns.Insert(0,
-                new Columns
-                {
-                    Name = "UserName",
-                    Value = item.UserName,
-                    CellAlignment = HAlignment.Left,
-                    CustomAttributes = item.UserName
-                });
-            var customGroupAttributes = new
+            var index = 0;
+            foreach (var item in statistics)
             {
-                custId = item.CustId,
-                userName = item.UserName
-            };
-            row.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
-            dataRows.Add(row);
+                var row = BuildBaseDataRow(item, viewByInteger);
+                if (index == 0)
+                {
+                    row.Columns.Insert(0,
+                        new Columns
+                        {
+                            Name = "CustId",
+                            Value = item.CustId,
+                            CellAlignment = HAlignment.Right,
+                            CustomAttributes = item.CustId.ToString(),
+                            MergeRowNumber = statistics.Count
+                        });
+                    row.Columns.Insert(0,
+                        new Columns
+                        {
+                            Name = "UserName",
+                            Value = item.UserName,
+                            CellAlignment = HAlignment.Left,
+                            CustomAttributes = item.UserName,
+                            MergeRowNumber = statistics.Count
+                        });
+                }
+
+                index++;
+                dataRows.Add(row);
+            }
+        }
+        else
+        {
+            foreach (var item in statistics)
+            {
+                var row = BuildBaseDataRow(item, viewByInteger);
+                row.Columns.Insert(0,
+                    new Columns
+                    {
+                        Name = "CustId",
+                        Value = item.CustId,
+                        CellAlignment = HAlignment.Right,
+                        CustomAttributes = item.CustId.ToString()
+                    });
+                row.Columns.Insert(0,
+                    new Columns
+                    {
+                        Name = "UserName",
+                        Value = isGrandTotal ? $"Total {item.UserName}" : item.UserName,
+                        CellAlignment = HAlignment.Left,
+                        CustomAttributes = item.UserName
+                    });
+                var customGroupAttributes = new
+                {
+                    custId = item.CustId,
+                    userName = item.UserName
+                };
+                row.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
+                dataRows.Add(row);
+            }
         }
 
         return dataRows;
     }
 
-    private List<GridDataRow> BuildFooter(TotalStatisticsModel grandTotal, bool viewByInteger)
+    public List<GridDataRow> BuildFooter(TotalStatisticsModel grandTotal, bool viewByInteger)
     {
         var dataRow = BuildBaseDataRow(grandTotal, viewByInteger);
         dataRow.Columns.Insert(0,
@@ -93,7 +99,7 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
         return [dataRow];
     }
 
-    public GridDataRow BuildBaseDataRow(BasicModel statistic, bool viewByInteger)
+    private GridDataRow BuildBaseDataRow(BaseModel statistic, bool viewByInteger)
     {
         var gamePayout = viewByInteger
             ? Math.Round(statistic.GamePayout, 0, MidpointRounding.AwayFromZero)
@@ -108,17 +114,17 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
         };
     }
 
-    private static List<HeaderColumns> BuildHeaderColumns(Request queryModel)
+    public List<HeaderColumns> BuildHeaderColumns(BaseRequestModel basicRequestModel)
     {
         return
         [
             new HeaderColumns
             {
-                HeaderText = "Headline",
+                HeaderText = basicRequestModel.IsGrandTotal ? "Grand Total" : "Headline",
                 Width = HeaderColumnConstant.WIDTH_200,
                 Name = "UserName",
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == "UserName" ? queryModel.SortDirection : string.Empty
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "UserName" ? basicRequestModel.SortDirection : string.Empty
             },
 
             new HeaderColumns
@@ -126,8 +132,8 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 HeaderText = "CustId",
                 Width = HeaderColumnConstant.WIDTH_100,
                 Name = "CustId",
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == "CustId" ? queryModel.SortDirection : string.Empty
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "CustId" ? basicRequestModel.SortDirection : string.Empty
             },
 
             new HeaderColumns
@@ -136,8 +142,8 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 Width = HeaderColumnConstant.WIDTH_100,
                 Name = "BetCount",
                 CustomCellType = ExcelCellType.Integer,
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == "BetCount" ? queryModel.SortDirection : string.Empty
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "BetCount" ? basicRequestModel.SortDirection : string.Empty
             },
 
             new HeaderColumns
@@ -145,9 +151,9 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 HeaderText = HeaderColumnConstant.CURRENCY_TEXT,
                 Width = HeaderColumnConstant.WIDTH_100,
                 Name = HeaderColumnConstant.CURRENCY_TEXT,
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == HeaderColumnConstant.CURRENCY_TEXT
-                    ? queryModel.SortDirection
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == HeaderColumnConstant.CURRENCY_TEXT
+                    ? basicRequestModel.SortDirection
                     : string.Empty
             },
 
@@ -156,9 +162,9 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 HeaderText = "Total Bets",
                 Width = HeaderColumnConstant.WIDTH_120,
                 Name = "TotalBets",
-                CustomCellType = queryModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == "TotalBets" ? queryModel.SortDirection : string.Empty
+                CustomCellType = basicRequestModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "TotalBets" ? basicRequestModel.SortDirection : string.Empty
             },
 
             new HeaderColumns
@@ -166,11 +172,11 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 HeaderText = "Game Income",
                 Width = HeaderColumnConstant.WIDTH_120,
                 Name = "GameIncome",
-                CustomCellType = queryModel.ViewByInteger
+                CustomCellType = basicRequestModel.ViewByInteger
                     ? ExcelCellType.IntegerRedNegative
                     : ExcelCellType.DoubleRedNegative,
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == "GameIncome" ? queryModel.SortDirection : string.Empty
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "GameIncome" ? basicRequestModel.SortDirection : string.Empty
             },
 
             new HeaderColumns
@@ -179,8 +185,8 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 Width = HeaderColumnConstant.WIDTH_120,
                 Name = "GamePayout",
                 CustomCellType = ExcelCellType.PercentageRedPositive,
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == "GamePayout" ? queryModel.SortDirection : string.Empty
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "GamePayout" ? basicRequestModel.SortDirection : string.Empty
             },
 
 
@@ -189,9 +195,9 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 HeaderText = "Real Turnover",
                 Width = HeaderColumnConstant.WIDTH_120,
                 Name = "RealTurnover",
-                CustomCellType = queryModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == "RealTurnover" ? queryModel.SortDirection : string.Empty
+                CustomCellType = basicRequestModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "RealTurnover" ? basicRequestModel.SortDirection : string.Empty
             },
 
             new HeaderColumns
@@ -199,12 +205,12 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 HeaderText = "Gross Income",
                 Width = HeaderColumnConstant.WIDTH_120,
                 Name = "HouseGrossIncome",
-                CustomCellType = queryModel.ViewByInteger
+                CustomCellType = basicRequestModel.ViewByInteger
                     ? ExcelCellType.IntegerRedNegative
                     : ExcelCellType.DoubleRedNegative,
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == "HouseGrossIncome"
-                    ? queryModel.SortDirection
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "HouseGrossIncome"
+                    ? basicRequestModel.SortDirection
                     : string.Empty
             },
 
@@ -213,11 +219,11 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 HeaderText = "Comm",
                 Width = HeaderColumnConstant.WIDTH_120,
                 Name = "HouseComm",
-                CustomCellType = queryModel.ViewByInteger
+                CustomCellType = basicRequestModel.ViewByInteger
                     ? ExcelCellType.IntegerRedNegative
                     : ExcelCellType.DoubleRedNegative,
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == "HouseComm" ? queryModel.SortDirection : string.Empty
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "HouseComm" ? basicRequestModel.SortDirection : string.Empty
             },
 
             new HeaderColumns
@@ -225,12 +231,12 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 HeaderText = HeaderColumnConstant.EXTRAPT_TEXT,
                 Width = HeaderColumnConstant.WIDTH_120,
                 Name = HeaderColumnConstant.EXTRAPT_TEXT,
-                CustomCellType = queryModel.ViewByInteger
+                CustomCellType = basicRequestModel.ViewByInteger
                     ? ExcelCellType.IntegerRedNegative
                     : ExcelCellType.DoubleRedNegative,
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == HeaderColumnConstant.EXTRAPT_TEXT
-                    ? queryModel.SortDirection
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == HeaderColumnConstant.EXTRAPT_TEXT
+                    ? basicRequestModel.SortDirection
                     : string.Empty
             },
 
@@ -239,16 +245,16 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionCustomEx
                 HeaderText = "Net Income",
                 Width = HeaderColumnConstant.WIDTH_120,
                 Name = "HouseNetIncome",
-                CustomCellType = queryModel.ViewByInteger
+                CustomCellType = basicRequestModel.ViewByInteger
                     ? ExcelCellType.IntegerRedNegative
                     : ExcelCellType.DoubleRedNegative,
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == "HouseNetIncome" ? queryModel.SortDirection : string.Empty
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "HouseNetIncome" ? basicRequestModel.SortDirection : string.Empty
             }
         ];
     }
 
-    private static List<Columns> InitColumns(BasicModel statistic, bool viewByInteger, decimal gamePayout)
+    private static List<Columns> InitColumns(BaseModel statistic, bool viewByInteger, decimal gamePayout)
     {
         var columns = new List<Columns>
         {

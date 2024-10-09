@@ -14,16 +14,12 @@ export class GrandTotalService {
   ) { }
 
   query( model: QueryModel): Observable<GridOptions> {
-    const url = this.getGrandTotalBaseUrl() + 'Query';
+    const url ='HeadlineNonSportsGamesStatistics/Query';
     return this.httpService.post<GridOptions>(url, model);
   }
 
   excel(model: QueryModel): Observable<Blob> {
-    const url = this.getGrandTotalBaseUrl() + 'Excel';
+    const url = 'HeadlineNonSportsGamesStatistics/Excel';
     return this.httpService.download(url, model);
-  }
-
-  private getGrandTotalBaseUrl(): string {
-    return `${this.url}/DailyViewGrandTotalHistory/`;
   }
 }

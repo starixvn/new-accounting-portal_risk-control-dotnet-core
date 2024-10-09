@@ -8,5 +8,6 @@ public class HeadlineProfile : Profile
     public HeadlineProfile()
     {
         CreateMap<Headline.Main.Request, Headline.Main.Criteria>();
+        CreateMap<Headline.SMA.Request, Headline.SMA.Criteria>();
     }
 }

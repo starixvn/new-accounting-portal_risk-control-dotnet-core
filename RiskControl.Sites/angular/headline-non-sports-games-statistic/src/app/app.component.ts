@@ -48,7 +48,7 @@ export class AppComponent {
     this.removeCurrentComponent();
     const component = this.modeService.getComponent();
     if (component) {
-      const modeContext = ModeContext.create('', filterModel, false);
+      const modeContext = ModeContext.create('Headline', filterModel, false);
       this.modeContexts = [modeContext];
       this.componentRef = this.createComponent(component, modeContext);
       this.instances = [this.componentRef.instance];
