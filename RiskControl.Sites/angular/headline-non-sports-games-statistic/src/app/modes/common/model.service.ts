@@ -52,7 +52,8 @@ export class ModelService {
             isExactly: filterModel.isExactly,
             fromDate: filterModel.fromDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
             toDate: filterModel.toDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
-            custId: filterModel.custId
+            custId: filterModel.custId,
+            headline: filterModel.headline
         };
         const model: QueryModel = Helper.extend(baseModel, this.createCriteria(filterModel));
         return model;

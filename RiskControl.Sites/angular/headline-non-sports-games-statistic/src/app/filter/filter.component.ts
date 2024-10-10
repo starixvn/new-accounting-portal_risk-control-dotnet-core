@@ -577,7 +577,8 @@ export class FilterComponent implements OnInit {
       isExactly: this.exactMatching,
       sortColumnName: this.sortColumnName,
       sortDirection: this.sortDirection,
-      custId: 0
+      custId: 0,
+      headline: 0
     };
     return model;
   }

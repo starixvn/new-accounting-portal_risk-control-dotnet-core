@@ -35,4 +35,5 @@ export interface QueryModel {
     sportBettype: string;
     isExactly: boolean;
     custId: number;
+    headline: number;
 }

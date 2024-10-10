@@ -24,7 +24,7 @@ public class BaseHandler<TRequestModel, TCriteria>(Service service, IMapper mapp
         return gridOptions;
     }
 
-    private static ViewModel SortData(ViewModel data, string sortDirection, string sortColumnName)
+    private static BaseViewModel SortData(BaseViewModel data, string sortDirection, string sortColumnName)
     {
         var propInfo = typeof(StatisticsModel).GetProperty(sortColumnName);
         var isAsc = string.Equals(sortDirection, SortingInformation.Ascending, StringComparison.OrdinalIgnoreCase);

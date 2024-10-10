@@ -2,7 +2,7 @@
 
 namespace RiskControl.NonSportsGamesStatistics.Headline;
 
-public class ViewModel
+public class BaseViewModel
 {
     public IEnumerable<StatisticsModel> Statistics { get; set; }
 

@@ -8,24 +8,24 @@ namespace RiskControl.NonSportsGamesStatistics.Headline;
 
 public interface Service
 {
-    Task<ViewModel> QueryData(ICriteria criteria);
+    Task<BaseViewModel> QueryData(ICriteria criteria);
 
-    GridOptions BuildGridOpions(ViewModel model, BaseRequestModel request);
+    GridOptions BuildGridOpions(BaseViewModel model, BaseRequestModel request);
 }
 
 public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionBuilderService gridOptionBuilderService) : Service
 {
-    public async Task<ViewModel> QueryData(ICriteria criteria)
+    public async Task<BaseViewModel> QueryData(ICriteria criteria)
     {
         var rawData = await dynamicRepository.FetchMultipleAsync<StatisticsModel, TotalStatisticsModel>(criteria);
-        return new ViewModel
+        return new BaseViewModel
         {
             Statistics = rawData.Item1,
             Total = rawData.Item2.FirstOrDefault()
         };
     }
 
-    public GridOptions BuildGridOpions(ViewModel model, BaseRequestModel request)
+    public GridOptions BuildGridOpions(BaseViewModel model, BaseRequestModel request)
     {
         var gridOptions = new GridOptions
         {

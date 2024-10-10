@@ -150,6 +150,7 @@ export interface FilterModel {
     sortDirection: string;
     sortColumnName: string;
     custId: number;
+    headline: number;
 }
 
 export interface NumberGameGameType extends GameType {

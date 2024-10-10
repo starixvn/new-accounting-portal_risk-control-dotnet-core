@@ -54,9 +54,8 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
   onAfterGenerate(grid: ElementRef): void {
     $(grid.nativeElement).find('a[drill-down-headline]').on('click', (event) => {
       const element = $(event.target);
-      const typeId = parseInt(element.attr('type-id')!, 10);
-      const typeName = element.attr('type-name')!;
-      this.drillDownHeadline(typeId, typeName);
+      const headline = parseInt(element.attr('headline')!, 10);
+      this.drillDownHeadline(headline);
     });
 
     $(grid.nativeElement).find('a[drill-down-currency]').on('click', (event) => {
@@ -74,21 +73,22 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
     this.modeController.compileBreadcrumb(grid.nativeElement);
   }
 
-  private drillDownHeadline(typeId: number, typeName: string) {
+  private drillDownHeadline(headline: number) {
     const gridModel = new GridModel(false);
-    const filterModel = this.createFilterModel(gridModel);
-    const modeContext = ModeContext.create(typeName, filterModel, gridModel);
+    const filterModel = this.createFilterModel();
+    filterModel.headline = headline;
+    const modeContext = ModeContext.create("", filterModel, gridModel);
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
-  private createFilterModel(gridModel: GridModel): FilterModel {
+  private createFilterModel(): FilterModel {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
     return filterModel;
   }
 
   private drillDownCurrency(currency: number, custId: number, userName: string) {
     const gridModel = new GridModel(true);
-    const filterModel = this.createFilterModel(gridModel);
+    const filterModel = this.createFilterModel();
     filterModel.currency = [currency];
     filterModel.custId = custId;
     const modeContext = ModeContext.create(userName, filterModel, gridModel);
@@ -112,7 +112,6 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
   }
 
   private excelGrandTotal(queryModel: QueryModel) {
-    const gridModel = this.modeContext.gridModel;
     const queryHandler = (response: Blob) => {
       const fileName = this.titleService.getExcelGrandTotalFileName();
       Helper.downloadFile(response, fileName);

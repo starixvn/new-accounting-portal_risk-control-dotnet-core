@@ -13,12 +13,16 @@ export class HeadlineService {
   ) { }
 
   query(model: QueryModel): Observable<GridOptions> {
-      const url = 'HeadlineNonSportsGamesStatistics/Query';
+      const url = `${this.getUrl(model.headline)}/Query`;
       return this.httpService.post<GridOptions>(url, model);
   }
 
   excel(model: QueryModel): Observable<Blob> {
-      const url = 'HeadlineNonSportsGamesStatistics/Excel';
+    const url = `${this.getUrl(model.headline)}/Excel`;
       return this.httpService.download(url, model);
+  }
+
+  private getUrl(headline: number): string {
+    return headline > 0 ? 'HeadlineNonSportsGamesStatistics/SMA' : 'HeadlineNonSportsGamesStatistics';
   }
 }

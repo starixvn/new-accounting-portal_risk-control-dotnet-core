@@ -2,6 +2,8 @@
 
 public class StatisticsModel : BaseModel
 {
+    public string RoleName { get; set; }
+
     public string UserName { get; set; }
 
     public int CustId { get; set; }
