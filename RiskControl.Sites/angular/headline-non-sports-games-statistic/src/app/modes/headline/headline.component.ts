@@ -55,7 +55,8 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
     $(grid.nativeElement).find('a[drill-down-headline]').on('click', (event) => {
       const element = $(event.target);
       const headline = parseInt(element.attr('headline')!, 10);
-      this.drillDownHeadline(headline);
+      const userName = element.attr('username')!;
+      this.drillDownHeadline(headline, userName);
     });
 
     $(grid.nativeElement).find('a[drill-down-currency]').on('click', (event) => {
@@ -63,7 +64,8 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
       const currency = parseInt(element.attr('currency')!, 10);
       const custId = parseInt(element.attr('custid')!, 10);
       const userName = element.attr('username')!;
-      this.drillDownCurrency(currency, custId, userName);
+      const roleId = parseInt(element.attr('roleId')!, 10);
+      this.drillDownCurrency(currency, custId, userName, roleId);
     });
 
     $(grid.nativeElement).find('a[grand-total]').on('click', () => {
@@ -73,11 +75,11 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
     this.modeController.compileBreadcrumb(grid.nativeElement);
   }
 
-  private drillDownHeadline(headline: number) {
+  private drillDownHeadline(headline: number, userName: string) {
     const gridModel = new GridModel(false);
     const filterModel = this.createFilterModel();
     filterModel.headline = headline;
-    const modeContext = ModeContext.create("", filterModel, gridModel);
+    const modeContext = ModeContext.create(userName, filterModel, gridModel);
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
@@ -86,11 +88,12 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
     return filterModel;
   }
 
-  private drillDownCurrency(currency: number, custId: number, userName: string) {
+  private drillDownCurrency(currency: number, custId: number, userName: string, roleId: number) {
     const gridModel = new GridModel(true);
     const filterModel = this.createFilterModel();
     filterModel.currency = [currency];
     filterModel.custId = custId;
+    filterModel.roleId = roleId;
     const modeContext = ModeContext.create(userName, filterModel, gridModel);
     this.modeController.forward(this.gridOptions, modeContext);
   }
@@ -108,7 +111,7 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
       };
       this.modalService.open(GridModalComponent, { size: { width: 1200 } }, gridOptions);
     };
-    this.grandTotalService.query(queryModel).subscribe(queryHandler);
+    this.headlineService.query(queryModel).subscribe(queryHandler);
   }
 
   private excelGrandTotal(queryModel: QueryModel) {
@@ -116,7 +119,7 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
       const fileName = this.titleService.getExcelGrandTotalFileName();
       Helper.downloadFile(response, fileName);
     };
-    this.grandTotalService.excel(queryModel).subscribe(queryHandler);
+    this.headlineService.excel(queryModel).subscribe(queryHandler);
   }
 
   generateTitle(isLast: boolean): string {
@@ -146,9 +149,12 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
 
   private updateHeadlineColumn(gridOptions: GridOptions) {
     gridOptions.bodyRows.forEach(row => {
-      const column = row.columns[0];
-      const value = row.columns[1].value;
-      column.value = `<a href="javascript:;" drill-down-headline headline="${value}">${column.value}</a>`;
+      if (!gridOptions.showTree) {
+        const column = row.columns[0];
+        const value = row.columns[1].value;
+        const userName = row.columns[0].value
+        column.value = `<a href="javascript:;" drill-down-headline username="${userName}" headline="${value}">${column.value}</a>`;
+      }
     });
   }
 
@@ -168,7 +174,8 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
           const custId = rowAttribute.custId;
           const userName = rowAttribute.userName;
           const currency = column.customAttr;
-          column.value = `<a href="javascript:;" drill-down-currency username="${userName}" custid="${custId}" currency="${currency}">${column.value}</a>`;
+          const roleId = rowAttribute.roleId;
+          column.value = `<a href="javascript:;" drill-down-currency roleid="${roleId}" username="${userName}" custid="${custId}" currency="${currency}">${column.value}</a>`;
           break;
         }
       }

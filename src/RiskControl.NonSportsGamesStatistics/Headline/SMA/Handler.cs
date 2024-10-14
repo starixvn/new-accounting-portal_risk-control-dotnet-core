@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Headline.SMA;
 
-public class Handler(Service service, IMapper mapper) : BaseHandler<Request, Criteria>(service, mapper), IRequestHandler<Request, GridOptions>
+public class Handler(Service service, IMapper mapper) : BaseHandler<Request>(service, mapper), IRequestHandler<Request, GridOptions>
 {
     public async Task<GridOptions> Handle(Request request, CancellationToken cancellationToken)
     {
-        return await base.Handle(request);
+        if (request.IsToDay)
+        {
+            return await base.Handle<NormalCriteria>(request, true);
+        }
+        return await base.Handle<Criteria>(request, true);
     }
 }

@@ -8,19 +8,18 @@ using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Headline;
 
-public class BaseHandler<TRequestModel, TCriteria>(Service service, IMapper mapper)
+public class BaseHandler<TRequestModel>(Service service, IMapper mapper)
     where TRequestModel : BaseRequestModel
-    where TCriteria : ICriteria
 {
-    public async Task<GridOptions> Handle(TRequestModel request)
+    public async Task<GridOptions> Handle<TCriteria>(TRequestModel request, bool isGroup) where TCriteria : ICriteria
     {
         var criteria = mapper.Map<TCriteria>(request);
-        var data = await service.QueryData(criteria);
+        var data = await service.QueryData(criteria, isGroup && !request.IsDrillDown);
         if (!string.IsNullOrEmpty(request.SortColumnName) && !string.IsNullOrEmpty(request.SortDirection))
         {
             data = SortData(data, request.SortDirection, request.SortColumnName);
         }
-        var gridOptions = service.BuildGridOpions(data, request);
+        var gridOptions = service.BuildGridOpions(data, request, isGroup);
         return gridOptions;
     }
 

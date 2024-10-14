@@ -5,24 +5,29 @@ using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Constants;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace RiskControl.NonSportsGamesStatistics.Headline;
 
 public interface GridOptionBuilderService
 {
     List<GridDataRow> BuildBodyRows(List<StatisticsModel> statistics, bool viewByInteger, bool isDrillDown,
+        bool isGrandTotal, bool isSMA);
+
+    List<GridDataRow> BuildBodyRowsHaveGroup(List<StatisticsModel> statistics, List<StatisticsModel> subTotals, bool viewByInteger, bool isDrillDown,
         bool isGrandTotal);
 
     List<GridDataRow> BuildFooter(TotalStatisticsModel grandTotal, bool viewByInteger);
 
-    List<HeaderColumns> BuildHeaderColumns(BaseRequestModel basicRequestModel);
+    List<HeaderColumns> BuildHeaderColumns(BaseRequestModel basicRequestModel, bool isGroup, bool isDrillDown);
 }
 
 public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService customCellStyleService) : GridOptionBuilderService
 {
     private const int mergedColNumberGrandTotal = 2;
 
-    public List<GridDataRow> BuildBodyRows(List<StatisticsModel> statistics, bool viewByInteger, bool isDrillDown, bool isGrandTotal)
+    public List<GridDataRow> BuildBodyRows(List<StatisticsModel> statistics, bool viewByInteger, bool isDrillDown, bool isGrandTotal, bool isSMA)
     {
         var dataRows = new List<GridDataRow>();
         if (isDrillDown && !isGrandTotal)
@@ -37,16 +42,16 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
                         new Columns
                         {
                             Name = "CustId",
-                            Value = item.CustId,
+                            Value = item.CustId??string.Empty,
                             CellAlignment = HAlignment.Right,
-                            CustomAttributes = item.CustId.ToString(),
+                            CustomAttributes = item.CustId,
                             MergeRowNumber = statistics.Count
                         });
                     row.Columns.Insert(0,
                         new Columns
                         {
                             Name = "UserName",
-                            Value = item.UserName,
+                            Value = isSMA ? item.RoleName : item.UserName,
                             CellAlignment = HAlignment.Left,
                             CustomAttributes = item.UserName,
                             MergeRowNumber = statistics.Count
@@ -66,9 +71,9 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
                     new Columns
                     {
                         Name = "CustId",
-                        Value = item.CustId,
+                        Value = item.CustId??string.Empty,
                         CellAlignment = HAlignment.Right,
-                        CustomAttributes = item.CustId.ToString()
+                        CustomAttributes = item.CustId
                     });
                 row.Columns.Insert(0,
                     new Columns
@@ -81,12 +86,82 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
                 var customGroupAttributes = new
                 {
                     custId = item.CustId,
-                    userName = item.UserName
+                    userName = item.UserName,
+                    roleId = 0
                 };
                 row.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
                 dataRows.Add(row);
             }
         }
+
+        return dataRows;
+    }
+
+    public List<GridDataRow> BuildBodyRowsHaveGroup(List<StatisticsModel> statistics, List<StatisticsModel> subTotals, bool viewByInteger, bool isDrillDown, bool isGrandTotal)
+    {
+        var dataRows = new List<GridDataRow>();
+        if (subTotals.Count == 0)
+        {
+            return dataRows;
+        }
+        var rows = subTotals.Select(subTotal =>
+        {
+            var row = BuildBaseDataRow(subTotal, viewByInteger);
+            row.Columns.Insert(0,
+                new Columns
+                {
+                    Name = "CustId",
+                    Value = subTotal.CustId??string.Empty,
+                    CellAlignment = HAlignment.Right,
+                    CustomAttributes = subTotal.CustId
+                });
+            row.Columns.Insert(0,
+                new Columns
+                {
+                    Name = "UserName",
+                    Value = isGrandTotal ? $"Total {subTotal.RoleName}" : subTotal.RoleName,
+                    CellAlignment = HAlignment.Left,
+                    CustomAttributes = subTotal.RoleName
+                });
+            var customGroupAttributes = new
+            {
+                custId = 0,
+                userName = subTotal.RoleName,
+                roleId = GetRoleId(subTotal.RoleName.Trim().ToLower(CultureInfo.CurrentCulture))
+            };
+            row.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
+            var subItems = statistics.Where(s => s.RoleName == subTotal.RoleName);
+            if (subItems.Any())
+            {
+                var subRows = subItems.Select(subItem =>
+                {
+                    var subRow = BuildBaseDataRow(subItem, viewByInteger);
+                    subRow.Columns.Insert(0,
+                        new Columns
+                        {
+                            Name = "CustId",
+                            Value = subItem.CustId??string.Empty,
+                            CellAlignment = HAlignment.Right,
+                            CustomAttributes = subItem.CustId
+                        });
+                    subRow.Columns.Insert(0,
+                        new Columns
+                        {
+                            Name = "UserName",
+                            Value = isGrandTotal ? $"Total {subItem.UserName}" : subItem.UserName,
+                            CellAlignment = HAlignment.Left,
+                            CustomAttributes = subItem.UserName
+                        });
+                    return subRow;
+                });
+                row.SubRows.AddRange(subRows);
+            }
+
+            return row;
+        });
+        dataRows.AddRange(rows);
+
+        return dataRows;
 
         return dataRows;
     }
@@ -114,17 +189,23 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
         };
     }
 
-    public List<HeaderColumns> BuildHeaderColumns(BaseRequestModel basicRequestModel)
+    public List<HeaderColumns> BuildHeaderColumns(BaseRequestModel basicRequestModel, bool isGroup, bool isDrillDown)
     {
+        var firstColumnText = isGroup ? "Username" : "Headline";
+        if (isGroup && isDrillDown)
+        {
+            firstColumnText = "Account Level";
+        }
         return
         [
             new HeaderColumns
             {
-                HeaderText = basicRequestModel.IsGrandTotal ? "Grand Total" : "Headline",
+                HeaderText = basicRequestModel.IsGrandTotal ? "Grand Total" : firstColumnText,
                 Width = HeaderColumnConstant.WIDTH_200,
                 Name = "UserName",
                 Sort = !basicRequestModel.IsGrandTotal,
-                SortDirection = basicRequestModel.SortColumnName == "UserName" ? basicRequestModel.SortDirection : string.Empty
+                SortDirection = basicRequestModel.SortColumnName == "UserName" ? basicRequestModel.SortDirection : string.Empty,
+                ShowCollapseExpand = isGroup
             },
 
             new HeaderColumns
@@ -310,5 +391,17 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
             }
         };
         return columns;
+    }
+
+    private static int GetRoleId(string userName)
+    {
+        var result = userName switch
+        {
+            "agent" => 2,
+            "master" => 3,
+            "super" => 4,
+            _ => 0
+        };
+        return result;
     }
 }

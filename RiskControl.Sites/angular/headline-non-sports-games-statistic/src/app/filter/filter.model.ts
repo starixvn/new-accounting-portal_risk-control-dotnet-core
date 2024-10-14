@@ -151,6 +151,8 @@ export interface FilterModel {
     sortColumnName: string;
     custId: number;
     headline: number;
+    roleId: number;
+    isToday: boolean;
 }
 
 export interface NumberGameGameType extends GameType {
@@ -221,22 +223,22 @@ export interface SavedFilterQueryModel {
 }
 
 export interface SavedFilterContentModel {
-    products: string;
-    sites: string;
-    currencies: string;
-    totalBetCompareType: string;
-    gameIncomeCompareType: string;
-    housePtCompareType: string;
-    housePtValue: string;
-    gameTypes: string;
-    devices: string;
-    columns: string;
-    gameIncomeValue: string;
-    totalBetValue: string;
-    isExcludeTest: string;
-    isViewByInteger: string;
-    exactMatching: string;
-    isBasermCheck: string;
+    products: string | null;
+    sites: string | null;
+    currencies: string | null;
+    totalBetCompareType: string | null;
+    gameIncomeCompareType: string | null;
+    housePtCompareType: string | null;
+    housePtValue: string | null;
+    gameTypes: string | null;
+    devices: string | null;
+    columns: string | null;
+    gameIncomeValue: string | null;
+    totalBetValue: string | null;
+    isExcludeTest: string | null;
+    isViewByInteger: string | null;
+    exactMatching: string | null;
+    isBasermCheck: string | null;
     date: string;
     sort: string;
 }

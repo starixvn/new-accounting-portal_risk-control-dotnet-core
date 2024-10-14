@@ -52,4 +52,6 @@ public class BaseRequestModel
     public bool ViewByInteger { get; set; }
 
     public string Title { get; set; }
+
+    public bool IsToDay { get; set; }
 }

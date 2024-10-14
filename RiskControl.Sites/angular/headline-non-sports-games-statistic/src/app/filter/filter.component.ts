@@ -199,6 +199,11 @@ export class FilterComponent implements OnInit {
       timePeriodType: TimePeriod.SinceLastYear,
       startDate: this.lastYearStartDate,
       endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+    },
+    {
+      timePeriodType: TimePeriod.Today,
+      startDate: moment.utc(DATE_CONFIG.reportDate.today),
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     }
   ];
 
@@ -578,7 +583,9 @@ export class FilterComponent implements OnInit {
       sortColumnName: this.sortColumnName,
       sortDirection: this.sortDirection,
       custId: 0,
-      headline: 0
+      headline: 0,
+      roleId: 0,
+      isToday: this.isToday()
     };
     return model;
   }
@@ -818,20 +825,20 @@ export class FilterComponent implements OnInit {
 
   private createContentForSavedFilter(): string {
     const model: SavedFilterContentModel = {
-      columns: localStorage.getItem(LocalStorageKey.COLUMNS)??'',
-      currencies: localStorage.getItem(LocalStorageKey.CURRENCIES)??'',
-      devices: localStorage.getItem(LocalStorageKey.DEVICES)??'',
-      exactMatching: localStorage.getItem(LocalStorageKey.EXACT_MATCHING)??'',
-      gameIncomeCompareType: localStorage.getItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE)??'',
-      gameIncomeValue: localStorage.getItem(LocalStorageKey.GAME_INCOME_VALUE)??'',
-      gameTypes: localStorage.getItem(LocalStorageKey.GAME_TYPES)??'',
-      housePtCompareType: localStorage.getItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE)??'',
-      housePtValue: localStorage.getItem(LocalStorageKey.HOUSEPT_VALUE)??'',
-      isBasermCheck: localStorage.getItem(LocalStorageKey.IS_BASERM_CHECK)??'',
-      isExcludeTest: localStorage.getItem(LocalStorageKey.IS_EXCLUDE_TEST)??'',
-      isViewByInteger: localStorage.getItem(LocalStorageKey.IS_VIEW_BY_INTEGER)??'',
-      products: localStorage.getItem(LocalStorageKey.PRODUCTS)??'',
-      sites: localStorage.getItem(LocalStorageKey.SITES)??'',
+      columns: localStorage.getItem(LocalStorageKey.COLUMNS),
+      currencies: localStorage.getItem(LocalStorageKey.CURRENCIES),
+      devices: localStorage.getItem(LocalStorageKey.DEVICES),
+      exactMatching: localStorage.getItem(LocalStorageKey.EXACT_MATCHING),
+      gameIncomeCompareType: localStorage.getItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE),
+      gameIncomeValue: localStorage.getItem(LocalStorageKey.GAME_INCOME_VALUE),
+      gameTypes: localStorage.getItem(LocalStorageKey.GAME_TYPES),
+      housePtCompareType: localStorage.getItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE),
+      housePtValue: localStorage.getItem(LocalStorageKey.HOUSEPT_VALUE),
+      isBasermCheck: localStorage.getItem(LocalStorageKey.IS_BASERM_CHECK),
+      isExcludeTest: localStorage.getItem(LocalStorageKey.IS_EXCLUDE_TEST),
+      isViewByInteger: localStorage.getItem(LocalStorageKey.IS_VIEW_BY_INTEGER),
+      products: localStorage.getItem(LocalStorageKey.PRODUCTS),
+      sites: localStorage.getItem(LocalStorageKey.SITES),
       totalBetCompareType: localStorage.getItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE)??'',
       totalBetValue: localStorage.getItem(LocalStorageKey.TOTAL_BET_VALUE)??'',
       date: `${this.timePeriod}**${DateHelper.convertDateStructToString(this.startDate)}**${DateHelper.convertDateStructToString(this.endDate)}`,
@@ -842,22 +849,22 @@ export class FilterComponent implements OnInit {
 
   private reloadFilter(content: string) {
     const model = JSON.parse(content) as SavedFilterContentModel;
-    localStorage.setItem(LocalStorageKey.COLUMNS, model.columns);
-    localStorage.setItem(LocalStorageKey.CURRENCIES, model.currencies);
-    localStorage.setItem(LocalStorageKey.DEVICES, model.devices);
-    localStorage.setItem(LocalStorageKey.EXACT_MATCHING, model.exactMatching);
-    localStorage.setItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE, model.gameIncomeCompareType);
-    localStorage.setItem(LocalStorageKey.GAME_INCOME_VALUE, model.gameIncomeValue);
-    localStorage.setItem(LocalStorageKey.GAME_TYPES, model.gameTypes);
-    localStorage.setItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE, model.housePtCompareType);
-    localStorage.setItem(LocalStorageKey.HOUSEPT_VALUE, model.housePtValue);
-    localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, model.isBasermCheck);
-    localStorage.setItem(LocalStorageKey.IS_EXCLUDE_TEST, model.isExcludeTest);
-    localStorage.setItem(LocalStorageKey.IS_VIEW_BY_INTEGER, model.isViewByInteger);
-    localStorage.setItem(LocalStorageKey.PRODUCTS, model.products);
-    localStorage.setItem(LocalStorageKey.SITES, model.sites);
-    localStorage.setItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE, model.totalBetCompareType);
-    localStorage.setItem(LocalStorageKey.TOTAL_BET_VALUE, model.totalBetValue);
+    localStorage.setItem(LocalStorageKey.COLUMNS, model.columns!);
+    localStorage.setItem(LocalStorageKey.CURRENCIES, model.currencies!);
+    localStorage.setItem(LocalStorageKey.DEVICES, model.devices!);
+    localStorage.setItem(LocalStorageKey.EXACT_MATCHING, model.exactMatching!);
+    localStorage.setItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE, model.gameIncomeCompareType!);
+    localStorage.setItem(LocalStorageKey.GAME_INCOME_VALUE, model.gameIncomeValue!);
+    localStorage.setItem(LocalStorageKey.GAME_TYPES, model.gameTypes!);
+    localStorage.setItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE, model.housePtCompareType!);
+    localStorage.setItem(LocalStorageKey.HOUSEPT_VALUE, model.housePtValue!);
+    localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, model.isBasermCheck!);
+    localStorage.setItem(LocalStorageKey.IS_EXCLUDE_TEST, model.isExcludeTest!);
+    localStorage.setItem(LocalStorageKey.IS_VIEW_BY_INTEGER, model.isViewByInteger!);
+    localStorage.setItem(LocalStorageKey.PRODUCTS, model.products!);
+    localStorage.setItem(LocalStorageKey.SITES, model.sites!);
+    localStorage.setItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE, model.totalBetCompareType!);
+    localStorage.setItem(LocalStorageKey.TOTAL_BET_VALUE, model.totalBetValue!);
     localStorage.setItem(LocalStorageKey.SORT, model.sort);
     this.initFilter();
     if (model.date.length > 0) {
@@ -872,4 +879,7 @@ export class FilterComponent implements OnInit {
     }
   }
 
+  isToday(): boolean {
+    return this.timePeriod === TimePeriod.Today;
+  }
 }

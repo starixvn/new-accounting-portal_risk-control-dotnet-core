@@ -24,7 +24,7 @@
       <div class="nap-col">
         <div class="nap-group">
           <label>From Date</label>
-          <div class="nap-control">
+          <div class="nap-control" [ngClass]="{ 'disabledfield': isToday()}">
             <nap-date-picker [(date)]="startDate" [minDate]="minStartDate" [maxDate]="endDate"
               (dateChange)="onDateChange()"></nap-date-picker>
           </div>
@@ -33,7 +33,7 @@
       <div class="nap-col">
         <div class="nap-group">
           <label>To Date</label>
-          <div class="nap-control">
+          <div class="nap-control" [ngClass]="{ 'disabledfield':  isToday()}">
             <nap-date-picker [(date)]="endDate" [minDate]="startDate" [maxDate]="maxEndDate"
               (dateChange)="onDateChange()"></nap-date-picker>
           </div>

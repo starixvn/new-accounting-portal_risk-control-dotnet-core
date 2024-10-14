@@ -36,4 +36,6 @@ export interface QueryModel {
     isExactly: boolean;
     custId: number;
     headline: number;
+    roleId: number;
+    isToday: boolean;
 }

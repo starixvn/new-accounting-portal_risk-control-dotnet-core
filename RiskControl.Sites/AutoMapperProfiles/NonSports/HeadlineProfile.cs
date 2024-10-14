@@ -9,5 +9,7 @@ public class HeadlineProfile : Profile
     {
         CreateMap<Headline.Main.Request, Headline.Main.Criteria>();
         CreateMap<Headline.SMA.Request, Headline.SMA.Criteria>();
+        CreateMap<Headline.Main.Request, Headline.Main.NormalCriteria>();
+        CreateMap<Headline.SMA.Request, Headline.SMA.NormalCriteria>();
     }
 }

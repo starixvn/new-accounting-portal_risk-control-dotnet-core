@@ -53,7 +53,9 @@ export class ModelService {
             fromDate: filterModel.fromDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
             toDate: filterModel.toDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
             custId: filterModel.custId,
-            headline: filterModel.headline
+            headline: filterModel.headline,
+            roleId: filterModel.roleId,
+            isToday: filterModel.isToday
         };
         const model: QueryModel = Helper.extend(baseModel, this.createCriteria(filterModel));
         return model;

@@ -8,6 +8,7 @@ export interface ModeGenerate {
 export interface RowAttribute {
   custId: number;
   userName: string;
+  roleId: number;
 }
 
 export class GridModel {

@@ -6,5 +6,5 @@ public class StatisticsModel : BaseModel
 
     public string UserName { get; set; }
 
-    public int CustId { get; set; }
+    public string CustId { get; set; }
 }
