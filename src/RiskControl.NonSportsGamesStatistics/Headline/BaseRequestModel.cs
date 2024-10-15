@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RiskControl.NonSportsGamesStatistics.Headline;
@@ -54,4 +55,6 @@ public class BaseRequestModel
     public string Title { get; set; }
 
     public bool IsToDay { get; set; }
+
+    public List<string> RemovalColumns { get; set; }
 }

@@ -839,8 +839,8 @@ export class FilterComponent implements OnInit {
       isViewByInteger: localStorage.getItem(LocalStorageKey.IS_VIEW_BY_INTEGER),
       products: localStorage.getItem(LocalStorageKey.PRODUCTS),
       sites: localStorage.getItem(LocalStorageKey.SITES),
-      totalBetCompareType: localStorage.getItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE)??'',
-      totalBetValue: localStorage.getItem(LocalStorageKey.TOTAL_BET_VALUE)??'',
+      totalBetCompareType: localStorage.getItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE),
+      totalBetValue: localStorage.getItem(LocalStorageKey.TOTAL_BET_VALUE),
       date: `${this.timePeriod}**${DateHelper.convertDateStructToString(this.startDate)}**${DateHelper.convertDateStructToString(this.endDate)}`,
       sort: localStorage.getItem(LocalStorageKey.SORT)??''
     };

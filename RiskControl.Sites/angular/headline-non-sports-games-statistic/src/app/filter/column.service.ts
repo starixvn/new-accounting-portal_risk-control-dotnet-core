@@ -7,8 +7,6 @@ import { FilterConfig } from './filter.config';
 export class ColumnService {
   getColumns(): Column[] {
     const columns: Column[] = [
-      FilterConfig.gridColumns.user,
-      FilterConfig.gridColumns.custId,
       FilterConfig.gridColumns.betCount,
       FilterConfig.gridColumns.currency,
       FilterConfig.gridColumns.totalBets,

@@ -28,6 +28,13 @@ public class HomeController() : Controller
         return View("~/wwwroot/non-sports-statistics/index.cshtml");
     }
 
+    [Route("HeadlineNonSportGameStatistics/Main/Index")]
+    [NapAuth(FunctionKey = FunctionKeys.HeadlineNonSportGameStatistics, Policy = Constant.Policy.Read)]
+    public ActionResult HeadlineNonSportsGamesStatistics()
+    {
+        return View("~/wwwroot/headline-non-sports-games-statistic/index.cshtml");
+    }
+
     [Route("WinLimitControl/CurrencySetting/Index")]
     [NapAuth(FunctionKey = FunctionKeys.CurrencyWinLimitSetting, Policy = Constant.Policy.Read)]
     public ActionResult CurrencySetting()

@@ -4,6 +4,8 @@ public static class FunctionKeys
 {
     public const string NonSportGameStatistics = "Non_SportGameStatistics";
 
+    public const string HeadlineNonSportGameStatistics = "HeadlineNon_SportGameStatistics";
+
     public const string BetSettingMonitoring = "BetSettingMonitoring";
 
     public const string BettingMonitoring = "BettingMonitoring";

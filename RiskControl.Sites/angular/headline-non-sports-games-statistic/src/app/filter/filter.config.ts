@@ -1,8 +1,6 @@
 ﻿import { Column } from './filter.model';
 
 const gridColumns = {
-  user: { text: 'Group Headline', value: 'User' } as Column,
-  custId: { text: 'Cust ID', value: 'CustId' } as Column,
   betCount: { text: 'Bet Count', value: 'BetCount' } as Column,
   currency: { text: 'Currency', value: 'Currency' } as Column,
   totalBets: { text: 'Total Bets', value: 'TotalBets' } as Column,

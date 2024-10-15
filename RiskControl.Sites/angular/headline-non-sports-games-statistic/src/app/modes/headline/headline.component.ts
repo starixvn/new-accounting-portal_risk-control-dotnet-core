@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { GridModel, ModeGenerate, RowAttribute } from '../mode.model';
 import { HeadlineService } from './headline.service';
-import { GrandTotalService, GridService, ModelService, TitleService } from '../common';
+import { GridService, ModelService, TitleService } from '../common';
 import { ModalService } from 'components/modal';
 import { ModeContext } from '../mode-context';
 import { ModeController } from '../mode-controller';
@@ -18,7 +18,6 @@ import { GridModalComponent } from 'components/grid-modal';
   templateUrl: '../grid.html',
   providers: [
     HeadlineService,
-    GrandTotalService,
     TitleService,
     GridService,
     ModelService
@@ -32,7 +31,6 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
     private readonly modeContext: ModeContext,
     private readonly modeController: ModeController,
     private readonly headlineService: HeadlineService,
-    private readonly grandTotalService: GrandTotalService,
     private readonly gridService: GridService,
     private readonly titleService: TitleService,
     private readonly modelService: ModelService

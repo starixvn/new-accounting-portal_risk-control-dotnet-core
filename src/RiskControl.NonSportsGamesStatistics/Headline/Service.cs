@@ -1,6 +1,7 @@
 ﻿using Fanex.Data.Repository;
 using Fanex.Excel.Enums;
 using Fanex.Excel.Models;
+using RiskControl.NonSportsGamesStatistics.Common;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +14,9 @@ public interface Service
     GridOptions BuildGridOpions(BaseViewModel model, BaseRequestModel request, bool isGroup);
 }
 
-public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionBuilderService gridOptionBuilderService) : Service
+public class ServiceImp(IDynamicRepository dynamicRepository,
+    GridOptionBuilderService gridOptionBuilderService,
+    GridOptionRemoveColumnService gridOptionRemoveColumnService) : Service
 {
     public async Task<BaseViewModel> QueryData(ICriteria criteria, bool hasSubTotal)
     {
@@ -57,6 +60,7 @@ public class ServiceImp(IDynamicRepository dynamicRepository, GridOptionBuilderS
             ShowDistinctRow = false,
             ShowTree = isGroup
         };
+        gridOptions = gridOptionRemoveColumnService.RemoveColumn(gridOptions, request.RemovalColumns);
         return gridOptions;
     }
 }

@@ -210,7 +210,7 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
 
             new HeaderColumns
             {
-                HeaderText = "CustId",
+                HeaderText = "CustID",
                 Width = HeaderColumnConstant.WIDTH_100,
                 Name = "CustId",
                 Sort = !basicRequestModel.IsGrandTotal,
