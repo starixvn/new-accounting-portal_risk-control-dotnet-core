@@ -26,6 +26,8 @@ public interface GridOptionBuilderService
 public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService customCellStyleService) : GridOptionBuilderService
 {
     private const int mergedColNumberGrandTotal = 2;
+    private const string CustIdColumnName = "CustId";
+    private const string UserNameColumnName = "UserName";
 
     public List<GridDataRow> BuildBodyRows(List<StatisticsModel> statistics, bool viewByInteger, bool isDrillDown, bool isGrandTotal, bool isSMA)
     {
@@ -41,7 +43,7 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
                     row.Columns.Insert(0,
                         new Columns
                         {
-                            Name = "CustId",
+                            Name = CustIdColumnName,
                             Value = item.CustId??string.Empty,
                             CellAlignment = HAlignment.Right,
                             CustomAttributes = item.CustId,
@@ -50,7 +52,7 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
                     row.Columns.Insert(0,
                         new Columns
                         {
-                            Name = "UserName",
+                            Name = UserNameColumnName,
                             Value = isSMA ? item.RoleName : item.UserName,
                             CellAlignment = HAlignment.Left,
                             CustomAttributes = item.UserName,
@@ -70,7 +72,7 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
                 row.Columns.Insert(0,
                     new Columns
                     {
-                        Name = "CustId",
+                        Name = CustIdColumnName,
                         Value = item.CustId??string.Empty,
                         CellAlignment = HAlignment.Right,
                         CustomAttributes = item.CustId
@@ -78,8 +80,8 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
                 row.Columns.Insert(0,
                     new Columns
                     {
-                        Name = "UserName",
-                        Value = isGrandTotal ? $"Total {item.UserName}" : item.UserName,
+                        Name = UserNameColumnName,
+                        Value = AddTotalText(item.UserName, isGrandTotal),
                         CellAlignment = HAlignment.Left,
                         CustomAttributes = item.UserName
                     });
@@ -110,7 +112,7 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
             row.Columns.Insert(0,
                 new Columns
                 {
-                    Name = "CustId",
+                    Name = CustIdColumnName,
                     Value = subTotal.CustId??string.Empty,
                     CellAlignment = HAlignment.Right,
                     CustomAttributes = subTotal.CustId
@@ -118,8 +120,8 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
             row.Columns.Insert(0,
                 new Columns
                 {
-                    Name = "UserName",
-                    Value = isGrandTotal ? $"Total {subTotal.RoleName}" : subTotal.RoleName,
+                    Name = UserNameColumnName,
+                    Value = AddTotalText(subTotal.RoleName, isGrandTotal),
                     CellAlignment = HAlignment.Left,
                     CustomAttributes = subTotal.RoleName
                 });
@@ -139,7 +141,7 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
                     subRow.Columns.Insert(0,
                         new Columns
                         {
-                            Name = "CustId",
+                            Name = CustIdColumnName,
                             Value = subItem.CustId??string.Empty,
                             CellAlignment = HAlignment.Right,
                             CustomAttributes = subItem.CustId
@@ -147,8 +149,8 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
                     subRow.Columns.Insert(0,
                         new Columns
                         {
-                            Name = "UserName",
-                            Value = isGrandTotal ? $"Total {subItem.UserName}" : subItem.UserName,
+                            Name = UserNameColumnName,
+                            Value = AddTotalText(subItem.UserName, isGrandTotal),
                             CellAlignment = HAlignment.Left,
                             CustomAttributes = subItem.UserName
                         });
@@ -162,15 +164,13 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
         dataRows.AddRange(rows);
 
         return dataRows;
-
-        return dataRows;
     }
 
     public List<GridDataRow> BuildFooter(TotalStatisticsModel grandTotal, bool viewByInteger)
     {
         var dataRow = BuildBaseDataRow(grandTotal, viewByInteger);
         dataRow.Columns.Insert(0,
-            new Columns { Name = "UserName", Value = "Grand Total RM", CellAlignment = HAlignment.Right, MergeColNumber = mergedColNumberGrandTotal });
+            new Columns { Name = UserNameColumnName, Value = "Grand Total RM", CellAlignment = HAlignment.Right, MergeColNumber = mergedColNumberGrandTotal });
         return [dataRow];
     }
 
@@ -202,7 +202,7 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
             {
                 HeaderText = basicRequestModel.IsGrandTotal ? "Grand Total" : firstColumnText,
                 Width = HeaderColumnConstant.WIDTH_200,
-                Name = "UserName",
+                Name = UserNameColumnName,
                 Sort = !basicRequestModel.IsGrandTotal,
                 SortDirection = basicRequestModel.SortColumnName == "UserName" ? basicRequestModel.SortDirection : string.Empty,
                 ShowCollapseExpand = isGroup
@@ -212,7 +212,7 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
             {
                 HeaderText = "CustID",
                 Width = HeaderColumnConstant.WIDTH_100,
-                Name = "CustId",
+                Name = CustIdColumnName,
                 Sort = !basicRequestModel.IsGrandTotal,
                 SortDirection = basicRequestModel.SortColumnName == "CustId" ? basicRequestModel.SortDirection : string.Empty
             },
@@ -403,5 +403,10 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
             _ => 0
         };
         return result;
+    }
+
+    private static string AddTotalText(string text, bool isGrandTotal)
+    {
+        return isGrandTotal ? $"Total {text}" : text;
     }
 }
