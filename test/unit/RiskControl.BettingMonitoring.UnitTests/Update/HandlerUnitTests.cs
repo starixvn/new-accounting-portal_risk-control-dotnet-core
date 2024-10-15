@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Fanex.NAP.Client.Helpers.Web;
 using NSubstitute;
 using RiskControl.BettingMonitoring.Models;
 using RiskControl.BettingMonitoring.Update;
@@ -8,6 +7,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.BettingMonitoring.UnitTests.Update;
+
+using Fanex.NAP.Client;
 
 public class HandlerUnitTests
 {

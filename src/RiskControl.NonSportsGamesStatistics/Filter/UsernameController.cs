@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
-using Fanex.NAP.Client.Helpers.Web;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.NonSportsGamesStatistics.Filter.Criteria;
 using RiskControl.NonSportsGamesStatistics.Filter.Model;
@@ -9,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.Filter;
+
+using Fanex.NAP.Client;
 
 [ApiController]
 public class UsernameController(INapSession session, IDynamicRepository repository, IMapper mapper)

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
-using Fanex.NAP.Client.Helpers.Web;
 using NSubstitute;
 using RiskControl.WinLossLimitControl.Monitor.History;
 using System.Threading;
@@ -8,6 +7,8 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Monitor.History;
+
+using Fanex.NAP.Client;
 
 public class HandlerUncheckedNotificationUnitTests
 {

@@ -5,9 +5,10 @@ using RiskControl.NonSportsGamesStatistics.SavedFilter.Requests;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Fanex.NAP.Client.Helpers.Web;
 
 namespace RiskControl.NonSportsGamesStatistics.SavedFilter.Services;
+
+using Fanex.NAP.Client;
 
 public interface SavedFilterService
 {

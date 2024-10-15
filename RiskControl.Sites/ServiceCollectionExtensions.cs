@@ -93,7 +93,6 @@ public static class ServiceCollectionExtensions
         services.RegisterProgressiveJackpotService();
         services.RegisterWinLimitControlServices();
         services.AddSingleton(CreateMapper);
-        OnebookUMInitializer.RegisterServiceCollection(services, configuration);
     }
 
     public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
