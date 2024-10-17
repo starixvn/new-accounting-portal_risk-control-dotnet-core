@@ -250,6 +250,16 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
 
             new HeaderColumns
             {
+                HeaderText = "Total Wins",
+                Width = HeaderColumnConstant.WIDTH_120,
+                Name = "TotalWins",
+                CustomCellType = basicRequestModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "TotalWins" ? basicRequestModel.SortDirection : string.Empty
+            },
+
+            new HeaderColumns
+            {
                 HeaderText = "Game Income",
                 Width = HeaderColumnConstant.WIDTH_120,
                 Name = "GameIncome",
@@ -270,6 +280,25 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
                 SortDirection = basicRequestModel.SortColumnName == "GamePayout" ? basicRequestModel.SortDirection : string.Empty
             },
 
+            new HeaderColumns
+            {
+                HeaderText = "Total Refund",
+                Width = HeaderColumnConstant.WIDTH_120,
+                Name = "TotalRefund",
+                CustomCellType = basicRequestModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "TotalRefund" ? basicRequestModel.SortDirection : string.Empty
+            },
+
+            new HeaderColumns
+            {
+                HeaderText = "Turnover",
+                Width = HeaderColumnConstant.WIDTH_120,
+                Name = "HouseTurnover",
+                CustomCellType = basicRequestModel.ViewByInteger ? ExcelCellType.Integer : ExcelCellType.Double,
+                Sort = !basicRequestModel.IsGrandTotal,
+                SortDirection = basicRequestModel.SortColumnName == "HouseTurnover" ? basicRequestModel.SortDirection : string.Empty
+            },
 
             new HeaderColumns
             {
@@ -356,6 +385,11 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
             },
             new()
             {
+                Name = "TotalWins", Value = Math.Round(statistic.TotalWins, 2, MidpointRounding.AwayFromZero),
+                CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
+            },
+            new()
+            {
                 Name = "GameIncome", Value = Math.Round(statistic.GameIncome, 2, MidpointRounding.AwayFromZero),
                 CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.IntegerRedNegative : ExcelCellType.DoubleRedNegative
             },
@@ -363,6 +397,16 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
             {
                 Name = "GamePayout", Value = gamePayout/100,
                 CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.PercentageRedPositive
+            },
+            new()
+            {
+                Name = "TotalRefund", Value = Math.Round(statistic.TotalRefund, 2, MidpointRounding.AwayFromZero),
+                CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
+            },
+            new()
+            {
+                Name = "HouseTurnover", Value = Math.Round(statistic.HouseTurnOver, 2, MidpointRounding.AwayFromZero),
+                CellAlignment = HAlignment.Right, CustomCellType = viewByInteger ? ExcelCellType.Integer : ExcelCellType.Double
             },
             new()
             {
@@ -400,6 +444,7 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
             "agent" => 2,
             "master" => 3,
             "super" => 4,
+            "member" => 1,
             _ => 0
         };
         return result;
