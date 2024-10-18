@@ -48,7 +48,7 @@ export class AppComponent {
     this.removeCurrentComponent();
     const component = this.modeService.getComponent();
     if (component) {
-      const modeContext = ModeContext.create('Headline', filterModel, false);
+      const modeContext = ModeContext.create('', filterModel, false);
       this.modeContexts = [modeContext];
       this.componentRef = this.createComponent(component, modeContext);
       this.instances = [this.componentRef.instance];
@@ -63,6 +63,11 @@ export class AppComponent {
   forward(data: object, modeContext: ModeContext) {
     this.removeCurrentComponent();
     this.modeContexts[this.modeContexts.length - 1].data = data;
+    if (this.modeContexts.length === 1) {
+      this.modeContexts[this.modeContexts.length - 1].label = `Headline (${modeContext.label})`;
+    } else {
+      this.modeContexts[this.modeContexts.length - 1].label = modeContext.label;
+    }
     const component = this.modeService.getComponent();
     if (component) {
       this.modeContexts.push(modeContext);
