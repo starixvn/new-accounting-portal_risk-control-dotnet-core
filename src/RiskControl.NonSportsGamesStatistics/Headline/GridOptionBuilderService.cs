@@ -375,7 +375,7 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
             },
             new()
             {
-                Name = "Currency", Value = statistic.Currency,
+                Name = "Currency", Value = statistic.Currency??string.Empty,
                 CellAlignment = HAlignment.Center, CustomAttributes = statistic.CurrencyId.ToString()
             },
             new()
