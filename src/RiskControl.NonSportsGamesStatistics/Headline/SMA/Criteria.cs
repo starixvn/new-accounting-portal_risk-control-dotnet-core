@@ -45,6 +45,8 @@ public class Criteria : CriteriaBase
 
     public bool IsExactly { get; set; }
 
+    public bool ExcludeNoData { get; set; }
+
     public override string GetSettingKey() => "Acc_Rpt_NonSportsStatistics_SMA";
 
     public override bool IsValid() => true;

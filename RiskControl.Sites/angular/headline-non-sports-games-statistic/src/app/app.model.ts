@@ -38,4 +38,5 @@ export interface QueryModel {
     headline: number;
     roleId: number;
     isToday: boolean;
+    excludeNoData: boolean;
 }

@@ -29,6 +29,7 @@ export class LocalStorageKey {
     static readonly TOTAL_BET_COMPARE_TYPE = 'headline-non-sport-totalbetcomparetype';
     static readonly TOTAL_BET_VALUE = 'headline-non-sport-totalbetvalue';
     static readonly SORT = 'headline-non-sport-sort';
+    static readonly EXCLUDE_NO_DATA = 'healinde-non-sport-excludenodata';
 }
 
 export class ProductConstants {

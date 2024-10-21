@@ -153,6 +153,7 @@ export interface FilterModel {
     headline: number;
     roleId: number;
     isToday: boolean;
+    excludeNoData: boolean;
 }
 
 export interface NumberGameGameType extends GameType {
@@ -237,6 +238,7 @@ export interface SavedFilterContentModel {
     totalBetValue: string | null;
     isExcludeTest: string | null;
     isViewByInteger: string | null;
+    excludeNoData: string | null;
     exactMatching: string | null;
     isBasermCheck: string | null;
     date: string;

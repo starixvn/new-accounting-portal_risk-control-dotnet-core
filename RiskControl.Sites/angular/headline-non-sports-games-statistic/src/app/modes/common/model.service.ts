@@ -55,7 +55,8 @@ export class ModelService {
             custId: filterModel.custId,
             headline: filterModel.headline,
             roleId: filterModel.roleId,
-            isToday: filterModel.isToday
+            isToday: filterModel.isToday,
+            excludeNoData: filterModel.excludeNoData
         };
         const model: QueryModel = Helper.extend(baseModel, this.createCriteria(filterModel));
         return model;

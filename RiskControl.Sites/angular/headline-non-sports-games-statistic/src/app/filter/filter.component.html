@@ -168,6 +168,15 @@
           </div>
         </div>
       </div>
+      <div class="nap-col ml-223">
+        <div class="form-check nap-form-checkbox">
+          <label class="form-check-label">
+            <input name="excludeNoData" type="checkbox" class="form-check-input" [(ngModel)]="excludeNoData"
+              (change)="excludeNoDataChange(excludeNoData)">
+            Exclude Headline has no data
+          </label>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="nap-col col-buttons blocks">

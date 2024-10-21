@@ -70,6 +70,7 @@ export class FilterComponent implements OnInit {
   yesterday = DATE_CONFIG.reportDate.yesterday;
   isExcludeTest = true;
   isViewByInteger = false;
+  excludeNoData = false;
   isBaseRM = true;
   productTreeviewConfig = TreeviewConfig.create({
     hasCollapseExpand: true,
@@ -371,6 +372,11 @@ export class FilterComponent implements OnInit {
     localStorage.setItem(LocalStorageKey.IS_VIEW_BY_INTEGER, JSON.stringify($event));
   }
 
+  excludeNoDataChange($event: boolean) {
+    this.excludeNoData = $event;
+    localStorage.setItem(LocalStorageKey.EXCLUDE_NO_DATA, JSON.stringify($event));
+  }
+
   checkExactMatchingValue($event: boolean) {
     this.exactMatching = $event;
     localStorage.setItem(LocalStorageKey.EXACT_MATCHING, JSON.stringify($event));
@@ -585,7 +591,8 @@ export class FilterComponent implements OnInit {
       custId: 0,
       headline: 0,
       roleId: 0,
-      isToday: this.isToday()
+      isToday: this.isToday(),
+      excludeNoData: this.excludeNoData
     };
     return model;
   }
@@ -746,6 +753,14 @@ export class FilterComponent implements OnInit {
       this.isViewByInteger = false;
     }
 
+    const excludeNoData = JSON.parse(localStorage.getItem(LocalStorageKey.EXCLUDE_NO_DATA)!) as boolean;
+
+    if (excludeNoData !== null) {
+      this.excludeNoData = excludeNoData;
+    } else {
+      this.excludeNoData = false;
+    }
+
     const exactMatching = JSON.parse(localStorage.getItem(LocalStorageKey.EXACT_MATCHING)!) as boolean;
 
     if (exactMatching !== null) {
@@ -837,6 +852,7 @@ export class FilterComponent implements OnInit {
       isBasermCheck: localStorage.getItem(LocalStorageKey.IS_BASERM_CHECK),
       isExcludeTest: localStorage.getItem(LocalStorageKey.IS_EXCLUDE_TEST),
       isViewByInteger: localStorage.getItem(LocalStorageKey.IS_VIEW_BY_INTEGER),
+      excludeNoData: localStorage.getItem(LocalStorageKey.EXCLUDE_NO_DATA),
       products: localStorage.getItem(LocalStorageKey.PRODUCTS),
       sites: localStorage.getItem(LocalStorageKey.SITES),
       totalBetCompareType: localStorage.getItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE),
@@ -861,6 +877,7 @@ export class FilterComponent implements OnInit {
     localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, model.isBasermCheck!);
     localStorage.setItem(LocalStorageKey.IS_EXCLUDE_TEST, model.isExcludeTest!);
     localStorage.setItem(LocalStorageKey.IS_VIEW_BY_INTEGER, model.isViewByInteger!);
+    localStorage.setItem(LocalStorageKey.EXCLUDE_NO_DATA, model.excludeNoData!);
     localStorage.setItem(LocalStorageKey.PRODUCTS, model.products!);
     localStorage.setItem(LocalStorageKey.SITES, model.sites!);
     localStorage.setItem(LocalStorageKey.TOTAL_BET_COMPARE_TYPE, model.totalBetCompareType!);
