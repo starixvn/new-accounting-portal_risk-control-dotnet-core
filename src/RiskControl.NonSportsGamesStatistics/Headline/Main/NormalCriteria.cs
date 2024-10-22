@@ -43,6 +43,8 @@ public class NormalCriteria : CriteriaBase
 
     public bool IsExactly { get; set; }
 
+    public bool ExcludeNoData { get; set; }
+
     public override string GetSettingKey() => "Acc_Rpt_NonSportsProductStatistics_Headline";
 
     public override bool IsValid() => true;
