@@ -2,7 +2,7 @@
 
 public class BaseModel
 {
-    public int CurrencyId { get; set; }
+    public int? CurrencyId { get; set; }
 
     public string Currency { get; set; }
 

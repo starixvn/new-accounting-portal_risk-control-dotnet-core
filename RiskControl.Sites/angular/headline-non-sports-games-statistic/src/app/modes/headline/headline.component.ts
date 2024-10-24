@@ -154,7 +154,11 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
         const value = row.columns[1].value;
         const userName = row.columns[0].value;
         const currency = row.columns[3].customAttr;
-        column.value = `<a href="javascript:;" drill-down-headline currency="${currency}" username="${userName}" headline="${value}">${column.value}</a>`;
+        if (currency === "") {
+          column.value = `<span>${column.value}</span>`;
+        } else {
+          column.value = `<a href="javascript:;" drill-down-headline currency="${currency}" username="${userName}" headline="${value}">${column.value}</a>`;
+        }
       }
     });
   }
