@@ -66,25 +66,88 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
         }
         else
         {
-            foreach (var item in statistics)
+            if (isDrillDown)
+            {
+                var rows = BuildDrillDownBodyRows(statistics, viewByInteger, true);
+                dataRows.AddRange(rows);
+            }
+            else
+            {
+                var rows = BuildMainBodyRows(statistics, viewByInteger, isGrandTotal);
+                dataRows.AddRange(rows);
+            }
+            
+        }
+
+        return dataRows;
+    }
+
+    private List<GridDataRow> BuildDrillDownBodyRows(List<StatisticsModel> statistics, bool viewByInteger,
+        bool isGrandTotal)
+    {
+        var dataRows = new List<GridDataRow>();
+        foreach (var item in statistics)
+        {
+            var row = BuildBaseDataRow(item, viewByInteger);
+            row.Columns.Insert(0,
+                new Columns
+                {
+                    Name = CustIdColumnName,
+                    Value = item.CustId ?? string.Empty,
+                    CellAlignment = HAlignment.Right,
+                    CustomAttributes = item.CustId
+                });
+            row.Columns.Insert(0,
+                new Columns
+                {
+                    Name = UserNameColumnName,
+                    Value = AddTotalText(item.UserName, isGrandTotal),
+                    CellAlignment = HAlignment.Left,
+                    CustomAttributes = item.UserName
+                });
+            var customGroupAttributes = new
+            {
+                custId = item.CustId,
+                userName = item.UserName,
+                roleId = 0
+            };
+            row.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
+            dataRows.Add(row);
+        }
+        return dataRows;
+    }
+
+    private List<GridDataRow> BuildMainBodyRows(List<StatisticsModel> statistics, bool viewByInteger,
+        bool isGrandTotal)
+    {
+        var groups = statistics.GroupBy(s => s.UserName);
+        var dataRows = new List<GridDataRow>();
+        foreach (var group in groups)
+        {
+            var index = 0;
+            foreach (var item in group)
             {
                 var row = BuildBaseDataRow(item, viewByInteger);
                 row.Columns.Insert(0,
                     new Columns
                     {
                         Name = CustIdColumnName,
-                        Value = item.CustId??string.Empty,
+                        Value = item.CustId ?? string.Empty,
                         CellAlignment = HAlignment.Right,
                         CustomAttributes = item.CustId
                     });
-                row.Columns.Insert(0,
-                    new Columns
-                    {
-                        Name = UserNameColumnName,
-                        Value = AddTotalText(item.UserName, isGrandTotal),
-                        CellAlignment = HAlignment.Left,
-                        CustomAttributes = item.UserName
-                    });
+                if (index == 0)
+                {
+                    row.Columns.Insert(0,
+                        new Columns
+                        {
+                            Name = UserNameColumnName,
+                            Value = AddTotalText(item.UserName, isGrandTotal),
+                            CellAlignment = HAlignment.Left,
+                            CustomAttributes = item.UserName,
+                            MergeRowNumber = group.Count()
+                        });
+                }
                 var customGroupAttributes = new
                 {
                     custId = item.CustId,
@@ -93,9 +156,9 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
                 };
                 row.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
                 dataRows.Add(row);
+                index++;
             }
         }
-
         return dataRows;
     }
 

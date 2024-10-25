@@ -54,8 +54,7 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
       const element = $(event.target);
       const headline = parseInt(element.attr('headline')!, 10);
       const userName = element.attr('username')!;
-      const currency = parseInt(element.attr('currency')!);
-      this.drillDownHeadline(headline, userName, currency);
+      this.drillDownHeadline(headline, userName);
     });
 
     $(grid.nativeElement).find('a[drill-down-currency]').on('click', (event) => {
@@ -74,11 +73,10 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
     this.modeController.compileBreadcrumb(grid.nativeElement);
   }
 
-  private drillDownHeadline(headline: number, userName: string, currency: number) {
+  private drillDownHeadline(headline: number, userName: string) {
     const gridModel = new GridModel(false);
     const filterModel = this.createFilterModel();
     filterModel.headline = headline;
-    filterModel.currency = [currency];
     const modeContext = ModeContext.create(userName, filterModel, gridModel);
     this.modeController.forward(this.gridOptions, modeContext);
   }
@@ -153,11 +151,11 @@ export class HeadlineComponent implements OnInit, ModeGenerate {
         const column = row.columns[0];
         const value = row.columns[1].value;
         const userName = row.columns[0].value;
-        const currency = row.columns[3].customAttr;
-        if (currency === "") {
+        const currency = row.columns[3];
+        if (column.name !== "UserName" || (currency.name === "Currency" && currency.customAttr === "")) {
           column.value = `<span>${column.value}</span>`;
         } else {
-          column.value = `<a href="javascript:;" drill-down-headline currency="${currency}" username="${userName}" headline="${value}">${column.value}</a>`;
+          column.value = `<a href="javascript:;" drill-down-headline username="${userName}" headline="${value}">${column.value}</a>`;
         }
       }
     });
