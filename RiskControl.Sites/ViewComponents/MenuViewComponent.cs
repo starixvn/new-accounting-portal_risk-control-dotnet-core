@@ -1,8 +1,9 @@
-﻿using Fanex.NAP.Client.Helpers.Web;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace RiskControl.Sites.ViewComponents;
+
+using Fanex.NAP.Client;
 
 public class MenuViewComponent(INapSession napSession) : ViewComponent
 {

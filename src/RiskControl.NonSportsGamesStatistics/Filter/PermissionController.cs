@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.Model;
 using RiskControl.NonSportsGamesStatistics.Filter.Model;
 
 namespace RiskControl.NonSportsGamesStatistics.Filter;
+
+using Fanex.NAP.Client;
 
 [ApiController]
 [Route("state-api/NonSportsGamesStatistics/Permission")]

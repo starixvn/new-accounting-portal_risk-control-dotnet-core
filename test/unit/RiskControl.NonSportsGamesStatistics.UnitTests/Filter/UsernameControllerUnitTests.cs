@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
-using Fanex.NAP.Client.Helpers.Web;
 using NSubstitute;
 using RiskControl.NonSportsGamesStatistics.Filter;
 using RiskControl.NonSportsGamesStatistics.Filter.Criteria;
@@ -11,6 +10,7 @@ using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter;
 
+using Fanex.NAP.Client;
 using Xunit.Asserts.Compare;
 
 public class UsernameControllerUnitTests

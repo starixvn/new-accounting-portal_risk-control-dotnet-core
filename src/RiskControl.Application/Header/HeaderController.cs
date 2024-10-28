@@ -1,10 +1,11 @@
-﻿using Fanex.NAP.Client.Helpers.Web;
-using Fanex.NAP.Client.Models;
+﻿using Fanex.NAP.Client.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace RiskControl.Application.Header;
+
+using Fanex.NAP.Client;
 
 public class HeaderController(INapSession napSession) : ControllerBase
 {

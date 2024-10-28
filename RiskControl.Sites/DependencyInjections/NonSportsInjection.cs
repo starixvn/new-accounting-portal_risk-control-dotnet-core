@@ -19,6 +19,7 @@ using TopTwentyMain = RiskControl.NonSportsGamesStatistics.TopTwenty.Main;
 using UserNameViewCommon = RiskControl.NonSportsGamesStatistics.UserNameView.Common;
 using UserNameViewMain = RiskControl.NonSportsGamesStatistics.UserNameView.Main;
 using UserNameView = RiskControl.NonSportsGamesStatistics.UserNameView;
+using Headline = RiskControl.NonSportsGamesStatistics.Headline;
 
 namespace RiskControl.Sites.DependencyInjections;
 
@@ -31,6 +32,7 @@ public static class NonSportsInjection
         service.RegisterCurrencyViewServices();
         service.RegisterTopTwentyServices();
         service.RegisterHourlyServices();
+        service.RegisterHeadlineServices();
         service.AddTransient<RawService, RawServiceImp>();
         service.AddTransient<GridOptionRemoveColumnService, GridOptionRemoveColumnServiceImp>();
         service.AddTransient<DataSourceChooser, DataSourceChooserImp>();
@@ -169,5 +171,11 @@ public static class NonSportsInjection
     {
         services.AddTransient<Hourly.Service, Hourly.ServiceImp>();
         services.AddTransient<Hourly.ExcelReportBuilder, Hourly.ExcelReportBuilderImp>();
+    }
+
+    private static void RegisterHeadlineServices(this IServiceCollection services)
+    {
+        services.AddTransient<Headline.GridOptionBuilderService, Headline.GridOptionBuilderServiceImp>();
+        services.AddTransient<Headline.Service, Headline.ServiceImp>();
     }
 }

@@ -1,8 +1,9 @@
 ﻿using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Models.ParameterObject;
 
 namespace RiskControl.WinLossLimitControl.Services;
+
+using Fanex.NAP.Client;
 
 public interface UserHttpContext
 {

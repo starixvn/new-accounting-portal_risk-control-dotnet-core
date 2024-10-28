@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
-using Fanex.NAP.Client.Helpers.Web;
 using MediatR;
 using RiskControl.BettingMonitoring.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace RiskControl.BettingMonitoring.Update;
+
+using Fanex.NAP.Client;
 
 public class Handler(INapSession napSession, UpdateService updateService, IMapper mapper)
     : IRequestHandler<Message, bool>

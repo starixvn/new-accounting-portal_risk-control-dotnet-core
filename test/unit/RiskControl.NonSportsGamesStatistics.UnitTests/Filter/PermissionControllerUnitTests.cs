@@ -1,5 +1,4 @@
 ﻿using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Models.ValueObject;
 using Fanex.NAP.Client.Services;
 using NSubstitute;
@@ -11,6 +10,7 @@ using Xunit;
 
 namespace RiskControl.NonSportsGamesStatistics.UnitTests.Filter;
 
+using Fanex.NAP.Client;
 using Xunit.Asserts.Compare;
 
 public class PermissionControllerUnitTests

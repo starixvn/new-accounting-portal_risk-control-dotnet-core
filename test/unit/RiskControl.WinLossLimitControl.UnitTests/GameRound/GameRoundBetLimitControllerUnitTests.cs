@@ -9,6 +9,7 @@ using Xunit;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.GameRound;
 
+using Configuration;
 using Fanex.NAP.Client.Helpers.Business;
 
 public class GameRoundBetLimitControllerUnitTests
@@ -22,7 +23,8 @@ public class GameRoundBetLimitControllerUnitTests
         mediator = Substitute.For<IMediator>();
         var authorizationService = Substitute.For<AuthorizationService>();
         authorizationService.HasPermission(Arg.Compat.Any<string>(), Arg.Compat.Any<Constant.Policy>()).Returns(true);
-        controller = new GameRoundBetLimitController(mediator, authorizationService);
+        var configurationService = Substitute.For<ConfigurationService>();
+        controller = new GameRoundBetLimitController(mediator, authorizationService, configurationService);
     }
 
     [Fact]

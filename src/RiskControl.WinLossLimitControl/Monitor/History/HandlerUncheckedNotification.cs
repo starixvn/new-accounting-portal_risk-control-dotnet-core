@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
-using Fanex.NAP.Client.Helpers.Web;
 using MediatR;
 using RiskControl.WinLossLimitControl.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace RiskControl.WinLossLimitControl.Monitor.History;
+
+using Fanex.NAP.Client;
 
 public class HandlerUncheckedNotification(IDynamicRepository repository, INapSession sessionService, IMapper mapper)
     : IRequestHandler<RequestUncheckedNotification, ExecuteResult>

@@ -1,11 +1,12 @@
-﻿using Fanex.NAP.Client.Helpers.Web;
-using Fanex.NAP.Client.Models;
+﻿using Fanex.NAP.Client.Models;
 using NSubstitute;
 using RiskControl.Application.Header;
 using System.Collections.Generic;
 using Xunit;
 
 namespace RiskControl.Application.UnitTests.Header;
+
+using Fanex.NAP.Client;
 
 public class HeaderControllerUnitTests
 {

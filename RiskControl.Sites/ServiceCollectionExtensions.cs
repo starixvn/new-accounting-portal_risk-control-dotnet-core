@@ -63,6 +63,7 @@ public static class ServiceCollectionExtensions
                 mc.AddProfile(new MonitorProfile());
                 mc.AddProfile(new PlayerSettingProfile());
                 mc.AddProfile(new SavedFilterProfile());
+                mc.AddProfile(new HeadlineProfile());
             });
 
             return mapperConfig.CreateMapper();
@@ -92,7 +93,6 @@ public static class ServiceCollectionExtensions
         services.RegisterProgressiveJackpotService();
         services.RegisterWinLimitControlServices();
         services.AddSingleton(CreateMapper);
-        OnebookUMInitializer.RegisterServiceCollection(services, configuration);
     }
 
     public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)

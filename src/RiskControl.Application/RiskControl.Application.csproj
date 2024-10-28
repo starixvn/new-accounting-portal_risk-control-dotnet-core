@@ -7,8 +7,8 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.3" />
-    <PackageReference Include="Fanex.NAP.Client" Version="2.0.0.1" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.0" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>

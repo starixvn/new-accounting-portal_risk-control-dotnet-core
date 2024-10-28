@@ -1,8 +1,8 @@
-﻿using Fanex.NAP.Client.Helpers.Web;
-using Fanex.NAP.Client.Services;
+﻿using Fanex.NAP.Client.Services;
 
 namespace RiskControl.WinLossLimitControl.Services;
 
+using Fanex.NAP.Client;
 using Fanex.NAP.Client.Helpers.Business;
 
 public interface AuthorizationService

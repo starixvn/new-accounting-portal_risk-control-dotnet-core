@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <p class="modal-title">Save Non-Sport Game Statistic Filter</p>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+  <div class="nap-filter">
+    <div class="notification" *ngIf="hasNotification">
+      <div class="p-2" [style.background-color]="notificationColor">{{notification}}</div>
+    </div>
+    <div class="row">
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>Filter name</label>
+          <div class="nap-control">
+              <nap-dropdown-typeahead [(text)]="filterName" [query]="filterNameTypeaheadQuery"
+                [placeholder]="'Maximum is 50 characters'">
+              </nap-dropdown-typeahead>
+          </div>
+          <button type="button" class="btn btn-primary ml-3" (click)="onSave()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
