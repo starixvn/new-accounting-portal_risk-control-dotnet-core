@@ -12,7 +12,7 @@ public class HeaderControllerUnitTests
 {
     private static List<MenuItem> MenuItemList =>
     [
-        new MenuItem
+        new()
         {
             DisplayOrder = 3,
             Environment = "LIVE",
@@ -26,7 +26,7 @@ public class HeaderControllerUnitTests
             Url = ""
         },
 
-        new MenuItem
+        new()
         {
             DisplayOrder = 1,
             Environment = "LIVE",

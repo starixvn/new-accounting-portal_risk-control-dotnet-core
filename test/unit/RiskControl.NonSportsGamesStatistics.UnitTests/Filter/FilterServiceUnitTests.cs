@@ -57,7 +57,7 @@ public class FilterServiceUnitTests
 
     private static List<SiteGroupModel>  ExpectedData =>
     [
-        new SiteGroupModel
+        new()
         {
             ChildGroups =
             [
@@ -103,7 +103,7 @@ public class FilterServiceUnitTests
             ParentId = 0
         },
 
-        new SiteGroupModel
+        new()
         {
             ChildGroups =
             [

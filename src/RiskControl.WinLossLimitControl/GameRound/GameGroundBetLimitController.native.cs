@@ -8,7 +8,7 @@ namespace RiskControl.WinLossLimitControl.GameRound;
 
 using Fanex.NAP.Client.Helpers.Business;
 using Results;
-using RiskControl.Configuration;
+using Configuration;
 
 [ApiController]
 public class GameRoundBetLimitController(IMediator mediator, AuthorizationService authorizationService, ConfigurationService configurationService)
