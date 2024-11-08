@@ -1,0 +1,14 @@
+﻿namespace RiskControl.FailSafeSystem.Model;
+
+public class SettingRuleModel
+{
+    public int RuleId { get; set; }
+
+    public string RuleTitle { get; set; }
+
+    public int ProductCount { get; set; }
+
+    public int RuleMemberLimit { get; set; }
+
+    public bool EnableLetstalk { get; set; }
+}

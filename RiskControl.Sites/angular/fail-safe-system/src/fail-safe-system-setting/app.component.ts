@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SettingCriteria } from './filter/filter.model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'fail-safe-system';
+  settingCriteria: SettingCriteria | undefined
+
+  generate(settingCriteria: SettingCriteria): void {
+    this.settingCriteria = settingCriteria;
+  }
 }

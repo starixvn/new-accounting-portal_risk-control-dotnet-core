@@ -1,0 +1,17 @@
+@import '~nap-theme/scss/breadcrumb';
+@import '~nap-theme/scss/grid';
+div.nap-grid {
+    div.body {
+        overflow-x: hidden;
+    }
+}
+
+.button-action {
+    font-size: 15px;
+    cursor: pointer;
+    &.delete-rule {
+        display: block;
+        margin-top: -19px;
+        padding-left: 10px;
+    }
+}

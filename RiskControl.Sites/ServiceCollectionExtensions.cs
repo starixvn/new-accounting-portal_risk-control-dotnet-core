@@ -14,6 +14,7 @@ using SharpRaven;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using RiskControl.Sites.AutoMapperProfiles.FailSafeSystem;
 
 namespace RiskControl.Sites;
 
@@ -25,7 +26,7 @@ using WinLossLimitControl.PlayerSettings.Insert;
 
 public static class ServiceCollectionExtensions
 {
-    public static void RegisterSentry(this IServiceCollection services, IConfiguration configuration)
+    public static void AddSentry(this IServiceCollection services, IConfiguration configuration)
     {
         LogManager
             .SetDefaultLogCategory(configuration.GetSection("CategorySentryLog").Value)
@@ -38,7 +39,7 @@ public static class ServiceCollectionExtensions
             });
     }
 
-    public static void RegisterRemotingRef(this IServiceCollection services, IConfiguration configuration)
+    public static void AddRemotingRef(this IServiceCollection services, IConfiguration configuration)
     {
         RefDataTypeContainer.ConnectTo(new Uri(configuration["Fanex.RemotingRef.Service.Url"]))
             .FromApplication("Risk Controls");
@@ -64,13 +65,14 @@ public static class ServiceCollectionExtensions
                 mc.AddProfile(new PlayerSettingProfile());
                 mc.AddProfile(new SavedFilterProfile());
                 mc.AddProfile(new HeadlineProfile());
+                mc.AddProfile(new FailSafeSystemProfile());
             });
 
             return mapperConfig.CreateMapper();
         }
     }
 
-    public static void RegisterAssemblyForMediatR(this IServiceCollection services)
+    public static void AddAssemblyForMediatR(this IServiceCollection services)
     {
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(BettingMonitoringQueryController)));
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(CurrencyViewHistoryModeController)));
@@ -85,17 +87,18 @@ public static class ServiceCollectionExtensions
     }
 
 
-    public static void RegisterInternalServices(this IServiceCollection services, IConfiguration configuration)
+    public static void AddInternalServices(this IServiceCollection services)
     {
         services.RegisterGlobalServices();
         services.RegisterNonSportsServices();
         services.RegisterBetMonitoringServices();
         services.RegisterProgressiveJackpotService();
         services.RegisterWinLimitControlServices();
+        services.RegisterFailSafeSystemServices();
         services.AddSingleton(CreateMapper);
     }
 
-    public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
+    public static void AddNapAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>

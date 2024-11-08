@@ -52,6 +52,7 @@
   <ItemGroup>
     <ProjectReference Include="..\src\RiskControl.Application\RiskControl.Application.csproj" />
     <ProjectReference Include="..\src\RiskControl.BettingMonitoring\RiskControl.BettingMonitoring.csproj" />
+    <ProjectReference Include="..\src\RiskControl.FailSafeSystem\RiskControl.FailSafeSystem.csproj" />
     <ProjectReference Include="..\src\RiskControl\RiskControl.csproj" />
     <ProjectReference Include="..\src\RiskControl.Dashboard\RiskControl.Dashboard.csproj" />
     <ProjectReference Include="..\src\RiskControl.NonSportsGamesStatistics\RiskControl.NonSportsGamesStatistics.csproj" />

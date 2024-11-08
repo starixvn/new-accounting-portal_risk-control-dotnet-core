@@ -1,0 +1,59 @@
+<div class="modal-header">
+    <p class="modal-title">ADD NEW RULE</p>
+    <button type="button" class="close" aria-label="Close" (click)="closePopup()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="nap-filter">
+        <div class="row">
+            <div class="nap-col">
+                <div class="nap-group">
+                    <label>Rule title <span class="text-danger">*</span></label>
+                    <div class="nap-control">
+                        <input type="text" class="width-180" [(ngModel)]="ruleTitle" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="nap-col">
+                <div class="nap-group">
+                    <label>Product <span class="text-danger">*</span></label>
+                    <div class="nap-control width-200">
+                        <ngx-dropdown-treeview [items]="productItems | productTreeview" [config]="itemConfig"
+                          (selectedChange)="selectedProducts = $event"></ngx-dropdown-treeview>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="nap-col">
+                <div class="nap-group">
+                    <label>Number of Members reach Rule<span class="text-danger">*</span></label>
+                    <div class="nap-control align-top width-200">
+                        <input type="text" class="width-180" [(ngModel)]="ruleMemberLimit" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="nap-col">
+                <div class="nap-group">
+                    Send Letstalk notification
+                    <input type="checkbox" [checked]="enableLetstalk"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="nap-col">
+                <div class="nap-group float-right">
+                    <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+                    <button type="button" class="btn btn-danger ml-3" (click)="cancel()">Cancel</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <nap-toast></nap-toast>
+</div>
