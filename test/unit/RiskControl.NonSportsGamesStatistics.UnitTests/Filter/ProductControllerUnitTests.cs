@@ -19,14 +19,14 @@ public class ProductControllerUnitTests
         // Arrange
         var fakeProducts = new List<ProductModel>
         {
-            new() { ProductId = 1, ProductName = "Any product name 1", CasinoType = 0, IsSingleWallet = false },
-            new() { ProductId = 2, ProductName = "Any product name 2", CasinoType = 1, IsSingleWallet = true }
+            new() { ProductId = 1, ProductName = "Any product name 1", ProductCategory = "Category 1", IsSingleWallet = false },
+            new() { ProductId = 2, ProductName = "Any product name 2", ProductCategory = "Category 2", IsSingleWallet = true }
         };
 
         var expectedProducts = new List<ProductModel>
         {
-            new() { ProductId = 1, ProductName = "Any product name 1", CasinoType = 0, IsSingleWallet = false },
-            new() { ProductId = 2, ProductName = "Any product name 2", CasinoType = 1, IsSingleWallet = true }
+            new() { ProductId = 1, ProductName = "Any product name 1", ProductCategory = "Category 1", IsSingleWallet = false },
+            new() { ProductId = 2, ProductName = "Any product name 2", ProductCategory = "Category 2", IsSingleWallet = true }
         };
 
         var repository = Substitute.For<IDynamicRepository>();

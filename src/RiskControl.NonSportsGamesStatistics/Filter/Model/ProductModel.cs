@@ -6,7 +6,7 @@ public class ProductModel
 
     public string ProductName { get; set; }
 
-    public int CasinoType { get; set; }
+    public string ProductCategory { get; set; }
 
     public bool IsSingleWallet { get; set; }
 }

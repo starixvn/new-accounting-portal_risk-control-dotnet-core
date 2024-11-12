@@ -126,7 +126,7 @@
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_UserNameViewGrandTotal_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Username" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Top20_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Top20" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Hourly_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Hourly" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
-		<Setting Key="Acc_Rpt_NonSportsStatistic_ProductSel" SpName="Acc_Rpt_NonSportsStatistic_ProductSel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsStatistic_ProductSel" SpName="Acc_Rpt_NonSportsStatistic_ProductSel_xpre" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="BI_GetDWStatusByCube" SpName="BI_GetDWStatusByCube" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_CustomerSelCustByUsername" SpName="Acc_CustomerSelCustByUsername" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsStatistics_TopAssociatedAccount_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_TopAssociatedAccount" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
