@@ -24,6 +24,8 @@ export class RuleComponent implements OnInit {
   gameIncome: number | undefined;
   gamePayout: number | undefined;
   enableLetstalk: boolean = false;
+  gameIncomeCheckBox: boolean = false;
+  gamePayoutCheckBox: boolean = false;
 
   constructor(public readonly activeModal: NgbActiveModal,
     private readonly toastService: ToastService,
@@ -38,10 +40,28 @@ export class RuleComponent implements OnInit {
   }
 
   save(): void {
+    if (this.isValid()) {
 
+    }
   }
 
   cancel(): void {
 
+  }
+
+  private isValid(): boolean {
+    if (this.ruleTitle.length === 0) {
+      this.toastService.activate('Rule title is required!');
+      return false;
+    }
+    if (this.selectedProducts.length === 0) {
+      this.toastService.activate('Product is required!');
+      return false;
+    }
+    if (this.ruleMemberLimit === undefined) {
+      this.toastService.activate('Number of Members reach Rule is required!');
+      return false;
+    } 
+    return true;
   }
 }

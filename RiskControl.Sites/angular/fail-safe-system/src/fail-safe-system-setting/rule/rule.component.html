@@ -5,6 +5,7 @@
     </button>
 </div>
 <div class="modal-body">
+    <nap-toast></nap-toast>
     <div class="nap-filter">
         <div class="row">
             <div class="nap-col">
@@ -32,10 +33,65 @@
                 <div class="nap-group">
                     <label>Number of Members reach Rule<span class="text-danger">*</span></label>
                     <div class="nap-control align-top width-200">
-                        <input type="text" class="width-180" [(ngModel)]="ruleMemberLimit" />
+                        <nap-ngx-numeric-textbox
+                            [min]="0"
+                            [max]="1000000000"
+                            [decimals]="0"
+                            [autoCorrect]="true"
+                            [format]="'0,0'"
+                            [(ngModel)]="ruleMemberLimit"
+                        >
+                        </nap-ngx-numeric-textbox>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <fieldset class="criteria-border">
+                <legend class="criteria-border"><span>Criteria (on Member)</span><span class="text-danger">*</span></legend>
+                <div class="nap-col">
+                    <div class="nap-group">
+                        <div class="nap-control width-40">
+                            <input type="checkbox" class="width-180" [(ngModel)]="gameIncomeCheckBox" />
+                        </div>
+                        <label>Game Income</label>
+                        <div class="nap-control align-top width-200">
+                            <nap-ngx-numeric-textbox
+                                [min]="0"
+                                [max]="1000000000"
+                                [decimals]="0"
+                                [autoCorrect]="true"
+                                [format]="'0,0'"
+                                [(ngModel)]="gameIncome"
+                                [disabled]="!gameIncomeCheckBox"
+                            >
+                            </nap-ngx-numeric-textbox>
+                        </div>
+                        <span class="ml-5">RM</span>
+                    </div>
+                </div>
+                <div class="nap-col">
+                    <div class="nap-group">
+                        <div class="nap-control width-40">
+                            <input type="checkbox" class="width-180" [(ngModel)]="gamePayoutCheckBox" />
+                        </div>
+                        <label>Game Payout</label>
+                        <div class="nap-control align-top width-200">
+                            <nap-ngx-numeric-textbox
+                                [min]="0"
+                                [max]="1000000000"
+                                [decimals]="0"
+                                [autoCorrect]="true"
+                                [format]="'0,0'"
+                                [(ngModel)]="gamePayout"
+                                [disabled]="!gamePayoutCheckBox"
+                            >
+                            </nap-ngx-numeric-textbox>
+                        </div>
+                        <span class="ml-5">%</span>
+                    </div>
+                </div>
+            </fieldset>
         </div>
         <div class="row">
             <div class="nap-col">
@@ -55,5 +111,4 @@
             </div>
         </div>
     </div>
-    <nap-toast></nap-toast>
 </div>

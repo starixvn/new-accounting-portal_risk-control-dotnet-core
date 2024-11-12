@@ -16,6 +16,7 @@ import { GridComponent } from './grid/grid.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationConfig, PaginationModule } from 'nap-components/pagination';
 import { RuleComponent } from './rule/rule.component';
+import { NumericTextboxModule } from 'nap-components/numeric-textbox';
 
 @Injectable()
 export class CustomPaginationConfig extends PaginationConfig {
@@ -43,6 +44,7 @@ export class CustomPaginationConfig extends PaginationConfig {
     AuthenticationModule,
     NgxPaginationModule,
     PaginationModule.forRoot(),
+    NumericTextboxModule
   ],
   providers: [
     { provide: PaginationConfig, useClass: CustomPaginationConfig }
