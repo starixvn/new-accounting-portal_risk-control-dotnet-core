@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import { Helper } from 'nap-components/helper';
 import { GridModalComponent } from 'components/grid-modal';
 import { ModalService } from 'components/modal';
-import { FilterConfig, FilterHelper, FilterModel, Product } from '../../filter';
+import { FilterConfig, FilterHelper, FilterModel, Product, ReportType } from '../../filter';
 import { QueryModel } from '../../app.model';
 import { CasinoType, GameTypeId, ProductId } from '../../common';
 import { GrandTotalService, ModelService, TitleService, GridService } from '../common';
@@ -24,6 +24,7 @@ import { KenoSetting } from './keno-setting';
 import { ProductDetailRngCasinoSetting } from './product-detail-rng-casino-setting';
 import { ProductDetailLiveCasinoSetting } from './product-detail-live-casino-setting';
 import { LocalStorageKey } from 'app/common/constants';
+import { ProductGroupSetting } from './product-group-setting';
 
 @Component({
   selector: 'nap-product',
@@ -191,44 +192,48 @@ export class ProductComponent implements OnInit, ModeGenerate {
     const filterModel = this.modeContext.filterModel;
     const gridModel = this.modeContext.gridModel;
     if (gridModel instanceof ProductGridModel) {
-      productSetting = _.cloneDeep(gridModel.productSetting);
-      productSetting.drillDown(isDrillDownCurrency, typeId, typeName);
+      if (gridModel.productSetting.levels.length > 1) {
+        productSetting = _.cloneDeep(gridModel.productSetting);
+        productSetting.drillDown(isDrillDownCurrency, typeId, typeName);
+      } else {
+        productSetting = this.getProductDetailProductSetting(typeId, typeName, filterModel);
+      }
+      
     } else {
-      const RNGCasinoTypeId = 1;
-      const LiveCasinoTypeId = 2;
-      switch (typeId) {
-        case LiveCasinoTypeId:
-          productSetting = new LiveCasinoSetting(CasinoType.SLI, typeName);
-          break;
-        case RNGCasinoTypeId:
-          productSetting = new RNGCasinoSetting(CasinoType.RNG, typeName);
-          break;
-        case ProductId.NumberGame:
-          productSetting = new NumberGameSetting(typeId, typeName);
-          break;
-        default:
-          // tslint:disable-next-line:max-line-length
-          var casinoProduct = this.getCasinoProduct(filterModel.collection.products, typeId);
-          if (!_.isNil(casinoProduct)) {
-            productSetting = casinoProduct.casinoType === RNGCasinoTypeId
-              ? new ProductDetailRngCasinoSetting(typeId, typeName) : new ProductDetailLiveCasinoSetting(typeId, typeName);
-          } else {
-            const filterGameTypes = filterModel.selectedCollection.gameTypes.filter(gameType => gameType.productId === typeId);
-            const gameTypeId: GameTypeId = filterGameTypes[0].gameType;
-
-            if (gameTypeId === GameTypeId.SportType) {
-              productSetting = new VirtualSportsSetting(typeId, typeName);
-            }
-
-            if (gameTypeId === GameTypeId.BetType) {
-              productSetting = new KenoSetting(typeId, typeName);
-            }
-          }
-          break;
+      if (filterModel.reportType === ReportType.ProductDetail) {
+        productSetting = this.getProductDetailProductSetting(typeId, typeName, filterModel);
+      }
+      else {
+        productSetting = new ProductGroupSetting(typeId, typeName);
       }
     }
 
     return new ProductGridModel(isDrillDownCurrency, productSetting);
+  }
+
+  private getProductDetailProductSetting(typeId: number, typeName: string, filterModel: FilterModel): ProductSetting {
+    if (ProductId.NumberGame === typeId) {
+      return new NumberGameSetting(typeId, typeName);
+    } else {
+      const casinoProduct = this.getCasinoProduct(filterModel.collection.products, typeId);
+      let productSetting: ProductSetting;
+      if (!_.isNil(casinoProduct)) {
+        productSetting = casinoProduct.casinoType === CasinoType.RNG
+          ? new ProductDetailRngCasinoSetting(typeId, typeName) : new ProductDetailLiveCasinoSetting(typeId, typeName);
+      } else {
+        const filterGameTypes = filterModel.selectedCollection.gameTypes.filter(gameType => gameType.productId === typeId);
+        const gameTypeId: GameTypeId = filterGameTypes[0].gameType;
+
+        if (gameTypeId === GameTypeId.SportType) {
+          productSetting = new VirtualSportsSetting(typeId, typeName);
+        }
+
+        if (gameTypeId === GameTypeId.BetType) {
+          productSetting = new KenoSetting(typeId, typeName);
+        }
+      }
+      return productSetting;
+    }
   }
 
   private hasDrillDownProduct() {

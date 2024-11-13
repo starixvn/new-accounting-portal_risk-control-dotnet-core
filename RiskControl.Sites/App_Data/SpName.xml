@@ -64,8 +64,8 @@
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Daily_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Daily" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Company_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Company" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Currency_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Currency" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
-		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Product_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
-		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSubProduct_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Product_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_xpre" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSubProduct_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_xpre" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSportType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductLeague_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductBetType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_BettypeGameTable" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
@@ -73,8 +73,8 @@
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductGameTable_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_BettypeGameTable" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductCasinoGameGroup_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductCasinoGameType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_BettypeGameTable" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
-		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetail_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
-		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetailSubProduct_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetail_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_xpre" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetailSubProduct_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_xpre" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetailSportType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetailLeague_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_SportLeagueGameType" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetailBetType_Bettrans" SpName="Acc_Rpt_NonSportsProductStatistics_Product_BettypeGameTable" DbName="DBACC.bodb02.wsv_nap" TimeOut="300" />
@@ -99,10 +99,10 @@
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Monthly_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Monthly" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Company_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Company" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Currency_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Currency" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
-		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Product_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_ProductGroup" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
-		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetail_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Product" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
-		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSubProduct_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Product" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
-		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetailSubProduct_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Product" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_Product_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_ProductGroup_xpre" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetail_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Product_xpre" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSubProduct_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Product_xpre" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetailSubProduct_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_Product_xpre" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductSportType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_SportType" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductDetailSportType_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_SportType" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsProductStatistics_ProductLeague_Warehouse" SpName="Acc_Rpt_NonSportsStatistics_League" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />

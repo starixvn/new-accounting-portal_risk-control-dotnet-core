@@ -23,7 +23,6 @@ export class TreeViewBuilderService {
       return undefined;
     }
 
-
     products.forEach(product => {
       let checked = false;
       if (selectedProducts.length > 0) {
