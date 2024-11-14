@@ -30,6 +30,9 @@ export class TreeViewBuilderService {
         }
       }
       if (product.productCategory !== productCategory) {
+        if (result.length > 0) {
+          result[categoryIndex].correctChecked();
+        }
         result.push(new TreeviewItem({ 
           text: product.productCategory,
           value: undefined,
