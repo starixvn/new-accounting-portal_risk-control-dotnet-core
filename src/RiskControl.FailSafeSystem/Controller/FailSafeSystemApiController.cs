@@ -31,4 +31,20 @@ public class FailSafeSystemApiController(FailSafeSystemService service) : Contro
         var data = await service.GetSettings(criteria);
         return Ok(data);
     }
+
+    [Route("setting/add-rule")]
+    [HttpPost]
+    public async Task<IActionResult> AddRule(AddRuleCriteria criteria)
+    {
+        _ = await service.AddRule(criteria);
+        return Ok(true);
+    }
+
+    [Route("setting/edit-rule")]
+    [HttpPost]
+    public async Task<IActionResult> EditRule(EditRuleCriteria criteria)
+    {
+        _ = await service.EditRule(criteria);
+        return Ok(true);
+    }
 }

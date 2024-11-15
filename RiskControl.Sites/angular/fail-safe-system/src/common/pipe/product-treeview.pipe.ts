@@ -14,7 +14,7 @@ export class ProductTreeviewPipe implements PipeTransform {
       return [];
     }
     products.forEach(product => {
-      const item = new TreeviewItem({ text: product.productName, value: product.productId, checked: true});
+      const item = new TreeviewItem({ text: product.productName, value: product.productId, checked: product.checked});
       treeViewItems.push(item);
     })
 

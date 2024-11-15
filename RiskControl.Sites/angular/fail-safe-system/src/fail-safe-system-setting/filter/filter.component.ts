@@ -47,7 +47,13 @@ export class FilterComponent implements OnInit {
   }
 
   addNewRule(): void {
-    this.modalService.open(RuleComponent, { backdrop: 'static', windowClass: 'modal-auto-size' });
+    this.filterService.getProducts().subscribe(products => {
+      var modalRef = this.modalService.open(RuleComponent, { backdrop: 'static', windowClass: 'modal-auto-size' });
+      var component = modalRef.componentInstance as RuleComponent;
+      component.productItems = products;
+      component.isEdit = false;
+    });
+    
   }
 
   private isValid(): boolean {

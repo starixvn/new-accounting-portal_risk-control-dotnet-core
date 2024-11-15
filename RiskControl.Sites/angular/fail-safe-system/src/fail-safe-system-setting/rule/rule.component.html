@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <p class="modal-title">ADD NEW RULE</p>
+    <p class="modal-title">{{title}}</p>
     <button type="button" class="close" aria-label="Close" (click)="closePopup()">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -97,7 +97,7 @@
             <div class="nap-col">
                 <div class="nap-group">
                     Send Letstalk notification
-                    <input type="checkbox" [checked]="enableLetstalk"/>
+                    <input type="checkbox" [(ngModel)]="enableLetstalk"/>
                 </div>
             </div>
         </div>

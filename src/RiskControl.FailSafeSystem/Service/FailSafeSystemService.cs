@@ -13,6 +13,10 @@ public interface FailSafeSystemService
     Task<IEnumerable<ProductModel>> GetProducts();
 
     Task<IEnumerable<SettingViewModel>> GetSettings(SettingCriteria criteria);
+
+    Task<int> AddRule(AddRuleCriteria criteria);
+
+    Task<int> EditRule(EditRuleCriteria criteria);
 }
 
 public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper mapper) : FailSafeSystemService
@@ -38,5 +42,15 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper map
             item.ProductList = rawData.Item3.Where(p => p.RuleId == item.RuleId).Select(s => s.ProductName).ToArray();
         });
         return data;
+    }
+
+    public Task<int> AddRule(AddRuleCriteria criteria)
+    {
+        return repository.ExecuteAsync(criteria);
+    }
+
+    public Task<int> EditRule(EditRuleCriteria criteria)
+    {
+        return repository.ExecuteAsync(criteria);
     }
 }
