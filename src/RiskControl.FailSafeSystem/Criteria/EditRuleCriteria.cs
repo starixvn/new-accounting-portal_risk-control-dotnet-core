@@ -4,7 +4,7 @@ namespace RiskControl.FailSafeSystem.Criteria;
 
 public class EditRuleCriteria : CriteriaBase, INonQueryCommand
 {
-    public int RuleId { get; set; }
+    public int ConstantKey { get; set; }
 
     public string RuleTitle { get; set; }
 

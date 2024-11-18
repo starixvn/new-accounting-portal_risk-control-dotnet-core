@@ -40,7 +40,7 @@ export class FilterComponent implements OnInit {
     if (this.isValid()) {
       const criteria: SettingCriteria = {
         productIdList: this.selectedProducts.join(','),
-        ruleIdList: this.selectedRuleTitles.join(',')
+        constantKeyList: this.selectedRuleTitles.join(',')
       };
       this.valueChange.emit(criteria);
     }
@@ -48,8 +48,8 @@ export class FilterComponent implements OnInit {
 
   addNewRule(): void {
     this.filterService.getProducts().subscribe(products => {
-      var modalRef = this.modalService.open(RuleComponent, { backdrop: 'static', windowClass: 'modal-auto-size' });
-      var component = modalRef.componentInstance as RuleComponent;
+      const modalRef = this.modalService.open(RuleComponent, { backdrop: 'static', windowClass: 'modal-auto-size' });
+      const component: RuleComponent = modalRef.componentInstance;
       component.productItems = products;
       component.isEdit = false;
     });

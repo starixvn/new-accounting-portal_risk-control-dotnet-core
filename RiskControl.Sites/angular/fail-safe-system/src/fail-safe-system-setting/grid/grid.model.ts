@@ -1,5 +1,5 @@
 export interface GridModel {
-    ruleId: number;
+    constantKey: number;
     ruleTitle: string;
     productCount: number;
     ruleMemberLimit: number;
@@ -8,4 +8,8 @@ export interface GridModel {
     gamePayout: string;
     productList: string[];
     isDelete: boolean;
+}
+
+export interface DeleteRuleCriteria {
+    constantKeyList: string;
 }

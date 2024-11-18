@@ -5,7 +5,13 @@
     </button>
 </div>
 <div class="modal-body">
-    <nap-toast></nap-toast>
+    <div class="toast-container" [hidden]="alertMessage === ''">
+        <div class="alert" class="{{alertClass}}" role="alert">
+            <button type="button" class="close" (click)="closeAlert()">
+                <span aria-hidden="true">&times;</span>
+            </button> {{ alertMessage }}
+        </div>
+    </div>
     <div class="nap-filter">
         <div class="row">
             <div class="nap-col">
@@ -55,7 +61,7 @@
                             <input type="checkbox" class="width-180" [(ngModel)]="gameIncomeCheckBox" />
                         </div>
                         <label>Game Income</label>
-                        <div class="nap-control align-top width-200">
+                        <div class="nap-control align-top width-200" [ngClass]="{'border border-danger' : gameIncomeCheckBox && !gameIncome}">
                             <nap-ngx-numeric-textbox
                                 [min]="0"
                                 [max]="1000000000"
@@ -76,7 +82,7 @@
                             <input type="checkbox" class="width-180" [(ngModel)]="gamePayoutCheckBox" />
                         </div>
                         <label>Game Payout</label>
-                        <div class="nap-control align-top width-200">
+                        <div class="nap-control align-top width-200" [ngClass]="{'border border-danger' : gamePayoutCheckBox && !gamePayout}">
                             <nap-ngx-numeric-textbox
                                 [min]="0"
                                 [max]="1000000000"

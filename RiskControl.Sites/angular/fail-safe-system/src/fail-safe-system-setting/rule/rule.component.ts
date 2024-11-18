@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MessageType, ToastService } from 'nap-components/toast';
 import { Product } from '../filter/filter.model';
 import { TreeviewConfig } from 'ngx-treeview';
-import { AddRuleCriteria } from './rule.model';
+import { AddRuleCriteria, AlertType } from './rule.model';
 import { RuleService } from './rule.service';
 import * as _ from 'lodash';
+import { SharedDataService } from '../../common/shared-data.service';
+import { RuleAction } from '../../common/constants';
 
 @Component({
   selector: 'app-rule',
@@ -29,11 +30,13 @@ export class RuleComponent implements OnInit {
   gameIncomeCheckBox: boolean = false;
   gamePayoutCheckBox: boolean = false;
   isEdit: boolean = false;
-  ruleId: number = 0;
+  constantKey: number = 0;
+  alertMessage: string = '';
+  alertClass = AlertType.Danger;
 
   constructor(public readonly activeModal: NgbActiveModal,
-    private readonly toastService: ToastService,
-    private readonly service: RuleService) { }
+    private readonly service: RuleService,
+    private readonly sharedDataService: SharedDataService) { }
 
   ngOnInit(): void {
   }
@@ -56,16 +59,18 @@ export class RuleComponent implements OnInit {
         criteriaList: this.getCriteriaList()
       }
       if (this.isEdit) {
-        const editCriteria = _.assign({ ruleId: this.ruleId}, criteria);
+        const editCriteria = _.assign({ constantKey: this.constantKey}, criteria);
         this.service.editRule(editCriteria).subscribe(result => {
           if (result) {
-            this.toastService.activate('Rule has been edited successfully!', MessageType.Success);
+            this.activeModal.close();
+            this.sharedDataService.setRuleData(RuleAction.Edit);
           }
         });
       } else {
         this.service.addRule(criteria).subscribe(result => {
           if (result) {
-            this.toastService.activate('Rule has been added successfully!', MessageType.Success);
+            this.alertMessage = 'Rule has been added successfully!!!';
+            this.alertClass = AlertType.Success;
           }
         });
       }
@@ -78,20 +83,24 @@ export class RuleComponent implements OnInit {
 
   private isValid(): boolean {
     if (this.ruleTitle.length === 0) {
-      this.toastService.activate('Rule title is required!');
+      this.alertMessage = 'Rule title is required!';
+      this.alertClass = AlertType.Danger;
       return false;
     }
     if (this.selectedProducts.length === 0) {
-      this.toastService.activate('Product is required!');
+      this.alertMessage = 'Product is required!';
+      this.alertClass = AlertType.Danger;
       return false;
     }
     if (_.isNil(this.ruleMemberLimit)) {
-      this.toastService.activate('Number of Members reach Rule is required!');
+      this.alertMessage = 'Number of Members reach Rule is required!';
+      this.alertClass = AlertType.Danger;
       return false;
     }
-    if ((this.gameIncomeCheckBox && _.isNil(this.gameIncome))
-      || (this.gamePayoutCheckBox && _.isNil(this.gamePayout))) {
-      this.toastService.activate('Game Income/ Game Payout is required!');
+    if ((!this.gameIncomeCheckBox || (this.gameIncomeCheckBox && _.isNil(this.gameIncome)))
+      && (!this.gamePayoutCheckBox || (this.gamePayoutCheckBox && _.isNil(this.gamePayout)))) {
+      this.alertMessage = 'Game Income/ Game Payout is required!';
+      this.alertClass = AlertType.Danger;
       return false;
     }
     return true;
@@ -107,4 +116,8 @@ export class RuleComponent implements OnInit {
     }
     return result.join(',');
   }
+
+  closeAlert() {
+    this.alertMessage = '';
+}
 }

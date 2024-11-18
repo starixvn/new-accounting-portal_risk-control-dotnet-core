@@ -2,7 +2,7 @@
 
 public class SettingProductModel
 {
-    public int RuleId { get; set; }
+    public int ConstantKey { get; set; }
 
     public int ProductId { get; set; }
 

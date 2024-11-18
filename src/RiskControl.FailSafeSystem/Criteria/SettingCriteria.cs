@@ -6,7 +6,7 @@ namespace RiskControl.FailSafeSystem.Criteria
     {
         public string ProductIdList { get; set; }
 
-        public string RuleIdList { get; set; }
+        public string ConstantKeyList { get; set; }
 
         public override string GetSettingKey() => "fss_Setting";
 

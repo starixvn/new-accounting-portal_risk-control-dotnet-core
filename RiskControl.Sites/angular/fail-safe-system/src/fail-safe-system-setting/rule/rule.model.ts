@@ -7,5 +7,10 @@ export interface AddRuleCriteria {
 }
 
 export interface EditRuleCriteria extends AddRuleCriteria {
-    ruleId: number;
+    constantKey: number;
+}
+
+export enum AlertType {
+    Danger = 'alert-danger',
+    Success = 'alert-success'
 }

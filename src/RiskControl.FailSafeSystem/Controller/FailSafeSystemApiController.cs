@@ -47,4 +47,12 @@ public class FailSafeSystemApiController(FailSafeSystemService service) : Contro
         _ = await service.EditRule(criteria);
         return Ok(true);
     }
+
+    [Route("setting/delete-rule")]
+    [HttpPost]
+    public async Task<IActionResult> DeleteRule(DeleteRuleCriteria criteria)
+    {
+        _ = await service.DeleteRule(criteria);
+        return Ok(true);
+    }
 }

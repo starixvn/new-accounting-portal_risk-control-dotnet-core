@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { RuleTitleTreeviewPipe } from '../common/pipe/rule-title-treeview.pipe';
 import { HttpModule } from 'nap-components/http';
 import { NavbarModule, NavbarService } from 'nap-components/navbar';
-import { ToastModule } from 'nap-components/toast';
+import { ToastModule, ToastService } from 'nap-components/toast';
 import { SpinnerModule } from 'nap-components/spinner';
 import { AuthenticationModule } from 'nap-components/authentication';
 import { ProductTreeviewPipe } from '../common/pipe/product-treeview.pipe';
@@ -17,6 +17,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationConfig, PaginationModule } from 'nap-components/pagination';
 import { RuleComponent } from './rule/rule.component';
 import { NumericTextboxModule } from 'nap-components/numeric-textbox';
+import { ConfirmationModule } from 'nap-components/confirmation';
+import { ProductComponent } from './product/product.component';
 
 @Injectable()
 export class CustomPaginationConfig extends PaginationConfig {
@@ -31,7 +33,8 @@ export class CustomPaginationConfig extends PaginationConfig {
     RuleTitleTreeviewPipe,
     ProductTreeviewPipe,
     GridComponent,
-    RuleComponent
+    RuleComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ export class CustomPaginationConfig extends PaginationConfig {
     NavbarModule.forRoot(),
     ToastModule.forRoot(),
     SpinnerModule.forRoot(),
+    ConfirmationModule.forRoot(),
     AuthenticationModule,
     NgxPaginationModule,
     PaginationModule.forRoot(),

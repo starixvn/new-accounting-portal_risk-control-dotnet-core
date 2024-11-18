@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from 'nap-components/http';
 import { Observable } from 'rxjs';
-import { GridModel } from './grid.model';
+import { DeleteRuleCriteria, GridModel } from './grid.model';
 import { CommonConstants } from '../../common/constants';
 import { SettingCriteria } from '../filter/filter.model';
 
@@ -14,5 +14,9 @@ export class GridService {
 
   getSettings(criteria: SettingCriteria): Observable<GridModel[]> {
     return this.httpService.post(`${CommonConstants.API}setting/data`, criteria);
+  }
+
+  deleteRules(criteria: DeleteRuleCriteria): Observable<boolean> {
+    return this.httpService.post(`${CommonConstants.API}setting/delete-rule`, criteria);
   }
 }

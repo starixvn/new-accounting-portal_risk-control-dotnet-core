@@ -6,5 +6,5 @@ public class SettingCriteriaModel
 
     public string CriteriaValue { get; set; }
 
-    public int RuleId { get; set; }
+    public int ConstantKey { get; set; }
 }

@@ -17,6 +17,8 @@ public interface FailSafeSystemService
     Task<int> AddRule(AddRuleCriteria criteria);
 
     Task<int> EditRule(EditRuleCriteria criteria);
+
+    Task<int> DeleteRule(DeleteRuleCriteria criteria);
 }
 
 public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper mapper) : FailSafeSystemService
@@ -37,9 +39,9 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper map
         var data = mapper.Map<IEnumerable<SettingViewModel>>(rawData.Item1).ToList();
         data.ForEach(item =>
         {
-            item.GameIncome = rawData.Item2.FirstOrDefault(r => r.RuleId == item.RuleId && r.CriteriaId == CriteriaTypeConstants.GameIncome)?.CriteriaValue;
-            item.GamePayout = rawData.Item2.FirstOrDefault(r => r.RuleId == item.RuleId && r.CriteriaId == CriteriaTypeConstants.GamePayout)?.CriteriaValue;
-            item.ProductList = rawData.Item3.Where(p => p.RuleId == item.RuleId).Select(s => s.ProductName).ToArray();
+            item.GameIncome = rawData.Item2.FirstOrDefault(r => r.ConstantKey == item.ConstantKey && r.CriteriaId == CriteriaTypeConstants.GameIncome)?.CriteriaValue;
+            item.GamePayout = rawData.Item2.FirstOrDefault(r => r.ConstantKey == item.ConstantKey && r.CriteriaId == CriteriaTypeConstants.GamePayout)?.CriteriaValue;
+            item.ProductList = rawData.Item3.Where(p => p.ConstantKey == item.ConstantKey).Select(s => s.ProductName).ToArray();
         });
         return data;
     }
@@ -50,6 +52,11 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper map
     }
 
     public Task<int> EditRule(EditRuleCriteria criteria)
+    {
+        return repository.ExecuteAsync(criteria);
+    }
+
+    public Task<int> DeleteRule(DeleteRuleCriteria criteria)
     {
         return repository.ExecuteAsync(criteria);
     }

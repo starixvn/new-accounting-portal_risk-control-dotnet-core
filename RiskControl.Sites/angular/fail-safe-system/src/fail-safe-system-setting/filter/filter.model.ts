@@ -1,5 +1,5 @@
 export interface RuleTitle {
-    ruleId: number;
+    constantKey: number;
     ruleTitle: string;
 }
 
@@ -11,5 +11,5 @@ export interface Product {
 
 export interface SettingCriteria {
     productIdList: string;
-    ruleIdList: string;
+    constantKeyList: string;
 }

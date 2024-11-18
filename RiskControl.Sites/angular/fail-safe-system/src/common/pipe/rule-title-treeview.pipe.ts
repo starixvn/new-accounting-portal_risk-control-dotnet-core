@@ -14,7 +14,7 @@ export class RuleTitleTreeviewPipe implements PipeTransform {
       return [];
     }
     ruleTitle.forEach(item => {
-      const value = new TreeviewItem({ text: item.ruleTitle, value: item.ruleId, checked: true });
+      const value = new TreeviewItem({ text: item.ruleTitle, value: item.constantKey, checked: true });
       treeViewItems.push(value);
     });
 
