@@ -10,6 +10,7 @@
 		<PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.0" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\RiskControl.WinLossLimitControl\RiskControl.WinLossLimitControl.csproj" />
 		<ProjectReference Include="..\RiskControl\RiskControl.csproj" />
 	</ItemGroup>
 

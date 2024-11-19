@@ -21,6 +21,7 @@ import { RuleAction } from '../../common/constants';
 })
 export class GridComponent implements OnChanges, OnInit {
   @Input() settingCriteria: SettingCriteria | undefined;
+  @Input() hasHostPermission: boolean = false;
   gridData: GridModel[] = [];
   displayedModels: GridModel[] = [];
   paginationInstance!: PaginationInstance;

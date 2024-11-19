@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Fanex.NAP.Client.Helpers.Business;
+using Microsoft.AspNetCore.Mvc;
 using RiskControl.FailSafeSystem.Criteria;
 using RiskControl.FailSafeSystem.Service;
+using RiskControl.Model;
+using RiskControl.WinLossLimitControl.Services;
 
 namespace RiskControl.FailSafeSystem.Controller;
 
 [ApiController]
 [Route("api/fail-safe-system")]
-public class FailSafeSystemApiController(FailSafeSystemService service) : ControllerBase
+public class FailSafeSystemApiController(FailSafeSystemService service, AuthorizationService authorizationService) : ControllerBase
 {
     [Route("setting/rule-title")]
     [HttpPost]
@@ -54,5 +57,13 @@ public class FailSafeSystemApiController(FailSafeSystemService service) : Contro
     {
         _ = await service.DeleteRule(criteria);
         return Ok(true);
+    }
+
+    [Route("host-permission")]
+    [HttpPost]
+    public IActionResult HasHostPermission()
+    {
+        var hasHostPermission = authorizationService.HasPermission(FunctionKeys.FailSafeSystemSetting, Constant.Policy.Host);
+        return Ok(hasHostPermission);
     }
 }

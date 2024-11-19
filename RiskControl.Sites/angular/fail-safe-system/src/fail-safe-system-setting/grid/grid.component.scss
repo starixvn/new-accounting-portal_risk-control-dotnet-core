@@ -15,3 +15,8 @@ div.nap-grid {
         padding-left: 10px;
     }
 }
+
+.disabled-button {
+    pointer-events: none;
+    opacity: 0.5;
+}

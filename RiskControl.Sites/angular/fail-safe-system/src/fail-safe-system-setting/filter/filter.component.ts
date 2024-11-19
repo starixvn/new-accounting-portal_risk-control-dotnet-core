@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product, RuleTitle, SettingCriteria } from './filter.model';
 import { FilterService } from './filter.service';
 import { TreeviewConfig } from 'ngx-treeview';
@@ -13,6 +13,7 @@ import { RuleComponent } from '../rule/rule.component';
 })
 export class FilterComponent implements OnInit {
   @Output() valueChange = new EventEmitter<SettingCriteria>();
+  @Input() hasHostPermission: boolean = false;
   ruleTitleItems: RuleTitle[] = [];
   selectedRuleTitles: number[] = [];
 

@@ -13,10 +13,10 @@ export class FilterService {
   { }
 
   public getRuleTitles(): Observable<RuleTitle[]> {
-    return this.httpService.post(`${CommonConstants.API}/setting/rule-title`);
+    return this.httpService.post(`${CommonConstants.API}setting/rule-title`);
   }
 
   public getProducts(): Observable<Product[]> {
-    return this.httpService.post(`${CommonConstants.API}/setting/product`);
+    return this.httpService.post(`${CommonConstants.API}setting/product`);
   }
 }

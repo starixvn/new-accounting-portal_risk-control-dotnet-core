@@ -5,8 +5,8 @@
       <span class="active">Fail-Safe System Setting</span>
     </div>
   </div>
-  <app-filter (valueChange)="generate($event)"></app-filter>
+  <app-filter [hasHostPermission]="hasHostPermission" (valueChange)="generate($event)"></app-filter>
   <nap-toast></nap-toast>
-  <app-grid [settingCriteria]="settingCriteria"></app-grid>
+  <app-grid [hasHostPermission]="hasHostPermission" [settingCriteria]="settingCriteria"></app-grid>
 </div>
 <nap-spinner></nap-spinner>
