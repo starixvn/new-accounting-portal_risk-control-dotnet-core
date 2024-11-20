@@ -66,4 +66,12 @@ public class FailSafeSystemApiController(FailSafeSystemService service, Authoriz
         var hasHostPermission = authorizationService.HasPermission(FunctionKeys.FailSafeSystemSetting, Constant.Policy.Host);
         return Ok(hasHostPermission);
     }
+
+    [Route("monitor/data")]
+    [HttpPost]
+    public async Task<IActionResult> GetMonitor(MonitorCriteria criteria)
+    {
+        var data = await service.GetMonitors(criteria);
+        return Ok(data);
+    }
 }

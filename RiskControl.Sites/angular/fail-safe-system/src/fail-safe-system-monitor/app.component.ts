@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MonitorCriteria } from './filter/filter.model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'fail-safe-system';
+  monitorCriteria: MonitorCriteria | undefined;
+
+  constructor(){}
+
+  generate(monitorCriteria: MonitorCriteria): void {
+    this.monitorCriteria = monitorCriteria;
+  }
 }

@@ -1,0 +1,45 @@
+<div class="nap-filter">
+    <div class="row">
+      <div class="nap-col nap-col-1">
+        <div class="nap-group">
+            <label>From Date</label>
+            <div class="nap-control">
+                <nap-date-picker [(date)]="fromDate" [minDate]="minDate" [maxDate]="toDate"></nap-date-picker>
+            </div>
+        </div>
+    </div>
+    <div class="nap-col nap-col-2">
+        <div class="nap-group">
+            <label>To Date</label>
+            <div class="nap-control">
+                <nap-date-picker [(date)]="toDate" [minDate]="fromDate" [maxDate]="maxDate"></nap-date-picker>
+            </div>
+        </div>
+    </div>
+    
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>Rule title</label>
+          <div class="nap-control">
+            <ngx-dropdown-treeview [items]="ruleTitleItems | ruleTitleTreeview" [config]="itemConfig"
+              (selectedChange)="selectedRuleTitles = $event"></ngx-dropdown-treeview>
+          </div>
+        </div>
+      </div>
+
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>Product</label>
+          <div class="nap-control">
+            <ngx-dropdown-treeview [items]="productItems | productTreeview" [config]="itemConfig"
+              (selectedChange)="selectedProducts = $event"></ngx-dropdown-treeview>
+          </div>
+        </div>
+      </div>
+
+      <div class="nap-col ml-80">
+        <button type="button" class="btn btn-primary" (click)="search()">Searh</button>
+      </div>
+    </div>
+  </div>
+  

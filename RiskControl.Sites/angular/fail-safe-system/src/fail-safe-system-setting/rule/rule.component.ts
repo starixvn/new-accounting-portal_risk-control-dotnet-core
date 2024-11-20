@@ -69,7 +69,7 @@ export class RuleComponent implements OnInit {
       } else {
         this.service.addRule(criteria).subscribe(result => {
           if (result) {
-            this.alertMessage = 'Rule has been added successfully!!!';
+            this.alertMessage = 'The Rule has been added successfully!!!';
             this.alertClass = AlertType.Success;
           }
         });

@@ -23,7 +23,7 @@ export class GridComponent implements OnChanges, OnInit {
   @Input() settingCriteria: SettingCriteria | undefined;
   @Input() hasHostPermission: boolean = false;
   gridData: GridModel[] = [];
-  displayedModels: GridModel[] = [];
+  displayedModels: GridModel[] | undefined;
   paginationInstance!: PaginationInstance;
   checkAll: boolean = false;
   private paginatePipe: PaginatePipe;
@@ -96,11 +96,11 @@ export class GridComponent implements OnChanges, OnInit {
 
   checkAllDelete(): void {
     this.checkAll = !this.checkAll;
-    this.displayedModels.forEach(m => m.isDelete = this.checkAll);
+    this.displayedModels!.forEach(m => m.isDelete = this.checkAll);
   }
 
   deleteRule(): void {
-    const deletedList = this.displayedModels.filter(f => f.isDelete).map(m => m.constantKey);
+    const deletedList = this.displayedModels!.filter(f => f.isDelete).map(m => m.constantKey);
     if (deletedList.length === 0) {
       this.toastService.activate('Please select at least one rule!');
     } else {

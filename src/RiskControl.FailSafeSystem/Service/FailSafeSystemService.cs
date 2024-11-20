@@ -19,6 +19,8 @@ public interface FailSafeSystemService
     Task<int> EditRule(EditRuleCriteria criteria);
 
     Task<int> DeleteRule(DeleteRuleCriteria criteria);
+
+    Task<IEnumerable<MonitorModel>> GetMonitors(MonitorCriteria criteria);
 }
 
 public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper mapper) : FailSafeSystemService
@@ -59,5 +61,23 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper map
     public Task<int> DeleteRule(DeleteRuleCriteria criteria)
     {
         return repository.ExecuteAsync(criteria);
+    }
+
+    public async Task<IEnumerable<MonitorModel>> GetMonitors(MonitorCriteria criteria)
+    {
+        var rawData = await repository.FetchMultipleAsync<MonitorModel, MonitorCriteriaModel>(criteria);
+        var data = rawData.Item1.ToList();
+        data.ForEach(item =>
+        {
+            item.ReachedRule = GetReachedRule(rawData.Item2, item.ConstantKey);
+        });
+        return data;
+    }
+
+    private static string GetReachedRule(IEnumerable<MonitorCriteriaModel> criterias, int ruleId)
+    {
+        var data = criterias.Where(r => r.ConstantKey == ruleId)
+            .Select(s => $"{s.CriteriaValue} {s.PostFix}");
+        return !data.Any() ? string.Empty : string.Join('|', data);
     }
 }

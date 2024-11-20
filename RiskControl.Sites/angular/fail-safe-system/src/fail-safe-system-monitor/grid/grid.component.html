@@ -1,0 +1,91 @@
+<ng-template #colgroup>
+    <colgroup>
+      <col style="width: 60px" />
+      <col style="width: 300px" />
+      <col style="width: 200px" />
+      <col style="width: 200px" />
+      <col style="width: 300px" />
+      <col style="width: 150px" />
+      <col style="width: 100px" />
+    </colgroup>
+  </ng-template>
+  <ng-template #thead>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product</th>
+        <th scope="col">Game Type</th>
+        <th scope="col">Member</th>
+        <th scope="col">Reached Rule <br/> Game Income | Game Payout</th>
+        <th scope="col">Reached Limit Time</th>
+        <th scope="col">Send Letstalk notification</th>
+      </tr>
+    </thead>
+  </ng-template>
+  <ng-template #rowItem let-item="item" let-index="index">
+    <tr>
+        <td class="text-center">{{index}}</td>
+        <td class="text-center">{{item.productName}}</td>
+        <td class="text-center">{{item.gameTypeName}}</td>
+        <td class="text-center">{{item.members}}</td>
+        <td class="text-center">{{item.ruleTitle}}<br/>{{item.reachedRule}}</td>
+        <td class="text-center">{{item.reachedTime | date: 'M/dd/yyyy hh:mm:ss aa'}}</td>
+        <td class="text-center">
+            <input type="checkbox" [disabled]="true" [checked]="item.enableLetstalk"/>
+        </td>
+    </tr>
+  </ng-template>
+  <ng-template #breadcrumbToolboxTemplate>
+    <div class="breadcrumb-toolbox">
+        <div class="toolbox-item">
+            <nap-countdown-timer (callback)="countdownCallback()"></nap-countdown-timer>
+        </div>
+    </div>
+</ng-template>
+  <div *ngIf="displayedModels" [ngSwitch]="displayedModels.length > 0">
+    <div class="nap-grid">
+      <div style="width: 1325px">
+        <nap-breadcrumb [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
+        <div class="header">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <ng-template [ngTemplateOutlet]="thead"></ng-template>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+          <table class="table-striped mb-0">
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <tbody>
+              <ng-container *ngFor="let item of displayedModels; index as i">
+                <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item, index: getIndex(i + 1) }">
+                </ng-template>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="false" class="body stretch">
+          <table>
+            <tbody>
+              <tr>
+                <th scope="col" class="no-data" colspan="7">
+                  There is no data
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="footer">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">
+                            <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange()"></nap-pagination>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
