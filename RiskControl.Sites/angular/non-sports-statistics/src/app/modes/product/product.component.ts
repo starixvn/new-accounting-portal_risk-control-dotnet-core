@@ -175,9 +175,9 @@ export class ProductComponent implements OnInit, ModeGenerate {
     if (gridModel.productSetting instanceof CasinoSetting
       && gridModel.isDrillDownCurrency
       && gridModel.productSetting.level === ProductLevel.CasinoTypeViewProduct) {
-      const casinoType = gridModel.productSetting.casinoType;
+      const productCategory = gridModel.productSetting.productCategory;
       const casinoProductIds = filterModel.selectedCollection.products
-        .filter(product => product.casinoType === casinoType)
+        .filter(product => product.productCategory === productCategory)
         .map(product => product.productId);
       filterModel.productIds = _.intersection(filterModel.productIds, casinoProductIds);
     } else {
