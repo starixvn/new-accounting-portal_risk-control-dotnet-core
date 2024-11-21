@@ -6,6 +6,7 @@ using ONEbook.UM.AspNetCore.Filters;
 using Microsoft.AspNetCore.Http;
 using RiskControl.Sites.Extensions;
 using Fanex.Data;
+using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.Client.Attributes;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +24,7 @@ services.AddOneBookUm(configuration);
 services.AddHttpContextAccessor();
 services.AddRemotingRef(configuration);
 services.AddFanexData(configuration);
-services.AddSentry(configuration);
+services.AddFanexLogSentry(configuration);
 services.AddInternalServices();
 services.AddAssemblyForMediatR();
 

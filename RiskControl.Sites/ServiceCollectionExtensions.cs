@@ -26,20 +26,7 @@ using WinLossLimitControl.PlayerSettings.Insert;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddSentry(this IServiceCollection services, IConfiguration configuration)
-    {
-        LogManager
-            .SetDefaultLogCategory(configuration.GetSection("CategorySentryLog").Value)
-            .Use(new List<ILogEngine>
-            {
-                new SentryLogging(new SentryEngineOptions
-                {
-                    Dsn = new Dsn(configuration.GetSection("SentryClientKey").Value)
-                })
-            });
-    }
-
-    public static void AddRemotingRef(this IServiceCollection services, IConfiguration configuration)
+ public static void AddRemotingRef(this IServiceCollection services, IConfiguration configuration)
     {
         RefDataTypeContainer.ConnectTo(new Uri(configuration["Fanex.RemotingRef.Service.Url"]))
             .FromApplication("Risk Controls");
