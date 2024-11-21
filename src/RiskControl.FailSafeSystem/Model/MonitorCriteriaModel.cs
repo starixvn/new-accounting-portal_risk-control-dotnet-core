@@ -2,7 +2,7 @@
 
 public class MonitorCriteriaModel
 {
-    public int ConstantKey { get; set; }
+    public int RuleId { get; set; }
 
     public string CriteriaName { get; set; }
 

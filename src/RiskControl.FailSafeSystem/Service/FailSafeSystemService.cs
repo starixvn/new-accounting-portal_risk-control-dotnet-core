@@ -69,14 +69,14 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper map
         var data = rawData.Item1.ToList();
         data.ForEach(item =>
         {
-            item.ReachedRule = GetReachedRule(rawData.Item2, item.ConstantKey);
+            item.ReachedRule = GetReachedRule(rawData.Item2, item.RuleId);
         });
         return data;
     }
 
     private static string GetReachedRule(IEnumerable<MonitorCriteriaModel> criterias, int ruleId)
     {
-        var data = criterias.Where(r => r.ConstantKey == ruleId)
+        var data = criterias.Where(r => r.RuleId == ruleId)
             .Select(s => $"{s.CriteriaValue} {s.PostFix}");
         return !data.Any() ? string.Empty : string.Join('|', data);
     }

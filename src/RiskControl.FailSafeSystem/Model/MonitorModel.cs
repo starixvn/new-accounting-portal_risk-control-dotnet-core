@@ -8,7 +8,7 @@ public class MonitorModel
 
     public string Members { get; set; }
 
-    public int ConstantKey { get; set; }
+    public int RuleId { get; set; }
 
     public string RuleTitle { get; set; }
 
