@@ -42,9 +42,12 @@ export class GridComponent implements OnChanges, OnInit {
   ngOnInit(): void {
     this.sharedDataService.selectedRuleData$.subscribe(rule => {
       if (rule === RuleAction.Edit) {
-        
         this.getGridData();
         this.toastService.activate('The Rule has been edited successfully!!!', MessageType.Success);
+      }
+      if (rule === RuleAction.Delete) {
+        this.getGridData();
+        this.toastService.activate('The Rule(s) has been deleted successfully!!!', MessageType.Success);
       }
     })
   }
@@ -106,8 +109,7 @@ export class GridComponent implements OnChanges, OnInit {
     } else {
       this.confirmationService.openContent('Are you sure want to delete the Rule(s)?', () => {
         this.gridService.deleteRules( {constantKeyList: deletedList.join(',')}).subscribe(() => {
-          this.getGridData();
-          this.toastService.activate('The Rule(s) has been deleted successfully!', MessageType.Success);
+          this.sharedDataService.setRuleData(RuleAction.Delete);
         });
       })
     }

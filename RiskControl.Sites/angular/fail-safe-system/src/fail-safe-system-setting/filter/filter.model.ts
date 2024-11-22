@@ -1,6 +1,7 @@
 export interface RuleTitle {
     constantKey: number;
     ruleTitle: string;
+    checked: boolean;
 }
 
 export interface Product {

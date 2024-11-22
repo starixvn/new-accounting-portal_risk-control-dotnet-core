@@ -5,6 +5,8 @@ import { TreeviewConfig } from 'ngx-treeview';
 import { ToastService } from 'nap-components/toast';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RuleComponent } from '../rule/rule.component';
+import { SharedDataService } from '../../common/shared-data.service';
+import { RuleAction } from '../../common/constants';
 
 @Component({
   selector: 'app-filter',
@@ -29,12 +31,18 @@ export class FilterComponent implements OnInit {
 
   constructor(private readonly filterService: FilterService,
     private readonly toastService: ToastService,
-    private readonly modalService: NgbModal
+    private readonly modalService: NgbModal,
+    private readonly sharedDataService: SharedDataService
   ) { }
 
   ngOnInit(): void {
     this.filterService.getRuleTitles().subscribe(ruleTitles => this.ruleTitleItems = ruleTitles);
     this.filterService.getProducts().subscribe(products => this.productItems = products);
+    this.sharedDataService.selectedRuleData$.subscribe( rule => {
+      if (rule !== RuleAction.None) {
+        this.updateRuleTitleFilter();
+      }
+    })
   }
 
   search(): void {
@@ -55,6 +63,19 @@ export class FilterComponent implements OnInit {
       component.isEdit = false;
     });
     
+  }
+
+  private updateRuleTitleFilter(): void {
+    this.filterService.getRuleTitles().subscribe(rules => {
+      if (this.ruleTitleItems.length === this.selectedRuleTitles.length) {
+        this.ruleTitleItems = rules;
+      } else {
+        rules.forEach(r => {
+           r.checked = this.selectedRuleTitles.indexOf(r.constantKey) > -1;
+        });
+        this.ruleTitleItems = rules;
+      }
+    });
   }
 
   private isValid(): boolean {

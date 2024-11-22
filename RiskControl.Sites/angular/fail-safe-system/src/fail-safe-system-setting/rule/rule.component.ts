@@ -71,6 +71,7 @@ export class RuleComponent implements OnInit {
           if (result) {
             this.alertMessage = 'The Rule has been added successfully!!!';
             this.alertClass = AlertType.Success;
+            this.sharedDataService.setRuleData(RuleAction.Add);
           }
         });
       }
