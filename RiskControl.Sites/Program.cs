@@ -8,6 +8,7 @@ using RiskControl.Sites.Extensions;
 using Fanex.Data;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.Client.Attributes;
+using Fanex.NAP.SignIn;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -14,7 +14,7 @@
     <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.1" />
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.1.0" />
     <PackageReference Include="Fanex.NAP.Client" Version="2.0.2" />
-    <PackageReference Include="Fanex.Excel" Version="2.6.2" />
+    <PackageReference Include="Fanex.Excel" Version="2.7.2.2" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Olympus.FPSAPI.Client" Version="1.0.0.16" />
