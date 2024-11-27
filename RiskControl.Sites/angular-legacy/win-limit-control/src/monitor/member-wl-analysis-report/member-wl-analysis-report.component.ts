@@ -76,10 +76,6 @@ export class MemberWlAnalysisReportComponent {
       this.toastService.activate('Product is required!', MessageType.Warning);
         return false;
     }
-    if (this.selectedProducts.length > 20) {
-      this.toastService.activate('Maximum is 20 products!', MessageType.Warning);
-        return false;
-    }
     if (this.userName.length <= 0) {
       this.toastService.activate('Username is required!', MessageType.Warning);
         return false;
