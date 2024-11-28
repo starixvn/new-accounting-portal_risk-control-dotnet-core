@@ -20,6 +20,8 @@ public interface ConfigurationService
     string CWLAnalysisApi { get; }
 
     string ExcelPassword { get; }
+
+    string MemberWinLossFileServerDirectory { get; }
 }
 
 public class ConfigurationServiceImp(IConfiguration configuration) : ConfigurationService
@@ -39,4 +41,6 @@ public class ConfigurationServiceImp(IConfiguration configuration) : Configurati
     public string CWLAnalysisApi => configuration["CWLAnalysisApi"];
 
     public string ExcelPassword => configuration["ExcelPassword"];
+
+    public string MemberWinLossFileServerDirectory => configuration["MemberWinLossFileServerDirectory"];
 }

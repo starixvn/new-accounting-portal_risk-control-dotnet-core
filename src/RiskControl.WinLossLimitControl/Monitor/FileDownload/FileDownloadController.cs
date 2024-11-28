@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RiskControl.Configuration;
 using RiskControl.WebApiClient;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace RiskControl.WinLossLimitControl.Monitor.FileDownload;
@@ -21,20 +21,32 @@ public class FileDownloadController(ConfigurationService configurationService, R
         return File(data.FileContent, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", data.FilName);
     }
 
-    [Route("member-wl-file")]
+    [Route("guid-member-wl-file")]
     [HttpPost]
     public async Task<IActionResult> MemberWLFile(MemberWLDownloadFileModel model)
     {
-        var requestUri = $"{configurationService.CWLAnalysisApi}/File";
+        var requestUri = $"{configurationService.CWLAnalysisApi}/Download";
 
         var data = await richHttpClient.PostJson<ApiResultModel>(requestUri, model).ConfigureAwait(false);
 
-        Response.Headers.Append("X-InvalidUsernames", data.InvalidUsernames);
+        return Ok(data);
+    }
 
-        var contentType = data.FilName == "NoData.xlsx"
-            ? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            : "application/zip";
+    [HttpGet("member-wl-file")]
+    public async Task<IActionResult> MemberWLFile(string guid)
+    {
+        var requestUri = $"{configurationService.CWLAnalysisApi}/GetFile";
 
-        return File(data.FileContent, contentType, data.FilName);
+        var data = await richHttpClient.PostJson<ApiResultModel>(requestUri, guid).ConfigureAwait(false);
+
+        return Ok(data);
+    }
+
+    [HttpGet("download-member-wl-file")]
+    public FileStreamResult DownloadMemberWLFile(string fileName)
+    {
+        var path = $"{configurationService.MemberWinLossFileServerDirectory}/{fileName}";
+        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous);
+        return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(fileName));
     }
 }

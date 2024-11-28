@@ -7,4 +7,6 @@ public class ApiResultModel
     public byte[] FileContent { get; set; }
 
     public string InvalidUsernames { get; set; }
+
+    public string Guid { get; set; }
 }

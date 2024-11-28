@@ -27,6 +27,8 @@ export class MemberWlAnalysisReportComponent {
       maxHeight: 500
     });
   selectedProducts: number[] = [];
+  intervalId: number = 0;
+  limitedCount: number = 10;
 
   constructor(private readonly memberWlAnalysisReportService: MemberWlAnalysisReportService,
     public readonly activeModal: NgbActiveModal,
@@ -48,21 +50,38 @@ export class MemberWlAnalysisReportComponent {
 
   generate(): void {
     if (this.isValid()) {
-      const model: DownLoadFileModel = {
+      const criteria: DownLoadFileModel = {
         productIdList : this.selectedProducts.join(','),
         usernameList: this.userName.trim(),
         fromDate: DateHelper.convertDateStructToString(this.fromDate),
         toDate: DateHelper.convertDateStructToString(this.toDate)
       };
-      this.memberWlAnalysisReportService.downloadFile(model).subscribe(response => {
-        var contentDisposition = response.headers.get('content-disposition');
-        var invalidUsernames = response.headers.get('X-InvalidUsernames');
-        if (invalidUsernames?.length > 0 ) {
-          this.toastService.activate(`Invalid member(s): ${invalidUsernames}`, MessageType.Warning);
-        }
-        var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
-        Helper.downloadFile(response.body, `${filename}`);
-      });
+      this.memberWlAnalysisReportService.getGuidFile(criteria).subscribe(model => {
+          if (model.guid.length > 0) {
+            let timerCount = 0;
+            this.intervalId = window.setInterval(() => {
+              if (timerCount < this.limitedCount) {
+                this.memberWlAnalysisReportService.getFile(model.guid).subscribe(result => {
+                  if (result?.fileName.length > 0) {
+                    window.clearInterval(this.intervalId);
+                    this.memberWlAnalysisReportService.downloadFile(result).subscribe(response => {
+                      if (result?.invalidUsernames.length > 0) {
+                        this.toastService.activate(`Invalid member(s): ${result.invalidUsernames}`, MessageType.Warning);
+                      }
+                      Helper.downloadFile(response.body, result.fileName);
+                    })
+                  } else {
+                    timerCount += 1;
+                  }                 
+                })
+              } else {
+                window.clearInterval(this.intervalId);
+                this.toastService.activate('Timeout !!!', MessageType.Warning);
+              }
+            })
+          }
+      })
+      
     }
   }
 
