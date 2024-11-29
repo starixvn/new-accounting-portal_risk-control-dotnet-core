@@ -94,6 +94,7 @@ export class GridComponent implements OnChanges, OnInit {
       component.enableLetstalk = item.enableLetstalk;
       component.constantKey = item.constantKey;
       component.isEdit = true;
+      component.isTest = item.isTest;
     });
   }
 

@@ -26,6 +26,8 @@ export class FilterComponent implements OnInit {
   productItems: Product[] = [];
   selectedProducts: number[] = [];
 
+  isTest: boolean = true;
+
   public itemConfig = TreeviewConfig.create({
     hasFilter: true,
     hasAllCheckBox: true,
@@ -51,7 +53,8 @@ export class FilterComponent implements OnInit {
         fromDate: DateHelper.formatMomentDate(fromDate, DateFormat.Date),
         toDate: DateHelper.formatMomentDate(toDate, DateFormat.Date),
         productIdList: this.selectedProducts.join(','),
-        constantKeyList: this.selectedRuleTitles.join(',')
+        constantKeyList: this.selectedRuleTitles.join(','),
+        isTest: !this.isTest
       };
       this.valueChange.emit(criteria);
     }

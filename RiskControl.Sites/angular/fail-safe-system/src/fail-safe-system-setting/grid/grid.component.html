@@ -9,6 +9,7 @@
       <col style="width: 100px" />
       <col style="width: 70px" />
       <col style="width: 70px" />
+      <col style="width: 70px" />
     </colgroup>
   </ng-template>
   <ng-template #thead>
@@ -20,6 +21,7 @@
         <th scope="col" rowspan="2">Number of Members reach Rule</th>
         <th scope="col" colspan="2">Criteria for each Game Type</th>
         <th scope="col" rowspan="2">Send Letstalk notification</th>
+        <th scope="col" rowspan="2">Is Test</th>
         <th scope="col" rowspan="2">Edit</th>
         <th scope="col" rowspan="2">
             Delete
@@ -43,10 +45,13 @@
           <a href="javascript:;" (click)="showProduct(item.productList, item.ruleTitle)">{{item.productCount}}</a>
         </td>
         <td class="text-center">{{item.ruleMemberLimit}}</td>
-        <td class="text-center">{{item.gameIncome}}</td>
+        <td class="text-center" [napIntegerFormat]="item.gameIncome"></td>
         <td class="text-center">{{item.gamePayout}}</td>
         <td class="text-center">
             <input type="checkbox" [disabled]="true" [checked]="item.enableLetstalk"/>
+        </td>
+        <td class="text-center">
+          <input type="checkbox" [disabled]="true" [checked]="item.isTest"/>
         </td>
         <td class="text-center">
             <span [ngClass]="{'disabled-button': !hasHostPermission }" (click)="editRule(item)" class="button-action fa fa-edit"></span>
@@ -58,7 +63,7 @@
   </ng-template>
   <div *ngIf="displayedModels" [ngSwitch]="displayedModels.length > 0">
     <div class="nap-grid">
-      <div style="width: 1215px">
+      <div style="width: 1285px">
         <div class="header">
           <table>
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
@@ -92,7 +97,7 @@
                 <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                 <tfoot>
                     <tr>
-                        <td colspan="9">
+                        <td colspan="10">
                             <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange()"></nap-pagination>
                         </td>
                     </tr>

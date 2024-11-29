@@ -8,6 +8,7 @@ export interface GridModel {
     gamePayout: string;
     productList: string[];
     isDelete: boolean;
+    isTest: boolean;
 }
 
 export interface DeleteRuleCriteria {

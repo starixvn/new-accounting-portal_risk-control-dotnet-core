@@ -11,4 +11,6 @@ public class SettingRuleModel
     public int RuleMemberLimit { get; set; }
 
     public bool EnableLetstalk { get; set; }
+
+    public bool IsTest { get; set; }
 }

@@ -33,6 +33,7 @@ export class RuleComponent implements OnInit {
   constantKey: number = 0;
   alertMessage: string = '';
   alertClass = AlertType.Danger;
+  isTest: boolean = false;
 
   constructor(public readonly activeModal: NgbActiveModal,
     private readonly service: RuleService,
@@ -56,7 +57,8 @@ export class RuleComponent implements OnInit {
         productIdList: this.selectedProducts.join(','),
         ruleMemberLimit: this.ruleMemberLimit??0,
         enableLetstalk: this.enableLetstalk,
-        criteriaList: this.getCriteriaList()
+        criteriaList: this.getCriteriaList(),
+        isTest: this.isTest
       }
       if (this.isEdit) {
         const editCriteria = _.assign({ constantKey: this.constantKey}, criteria);

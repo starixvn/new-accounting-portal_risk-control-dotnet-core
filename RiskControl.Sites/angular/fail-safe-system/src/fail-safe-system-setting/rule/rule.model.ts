@@ -4,6 +4,7 @@ export interface AddRuleCriteria {
     ruleMemberLimit: number;
     enableLetstalk: boolean;
     criteriaList: string;
+    isTest: boolean;
 }
 
 export interface EditRuleCriteria extends AddRuleCriteria {

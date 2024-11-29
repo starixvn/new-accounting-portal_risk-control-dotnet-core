@@ -20,7 +20,7 @@
     }
   },
   "files": [
-    "fail-safe-system-setting.ts",
+    "fail-safe-system-monitor.ts",
     "polyfills.ts"
   ],
   "include": [

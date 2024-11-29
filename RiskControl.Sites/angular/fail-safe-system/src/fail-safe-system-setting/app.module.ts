@@ -19,6 +19,7 @@ import { RuleComponent } from './rule/rule.component';
 import { NumericTextboxModule } from 'nap-components/numeric-textbox';
 import { ConfirmationModule } from 'nap-components/confirmation';
 import { ProductComponent } from './product/product.component';
+import { NumberFormatModule } from 'nap-components/number-format';
 
 @Injectable()
 export class CustomPaginationConfig extends PaginationConfig {
@@ -48,7 +49,8 @@ export class CustomPaginationConfig extends PaginationConfig {
     AuthenticationModule,
     NgxPaginationModule,
     PaginationModule.forRoot(),
-    NumericTextboxModule
+    NumericTextboxModule,
+    NumberFormatModule
   ],
   providers: [
     { provide: PaginationConfig, useClass: CustomPaginationConfig }

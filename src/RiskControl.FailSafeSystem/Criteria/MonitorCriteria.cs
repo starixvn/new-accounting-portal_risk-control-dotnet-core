@@ -12,6 +12,8 @@ public class MonitorCriteria : CriteriaBase
 
     public string ConstantKeyList { get; set; }
 
+    public bool IsTest { get; set; }
+
     public override string GetSettingKey() => "fss_Monitor";
 
     public override bool IsValid() => true;

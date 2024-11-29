@@ -1,6 +1,7 @@
 export interface RuleTitle {
     constantKey: number;
     ruleTitle: string;
+    checked: boolean;
 }
 
 export interface Product {
@@ -14,4 +15,5 @@ export interface MonitorCriteria {
     toDate: string;
     productIdList: string;
     constantKeyList: string;
+    isTest: boolean;
 }
