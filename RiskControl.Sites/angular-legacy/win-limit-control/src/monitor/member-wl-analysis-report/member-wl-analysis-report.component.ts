@@ -29,7 +29,7 @@ export class MemberWlAnalysisReportComponent {
     });
   selectedProducts: number[] = [];
   intervalId: number = 0;
-  limitedCount: number = 120;
+  limitedCount: number = 180;
 
   constructor(private readonly memberWlAnalysisReportService: MemberWlAnalysisReportService,
     public readonly activeModal: NgbActiveModal,
@@ -65,12 +65,14 @@ export class MemberWlAnalysisReportComponent {
             this.intervalId = window.setInterval(() => {
               if (timerCount < this.limitedCount) {
                 this.memberWlAnalysisReportService.getFile(model.guid).subscribe(result => {
-                  if (result?.fileName.length > 0) {
+                  if (result.fileName !== null) {
                     window.clearInterval(this.intervalId);
-                    this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(() => {
-                      if (result?.invalidUsernames.length > 0) {
+                    this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(response => {
+                      if (result.invalidUsernames != null) {
                         this.toastService.activate(`Invalid member(s): ${result.invalidUsernames}`, MessageType.Warning);
                       }
+                      var fileNameInfo = result.fileName.split('/');
+                      Helper.downloadFile(response, fileNameInfo[fileNameInfo.length-1]);
                       this.spinnerService.hide();
                     })
                   } else {
@@ -82,7 +84,7 @@ export class MemberWlAnalysisReportComponent {
                 this.toastService.activate('The operation timed out. Please try again later.', MessageType.Warning);
                 this.spinnerService.hide();
               }
-            })
+            }, 5000)
           }
       })
       

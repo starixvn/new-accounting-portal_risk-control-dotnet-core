@@ -39,7 +39,7 @@ export class MemberWlAnalysisReportService {
     return this.httpService.get<ApiResultModel>(`api/win-limit-control/download/member-wl-file?guid=${guid}`, {}, { noSpinner: true});
   }
 
-  downloadFile(fileName: string): Observable<void> {
-    return this.httpService.get(`api/win-limit-control/download/download-member-wl-file?fileName=${fileName}`, {}, { noSpinner: true});
+  downloadFile(fileName: string): Observable<HttpResponse<Blob>> {
+    return this.httpService.get(`api/win-limit-control/download/download-member-wl-file?fileName=${fileName}`, { noSpinner: true, responseType: 'blob' });
   }
 }
