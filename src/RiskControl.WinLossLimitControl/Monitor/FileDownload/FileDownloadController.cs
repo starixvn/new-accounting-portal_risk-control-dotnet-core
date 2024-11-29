@@ -23,7 +23,7 @@ public class FileDownloadController(ConfigurationService configurationService, R
 
     [Route("guid-member-wl-file")]
     [HttpPost]
-    public async Task<IActionResult> MemberWLFile(MemberWLDownloadFileModel model)
+    public async Task<IActionResult> GetGuidMemberWLFile(MemberWLDownloadFileModel model)
     {
         var requestUri = $"{configurationService.CWLAnalysisApi}/Download";
 
@@ -33,7 +33,7 @@ public class FileDownloadController(ConfigurationService configurationService, R
     }
 
     [HttpGet("member-wl-file")]
-    public async Task<IActionResult> MemberWLFile(string guid)
+    public async Task<IActionResult> CheckMemberWLFile(string guid)
     {
         var requestUri = $"{configurationService.CWLAnalysisApi}/GetFile";
 

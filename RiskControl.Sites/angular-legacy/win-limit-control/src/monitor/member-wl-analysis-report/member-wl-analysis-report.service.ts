@@ -32,17 +32,14 @@ export class MemberWlAnalysisReportService {
   }
 
   getGuidFile(model: DownLoadFileModel): Observable<ApiResultModel> {
-    return this.httpService.post<ApiResultModel>('api/win-limit-control/download/guild-member-wl-file', model);
+    return this.httpService.post<ApiResultModel>('api/win-limit-control/download/guid-member-wl-file', model, { noSpinner: true});
   }
 
   getFile(guid: string): Observable<ApiResultModel> {
-    return this.httpService.get<ApiResultModel>('api/win-limit-control/download/member-wl-file', guid);
+    return this.httpService.get<ApiResultModel>(`api/win-limit-control/download/member-wl-file?guid=${guid}`, {}, { noSpinner: true});
   }
 
-  downloadFile(model: ApiResultModel): Observable<HttpResponse<Blob>> {
-    this.spinnerService.show();
-    const observable =
-     this.httpClient.post('api/win-limit-control/download/download-member-wl-file', model, { observe: 'response', responseType: 'blob' });
-    return observable.pipe(tap(() => this.spinnerService.hide()));
+  downloadFile(fileName: string): Observable<void> {
+    return this.httpService.get(`api/win-limit-control/download/download-member-wl-file?fileName=${fileName}`, {}, { noSpinner: true});
   }
 }

@@ -7,6 +7,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageType, ToastService } from 'nap-components/toast';
 import { Helper } from 'nap-components/helper';
 import { SharedDataService } from '../../common/services/shared-data.service';
+import { SpinnerService } from 'nap-components/spinner';
 
 @Component({
   selector: 'nap-member-wl-analysis-report',
@@ -28,12 +29,13 @@ export class MemberWlAnalysisReportComponent {
     });
   selectedProducts: number[] = [];
   intervalId: number = 0;
-  limitedCount: number = 10;
+  limitedCount: number = 120;
 
   constructor(private readonly memberWlAnalysisReportService: MemberWlAnalysisReportService,
     public readonly activeModal: NgbActiveModal,
     private readonly toastService: ToastService,
-    private readonly sharedDataService: SharedDataService
+    private readonly sharedDataService: SharedDataService,
+    private readonly spinnerService: SpinnerService
   ) { 
     const lastYear = new Date();
     lastYear.setFullYear(2013, 0, 1);
@@ -56,6 +58,7 @@ export class MemberWlAnalysisReportComponent {
         fromDate: DateHelper.convertDateStructToString(this.fromDate),
         toDate: DateHelper.convertDateStructToString(this.toDate)
       };
+      this.spinnerService.show();
       this.memberWlAnalysisReportService.getGuidFile(criteria).subscribe(model => {
           if (model.guid.length > 0) {
             let timerCount = 0;
@@ -64,11 +67,11 @@ export class MemberWlAnalysisReportComponent {
                 this.memberWlAnalysisReportService.getFile(model.guid).subscribe(result => {
                   if (result?.fileName.length > 0) {
                     window.clearInterval(this.intervalId);
-                    this.memberWlAnalysisReportService.downloadFile(result).subscribe(response => {
+                    this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(() => {
                       if (result?.invalidUsernames.length > 0) {
                         this.toastService.activate(`Invalid member(s): ${result.invalidUsernames}`, MessageType.Warning);
                       }
-                      Helper.downloadFile(response.body, result.fileName);
+                      this.spinnerService.hide();
                     })
                   } else {
                     timerCount += 1;
@@ -76,7 +79,8 @@ export class MemberWlAnalysisReportComponent {
                 })
               } else {
                 window.clearInterval(this.intervalId);
-                this.toastService.activate('Timeout !!!', MessageType.Warning);
+                this.toastService.activate('The operation timed out. Please try again later.', MessageType.Warning);
+                this.spinnerService.hide();
               }
             })
           }
