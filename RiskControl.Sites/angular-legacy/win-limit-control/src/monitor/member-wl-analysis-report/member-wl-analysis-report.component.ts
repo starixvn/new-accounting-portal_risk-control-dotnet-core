@@ -29,7 +29,7 @@ export class MemberWlAnalysisReportComponent {
     });
   selectedProducts: number[] = [];
   intervalId: number = 0;
-  limitedCount: number = 180;
+  limitedCount: number = 1440;
 
   constructor(private readonly memberWlAnalysisReportService: MemberWlAnalysisReportService,
     public readonly activeModal: NgbActiveModal,
@@ -68,7 +68,7 @@ export class MemberWlAnalysisReportComponent {
                   if (result.fileName !== null) {
                     window.clearInterval(this.intervalId);
                     this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(response => {
-                      if (result.invalidUsernames != null) {
+                      if (result.invalidUsernames != null && result.invalidUsernames.length > 0) {
                         this.toastService.activate(`Invalid member(s): ${result.invalidUsernames}`, MessageType.Warning);
                       }
                       var fileNameInfo = result.fileName.split('/');
