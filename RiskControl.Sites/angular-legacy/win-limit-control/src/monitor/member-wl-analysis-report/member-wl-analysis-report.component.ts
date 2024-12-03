@@ -7,6 +7,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageType, ToastService } from 'nap-components/toast';
 import { Helper } from 'nap-components/helper';
 import { SharedDataService } from '../../common/services/shared-data.service';
+import { SpinnerService } from 'nap-components/spinner';
 
 @Component({
   selector: 'nap-member-wl-analysis-report',
@@ -27,11 +28,14 @@ export class MemberWlAnalysisReportComponent {
       maxHeight: 500
     });
   selectedProducts: number[] = [];
+  intervalId: number = 0;
+  limitedCount: number = 1440;
 
   constructor(private readonly memberWlAnalysisReportService: MemberWlAnalysisReportService,
     public readonly activeModal: NgbActiveModal,
     private readonly toastService: ToastService,
-    private readonly sharedDataService: SharedDataService
+    private readonly sharedDataService: SharedDataService,
+    private readonly spinnerService: SpinnerService
   ) { 
     const lastYear = new Date();
     lastYear.setFullYear(2013, 0, 1);
@@ -48,21 +52,42 @@ export class MemberWlAnalysisReportComponent {
 
   generate(): void {
     if (this.isValid()) {
-      const model: DownLoadFileModel = {
+      const criteria: DownLoadFileModel = {
         productIdList : this.selectedProducts.join(','),
         usernameList: this.userName.trim(),
         fromDate: DateHelper.convertDateStructToString(this.fromDate),
         toDate: DateHelper.convertDateStructToString(this.toDate)
       };
-      this.memberWlAnalysisReportService.downloadFile(model).subscribe(response => {
-        var contentDisposition = response.headers.get('content-disposition');
-        var invalidUsernames = response.headers.get('X-InvalidUsernames');
-        if (invalidUsernames?.length > 0 ) {
-          this.toastService.activate(`Invalid member(s): ${invalidUsernames}`, MessageType.Warning);
-        }
-        var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
-        Helper.downloadFile(response.body, `${filename}`);
-      });
+      this.spinnerService.show();
+      this.memberWlAnalysisReportService.getGuidFile(criteria).subscribe(model => {
+          if (model.guid.length > 0) {
+            let timerCount = 0;
+            this.intervalId = window.setInterval(() => {
+              if (timerCount < this.limitedCount) {
+                this.memberWlAnalysisReportService.getFile(model.guid).subscribe(result => {
+                  if (result.fileName !== null) {
+                    window.clearInterval(this.intervalId);
+                    this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(response => {
+                      if (result.invalidUsernames != null && result.invalidUsernames.length > 0) {
+                        this.toastService.activate(`Invalid member(s): ${result.invalidUsernames}`, MessageType.Warning);
+                      }
+                      var fileNameInfo = result.fileName.split('/');
+                      Helper.downloadFile(response, fileNameInfo[fileNameInfo.length-1]);
+                      this.spinnerService.hide();
+                    })
+                  } else {
+                    timerCount += 1;
+                  }                 
+                })
+              } else {
+                window.clearInterval(this.intervalId);
+                this.toastService.activate('The operation timed out. Please try again later.', MessageType.Warning);
+                this.spinnerService.hide();
+              }
+            }, 5000)
+          }
+      })
+      
     }
   }
 
@@ -74,10 +99,6 @@ export class MemberWlAnalysisReportComponent {
   private isValid(): boolean {
     if (this.selectedProducts.length <= 0) {
       this.toastService.activate('Product is required!', MessageType.Warning);
-        return false;
-    }
-    if (this.selectedProducts.length > 20) {
-      this.toastService.activate('Maximum is 20 products!', MessageType.Warning);
         return false;
     }
     if (this.userName.length <= 0) {

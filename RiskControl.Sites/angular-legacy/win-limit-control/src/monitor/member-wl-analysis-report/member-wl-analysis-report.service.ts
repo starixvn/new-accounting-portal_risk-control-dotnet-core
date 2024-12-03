@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DownLoadFileModel, Product } from './member-wl-analysis-report.model';
+import { ApiResultModel, DownLoadFileModel, Product } from './member-wl-analysis-report.model';
 import { Observable } from 'rxjs';
 import { HttpService } from 'nap-components/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -31,10 +31,15 @@ export class MemberWlAnalysisReportService {
     this.modalService.open(MemberWlAnalysisReportComponent, { backdrop: 'static', windowClass: 'modal-auto-size' });
   }
 
-  downloadFile(model: DownLoadFileModel): Observable<HttpResponse<Blob>> {
-    this.spinnerService.show();
-    const observable =
-     this.httpClient.post('api/win-limit-control/download/member-wl-file', model, { observe: 'response', responseType: 'blob' });
-    return observable.pipe(tap(() => this.spinnerService.hide()));
+  getGuidFile(model: DownLoadFileModel): Observable<ApiResultModel> {
+    return this.httpService.post<ApiResultModel>('api/win-limit-control/download/guid-member-wl-file', model, { noSpinner: true});
+  }
+
+  getFile(guid: string): Observable<ApiResultModel> {
+    return this.httpService.get<ApiResultModel>(`api/win-limit-control/download/member-wl-file?guid=${guid}`, {}, { noSpinner: true});
+  }
+
+  downloadFile(fileName: string): Observable<HttpResponse<Blob>> {
+    return this.httpService.get(`api/win-limit-control/download/download-member-wl-file?fileName=${fileName}`, { noSpinner: true, responseType: 'blob' });
   }
 }

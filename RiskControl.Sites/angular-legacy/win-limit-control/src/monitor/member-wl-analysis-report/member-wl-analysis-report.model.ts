@@ -19,3 +19,9 @@ export interface DownLoadFileModel {
     fromDate: string,
     toDate: string
 }
+
+export interface ApiResultModel {
+    fileName: string;
+    invalidUsernames: string;
+    guid: string;
+}

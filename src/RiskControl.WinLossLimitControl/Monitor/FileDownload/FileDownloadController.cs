@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RiskControl.Configuration;
 using RiskControl.WebApiClient;
+using System.IO;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace RiskControl.WinLossLimitControl.Monitor.FileDownload;
 
@@ -18,23 +19,37 @@ public class FileDownloadController(ConfigurationService configurationService, R
 
         var data = await richHttpClient.PostJson<ApiResultModel>(requestUri, model).ConfigureAwait(false);
 
-        return File(data.FileContent, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", data.FilName);
+        return File(data.FileContent, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", data.FileName);
     }
 
-    [Route("member-wl-file")]
+    [Route("guid-member-wl-file")]
     [HttpPost]
-    public async Task<IActionResult> MemberWLFile(MemberWLDownloadFileModel model)
+    public async Task<IActionResult> GetGuidMemberWLFile(MemberWLDownloadFileModel model)
     {
         var requestUri = $"{configurationService.CWLAnalysisApi}/File";
 
         var data = await richHttpClient.PostJson<ApiResultModel>(requestUri, model).ConfigureAwait(false);
 
-        Response.Headers.Append("X-InvalidUsernames", data.InvalidUsernames);
+        return Ok(data);
+    }
 
-        var contentType = data.FilName == "NoData.xlsx"
-            ? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            : "application/zip";
+    [HttpGet("member-wl-file")]
+    public async Task<IActionResult> CheckMemberWLFile(string guid)
+    {
+        var requestUri = $"{configurationService.CWLAnalysisApi}/File/GetFile";
 
-        return File(data.FileContent, contentType, data.FilName);
+        var json = await richHttpClient.PostJson<string>(requestUri, guid).ConfigureAwait(false);
+
+        var result = json != null ? JsonConvert.DeserializeObject<ApiResultModel>(json) : new ApiResultModel();
+
+        return Ok(result);
+    }
+
+    [HttpGet("download-member-wl-file")]
+    public FileStreamResult DownloadMemberWLFile(string fileName)
+    {
+        var path = $"{configurationService.MemberWinLossFileServerDirectory}/{fileName.Replace("/Excel/", "")}";
+        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous);
+        return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));
     }
 }
