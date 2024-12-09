@@ -90,4 +90,18 @@ public class HomeController : Controller
     {
         return View("~/wwwroot/game-round-bet-limit-monitor/index.cshtml");
     }
+
+    [Route("FailSafeSystemSetting/Main/Index")]
+    [NapAuth(FunctionKey = FunctionKeys.FailSafeSystemSetting, Policy = Constant.Policy.Read)]
+    public ActionResult FailSafeSystemSetting()
+    {
+        return View("~/wwwroot/fail-safe-system-setting/index.cshtml");
+    }
+
+    [Route("FailSafeSystemMonitor/Main/Index")]
+    [NapAuth(FunctionKey = FunctionKeys.FailSafeSystemMonitor, Policy = Constant.Policy.Read)]
+    public ActionResult FailSafeSystemMonitor()
+    {
+        return View("~/wwwroot/fail-safe-system-monitor/index.cshtml");
+    }
 }

@@ -143,4 +143,14 @@
 		<Setting Key="Acc_Rpt_NonSports_Dashboard_Weekly" SpName="Acc_Rpt_NonSports_Dashboard_Weekly" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSports_Dashboard_PlayersByDevice" SpName="Acc_Rpt_NonSports_Dashboard_PlayersByDevice" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 	</Function>
+
+	<Function Name="Dashboard">
+		<Setting Key="fss_Product" SpName="fss_Product" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="fss_Rule" SpName="fss_Rule" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="fss_Setting" SpName="fss_Setting" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="fss_Rule_Add" SpName="fss_Rule_Add" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="fss_Rule_Edit" SpName="fss_Rule_Edit" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="fss_Rule_Delete" SpName="fss_Rule_Delete" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="fss_Monitor" SpName="fss_Monitor" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+	</Function>
 </Functions>

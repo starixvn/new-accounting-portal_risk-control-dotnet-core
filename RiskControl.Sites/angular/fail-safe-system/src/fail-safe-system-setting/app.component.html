@@ -1,0 +1,12 @@
+<nap-navbar></nap-navbar>
+<div class="container-fluid" style="min-width: 1100px;">
+  <div class="nap-header">
+    <div class="title">
+      <span class="active">Fail-Safe System Setting</span>
+    </div>
+  </div>
+  <app-filter [hasHostPermission]="hasHostPermission" (valueChange)="generate($event)"></app-filter>
+  <nap-toast></nap-toast>
+  <app-grid [hasHostPermission]="hasHostPermission" [settingCriteria]="settingCriteria"></app-grid>
+</div>
+<nap-spinner></nap-spinner>

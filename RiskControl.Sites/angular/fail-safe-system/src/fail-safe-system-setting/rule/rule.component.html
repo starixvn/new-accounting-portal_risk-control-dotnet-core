@@ -1,0 +1,128 @@
+<div class="modal-header">
+    <p class="modal-title">{{title}}</p>
+    <button type="button" class="close" aria-label="Close" (click)="closePopup()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="toast-container" [hidden]="alertMessage === ''">
+        <div class="alert" class="{{alertClass}}" role="alert">
+            <button type="button" class="close" (click)="closeAlert()">
+                <span aria-hidden="true">&times;</span>
+            </button> {{ alertMessage }}
+        </div>
+    </div>
+    <div class="nap-filter">
+        <div class="row">
+            <div class="nap-col">
+                <div class="nap-group">
+                    <label>Rule title <span class="text-danger">*</span></label>
+                    <div class="nap-control">
+                        <input type="text" class="width-180" [(ngModel)]="ruleTitle" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="nap-col">
+                <div class="nap-group">
+                    <label>Product <span class="text-danger">*</span></label>
+                    <div class="nap-control width-200">
+                        <ngx-dropdown-treeview [items]="productItems | productTreeview" [config]="itemConfig"
+                          (selectedChange)="selectedProducts = $event"></ngx-dropdown-treeview>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="nap-col">
+                <div class="nap-group">
+                    <label>Number of Members reach Rule<span class="text-danger">*</span></label>
+                    <div class="nap-control align-top width-200">
+                        <nap-ngx-numeric-textbox
+                            [min]="0"
+                            [max]="1000000000"
+                            [decimals]="0"
+                            [autoCorrect]="true"
+                            [format]="'0,0'"
+                            [(ngModel)]="ruleMemberLimit"
+                        >
+                        </nap-ngx-numeric-textbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <fieldset class="criteria-border">
+                <legend class="criteria-border"><span>Criteria (on Member)</span><span class="text-danger">*</span></legend>
+                <div class="nap-col">
+                    <div class="nap-group">
+                        <div class="nap-control width-40">
+                            <input type="checkbox" class="width-180" [(ngModel)]="gameIncomeCheckBox" />
+                        </div>
+                        <label>Game Income</label>
+                        <div class="nap-control align-top width-200" [ngClass]="{'border border-danger' : gameIncomeCheckBox && !gameIncome}">
+                            <nap-ngx-numeric-textbox
+                                [min]="0"
+                                [max]="1000000000"
+                                [decimals]="0"
+                                [autoCorrect]="true"
+                                [format]="'0,0'"
+                                [(ngModel)]="gameIncome"
+                                [disabled]="!gameIncomeCheckBox"
+                            >
+                            </nap-ngx-numeric-textbox>
+                        </div>
+                        <span class="ml-5">RM</span>
+                    </div>
+                </div>
+                <div class="nap-col">
+                    <div class="nap-group">
+                        <div class="nap-control width-40">
+                            <input type="checkbox" class="width-180" [(ngModel)]="gamePayoutCheckBox" />
+                        </div>
+                        <label>Game Payout</label>
+                        <div class="nap-control align-top width-200" [ngClass]="{'border border-danger' : gamePayoutCheckBox && !gamePayout}">
+                            <nap-ngx-numeric-textbox
+                                [min]="0"
+                                [max]="1000000000"
+                                [decimals]="0"
+                                [autoCorrect]="true"
+                                [format]="'0,0'"
+                                [(ngModel)]="gamePayout"
+                                [disabled]="!gamePayoutCheckBox"
+                            >
+                            </nap-ngx-numeric-textbox>
+                        </div>
+                        <span class="ml-5">%</span>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="row">
+            <div class="nap-col">
+                <div class="nap-group">
+                    Send Letstalk notification
+                    <input type="checkbox" [(ngModel)]="enableLetstalk"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="nap-col">
+                <div class="nap-group">
+                    Is Test
+                    <input type="checkbox" [(ngModel)]="isTest"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="nap-col">
+                <div class="nap-group float-right">
+                    <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+                    <button type="button" class="btn btn-danger ml-3" (click)="cancel()">Cancel</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

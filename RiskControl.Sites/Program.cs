@@ -6,13 +6,15 @@ using ONEbook.UM.AspNetCore.Filters;
 using Microsoft.AspNetCore.Http;
 using RiskControl.Sites.Extensions;
 using Fanex.Data;
+using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.Client.Attributes;
+using Fanex.NAP.SignIn;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-services.RegisterAuthentication(configuration);
+services.AddNapAuthentication(configuration);
 services.AddControllersWithViews(options =>
 {
     options.Filters.Add(new ServiceFilterAttribute(typeof(CheckUMFilterAttribute)));
@@ -21,11 +23,11 @@ services.AddControllersWithViews(options =>
 services.AddNapClient(configuration);
 services.AddOneBookUm(configuration);
 services.AddHttpContextAccessor();
-services.RegisterRemotingRef(configuration);
+services.AddRemotingRef(configuration);
 services.AddFanexData(configuration);
-services.RegisterSentry(configuration);
-services.RegisterInternalServices(configuration);
-services.RegisterAssemblyForMediatR();
+services.AddFanexLogSentry(configuration);
+services.AddInternalServices();
+services.AddAssemblyForMediatR();
 
 var app = builder.Build();
 app.Use((context, next) =>
