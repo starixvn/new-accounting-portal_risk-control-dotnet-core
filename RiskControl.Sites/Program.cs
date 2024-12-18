@@ -2,13 +2,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using RiskControl.Sites;
 using Microsoft.AspNetCore.Mvc;
-using ONEbook.UM.AspNetCore.Filters;
 using Microsoft.AspNetCore.Http;
 using RiskControl.Sites.Extensions;
 using Fanex.Data;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.Client.Attributes;
-using Fanex.NAP.SignIn;
+using ONEbook.UM.DependencyInjection;
+using ONEbook.UM.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;

@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Fanex.Logging;
-using Fanex.Logging.Sentry.RavenClient;
 using Fanex.RemotingRef;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
@@ -10,9 +8,7 @@ using RiskControl.Sites.AutoMapperProfiles.BettingMonitoring;
 using RiskControl.Sites.AutoMapperProfiles.NonSports;
 using RiskControl.Sites.AutoMapperProfiles.WinLossLimitControl;
 using RiskControl.Sites.DependencyInjections;
-using SharpRaven;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using RiskControl.Sites.AutoMapperProfiles.FailSafeSystem;
 
