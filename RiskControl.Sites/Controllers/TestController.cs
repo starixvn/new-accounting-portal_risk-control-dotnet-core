@@ -6,7 +6,7 @@ using System;
 using System.Threading.Tasks;
 using Fanex.Caching;
 using Microsoft.AspNetCore.Authorization;
-using ONEbook.UM.AspNetCore.Filters;
+using ONEbook.UM.Filters;
 
 [AllowAnonymous]
 [Route("Test")]

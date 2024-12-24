@@ -13,14 +13,13 @@ export class TreeViewBuilderService {
   private readonly happyFiveLinkedGamesMaxBetType = 3610;
 
   buildProductTreeViewItems(products: Product[], selectedProducts: Product[]): TreeviewItem[] {
+    let productCategory = '';
+    let result: TreeviewItem[] = [];
+    let categoryIndex = -1;
+
     if (_.isNil(products)) {
       return [];
     }
-
-    const liveCasinoProducts: TreeviewItem[] = [];
-    const rngCasinoProducts: TreeviewItem[] = [];
-    const nonCasinoProducts: TreeviewItem[] = [];
-
 
     products.forEach(product => {
       let checked = false;
@@ -30,37 +29,22 @@ export class TreeViewBuilderService {
           checked = true;
         }
       }
-      const item = new TreeviewItem({ text: product.productName, value: product, checked: checked });
-      switch (product.casinoType) {
-        case CasinoType.None:
-          nonCasinoProducts.push(item);
-          break;
-        case CasinoType.RNG:
-          rngCasinoProducts.push(item);
-          break;
-        case CasinoType.SLI:
-          liveCasinoProducts.push(item);
-          break;
+      if (product.productCategory !== productCategory) {
+        if (result.length > 0) {
+          result[categoryIndex].correctChecked();
+        }
+        result.push(new TreeviewItem({ 
+          text: product.productCategory,
+          value: undefined,
+          children: [{ text: product.productName, value: product, checked: checked }]
+        }));
+        categoryIndex++;
+        productCategory = product.productCategory;
+      } else {
+       result[categoryIndex].children.push(new TreeviewItem({ text: product.productName, value: product, checked: checked })); 
       }
     });
-
-    const result: TreeviewItem[] = [];
-    if (liveCasinoProducts.length > 0) {
-      result.push(new TreeviewItem({
-        text: 'Live Casino',
-        value: undefined,
-        children: liveCasinoProducts
-      }));
-    }
-    if (rngCasinoProducts.length > 0) {
-      result.push(new TreeviewItem({
-        text: 'RNG Casino',
-        value: undefined,
-        children: rngCasinoProducts
-      }));
-    }
-
-    return result.concat(nonCasinoProducts);
+    return result;
   }
 
   buildSiteTreeViewItems(sites: SiteGroupModel[], selectedSites: SiteGroupModel[]): TreeviewItem[] {

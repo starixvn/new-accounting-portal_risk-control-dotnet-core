@@ -44,6 +44,7 @@ export interface Product {
     productName: string;
     casinoType: CasinoType;
     isSingleWallet: boolean;
+    productCategory: string;
 }
 
 export interface Site {

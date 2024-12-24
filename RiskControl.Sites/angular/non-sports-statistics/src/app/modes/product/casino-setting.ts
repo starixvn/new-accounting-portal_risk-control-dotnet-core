@@ -4,12 +4,14 @@ import { ProductLevel } from './product.model';
 
 export abstract class CasinoSetting extends ProductSetting {
     casinoType: CasinoType;
+    productCategory: string;
 
     constructor(typeId: number, typeName: string) {
         super(typeId, typeName, [
             ProductLevel.CasinoTypeViewProduct
         ]);
         this.casinoType = typeId;
+        this.productCategory = typeName;
     }
 
     hasDrillDownProduct(): boolean {

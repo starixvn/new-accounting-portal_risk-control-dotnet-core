@@ -8,5 +8,7 @@ public class ProductModel
 
     public int CasinoType { get; set; }
 
+    public string ProductCategory { get; set; }
+
     public bool IsSingleWallet { get; set; }
 }
