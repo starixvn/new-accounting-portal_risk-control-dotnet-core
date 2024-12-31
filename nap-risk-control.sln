@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskControl.UnitTests", "te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskControl.FailSafeSystem", "src\RiskControl.FailSafeSystem\RiskControl.FailSafeSystem.csproj", "{5CE0194D-5473-4518-8825-03C21207DA9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskControl.FailSafeSystem.UnitTests", "test\unit\RiskControl.FailSafeSystem.UnitTests\RiskControl.FailSafeSystem.UnitTests.csproj", "{A7E031C7-E63E-48B9-A2CF-2427CF88A304}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{5CE0194D-5473-4518-8825-03C21207DA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CE0194D-5473-4518-8825-03C21207DA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CE0194D-5473-4518-8825-03C21207DA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7E031C7-E63E-48B9-A2CF-2427CF88A304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7E031C7-E63E-48B9-A2CF-2427CF88A304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7E031C7-E63E-48B9-A2CF-2427CF88A304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7E031C7-E63E-48B9-A2CF-2427CF88A304}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +138,7 @@ Global
 		{35755745-0470-4238-8E2E-B0A531EECA85} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
 		{AFDB9546-521C-48FE-BFE5-353316D39D75} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
 		{5CE0194D-5473-4518-8825-03C21207DA9C} = {5186ACE3-6F85-42AC-8C58-28004B503E91}
+		{A7E031C7-E63E-48B9-A2CF-2427CF88A304} = {9F43D512-8D7A-49AF-B8AF-CB86AB82908C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FBF92E47-50E6-4A60-AEB9-7251A38B2985}
