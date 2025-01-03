@@ -22,6 +22,8 @@ public interface ConfigurationService
     string ExcelPassword { get; }
 
     string MemberWinLossFileServerDirectory { get; }
+
+    string CwlFileServerDirectory { get; }
 }
 
 public class ConfigurationServiceImp(IConfiguration configuration) : ConfigurationService
@@ -43,4 +45,5 @@ public class ConfigurationServiceImp(IConfiguration configuration) : Configurati
     public string ExcelPassword => configuration["ExcelPassword"];
 
     public string MemberWinLossFileServerDirectory => configuration["MemberWinLossFileServerDirectory"];
+    public string CwlFileServerDirectory => configuration["CWLFileServerDirectory"];
 }

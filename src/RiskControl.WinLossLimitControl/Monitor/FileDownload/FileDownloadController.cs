@@ -11,15 +11,35 @@ namespace RiskControl.WinLossLimitControl.Monitor.FileDownload;
 [Route("api/win-limit-control/download")]
 public class FileDownloadController(ConfigurationService configurationService, RichHttpClient richHttpClient) : ControllerBase
 {
-    [Route("excel")]
+    [Route("guid")]
     [HttpPost]
-    public async Task<IActionResult> Excel(WinLossAnalysisExcelModel model)
+    public async Task<IActionResult> GetGuid(WinLossAnalysisExcelModel model)
     {
-        var requestUri = configurationService.DownFileApi;
+        var requestUri = $"{configurationService.DownFileApi}/File";
 
         var data = await richHttpClient.PostJson<ApiResultModel>(requestUri, model).ConfigureAwait(false);
 
-        return File(data.FileContent, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", data.FileName);
+        return Ok(data);
+    }
+
+    [HttpGet("file")]
+    public async Task<IActionResult> CheckFile(string guid)
+    {
+        var requestUri = $"{configurationService.DownFileApi}/File/GetFile";
+
+        var json = await richHttpClient.PostJson<string>(requestUri, guid).ConfigureAwait(false);
+
+        var result = json != null ? JsonConvert.DeserializeObject<ApiResultModel>(json) : new ApiResultModel();
+
+        return Ok(result);
+    }
+
+    [HttpGet("excel")]
+    public FileStreamResult Excel(string fileName)
+    {
+        var path = $"{configurationService.CwlFileServerDirectory}/{fileName.Replace("/Excel/", "")}";
+        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous);
+        return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));
     }
 
     [Route("guid-member-wl-file")]

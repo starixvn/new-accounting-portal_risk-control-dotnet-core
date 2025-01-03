@@ -38,3 +38,9 @@ export interface WinLossAnalysisExcel {
     reachedLimitTime: string;
     username: string;
 }
+
+export interface ApiResultModel {
+    fileName: string;
+    invalidUsernames: string;
+    guid: string;
+}
