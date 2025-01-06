@@ -1,5 +1,6 @@
 ﻿using Fanex.Data.Repository;
 using System.Linq;
+using Fanex.Logging;
 
 namespace RiskControl.AssociatedAcccount;
 
@@ -31,6 +32,7 @@ public class AssociatedAccountServiceImp(
     {
         var associatedCustomers = await GetAssociatedCustomer(custId);
         var custIds = associatedCustomers.Select(x => x.CustId).Distinct();
+        await LogService.InfoAsync($"GetAssociatedAccount - Custid: {string.Join(",", custIds)}");
         var customerSites =  await repository.FetchAsync<CustomerSiteModel>(new CustomerSiteCriteria { CustIdList = string.Join(",", custIds) });
 
         var data = (from a in associatedCustomers
