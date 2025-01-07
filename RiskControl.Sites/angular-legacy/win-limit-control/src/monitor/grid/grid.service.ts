@@ -4,7 +4,7 @@ import { HttpService } from 'nap-components/http';
 import { DateHelper } from 'nap-components/date';
 import { CommandResult } from '../../common/model';
 import { FilterModel } from '../filter';
-import { MonitorModel, UnblockCommand, WinLossAnalysisExcel } from './grid.model';
+import { ApiResultModel, MonitorModel, UnblockCommand, WinLossAnalysisExcel } from './grid.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { SpinnerService } from 'nap-components/spinner';
 import { tap } from 'rxjs/operators';
@@ -47,10 +47,15 @@ export class GridService {
         return this.httpService.post<CommandResult>(url, { LogID: logID, CustID: custId });
     }
 
-    exportExcel(model: WinLossAnalysisExcel): Observable<HttpResponse<Blob>> {
-        this.spinnerService.show();
-        const observable =
-         this.httpClient.post('api/win-limit-control/download/excel', model, { observe: 'response', responseType: 'blob' });
-        return observable.pipe(tap(() => this.spinnerService.hide()));
+    getGuidFile(model: WinLossAnalysisExcel): Observable<ApiResultModel> {
+        return this.httpService.post<ApiResultModel>('api/win-limit-control/download/guid', model, { noSpinner: true});
+    }
+    
+    getFile(guid: string): Observable<ApiResultModel> {
+        return this.httpService.get<ApiResultModel>(`api/win-limit-control/download/file?guid=${guid}`, {}, { noSpinner: true});
+    }
+    
+    downloadFile(fileName: string): Observable<HttpResponse<Blob>> {
+        return this.httpService.get(`api/win-limit-control/download/excel?fileName=${fileName}`, { noSpinner: true, responseType: 'blob' });
     }
 }

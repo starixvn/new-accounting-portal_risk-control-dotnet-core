@@ -18,6 +18,7 @@ import { AudioWrapper } from './audio-wrapper';
 import { LimitLevel } from '../../common/filter';
 import { Helper } from 'nap-components/helper';
 import { SharedDataService } from '../../common/services/shared-data.service';
+import { SpinnerService } from 'nap-components/spinner';
 
 const scrollWidth = 20;
 
@@ -44,6 +45,8 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
     width = scrollWidth;
     colspan: number;
     rowspan: number;
+    intervalId: number = 0;
+    limitedCount: number = 1440;
 
     private paginatePipe: PaginatePipe;
     private alertMessageBlurTimer: NodeJS.Timer = undefined;
@@ -59,7 +62,8 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
         private historyService: HistoryService,
         private accountService: AccountService,
         private audioWrapper: AudioWrapper,
-        private sharedDataService: SharedDataService
+        private sharedDataService: SharedDataService,
+        private readonly spinnerService: SpinnerService
     ) {
         this.paginatePipe = new PaginatePipe(this.ngxPaginationService);
         this.audioWrapper.create('monitor/assets/koekoeksklok.mp3');
@@ -241,10 +245,38 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
             reachedLimitTime: monitorModel.reachedLimitTime,
             username: monitorModel.userName
         };
-        this.gridService.exportExcel(winLossAnalysisExcel).subscribe(response => {
-          var contentDisposition = response.headers.get('content-disposition');
-          var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
-          Helper.downloadFile(response.body, `${filename}`);
-        });
+        this.countdownTimerComponent.pause();
+        this.spinnerService.show();
+        this.gridService.getGuidFile(winLossAnalysisExcel).subscribe(model => {
+            if (model.guid.length > 0) {
+              let timerCount = 0;
+              this.intervalId = window.setInterval(() => {
+                if (timerCount < this.limitedCount) {
+                  this.gridService.getFile(model.guid).subscribe(result => {
+                    if (result.fileName !== null) {
+                      window.clearInterval(this.intervalId);
+                      if (result.fileName.includes("NoData")) {
+                        this.toastService.activate('No Data !!!', MessageType.Warning);
+                      } else {
+                        this.gridService.downloadFile(result.fileName).subscribe(response => {
+                            var fileNameInfo = result.fileName.split('/');
+                            Helper.downloadFile(response, fileNameInfo[fileNameInfo.length-1]);
+                          })
+                      }
+                      this.spinnerService.hide();
+                      this.countdownTimerComponent.continue();
+                    } else {
+                      timerCount += 1;
+                    }                 
+                  })
+                } else {
+                  window.clearInterval(this.intervalId);
+                  this.toastService.activate('The operation timed out. Please try again later.', MessageType.Warning);
+                  this.spinnerService.hide();
+                  this.countdownTimerComponent.continue();
+                }
+              }, 5000)
+            }
+        })
     }
 }
