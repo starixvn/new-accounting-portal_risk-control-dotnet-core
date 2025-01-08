@@ -21,13 +21,13 @@ services.AddControllersWithViews(options =>
     options.Filters.Add(new SessionAuthorizeAttribute());
 }).AddNewtonsoftJson();
 services.AddNapClient(configuration);
-services.AddOneBookUm(configuration);
 services.AddHttpContextAccessor();
 services.AddRemotingRef(configuration);
 services.AddFanexData(configuration);
 services.AddFanexLogSentry(configuration);
 services.AddInternalServices();
 services.AddAssemblyForMediatR();
+services.AddOneBookUm(configuration);
 
 var app = builder.Build();
 app.Use((context, next) =>
