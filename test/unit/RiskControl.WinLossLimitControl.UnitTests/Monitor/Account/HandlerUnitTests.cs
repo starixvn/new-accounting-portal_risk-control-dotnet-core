@@ -1,4 +1,5 @@
-﻿using Fanex.Data.Repository;
+﻿using System.Collections.Generic;
+using Fanex.Data.Repository;
 using NSubstitute;
 using RiskControl.AssociatedAcccount;
 using RiskControl.WinLossLimitControl.Monitor.Account;
@@ -20,8 +21,15 @@ public class HandlerUnitTests
     {
         // Arrange
         var expectedAccountModel = TestDataProvider.Load<AccountModel>("account-model");
+        var expectedCustomer = new List<Customer>
+        {
+            new() { CustId = 1290, IsCreditUser = true, SiteName = "BEST-ODDS", RoleId = 1, Username = "302RM" },
+            new() { CustId = 1262, IsCreditUser = true, SiteName = "BEST-ODDS", RoleId = 2, Username = "wsrm" },
+            new() { CustId = 4174, IsCreditUser = true, SiteName = "BEST-ODDS", RoleId = 3, Username = "mrm" },
+            new() { CustId = 2, IsCreditUser = true, SiteName = "BEST-ODDS", RoleId = 4, Username = "SA-RM" }
+        };
         var repository = Substitute.For<IDynamicRepository>();
-        repository.GetAsync<Customer>(Arg.Compat.Any<CustomerQueryCriteria>()).Returns(expectedAccountModel.Customer);
+        repository.FetchAsync<Customer>(Arg.Compat.Any<CustomerQueryCriteria>()).Returns(expectedCustomer);
 
         var associatedAccountService = Substitute.For<AssociatedAccountService>();
         associatedAccountService.GetAssociatedAccount(Arg.Compat.Any<int>()).Returns([]);
