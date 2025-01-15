@@ -186,8 +186,8 @@ public class GridOptionDataRowBuilderServiceImp(GridOptionCustomExcelCellStyleSe
                 });
             var customGroupAttributes = new
             {
-                groupId = dailyViewStatistics.GroupId,
-                groupName = dailyViewStatistics.GroupName
+                groupName = dailyViewStatistics.GroupName,
+                groupId = dailyViewStatistics.GroupId
             };
             dataRow.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
 
