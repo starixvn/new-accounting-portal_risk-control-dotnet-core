@@ -20,7 +20,7 @@
     }
   },
   "files": [
-    "monitor.ts",
+    "manage-setting-group.ts",
     "polyfills.ts"
   ],
   "include": [
