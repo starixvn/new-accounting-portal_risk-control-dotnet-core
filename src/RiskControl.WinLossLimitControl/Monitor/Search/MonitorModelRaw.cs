@@ -37,4 +37,8 @@ public class MonitorModelRaw
     public string MaxWinLimitSetting { get; set; }
 
     public bool IsSuspendedAccount { get; set; }
+
+    public string GameType { get; set; }
+
+    public decimal WinningLosingCurrency { get; set; }
 }
