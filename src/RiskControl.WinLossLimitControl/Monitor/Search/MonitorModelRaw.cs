@@ -38,7 +38,7 @@ public class MonitorModelRaw
 
     public bool IsSuspendedAccount { get; set; }
 
-    public string GameType { get; set; }
+    public string BettypeIDList { get; set; }
 
-    public decimal WinningLosingCurrency { get; set; }
+    public decimal MaxWinLimit_RM { get; set; }
 }

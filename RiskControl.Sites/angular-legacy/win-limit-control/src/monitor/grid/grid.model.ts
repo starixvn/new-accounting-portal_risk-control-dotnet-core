@@ -44,3 +44,14 @@ export interface ApiResultModel {
     invalidUsernames: string;
     guid: string;
 }
+
+export interface QueryModel {
+    fromDate: string;
+    toDate: string;
+    productId: number;
+    levelId: string;
+    userName: string;
+    multiSite: string;
+    currencyId: number;
+    excludeTestData: boolean;
+}

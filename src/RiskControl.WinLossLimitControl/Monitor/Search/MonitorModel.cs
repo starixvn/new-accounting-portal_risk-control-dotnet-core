@@ -28,14 +28,14 @@ public class MonitorModel
 
     public string GroupName { get; set; }
 
-    [Cell("F2")]
+    [Cell("H2")]
     public decimal WinningAmount { get; set; }
 
     [Cell("G2")]
     public decimal WinningAmountRM { get; set; }
 
-    [Cell("H2")]
-    public decimal WinningLosingCurrency { get; set; }
+    [Cell("F2")]
+    public decimal MaxWinLimit_RM { get; set; }
 
     [Cell("I2")]
     public string ReachedLimitTime { get; set; }

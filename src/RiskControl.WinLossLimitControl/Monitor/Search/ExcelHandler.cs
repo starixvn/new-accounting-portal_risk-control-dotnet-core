@@ -21,6 +21,7 @@ public class ExcelHandler(IDynamicRepository repository,
     : IRequestHandler<ExcelRequest, ExcelPackage>
 {
     private const int ExcelStartRow = 2;
+    private const int MaxBetTypes = 3;
 
     public async Task<ExcelPackage> Handle(ExcelRequest request, CancellationToken cancellationToken)
     {
@@ -46,8 +47,8 @@ public class ExcelHandler(IDynamicRepository repository,
             WinningAmountRM = item.TotalWinAmountRM,
             ReachedLimitTime = $"{item.ReachedLimitTime:MM/d/yyyy h:mm:ss tt}",
             ReachedLimitLevel = item.ReachedLimitLevel,
-            GameType = item.GameType,
-            WinningLosingCurrency = item.WinningLosingCurrency,
+            GameType = GetGameType(item.BettypeIDList),
+            MaxWinLimit_RM = item.MaxWinLimit_RM,
             ReachedLimitLevelText = GetLimitLevelText(item.ReachedLimitLevel)
         });
     }
@@ -71,5 +72,12 @@ public class ExcelHandler(IDynamicRepository repository,
             LimitLevelConstant.BlackLevel => LimitLevelConstant.BlackLevelText,
             _ => "White"
         };
+    }
+
+    private string GetGameType(string betTypeIdList)
+    {
+        var betTypes = betTypeIdList.Split(',');
+        var gameTypes = string.Join(',', betTypes.Take(MaxBetTypes).Select(item => cacheRefService.GetBetTypeName(int.Parse(item))));
+        return betTypes.Length > MaxBetTypes ? $"{gameTypes} and other games..." : gameTypes;
     }
 }

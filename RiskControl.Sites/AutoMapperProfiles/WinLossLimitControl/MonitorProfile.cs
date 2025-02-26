@@ -11,6 +11,7 @@ public class MonitorProfile : Profile
     {
         CreateMap<History.Request, History.HistoryCriteria>();
         CreateMap<Search.Request, Search.MonitorSearchCriteria>();
+        CreateMap<Search.ExcelRequest, Search.MonitorSearchCriteria>();
         CreateMap<History.RequestUncheckedNotification, History.UncheckedNotificationCriteria>();
         CreateMap<Unblock.RequestUnblockPlaceBet, Unblock.ServiceParameter>();
         CreateMap<Unblock.RequestUnblockTransfer, Unblock.ServiceParameter>();

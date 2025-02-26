@@ -24,12 +24,19 @@
     </colgroup>
 </ng-template>
 <ng-template #breadcrumbToolboxTemplate>
+    <div class="fm-countdown">
+        <div class="breadcrumb-toolbox">
+            <div class="toolbox-item">
+                <nap-countdown-timer (callback)="countdownCallback()"></nap-countdown-timer>
+            </div>
+            <div class="toolbox-item">
+                <i class="fa" [ngClass]="{'fa-volume-up': volumnOn, 'fa-volume-off': !volumnOn}" aria-hidden="true" (click)="toggleVolume()"></i>
+            </div>
+        </div>
+    </div>
     <div class="breadcrumb-toolbox">
         <div class="toolbox-item">
-            <nap-countdown-timer (callback)="countdownCallback()"></nap-countdown-timer>
-        </div>
-        <div class="toolbox-item">
-            <i class="fa" [ngClass]="{'fa-volume-up': volumnOn, 'fa-volume-off': !volumnOn}" aria-hidden="true" (click)="toggleVolume()"></i>
+            <input type="button" class="btnExcel" (click)="exportExcelMain()">
         </div>
     </div>
 </ng-template>
