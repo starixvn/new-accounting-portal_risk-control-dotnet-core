@@ -238,6 +238,10 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
         return level === LimitLevel.Red || level === LimitLevel.Yellow;
     }
 
+    exportExcelMain(): void {
+        this.gridService.exportExcelMain(this.filterModel);
+    }
+
     exportExcel(monitorModel: MonitorModel): void {
         const winLossAnalysisExcel: WinLossAnalysisExcel = {
             custId: monitorModel.custId,

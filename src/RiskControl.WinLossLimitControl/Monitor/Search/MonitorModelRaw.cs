@@ -37,4 +37,8 @@ public class MonitorModelRaw
     public string MaxWinLimitSetting { get; set; }
 
     public bool IsSuspendedAccount { get; set; }
+
+    public string BettypeIDList { get; set; }
+
+    public decimal MaxWinLimit_RM { get; set; }
 }
