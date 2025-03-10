@@ -9,9 +9,8 @@
   <ItemGroup>
     <PackageReference Include="Epplus.Mapper" Version="7.5.0" />
     <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.5" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3.5" />
     <PackageReference Include="Fanex.Excel" Version="2.7.2.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.0" />
     <PackageReference Include="Olympus.FPSAPI.Client" Version="1.0.0.16" />
   </ItemGroup>
 

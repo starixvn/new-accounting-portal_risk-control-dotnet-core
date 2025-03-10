@@ -27,7 +27,7 @@ services.AddFanexData(configuration);
 services.AddFanexLogSentry(configuration);
 services.AddInternalServices();
 services.AddAssemblyForMediatR();
-services.AddOneBookUm(configuration);
+services.AddOneBookUmForWeb(configuration);
 
 var app = builder.Build();
 app.Use((context, next) =>
