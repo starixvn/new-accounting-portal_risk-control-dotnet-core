@@ -14,9 +14,9 @@
         </div>
         <div class="nap-col nap-col-2">
             <div class="nap-group">
-                <label for="select-currency">Group</label>
+                <label for="select-group">Group</label>
                 <div class="nap-control">
-                    <select class="form-control" id="select-currency" [(ngModel)]="groupId">
+                    <select class="form-control" id="select-group" [(ngModel)]="groupId">
                         <option [ngValue]="0">All</option>
                         <option *ngFor="let group of groups" [ngValue]="group.groupId">
                             {{group.groupName}}
