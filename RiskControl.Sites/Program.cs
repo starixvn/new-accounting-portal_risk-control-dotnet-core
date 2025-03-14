@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using RiskControl.Sites.Extensions;
 using Fanex.Data;
 using Fanex.Logging.Sentry.RavenClient;
+using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using ONEbook.UM.DependencyInjection;
 using ONEbook.UM.Filters;
