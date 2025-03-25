@@ -17,7 +17,9 @@ namespace RiskControl.Sites;
 using System.Reflection;
 using ProgressiveJackpot;
 using BettingMonitoring.Query;
+using Microsoft.AspNetCore.DataProtection;
 using NonSportsGamesStatistics.CurrencyView.Main.History;
+using StackExchange.Redis;
 using WinLossLimitControl.PlayerSettings.Insert;
 
 public static class ServiceCollectionExtensions
@@ -107,6 +109,20 @@ public static class ServiceCollectionExtensions
             options.Cookie.IsEssential = true;
             options.IdleTimeout = TimeSpan.FromMinutes(int.Parse(configuration.GetSection("AuthSettings:SessionTimeOut").Value));
             options.Cookie.Name = "RiskControl.Session";
+        });
+
+        var redisConfig = configuration.GetSection("AuthSettings:RedisConfig").Value;
+        var redisMultiplexer = ConnectionMultiplexer.Connect(redisConfig);
+
+        services.AddDataProtection()
+            .PersistKeysToStackExchangeRedis(redisMultiplexer, "Fanex.RiskControl-ProtectionKeys");
+
+        services.AddSingleton<IConnectionMultiplexer>(redisMultiplexer);
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = redisConfig;
+            options.InstanceName = "Fanex.RiskControl.Session-";
         });
     }
 }
