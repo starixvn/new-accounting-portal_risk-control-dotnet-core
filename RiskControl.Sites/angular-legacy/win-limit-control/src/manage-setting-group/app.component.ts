@@ -197,6 +197,12 @@ export class AppComponent implements OnInit {
       );
   }
 
+  selectAll(isAll: boolean) {
+    for (const item of this.unsignedBettypes) {
+      item.selected = isAll;
+    }
+  }
+
   private internalSave() {
     const settings = this.getSettings();
     this.appService.initialSettings(settings).subscribe(result => {

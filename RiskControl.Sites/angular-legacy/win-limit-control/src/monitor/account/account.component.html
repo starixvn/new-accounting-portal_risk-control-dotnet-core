@@ -55,15 +55,15 @@
                     <td>CUSTOMER</td>
                     <td>{{accountModel.customer.username}} ({{accountModel.customer.custId}})</td>
                 </tr>
-                <tr *ngIf="accountModel.customer.isCreditUser">
+                <tr *ngIf="accountModel.customer.isCreditUser && accountModel.customer.agent">
                     <td>AGENT</td>
                     <td>{{accountModel.customer.agent}} ({{accountModel.customer.agentId}})</td>
                 </tr>
-                <tr *ngIf="accountModel.customer.isCreditUser">
+                <tr *ngIf="accountModel.customer.isCreditUser && accountModel.customer.master">
                     <td>MASTER</td>
                     <td>{{accountModel.customer.master}} ({{accountModel.customer.masterId}})</td>
                 </tr>
-                <tr *ngIf="accountModel.customer.isCreditUser">
+                <tr *ngIf="accountModel.customer.isCreditUser && accountModel.customer.super">
                     <td>SUPER</td>
                     <td>{{accountModel.customer.super}} ({{accountModel.customer.superId}})</td>
                 </tr>
