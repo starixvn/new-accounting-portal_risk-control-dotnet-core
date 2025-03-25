@@ -37,6 +37,14 @@ public class FileDownloadController(ConfigurationService configurationService, R
     [HttpGet("excel")]
     public FileStreamResult Excel(string fileName)
     {
+        var path = $"{configurationService.FileServerDirectory}/{fileName.Replace("/Excel/", "")}";
+        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous);
+        return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));
+    }
+
+    [HttpGet("excel-web")]
+    public FileStreamResult ExcelWeb(string fileName)
+    {
         var path = $"{configurationService.CwlFileServerDirectory}/{fileName.Replace("/Excel/", "")}";
         var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous);
         return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));

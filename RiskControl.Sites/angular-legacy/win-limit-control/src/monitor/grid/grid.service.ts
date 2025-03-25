@@ -45,7 +45,7 @@ export class GridService {
     }
     
     downloadFile(fileName: string): Observable<HttpResponse<Blob>> {
-        return this.httpService.get(`api/win-limit-control/download/excel?fileName=${fileName}`, { noSpinner: true, responseType: 'blob' });
+        return this.httpService.get(`api/win-limit-control/download/excel-web?fileName=${fileName}`, { noSpinner: true, responseType: 'blob' });
     }
 
     exportExcelMain(filterModel: FilterModel): void {
