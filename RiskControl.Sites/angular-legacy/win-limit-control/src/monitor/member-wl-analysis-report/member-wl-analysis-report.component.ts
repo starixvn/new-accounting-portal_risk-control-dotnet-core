@@ -65,7 +65,7 @@ export class MemberWlAnalysisReportComponent {
             this.intervalId = window.setInterval(() => {
               if (timerCount < this.limitedCount) {
                 this.memberWlAnalysisReportService.getFile(model.guid).subscribe(result => {
-                  if (result.fileName !== null) {
+                  if (result.fileName !== null && result.fileName !== '') {
                     window.clearInterval(this.intervalId);
                     this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(response => {
                       if (result.invalidUsernames != null && result.invalidUsernames.length > 0) {
