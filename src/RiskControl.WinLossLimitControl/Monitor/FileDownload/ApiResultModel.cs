@@ -1,7 +1,11 @@
-﻿namespace RiskControl.WinLossLimitControl.Monitor.FileDownload;
+﻿using System.Collections.Generic;
+
+namespace RiskControl.WinLossLimitControl.Monitor.FileDownload;
 
 public class ApiResultModel
 {
+    public List<string> FileNames { get; set; }
+
     public string FileName { get; set; }
 
     public byte[] FileContent { get; set; }

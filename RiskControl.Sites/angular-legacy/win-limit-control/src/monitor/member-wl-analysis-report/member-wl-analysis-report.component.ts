@@ -67,14 +67,19 @@ export class MemberWlAnalysisReportComponent {
                 this.memberWlAnalysisReportService.getFile(model.guid).subscribe(result => {
                   if (result.fileName !== null && result.fileName !== '') {
                     window.clearInterval(this.intervalId);
-                    this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(response => {
-                      if (result.invalidUsernames != null && result.invalidUsernames.length > 0) {
-                        this.toastService.activate(`Invalid member(s): ${result.invalidUsernames}`, MessageType.Warning);
-                      }
-                      var fileNameInfo = result.fileName.split('/');
-                      Helper.downloadFile(response, fileNameInfo[fileNameInfo.length-1]);
+                    if (result.fileName.includes("NoData")) {
+                      this.toastService.activate('No Data !!!', MessageType.Warning);
                       this.spinnerService.hide();
-                    })
+                    } else {
+                      this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(response => {
+                        if (result.invalidUsernames != null && result.invalidUsernames.length > 0) {
+                          this.toastService.activate(`Invalid member(s): ${result.invalidUsernames}`, MessageType.Warning);
+                        }
+                        var fileNameInfo = result.fileName.split('/');
+                        Helper.downloadFile(response, fileNameInfo[fileNameInfo.length-1]);
+                        this.spinnerService.hide();
+                      });
+                    }
                   } else {
                     timerCount += 1;
                   }                 

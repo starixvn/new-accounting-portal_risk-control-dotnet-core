@@ -2,6 +2,7 @@
 using RiskControl.Configuration;
 using RiskControl.WebApiClient;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -29,7 +30,12 @@ public class FileDownloadController(ConfigurationService configurationService, R
 
         var json = await richHttpClient.PostJson<string>(requestUri, guid).ConfigureAwait(false);
 
-        var result = json != null ? JsonConvert.DeserializeObject<ApiResultModel>(json) : new ApiResultModel();
+        var result = new ApiResultModel();
+        if (json != null)
+        {
+            result = JsonConvert.DeserializeObject<ApiResultModel>(json);
+            result.FileName = result.FileNames.FirstOrDefault();
+        }
 
         return Ok(result);
     }
