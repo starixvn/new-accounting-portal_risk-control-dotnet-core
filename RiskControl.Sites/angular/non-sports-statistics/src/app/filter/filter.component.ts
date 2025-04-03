@@ -141,9 +141,9 @@ export class FilterComponent implements OnInit {
   housePTValue: number;
   date: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.today);
   minStartDate: NapDateStruct = { year: 2013, month: 1, day: 1 };
-  maxEndDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.yesterday);
+  maxEndDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.today);
   startDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.yesterday);
-  endDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.yesterday);
+  endDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.today);
   minDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.moveBetDate.add('1', 'day'));
   maxDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.today);
   username = '';
@@ -166,10 +166,15 @@ export class FilterComponent implements OnInit {
   private readonly lastMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(1, 'month').startOf('month');
   private readonly lastThreeMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(3, 'month').startOf('month');
   private readonly lastSixMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(6, 'month').startOf('month');
-  private readonly lastYearStartDate = moment.utc(DATE_CONFIG.reportDate.today).subtract(1, 'year');
+  private readonly lastYearStartDate = moment.utc(DATE_CONFIG.reportDate.today).add(1, "day").subtract(1, 'year');
   private numberLicensees = 0;
 
   private readonly TimeRanges: TimeRange[] = [
+    {
+      timePeriodType: TimePeriod.Today,
+      startDate: moment.utc(DATE_CONFIG.reportDate.today),
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
+    },
     {
       timePeriodType: TimePeriod.Yesterday,
       startDate: moment.utc(DATE_CONFIG.reportDate.yesterday),
@@ -177,8 +182,8 @@ export class FilterComponent implements OnInit {
     },
     {
       timePeriodType: TimePeriod.CurrentWeek,
-      startDate: moment.utc(DATE_CONFIG.reportDate.yesterday).startOf('week'),
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('week'),
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
       timePeriodType: TimePeriod.LastWeek,
@@ -187,8 +192,8 @@ export class FilterComponent implements OnInit {
     },
     {
       timePeriodType: TimePeriod.CurrentMonth,
-      startDate: moment.utc(DATE_CONFIG.reportDate.yesterday).startOf('month'),
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('month'),
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
       timePeriodType: TimePeriod.LastMonth,
@@ -198,7 +203,7 @@ export class FilterComponent implements OnInit {
     {
       timePeriodType: TimePeriod.SinceLastMonth,
       startDate: this.lastMonthStartDate,
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
       timePeriodType: TimePeriod.LastThreeMonths,
@@ -213,7 +218,7 @@ export class FilterComponent implements OnInit {
     {
       timePeriodType: TimePeriod.SinceLastYear,
       startDate: this.lastYearStartDate,
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     }
   ];
 
