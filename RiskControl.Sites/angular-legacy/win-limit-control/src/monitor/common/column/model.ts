@@ -53,5 +53,5 @@ export const Columns: GridColumns = {
     blockPlaceBet: new TableColumn('Block<br/>Place Bet', 80),
     blockTransferWithdraw: new TableColumn('Block<br/>Transfer/Withdraw', 130),
     winLossAnalysis: new TableColumn('Win Loss Analysis', 70, true, true),
-    history: new TableColumn('', 40, true, true)
+    history: new TableColumn('History', 55, true, true)
 };
