@@ -15,7 +15,7 @@
     <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3.6" />
     <PackageReference Include="Fanex.NAP.Client" Version="2.0.3" />
     <PackageReference Include="Fanex.RemotingRef" Version="1.5.5.1" />
-    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
     <PackageReference Include="Olympus.FPSAPI.Client" Version="1.0.0.16" />
   </ItemGroup>
 
