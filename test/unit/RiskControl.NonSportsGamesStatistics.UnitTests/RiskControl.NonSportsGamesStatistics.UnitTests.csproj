@@ -27,13 +27,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CurrencyView\GrandTotal\Normal\" />
+    <Folder Include="CurrencyView\Main\Normal\" />
     <Folder Include="DailyView\GrandTotal\DailyGrandTotal\" />
+    <Folder Include="DailyView\GrandTotal\DailyViewGrandTotalHistory\" />
     <Folder Include="DailyView\GrandTotal\DailyViewGrandTotal\" />
+    <Folder Include="DailyView\GrandTotal\ProductGrandTotalHistory\" />
+    <Folder Include="DailyView\GrandTotal\ProductGrandTotalNormal\" />
     <Folder Include="DailyView\GrandTotal\ProductGrandTotal\" />
+    <Folder Include="DailyView\GroupStatistics\CompanyNormal\" />
     <Folder Include="DailyView\GroupStatistics\Company\" />
+    <Folder Include="DailyView\GroupStatistics\DeviceNormal\" />
     <Folder Include="DailyView\GroupStatistics\Device\" />
+    <Folder Include="DailyView\Main\Normal\" />
+    <Folder Include="DailyView\Main\ProductNormal\" />
     <Folder Include="DailyView\Main\Product\" />
+    <Folder Include="Hourly\Normal\" />
     <Folder Include="TopTwenty\Common\" />
+    <Folder Include="TopTwenty\GroupStatistics\Normal\" />
+    <Folder Include="TopTwenty\Main\Normal\" />
+    <Folder Include="UserNameView\AssociatedAccount\Normal\" />
+    <Folder Include="UserNameView\GrandTotal\Normal\" />
+    <Folder Include="UserNameView\Main\Normal\" />
   </ItemGroup>
 
 </Project>
