@@ -80,6 +80,7 @@ export class FilterComponent implements OnInit {
   isExcludeTest = true;
   isViewByInteger = false;
   isBaseRM = true;
+  isBaseUSD = false;
   productTreeviewConfig = TreeviewConfig.create({
     hasCollapseExpand: true,
     hasAllCheckBox: true,
@@ -517,15 +518,24 @@ export class FilterComponent implements OnInit {
       action: ActionConstants.SELECT
     }
     this.savedFilterService.queryFilters(queryModel, false).subscribe(data => {
-      const modalRef = this.modalService.open(SavedFilterGridComponent, { size: { width: 500 } }, data);
-      modalRef.contentViewRef
+      this.modalService.open(SavedFilterGridComponent, { size: { width: 500 } }, data);
     })
   }
 
   checkBaseRMValue(isCheck: boolean) {
     this.isBaseRM = isCheck;
+    this.isBaseUSD = this.isBaseRM ? false : this.isBaseUSD;
     localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, JSON.stringify(isCheck));
+    localStorage.setItem(LocalStorageKey.IS_BASEUSD_CHECK, JSON.stringify(this.isBaseUSD));
   }
+
+  checkBaseUSDValue(isCheck: boolean) {
+    this.isBaseUSD = isCheck;
+    this.isBaseRM = this.isBaseUSD ? false : this.isBaseRM;
+    localStorage.setItem(LocalStorageKey.IS_BASEUSD_CHECK, JSON.stringify(isCheck));
+    localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, JSON.stringify(this.isBaseRM));
+  }
+
   private generateInternal() {
     this.reset.emit();
     if (!this.isValid) {
@@ -673,16 +683,14 @@ export class FilterComponent implements OnInit {
       betTypes: gameTypeResult.betTypes,
       leagueIds: gameTypeResult.leagueIds,
       sportTypes: gameTypeResult.sportTypes,
-      currency: this.isBaseRM ?
-        [-1]
-        : this.selectedCurrencies.map(currency => currency.exchangeId),
+      currency: this.getCurrenciesModel(),
       devices: this.selectedDevices.map(device => device.betFrom),
       isExcludeTest: this.isExcludeTest,
       isViewByInteger: this.isViewByInteger,
       totalBetType: this.totalBetsCompareType,
-      totalBetValue: this.totalBetsValue === null ? 0 : this.totalBetsValue,
+      totalBetValue: this.totalBetsValue ?? 0,
       gameIncomeType: this.gameIncomeCompareType,
-      gameIncomeValue: this.gameIncomeValue === null ? 0 : this.gameIncomeValue,
+      gameIncomeValue: this.gameIncomeValue ?? 0,
       housePTType: this.housePTCompareType,
       housePTValue: this.housePTValue,
       removalColumns: this.columnDropdownTreeview.items
@@ -714,11 +722,21 @@ export class FilterComponent implements OnInit {
 
   private getReportRoleId(): RoleId {
     let roleId = JSON.parse(localStorage.getItem(LocalStorageKey.ROLEID)) as RoleId;
-    if (roleId === null) {
-      roleId = RoleId.Member;
-    }
+    roleId ??= RoleId.Member;
 
     return roleId;
+  }
+
+  private getCurrenciesModel(): number[] {
+    if (this.isBaseRM) {
+      return [-1];
+    }
+
+    if (this.isBaseUSD) {
+      return [-2];
+    }
+
+    return this.selectedCurrencies.map(currency => currency.exchangeId);
   }
 
   private transformGameTypes(gameTypes: GameType[]): GameType[] {
@@ -861,17 +879,18 @@ export class FilterComponent implements OnInit {
 
   private initFilter() {
     const isBaseRM = JSON.parse(localStorage.getItem(LocalStorageKey.IS_BASERM_CHECK)) as boolean;
-    this.isBaseRM = isBaseRM === null ? true : isBaseRM;
+    this.isBaseRM = isBaseRM ?? true;
+
+    const isBaseUSD = JSON.parse(localStorage.getItem(LocalStorageKey.IS_BASEUSD_CHECK)) as boolean;
+    this.isBaseUSD = isBaseUSD ?? false;
 
     let reportType = JSON.parse(localStorage.getItem(LocalStorageKey.REPORT_TYPE)) as ReportType;
 
-    if (reportType === null) {
-      reportType = ReportType.Daily;
-    }
+    reportType ??= ReportType.Daily;
 
     let roleId = JSON.parse(localStorage.getItem(LocalStorageKey.ROLEID)) as RoleId;
 
-    this.roleId = roleId === null ? RoleId.Member : roleId;
+    this.roleId = roleId ?? RoleId.Member;
 
     this.onReportTypeChange(reportType);
 
@@ -989,6 +1008,7 @@ export class FilterComponent implements OnInit {
       housePtCompareType: localStorage.getItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE),
       housePtValue: localStorage.getItem(LocalStorageKey.HOUSEPT_VALUE),
       isBasermCheck: localStorage.getItem(LocalStorageKey.IS_BASERM_CHECK),
+      isBaseUsdCheck: localStorage.getItem(LocalStorageKey.IS_BASEUSD_CHECK),
       isExcludeTest: localStorage.getItem(LocalStorageKey.IS_EXCLUDE_TEST),
       isViewByInteger: localStorage.getItem(LocalStorageKey.IS_VIEW_BY_INTEGER),
       mode: localStorage.getItem(LocalStorageKey.MODE),
@@ -1017,6 +1037,7 @@ export class FilterComponent implements OnInit {
     localStorage.setItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE, model.housePtCompareType);
     localStorage.setItem(LocalStorageKey.HOUSEPT_VALUE, model.housePtValue);
     localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, model.isBasermCheck);
+    localStorage.setItem(LocalStorageKey.IS_BASEUSD_CHECK, model.isBaseUsdCheck);
     localStorage.setItem(LocalStorageKey.IS_EXCLUDE_TEST, model.isExcludeTest);
     localStorage.setItem(LocalStorageKey.IS_VIEW_BY_INTEGER, model.isViewByInteger);
     localStorage.setItem(LocalStorageKey.MODE, model.mode);

@@ -21,6 +21,7 @@ export class LocalStorageKey {
     static readonly HOUSEPT_COMPARE_TYPE = 'non-sport-houseptcomparetype';
     static readonly HOUSEPT_VALUE = 'non-sport-houseptvalue';
     static readonly IS_BASERM_CHECK = 'non-sport-isbasermcheck';
+    static readonly IS_BASEUSD_CHECK = 'non-sport-isbaseusdcheck';
     static readonly IS_EXCLUDE_TEST = 'non-sport-isexcludetest';
     static readonly IS_VIEW_BY_INTEGER = 'non-sport-isviewbyinteger';
     static readonly MODE = 'non-sport-mode';

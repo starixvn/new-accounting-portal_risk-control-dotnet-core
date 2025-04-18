@@ -174,9 +174,13 @@ export class FilterModelWrapper {
     }
 
     getCurrencyName(exchangeId: number): string {
-        return exchangeId === -1 ?
-        'Base RM' :
-        this.filterModel.selectedCollection.currencies.filter(currency => currency.exchangeId === exchangeId)[0].currency;
+        if (exchangeId === -2) {
+            return 'Base USD';
+        }
+        if (exchangeId === -1) { 
+            return 'Base RM';
+        }
+        return this.filterModel.selectedCollection.currencies.filter(currency => currency.exchangeId === exchangeId)[0].currency;
     }
 }
 
@@ -242,6 +246,7 @@ export interface SavedFilterContentModel {
     isViewByInteger: string;
     exactMatching: string;
     isBasermCheck: string;
+    isBaseUsdCheck: string;
     date: string;
     sort: string;
 }
