@@ -1,6 +1,5 @@
-﻿using System;
-using RiskControl.NonSportsGamesStatistics.Common;
-using RiskControl.NonSportsGamesStatistics.Constants;
+﻿using RiskControl.NonSportsGamesStatistics.Common;
+using System;
 
 namespace RiskControl.NonSportsGamesStatistics.DailyView.GrandTotal.DailyViewGrandTotal;
 
