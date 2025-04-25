@@ -7,6 +7,7 @@ export interface PlayerCurrencySetting {
 }
 
 export interface PlayerProductSetting {
+    productId: number;
     productName: string;
     playerSettings: PlayerSetting[];
 }

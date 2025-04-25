@@ -1,96 +1,108 @@
-import { PlayerCurrencySetting } from './index';
+import { PlayerCurrencySetting } from "./index";
 
 export const fakePlayerCurrencySettings: PlayerCurrencySetting[] = [
-    {
-        Username: 'User1', SiteName: 'Site 1', CurrencyName: 'Currency 1', Products: [
-            {
-                ProductName: 'Product 1', PlayerSettings: [
-                    {
-                        CustId: 1,
-                        Username: 'User1',
-                        SiteId: 1,
-                        SiteName: 'Site 1',
-                        CurrencyId: 1,
-                        CurrencyName: 'Currency 1',
-                        ProductId: 1,
-                        ProductName: 'Product 1',
-                        GroupId: 1,
-                        GroupName: 'Group 1',
-                        BlackLimit: -2,
-                        GreyLimit: -1,
-                        OrangeLimit: 1,
-                        YellowLimit: 2,
-                        RedLimit: 3,
-                        HasCurrencySetting: true
-                    },
-                    {
-                        CustId: 1,
-                        Username: 'User1',
-                        SiteId: 1,
-                        SiteName: 'Site 1',
-                        CurrencyId: 1,
-                        CurrencyName: 'Currency 1',
-                        ProductId: 1,
-                        ProductName: 'Product 1',
-                        GroupId: 2,
-                        GroupName: 'Group 2',
-                        BlackLimit: -1234,
-                        GreyLimit: -123,
-                        OrangeLimit: 123,
-                        YellowLimit: 1234,
-                        RedLimit: 12345,
-                        HasCurrencySetting: true
-                    }
-                ]
-            },
-            {
-                ProductName: 'Product 2', PlayerSettings: [
-                    {
-                        CustId: 1,
-                        Username: 'User1',
-                        SiteId: 1,
-                        SiteName: 'Site 1',
-                        CurrencyId: 1,
-                        CurrencyName: 'Currency 1',
-                        ProductId: 2,
-                        ProductName: 'Product 2',
-                        GroupId: 3,
-                        GroupName: 'Group 3',
-                        BlackLimit: -2,
-                        GreyLimit: 0,
-                        OrangeLimit: 1,
-                        YellowLimit: 0,
-                        RedLimit: 3,
-                        HasCurrencySetting: false
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        Username: 'User2', SiteName: 'Site 2', CurrencyName: 'Currency 2', Products: [
-            {
-                ProductName: 'Product 3', PlayerSettings: [
-                    {
-                        CustId: 2,
-                        Username: 'User2',
-                        SiteId: 2,
-                        SiteName: 'Site 2',
-                        CurrencyId: 2,
-                        CurrencyName: 'Currency 2',
-                        ProductId: 3,
-                        ProductName: 'Product 3',
-                        GroupId: 3,
-                        GroupName: 'Group 3',
-                        BlackLimit: -1234567,
-                        GreyLimit: 0,
-                        OrangeLimit: 1,
-                        YellowLimit: 0,
-                        RedLimit: 123456789,
-                        HasCurrencySetting: false
-                    }
-                ]
-            }
-        ]
-    }
+  {
+    username: "User1",
+    siteName: "Site 1",
+    currencyName: "Currency 1",
+    products: [
+      {
+        productId: 1,
+        productName: "Product 1",
+        playerSettings: [
+          {
+            custId: 1,
+            username: "User1",
+            siteId: 1,
+            siteName: "Site 1",
+            currencyId: 1,
+            currencyName: "Currency 1",
+            productId: 1,
+            productName: "Product 1",
+            groupId: 1,
+            groupName: "Group 1",
+            blackLimit: -2,
+            greyLimit: -1,
+            orangeLimit: 1,
+            yellowLimit: 2,
+            redLimit: 3,
+            hasCurrencySetting: true,
+          },
+          {
+            custId: 1,
+            username: "User1",
+            siteId: 1,
+            siteName: "Site 1",
+            currencyId: 1,
+            currencyName: "Currency 1",
+            productId: 1,
+            productName: "Product 1",
+            groupId: 2,
+            groupName: "Group 2",
+            blackLimit: -1234,
+            greyLimit: -123,
+            orangeLimit: 123,
+            yellowLimit: 1234,
+            redLimit: 12345,
+            hasCurrencySetting: true,
+          },
+        ],
+      },
+      {
+        productId: 2,
+        productName: "Product 2",
+        playerSettings: [
+          {
+            custId: 1,
+            username: "User1",
+            siteId: 1,
+            siteName: "Site 1",
+            currencyId: 1,
+            currencyName: "Currency 1",
+            productId: 2,
+            productName: "Product 2",
+            groupId: 3,
+            groupName: "Group 3",
+            blackLimit: -2,
+            greyLimit: 0,
+            orangeLimit: 1,
+            yellowLimit: 0,
+            redLimit: 3,
+            hasCurrencySetting: false,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    username: "User2",
+    siteName: "Site 2",
+    currencyName: "Currency 2",
+    products: [
+      {
+        productId: 3,
+        productName: "Product 3",
+        playerSettings: [
+          {
+            custId: 2,
+            username: "User2",
+            siteId: 2,
+            siteName: "Site 2",
+            currencyId: 2,
+            currencyName: "Currency 2",
+            productId: 3,
+            productName: "Product 3",
+            groupId: 3,
+            groupName: "Group 3",
+            blackLimit: -1234567,
+            greyLimit: 0,
+            orangeLimit: 1,
+            yellowLimit: 0,
+            redLimit: 123456789,
+            hasCurrencySetting: false,
+          },
+        ],
+      },
+    ],
+  },
 ];

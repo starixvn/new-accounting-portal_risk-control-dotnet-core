@@ -65,7 +65,7 @@
                                         <td class="word-break-all" *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.settingCount">{{ currencySetting.siteName }}</td>
                                         <td class="word-break-all" *ngIf="isFirstCurrencySetting && isFirstProductSetting" [attr.rowspan]="currencySetting.settingCount">{{ currencySetting.currencyName }}</td>
                                         <td class="word-break-all" *ngIf="isFirstProductSetting" [attr.rowspan]="productSetting.playerSettings.length">{{ productSetting.productName }}</td>
-                                        <td class="word-break-all"><span class="nap-link" (click)="showGroupSetting(productSetting.productName)"> {{ playerSetting.groupName }}</span></td>
+                                        <td class="word-break-all"><span class="nap-link" (click)="showGroupSetting(productSetting.productId, productSetting.productName)"> {{ playerSetting.groupName }}</span></td>
                                         <td>
                                             <div class="limit-row">
                                                 <nap-editable-loss-limit #blackLossLimitTextbox [value]="playerSetting.blackLimit" [editable]="hasHostPermission" (edit)="onEditLimit(blackLossLimitTextbox)"

@@ -10,6 +10,7 @@ using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using ONEbook.UM.DependencyInjection;
 using ONEbook.UM.Filters;
+using RiskControl.WinLossLimitControl.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -29,6 +30,7 @@ services.AddFanexLogSentry(configuration);
 services.AddInternalServices();
 services.AddAssemblyForMediatR();
 services.AddOneBookUmForWeb(configuration);
+services.AddHostedService<CacheBackgroundService>();
 
 var app = builder.Build();
 app.Use((context, next) =>

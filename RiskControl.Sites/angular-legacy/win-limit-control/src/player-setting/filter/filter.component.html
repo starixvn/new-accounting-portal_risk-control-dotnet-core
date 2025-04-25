@@ -13,10 +13,11 @@
                 <label for="select-product">Product</label>
                 <div class="nap-control">
                     <select class="form-control" id="select-product" [(ngModel)]="productId" (ngModelChange)="onProductChange()">
-                        <option *ngFor="let product of products" [ngValue]="product.id">
+                        <option *ngFor="let product of filteredProducts" [ngValue]="product.id">
                             {{product.name}}
                         </option>
                     </select>
+                    <input *ngIf="productId" type="text" class="form-control mt-2" placeholder="Enter additional details" [(ngModel)]="additionalDetails">
                 </div>
             </div>
         </div>

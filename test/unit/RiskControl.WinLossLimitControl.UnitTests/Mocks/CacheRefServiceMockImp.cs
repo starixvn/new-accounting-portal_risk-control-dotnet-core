@@ -3,6 +3,8 @@ using RiskControl.WinLossLimitControl.Filter.Model;
 
 namespace RiskControl.WinLossLimitControl.UnitTests.Mocks;
 
+using System.Collections.Generic;
+
 public class CacheRefServiceMockImp : CacheRefService
 {
     public BaseEntityGroup BaseEntityGroup => new();
@@ -35,5 +37,9 @@ public class CacheRefServiceMockImp : CacheRefService
     public string GetSportName(int sportId)
     {
         return $"B{sportId}";
+    }
+
+    public void ReloadCache(List<int> sportIds, List<int> betTypeIds)
+    {
     }
 }
