@@ -118,7 +118,8 @@ export class UserNameComponent implements OnInit, ModeGenerate {
     if (isNormalQueryModel(queryModel)) {
       const housePositionTakingQueryModel: HousePositionTakingQueryModel = {
         isNormalMode: queryModel.isNormalMode,
-        winLostDate: queryModel.fromDate,
+        fromDate: queryModel.fromDate,
+        toDate: queryModel.fromDate,
         productId: queryModel.productId,
         custId: custId,
         betType: queryModel.betType,

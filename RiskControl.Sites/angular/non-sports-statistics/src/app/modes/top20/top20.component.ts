@@ -148,7 +148,8 @@ export class Top20Component implements OnInit, ModeGenerate {
     const queryModel = this.createQueryModel() as Top20BaseQueryModel;
     const housePositionTakingQueryModel: HousePositionTakingQueryModel = {
       isNormalMode: queryModel.isNormalMode,
-      winLostDate: queryModel.fromDate,
+      fromDate: queryModel.fromDate,
+      toDate: queryModel.fromDate,
       productId: queryModel.productId,
       custId: custId,
       betType: queryModel.betType,

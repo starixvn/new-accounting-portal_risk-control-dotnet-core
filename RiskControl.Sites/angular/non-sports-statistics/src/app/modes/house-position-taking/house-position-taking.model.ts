@@ -10,7 +10,6 @@ export interface HousePositionTakingModel {
 
 export interface HousePositionTakingQueryModel {
     isNormalMode: boolean;
-    winLostDate: string;
     productId: string;
     custId: number;
     betType: string;
@@ -27,4 +26,6 @@ export interface HousePositionTakingQueryModel {
     housePTValue: number;
     excludeTest: boolean;
     sportBettype: string;
+    fromDate: string;
+    toDate: string;
 }
