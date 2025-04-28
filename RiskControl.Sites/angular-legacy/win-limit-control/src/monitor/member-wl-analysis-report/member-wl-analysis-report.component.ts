@@ -4,7 +4,7 @@ import { TreeviewConfig } from 'ngx-treeview';
 import { DownLoadFileModel, Product } from './member-wl-analysis-report.model';
 import { MemberWlAnalysisReportService } from './member-wl-analysis-report.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MessageType, ToastService } from 'nap-components/toast';
+import { MessageType } from 'nap-components/toast';
 import { Helper } from 'nap-components/helper';
 import { SharedDataService } from '../../common/services/shared-data.service';
 import { SpinnerService } from 'nap-components/spinner';
@@ -30,10 +30,10 @@ export class MemberWlAnalysisReportComponent {
   selectedProducts: number[] = [];
   intervalId: number = 0;
   limitedCount: number = 1440;
+  warningMessage: string = undefined;
 
   constructor(private readonly memberWlAnalysisReportService: MemberWlAnalysisReportService,
     public readonly activeModal: NgbActiveModal,
-    private readonly toastService: ToastService,
     private readonly sharedDataService: SharedDataService,
     private readonly spinnerService: SpinnerService
   ) { 
@@ -68,12 +68,20 @@ export class MemberWlAnalysisReportComponent {
                   if (result.fileName !== null && result.fileName !== '') {
                     window.clearInterval(this.intervalId);
                     if (result.fileName.includes("NoData")) {
-                      this.toastService.activate('There is no data !!!', MessageType.Warning);
+                      if (result.invalidUsernames != null && result.invalidUsernames.length > 0) {
+                        if (result.invalidUsernames.trim().split(',').length === this.userName.trim().split(',').length) {
+                          this.warningMessage = `Invalid member(s): ${result.invalidUsernames}`;
+                        } else {
+                          this.warningMessage = `There is no data !!! <br/> Invalid member(s): ${result.invalidUsernames}`;
+                        }
+                      } else {
+                        this.warningMessage = 'There is no data !!!';
+                      }
                       this.spinnerService.hide();
                     } else {
                       this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(response => {
                         if (result.invalidUsernames != null && result.invalidUsernames.length > 0) {
-                          this.toastService.activate(`Invalid member(s): ${result.invalidUsernames}`, MessageType.Warning);
+                          this.warningMessage = `Invalid member(s): ${result.invalidUsernames}`;
                         }
                         var fileNameInfo = result.fileName.split('/');
                         Helper.downloadFile(response, fileNameInfo[fileNameInfo.length-1]);
@@ -86,7 +94,7 @@ export class MemberWlAnalysisReportComponent {
                 })
               } else {
                 window.clearInterval(this.intervalId);
-                this.toastService.activate('The operation timed out. Please try again later.', MessageType.Warning);
+                this.warningMessage = 'The operation timed out. Please try again later.';
                 this.spinnerService.hide();
               }
             }, 5000)
@@ -101,18 +109,22 @@ export class MemberWlAnalysisReportComponent {
     this.activeModal.dismiss('Cross click');
   }
 
+  closeWarning() {
+    this.warningMessage = undefined
+  }
+
   private isValid(): boolean {
     if (this.selectedProducts.length <= 0) {
-      this.toastService.activate('Product is required!', MessageType.Warning);
+      this.warningMessage = 'Product is required!';
         return false;
     }
     if (this.userName.length <= 0) {
-      this.toastService.activate('Username is required!', MessageType.Warning);
+      this.warningMessage = 'Username is required!';
         return false;
     }
     const maxDate = DateHelper.convertDateStructToMoment(this.fromDate).add(6, 'month');
     if (!DateHelper.convertDateStructToMoment(this.toDate).isBefore(maxDate)) {
-        this.toastService.activate('Maximum time range is 6 months.', MessageType.Warning);
+        this.warningMessage = 'Maximum time range is 6 months.';
         return false;
     }
     return true;

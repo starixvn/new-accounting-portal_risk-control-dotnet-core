@@ -8,7 +8,6 @@ import { DateModule } from 'nap-components/date';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { TreeviewModule } from 'ngx-treeview';
 import { ProductTreeviewPipe } from './product-treeview.pipe';
-import { ToastModule } from 'nap-components/toast';
 
 
 
@@ -23,8 +22,7 @@ import { ToastModule } from 'nap-components/toast';
     HttpModule.forRoot(),
     DateModule,
     NgbModalModule,
-    TreeviewModule.forRoot(),
-    ToastModule
+    TreeviewModule.forRoot()
   ],
   entryComponents: [
     MemberWlAnalysisReportComponent
