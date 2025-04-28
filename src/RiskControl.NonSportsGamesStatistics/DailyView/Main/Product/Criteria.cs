@@ -16,6 +16,4 @@ public class Criteria : BaseStatisticCriteria
     public bool IsDrillDown { get; set; }
 
     public bool IsGrandTotal { get; set; }
-
-    public int CasinoType { get; set; }
 }
