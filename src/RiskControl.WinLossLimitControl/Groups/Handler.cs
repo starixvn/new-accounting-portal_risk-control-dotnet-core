@@ -52,7 +52,7 @@ public class Handler(IDynamicRepository repository, CacheRefService cacheRefServ
         var sportName = cacheRefService.GetSportName(sportId);
         sportName = string.IsNullOrEmpty(sportName) ? string.Empty : $"({sportName})";
 
-        var betTypeName = cacheRefService.GetSportName(betTypeId);
+        var betTypeName = cacheRefService.GetBetTypeName(betTypeId);
 
         return $"{betTypeName} {sportName}";
     }

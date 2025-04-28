@@ -113,7 +113,7 @@ public class CacheRefServiceImp(BaseEntityGroupLoaderService baseEntityGroupLoad
     {
         foreach (var id in sportIds)
         {
-            sportNames[id] = GetSportNameeFromRemotingRef(id);
+            sportNames[id] = GetSportNameFromRemotingRef(id);
         }
 
         foreach (var id in betTypeIds)
@@ -127,7 +127,7 @@ public class CacheRefServiceImp(BaseEntityGroupLoaderService baseEntityGroupLoad
         return remotingRefService.GetBetTypeName(betTypeId.ToString(), "en-US");
     }
 
-    private string GetSportNameeFromRemotingRef(int sportId)
+    private string GetSportNameFromRemotingRef(int sportId)
     {
         return remotingRefService.GetSportName(sportId.ToString(), "en-US");
     }
