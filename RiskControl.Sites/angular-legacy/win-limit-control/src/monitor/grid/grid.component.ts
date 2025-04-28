@@ -260,7 +260,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
                     if (result.fileName !== null) {
                       window.clearInterval(this.intervalId);
                       if (result.fileName.includes("NoData")) {
-                        this.toastService.activate('No Data !!!', MessageType.Warning);
+                        this.toastService.activate('There is no data !!!', MessageType.Warning);
                       } else {
                         this.gridService.downloadFile(result.fileName).subscribe(response => {
                             var fileNameInfo = result.fileName.split('/');

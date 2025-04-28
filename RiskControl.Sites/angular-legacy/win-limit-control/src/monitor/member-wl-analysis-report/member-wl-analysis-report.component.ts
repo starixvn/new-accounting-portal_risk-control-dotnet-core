@@ -68,7 +68,7 @@ export class MemberWlAnalysisReportComponent {
                   if (result.fileName !== null && result.fileName !== '') {
                     window.clearInterval(this.intervalId);
                     if (result.fileName.includes("NoData")) {
-                      this.toastService.activate('No Data !!!', MessageType.Warning);
+                      this.toastService.activate('There is no data !!!', MessageType.Warning);
                       this.spinnerService.hide();
                     } else {
                       this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(response => {
