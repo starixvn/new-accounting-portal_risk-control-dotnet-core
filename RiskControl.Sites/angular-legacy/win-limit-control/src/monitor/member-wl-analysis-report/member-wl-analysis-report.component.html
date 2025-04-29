@@ -53,5 +53,11 @@
             </div>
         </div>
     </div>
-    <nap-toast></nap-toast>
+    <div class="toast-container" [hidden]="!warningMessage">
+        <div class="alert alert-warning" role="alert">
+            <button type="button" class="close" (click)="closeWarning()">
+                <span aria-hidden="true">&times;</span>
+            </button> <div [innerHTML]="warningMessage"></div>
+        </div>
+    </div>
 </div>
