@@ -149,7 +149,6 @@ export class FilterComponent implements OnInit {
   username = '';
   timePeriodSelectItems = this.filterService.getTimePeriodSelectItems();
   timePeriod: TimePeriod = TimePeriod.Yesterday;
-  isYerterdayDataWarehouseReady = true;
   top20RoleSelectItems = FilterHelper.getRoleSelectItems();
   roleId = RoleId.Member;
   reportRoleId = this.getReportRoleId();
@@ -465,7 +464,6 @@ export class FilterComponent implements OnInit {
   toggleMode() {
     if (this.mode === FilterMode.Normal) {
       this.mode = FilterMode.History;
-      this.filterService.checkYesterdayDataWarehouseIsReady().subscribe(isReady => this.isYerterdayDataWarehouseReady = isReady);
     } else {
       this.mode = FilterMode.Normal;
       this.housePTCompareType = CompareType.None;
@@ -943,7 +941,6 @@ export class FilterComponent implements OnInit {
       this.hasHistoryMode = permission.modes.indexOf('History Mode') !== -1;
       if (!this.hasNormalMode) {
         this.mode = FilterMode.History;
-        this.filterService.checkYesterdayDataWarehouseIsReady().subscribe(isReady => this.isYerterdayDataWarehouseReady = isReady);
       }
       if (!this.hasHistoryMode) {
         this.reportTypeSelectItems = this.reportTypeSelectItems.filter(x => x.value !== ReportType.Monthly);

@@ -224,9 +224,6 @@
       <nap-dropdown-select [items]="top20RoleSelectItems" [value]="roleId" (valueChange)="onTop20RoleIdChange($event)">
       </nap-dropdown-select>
     </div>
-    <div class="nap-col" *ngIf="!isNormalMode && !isYerterdayDataWarehouseReady">
-      <div class="text-danger">Yesterday's data is not ready.</div>
-    </div>
   </div>
   <div class="row">
     <div class="nap-col col-buttons blocks">
