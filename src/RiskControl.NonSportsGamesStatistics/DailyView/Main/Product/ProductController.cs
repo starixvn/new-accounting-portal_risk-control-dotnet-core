@@ -15,12 +15,20 @@ public class ProductController(IMediator mediator) : BaseController<QueryModel>(
     [HttpPost, Route("Query")]
     public override Task<IActionResult> Query(QueryModel queryModel)
     {
+        if (queryModel.ReportBy == ReportByConstant.PRODUCT)
+        {
+            queryModel.CasinoType = null;
+        }
         return base.Query(queryModel);
     }
 
     [HttpPost, Route("Excel")]
     public Task<IActionResult> Excel(QueryModel queryModel)
     {
+        if (queryModel.ReportBy == ReportByConstant.PRODUCT)
+        {
+            queryModel.CasinoType = null;
+        }
         return base.Excel(queryModel, SheetNameConstant.SHEETNAME);
     }
 }

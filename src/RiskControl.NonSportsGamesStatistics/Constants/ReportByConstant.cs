@@ -2,5 +2,5 @@
 
 public static class ReportByConstant
 {
-    public const string PRODUCT_DETAIL = "ProductDetail";
+    public const string PRODUCT = "Product";
 }
