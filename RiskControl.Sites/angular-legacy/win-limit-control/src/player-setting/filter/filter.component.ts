@@ -65,7 +65,6 @@ export class FilterComponent implements OnInit {
   }
 
   onProductChange() {
-    console.log("onProductChange", this.selectedProduct);
     this.productId = this.selectedProduct == null ? 0 : this.selectedProduct.id;
     this.currencyId = 0;
     this.querySite(this.productId);
