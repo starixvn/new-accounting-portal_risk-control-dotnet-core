@@ -106,6 +106,7 @@ export class FilterService {
 
   getTimePeriodSelectItems(): SelectItem[] {
     return [
+      { text: 'Today', value: TimePeriod.Today },
       { text: 'Yesterday', value: TimePeriod.Yesterday },
       { text: 'Current Week', value: TimePeriod.CurrentWeek },
       { text: 'Last Week', value: TimePeriod.LastWeek },
@@ -116,7 +117,6 @@ export class FilterService {
       { text: 'Last 3 Months', value: TimePeriod.LastThreeMonths },
       { text: 'Last 6 Months', value: TimePeriod.LastSixMonths },
       { text: 'Since Last Year', value: TimePeriod.SinceLastYear },
-      { text: 'Today', value: TimePeriod.Today }
     ];
   }
 }
