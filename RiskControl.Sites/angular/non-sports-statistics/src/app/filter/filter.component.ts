@@ -181,7 +181,7 @@ export class FilterComponent implements OnInit {
     },
     {
       timePeriodType: TimePeriod.CurrentWeek,
-      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('week'),
+      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('isoWeek'),
       endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
