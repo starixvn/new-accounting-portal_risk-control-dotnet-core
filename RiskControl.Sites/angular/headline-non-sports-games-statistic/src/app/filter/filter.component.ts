@@ -163,7 +163,7 @@ export class FilterComponent implements OnInit {
     },
     {
       timePeriodType: TimePeriod.CurrentWeek,
-      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('week'),
+      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('isoWeek'),
       endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
@@ -591,7 +591,6 @@ export class FilterComponent implements OnInit {
       custId: 0,
       headline: 0,
       roleId: 0,
-      isToday: this.isToday(),
       excludeNoData: this.excludeNoData
     };
     return model;
@@ -894,9 +893,5 @@ export class FilterComponent implements OnInit {
         this.onTimePeriodChange();
       }
     }
-  }
-
-  isToday(): boolean {
-    return this.timePeriod === TimePeriod.Today;
   }
 }

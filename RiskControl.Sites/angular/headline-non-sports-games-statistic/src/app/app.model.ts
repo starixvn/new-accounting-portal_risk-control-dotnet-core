@@ -37,6 +37,5 @@ export interface QueryModel {
     custId: number;
     headline: number;
     roleId: number;
-    isToday: boolean;
     excludeNoData: boolean;
 }

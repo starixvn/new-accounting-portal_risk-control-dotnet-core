@@ -54,8 +54,6 @@ public class BaseRequestModel
 
     public string Title { get; set; }
 
-    public bool IsToDay { get; set; }
-
     public List<string> RemovalColumns { get; set; }
 
     public bool ExcludeNoData { get; set; }
