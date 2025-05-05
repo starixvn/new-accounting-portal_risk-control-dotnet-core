@@ -5,23 +5,16 @@ import { DailyQueryModel } from './daily.model';
 
 @Injectable()
 export class DailyService {
+    private readonly url = 'NonSportsGamesStatistics/Daily';
     constructor(
         private readonly httpService: HttpService
     ) { }
 
     query(model: DailyQueryModel): Observable<GridOptions> {
-        const url = this.getUrl(model) + 'Query';
-        return this.httpService.post<GridOptions>(url, model);
+        return this.httpService.post<GridOptions>(`${this.url}/Query`, model);
     }
 
     excel(model: DailyQueryModel): Observable<Blob> {
-        const url = this.getUrl(model) + 'Excel';
-        return this.httpService.download(url, model);
-    }
-
-    private getUrl(model: DailyQueryModel): string {
-        return model.isNormalMode
-            ? 'NonSportsGamesStatistics/DailyNormal/'
-            : 'NonSportsGamesStatistics/DailyHistory/';
+        return this.httpService.download(`${this.url}/Excel`, model);
     }
 }

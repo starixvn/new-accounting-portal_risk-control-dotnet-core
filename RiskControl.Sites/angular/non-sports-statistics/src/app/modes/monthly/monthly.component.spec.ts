@@ -10,7 +10,7 @@ import { GridModalComponent } from 'components/grid-modal';
 import { ModalService } from 'components/modal';
 import { ReportType } from '../../filter';
 import { GrandTotalService } from '../common';
-import { QueryModel } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 import { ModeContext, ModeController } from '../index';
 import { MonthlyComponent, MonthlyService, MonthlyModule } from './index';
 import { FakeModeController } from '../mocks/mode-controller.spec';
@@ -77,7 +77,7 @@ describe('MonthlyComponent', () => {
             fixture.detectChanges();
             expect(querySpy.calls.any()).toBeTruthy();
             const args = querySpy.calls.mostRecent().args;
-            const queryModel = args[0] as QueryModel;
+            const queryModel = args[0] as BaseQueryModel;
             expect(queryModel.title).toBe('Monthly Game Statistics Report From Nov 22, 2016 To Nov 22, 2016 (Base RM)');
         });
 
@@ -223,7 +223,7 @@ describe('MonthlyComponent', () => {
                 it('should invoke query when clicking on sort column', () => {
                     sortElements[0].click();
                     const args = querySpy.calls.mostRecent().args;
-                    const queryModel = args[0] as QueryModel;
+                    const queryModel = args[0] as BaseQueryModel;
                     expect(queryModel).toHaveMap({
                         sortColumnName: 'ReportBy',
                         sortDirection: 'desc'
@@ -262,7 +262,7 @@ describe('MonthlyComponent', () => {
 
                 it('should invoke queryGrandTotal when clicking element', () => {
                     const fakeGrandTotalGridOptions: GridOptions = {
-                        TitleInfoText: '123',
+                        titleInfoText: '123',
                         bodyRowHeight: undefined,
                         gridExpandHeight: undefined,
                         bodyRows: undefined,
@@ -289,7 +289,7 @@ describe('MonthlyComponent', () => {
                     expect(grandTotalSpy.calls.any()).toBeTruthy();
                     let args = grandTotalSpy.calls.mostRecent().args;
                     expect(args[0]).toBe(ReportType.Monthly);
-                    const queryModel = args[1] as QueryModel;
+                    const queryModel = args[1] as BaseQueryModel;
                     expect(queryModel).not.toBe(fakeFilterModel);
                     expect(queryModel).toHaveMap({
                         isDrillDown: true,

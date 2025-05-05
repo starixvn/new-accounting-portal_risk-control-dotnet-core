@@ -2,7 +2,7 @@
 import * as _ from 'lodash';
 import * as numeral from 'numeral';
 import { Helper } from 'nap-components/helper';
-import { RoleId } from '../../common';
+import { DATE_CONFIG, RoleId } from '../../common';
 import { GridModalComponent } from 'components/grid-modal';
 import { ModalService } from 'components/modal';
 import { FilterConfig, ReportType, CompareType, GameTypeModel, FilterHelper } from '../../filter';
@@ -18,7 +18,8 @@ import { HousePositionTakingService } from '../house-position-taking/house-posit
 import { HousePositionTakingQueryModel } from '../house-position-taking/house-position-taking.model';
 import { UserNameService } from './user-name.service';
 import {
-  UserNameBaseQueryModel, UserNameQueryModel, UserNameNormalQueryModel, isNormalQueryModel, UserNameGridModel
+  UserNameBaseQueryModel, UserNameGridModel,
+  isNormalQueryModel
 } from './user-name.model';
 import { AssociatedAccountComponent } from '../associated-account/associated-account.component';
 
@@ -103,10 +104,10 @@ export class UserNameComponent implements OnInit, ModeGenerate {
     });
   }
 
-  private createQueryModel(): UserNameQueryModel {
+  private createQueryModel(): UserNameBaseQueryModel {
     const filterModel = this.modeContext.filterModel;
     const gridModel = this.modeContext.gridModel as UserNameGridModel;
-    const queryModel = this.modelService.createQueryModel() as UserNameQueryModel;
+    const queryModel = this.modelService.createQueryModel() as UserNameBaseQueryModel;
     queryModel.roleId = filterModel.roleId;
     queryModel.isDrillDown = gridModel.isDrillDownFromUserName;
     return queryModel;
@@ -117,7 +118,8 @@ export class UserNameComponent implements OnInit, ModeGenerate {
     if (isNormalQueryModel(queryModel)) {
       const housePositionTakingQueryModel: HousePositionTakingQueryModel = {
         isNormalMode: queryModel.isNormalMode,
-        winLostDate: queryModel.winlostDate,
+        fromDate: queryModel.fromDate,
+        toDate: queryModel.fromDate,
         productId: queryModel.productId,
         custId: custId,
         betType: queryModel.betType,
@@ -179,10 +181,14 @@ export class UserNameComponent implements OnInit, ModeGenerate {
       custId: custId,
       isBaseRM: filterModel.isBaseRM,
       sportBettype: gameTypeResult.sportBetTypes.map(s => `${s.sportType}-${s.betType}`).join(','),
-      isExactly: filterModel.isExactly
+      isExactly: filterModel.isExactly,
+      fromDate: filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
+      toDate: filterModel.isNormalMode ? filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD)
+                :filterModel.endDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
+      housePTType: filterModel.housePTType,
+      housePTValue: filterModel.housePTValue
     };
-    const model: UserNameQueryModel = Helper.extend(baseModel, this.modelService.createCriteria(filterModel));
-    this.modalService.open(AssociatedAccountComponent, { size: { width: 1200 } }, model);
+    this.modalService.open(AssociatedAccountComponent, { size: { width: 1200 } }, baseModel);
   }
 
   private showGrandTotal() {
@@ -274,7 +280,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
     }
   }
 
-  private updateGridOptions(gridOptions: GridOptions, queryModel: UserNameQueryModel, isBack: boolean) {
+  private updateGridOptions(gridOptions: GridOptions, queryModel: UserNameBaseQueryModel, isBack: boolean) {
     if (!isBack && gridOptions.bodyRows.length > 0 && !this.gridService.isDrilldown()) {
       if (this.gridService.hasShowHousePositionTaking()) {
         this.updateHousePositionTakingColumn(gridOptions);
@@ -381,7 +387,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
     column.value = `<a href="javascript:;" grand-total>${value}</a>`;
   }
 
-  private excel(queryModel: UserNameQueryModel) {
+  private excel(queryModel: UserNameBaseQueryModel) {
     const extensionFileName = 'xlsx';
 
     this.userNameService.excel(queryModel)
@@ -391,7 +397,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
       });
   }
 
-  private excelGrandTotal(queryModel: UserNameQueryModel) {
+  private excelGrandTotal(queryModel: UserNameBaseQueryModel) {
     this.userNameService.excelGrandTotal(queryModel)
       .subscribe(response => {
         const fileName = this.titleService.getExcelGrandTotalFileName();
@@ -399,7 +405,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
       });
   }
 
-  private sort(queryModel: UserNameQueryModel, sortColumnName: string, sortDirection: string) {
+  private sort(queryModel: UserNameBaseQueryModel, sortColumnName: string, sortDirection: string) {
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
     this.userNameService.query(queryModel).subscribe(gridOptions => {

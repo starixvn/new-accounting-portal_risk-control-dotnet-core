@@ -1,5 +1,5 @@
 ﻿import { CasinoType } from '../../common/model';
-import { NormalQueryModel, HistoryQueryModel } from '../../app.model';
+import {  BaseQueryModel } from '../../app.model';
 import { GridModel } from '../mode.model';
 import { ProductSetting } from './product-setting';
 
@@ -7,11 +7,7 @@ interface CasinoTypeModel {
     casinoType: CasinoType;
 }
 
-export interface CasinoProductNormalQueryModel extends NormalQueryModel, CasinoTypeModel { }
-
-export interface CasinoProductHistoryQueryModel extends HistoryQueryModel, CasinoTypeModel { }
-
-export type CasinoProductQueryModel = CasinoProductNormalQueryModel | CasinoProductHistoryQueryModel;
+export interface CasinoProductQueryModel extends BaseQueryModel, CasinoTypeModel { }
 
 export enum ProductLevel {
     CasinoTypeViewProduct,

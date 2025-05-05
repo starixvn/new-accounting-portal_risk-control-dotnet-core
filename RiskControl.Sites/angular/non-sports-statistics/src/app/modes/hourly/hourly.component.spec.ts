@@ -9,7 +9,7 @@ import { HttpService, HttpModule as NapHttpModule } from 'nap-components/http';
 import { NumberFormatModule } from 'nap-components/number-format';
 import { GridModalComponent } from 'components/grid-modal';
 import { ReportType } from '../../filter';
-import { QueryModel } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 import { ModeContext, GridModel, ModeController } from '../index';
 import { HourlyData, HourlyService, HourlyComponent, HourlyModule } from './index';
 import { FakeModeController } from '../mocks/mode-controller.spec';
@@ -71,7 +71,7 @@ describe('HourlyComponent', () => {
         fixture.detectChanges();
         expect(querySpy.calls.any()).toBeTruthy();
         const args = querySpy.calls.mostRecent().args;
-        const queryModel = args[0] as QueryModel;
+        const queryModel = args[0] as BaseQueryModel;
         expect(queryModel.title).toBe('Hourly Game Statistics Report On Nov 22, 2016 (Base RM)');
     });
 

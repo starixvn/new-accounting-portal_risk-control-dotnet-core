@@ -1,5 +1,5 @@
 ﻿import { RoleId } from '../../common/model';
-import { BaseQueryModel, NormalCriteria, HistoryCriteria } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 import { GridModel } from '../mode.model';
 
 interface UserNameCriteria {
@@ -8,13 +8,7 @@ interface UserNameCriteria {
 }
 export interface UserNameBaseQueryModel extends BaseQueryModel, UserNameCriteria { }
 
-export interface UserNameNormalQueryModel extends UserNameBaseQueryModel, NormalCriteria { }
-
-export interface UserNameHistoryQueryModel extends UserNameBaseQueryModel, HistoryCriteria { }
-
-export type UserNameQueryModel = UserNameNormalQueryModel | UserNameHistoryQueryModel;
-
-export function isNormalQueryModel(queryModel: UserNameQueryModel): queryModel is UserNameNormalQueryModel {
+export function isNormalQueryModel(queryModel: UserNameBaseQueryModel): queryModel is UserNameBaseQueryModel {
     return queryModel.isNormalMode;
 }
 

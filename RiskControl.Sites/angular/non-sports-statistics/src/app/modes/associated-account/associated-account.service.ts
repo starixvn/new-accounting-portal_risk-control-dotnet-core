@@ -2,29 +2,21 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from 'nap-components/http';
 import { ModalService } from 'components/modal';
-import { UserNameQueryModel } from '../user-name';
+import { UserNameBaseQueryModel } from '../user-name';
 
 @Injectable()
 export class AssociatedAccountService {
-    private readonly url = 'NonSportsGamesStatistics';
+    private readonly url = 'NonSportsGamesStatistics/AssociatedAccount';
 
     constructor(
         private readonly httpService: HttpService,
     ) { }
 
-    query(model: UserNameQueryModel): Observable<GridOptions> {
-        const url = this.getAssociatedAccountsUrl(model) + 'Query';
-        return this.httpService.post<GridOptions>(url, model);
+    query(model: UserNameBaseQueryModel): Observable<GridOptions> {
+        return this.httpService.post<GridOptions>(`${this.url}/Query`, model);
     }
 
-    excel(model: UserNameQueryModel): Observable<Blob> {
-        const url = this.getAssociatedAccountsUrl(model) + 'Excel';
-        return this.httpService.download(url, model);
-    }
-
-    private getAssociatedAccountsUrl(model: UserNameQueryModel) {
-        return model.isNormalMode
-            ? `${this.url}/AssociatedAccountNormal/`
-            : `${this.url}/AssociatedAccountHistory/`;
+    excel(model: UserNameBaseQueryModel): Observable<Blob> {
+        return this.httpService.download(`${this.url}/Excel`, model);
     }
 }

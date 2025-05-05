@@ -11,13 +11,13 @@ import { GridModalComponent } from 'components/grid-modal';
 import { ModalService } from 'components/modal';
 import { RoleId } from '../../common';
 import { ReportType, FilterModel } from '../../filter';
-import { QueryModel } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 import { DailyGridModel } from '../daily';
 import { HourlyGridModel } from '../hourly';
-import { UserNameQueryModel, UserNameService } from '../user-name';
+import { UserNameBaseQueryModel, UserNameService } from '../user-name';
 import { HousePositionTakingQueryModel, HousePositionTakingService } from '../house-position-taking';
 import { ModeContext, ModeController } from '../index';
-import { Top20GridModel, TopType, Top20QueryModel, Top20Module, Top20Component, Top20Service } from './index';
+import { Top20GridModel, TopType, Top20BaseQueryModel, Top20Module, Top20Component, Top20Service } from './index';
 import { FakeModeController } from '../mocks/mode-controller.spec';
 import { createFakeFilterModel, createFakeFilterModelWithSingleWalletProduct } from '../mocks/filter-model.spec';
 import { fakeGridModel } from '../mocks/grid-model.spec';
@@ -108,7 +108,7 @@ describe('Top20Component', () => {
                     fixture.detectChanges();
                     expect(querySpy.calls.any()).toBeTruthy();
                     const args = querySpy.calls.mostRecent().args;
-                    const queryModel = args[0] as QueryModel;
+                    const queryModel = args[0] as BaseQueryModel;
                     expect(queryModel.title).toBe('Top 20 Super Game Statistics Report From Nov 22, 2016 To Nov 22, 2016 (Base RM)');
                 });
 
@@ -225,7 +225,7 @@ describe('Top20Component', () => {
                             associatedAccountElements[0].click();
                             expect(modalSpy.calls.any()).toBeTruthy();
                             const args = modalSpy.calls.mostRecent().args;
-                            const queryModel = args[2] as UserNameQueryModel;
+                            const queryModel = args[2] as UserNameBaseQueryModel;
                             expect(queryModel).toHaveMap({
                                 productId: '1,2',
                                 username: 'LE',
@@ -321,7 +321,7 @@ describe('Top20Component', () => {
                         it('should invoke query when clicking on sort column', () => {
                             sortElements[0].click();
                             const args = querySpy.calls.mostRecent().args;
-                            const queryModel = args[0] as QueryModel;
+                            const queryModel = args[0] as BaseQueryModel;
                             expect(queryModel).toHaveMap({
                                 sortColumnName: 'BetCount',
                                 sortDirection: 'desc'
@@ -505,7 +505,7 @@ describe('Top20Component', () => {
             it('should invoke query when going forward', () => {
                 expect(querySpy.calls.any()).toBeTruthy();
                 const args = querySpy.calls.mostRecent().args;
-                const queryModel = args[0] as Top20QueryModel;
+                const queryModel = args[0] as Top20BaseQueryModel;
                 expect(queryModel.topType).toBe(TopType.Winner);
             });
 
@@ -611,7 +611,7 @@ describe('Top20Component', () => {
                     associatedAccountElements[0].click();
                     expect(modalSpy.calls.any()).toBeTruthy();
                     const args = modalSpy.calls.mostRecent().args;
-                    const queryModel = args[2] as UserNameQueryModel;
+                    const queryModel = args[2] as UserNameBaseQueryModel;
                     expect(queryModel).toHaveMap({
                         productId: '1,2',
                         username: 'SupertestAuto00',

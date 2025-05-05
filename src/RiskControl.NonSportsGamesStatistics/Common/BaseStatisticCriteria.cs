@@ -6,9 +6,6 @@ namespace RiskControl.NonSportsGamesStatistics.Common;
 public class BaseStatisticCriteria : CriteriaBase
 {
     [SpParam(Ignored = true)]
-    public bool IsNormalMode { get; set; }
-
-    [SpParam(Ignored = true)]
     public string ReportBy { get; set; }
 
     public string ProductId { get; set; }
@@ -42,9 +39,6 @@ public class BaseStatisticCriteria : CriteriaBase
 
     public string SportBetType { get; set; }
 
-    [SpParam(Ignored = true)]
-    public string Source { get; set; }
-
     public bool IsExactly { get; set; }
 
     public override bool IsValid()
@@ -54,6 +48,6 @@ public class BaseStatisticCriteria : CriteriaBase
 
     public override string GetSettingKey()
     {
-        return $"Acc_Rpt_NonSportsProductStatistics_{ReportBy}_{Source}";
+        return $"Acc_Rpt_NonSportsProductStatistics_{ReportBy}";
     }
 }

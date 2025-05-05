@@ -141,7 +141,7 @@ export class FilterComponent implements OnInit {
   housePTValue: number;
   date: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.today);
   minStartDate: NapDateStruct = { year: 2013, month: 1, day: 1 };
-  maxEndDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.yesterday);
+  maxEndDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.today);
   startDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.yesterday);
   endDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.yesterday);
   minDate: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.moveBetDate.add('1', 'day'));
@@ -149,7 +149,6 @@ export class FilterComponent implements OnInit {
   username = '';
   timePeriodSelectItems = this.filterService.getTimePeriodSelectItems();
   timePeriod: TimePeriod = TimePeriod.Yesterday;
-  isYerterdayDataWarehouseReady = true;
   top20RoleSelectItems = FilterHelper.getRoleSelectItems();
   roleId = RoleId.Member;
   reportRoleId = this.getReportRoleId();
@@ -166,10 +165,15 @@ export class FilterComponent implements OnInit {
   private readonly lastMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(1, 'month').startOf('month');
   private readonly lastThreeMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(3, 'month').startOf('month');
   private readonly lastSixMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(6, 'month').startOf('month');
-  private readonly lastYearStartDate = moment.utc(DATE_CONFIG.reportDate.today).subtract(1, 'year');
+  private readonly lastYearStartDate = moment.utc(DATE_CONFIG.reportDate.today).add(1, "day").subtract(1, 'year');
   private numberLicensees = 0;
 
   private readonly TimeRanges: TimeRange[] = [
+    {
+      timePeriodType: TimePeriod.Today,
+      startDate: moment.utc(DATE_CONFIG.reportDate.today),
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
+    },
     {
       timePeriodType: TimePeriod.Yesterday,
       startDate: moment.utc(DATE_CONFIG.reportDate.yesterday),
@@ -177,8 +181,8 @@ export class FilterComponent implements OnInit {
     },
     {
       timePeriodType: TimePeriod.CurrentWeek,
-      startDate: moment.utc(DATE_CONFIG.reportDate.yesterday).startOf('week'),
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('isoWeek'),
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
       timePeriodType: TimePeriod.LastWeek,
@@ -187,8 +191,8 @@ export class FilterComponent implements OnInit {
     },
     {
       timePeriodType: TimePeriod.CurrentMonth,
-      startDate: moment.utc(DATE_CONFIG.reportDate.yesterday).startOf('month'),
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('month'),
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
       timePeriodType: TimePeriod.LastMonth,
@@ -198,7 +202,7 @@ export class FilterComponent implements OnInit {
     {
       timePeriodType: TimePeriod.SinceLastMonth,
       startDate: this.lastMonthStartDate,
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
       timePeriodType: TimePeriod.LastThreeMonths,
@@ -213,7 +217,7 @@ export class FilterComponent implements OnInit {
     {
       timePeriodType: TimePeriod.SinceLastYear,
       startDate: this.lastYearStartDate,
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     }
   ];
 
@@ -460,7 +464,6 @@ export class FilterComponent implements OnInit {
   toggleMode() {
     if (this.mode === FilterMode.Normal) {
       this.mode = FilterMode.History;
-      this.filterService.checkYesterdayDataWarehouseIsReady().subscribe(isReady => this.isYerterdayDataWarehouseReady = isReady);
     } else {
       this.mode = FilterMode.Normal;
       this.housePTCompareType = CompareType.None;
@@ -938,7 +941,6 @@ export class FilterComponent implements OnInit {
       this.hasHistoryMode = permission.modes.indexOf('History Mode') !== -1;
       if (!this.hasNormalMode) {
         this.mode = FilterMode.History;
-        this.filterService.checkYesterdayDataWarehouseIsReady().subscribe(isReady => this.isYerterdayDataWarehouseReady = isReady);
       }
       if (!this.hasHistoryMode) {
         this.reportTypeSelectItems = this.reportTypeSelectItems.filter(x => x.value !== ReportType.Monthly);

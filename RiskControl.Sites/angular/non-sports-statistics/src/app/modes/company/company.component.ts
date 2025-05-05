@@ -4,7 +4,7 @@ import { Helper } from 'nap-components/helper';
 import { GridModalComponent } from 'components/grid-modal';
 import { ModalService } from 'components/modal';
 import { FilterConfig } from '../../filter';
-import { QueryModel } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 import { GrandTotalService, ModelService, TitleService, GridService } from '../common';
 import { CompanyService } from './company.service';
 import { ModeGenerate, RowAttribute } from '../mode.model';
@@ -101,7 +101,7 @@ export class CompanyComponent implements OnInit, ModeGenerate {
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
-  private updateGridOptions(gridOptions: GridOptions, queryModel: QueryModel, isBack: boolean) {
+  private updateGridOptions(gridOptions: GridOptions, queryModel: BaseQueryModel, isBack: boolean) {
     if (!isBack && gridOptions.bodyRows.length > 0 && !this.gridService.isDrilldown()) {
       this.updateGrandTotalCell(gridOptions);
       if (this.gridService.hasCurrencyColumn()) {
@@ -154,7 +154,7 @@ export class CompanyComponent implements OnInit, ModeGenerate {
     });
   }
 
-  private excel(queryModel: QueryModel) {
+  private excel(queryModel: BaseQueryModel) {
     const gridModel = this.modeContext.gridModel;
     this.companyService.excel(queryModel, gridModel.isDrillDownCurrency)
       .subscribe(response => {
@@ -163,7 +163,7 @@ export class CompanyComponent implements OnInit, ModeGenerate {
       });
   }
 
-  private excelGrandTotal(queryModel: QueryModel) {
+  private excelGrandTotal(queryModel: BaseQueryModel) {
     const filterModel = this.modeContext.filterModel;
     this.grandTotalService.excel(filterModel.reportType, queryModel)
       .subscribe(response => {
@@ -172,7 +172,7 @@ export class CompanyComponent implements OnInit, ModeGenerate {
       });
   }
 
-  private sort(queryModel: QueryModel, sortColumnName: string, sortDirection: string) {
+  private sort(queryModel: BaseQueryModel, sortColumnName: string, sortDirection: string) {
     const gridModel = this.modeContext.gridModel;
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;

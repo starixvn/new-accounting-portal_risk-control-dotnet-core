@@ -11,7 +11,7 @@ import { ModalService } from 'components/modal';
 import { ReportType } from '../../filter';
 import { GrandTotalService } from '../common';
 import { HourlyGridModel } from '../hourly';
-import { QueryModel } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 import { ModeContext, ModeController } from '../index';
 import { DailyService, DailyComponent, DailyModule, DailyGridModel, DailyQueryModel } from './index';
 import { FakeModeController } from '../mocks/mode-controller.spec';
@@ -78,7 +78,7 @@ describe('DailyComponent', () => {
             fixture.detectChanges();
             expect(querySpy.calls.any()).toBeTruthy();
             const args = querySpy.calls.mostRecent().args;
-            const queryModel = args[0] as QueryModel;
+            const queryModel = args[0] as BaseQueryModel;
             expect(queryModel.title).toBe('Daily Game Statistics Report On Nov 22, 2016 (Base RM)');
         });
 
@@ -263,7 +263,7 @@ describe('DailyComponent', () => {
                 it('should invoke query when clicking on sort column', () => {
                     sortElements[0].click();
                     const args = querySpy.calls.mostRecent().args;
-                    const queryModel = args[0] as QueryModel;
+                    const queryModel = args[0] as BaseQueryModel;
                     expect(queryModel).toHaveMap({
                         sortColumnName: 'ReportBy',
                         sortDirection: 'desc'
@@ -302,7 +302,7 @@ describe('DailyComponent', () => {
 
                 it('should invoke queryGrandTotal when clicking element', () => {
                     const fakeGrandTotalGridOptions: GridOptions = {
-                        TitleInfoText: '123',
+                        titleInfoText: '123',
                         bodyRowHeight: undefined,
                         gridExpandHeight: undefined,
                         bodyRows: undefined,
@@ -329,7 +329,7 @@ describe('DailyComponent', () => {
                     expect(grandTotalSpy.calls.any()).toBeTruthy();
                     let args = grandTotalSpy.calls.mostRecent().args;
                     expect(args[0]).toBe(ReportType.Daily);
-                    const queryModel = args[1] as QueryModel;
+                    const queryModel = args[1] as BaseQueryModel;
                     expect(queryModel).not.toBe(fakeFilterModel);
                     expect(queryModel).toHaveMap({
                         isDrillDown: true,
@@ -423,7 +423,7 @@ describe('DailyComponent', () => {
             const modalSpy = spyOn(modalService, 'open').and.callFake(() => { });
             grandTotalElements[0].click();
             expect(grandTotalSpy.calls.any()).toBeTruthy();
-            const queryModel = grandTotalSpy.calls.mostRecent().args[1] as QueryModel;
+            const queryModel = grandTotalSpy.calls.mostRecent().args[1] as BaseQueryModel;
             expect(queryModel.isDrillDown).toBeFalsy();
         });
 

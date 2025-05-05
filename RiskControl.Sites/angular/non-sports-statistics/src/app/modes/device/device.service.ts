@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from 'nap-components/http';
-import { QueryModel } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 
 @Injectable()
 export class DeviceService {
@@ -9,25 +9,21 @@ export class DeviceService {
         private readonly httpService: HttpService
     ) { }
 
-    query(model: QueryModel): Observable<GridOptions> {
+    query(model: BaseQueryModel): Observable<GridOptions> {
         const url = this.getUrl(model) + 'Query';
         return this.httpService.post<GridOptions>(url, model);
     }
 
-    excel(model: QueryModel): Observable<Blob> {
+    excel(model: BaseQueryModel): Observable<Blob> {
         const url = this.getUrl(model) + 'Excel';
         return this.httpService.download(url, model);
     }
 
-    private getUrl(model: QueryModel): string {
+    private getUrl(model: BaseQueryModel): string {
         if (model.isDrillDown) {
-            return model.isNormalMode
-                ? 'NonSportsGamesStatistics/DailyViewNormal/'
-                : 'NonSportsGamesStatistics/DailyViewHistory/';
+            return 'NonSportsGamesStatistics/DailyView/';
         } else {
-            return model.isNormalMode
-                ? 'NonSportsGamesStatistics/DeviceNormal/'
-                : 'NonSportsGamesStatistics/DeviceHistory/';
+            return 'NonSportsGamesStatistics/Device/';
         }
     }
 }

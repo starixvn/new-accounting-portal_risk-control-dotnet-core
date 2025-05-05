@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Helper } from 'nap-components/helper';
 import { ReportType, FilterModel, FilterHelper } from '../../filter';
-import { BaseQueryModel, QueryModel, NormalCriteria, HistoryCriteria } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 import { ModeContext } from '../mode-context';
 import { TitleService } from './title.service';
 import { DATE_CONFIG } from 'app/common';
@@ -14,27 +14,12 @@ export class ModelService {
         private readonly titleService: TitleService
     ) { }
 
-    createCriteria(filterModel: FilterModel): NormalCriteria | HistoryCriteria {
-        if (filterModel.isNormalMode) {
-            return {
-                winlostDate: filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
-                housePTType: filterModel.housePTType,
-                housePTValue: filterModel.housePTValue
-            };
-        } else {
-            return {
-                fromDate: filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
-                toDate: filterModel.endDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD)
-            };
-        }
-    }
-
     getReportBy(reportType: ReportType): string {
         const reportName = FilterHelper.getReportName(reportType).replace(/ /g, '');
         return reportName;
     }
 
-    createQueryModel(): QueryModel {
+    createQueryModel(): BaseQueryModel {
         const filterModel = this.modeContext.filterModel;
         const gridModel = this.modeContext.gridModel;
         const baseModel: BaseQueryModel = {
@@ -64,13 +49,17 @@ export class ModelService {
             isGrandTotal: false,
             isBaseRM: filterModel.isBaseRM,
             sportBettype: filterModel.sportBettypes.map(s => `${s.sportType}-${s.betType}`).join(','),
-            isExactly: filterModel.isExactly
+            isExactly: filterModel.isExactly,
+            fromDate: filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
+            toDate: filterModel.isNormalMode ? filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD)
+                :filterModel.endDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
+            housePTType: filterModel.housePTType,
+            housePTValue: filterModel.housePTValue
         };
-        const model: QueryModel = Helper.extend(baseModel, this.createCriteria(filterModel));
-        return model;
+        return baseModel;
     }
 
-    updateModelToQueryGrandTotal(queryModel: QueryModel) {
+    updateModelToQueryGrandTotal(queryModel: BaseQueryModel) {
         queryModel.isDrillDown = true;
         queryModel.isGrandTotal = true;
         queryModel.sortColumnName = '';

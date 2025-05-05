@@ -5,21 +5,21 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RiskControl.Sites.AutoMapperProfiles.BettingMonitoring;
+using RiskControl.Sites.AutoMapperProfiles.FailSafeSystem;
 using RiskControl.Sites.AutoMapperProfiles.NonSports;
 using RiskControl.Sites.AutoMapperProfiles.WinLossLimitControl;
 using RiskControl.Sites.DependencyInjections;
 using System;
 using System.Threading.Tasks;
-using RiskControl.Sites.AutoMapperProfiles.FailSafeSystem;
 
 namespace RiskControl.Sites;
 
-using System.Reflection;
-using ProgressiveJackpot;
 using BettingMonitoring.Query;
 using Microsoft.AspNetCore.DataProtection;
-using NonSportsGamesStatistics.CurrencyView.Main.History;
+using ProgressiveJackpot;
+using RiskControl.NonSportsGamesStatistics.CurrencyView.Main;
 using StackExchange.Redis;
+using System.Reflection;
 using WinLossLimitControl.PlayerSettings.Insert;
 
 public static class ServiceCollectionExtensions
@@ -60,7 +60,7 @@ public static class ServiceCollectionExtensions
     public static void AddAssemblyForMediatR(this IServiceCollection services)
     {
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(BettingMonitoringQueryController)));
-        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(CurrencyViewHistoryModeController)));
+        services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(CurrencyViewController)));
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(ProgressiveJackpotController)));
         services.AddMediatR(cfg => ConfigAssembly(cfg, typeof(PlayerSettingInsertController)));
         return;

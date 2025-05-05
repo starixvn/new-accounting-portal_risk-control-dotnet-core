@@ -4,7 +4,7 @@ import { Helper } from 'nap-components/helper';
 import { GridModalComponent } from 'components/grid-modal';
 import { ModalService } from 'components/modal';
 import { FilterConfig } from '../../filter';
-import { QueryModel } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 import { GrandTotalService, ModelService, TitleService, GridService } from '../common';
 import { DeviceService } from './device.service';
 import { ModeGenerate, RowAttribute } from '../mode.model';
@@ -95,7 +95,7 @@ export class DeviceComponent implements OnInit, ModeGenerate {
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
-  private updateGridOptions(gridOptions: GridOptions, queryModel: QueryModel, isBack: boolean) {
+  private updateGridOptions(gridOptions: GridOptions, queryModel: BaseQueryModel, isBack: boolean) {
     if (!isBack && gridOptions.bodyRows.length > 0 && !this.gridService.isDrilldown()) {
       if (this.gridService.hasCurrencyColumn()) {
         this.updateCurrencyColumn(gridOptions);
@@ -138,7 +138,7 @@ export class DeviceComponent implements OnInit, ModeGenerate {
     });
   }
 
-  private excel(queryModel: QueryModel) {
+  private excel(queryModel: BaseQueryModel) {
     this.deviceService.excel(queryModel)
       .subscribe(response => {
         const fileName = this.titleService.getExcelFileName();
@@ -146,7 +146,7 @@ export class DeviceComponent implements OnInit, ModeGenerate {
       });
   }
 
-  private excelGrandTotal(queryModel: QueryModel) {
+  private excelGrandTotal(queryModel: BaseQueryModel) {
     const filterModel = this.modeContext.filterModel;
     this.grandTotalService.excel(filterModel.reportType, queryModel)
       .subscribe(response => {
@@ -155,7 +155,7 @@ export class DeviceComponent implements OnInit, ModeGenerate {
       });
   }
 
-  private sort(queryModel: QueryModel, sortColumnName: string, sortDirection: string) {
+  private sort(queryModel: BaseQueryModel, sortColumnName: string, sortDirection: string) {
     queryModel.sortColumnName = sortColumnName;
     queryModel.sortDirection = sortDirection;
     localStorage.setItem(LocalStorageKey.SORT, `${queryModel.sortColumnName}**${queryModel.sortDirection}**${localStorage.getItem(LocalStorageKey.REPORT_TYPE)}`);

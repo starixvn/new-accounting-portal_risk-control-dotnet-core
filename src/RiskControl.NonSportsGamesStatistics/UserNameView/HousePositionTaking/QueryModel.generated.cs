@@ -10,7 +10,9 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.HousePositionTaking
     {
         public bool IsNormalMode { get; set; }
 
-        public DateTime WinLostDate { get; set; }
+        public DateTime FromDate { get; set; }
+
+        public DateTime ToDate { get; set; }
 
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string ProductId { get; set; }

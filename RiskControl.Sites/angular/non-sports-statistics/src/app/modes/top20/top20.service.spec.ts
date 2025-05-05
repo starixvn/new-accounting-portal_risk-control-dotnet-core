@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { HttpService, HttpModule } from 'nap-components/http';
 import { RoleId } from '../../common';
-import { Top20QueryModel, TopType, Top20Service } from './index';
+import { Top20BaseQueryModel, TopType, Top20Service } from './index';
 import { fakeBaseQueryModel } from '../mocks/query-model.spec';
 
 describe('Top20Service', () => {
 
-    const fakeNormalQueryModel: Top20QueryModel = _.extend({}, fakeBaseQueryModel, {
+    const fakeNormalQueryModel: Top20BaseQueryModel = _.extend({}, fakeBaseQueryModel, {
         isNormalMode: true,
         winlostDate: 'May 31, 2017',
         housePTType: undefined,
@@ -19,7 +19,7 @@ describe('Top20Service', () => {
         roleId: RoleId.Member
     });
 
-    const fakeHistoryQueryModel: Top20QueryModel = _.extend({}, fakeBaseQueryModel, {
+    const fakeHistoryQueryModel: Top20BaseQueryModel = _.extend({}, fakeBaseQueryModel, {
         isNormalMode: false,
         fromDate: 'May 30, 2017',
         toDate: 'May 30, 2017',
@@ -50,7 +50,7 @@ describe('Top20Service', () => {
 
     describe('query', () => {
         it('should invoke post method with parameters exactly', () => {
-            let fakeQueryModel: Top20QueryModel;
+            let fakeQueryModel: Top20BaseQueryModel;
 
             // normal mode
             fakeQueryModel = _.clone(fakeNormalQueryModel);

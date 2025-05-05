@@ -44,7 +44,7 @@ export abstract class ProductSetting {
       level = this.levels[this.levelIndex - 1];
     }
 
-    if (level === ProductLevel.CasinoTypeViewProduct) {
+    if (level === ProductLevel.CasinoTypeViewProduct || level === undefined) {
       return 'SubProduct';
     }
 

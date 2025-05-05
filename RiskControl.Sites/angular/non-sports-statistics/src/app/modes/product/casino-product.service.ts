@@ -31,13 +31,9 @@ export class CasinoProductService {
 
   private getUrl(model: CasinoProductQueryModel, isGrandTotal = false): string {
     if (!isGrandTotal) {
-      return model.isNormalMode
-        ? 'NonSportsGamesStatistics/ProductNormal/'
-        : 'NonSportsGamesStatistics/ProductHistory/';
+      return 'NonSportsGamesStatistics/Product/';
     } else {
-      return model.isNormalMode
-        ? 'NonSportsGamesStatistics/ProductGrandTotalNormal/'
-        : 'NonSportsGamesStatistics/ProductGrandTotalHistory/';
+      return 'NonSportsGamesStatistics/ProductGrandTotal/';
     }
   }
 }

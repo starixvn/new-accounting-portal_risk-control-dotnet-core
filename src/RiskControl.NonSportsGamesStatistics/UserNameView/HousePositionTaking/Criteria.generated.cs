@@ -9,7 +9,9 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.HousePositionTaking
         [SpParam(Ignored = true)]
         public bool IsNormalMode { get; set; }
 
-        public DateTime WinLostDate { get; set; }
+        public DateTime FromDate { get; set; }
+
+        public DateTime ToDate { get; set; }
 
         public string ProductId { get; set; }
 
@@ -50,6 +52,6 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.HousePositionTaking
 
         public override bool IsValid() => true;
 
-        public override string GetSettingKey() => $"Acc_Rpt_NonSportsProductStatistics_HousePositionTaking_{Source}";
+        public override string GetSettingKey() => $"Acc_Rpt_NonSportsProductStatistics_HousePositionTaking";
     }
 }

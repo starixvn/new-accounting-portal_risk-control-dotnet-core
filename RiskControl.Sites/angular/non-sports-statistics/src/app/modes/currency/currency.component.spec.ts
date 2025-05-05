@@ -8,7 +8,7 @@ import { Helper } from 'nap-components/helper';
 import { GridModalComponent } from 'components/grid-modal';
 import { ModalService } from 'components/modal';
 import { ReportType } from '../../filter';
-import { QueryModel } from '../../app.model';
+import { BaseQueryModel } from '../../app.model';
 import { ModeContext, ModeController } from '../index';
 import { CurrencyQueryModel, CurrencyGridModel, CurrencyComponent, CurrencyService, CurrencyModule } from './index';
 import { FakeModeController } from '../mocks/mode-controller.spec';
@@ -73,7 +73,7 @@ describe('CurrencyComponent', () => {
             fixture.detectChanges();
             expect(querySpy.calls.any()).toBeTruthy();
             const args = querySpy.calls.mostRecent().args;
-            const queryModel = args[0] as QueryModel;
+            const queryModel = args[0] as BaseQueryModel;
             expect(queryModel.title).toBe('Currency Game Statistics Report From Nov 22, 2016 To Nov 22, 2016 (Base RM)');
         });
 
@@ -184,7 +184,7 @@ describe('CurrencyComponent', () => {
                 it('should invoke query when clicking on sort column', () => {
                     sortElements[0].click();
                     const args = querySpy.calls.mostRecent().args;
-                    const queryModel = args[0] as QueryModel;
+                    const queryModel = args[0] as BaseQueryModel;
                     expect(queryModel).toHaveMap({
                         sortColumnName: 'ReportBy',
                         sortDirection: 'desc'
@@ -223,7 +223,7 @@ describe('CurrencyComponent', () => {
 
                 it('should invoke queryGrandTotal when clicking element', () => {
                     const fakeGrandTotalGridOptions: GridOptions = {
-                        TitleInfoText: '123',
+                        titleInfoText: '123',
                         bodyRowHeight: undefined,
                         gridExpandHeight: undefined,
                         bodyRows: undefined,
@@ -249,7 +249,7 @@ describe('CurrencyComponent', () => {
                     grandTotalElements[0].click();
                     expect(grandTotalSpy.calls.any()).toBeTruthy();
                     let args = grandTotalSpy.calls.mostRecent().args;
-                    const queryModel = args[0] as QueryModel;
+                    const queryModel = args[0] as BaseQueryModel;
                     expect(queryModel).not.toBe(fakeFilterModel);
                     expect(queryModel).toHaveMap({
                         drillDownCurrency: 0,

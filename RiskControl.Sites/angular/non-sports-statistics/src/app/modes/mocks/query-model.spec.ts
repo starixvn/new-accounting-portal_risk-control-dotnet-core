@@ -24,5 +24,10 @@ export const fakeBaseQueryModel: BaseQueryModel = {
     isGrandTotal: false,
     isNormalMode: undefined,
     isBaseRM: true,
-    sportBettype: ''
+    sportBettype: '',
+    isExactly: false,
+    housePTType: 0,
+    housePTValue: 0,
+    fromDate: '',
+    toDate: ''
 };

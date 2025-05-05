@@ -106,7 +106,7 @@ public class FailSafeSystemApiControllerUnitTests
     }
 
     [Fact]
-    public async Task HasPermission_Always_CallRightFunctionFromAuthorizationService()
+    public void HasPermission_Always_CallRightFunctionFromAuthorizationService()
     {
         // Arrange
         var controller = new FailSafeSystemApiController(service, authorizationService);
