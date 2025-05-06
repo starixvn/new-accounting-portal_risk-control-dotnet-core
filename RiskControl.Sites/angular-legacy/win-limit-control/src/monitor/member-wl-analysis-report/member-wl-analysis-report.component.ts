@@ -51,6 +51,7 @@ export class MemberWlAnalysisReportComponent {
   }
 
   generate(): void {
+    this.warningMessage = undefined;
     if (this.isValid()) {
       const criteria: DownLoadFileModel = {
         productIdList : this.selectedProducts.join(','),
@@ -72,10 +73,10 @@ export class MemberWlAnalysisReportComponent {
                         if (result.invalidUsernames.trim().split(',').length === this.userName.trim().split(',').length) {
                           this.warningMessage = `Invalid member(s): ${result.invalidUsernames}`;
                         } else {
-                          this.warningMessage = `There is no data !!! <br/> Invalid member(s): ${result.invalidUsernames}`;
+                          this.warningMessage = `There is no data ! <br/> Invalid member(s): ${result.invalidUsernames}`;
                         }
                       } else {
-                        this.warningMessage = 'There is no data !!!';
+                        this.warningMessage = 'There is no data !';
                       }
                       this.spinnerService.hide();
                     } else {
