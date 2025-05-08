@@ -4,7 +4,7 @@ const PROXY_CONFIG = [
             "/api",
             "/state-api"
         ],
-        target: "http://localhost:60809",
+        target: "http://localhost:44383",
         secure: false
     }
 ]

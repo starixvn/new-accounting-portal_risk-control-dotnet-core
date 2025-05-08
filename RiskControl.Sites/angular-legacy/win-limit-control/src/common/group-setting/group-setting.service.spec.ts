@@ -30,7 +30,7 @@ describe('GroupSettingService', () => {
         updateSettingsSpy = spyOn(modalRef.componentInstance, 'updateSettings');
         modalServiceSpy = spyOn(modalService, 'open').and.returnValue(modalRef);
         httpServiceSpy = spyOn(httpService, 'post').and.returnValue(Observable.of(fakeProductBetTypeSettings));
-        groupSettingService.show('Product 1');
+        groupSettingService.show(1, 'Product 1');
     });
 
     it('should show modal', () => {
@@ -48,7 +48,7 @@ describe('GroupSettingService', () => {
         describe('Show the second time', () => {
             it('should not query again', () => {
                 httpServiceSpy.calls.reset();
-                groupSettingService.show('Product 1');
+                groupSettingService.show(1, 'Product 1');
                 expect(httpServiceSpy.calls.any()).toBeFalsy();
             });
         });
@@ -56,7 +56,7 @@ describe('GroupSettingService', () => {
 
     it('should not query again after invoking to show modal again', () => {
         httpServiceSpy.calls.reset();
-        groupSettingService.show('Product 1');
+        groupSettingService.show(1, 'Product 1');
         expect(httpServiceSpy.calls.any()).toBeFalsy();
     });
 });

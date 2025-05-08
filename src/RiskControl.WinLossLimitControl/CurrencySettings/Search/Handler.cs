@@ -110,6 +110,7 @@ public class Handler(IDynamicRepository repository, CacheRefService cacheRefServ
 
             var settingSite = new SettingSite
             {
+                ProductId = group.Key.ProductId,
                 ProductName = group.Key.ProductName,
                 SiteName = group.Key.SiteName,
                 CurrencyName = group.Key.CurrencyName,

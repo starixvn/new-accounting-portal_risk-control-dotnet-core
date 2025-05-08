@@ -61,7 +61,6 @@ public class FileDownloadController(ConfigurationService configurationService, R
     public async Task<IActionResult> GetGuidMemberWLFile(MemberWLDownloadFileModel model)
     {
         var requestUri = $"{configurationService.CWLAnalysisApi}/File";
-
         var data = await richHttpClient.PostJson<ApiResultModel>(requestUri, model).ConfigureAwait(false);
 
         return Ok(data);

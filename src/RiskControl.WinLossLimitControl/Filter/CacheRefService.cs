@@ -5,6 +5,8 @@ using RiskControl.WinLossLimitControl.Filter.Model;
 
 namespace RiskControl.WinLossLimitControl.Filter;
 
+using System.Collections.Generic;
+
 public interface CacheRefService
 {
     BaseEntityGroup BaseEntityGroup { get; }
@@ -20,6 +22,8 @@ public interface CacheRefService
     string GetBetTypeName(int betTypeId);
 
     string GetSportName(int sportId);
+
+    void ReloadCache(List<int> sportIds, List<int> betTypeIds);
 }
 
 public class CacheRefServiceImp(BaseEntityGroupLoaderService baseEntityGroupLoaderService, ICacheService cacheService,
@@ -28,6 +32,10 @@ public class CacheRefServiceImp(BaseEntityGroupLoaderService baseEntityGroupLoad
 {
     private const int CacheDurationInMinutes = 15;
     private const string CacheKey = "RiskControl.Settings.BaseEntityGroup";
+
+    private readonly Dictionary<int, string> sportNames = new();
+
+    private readonly Dictionary<int, string> betTypeNames = new();
 
     public BaseEntityGroup BaseEntityGroup
     {
@@ -83,10 +91,43 @@ public class CacheRefServiceImp(BaseEntityGroupLoaderService baseEntityGroupLoad
 
     public string GetBetTypeName(int betTypeId)
     {
+        if(betTypeNames.TryGetValue(betTypeId, out var name))
+        {
+            return name;
+        }
+
         return remotingRefService.GetBetTypeName(betTypeId.ToString(), "en-US");
     }
 
     public string GetSportName(int sportId)
+    {
+        if (sportNames.TryGetValue(sportId, out var name))
+        {
+            return name;
+        }
+
+        return remotingRefService.GetSportName(sportId.ToString(), "en-US");
+    }
+
+    public void ReloadCache(List<int> sportIds, List<int> betTypeIds)
+    {
+        foreach (var id in sportIds)
+        {
+            sportNames[id] = GetSportNameFromRemotingRef(id);
+        }
+
+        foreach (var id in betTypeIds)
+        {
+            betTypeNames[id] = GetBetTypeNameFromRemotingRef(id);
+        }
+    }
+
+    private string GetBetTypeNameFromRemotingRef(int betTypeId)
+    {
+        return remotingRefService.GetBetTypeName(betTypeId.ToString(), "en-US");
+    }
+
+    private string GetSportNameFromRemotingRef(int sportId)
     {
         return remotingRefService.GetSportName(sportId.ToString(), "en-US");
     }

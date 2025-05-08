@@ -16,6 +16,7 @@ export interface ProductSettingGroup {
 }
 
 export interface ProductSetting {
+    productId: number;
     productName: string;
     currencyName: string;
     siteName: string;

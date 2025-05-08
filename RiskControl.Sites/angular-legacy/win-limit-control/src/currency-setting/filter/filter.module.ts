@@ -6,6 +6,7 @@ import { ToastModule } from 'nap-components/toast';
 import { FilterComponent } from './filter.component';
 import { TreeviewModule } from 'ngx-treeview';
 import { SiteTreeviewPipe } from '../../common/filter/site-treeview.pipe';
+import { SelectDropDownModule } from '../../common/filterable-select';
 
 @NgModule({
     imports: [
@@ -14,6 +15,7 @@ import { SiteTreeviewPipe } from '../../common/filter/site-treeview.pipe';
         HttpModule.forRoot(),
         ToastModule.forRoot(),
         TreeviewModule.forRoot(),
+        SelectDropDownModule
     ],
     declarations: [
         FilterComponent,

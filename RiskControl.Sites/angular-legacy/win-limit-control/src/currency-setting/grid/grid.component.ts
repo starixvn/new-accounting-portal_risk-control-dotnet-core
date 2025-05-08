@@ -151,8 +151,8 @@ export class GridComponent implements OnInit, OnChanges {
         this.resetForm();
     }
 
-    showGroupSetting(productName: string) {
-        this.groupSettingService.show(productName);
+    showGroupSetting(productId: number, productName: string) {
+        this.groupSettingService.show(productId, productName);
     }
 
     onPageChange() {

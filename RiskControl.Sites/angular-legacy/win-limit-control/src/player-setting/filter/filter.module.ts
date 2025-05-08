@@ -6,6 +6,7 @@ import { DropdownTreeviewSelectModule } from 'nap-components/dropdown-treeview-s
 import { DropdownTypeaheadModule } from 'nap-components/dropdown-typeahead';
 import { FilterComponent } from './filter.component';
 import { SiteTreeviewPipe } from '../../common/filter/site-treeview.pipe';
+import { SelectDropDownModule } from '../../common/filterable-select';
 import { TreeviewModule } from 'ngx-treeview';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { TreeviewModule } from 'ngx-treeview';
         DropdownTreeviewSelectModule,
         DropdownTypeaheadModule,
         TreeviewModule.forRoot(),
+        SelectDropDownModule
     ],
     declarations: [
         FilterComponent,

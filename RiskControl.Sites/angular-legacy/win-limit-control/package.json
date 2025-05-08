@@ -15,7 +15,7 @@
     "start:monitor": "ng serve monitor --proxy-config proxy.conf.js",
     "build:monitor": "ng build monitor --configuration production",
     "postbuild:monitor": "gulp --path \"../../wwwroot/monitor\"",
-    "test": "ng test",
+    "test": "ng test currency-setting",
     "test-coverage": "ng test --code-coverage",
     "lint": "ng lint",
     "ci": "ng test --code-coverage --single-run=true",

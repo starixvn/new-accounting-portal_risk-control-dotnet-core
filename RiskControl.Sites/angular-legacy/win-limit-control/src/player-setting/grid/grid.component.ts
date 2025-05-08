@@ -49,8 +49,8 @@ export class GridComponent implements OnInit, OnChanges {
         }
     }
 
-    showGroupSetting(productName: string) {
-        this.groupSettingService.show(productName);
+    showGroupSetting(productId: number, productName: string) {
+        this.groupSettingService.show(productId, productName);
     }
 
     addPlayer() {
@@ -132,7 +132,7 @@ export class GridComponent implements OnInit, OnChanges {
             () => this.editComponent.value = orginalValue
         );
         });
-        
+
         this.editComponent.closeEdit();
     }
 

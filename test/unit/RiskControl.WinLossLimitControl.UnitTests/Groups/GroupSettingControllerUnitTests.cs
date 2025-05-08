@@ -22,7 +22,7 @@ public class GroupSettingControllerUnitTests
 
         // Act
         var controller = new GroupSettingController(mediator);
-        var actionResult = await controller.Post() as OkObjectResult;
+        var actionResult = await controller.Post(new Request()) as OkObjectResult;
         var jsonResult = actionResult.Value as List<ProductGroupSetting>;
 
         // Assert

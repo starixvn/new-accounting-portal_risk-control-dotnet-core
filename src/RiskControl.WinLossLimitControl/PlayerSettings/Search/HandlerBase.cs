@@ -64,6 +64,7 @@ public class HandlerBase(CacheRefService cacheRefService, DataTransformService d
         return filterSettings.GroupBy(s => new { s.ProductId, s.ProductName })
             .Select(g => new PlayerSettingProduct
             {
+                ProductId = g.Key.ProductId,
                 ProductName = g.Key.ProductName,
                 PlayerSettings = GetPlayerSettings(g.ToList(), custId, siteId, currencyId, g.Key.ProductId)
             })

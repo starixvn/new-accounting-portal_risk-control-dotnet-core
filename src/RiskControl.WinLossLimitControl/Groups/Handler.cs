@@ -15,32 +15,36 @@ public class Handler(IDynamicRepository repository, CacheRefService cacheRefServ
     {
         var criteria = new ReadCriteria();
         var settings = await repository.FetchAsync<GroupSetting>(criteria);
-
+        var groupSettings = settings
+            .Where(s => s.ProductId == request.ProductId)
+            .ToList();
         var result = new List<ProductGroupSetting>();
-        var productIds = settings.Select(s => s.ProductId).Distinct();
 
-        foreach (var productId in productIds)
-        {
-            var groupSettings = settings.Where(s => s.ProductId == productId).ToList();
-            var groups = groupSettings.GroupBy(s => s.GroupId)
-                .Select(g => new GroupBetTypeSetting
-                {
-                    GroupName = cacheRefService.GetGroupName(g.Key),
-                    BetTypes = g.Select(b => GetSportBettypeName(b.SportId, b.BetTypeId)).Distinct().ToList()
-                })
-                .ToList();
-
-            var productGroupSetting = new ProductGroupSetting
+        var groups = groupSettings.GroupBy(s => s.GroupId)
+            .Select(g => new GroupBetTypeSetting
             {
-                ProductId = productId,
-                ProductName = cacheRefService.GetProductName(productId),
-                Groups = groups
-            };
+                GroupName = cacheRefService.GetGroupName(g.Key),
+                BetTypes = GetBetTypeNames(g.ToList())
+            })
+            .ToList();
 
-            result.Add(productGroupSetting);
-        }
+        var productGroupSetting = new ProductGroupSetting
+        {
+            ProductId = request.ProductId,
+            ProductName = cacheRefService.GetProductName(request.ProductId),
+            Groups = groups
+        };
+
+        result.Add(productGroupSetting);
 
         return result;
+    }
+
+    private List<string> GetBetTypeNames(IEnumerable<GroupSetting> settings)
+    {
+        var betTypes = settings.Select(s => (s.BetTypeId, s.SportId)).Distinct();
+
+        return betTypes.Select(b => GetSportBettypeName(b.SportId, b.BetTypeId)).ToList();
     }
 
     private string GetSportBettypeName(int sportId, int betTypeId)
@@ -48,7 +52,8 @@ public class Handler(IDynamicRepository repository, CacheRefService cacheRefServ
         var sportName = cacheRefService.GetSportName(sportId);
         sportName = string.IsNullOrEmpty(sportName) ? string.Empty : $"({sportName})";
 
-        return $"{cacheRefService.GetBetTypeName(betTypeId)} {sportName}";
-    }
+        var betTypeName = cacheRefService.GetBetTypeName(betTypeId);
 
+        return $"{betTypeName} {sportName}";
+    }
 }

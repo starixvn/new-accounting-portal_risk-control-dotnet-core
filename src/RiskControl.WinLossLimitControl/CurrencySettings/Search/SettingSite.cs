@@ -4,6 +4,8 @@ namespace RiskControl.WinLossLimitControl.CurrencySettings.Search;
 
 public class SettingSite
 {
+    public int ProductId { get; set; }
+
     public string ProductName { get; set; }
 
     public string CurrencyName { get; set; }

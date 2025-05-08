@@ -113,7 +113,7 @@
                                     </td>
                                     <td class="word-break-all" *ngIf="isFirst" [attr.rowspan]="setting.groups.length">{{ setting.currencyName }}</td>
                                     <td class="word-break-all" *ngIf="isFirst" [attr.rowspan]="setting.groups.length">{{ setting.siteName }}</td>
-                                    <td><span class="nap-link word-break-all" (click)="showGroupSetting(setting.productName)"> {{ group.groupName }}</span></td>
+                                    <td><span class="nap-link word-break-all" (click)="showGroupSetting(setting.productId, setting.productName)"> {{ group.groupName }}</span></td>
                                     <td>
                                         <div class="limit-row">
                                             <nap-loss-limit-textbox [disabled]="!hasHostPermission" #blackLossLimitTextbox [(value)]="group.blackLimit"></nap-loss-limit-textbox>

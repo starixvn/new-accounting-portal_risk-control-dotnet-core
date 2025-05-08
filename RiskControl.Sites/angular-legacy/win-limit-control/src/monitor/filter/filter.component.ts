@@ -27,7 +27,17 @@ export class FilterComponent implements OnInit {
     @Output() generate = new EventEmitter<FilterModel>();
     sites: TreeviewItem[];
     products: Product[];
-    productId: number;
+    selectedProduct: Product = null;
+    productConfig = {
+      displayKey: "name",
+      search: true,
+      limitTo: 0,
+      height: "450px",
+      with: "135px",
+      enableSelectAll: true,
+      placeholder: "",
+    };
+    productId: number = 0;
     currencies: Currency[];
     currencyId: number;
     fromDate: NapDate;
@@ -84,6 +94,7 @@ export class FilterComponent implements OnInit {
 
     onProductChange() {
         this.currencyId = 0;
+        this.productId = this.selectedProduct.id;
         this.querySites(this.productId);
     }
 
@@ -99,7 +110,7 @@ export class FilterComponent implements OnInit {
             this.selectedSites = [];
             this.initCurrencies([]);
         }
-        
+
     }
 
     onColumnChange(selectedColumns: TableColumn[]) {
@@ -140,6 +151,7 @@ export class FilterComponent implements OnInit {
         observable.subscribe(products => {
             this.products = FilterHelper.insertProductAll(products);
             this.productId = this.products[0].id;
+            this.selectedProduct = this.products[0];
         });
         return observable;
     }
