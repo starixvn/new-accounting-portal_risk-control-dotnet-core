@@ -153,7 +153,6 @@ export interface FilterModel {
     custId: number;
     headline: number;
     roleId: number;
-    isToday: boolean;
     excludeNoData: boolean;
 }
 

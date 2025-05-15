@@ -152,7 +152,7 @@ export class FilterComponent implements OnInit {
   private readonly lastMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(1, 'month').startOf('month');
   private readonly lastThreeMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(3, 'month').startOf('month');
   private readonly lastSixMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(6, 'month').startOf('month');
-  private readonly lastYearStartDate = moment.utc(DATE_CONFIG.reportDate.today).subtract(1, 'year');
+  private readonly lastYearStartDate = moment.utc(DATE_CONFIG.reportDate.today).add(1, "day").subtract(1, 'year');
   private numberLicensees = 0;
 
   private readonly TimeRanges: TimeRange[] = [
@@ -163,8 +163,8 @@ export class FilterComponent implements OnInit {
     },
     {
       timePeriodType: TimePeriod.CurrentWeek,
-      startDate: moment.utc(DATE_CONFIG.reportDate.yesterday).startOf('week'),
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('isoWeek'),
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
       timePeriodType: TimePeriod.LastWeek,
@@ -173,8 +173,8 @@ export class FilterComponent implements OnInit {
     },
     {
       timePeriodType: TimePeriod.CurrentMonth,
-      startDate: moment.utc(DATE_CONFIG.reportDate.yesterday).startOf('month'),
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      startDate: moment.utc(DATE_CONFIG.reportDate.today).startOf('month'),
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
       timePeriodType: TimePeriod.LastMonth,
@@ -184,7 +184,7 @@ export class FilterComponent implements OnInit {
     {
       timePeriodType: TimePeriod.SinceLastMonth,
       startDate: this.lastMonthStartDate,
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
       timePeriodType: TimePeriod.LastThreeMonths,
@@ -199,7 +199,7 @@ export class FilterComponent implements OnInit {
     {
       timePeriodType: TimePeriod.SinceLastYear,
       startDate: this.lastYearStartDate,
-      endDate: moment.utc(DATE_CONFIG.reportDate.yesterday)
+      endDate: moment.utc(DATE_CONFIG.reportDate.today)
     },
     {
       timePeriodType: TimePeriod.Today,
@@ -591,7 +591,6 @@ export class FilterComponent implements OnInit {
       custId: 0,
       headline: 0,
       roleId: 0,
-      isToday: this.isToday(),
       excludeNoData: this.excludeNoData
     };
     return model;
@@ -894,9 +893,5 @@ export class FilterComponent implements OnInit {
         this.onTimePeriodChange();
       }
     }
-  }
-
-  isToday(): boolean {
-    return this.timePeriod === TimePeriod.Today;
   }
 }

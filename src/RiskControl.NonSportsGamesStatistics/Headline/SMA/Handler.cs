@@ -10,10 +10,6 @@ public class Handler(Service service, IMapper mapper) : BaseHandler<Request>(ser
 {
     public async Task<GridOptions> Handle(Request request, CancellationToken cancellationToken)
     {
-        if (request.IsToDay)
-        {
-            return await base.Handle<NormalCriteria>(request, true);
-        }
         return await base.Handle<Criteria>(request, true);
     }
 }
