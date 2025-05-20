@@ -433,9 +433,9 @@ export class FilterComponent implements OnInit {
 
   checkBaseRMValue(isCheck: boolean) {
     this.isBaseRM = isCheck;
-    this.isBaseUSD = this.isBaseRM ? false : this.isBaseUSD;
+    //this.isBaseUSD = this.isBaseRM ? false : this.isBaseUSD;
     localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, JSON.stringify(isCheck));
-    localStorage.setItem(LocalStorageKey.IS_BASEUSD_CHECK, JSON.stringify(this.isBaseUSD));
+    //localStorage.setItem(LocalStorageKey.IS_BASEUSD_CHECK, JSON.stringify(this.isBaseUSD));
   }
 
   checkBaseUSDValue(isCheck: boolean) {
@@ -757,8 +757,8 @@ export class FilterComponent implements OnInit {
     const isBaseRM = JSON.parse(localStorage.getItem(LocalStorageKey.IS_BASERM_CHECK)!) as boolean;
     this.isBaseRM = isBaseRM ?? true;
 
-    const isBaseUSD = JSON.parse(localStorage.getItem(LocalStorageKey.IS_BASEUSD_CHECK)!) as boolean;
-    this.isBaseUSD = isBaseUSD ?? false;
+    // const isBaseUSD = JSON.parse(localStorage.getItem(LocalStorageKey.IS_BASEUSD_CHECK)!) as boolean;
+    // this.isBaseUSD = isBaseUSD ?? false;
 
     const isExcludeTest = JSON.parse(localStorage.getItem(LocalStorageKey.IS_EXCLUDE_TEST)!) as boolean;
 
@@ -867,7 +867,7 @@ export class FilterComponent implements OnInit {
       housePtCompareType: localStorage.getItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE),
       housePtValue: localStorage.getItem(LocalStorageKey.HOUSEPT_VALUE),
       isBasermCheck: localStorage.getItem(LocalStorageKey.IS_BASERM_CHECK),
-      isBaseusdCheck: localStorage.getItem(LocalStorageKey.IS_BASEUSD_CHECK),
+      // isBaseusdCheck: localStorage.getItem(LocalStorageKey.IS_BASEUSD_CHECK),
       isExcludeTest: localStorage.getItem(LocalStorageKey.IS_EXCLUDE_TEST),
       isViewByInteger: localStorage.getItem(LocalStorageKey.IS_VIEW_BY_INTEGER),
       excludeNoData: localStorage.getItem(LocalStorageKey.EXCLUDE_NO_DATA),
@@ -893,7 +893,7 @@ export class FilterComponent implements OnInit {
     localStorage.setItem(LocalStorageKey.HOUSEPT_COMPARE_TYPE, model.housePtCompareType!);
     localStorage.setItem(LocalStorageKey.HOUSEPT_VALUE, model.housePtValue!);
     localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, model.isBasermCheck!);
-    localStorage.setItem(LocalStorageKey.IS_BASEUSD_CHECK, model.isBaseusdCheck!);
+    // localStorage.setItem(LocalStorageKey.IS_BASEUSD_CHECK, model.isBaseusdCheck!);
     localStorage.setItem(LocalStorageKey.IS_EXCLUDE_TEST, model.isExcludeTest!);
     localStorage.setItem(LocalStorageKey.IS_VIEW_BY_INTEGER, model.isViewByInteger!);
     localStorage.setItem(LocalStorageKey.EXCLUDE_NO_DATA, model.excludeNoData!);

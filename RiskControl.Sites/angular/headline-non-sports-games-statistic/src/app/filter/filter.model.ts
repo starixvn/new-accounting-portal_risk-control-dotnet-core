@@ -245,7 +245,7 @@ export interface SavedFilterContentModel {
     excludeNoData: string | null;
     exactMatching: string | null;
     isBasermCheck: string | null;
-    isBaseusdCheck: string | null;
+    // isBaseusdCheck: string | null;
     date: string;
     sort: string;
 }
