@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.RawData;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RiskControl.NonSportsGamesStatistics.Common;
 
