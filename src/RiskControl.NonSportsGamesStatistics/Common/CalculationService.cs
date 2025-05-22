@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using Fanex.Logging;
-using Newtonsoft.Json;
+﻿using AutoMapper;
 using RiskControl.NonSportsGamesStatistics.Model;
 using RiskControl.NonSportsGamesStatistics.RawData;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RiskControl.NonSportsGamesStatistics.Common;
 
@@ -95,9 +93,7 @@ public class CalculationServiceImp(IMapper mapper) : CalculationService
 
     public DailyViewStatisticsModel CalculateDailyViewBaseCurrencyGrandTotal(BaseRawStatistic rawData)
     {
-        LogService.Info(JsonConvert.SerializeObject(rawData));
         var grandTotal = mapper.Map<DailyViewStatisticsModel>(rawData);
-        LogService.Info("Ok");
         grandTotal.ReportBy = "Grand Total RM";
         return grandTotal;
     }

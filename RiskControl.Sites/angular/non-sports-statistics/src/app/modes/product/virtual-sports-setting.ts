@@ -37,13 +37,7 @@ export class VirtualSportsSetting extends ProductSetting {
                 }
                 break;
             case ProductLevel.League:
-                if (filterModel.productIds.join(',') === ProductConstants.VIRTUAL_SPORT_5.toString()
-                    && filterModel.isNormalMode
-                    && !this.isDrillDownCurrency) {
-                    filterModel.leagueIds = [{leagueId: 0, betType: 0}];
-                } else {
-                    filterModel.leagueIds = [];
-                }
+                filterModel.leagueIds = []
                 filterModel.sportTypes = [this.typeId];
                 break;
             case ProductLevel.BetType:
