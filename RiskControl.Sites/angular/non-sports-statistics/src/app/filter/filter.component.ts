@@ -712,6 +712,7 @@ export class FilterComponent implements OnInit {
         currencies: this.currencies
       },
       isBaseRM: this.isBaseRM,
+      isBaseUSD: this.isBaseUSD,
       sportBettypes: gameTypeResult.sportBetTypes,
       isExactly: this.exactMatching,
       sortColumnName: this.selectedReportType === this.cachedReportType ? this.sortColumnName : '',

@@ -32,6 +32,7 @@ export interface BaseQueryModel {
     isGrandTotal: boolean;
     isNormalMode: boolean;
     isBaseRM: boolean;
+    isBaseUSD: boolean
     sportBettype: string;
     isExactly: boolean;
     housePTType: number;

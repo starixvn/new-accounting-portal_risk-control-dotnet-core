@@ -91,7 +91,7 @@ namespace RiskControl.NonSportsGamesStatistics.TopTwenty.GroupStatistics
             if (dataRow != null)
             {
                 dataRow.Columns.Insert(0,
-                    new Columns { Name = "ReportBy", Value = "Grand Total RM", CellAlignment = HAlignment.Right });
+                    new Columns { Name = "ReportBy", Value = $"Grand Total {statistic.Currency}", CellAlignment = HAlignment.Right });
                 dataRow.Columns.Insert(1,
                     new Columns { Name = "NoOfPlayers", Value = statistic.NoOfPlayers, CellAlignment = HAlignment.Right });
             }

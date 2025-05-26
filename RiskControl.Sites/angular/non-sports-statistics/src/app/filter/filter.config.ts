@@ -25,5 +25,6 @@ export const FilterConfig = {
   gridColumns: gridColumns,
   housePTAllValue: -1,
   currencyAllValue: 0,
-  currencyBaseRM: -1
+  currencyBaseRM: -1,
+  currencyBaseUSD: -2
 };

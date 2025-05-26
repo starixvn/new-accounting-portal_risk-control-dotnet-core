@@ -149,6 +149,7 @@ export interface FilterModel {
     collection: FilterCollection,
     selectedCollection: FilterCollection,
     isBaseRM: boolean,
+    isBaseUSD: boolean,
     sportBettypes: SportBetType[];
     isExactly: boolean;
     sortDirection: string;
