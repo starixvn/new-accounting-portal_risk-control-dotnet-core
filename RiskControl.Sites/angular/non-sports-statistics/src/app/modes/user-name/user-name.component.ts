@@ -22,6 +22,7 @@ import {
   isNormalQueryModel
 } from './user-name.model';
 import { AssociatedAccountComponent } from '../associated-account/associated-account.component';
+import { filter } from 'rxjs-compat/operator/filter';
 
 interface RowCustomAttribute {
   ReportBy: string;
@@ -143,11 +144,17 @@ export class UserNameComponent implements OnInit, ModeGenerate {
 
   private showAssociatedAccounts(userName: string, site: string, custId: number) {
     const filterModel = this.modeContext.filterModel;
-    let currency = FilterConfig.currencyBaseRM.toString();
-    let currencyName = 'Base RM';
-    if (!filterModel.isBaseRM) {
-      currency = filterModel.collection.currencies.map(c => c.exchangeId).join(',');
-      currencyName = 'All Currency';
+    let currency = filterModel.collection.currencies.map(c => c.exchangeId).join(',');
+    let currencyName = 'All Currency';
+    
+    if (filterModel.isBaseUSD) {
+      currency = FilterConfig.currencyBaseUSD.toString();
+      currencyName = 'Base USD';
+    }
+    
+    if (filterModel.isBaseRM) {
+      currency = FilterConfig.currencyBaseRM.toString();
+    currencyName = 'Base RM';
     }
     const gameTypeModel: GameTypeModel = {
       products: filterModel.collection.products,
@@ -180,6 +187,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
       roleId: RoleId.None,
       custId: custId,
       isBaseRM: filterModel.isBaseRM,
+      isBaseUSD: filterModel.isBaseUSD,
       sportBettype: gameTypeResult.sportBetTypes.map(s => `${s.sportType}-${s.betType}`).join(','),
       isExactly: filterModel.isExactly,
       fromDate: filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),

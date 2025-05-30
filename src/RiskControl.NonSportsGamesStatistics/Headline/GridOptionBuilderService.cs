@@ -233,7 +233,7 @@ public class GridOptionBuilderServiceImp(GridOptionCustomExcelCellStyleService c
     {
         var dataRow = BuildBaseDataRow(grandTotal, viewByInteger);
         dataRow.Columns.Insert(0,
-            new Columns { Name = UserNameColumnName, Value = "Grand Total RM", CellAlignment = HAlignment.Right, MergeColNumber = mergedColNumberGrandTotal });
+            new Columns { Name = UserNameColumnName, Value = $"Grand Total {grandTotal.Currency}", CellAlignment = HAlignment.Right, MergeColNumber = mergedColNumberGrandTotal });
         return [dataRow];
     }
 

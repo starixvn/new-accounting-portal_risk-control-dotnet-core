@@ -1,6 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { Helper } from 'nap-components/helper';
-import { ReportType, FilterModel, FilterHelper } from '../../filter';
+import { ReportType, FilterHelper } from '../../filter';
 import { BaseQueryModel } from '../../app.model';
 import { ModeContext } from '../mode-context';
 import { TitleService } from './title.service';
@@ -48,6 +47,7 @@ export class ModelService {
             isDrillDown: gridModel.isDrillDownCurrency,
             isGrandTotal: false,
             isBaseRM: filterModel.isBaseRM,
+            isBaseUSD: filterModel.isBaseUSD,
             sportBettype: filterModel.sportBettypes.map(s => `${s.sportType}-${s.betType}`).join(','),
             isExactly: filterModel.isExactly,
             fromDate: filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),

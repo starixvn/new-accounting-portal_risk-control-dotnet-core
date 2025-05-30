@@ -172,11 +172,17 @@ export class Top20Component implements OnInit, ModeGenerate {
 
   private showAssociatedAccounts(userName: string, site: string, custId: number) {
     const filterModel = this.modeContext.filterModel;
-    let currency = FilterConfig.currencyBaseRM.toString();
-    let currencyName = 'Base RM';
-    if (!filterModel.isBaseRM) {
-      currency = '0';
-      currencyName = 'Original Currency';
+    let currency = '0';
+    let currencyName = 'Original Currency';
+
+    if (filterModel.isBaseRM) {
+      currency = FilterConfig.currencyBaseRM.toString();
+      currencyName = 'Base RM';
+    }
+    
+    if (filterModel.isBaseUSD) {
+      currency = FilterConfig.currencyBaseUSD.toString();
+      currencyName = 'Base USD';
     }
     const gameTypeModel: GameTypeModel = {
       products: filterModel.collection.products,
@@ -209,6 +215,7 @@ export class Top20Component implements OnInit, ModeGenerate {
       roleId: RoleId.None,
       custId: custId,
       isBaseRM: filterModel.isBaseRM,
+      isBaseUSD: filterModel.isBaseUSD,
       sportBettype: gameTypeResult.sportBetTypes.map(s => `${s.sportType}-${s.betType}`).join(','),
       isExactly: filterModel.isExactly,
       fromDate: filterModel.startDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),

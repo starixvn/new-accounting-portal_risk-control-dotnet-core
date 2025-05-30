@@ -150,6 +150,15 @@
           <label class="mt-2">Currency</label>
         </div>
       </div>
+      <div class="nap-col d-none">
+        <div class="form-check nap-form-checkbox">
+          <label class="form-check-label">
+            <input name="basermcheckbox" type="checkbox" class="form-check-input" [(ngModel)]="isBaseUSD"
+              (change)="checkBaseUSDValue(isBaseUSD)">
+            Base USD
+          </label>
+        </div>
+      </div>
       <div class="nap-col">
         <div class="form-check nap-form-checkbox">
           <label class="form-check-label">
@@ -161,7 +170,7 @@
       </div>
       <div class="nap-col">
         <div class="nap-group">
-          <div class="nap-control" [ngClass]="{ 'disabledfield': isBaseRM === true}">
+          <div class="nap-control" [ngClass]="{ 'disabledfield': isBaseRM === true || isBaseUSD === true }">
             <ngx-dropdown-treeview [config]="currenciesTreeviewConfig" [items]="currenciesTreeViewItems"
               (selectedChange)="onCurrenciesChange($event)">
             </ngx-dropdown-treeview>

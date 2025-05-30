@@ -94,7 +94,7 @@ public class CalculationServiceImp(IMapper mapper) : CalculationService
     public DailyViewStatisticsModel CalculateDailyViewBaseCurrencyGrandTotal(BaseRawStatistic rawData)
     {
         var grandTotal = mapper.Map<DailyViewStatisticsModel>(rawData);
-        grandTotal.ReportBy = "Grand Total RM";
+        grandTotal.ReportBy = $"Grand Total {grandTotal.Currency}";
         return grandTotal;
     }
 
@@ -150,7 +150,7 @@ public class CalculationServiceImp(IMapper mapper) : CalculationService
     public UserNameViewStatisticsModel CalculateUserNameViewBaseCurrencyGrandTotal(UserNameViewRawStatistics rawData)
     {
         var grandTotal = mapper.Map<UserNameViewStatisticsModel>(rawData);
-        grandTotal.ReportBy = "Grand Total RM";
+        grandTotal.ReportBy = $"Grand Total {grandTotal.Currency}";
         return grandTotal;
     }
 
@@ -312,7 +312,7 @@ public class CalculationServiceImp(IMapper mapper) : CalculationService
     public DailyViewGroupStatisticWithTotalReportModel CalculateDeviceReport(
         GenericRawData<BaseRawStatistic> rawData)
     {
-        var grandTotal = rawData.Total.FirstOrDefault(x => x.ReportBy == "GrandTotalRM");
+        var grandTotal = rawData.Total.FirstOrDefault(x => x.ReportBy is "GrandTotalRM" or "GrandTotalUSD");
         return new DailyViewGroupStatisticWithTotalReportModel
         {
             GroupStatisticWithTotal = CalculateDeviceStatisticGroup(rawData),
@@ -323,7 +323,7 @@ public class CalculationServiceImp(IMapper mapper) : CalculationService
     public DailyViewGroupStatisticWithTotalReportModel CalculateCompanyReport(
         GenericRawData<CompanyRawStatistics> rawData)
     {
-        var grandTotal = rawData.Total.FirstOrDefault(x => x.ReportBy == "GrandTotalRM");
+        var grandTotal = rawData.Total.FirstOrDefault(x => x.ReportBy is "GrandTotalRM" or "GrandTotalUSD");
         return new DailyViewGroupStatisticWithTotalReportModel
         {
             GroupStatisticWithTotal = CalculateCompanyStatisticsGroup(rawData),
