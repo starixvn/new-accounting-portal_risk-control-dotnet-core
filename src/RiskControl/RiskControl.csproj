@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Epplus.Mapper" Version="7.5.0" />
     <PackageReference Include="Fanex.Caching" Version="2.2.8" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3.6" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.4.2" />
     <PackageReference Include="Fanex.Excel" Version="2.7.2.2" />
     <PackageReference Include="Olympus.FPSAPI.Client" Version="1.0.0.16" />
   </ItemGroup>
