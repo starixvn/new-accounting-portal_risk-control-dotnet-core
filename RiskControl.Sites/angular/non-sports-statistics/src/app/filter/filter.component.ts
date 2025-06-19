@@ -156,6 +156,7 @@ export class FilterComponent implements OnInit {
   hasNormalMode = false;
   hasHistoryMode = false;
   exactMatching = true;
+  isExcludePrizes = true;
   sortColumnName = '';
   sortDirection = '';
   cachedReportType = ReportType.Product;
@@ -371,7 +372,7 @@ export class FilterComponent implements OnInit {
     if (selectedGameTypes != null && selectedGameTypes.length > 0) {
       localStorage.setItem(LocalStorageKey.GAME_TYPES, JSON.stringify(selectedGameTypes));
     }
-
+    this.isExcludePrizes = !selectedGameTypes.some(gameType => gameType.isPrize);
     this.selectedGameTypes = selectedGameTypes;
   }
 
@@ -429,6 +430,16 @@ export class FilterComponent implements OnInit {
   checkExactMatchingValue($event: boolean) {
     this.exactMatching = $event;
     localStorage.setItem(LocalStorageKey.EXACT_MATCHING, JSON.stringify($event));
+  }
+
+  checkExcludePrizesValue($event: boolean) {
+    this.isExcludePrizes = $event;
+    localStorage.setItem(LocalStorageKey.IS_EXCLUDE_PRIZES, JSON.stringify($event));
+    var gameTypes = this.gameTypes;
+    if ($event) {
+      gameTypes = gameTypes.filter(x => !x.isPrize);
+    }
+    this.gameTypeTreeViewItems = this.treeviewBuilderService.buildGameTypeTreeViewItems(this.gameTypes, this.selectedProducts, gameTypes);
   }
 
   onGenerateClick() {
@@ -860,10 +871,9 @@ export class FilterComponent implements OnInit {
   }
 
   private getGameTypes(isEqualProducts: boolean) {
-    const uncheckedGameTypes: string[] = ['Jackpot Prize', 'Promotion', 'Tournament Prize', 'Promotion Prize'];
     this.filterService.getGameTypes().subscribe(gameTypes => {
       this.gameTypes = gameTypes;
-      const defaultGameTypes = gameTypes.filter(x => !uncheckedGameTypes.includes(x.typeName));
+      const defaultGameTypes = gameTypes.filter(x => !x.isPrize);
 
       this.selectedGameTypes = isEqualProducts ?
         JSON.parse(localStorage.getItem(LocalStorageKey.GAME_TYPES)) as GameType[] :
@@ -917,6 +927,14 @@ export class FilterComponent implements OnInit {
       this.exactMatching = exactMatching;
     } else {
       this.exactMatching = true;
+    }
+
+    const isExcludePrizes = JSON.parse(localStorage.getItem(LocalStorageKey.IS_EXCLUDE_PRIZES)) as boolean;
+
+    if (isExcludePrizes !== null) {
+      this.isExcludePrizes = isExcludePrizes;
+    } else {
+      this.isExcludePrizes = true;
     }
 
 
@@ -1003,6 +1021,7 @@ export class FilterComponent implements OnInit {
       currencies: localStorage.getItem(LocalStorageKey.CURRENCIES),
       devices: localStorage.getItem(LocalStorageKey.DEVICES),
       exactMatching: localStorage.getItem(LocalStorageKey.EXACT_MATCHING),
+      isExcludePrizes: localStorage.getItem(LocalStorageKey.IS_EXCLUDE_PRIZES),
       gameIncomeCompareType: localStorage.getItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE),
       gameIncomeValue: localStorage.getItem(LocalStorageKey.GAME_INCOME_VALUE),
       gameTypes: localStorage.getItem(LocalStorageKey.GAME_TYPES),
@@ -1032,6 +1051,7 @@ export class FilterComponent implements OnInit {
     localStorage.setItem(LocalStorageKey.CURRENCIES, model.currencies);
     localStorage.setItem(LocalStorageKey.DEVICES, model.devices);
     localStorage.setItem(LocalStorageKey.EXACT_MATCHING, model.exactMatching);
+    localStorage.setItem(LocalStorageKey.IS_EXCLUDE_PRIZES, model.isExcludePrizes);
     localStorage.setItem(LocalStorageKey.GAME_INCOME_COMPARE_TYPE, model.gameIncomeCompareType);
     localStorage.setItem(LocalStorageKey.GAME_INCOME_VALUE, model.gameIncomeValue);
     localStorage.setItem(LocalStorageKey.GAME_TYPES, model.gameTypes);

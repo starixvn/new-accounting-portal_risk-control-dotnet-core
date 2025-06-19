@@ -73,6 +73,7 @@ export interface GameType extends TestObject {
     typeName: string;
     typeId: number;
     gameType: number;
+    isPrize: boolean;
 }
 
 export interface Device {
@@ -246,6 +247,7 @@ export interface SavedFilterContentModel {
     isExcludeTest: string;
     isViewByInteger: string;
     exactMatching: string;
+    isExcludePrizes: string;
     isBasermCheck: string;
     isBaseUsdCheck: string;
     date: string;
