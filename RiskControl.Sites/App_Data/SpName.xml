@@ -12,48 +12,48 @@
 		<Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBAGE.bodb02.wsv_nap" TimeOut="300" />
 	</Function>
 	<Function Name="Game Ground Bet Limit Control">
-		<Setting Key="NAP_GameRoundBetLimitSettingUpd" SpName="NAP_GameRoundBetLimitSettingUpd" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_GameRoundBetLimitSettingSel" SpName="NAP_GameRoundBetLimitSettingSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_GameRoundBetLimitSettingUpd" SpName="NAP_GameRoundBetLimitSettingUpd" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_GameRoundBetLimitSettingSel" SpName="NAP_GameRoundBetLimitSettingSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
 		<Setting Key="NAP_GameRoundBetLimitMonitorSel" SpName="NAP_GameRoundBetLimitMonitorSel" DbName="DBTXN.bodb02.wsv_nap" TimeOut="300" />
 	</Function>
 	<Function Name="Win Limit Control">
 		<Setting Key="NAP_WinLimit_UserByIPSel" SpName="NAP_WinLimit_UserByIPSel" DbName="DBACC.bodb02.wsv_nap" />
-		<Setting Key="NAP_WinLimit_CustSuggestionSel" SpName="NAP_WinLimit_CustSuggestionSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_AllCurrencySel" SpName="NAP_WinLimit_AllCurrencySel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_AllGroupSel" SpName="NAP_WinLimit_AllGroupSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_AllProductSel" SpName="NAP_WinLimit_AllProductSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_AllSiteSel" SpName="NAP_WinLimit_AllSiteSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_SiteByProductSel" SpName="NAP_WinLimit_SiteByProductSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CurrencySel" SpName="NAP_WinLimit_CurrencySel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CurrencySettingSel" SpName="NAP_WinLimit_CurrencySettingSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CurrencySettingAllSiteSel" SpName="NAP_WinLimit_CurrencySettingAllSiteSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CurrencySettingUpd" SpName="NAP_WinLimit_CurrencySettingUpd" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustSettingSel" SpName="NAP_WinLimit_CustSettingSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustSettingUndefinedProductSettingSel" SpName="NAP_WinLimit_CustSettingUndefinedProductSettingSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustSettingValidateInsertingUser" SpName="NAP_WinLimit_CustSettingValidateInsertingUser" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustSettingIns" SpName="NAP_WinLimit_CustSettingIns" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustSettingUpd" SpName="NAP_WinLimit_CustSettingUpd" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustSettingDel" SpName="NAP_WinLimit_CustSettingDel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CurrencySettingSingleSel" SpName="NAP_WinLimit_CurrencySettingSingleSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustSettingSingleSel" SpName="NAP_WinLimit_CustSettingSingleSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300">
+		<Setting Key="NAP_WinLimit_CustSuggestionSel" SpName="NAP_WinLimit_CustSuggestionSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_AllCurrencySel" SpName="NAP_WinLimit_AllCurrencySel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_AllGroupSel" SpName="NAP_WinLimit_AllGroupSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_AllProductSel" SpName="NAP_WinLimit_AllProductSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_AllSiteSel" SpName="NAP_WinLimit_AllSiteSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_SiteByProductSel" SpName="NAP_WinLimit_SiteByProductSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CurrencySel" SpName="NAP_WinLimit_CurrencySel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CurrencySettingSel" SpName="NAP_WinLimit_CurrencySettingSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CurrencySettingAllSiteSel" SpName="NAP_WinLimit_CurrencySettingAllSiteSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CurrencySettingUpd" SpName="NAP_WinLimit_CurrencySettingUpd" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustSettingSel" SpName="NAP_WinLimit_CustSettingSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustSettingUndefinedProductSettingSel" SpName="NAP_WinLimit_CustSettingUndefinedProductSettingSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustSettingValidateInsertingUser" SpName="NAP_WinLimit_CustSettingValidateInsertingUser" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustSettingIns" SpName="NAP_WinLimit_CustSettingIns" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustSettingUpd" SpName="NAP_WinLimit_CustSettingUpd" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustSettingDel" SpName="NAP_WinLimit_CustSettingDel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CurrencySettingSingleSel" SpName="NAP_WinLimit_CurrencySettingSingleSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustSettingSingleSel" SpName="NAP_WinLimit_CustSettingSingleSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300">
 			<Mapping DataField="MaxWinLimit_RM" ObjectProperty="MaxWinLimit" />
 		</Setting>
-		<Setting Key="NAP_WinLimit_AllGameGroupSettingSel" SpName="NAP_WinLimit_AllGameGroupSettingSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_MonitorSel" SpName="NAP_WinLimit_MonitorSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_HistorySel" SpName="NAP_WinLimit_HistorySel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_Notification_History_Update" SpName="NAP_WinLimit_Notification_History_Update" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustGameMonitoring_HistoryIns" SpName="NAP_WinLimit_CustGameMonitoring_HistoryIns" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustGameStatusTransferUnblock" SpName="NAP_WinLimit_CustGameStatusTransferUnblock" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustGameStatusPlaceBetUnblock" SpName="NAP_WinLimit_CustGameStatusPlaceBetUnblock" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustGameStatusSel" SpName="NAP_WinLimit_CustGameStatusSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustomerInformationSel" SpName="NAP_WinLimit_CustomerInformationSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustomerSiteSel" SpName="NAP_WinLimit_CustomerSiteSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_CustomerSiteByCustIdSel" SpName="NAP_WinLimit_CustomerSiteByCustIdSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
-		<Setting Key="NAP_WinLimit_GameGroupSettingSel" SpName="NAP_WinLimit_GameGroupSettingSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300"/>
-		<Setting Key="NAP_WinLimit_UnassignedBettypeSel" SpName="NAP_WinLimit_UnassignedBettypeSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300"/>
-		<Setting Key="NAP_WinLimit_GroupByProductSel" SpName="NAP_WinLimit_GroupByProductSel" DbName="DBCust.CustDB.wsv_nap" TimeOut="300"/>
-		<Setting Key="NAP_WinLimit_GameGroupSettingIns" SpName="NAP_WinLimit_GameGroupSettingIns" DbName="DBCust.CustDB.wsv_nap" TimeOut="300"/>
-		<Setting Key="NAP_WinLimit_CurrencySettingInactiveSiteUpd" SpName="NAP_WinLimit_CurrencySettingInactiveSiteUpd" DbName="DBCust.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_AllGameGroupSettingSel" SpName="NAP_WinLimit_AllGameGroupSettingSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_MonitorSel" SpName="NAP_WinLimit_MonitorSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_HistorySel" SpName="NAP_WinLimit_HistorySel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_Notification_History_Update" SpName="NAP_WinLimit_Notification_History_Update" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustGameMonitoring_HistoryIns" SpName="NAP_WinLimit_CustGameMonitoring_HistoryIns" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustGameStatusTransferUnblock" SpName="NAP_WinLimit_CustGameStatusTransferUnblock" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustGameStatusPlaceBetUnblock" SpName="NAP_WinLimit_CustGameStatusPlaceBetUnblock" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustGameStatusSel" SpName="NAP_WinLimit_CustGameStatusSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustomerInformationSel" SpName="NAP_WinLimit_CustomerInformationSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustomerSiteSel" SpName="NAP_WinLimit_CustomerSiteSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_CustomerSiteByCustIdSel" SpName="NAP_WinLimit_CustomerSiteByCustIdSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
+		<Setting Key="NAP_WinLimit_GameGroupSettingSel" SpName="NAP_WinLimit_GameGroupSettingSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300"/>
+		<Setting Key="NAP_WinLimit_UnassignedBettypeSel" SpName="NAP_WinLimit_UnassignedBettypeSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300"/>
+		<Setting Key="NAP_WinLimit_GroupByProductSel" SpName="NAP_WinLimit_GroupByProductSel" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300"/>
+		<Setting Key="NAP_WinLimit_GameGroupSettingIns" SpName="NAP_WinLimit_GameGroupSettingIns" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300"/>
+		<Setting Key="NAP_WinLimit_CurrencySettingInactiveSiteUpd" SpName="NAP_WinLimit_CurrencySettingInactiveSiteUpd" DbName="DBCUST.CustDB.wsv_nap" TimeOut="300" />
 		<Setting Key="NAP_WinLimit_SelRepresentativeBettype" SpName="NAP_WinLimit_SelRepresentativeBettype" DbName="DBTXN.bodb02.wsv_nap" TimeOut="300" />
 		<Setting Key="NAP_WinLimit_UserByIPSel_Old" SpName="NAP_WinLimit_UserByIPSel_Old" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 	</Function>
