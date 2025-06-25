@@ -15,6 +15,7 @@ export class LocalStorageKey {
     static readonly CURRENCIES = 'non-sport-currencies';
     static readonly DEVICES = 'non-sport-devices';
     static readonly EXACT_MATCHING = 'non-sport-exactmatching';
+    static readonly IS_EXCLUDE_PRIZES = 'non-sport-isexcludeprizes';
     static readonly GAME_INCOME_COMPARE_TYPE = 'non-sport-gameincomecomparetype';
     static readonly GAME_INCOME_VALUE = 'non-sport-gameincomevalue';
     static readonly GAME_TYPES = 'non-sport-gametypes';

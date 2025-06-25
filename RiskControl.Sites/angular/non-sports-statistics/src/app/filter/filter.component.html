@@ -63,6 +63,15 @@
         </label>
       </div>
     </div>
+    <div class="nap-col col-search-exclude-prizes">
+      <div class="form-check nap-form-checkbox">
+        <label class="form-check-label">
+          <input name="basermcheckbox" type="checkbox" class="form-check-input" [(ngModel)]="isExcludePrizes"
+            (change)="checkExcludePrizesValue(isExcludePrizes)">
+          Exclude Prizes
+        </label>
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="nap-col">

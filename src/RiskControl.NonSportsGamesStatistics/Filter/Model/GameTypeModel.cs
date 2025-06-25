@@ -11,4 +11,6 @@ public class GameTypeModel
     public bool IsTest { get; set; }
 
     public byte GameType { get; set; }
+
+    public bool IsPrize { get; set; }
 }
