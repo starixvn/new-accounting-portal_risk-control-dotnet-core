@@ -29,7 +29,8 @@ services.AddFanexData(configuration);
 services.AddFanexLogSentry(configuration);
 services.AddInternalServices();
 services.AddAssemblyForMediatR();
-services.AddOneBookUmForWeb(configuration);
+services.AddOneBookUm(configuration);
+services.AddHealthChecks();
 services.AddHostedService<CacheBackgroundService>();
 
 var app = builder.Build();
@@ -47,7 +48,7 @@ app.UseSession();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapHealthChecks("/healthz");
 app.MapControllerRoute(
     "default",
     "{controller=Home}/{action=Index}/{id?}");
