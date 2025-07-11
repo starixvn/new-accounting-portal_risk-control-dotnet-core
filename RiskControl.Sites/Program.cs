@@ -29,7 +29,7 @@ services.AddFanexData(configuration);
 services.AddFanexLogSentry(configuration);
 services.AddInternalServices();
 services.AddAssemblyForMediatR();
-services.AddOneBookUm(configuration);
+services.AddOneBookUmForWeb(configuration);
 services.AddHealthChecks();
 services.AddHostedService<CacheBackgroundService>();
 
