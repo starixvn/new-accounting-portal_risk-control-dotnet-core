@@ -4,10 +4,6 @@ using RiskControl.Attributes;
 using RiskControl.NonSportsGamesStatistics.Common;
 using RiskControl.NonSportsGamesStatistics.Constants;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RiskControl.NonSportsGamesStatistics.CurrencyView.GrandTotal;
 
