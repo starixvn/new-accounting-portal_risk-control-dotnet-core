@@ -32,6 +32,7 @@ public class CacheRefServiceImp(BaseEntityGroupLoaderService baseEntityGroupLoad
 {
     private const int CacheDurationInMinutes = 15;
     private const string CacheKey = "RiskControl.Settings.BaseEntityGroup";
+    private const string EnUsLanguageCode = "en-US";
 
     private readonly Dictionary<int, string> sportNames = new();
 
@@ -91,22 +92,12 @@ public class CacheRefServiceImp(BaseEntityGroupLoaderService baseEntityGroupLoad
 
     public string GetBetTypeName(int betTypeId)
     {
-        if(betTypeNames.TryGetValue(betTypeId, out var name))
-        {
-            return name;
-        }
-
-        return remotingRefService.GetBetTypeName(betTypeId.ToString(), "en-US");
+        return betTypeNames.TryGetValue(betTypeId, out var name) ? name : remotingRefService.GetBetTypeName(betTypeId.ToString(), EnUsLanguageCode);
     }
 
     public string GetSportName(int sportId)
     {
-        if (sportNames.TryGetValue(sportId, out var name))
-        {
-            return name;
-        }
-
-        return remotingRefService.GetSportName(sportId.ToString(), "en-US");
+        return sportNames.TryGetValue(sportId, out var name) ? name : remotingRefService.GetSportName(sportId.ToString(), EnUsLanguageCode);
     }
 
     public void ReloadCache(List<int> sportIds, List<int> betTypeIds)
@@ -124,11 +115,11 @@ public class CacheRefServiceImp(BaseEntityGroupLoaderService baseEntityGroupLoad
 
     private string GetBetTypeNameFromRemotingRef(int betTypeId)
     {
-        return remotingRefService.GetBetTypeName(betTypeId.ToString(), "en-US");
+        return remotingRefService.GetBetTypeName(betTypeId.ToString(), EnUsLanguageCode);
     }
 
     private string GetSportNameFromRemotingRef(int sportId)
     {
-        return remotingRefService.GetSportName(sportId.ToString(), "en-US");
+        return remotingRefService.GetSportName(sportId.ToString(), EnUsLanguageCode);
     }
 }

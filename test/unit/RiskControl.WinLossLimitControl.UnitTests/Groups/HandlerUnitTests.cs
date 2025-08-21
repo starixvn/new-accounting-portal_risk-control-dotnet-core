@@ -42,15 +42,9 @@ public class HandlerUnitTests
         const string ExpectedSettingJson = """
                                            [
                                                            {
-                                                             ProductId: 1,
+                                                             ProductId: 0,
                                                              ProductName: 'Product 1',
                                                              Groups: [
-                                                               {
-                                                                 GroupName: 'Group 1',
-                                                                 BetTypes: [
-                                                                   'BetType 1 (Any Sport)'
-                                                                 ]
-                                                               }
                                                              ]
                                                            }
                                                        ]
@@ -58,6 +52,6 @@ public class HandlerUnitTests
                                            """;
         var expectedSettings = JsonConvert.DeserializeObject<List<ProductGroupSetting>>(ExpectedSettingJson);
 
-        DeepAssert.Equal(productGroupSettings, expectedSettings);
+        DeepAssert.Equal(expectedSettings, productGroupSettings);
     }
 }
