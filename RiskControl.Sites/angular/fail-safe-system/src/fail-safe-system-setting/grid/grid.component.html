@@ -7,6 +7,7 @@
       <col style="width: 150px" />
       <col style="width: 150px" />
       <col style="width: 100px" />
+      <col style="width: 100px" />
       <col style="width: 70px" />
       <col style="width: 70px" />
       <col style="width: 70px" />
@@ -21,6 +22,7 @@
         <th scope="col" rowspan="2">Number of Members reach Rule</th>
         <th scope="col" colspan="2">Criteria for each Game Type</th>
         <th scope="col" rowspan="2">Send Letstalk notification</th>
+        <th scope="col" rowspan="2">Auto-Disable Product</th>
         <th scope="col" rowspan="2">Is Test</th>
         <th scope="col" rowspan="2">Edit</th>
         <th scope="col" rowspan="2">
@@ -51,6 +53,9 @@
             <input type="checkbox" [disabled]="true" [checked]="item.enableLetstalk"/>
         </td>
         <td class="text-center">
+            <input type="checkbox" [disabled]="true" [checked]="item.autoDisableProduct"/>
+        </td>
+        <td class="text-center">
           <input type="checkbox" [disabled]="true" [checked]="item.isTest"/>
         </td>
         <td class="text-center">
@@ -63,7 +68,7 @@
   </ng-template>
   <div *ngIf="displayedModels" [ngSwitch]="displayedModels.length > 0">
     <div class="nap-grid">
-      <div style="width: 1285px">
+      <div style="width: 1385px">
         <div class="header">
           <table>
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
@@ -85,7 +90,7 @@
           <table>
             <tbody>
               <tr>
-                <th scope="col" class="no-data" colspan="9">
+                <th scope="col" class="no-data" colspan="11">
                   There is no data
                 </th>
               </tr>
@@ -97,7 +102,7 @@
                 <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                 <tfoot>
                     <tr>
-                        <td colspan="10">
+                        <td colspan="11">
                             <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange()"></nap-pagination>
                         </td>
                     </tr>

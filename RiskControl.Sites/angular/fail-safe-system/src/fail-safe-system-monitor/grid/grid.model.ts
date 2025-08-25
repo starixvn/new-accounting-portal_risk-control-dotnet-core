@@ -6,4 +6,5 @@ export interface GridModel {
     reachedTime: string;
     enableLetstalk: boolean;
     ruleTitle: string;
+    autoDisableProduct: boolean;
 }

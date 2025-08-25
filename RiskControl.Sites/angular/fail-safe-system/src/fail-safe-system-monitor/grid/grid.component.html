@@ -7,6 +7,7 @@
       <col style="width: 300px" />
       <col style="width: 150px" />
       <col style="width: 100px" />
+      <col style="width: 100px" />
     </colgroup>
   </ng-template>
   <ng-template #thead>
@@ -19,6 +20,7 @@
         <th scope="col">Reached Rule <br/> Game Income | Game Payout</th>
         <th scope="col">Reached Limit Time</th>
         <th scope="col">Send Letstalk notification</th>
+        <th scope="col">Auto-Disable Product</th>
       </tr>
     </thead>
   </ng-template>
@@ -33,6 +35,9 @@
         <td class="text-center">
             <input type="checkbox" [disabled]="true" [checked]="item.enableLetstalk"/>
         </td>
+        <td class="text-center">
+            <input type="checkbox" [disabled]="true" [checked]="item.autoDisableProduct"/>
+        </td>
     </tr>
   </ng-template>
   <ng-template #breadcrumbToolboxTemplate>
@@ -44,7 +49,7 @@
 </ng-template>
   <div *ngIf="displayedModels" [ngSwitch]="displayedModels.length > 0">
     <div class="nap-grid">
-      <div style="width: 1325px">
+      <div style="width: 1425px">
         <nap-breadcrumb [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
         <div class="header">
           <table>
@@ -67,7 +72,7 @@
           <table>
             <tbody>
               <tr>
-                <th scope="col" class="no-data" colspan="7">
+                <th scope="col" class="no-data" colspan="8">
                   There is no data
                 </th>
               </tr>
@@ -79,7 +84,7 @@
                 <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                 <tfoot>
                     <tr>
-                        <td colspan="9">
+                        <td colspan="8">
                             <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange()"></nap-pagination>
                         </td>
                     </tr>

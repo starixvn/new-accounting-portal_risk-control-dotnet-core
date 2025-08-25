@@ -19,4 +19,6 @@ public class MonitorModel
     public DateTime ReachedTime { get; set; }
 
     public bool EnableLetstalk { get; set; }
+
+    public bool AutoDisableProduct { get; set; }
 }
