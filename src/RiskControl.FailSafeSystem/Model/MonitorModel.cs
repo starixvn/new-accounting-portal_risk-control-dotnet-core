@@ -20,5 +20,5 @@ public class MonitorModel
 
     public bool EnableLetstalk { get; set; }
 
-    public bool AutoDisableProduct { get; set; }
+    public bool EnableAutoDisableProduct { get; set; }
 }

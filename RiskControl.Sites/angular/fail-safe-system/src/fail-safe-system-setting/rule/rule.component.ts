@@ -34,7 +34,7 @@ export class RuleComponent implements OnInit {
   alertMessage: string = '';
   alertClass = AlertType.Danger;
   isTest: boolean = false;
-  autoDisableProduct: boolean = false;
+  enableAutoDisableProduct: boolean = false;
 
   constructor(public readonly activeModal: NgbActiveModal,
     private readonly service: RuleService,
@@ -60,7 +60,7 @@ export class RuleComponent implements OnInit {
         enableLetstalk: this.enableLetstalk,
         criteriaList: this.getCriteriaList(),
         isTest: this.isTest,
-        autoDisableProduct: this.autoDisableProduct
+        enableAutoDisableProduct: this.enableAutoDisableProduct
       };
       if (this.isEdit) {
         const editCriteria = _.assign({ constantKey: this.constantKey}, criteria);

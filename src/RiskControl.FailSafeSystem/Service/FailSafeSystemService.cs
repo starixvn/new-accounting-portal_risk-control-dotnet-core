@@ -21,6 +21,10 @@ public interface FailSafeSystemService
     Task<int> DeleteRule(DeleteRuleCriteria criteria);
 
     Task<IEnumerable<MonitorModel>> GetMonitors(MonitorCriteria criteria);
+
+    Task<IEnumerable<ManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria);
+
+    Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria);
 }
 
 public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper mapper) : FailSafeSystemService
@@ -72,6 +76,16 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper map
             item.ReachedRule = GetReachedRule(rawData.Item2, item.RuleId);
         });
         return data;
+    }
+
+    public async Task<IEnumerable<ManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria)
+    {
+        return await repository.FetchAsync<ManageProductStatusModel>(criteria);
+    }
+
+    public async Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria)
+    {
+        return await repository.FetchAsync<ProductStatusHistoryModel>(criteria);
     }
 
     private static string GetReachedRule(IEnumerable<MonitorCriteriaModel> criterias, int ruleId)

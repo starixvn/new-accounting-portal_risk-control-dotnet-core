@@ -1,0 +1,71 @@
+<ng-template #colgroup>
+    <colgroup>
+      <col style="width: 60px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 100px" />
+      <col style="width: 100px" />
+    </colgroup>
+</ng-template>
+  <ng-template #thead>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Product</th>
+        <th scope="col">Status</th>
+        <th scope="col">Proceeded By</th>
+      </tr>
+    </thead>
+  </ng-template>
+  <ng-template #rowItem let-item="item" let-index="index">
+    <tr>
+        <td class="text-center">{{index}}</td>
+        <td>{{item.date | date: 'MM/dd/yyyy hh:mm:ss aa'}}</td>
+        <td>{{item.productName}}</td>
+        <td>{{item.status}}</td>
+        <td class="text-center">{{item.proceededBy}}</td>
+    </tr>
+  </ng-template>
+<div class="modal-header">
+    <p class="modal-title">Product Status History - {{productName}}</p>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div *ngIf="data" [ngSwitch]="data.length > 0">
+    <div class="nap-grid">
+      <div style="width: 580px">
+        <div class="header">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <ng-template [ngTemplateOutlet]="thead"></ng-template>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+          <table class="table-striped mb-0">
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <tbody>
+              <ng-container *ngFor="let item of data; index as i">
+                <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item, index: i + 1 }">
+                </ng-template>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="false" class="body stretch">
+          <table>
+            <tbody>
+              <tr>
+                <th scope="col" class="no-data" colspan="5">
+                  There is no data
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
