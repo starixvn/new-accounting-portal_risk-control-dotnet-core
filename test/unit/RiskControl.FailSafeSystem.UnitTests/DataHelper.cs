@@ -139,4 +139,40 @@ public static class DataHelper
             PostFix = "%"
         }
     };
+
+    public static IEnumerable<ManageProductStatusModel> GetManageProductStatus => new List<ManageProductStatusModel>
+    {
+        new()
+        {
+            ProductId = 3,
+            ProductName = "Number Game",
+            Status = true,
+            LastUpdated = new DateTime(2025, 08, 26)
+        },
+        new()
+        {
+            ProductId = 4,
+            ProductName = "SLI Live Casino",
+            Status = true,
+            LastUpdated = new DateTime(2025, 08, 26)
+        }
+    };
+
+    public static IEnumerable<ProductStatusHistoryModel> GetProductStatusHistory => new List<ProductStatusHistoryModel>
+    {
+        new()
+        {
+            ProceededBy = "sa",
+            ProductName = "Number Game",
+            Status = true,
+            Date = new DateTime(2025, 08, 26)
+        },
+        new()
+        {
+            ProceededBy = "starix1",
+            ProductName = "SLI Live Casino",
+            Status = true,
+            Date = new DateTime(2025, 08, 26)
+        }
+    };
 }

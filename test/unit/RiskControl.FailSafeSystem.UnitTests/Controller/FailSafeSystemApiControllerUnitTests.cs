@@ -106,6 +106,32 @@ public class FailSafeSystemApiControllerUnitTests
     }
 
     [Fact]
+    public async Task GetManageProductStatus_Always_CallRightFunctionFromFailSafeSystemService()
+    {
+        // Arrange
+        var controller = new FailSafeSystemApiController(service, authorizationService);
+
+        // Act
+        await controller.GetManageProductStatus(new ManageProductStatusCriteria());
+
+        // Assert
+        await service.Received().GetManageProductStatus(Arg.Compat.Any<ManageProductStatusCriteria>());
+    }
+
+    [Fact]
+    public async Task GetProductStatusHistory_Always_CallRightFunctionFromFailSafeSystemService()
+    {
+        // Arrange
+        var controller = new FailSafeSystemApiController(service, authorizationService);
+
+        // Act
+        await controller.GetProductStatusHistory(new ProductStatusHistoryCriteria());
+
+        // Assert
+        await service.Received().GetProductStatusHistory(Arg.Compat.Any<ProductStatusHistoryCriteria>());
+    }
+
+    [Fact]
     public void HasPermission_Always_CallRightFunctionFromAuthorizationService()
     {
         // Arrange

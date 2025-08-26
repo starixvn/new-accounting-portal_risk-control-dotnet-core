@@ -127,4 +127,38 @@ public class FailSafeSystemServiceUnitTests
         Assert.Equal("10 RM|1 %", actualResults.First().ReachedRule);
         Assert.Equal(string.Empty, actualResults.ElementAt(1).ReachedRule);
     }
+
+    [Fact]
+    public async Task GetManageProductStatus_Always_ReturnExpectedList()
+    {
+        // Arrange
+        repository.FetchAsync<ManageProductStatusModel>(Arg.Any<ManageProductStatusCriteria>())
+            .Returns((DataHelper.GetManageProductStatus));
+        var service = new FailSafeSystemServiceImp(repository, mapper);
+
+        // Act
+        var actualResults = await service.GetManageProductStatus(new ManageProductStatusCriteria());
+
+        // Assert
+        Assert.Equal(2, actualResults.Count());
+        Assert.Equal("Number Game", actualResults.First().ProductName);
+        Assert.Equal(4, actualResults.ElementAt(1).ProductId);
+    }
+
+    [Fact]
+    public async Task GetProductStatusHistory_Always_ReturnExpectedList()
+    {
+        // Arrange
+        repository.FetchAsync<ProductStatusHistoryModel>(Arg.Any<ProductStatusHistoryCriteria>())
+            .Returns((DataHelper.GetProductStatusHistory));
+        var service = new FailSafeSystemServiceImp(repository, mapper);
+
+        // Act
+        var actualResults = await service.GetProductStatusHistory(new ProductStatusHistoryCriteria());
+
+        // Assert
+        Assert.Equal(2, actualResults.Count());
+        Assert.Equal("Number Game", actualResults.First().ProductName);
+        Assert.Equal("starix1", actualResults.ElementAt(1).ProceededBy);
+    }
 }
