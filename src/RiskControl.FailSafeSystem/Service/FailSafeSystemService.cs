@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
+using Fanex.NAP.Client;
 using RiskControl.FailSafeSystem.Constants;
 using RiskControl.FailSafeSystem.Criteria;
 using RiskControl.FailSafeSystem.Model;
@@ -27,7 +28,7 @@ public interface FailSafeSystemService
     Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria);
 }
 
-public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper mapper) : FailSafeSystemService
+public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper mapper, INapSession napSession) : FailSafeSystemService
 {
     public Task<IEnumerable<RuleTitleModel>> GetRuleTitles()
     {
@@ -54,16 +55,19 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper map
 
     public Task<int> AddRule(AddRuleCriteria criteria)
     {
+        criteria.CreatedBy = napSession.UserId;
         return repository.ExecuteAsync(criteria);
     }
 
     public Task<int> EditRule(EditRuleCriteria criteria)
     {
+        criteria.CreatedBy = napSession.UserId;
         return repository.ExecuteAsync(criteria);
     }
 
     public Task<int> DeleteRule(DeleteRuleCriteria criteria)
     {
+        criteria.CreatedBy = napSession.UserId;
         return repository.ExecuteAsync(criteria);
     }
 

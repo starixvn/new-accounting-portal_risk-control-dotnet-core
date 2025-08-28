@@ -18,6 +18,8 @@ public class AddRuleCriteria : CriteriaBase, INonQueryCommand
 
     public bool IsTest { get; set; }
 
+    public int CreatedBy { get; set; }
+
     public override string GetSettingKey() => "fss_Rule_Add";
 
     public override bool IsValid() => true;

@@ -18,6 +18,8 @@ public class EditRuleCriteria : CriteriaBase, INonQueryCommand
 
     public string CriteriaList { get; set; }
 
+    public int CreatedBy { get; set; }
+
     public bool IsTest { get; set; }
 
     public override string GetSettingKey() => "fss_Rule_Edit";
