@@ -7,6 +7,7 @@ using Olympus.FPSAPI.Client;
 using RiskControl.AssociatedAcccount;
 using RiskControl.BalanceUp;
 using RiskControl.Configuration;
+using RiskControl.Services;
 
 namespace RiskControl.Sites.DependencyInjections;
 
@@ -21,6 +22,7 @@ public static class GlobalInjection
 
         service.AddTransient<ConfigurationService, ConfigurationServiceImp>();
         service.AddTransient<BalanceUpService, BalanceUpServiceImp>();
+        service.AddTransient<LogDataService, LogDataServiceImp>();
 
         service.AddTransient<FraudServiceWrapper, FraudServiceWrapperImp>();
         service.AddTransient<AssociatedAccountService, AssociatedAccountServiceImp>();

@@ -4,6 +4,7 @@ using Fanex.NAP.Client;
 using RiskControl.FailSafeSystem.Constants;
 using RiskControl.FailSafeSystem.Criteria;
 using RiskControl.FailSafeSystem.Model;
+using RiskControl.Services;
 
 namespace RiskControl.FailSafeSystem.Service;
 
@@ -28,7 +29,7 @@ public interface FailSafeSystemService
     Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria);
 }
 
-public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper mapper, INapSession napSession) : FailSafeSystemService
+public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper mapper, INapSession napSession, LogDataService logData) : FailSafeSystemService
 {
     public Task<IEnumerable<RuleTitleModel>> GetRuleTitles()
     {

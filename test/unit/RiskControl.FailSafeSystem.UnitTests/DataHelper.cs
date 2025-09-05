@@ -146,14 +146,14 @@ public static class DataHelper
         {
             ProductId = 3,
             ProductName = "Number Game",
-            Status = true,
+            Status = "Disable",
             LastUpdated = new DateTime(2025, 08, 26)
         },
         new()
         {
             ProductId = 4,
             ProductName = "SLI Live Casino",
-            Status = true,
+            Status = "Disable",
             LastUpdated = new DateTime(2025, 08, 26)
         }
     };
@@ -163,16 +163,14 @@ public static class DataHelper
         new()
         {
             ProceededBy = "sa",
-            ProductName = "Number Game",
-            Status = true,
-            Date = new DateTime(2025, 08, 26)
+            ActionType = "Disable",
+            InsertDate = new DateTime(2025, 08, 26)
         },
         new()
         {
             ProceededBy = "starix1",
-            ProductName = "SLI Live Casino",
-            Status = true,
-            Date = new DateTime(2025, 08, 26)
+            ActionType = "Disable",
+            InsertDate = new DateTime(2025, 08, 26)
         }
     };
 }
