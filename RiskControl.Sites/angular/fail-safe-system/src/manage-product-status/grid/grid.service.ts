@@ -15,4 +15,8 @@ export class GridService {
   getData(criteria: ManageProductStatusCriteria): Observable<GridModel[]> {
     return this.httpService.post(`${CommonConstants.API}manage-product-status/data`, criteria);
   }
+
+  enableSport(sport: number): Observable<void> {
+    return this.httpService.post(`${CommonConstants.API}manage-product-status/enable-sport`, { sportType: sport });
+  }
 }

@@ -1,10 +1,11 @@
 export interface HistoryModel {
-    date: Date;
-    productName: string;
-    status: string;
+    insertDate: Date;
+    actionType: string;
     proceededBy: string;
+    description: string;
 }
 
 export interface HistoryCriteria {
     productId: number;
+    sportType: number;
 }

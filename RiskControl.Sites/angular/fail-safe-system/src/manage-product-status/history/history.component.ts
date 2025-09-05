@@ -10,6 +10,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class HistoryComponent {
   data: HistoryModel[] | undefined;
   productName = '';
+  sportName = '';
   constructor(public readonly activeModal: NgbActiveModal,
   ) { }
 

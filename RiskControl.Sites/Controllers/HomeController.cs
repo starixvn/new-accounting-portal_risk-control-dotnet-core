@@ -104,4 +104,11 @@ public class HomeController : Controller
     {
         return View("~/wwwroot/fail-safe-system-monitor/index.cshtml");
     }
+
+    [Route("FailSafeSystemManageProductStatus/Main/Index")]
+    [NapAuth(FunctionKey = FunctionKeys.FailSafeSystemSetting, Policy = Constant.Policy.Read)]
+    public ActionResult FailSafeSystemManageProductStatus()
+    {
+        return View("~/wwwroot/manage-product-status/index.cshtml");
+    }
 }

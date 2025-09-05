@@ -122,5 +122,6 @@
 		<Setting Key="fss_Rule_Delete" SpName="fss_Rule_Delete" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="fss_Monitor" SpName="fss_Monitor" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="fss_ManageProductStatus" SpName="fss_ManageProductStatus" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="fss_ManageProductStatus_ProductHistory" SpName="fss_ManageProductStatus_ProductHistory" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 	</Function>
 </Functions>

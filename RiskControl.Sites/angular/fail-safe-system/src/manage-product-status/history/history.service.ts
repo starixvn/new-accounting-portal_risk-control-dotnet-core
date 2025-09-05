@@ -19,12 +19,13 @@ export class HistoryService {
     return this.httpService.post(`${CommonConstants.API}manage-product-status/history-data`, criteria);
   }
 
-  show(productName: string, productId: number): void {
-    this.getData( {productId: productId}).subscribe(data => {
-      const modalRef = this.modalService.open(HistoryComponent, { backdrop: 'static', windowClass: 'modal-auto-size' });
+  show(productName: string, productId: number, sportType: number, sportName: string): void {
+    this.getData({ productId: productId, sportType: sportType }).subscribe(data => {
+      const modalRef = this.modalService.open(HistoryComponent, { backdrop: 'static', windowClass: 'modal-history' });
       const componentInstance = modalRef.componentInstance;
       componentInstance.data = data;
       componentInstance.productName = productName;
+      componentInstance.sportName = sportName;
     });
   }
 }

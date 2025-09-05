@@ -3,6 +3,14 @@
 div.nap-grid {
     div.body {
         overflow-x: hidden;
+        overflow-y: hidden;
+        max-height: initial;
+        margin-bottom: 15px;
+    }
+    .link {
+        cursor: pointer;
+        color: #0876b7;
+        font-weight: bold;
     }
 }
 

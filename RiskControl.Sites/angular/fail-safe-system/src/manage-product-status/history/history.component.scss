@@ -1,0 +1,13 @@
+@import '~nap-theme/scss/grid';
+div.nap-grid {
+    div.body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        max-height: initial;
+        margin-bottom: 15px;
+    }
+}
+
+::ng-deep .modal-history > .modal-dialog {
+    max-width: 902px;
+}

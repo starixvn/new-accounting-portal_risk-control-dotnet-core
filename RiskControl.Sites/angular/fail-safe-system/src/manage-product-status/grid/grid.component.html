@@ -1,7 +1,8 @@
 <ng-template #colgroup>
     <colgroup>
       <col style="width: 60px" />
-      <col style="width: 300px" />
+      <col style="width: 200px" />
+      <col style="width: 200px" />
       <col style="width: 150px" />
       <col style="width: 100px" />
       <col style="width: 70px" />
@@ -12,6 +13,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Product</th>
+        <th scope="col">Sport</th>
         <th scope="col">Last Updated</th>
         <th scope="col">Status</th>
         <th scope="col">History</th>
@@ -22,17 +24,18 @@
     <tr>
         <td class="text-center">{{index}}</td>
         <td>{{item.productName}}</td>
+        <td>{{item.sportName}}</td>
         <td>{{item.lastUpdated | date: 'MM/dd/yyyy hh:mm:ss aa'}}</td>
-        <td *ngIf="item.status">Enable</td>
-        <td *ngIf="!item.status">Disable</td>
+        <td *ngIf="item.status === 'Enable'" class="text-center">Enable</td>
+        <td *ngIf="item.status === 'Disable'" class="text-center link" (click)="enableSport(item.sportType)">Disable</td>
         <td class="text-center">
-            <i class="fa fa-history fa-2x" title="View History" aria-hidden="true" (click)="onShowHistory(item.productName,item.productId)"></i>
+            <i class="fa fa-history fa-2x" title="View History" aria-hidden="true" (click)="onShowHistory(item)"></i>
         </td>
     </tr>
   </ng-template>
   <div *ngIf="gridData" [ngSwitch]="gridData.length > 0">
     <div class="nap-grid">
-      <div style="width: 700px">
+      <div style="width: 781px">
         <div class="header">
           <table>
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>

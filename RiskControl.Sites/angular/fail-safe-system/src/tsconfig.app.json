@@ -20,7 +20,7 @@
     }
   },
   "files": [
-    "fail-safe-system-setting.ts",
+    "manage-product-status.ts",
     "polyfills.ts"
   ],
   "include": [

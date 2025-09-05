@@ -90,4 +90,11 @@ public class FailSafeSystemApiController(FailSafeSystemService service, Authoriz
         var data = await service.GetProductStatusHistory(criteria);
         return Ok(data);
     }
+
+    [Route("manage-product-status/enable-sport")]
+    [HttpPost]
+    public IActionResult EnableSport(EnableSportCriteria criteria)
+    {
+        return Ok();
+    }
 }

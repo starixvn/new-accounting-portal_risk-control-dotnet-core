@@ -2,11 +2,9 @@
 
 public class ProductStatusHistoryModel
 {
-    public DateTime Date { get; set; }
+    public DateTime InsertDate { get; set; }
 
-    public string ProductName { get; set; }
-
-    public bool Status { get; set; }
+    public string ActionType { get; set; }
 
     public string ProceededBy { get; set; }
 }

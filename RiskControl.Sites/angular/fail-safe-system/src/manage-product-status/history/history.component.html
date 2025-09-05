@@ -3,7 +3,9 @@
       <col style="width: 60px" />
       <col style="width: 150px" />
       <col style="width: 150px" />
+      <col style="width: 150px" />
       <col style="width: 100px" />
+      <col style="width: 150px" />
       <col style="width: 100px" />
     </colgroup>
 </ng-template>
@@ -13,7 +15,9 @@
         <th scope="col">#</th>
         <th scope="col">Date</th>
         <th scope="col">Product</th>
-        <th scope="col">Status</th>
+        <th scope="col">Sport</th>
+        <th scope="col">Action</th>
+        <th scope="col">Description</th>
         <th scope="col">Proceeded By</th>
       </tr>
     </thead>
@@ -21,9 +25,11 @@
   <ng-template #rowItem let-item="item" let-index="index">
     <tr>
         <td class="text-center">{{index}}</td>
-        <td>{{item.date | date: 'MM/dd/yyyy hh:mm:ss aa'}}</td>
-        <td>{{item.productName}}</td>
-        <td>{{item.status}}</td>
+        <td>{{item.insertDate | date: 'MM/dd/yyyy hh:mm:ss aa'}}</td>
+        <td>{{productName}}</td>
+        <td>{{sportName}}</td>
+        <td>{{item.actionType}}</td>
+        <td>{{item.description}}</td>
         <td class="text-center">{{item.proceededBy}}</td>
     </tr>
   </ng-template>
@@ -36,7 +42,7 @@
 <div class="modal-body">
     <div *ngIf="data" [ngSwitch]="data.length > 0">
     <div class="nap-grid">
-      <div style="width: 580px">
+      <div style="width: 880px">
         <div class="header">
           <table>
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>

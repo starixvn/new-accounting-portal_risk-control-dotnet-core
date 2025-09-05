@@ -6,7 +6,11 @@ public class ManageProductStatusModel
 
     public string ProductName { get; set; }
 
+    public int SportType { get; set; }
+
+    public string SportName { get; set; }
+
     public DateTime? LastUpdated { get; set; }
 
-    public bool Status { get; set; }
+    public string Status { get; set; }
 }
