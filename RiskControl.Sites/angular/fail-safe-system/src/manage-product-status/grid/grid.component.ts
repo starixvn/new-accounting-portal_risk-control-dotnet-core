@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ManageProductStatusCriteria } from '../filter/filter.model';
 import { GridModel } from './grid.model';
 import { GridService } from './grid.service';
@@ -11,15 +11,20 @@ import { MessageType, ToastService } from 'nap-components/toast';
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnChanges {
+export class GridComponent implements OnChanges, OnInit {
   @Input() criteria: ManageProductStatusCriteria | undefined;
   gridData: GridModel[] | undefined;
+  hasHostPermission: boolean = false;
 
   constructor(private readonly gridService: GridService,
     private readonly historyService: HistoryService,
     private readonly confirmationService: ConfirmationService,
     private readonly toastService: ToastService
   ) { }
+
+  ngOnInit(): void {
+    this.gridService.getHostPermission().subscribe(hostPermission => this.hasHostPermission = hostPermission);
+  }
 
   ngOnChanges(): void {
     this.getGridData();
@@ -31,7 +36,7 @@ export class GridComponent implements OnChanges {
 
   enableSport(sport: number, productId: number): void {
     this.confirmationService.openContent('Are you sure you want to enable this sport?', () => {
-      this.gridService.enableSport(sport).subscribe(result => {
+      this.gridService.enableSport(sport, productId).subscribe(result => {
         if (result.statusCode !== 200) {
           this.toastService.activate('Oops! We couldn’t enable this sport. Please try again.', MessageType.Danger);
           return;

@@ -127,8 +127,21 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
         {
             { "Authentication", configuration.GetSection("UmSportApiKey").Value ?? string.Empty }
         };
-        return await richHttpClient.PostJsonWithOption<ApiResultModel>(configuration.GetSection("UmSportApi").Value, request,
+        var result = await richHttpClient.PostJsonWithOption<ApiResultModel>(configuration.GetSection("UmSportApi").Value, request,
             options);
+        var logCommand = new InsertProductActionLogCommand
+        {
+            ApiResponseMessage = JsonConvert.SerializeObject(result),
+            InsertTime = DateTime.Now,
+            ApiJsonBodyInfo = JsonConvert.SerializeObject(request),
+            ApiResponseStatusCode = result.StatusCode,
+            SportType = criteria.SportType,
+            ProductId = criteria.ProductId,
+            CreatedBy = napSession.UserId,
+            ActionType = result is { StatusCode: 200, ErrorCode: 0 } ? "Enable" : "Disable"
+        };
+        await repository.ExecuteAsync(logCommand);
+        return result;
     }
 
     private static string GetReachedRule(IEnumerable<MonitorCriteriaModel> criterias, int ruleId)

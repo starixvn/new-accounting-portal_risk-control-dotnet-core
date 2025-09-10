@@ -27,7 +27,8 @@
         <td>{{item.sportName}}</td>
         <td>{{item.lastUpdated | date: 'MM/dd/yyyy hh:mm:ss aa'}}</td>
         <td *ngIf="item.status === 'Enable'" class="text-center">Enable</td>
-        <td *ngIf="item.status === 'Disable'" class="text-center link" (click)="enableSport(item.sportType, item.productId)">Disable</td>
+        <td *ngIf="item.status === 'Disable' && hasHostPermission" class="text-center link" (click)="enableSport(item.sportType, item.productId)">Disable</td>
+        <td *ngIf="item.status === 'Disable' && !hasHostPermission" class="text-center">Disable</td>
         <td class="text-center">
             <i class="fa fa-history fa-2x" title="View History" aria-hidden="true" (click)="onShowHistory(item)"></i>
         </td>

@@ -16,7 +16,11 @@ export class GridService {
     return this.httpService.post(`${CommonConstants.API}manage-product-status/data`, criteria);
   }
 
-  enableSport(sport: number): Observable<ApiResultModel> {
-    return this.httpService.post(`${CommonConstants.API}manage-product-status/enable-sport`, { sportType: sport });
+  enableSport(sport: number, productId: number): Observable<ApiResultModel> {
+    return this.httpService.post(`${CommonConstants.API}manage-product-status/enable-sport`, { sportType: sport, productId: productId });
+  }
+
+  public getHostPermission(): Observable<boolean> {
+    return this.httpService.post(`${CommonConstants.API}host-permission`);
   }
 }
