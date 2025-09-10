@@ -28,7 +28,12 @@
         <td>{{item.insertDate | date: 'MM/dd/yyyy hh:mm:ss aa'}}</td>
         <td>{{productName}}</td>
         <td>{{sportName}}</td>
-        <td>{{item.actionType}}</td>
+        <td class="text-center">
+          <div style="display: inline-flex; align-items: center; justify-content: center; gap: 4px">
+            <span>{{item.actionType}}</span>
+            <i class="fa" [ngClass]="{'fa-times-circle fail': !item.isSuccess, 'fa-check-circle success': item.isSuccess}" aria-hidden="true"></i>
+          </div>
+        </td>
         <td>{{item.description}}</td>
         <td class="text-center">{{item.proceededBy}}</td>
     </tr>

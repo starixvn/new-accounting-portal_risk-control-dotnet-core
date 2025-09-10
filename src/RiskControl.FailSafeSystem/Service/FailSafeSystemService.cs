@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
 using Fanex.NAP.Client;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using RiskControl.FailSafeSystem.Constants;
 using RiskControl.FailSafeSystem.Criteria;
 using RiskControl.FailSafeSystem.Model;
 using RiskControl.Services;
+using RiskControl.WebApiClient;
 
 namespace RiskControl.FailSafeSystem.Service;
 
@@ -27,9 +30,16 @@ public interface FailSafeSystemService
     Task<IEnumerable<ManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria);
 
     Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria);
+
+    Task<ApiResultModel> EnableSport(EnableSportCriteria criteria);
 }
 
-public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper mapper, INapSession napSession, LogDataService logData) : FailSafeSystemService
+public class FailSafeSystemServiceImp(IDynamicRepository repository,
+    IMapper mapper,
+    INapSession napSession,
+    LogDataService logData,
+    RichHttpClient richHttpClient,
+    IConfiguration configuration) : FailSafeSystemService
 {
     public Task<IEnumerable<RuleTitleModel>> GetRuleTitles()
     {
@@ -90,7 +100,35 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper map
 
     public async Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria)
     {
-        return await repository.FetchAsync<ProductStatusHistoryModel>(criteria);
+        var data = await repository.FetchAsync<ProductStatusHistoryModel>(criteria);
+        var defaultApiResult = new ApiResultModel
+        {
+            ErrorCode = 0,
+            StatusCode = 200,
+            ErrorDescription = "Success"
+        };
+        data.ToList().ForEach(item =>
+        {
+            var apiResult = SafeDeserialize<ApiResultModel>(item.ApiResponseMessage, defaultApiResult);
+            item.IsSuccess = apiResult is { ErrorCode: 0, StatusCode: 200 };
+            item.Description = apiResult.ErrorDescription;
+        });
+        return data;
+    }
+
+    public async Task<ApiResultModel> EnableSport(EnableSportCriteria criteria)
+    {
+        var request = new UmSportRequest
+        {
+            SportTypeId = criteria.SportType,
+            Seq = criteria.SportType.ToString()
+        };
+        var options = new Dictionary<string, string>
+        {
+            { "Authentication", configuration.GetSection("UmSportApiKey").Value ?? string.Empty }
+        };
+        return await richHttpClient.PostJsonWithOption<ApiResultModel>(configuration.GetSection("UmSportApi").Value, request,
+            options);
     }
 
     private static string GetReachedRule(IEnumerable<MonitorCriteriaModel> criterias, int ruleId)
@@ -98,5 +136,17 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository, IMapper map
         var data = criterias.Where(r => r.RuleId == ruleId)
             .Select(s => $"{s.CriteriaValue} {s.PostFix}");
         return !data.Any() ? string.Empty : string.Join('|', data);
+    }
+
+    public static T SafeDeserialize<T>(string json, T defaultValue = default)
+    {
+        try
+        {
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+        catch (JsonException)
+        {
+            return defaultValue;
+        }
     }
 }

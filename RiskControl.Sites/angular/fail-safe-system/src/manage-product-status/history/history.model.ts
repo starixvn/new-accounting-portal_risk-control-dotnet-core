@@ -2,6 +2,7 @@ export interface HistoryModel {
     insertDate: Date;
     actionType: string;
     proceededBy: string;
+    isSuccess: boolean;
     description: string;
 }
 

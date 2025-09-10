@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace RiskControl.WebApiClient;
 
 using System;
@@ -17,6 +19,8 @@ public interface RichHttpClient
     Task Post(string requestUri, object postData);
 
     Task<T> PostJson<T>(string requestUri, object postData) where T : class;
+
+    Task<T> PostJsonWithOption<T>(string requestUri, object postData, Dictionary<string, string> options) where T : class;
 
     Task<Stream> Download(string requestUri);
 }
@@ -73,6 +77,20 @@ public class RichHttpClientImp : RichHttpClient
 
     public async Task<T> PostJson<T>(string requestUri, object postData) where T : class
     {
+        var jsonRequest = JsonConvert.SerializeObject(postData);
+        var httpLog = new HttpLog(requestUri, jsonRequest);
+        using var stringContent = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+        using var response = await JsonHttpClient.PostAsync(requestUri, stringContent).ConfigureAwait(false);
+        return await TryReadObjectFromResponse<T>(response, httpLog).ConfigureAwait(false);
+    }
+
+    public async Task<T> PostJsonWithOption<T>(string requestUri, object postData, Dictionary<string, string> options) where T : class
+    {
+        foreach (var option in options)
+        {
+            JsonHttpClient.DefaultRequestHeaders.Remove(option.Key);
+            JsonHttpClient.DefaultRequestHeaders.Add(option.Key, option.Value);
+        }
         var jsonRequest = JsonConvert.SerializeObject(postData);
         var httpLog = new HttpLog(requestUri, jsonRequest);
         using var stringContent = new StringContent(jsonRequest, Encoding.UTF8, "application/json");

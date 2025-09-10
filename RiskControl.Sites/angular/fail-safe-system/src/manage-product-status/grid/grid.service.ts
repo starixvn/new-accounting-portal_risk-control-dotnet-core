@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from 'nap-components/http';
 import { ManageProductStatusCriteria } from '../filter/filter.model';
 import { Observable } from 'rxjs';
-import { GridModel } from './grid.model';
+import { ApiResultModel, GridModel } from './grid.model';
 import { CommonConstants } from '../../common/constants';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class GridService {
     return this.httpService.post(`${CommonConstants.API}manage-product-status/data`, criteria);
   }
 
-  enableSport(sport: number): Observable<void> {
+  enableSport(sport: number): Observable<ApiResultModel> {
     return this.httpService.post(`${CommonConstants.API}manage-product-status/enable-sport`, { sportType: sport });
   }
 }

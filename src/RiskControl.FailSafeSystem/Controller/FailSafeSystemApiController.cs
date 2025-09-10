@@ -1,6 +1,7 @@
 ﻿using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.FailSafeSystem.Criteria;
+using RiskControl.FailSafeSystem.Model;
 using RiskControl.FailSafeSystem.Service;
 using RiskControl.Model;
 using RiskControl.WinLossLimitControl.Services;
@@ -93,8 +94,9 @@ public class FailSafeSystemApiController(FailSafeSystemService service, Authoriz
 
     [Route("manage-product-status/enable-sport")]
     [HttpPost]
-    public IActionResult EnableSport(EnableSportCriteria criteria)
+    public async Task<IActionResult> EnableSport(EnableSportCriteria criteria)
     {
-        return Ok();
+        var data = await service.EnableSport(criteria);
+        return Ok(data);
     }
 }

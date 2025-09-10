@@ -143,7 +143,7 @@ public class FailSafeSystemApiControllerUnitTests
         var expectedData = controller.EnableSport(new EnableSportCriteria());
 
         // Assert  
-        Assert.IsType<OkResult>(expectedData);
+        await service.Received().EnableSport(Arg.Compat.Any<EnableSportCriteria>());
     }
 
     [Fact]

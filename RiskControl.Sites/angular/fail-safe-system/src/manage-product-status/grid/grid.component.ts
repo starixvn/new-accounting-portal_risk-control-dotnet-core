@@ -29,12 +29,21 @@ export class GridComponent implements OnChanges {
     this.historyService.show(item.productName, item.productId, item.sportType, item.sportName);
   }
 
-  enableSport(sport: number): void {
+  enableSport(sport: number, productId: number): void {
     this.confirmationService.openContent('Are you sure you want to enable this sport?', () => {
-      this.gridService.enableSport(sport).subscribe(() => {
+      this.gridService.enableSport(sport).subscribe(result => {
+        if (result.statusCode !== 200) {
+          this.toastService.activate('Oops! We couldn’t enable this sport. Please try again.', MessageType.Danger);
+          return;
+        }
         this.toastService.activate('The Sport has been enabled successfully!!!', MessageType.Success);
+        this.gridData?.forEach(item => {
+          if (item.productId === productId && item.sportType === sport) {
+            item.status = 'Enable';
+          }
       });
     });
+  });
   }
 
   private getGridData(): void {

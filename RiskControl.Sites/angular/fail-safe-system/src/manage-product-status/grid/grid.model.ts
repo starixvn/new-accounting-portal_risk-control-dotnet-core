@@ -6,3 +6,9 @@ export interface GridModel {
     lastUpdated: Date;
     status: string;
 }
+
+export interface ApiResultModel {
+    statusCode: number;
+    errorCode: number;
+    errorDescription: string;
+}
