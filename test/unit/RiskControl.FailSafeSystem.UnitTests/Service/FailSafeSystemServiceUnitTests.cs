@@ -175,7 +175,7 @@ public class FailSafeSystemServiceUnitTests
 
         // Assert
         Assert.Equal(2, actualResults.Count());
-        Assert.Equal("Disable", actualResults.First().ActionType);
+        Assert.Equal("Disabled", actualResults.First().ActionType);
         Assert.Equal("starix1", actualResults.ElementAt(1).ProceededBy);
     }
 

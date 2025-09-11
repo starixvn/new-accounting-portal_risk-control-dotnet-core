@@ -147,14 +147,18 @@ public static class DataHelper
             ProductId = 3,
             ProductName = "Number Game",
             Status = "Disable",
-            LastUpdated = new DateTime(2025, 08, 26)
+            LastUpdated = new DateTime(2025, 08, 26),
+            LastActionType = "Enable",
+            LastAPIResponseMessage = "Data"
         },
         new()
         {
             ProductId = 4,
             ProductName = "SLI Live Casino",
             Status = "Disable",
-            LastUpdated = new DateTime(2025, 08, 26)
+            LastUpdated = new DateTime(2025, 08, 26),
+            LastActionType = "Enable",
+            LastAPIResponseMessage = "Data"
         }
     };
 

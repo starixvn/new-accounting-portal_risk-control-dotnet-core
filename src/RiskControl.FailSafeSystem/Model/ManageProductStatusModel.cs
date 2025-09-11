@@ -12,5 +12,9 @@ public class ManageProductStatusModel
 
     public DateTime? LastUpdated { get; set; }
 
+    public string LastActionType { get; set; }
+
+    public string LastAPIResponseMessage { get; set; }
+
     public string Status { get; set; }
 }

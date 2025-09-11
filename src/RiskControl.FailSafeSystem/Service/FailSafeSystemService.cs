@@ -41,6 +41,12 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
     RichHttpClient richHttpClient,
     IConfiguration configuration) : FailSafeSystemService
 {
+    private readonly ApiResultModel DefaultApiResult = new()
+    {
+        ErrorCode = 0,
+        ErrorDescription = "Success"
+    };
+
     public Task<IEnumerable<RuleTitleModel>> GetRuleTitles()
     {
         return repository.FetchAsync<RuleTitleModel>(new RuleTitleCriteria());
@@ -95,23 +101,25 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
 
     public async Task<IEnumerable<ManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria)
     {
-        return await repository.FetchAsync<ManageProductStatusModel>(criteria);
+        var result = await repository.FetchAsync<ManageProductStatusModel>(criteria);
+        result.ToList().ForEach(item =>
+        {
+            var apiResult = SafeDeserialize(item.LastAPIResponseMessage, DefaultApiResult);
+            item.Status = GetStatus(apiResult, item.LastActionType);
+        });
+        return result;
     }
 
     public async Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria)
     {
         var data = await repository.FetchAsync<ProductStatusHistoryModel>(criteria);
-        var defaultApiResult = new ApiResultModel
-        {
-            ErrorCode = 0,
-            StatusCode = 200,
-            ErrorDescription = "Success"
-        };
         data.ToList().ForEach(item =>
         {
-            var apiResult = SafeDeserialize<ApiResultModel>(item.ApiResponseMessage, defaultApiResult);
-            item.IsSuccess = apiResult is { ErrorCode: 0, StatusCode: 200 };
+            var apiResult = SafeDeserialize(item.ApiResponseMessage, DefaultApiResult);
             item.Description = apiResult.ErrorDescription;
+            item.ActionType = $"{item.ActionType}d";
+            item.IsSuccess = item.ActionType == "Enabled" ?
+                apiResult is { ErrorCode: 0 or 1011 } : apiResult is { ErrorCode: 0 };
         });
         return data;
     }
@@ -138,10 +146,20 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
             SportType = criteria.SportType,
             ProductId = criteria.ProductId,
             CreatedBy = napSession.UserId,
-            ActionType = result is { StatusCode: 200, ErrorCode: 0 } ? "Enable" : "Disable"
+            ActionType = result is { ErrorCode: 0 or 1011 } ? "Enable" : "Disable"
         };
         await repository.ExecuteAsync(logCommand);
         return result;
+    }
+
+    private static string GetStatus(ApiResultModel model, string actionType)
+    {
+        if (actionType == "Enable")
+        {
+            return model is { ErrorCode: 0 or 1011 } ? "Enabled" : "Disabled";
+        }
+
+        return model is { ErrorCode: 0 } ? "Disabled" : "Enabled";
     }
 
     private static string GetReachedRule(IEnumerable<MonitorCriteriaModel> criterias, int ruleId)

@@ -37,16 +37,17 @@ export class GridComponent implements OnChanges, OnInit {
   enableSport(sport: number, productId: number): void {
     this.confirmationService.openContent('Are you sure you want to enable this sport?', () => {
       this.gridService.enableSport(sport, productId).subscribe(result => {
-        if (result.statusCode !== 200) {
-          this.toastService.activate('Oops! We couldn’t enable this sport. Please try again.', MessageType.Danger);
-          return;
+        if (result.errorCode === 0 || result.errorCode === 1011) {
+          this.toastService.activate('The Sport has been enabled successfully!!!', MessageType.Success);
+          this.gridData?.forEach(item => {
+            if (item.productId === productId && item.sportType === sport) {
+              item.status = 'Enabled';
+            }
+          });
         }
-        this.toastService.activate('The Sport has been enabled successfully!!!', MessageType.Success);
-        this.gridData?.forEach(item => {
-          if (item.productId === productId && item.sportType === sport) {
-            item.status = 'Enable';
-          }
-      });
+        else {
+          this.toastService.activate('Oops! We couldn’t enable this sport. Please try again.', MessageType.Danger);
+        }
     });
   });
   }
