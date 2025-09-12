@@ -1,0 +1,18 @@
+{
+    "/Login": {
+        "target": "https://localhost:44383/",
+        "secure": false
+    },
+    "/Entities": {
+        "target": "https://localhost:44383/",
+        "secure": false
+    },
+    "/api": {
+        "target": "https://localhost:44383/",
+        "secure": false
+    },
+    "/state-api": {
+        "target": "https://localhost:44383/",
+        "secure": false
+    }
+}

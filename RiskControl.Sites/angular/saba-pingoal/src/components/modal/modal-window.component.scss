@@ -1,0 +1,15 @@
+﻿@import '~nap-theme/scss/mixins';
+:host ::ng-deep .modal {
+    .modal-header {
+        background: #5a7dc1;
+        color: white;
+        @include gradient-y(#486cb8, #5a7dc1);
+        .modal-title {
+            font-weight: bold;
+        }
+        .close {
+            color: white;
+            opacity: 1;
+        }
+    }
+}

@@ -3,7 +3,15 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [
+      "jasmine",
+      "jquery",
+      "node",
+      "numeral"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
   },
   "files": [
     "src/main.ts",
