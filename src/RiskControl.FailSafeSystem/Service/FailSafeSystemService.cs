@@ -122,7 +122,7 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
             item.Description = apiResult.ErrorDescription;
             item.ActionType = $"{item.ActionType}d";
             item.IsSuccess = item.ActionType == "Enabled" ?
-                apiResult is { ErrorCode: 0 or 1011 } : apiResult is { ErrorCode: 0 };
+                apiResult is { ErrorCode: 0 or 1012 } : apiResult is { ErrorCode: 0 or 1011 };
         });
         return data;
     }
@@ -149,7 +149,7 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
             SportType = criteria.SportType,
             ProductId = criteria.ProductId,
             CreatedBy = napSession.UserId,
-            ActionType = result is { ErrorCode: 0 or 1011 } ? "Enable" : "Disable"
+            ActionType = result is { ErrorCode: 0 or 1012 } ? "Enable" : "Disable"
         };
         await repository.ExecuteAsync(logCommand);
         return result;
@@ -159,10 +159,10 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
     {
         if (actionType == "Enable")
         {
-            return model is { ErrorCode: 0 or 1011 } ? "Enabled" : "Disabled";
+            return model is { ErrorCode: 0 or 1012 } ? "Enabled" : "Disabled";
         }
 
-        return model is { ErrorCode: 0 } ? "Disabled" : "Enabled";
+        return model is { ErrorCode: 0 or 1011 } ? "Disabled" : "Enabled";
     }
 
     private static string GetReachedRule(IEnumerable<MonitorCriteriaModel> criterias, int ruleId)
