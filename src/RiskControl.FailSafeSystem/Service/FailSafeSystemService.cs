@@ -107,7 +107,10 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
             var apiResult = SafeDeserialize(item.LastAPIResponseMessage, DefaultApiResult);
             item.Status = GetStatus(apiResult, item.LastActionType);
         });
-        return result;
+        return result.OrderBy(o => o.Status)
+            .ThenByDescending(o => o.LastUpdated)
+            .ThenBy(o => o.ProductId)
+            .ThenBy(o => o.SportType);
     }
 
     public async Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria)

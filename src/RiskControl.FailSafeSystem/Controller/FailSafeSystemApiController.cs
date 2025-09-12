@@ -1,7 +1,6 @@
 ﻿using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.FailSafeSystem.Criteria;
-using RiskControl.FailSafeSystem.Model;
 using RiskControl.FailSafeSystem.Service;
 using RiskControl.Model;
 using RiskControl.WinLossLimitControl.Services;
