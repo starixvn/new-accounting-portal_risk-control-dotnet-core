@@ -80,6 +80,7 @@ public static class ServiceCollectionExtensions
         services.RegisterProgressiveJackpotService();
         services.RegisterWinLimitControlServices();
         services.RegisterFailSafeSystemServices();
+        services.RegisterSabaPinGoalServices();
         services.AddSingleton(CreateMapper);
     }
 

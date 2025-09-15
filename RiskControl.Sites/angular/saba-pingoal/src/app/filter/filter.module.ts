@@ -13,6 +13,7 @@ import { ModalModule } from '../../components/modal';
 import { FilterComponent } from './filter.component';
 import { FilterService } from './filter.service';
 import { ConfirmationModule } from 'nap-components/confirmation';
+import { UserNameSuggestionModule } from './user-name-suggestion';
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import { ConfirmationModule } from 'nap-components/confirmation';
         ModalModule.forRoot(),
         DropdownTypeaheadModule,
         DropdownSelectModule,
-        ConfirmationModule.forRoot()
+        ConfirmationModule.forRoot(),
+        UserNameSuggestionModule
     ],
     declarations: [
         FilterComponent

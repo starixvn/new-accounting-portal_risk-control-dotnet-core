@@ -1,0 +1,18 @@
+﻿<div class="search-choice" *ngFor="let selectedUserName of selectedUserNames; let i = index" [class.active]="selectedUserName.isActive"
+    (click)="onSelectClick(selectedUserName, $event)">
+    {{selectedUserName.userName}}
+    <i class="fa fa-times" aria-hidden="true" (click)="onCloseClick(i)"></i>
+</div>
+<div class="search-field">
+    <input #hiddenInput class="hidden" tabindex="-1" aria-hidden="true" (keydown)="onHiddenKeydown($event)" />
+    <input #input type="text" placeholder="Search All" [(ngModel)]="userName" (ngModelChange)="onModelChange($event)" (keydown)="onInputKeydown($event)"
+        (focus)="onInputFocus()" (paste)="onInputPaste()" />
+</div>
+<div class="dropdown" [class.show]="hasSuggestion">
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a *ngFor="let userName of suggestedUserNames; let i = index" class="dropdown-item" [class.active]="i === suggestionIndex"
+            href="javascript:;" (click)="onItemClick(userName)">
+            {{userName}}
+        </a>
+    </div>
+</div>

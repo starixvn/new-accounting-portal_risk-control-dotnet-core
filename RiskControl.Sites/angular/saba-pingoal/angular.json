@@ -33,15 +33,20 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+               "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/numeral/min/numeral.min.js",
+              "src/libs/fanex-grid/fanex.grid.js",
+              "src/libs/fanex-grid/fanex.pagination.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -101,7 +106,12 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/numeral/min/numeral.min.js",
+              "src/libs/fanex-grid/fanex.grid.js",
+              "src/libs/fanex-grid/fanex.pagination.js"
+            ]
           }
         }
       }

@@ -4,8 +4,8 @@
         <div class="nap-group">
           <label>Sport</label>
           <div class="nap-control">
-            <ngx-dropdown-treeview #productDropdownTreeview [items]="productTreeViewItems"
-              [config]="productTreeviewConfig" (selectedChange)="onProductChange($event)">
+            <ngx-dropdown-treeview #sportDropdownTreeview [items]="sportTreeViewItems"
+              [config]="sportTreeviewConfig" (selectedChange)="onSportChange($event)">
             </ngx-dropdown-treeview>
           </div>
         </div>
@@ -45,8 +45,7 @@
         <div class="nap-group">
           <label>League Group</label>
           <div class="nap-control">
-            <ngx-dropdown-treeview #columnDropdownTreeview [items]="columnTreeViewItems"
-              (selectedChange)="onColumnChange($event)"></ngx-dropdown-treeview>
+            <ngx-dropdown-treeview #leagueGroupTreeview [items]="leagueGroupTreeViewItems"></ngx-dropdown-treeview>
           </div>
         </div>
       </div>
@@ -60,7 +59,7 @@
           </div>
         </div>
       </div>
-      <div class="nap-col nap-col-exclude-test">
+      <div class="nap-col nap-col-exact-matching ml-108">
         <div class="form-check nap-form-checkbox">
           <label class="form-check-label">
             <input name="excludeTestCheckbox" type="checkbox" class="form-check-input" [(ngModel)]="isExcludeTest"
@@ -91,7 +90,7 @@
           </div>
         </div>
       </div>
-      <div class="nap-col nap-col-exclude-test">
+      <div class="nap-col nap-col-exclude-test ml-108">
         <div class="form-check nap-form-checkbox">
           <label class="form-check-label">
             <input name="excludeTestCheckbox" type="checkbox" class="form-check-input" [(ngModel)]="isExcludeTest"
@@ -150,8 +149,7 @@
       <div class="nap-group">
         <label>Report by</label>
         <div class="nap-control">
-          <nap-dropdown-select [items]="reportTypeSelectItems" [value]="selectedReportType"
-            (valueChange)="onReportTypeChange($event)">
+          <nap-dropdown-select [items]="reportTypeSelectItems" [value]="selectedReportType">
           </nap-dropdown-select>
         </div>
       </div>
@@ -159,7 +157,6 @@
     </div>
     <div class="row">
       <div class="nap-col col-buttons blocks">
-        <label>&nbsp;</label>
         <button type="button" class="btn btn-primary" (click)="onGenerateClick()">
           GENERATE
         </button>

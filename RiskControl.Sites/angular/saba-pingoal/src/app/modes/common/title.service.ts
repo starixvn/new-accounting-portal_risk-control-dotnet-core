@@ -2,7 +2,6 @@
 import * as _ from 'lodash';
 import { DATE_CONFIG } from '../../common';
 import { ModeContext } from '../mode-context';
-import { FilterModelWrapper } from '../../filter/filter.model';
 
 enum TitleDateFormat {
   FromTo,
@@ -69,8 +68,7 @@ export class TitleService {
     if (filterModel.currency.length > 1) {
       return 'Original currency';
     } else {
-      const filterModelWrapper = new FilterModelWrapper(filterModel);
-      return filterModelWrapper.getCurrencyName(filterModel.currency[0]);
+      return '';
     }
     return '';
   }

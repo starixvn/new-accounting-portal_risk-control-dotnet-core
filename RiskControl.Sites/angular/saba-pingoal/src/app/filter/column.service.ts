@@ -27,14 +27,10 @@ export class ColumnService {
     return columns;
   }
 
-  buildColumnTreeViewItems(columns: Column[], selectedColumns: Column[]): TreeviewItem[] {
+  buildColumnTreeViewItems(columns: Column[]): TreeviewItem[] {
     let uncheckedColumns: Column[] = [];
 
-    if (selectedColumns === null || selectedColumns.length === 0) {
-      uncheckedColumns = [FilterConfig.gridColumns.totalWins, FilterConfig.gridColumns.totalRefund, FilterConfig.gridColumns.turnover];
-    } else {
-      uncheckedColumns = _.differenceWith(columns, selectedColumns, _.isEqual);
-    }
+    uncheckedColumns = [FilterConfig.gridColumns.totalWins, FilterConfig.gridColumns.totalRefund, FilterConfig.gridColumns.turnover];
 
     const treeviewItems: TreeviewItem[] = [];
     columns.forEach(column => {

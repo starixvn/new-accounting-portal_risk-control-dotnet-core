@@ -6,13 +6,17 @@ import { SelectItem } from 'nap-components/dropdown-select';
 import { HttpService } from 'nap-components/http';
 import { Helper } from 'nap-components/helper';
 import {
-  Product, GameType, Device, BaseCurrency, Permission,
-  Currency, CompareType, TimePeriod, SiteGroupModel,
-  CompanyModel, SportModel
+  Device, BaseCurrency,
+  Currency, TimePeriod,
+  CompanyModel, SportModel,
+  LeagueGroupModel,
+  ReportType
 } from './filter.model';
 import { FilterConfig } from './filter.config';
 import { HttpParams } from '@angular/common/http';
 import { ApiConstants } from 'app/common/constants';
+import { FilterHelper } from './filter-helper';
+import { value } from 'numeral';
 
 interface VisibleSelectItem extends SelectItem {
   visible: boolean;
@@ -23,11 +27,6 @@ export class FilterService {
   constructor(
     private readonly httpService: HttpService
   ) { }
-
-  getPermission(): Observable<Permission> {
-    const url = 'state-api/NonSportsGamesStatistics/Permission/Query';
-    return this.httpService.get<Permission>(url);
-  }
 
   getDevices(): Observable<Device[]> {
     const url = 'NonSportsGamesStatistics/Device/Query';
@@ -42,8 +41,8 @@ export class FilterService {
     return this.httpService.post<BaseCurrency[]>(url, options)
       .map(responseCurrencies => {
         let baseCurrencies: BaseCurrency[] = [
-          { exchangeId: FilterConfig.currencyAllValue, currency: 'All' },
-          { exchangeId: FilterConfig.currencyBaseRM, currency: 'Base RM' }
+          { exchangeId: FilterConfig.currencyAllValue, currency: 'All', isTest: false },
+          { exchangeId: FilterConfig.currencyBaseRM, currency: 'Base RM', isTest: false }
         ];
         baseCurrencies = baseCurrencies.concat(responseCurrencies);
         const testCurrencyIds = [20, 27, 28];
@@ -85,5 +84,23 @@ export class FilterService {
 
   getSports(): Observable<SportModel[]> {
     return this.httpService.post<SportModel[]>(`${ApiConstants.FILTER}sports`);
+  }
+
+  getLeagueGroups(): Observable<LeagueGroupModel[]> {
+    return this.httpService.post<LeagueGroupModel[]>(`${ApiConstants.FILTER}league-groups`);
+  }
+
+  getReportSelectItems(): VisibleSelectItem[] {
+    const reportSelectItems: SelectItem[] = [
+      { text: 'Daily', value: ReportType.Daily },
+      { text: 'Product', value: ReportType.Product },
+    ];
+    return reportSelectItems.map(item => {
+      return {
+        text: item.text,
+        value: item.value,
+        visible: true
+      } as VisibleSelectItem;
+    });
   }
 }

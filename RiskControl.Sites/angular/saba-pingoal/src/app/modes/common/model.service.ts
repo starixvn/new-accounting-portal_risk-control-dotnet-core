@@ -29,18 +29,10 @@ export class ModelService {
             username: filterModel.userName,
             site: filterModel.sites.join(','),
             betType: filterModel.betTypes.join(','),
-            leagueId: filterModel.productIds.join(',') === ProductConstants.VIRTUAL_SPORT_5.toString() ?
-                filterModel.leagueIds.map(l => l.leagueId).join(',')
-                : filterModel.leagueIds.map(l => `${l.leagueId}-${l.betType}`).join(','),
             sportType: filterModel.sportTypes.join(','),
             currency: filterModel.currency.join(','),
             device: filterModel.devices.join(','),
             excludeTest: filterModel.isExcludeTest,
-            viewByInteger: filterModel.isViewByInteger,
-            totalBetType: filterModel.totalBetType,
-            totalBetValue: filterModel.totalBetValue ?? 0,
-            gameIncomeType: filterModel.gameIncomeType,
-            gameIncomeValue: filterModel.gameIncomeValue ?? 0,
             removalColumns: filterModel.removalColumns,
             sortDirection: filterModel.sortDirection,
             sortColumnName: filterModel.sortColumnName,
@@ -55,7 +47,10 @@ export class ModelService {
             custId: filterModel.custId,
             headline: filterModel.headline,
             roleId: filterModel.roleId,
-            excludeNoData: filterModel.excludeNoData
+            excludeNoData: filterModel.excludeNoData,
+            leagueId: '1',
+        
+            
         };
         const model: QueryModel = Helper.extend(baseModel, this.createCriteria(filterModel));
         return model;

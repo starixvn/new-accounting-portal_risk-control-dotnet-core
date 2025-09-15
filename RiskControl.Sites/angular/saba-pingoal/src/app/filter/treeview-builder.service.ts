@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { TreeviewItem } from 'ngx-treeview';
-import { CompanyModel, Currency, SportModel } from './filter.model';
+import { CompanyModel, Currency, Device, LeagueGroupModel, SportModel } from './filter.model';
 
 @Injectable()
 export class TreeViewBuilderService {
@@ -36,15 +36,26 @@ export class TreeViewBuilderService {
     }));
   }
 
+  buildLeagueGroupTreeViewItems(leagueGroups: LeagueGroupModel[]): TreeviewItem[] {
+    if (leagueGroups.length === 0) {
+      return [];
+    }
+    return leagueGroups.map(leagueGroup => new TreeviewItem({
+      text: leagueGroup.groupName,
+      value: leagueGroup.groupId,
+      checked: true
+    }));
+  }
+
   buildSportTreeViewItems(sports: SportModel[]): TreeviewItem[] {
     if (sports.length === 0) {
       return [];
     }
-    const grouped = _.groupBy(sports, sport => `${sport.sportType}-${sport.sportName}`);
+    const grouped = _.groupBy(sports, sport => `${sport.sportType}*${sport.sportName}`);
     const items: TreeviewItem[] = [];
     for (const [sportType, group] of Object.entries(grouped)) {
       items.push(new TreeviewItem({
-        text: sportType.split('-')[1],
+        text: sportType.split('*')[1],
         value: sportType,
         checked: true,
         children: group.map(sport => new TreeviewItem({
@@ -55,6 +66,44 @@ export class TreeViewBuilderService {
       }));
     }
     return items;
+  }
+
+  buildDeviceTreeViewItems(devices: Device[]): TreeviewItem[] {
+    if (_.isNil(devices)) {
+      return [];
+    }
+
+    const mobileTreeItem = new TreeviewItem({ text: 'Mobile', value: undefined });
+    const nonMobileTreeItem = new TreeviewItem({ text: 'Non-mobile', value: undefined });
+    const uncategorizedTreeItem = new TreeviewItem({ text: 'Uncategorized', value: undefined });
+    devices.forEach(device => {
+      const item = new TreeviewItem({ text: device.fullName, value: device, checked: true });
+      let groupTreeviewItem: TreeviewItem;
+      switch (device.groupName) {
+        case 'Mobile':
+          groupTreeviewItem = mobileTreeItem;
+          break;
+        case 'Non-mobile':
+          groupTreeviewItem = nonMobileTreeItem;
+          break;
+        default:
+          groupTreeviewItem = uncategorizedTreeItem;
+          break;
+      }
+
+      if (_.isNil(groupTreeviewItem.children)) {
+        groupTreeviewItem.children = [item];
+      } else {
+        groupTreeviewItem.children.push(item);
+      }
+    });
+
+    const treeItems = [
+      mobileTreeItem,
+      nonMobileTreeItem,
+      uncategorizedTreeItem
+    ];
+    return treeItems.filter(item => !_.isNil(item.children) && item.children.length > 0);
   }
 
   private CreateSiteGroupTree(sites: CompanyModel[], siteName: string, siteId: number): TreeviewItem {

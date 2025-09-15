@@ -20,11 +20,6 @@ export interface QueryModel {
     currency: string;
     device: string;
     excludeTest: boolean;
-    viewByInteger: boolean;
-    totalBetType: number;
-    totalBetValue: number;
-    gameIncomeType: number;
-    gameIncomeValue: number;
     removalColumns: string[];
     sortDirection: string;
     sortColumnName: string;

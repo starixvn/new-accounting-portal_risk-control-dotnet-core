@@ -1,5 +1,4 @@
 ﻿import * as moment from 'moment';
-import { CasinoType } from '../common';
 
 export enum ReportType {
     Hourly,
@@ -14,65 +13,9 @@ export enum ReportType {
     ProductDetail
 }
 
-export enum CompareType {
-    None = 0,
-    GreaterOrEqual = 1,
-    LessOrEqual = -1
-}
-
-export enum FilterMode {
-    Normal,
-    History
-}
-
-export interface TestObject {
-    isTest: boolean;
-}
-
 export interface Column {
     text: string;
     value: string;
-}
-
-export interface Permission {
-    modes: string[];
-    products: string[];
-}
-
-export interface Product {
-    productId: number;
-    productName: string;
-    casinoType: CasinoType;
-    isSingleWallet: boolean;
-    productCategory: string;
-}
-
-export interface Site {
-    site: string;
-    orderId: number;
-    sortId: number;
-}
-export interface LicenseeModel {
-  licenseeId: number;
-  licenseeName: string;
-  groupId: number;
-}
-
-export interface SiteGroupModel {
-  groupId: number;
-  groupName: string;
-  parentId: number;
-  licenseeId: number;
-  licenseeName: string;
-  childGroups: SiteGroupModel[];
-  childItems: LicenseeModel[];
-}
-
-export interface GameType extends TestObject {
-    productId: number;
-    typeName: string;
-    typeId: number;
-    gameType: number;
 }
 
 export interface Device {
@@ -84,9 +27,10 @@ export interface Device {
 export interface BaseCurrency {
     exchangeId: number;
     currency: string;
+    isTest: boolean;
 }
 
-export interface Currency extends BaseCurrency, TestObject { }
+export interface Currency extends BaseCurrency { }
 
 export enum TimePeriod {
     Today,
@@ -101,50 +45,19 @@ export enum TimePeriod {
     LastSixMonths,
     SinceLastYear
 }
-
-export interface GameTypeModel {
-    products: Product[];
-    gameTypes: GameType[];
-}
-
-export interface GameTypeResult {
-    productIds: number[];
-    betTypes: number[];
-    leagueIds: NumberGameLeagueBetType[];
-    sportTypes: number[];
-    gameTableIds: number[];
-    sportBetTypes: SportBetType[];
-}
-
-export interface FilterCollection {
-    products: Product[];
-    gameTypes: GameType[];
-    devices: Device[];
-    currencies: Currency[];
-}
-
 export interface FilterModel {
     productIds: number[];
     userName: string;
     sites: string[];
     betTypes: number[];
-    leagueIds: NumberGameLeagueBetType[];
     sportTypes: number[];
     currency: number[];
     devices: string[];
     isExcludeTest: boolean;
-    isViewByInteger: boolean;
-    totalBetType: CompareType;
-    totalBetValue?: number;
-    gameIncomeType: CompareType;
     gameIncomeValue?: number;
-    housePTType: CompareType;
-    housePTValue?: number;
     removalColumns: string[];
     fromDate: moment.Moment;
     toDate: moment.Moment;
-    collection: FilterCollection,
-    selectedCollection: FilterCollection,
     isBaseRM: boolean,
     sportBettypes: SportBetType[];
     isExactly: boolean;
@@ -156,42 +69,9 @@ export interface FilterModel {
     excludeNoData: boolean;
 }
 
-export interface NumberGameGameType extends GameType {
-    leagueId: number;
-}
-
-export interface NumberGameLeagueBetType {
-    leagueId: number;
-    betType: number;
-}
-
-export class FilterModelWrapper {
-    constructor(
-        private readonly filterModel: FilterModel
-    ) { }
-
-    getProduct(productId: number): Product {
-        return this.filterModel.selectedCollection.products.filter(product => product.productId === productId)[0];
-    }
-
-    getCurrencyName(exchangeId: number): string {
-        if (exchangeId === -2) {
-            return 'Base USD';
-        }
-        if (exchangeId === -1) { 
-            return 'Base RM';
-        }
-        return this.filterModel.selectedCollection.currencies.filter(currency => currency.exchangeId === exchangeId)[0].currency;
-    }
-}
-
 export interface UsernameValidationModel {
     isCust: boolean;
     custId: string;
-}
-
-export interface SportGameType extends GameType {
-  sportType: number;
 }
 
 export interface SportBetType {
@@ -203,19 +83,6 @@ export interface TimeRange {
   timePeriodType: number;
   startDate: moment.Moment;
   endDate: moment.Moment;
-}
-
-export interface ProductHaveFreeBetBetTypes {
-  betTypes: GameType[];
-  freeBetBetTypes: GameType[];
-  otherBetTypes: GameType[];
-}
-
-export interface NumberGameBetTypes {
-  numberGameBetTypes: GameType[];
-  numberGameHappyFiveBetTypes: GameType[];
-  numberGameHappyFiveLinkedGamesBetTypes: GameType[];
-  otherBetTypes: GameType[];
 }
 
 export interface CompanyModel {
@@ -230,4 +97,15 @@ export interface SportModel {
   betType: number;
   sportName: string;
   betTypeName: string;
+}
+
+export interface LeagueGroupModel {
+    groupId: number;
+    groupName: string;
+}
+
+export interface Device {
+    betFrom: string;
+    fullName: string;
+    groupName: string;
 }

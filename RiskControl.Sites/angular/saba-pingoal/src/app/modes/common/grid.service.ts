@@ -23,19 +23,4 @@ export class GridService {
         const filterModel = this.modeContext.filterModel;
         return true;
     }
-
-    hasDrillDownHourly(): boolean {
-        let hasDrillDown = false;
-        const filterModel = this.modeContext.filterModel;
-        const isCurrencyBaseRM = filterModel.isBaseRM;
-        if (isCurrencyBaseRM && filterModel.productIds.length === 1) {
-            const product = filterModel.selectedCollection.products.filter(x => x.productId === filterModel.productIds[0])[0];
-            hasDrillDown = product.productId !== ProductId.FishingWorld
-             && product.productId !== ProductId.Bullfighting
-             && product.productId !== ProductId.PokerGames
-             && product.isSingleWallet;
-        }
-
-        return hasDrillDown;
-    }
 }

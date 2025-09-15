@@ -1,0 +1,3 @@
+﻿<input class="form-control" type="text" placeholder="Search All" [hidden]="isOpen" [ngModel]="text" (focus)="onFocus()" />
+<nap-user-name-suggestion #suggestion [hidden]="!isOpen" [roleId]="roleId" (complete)="onInputComplete($event)">
+</nap-user-name-suggestion>
