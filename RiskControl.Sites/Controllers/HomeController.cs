@@ -109,6 +109,13 @@ public class HomeController : Controller
     [NapAuth(FunctionKey = FunctionKeys.FailSafeSystemSetting, Policy = Constant.Policy.Read)]
     public ActionResult FailSafeSystemManageProductStatus()
     {
-        return View("~/wwwroot/manage-product-status/index.cshtml");
+    	return View("~/wwwroot/manage-product-status/index.cshtml");
+    }
+    
+    [Route("SabaPinGoal/Main/Index")]
+    [NapAuth(FunctionKey = FunctionKeys.SabaPinGoal, Policy = Constant.Policy.Read)]
+    public ActionResult SabaPinGoal()
+    {
+        return View("~/wwwroot/saba-pingoal/index.cshtml");
     }
 }

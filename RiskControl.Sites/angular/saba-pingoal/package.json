@@ -24,7 +24,7 @@
     "bootstrap": "^4.6.0",
     "cheerio": "^1.0.0-rc.1",
     "core-js": "^2.5.7",
-    "ejs": "^2.6.1",
+    "ejs": "^2.6.2",
     "font-awesome": "^4.7.0",
     "gulp": "^4.0.2",
     "jquery": "^3.6.0",
