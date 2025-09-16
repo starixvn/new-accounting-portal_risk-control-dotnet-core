@@ -15,9 +15,7 @@ export class ColumnService {
       FilterConfig.gridColumns.totalWins,
       FilterConfig.gridColumns.gameIncome,
       FilterConfig.gridColumns.gamePayout,
-      FilterConfig.gridColumns.totalRefund,
       FilterConfig.gridColumns.turnover,
-      FilterConfig.gridColumns.realTurnover,
       FilterConfig.gridColumns.grossIncome,
       FilterConfig.gridColumns.commission,
       FilterConfig.gridColumns.extraPT,
@@ -29,8 +27,6 @@ export class ColumnService {
 
   buildColumnTreeViewItems(columns: Column[]): TreeviewItem[] {
     let uncheckedColumns: Column[] = [];
-
-    uncheckedColumns = [FilterConfig.gridColumns.totalWins, FilterConfig.gridColumns.totalRefund, FilterConfig.gridColumns.turnover];
 
     const treeviewItems: TreeviewItem[] = [];
     columns.forEach(column => {

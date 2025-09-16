@@ -1,16 +1,8 @@
 ﻿import * as moment from 'moment';
 
 export enum ReportType {
-    Hourly,
     Daily,
-    Monthly,
     Product,
-    Company,
-    Currency,
-    Device,
-    Top20,
-    UserName,
-    ProductDetail
 }
 
 export interface Column {
@@ -46,27 +38,25 @@ export enum TimePeriod {
     SinceLastYear
 }
 export interface FilterModel {
-    productIds: number[];
-    userName: string;
-    sites: string[];
-    betTypes: number[];
-    sportTypes: number[];
-    currency: number[];
-    devices: string[];
-    isExcludeTest: boolean;
-    gameIncomeValue?: number;
-    removalColumns: string[];
     fromDate: moment.Moment;
     toDate: moment.Moment;
-    isBaseRM: boolean,
-    sportBettypes: SportBetType[];
+    sportBettype: string;
+    userName: string;
+    excludeTest: boolean;
+    site: string;
+    leagueGroup: string;
+    currency: string;
+    device: string;
+    isDrillDown: boolean;
+    userNameDrillDown: boolean;
+    isGrandTotal: boolean;
     isExactly: boolean;
+    reportType: number;
     sortDirection: string;
     sortColumnName: string;
-    custId: number;
-    headline: number;
-    roleId: number;
-    excludeNoData: boolean;
+    removalColumns: string[];
+    headerText: string;
+    currencyList: Currency[];
 }
 
 export interface UsernameValidationModel {
@@ -108,4 +98,20 @@ export interface Device {
     betFrom: string;
     fullName: string;
     groupName: string;
+}
+
+export class FilterModelWrapper {
+    constructor(
+        private readonly filterModel: FilterModel
+    ) { }
+
+    getCurrencyName(exchangeId: number): string {
+        if (exchangeId === -2) {
+            return 'Base USD';
+        }
+        if (exchangeId === -1) { 
+            return 'Base RM';
+        }
+        return this.filterModel.currencyList.filter(currency => currency.exchangeId === exchangeId)[0].currency;
+    }
 }

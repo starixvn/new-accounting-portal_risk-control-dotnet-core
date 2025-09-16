@@ -73,7 +73,7 @@ export class FilterComponent implements OnInit {
     maxHeight: 500
   });
   sports: SportModel[] = [];
-  selectedSports: SportModel[] = [];
+  selectedSports: string[] = [];
   sportTreeViewItems: TreeviewItem[] = [];
   leagueGroupTreeviewConfig = TreeviewConfig.create({
     hasCollapseExpand: true,
@@ -82,7 +82,7 @@ export class FilterComponent implements OnInit {
     maxHeight: 500
   });
   leagueGroups: LeagueGroupModel[] = [];
-  selectedLeagueGroups: LeagueGroupModel[] = [];
+  selectedLeagueGroups: string[] = [];
   leagueGroupTreeViewItems: TreeviewItem[] = [];
   deviceTreeviewConfig = TreeviewConfig.create({
     hasCollapseExpand: true,
@@ -109,7 +109,7 @@ export class FilterComponent implements OnInit {
     maxHeight: 500
   });
   currencies: Currency[] = [];
-  selectedCurrencies: Currency[] = [];
+  selectedCurrencies: number[] = [];
   currenciesTreeViewItems: TreeviewItem[] = [];
   date: NapDateStruct = DateHelper.convertMomentToDateStruct(DATE_CONFIG.reportDate.today);
   minStartDate: NapDateStruct = { year: 2013, month: 1, day: 1 };
@@ -128,7 +128,7 @@ export class FilterComponent implements OnInit {
   sortColumnName = '';
   sortDirection = '';
   companyTreeViewItems: TreeviewItem[] = [];
-  selectedCompanies: CompanyModel[] = [];
+  selectedCompanies: number[] = [];
   companyTreeviewConfig = TreeviewConfig.create({
     hasCollapseExpand: true,
     hasAllCheckBox: true,
@@ -146,7 +146,6 @@ export class FilterComponent implements OnInit {
   private readonly lastThreeMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(3, 'month').startOf('month');
   private readonly lastSixMonthStartDate = moment.utc(DATE_CONFIG.reportDate.yesterday).subtract(6, 'month').startOf('month');
   private readonly lastYearStartDate = moment.utc(DATE_CONFIG.reportDate.today).add(1, "day").subtract(1, 'year');
-  private numberLicensees = 0;
 
   private readonly TimeRanges: TimeRange[] = [
     {
@@ -231,7 +230,6 @@ export class FilterComponent implements OnInit {
   }
 
   onCompanyChange(siteIds: number[]) {
-
     if (siteIds.length === 0) {
       this.currencies = [];
     } else {
@@ -242,35 +240,21 @@ export class FilterComponent implements OnInit {
         const currenciesWithoutAllAndBaseRM = this.currencyHelper.getCurrenciesWithoutAllAndBaseRM();
         const currenciesData = currenciesWithoutAllAndBaseRM.filter(x => !x.isTest || x.isTest === !this.isExcludeTest);
         if (this.selectedCurrencies == null || this.selectedCurrencies.length === 0) {
-          this.selectedCurrencies = currenciesWithoutAllAndBaseRM;
+          this.selectedCurrencies = currenciesWithoutAllAndBaseRM.map(currency => currency.exchangeId);
         }
 
         this.currenciesTreeViewItems = this.treeviewBuilderService.buildCurrencyTreeViewItems(currenciesData);
         this.currencies = currenciesWithoutAllAndBaseRM;
       });
     }
+    this.selectedCompanies = siteIds;
   }
 
-  onDeviceChange($event: Device[]) {
-    if ($event != null && $event.length > 0) {
-      localStorage.setItem(LocalStorageKey.DEVICES, JSON.stringify($event));
-    }
-
-    this.selectedDevices = $event;
-  }
-
-  onCurrenciesChange($event: Currency[]) {
-    if ($event != null && $event.length > 0) {
-      localStorage.setItem(LocalStorageKey.CURRENCIES, JSON.stringify($event));
-    }
-
+  onCurrenciesChange($event: number[]) {
     this.selectedCurrencies = $event;
   }
 
   onColumnChange($event: Column[]) {
-    if ($event != null && $event.length > 0) {
-      localStorage.setItem(LocalStorageKey.COLUMNS, JSON.stringify($event));
-    }
 
     this.selectedColumns = $event;
   }
@@ -302,7 +286,6 @@ export class FilterComponent implements OnInit {
   }
   checkExactMatchingValue($event: boolean) {
     this.exactMatching = $event;
-    localStorage.setItem(LocalStorageKey.EXACT_MATCHING, JSON.stringify($event));
   }
 
   onGenerateClick() {
@@ -310,8 +293,11 @@ export class FilterComponent implements OnInit {
   }
 
 
-  onDateClick(date: moment.Moment) {
+  onDateClick(date: moment.Moment, isToday: boolean) {
+    this.timePeriod = isToday ? TimePeriod.Today : TimePeriod.Yesterday;
     this.date = DateHelper.convertMomentToDateStruct(date);
+    this.startDate = this.date;
+    this.endDate = this.date;
     this.generateInternal();
   }
 
@@ -338,15 +324,11 @@ export class FilterComponent implements OnInit {
   checkBaseRMValue(isCheck: boolean) {
     this.isBaseRM = isCheck;
     this.isBaseUSD = this.isBaseRM ? false : this.isBaseUSD;
-    localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, JSON.stringify(isCheck));
-    localStorage.setItem(LocalStorageKey.IS_BASEUSD_CHECK, JSON.stringify(this.isBaseUSD));
   }
 
   checkBaseUSDValue(isCheck: boolean) {
     this.isBaseUSD = isCheck;
     this.isBaseRM = this.isBaseUSD ? false : this.isBaseRM;
-    localStorage.setItem(LocalStorageKey.IS_BASEUSD_CHECK, JSON.stringify(isCheck));
-    localStorage.setItem(LocalStorageKey.IS_BASERM_CHECK, JSON.stringify(this.isBaseRM));
   }
 
   private generateInternal() {
@@ -356,12 +338,21 @@ export class FilterComponent implements OnInit {
     }
 
     const model = this.createModel();
-    this.generate.emit();
+    this.generate.emit(model);
   }
 
-  private get isValidProduct(): boolean {
+  private get isValidSport(): boolean {
     if (this.selectedSports.length === 0) {
-      this.toastService.activate(`Please select at least one product!`);
+      this.toastService.activate(`Please select at least one sport!`);
+      return false;
+    }
+
+    return true;
+  }
+
+  private get isValidLeagueGroup(): boolean {
+    if (this.selectedLeagueGroups.length === 0) {
+      this.toastService.activate(`Please select at least one league group!`);
       return false;
     }
 
@@ -407,26 +398,50 @@ export class FilterComponent implements OnInit {
 
   private get isValid(): boolean {
     return this.isValidDateRange &&
-      this.isValidProduct &&
+      this.isValidSport &&
+      this.isValidLeagueGroup &&
       this.isValidSite &&
       this.isValidDevice &&
       this.isValidCurrency;
   }
 
   private createModel() {
-    const model = {} as FilterModel;
-  }
+    const model: FilterModel = {
+        fromDate: DateHelper.convertDateStructToMoment(this.startDate),
+        toDate: DateHelper.convertDateStructToMoment(this.endDate),
+        currency: this.getCurrenciesModel(),
+        site: this.selectedCompanies.join(','),
+        device: this.selectedDevices.map(device => device.betFrom).join(','),
+        userName: this.username,
+        sportBettype: this.selectedSports.join(','),
+        leagueGroup: this.selectedLeagueGroups.join(','),
+        reportType: 0,
+        isExactly: this.exactMatching,
+        removalColumns: this.columnDropdownTreeview.items
+          .filter(item => item.checked === false)
+          .map(item => item.value.value),
+        isDrillDown: false,
+        userNameDrillDown: false,
+        isGrandTotal: false,
+        excludeTest: this.isExcludeTest,
+        sortDirection: this.sortDirection,
+        sortColumnName: this.sortColumnName,
+        headerText: "Date",
+        currencyList: this.currencyHelper ? this.currencyHelper.getAllOfCurrencies() : []
+      }
+      return model;
+    }
 
-  private getCurrenciesModel(): number[] {
+  private getCurrenciesModel(): string {
     if (this.isBaseRM) {
-      return [-1];
+      return '-1';
     }
 
     if (this.isBaseUSD) {
-      return [-2];
+      return '-2';
     }
 
-    return this.selectedCurrencies.map(currency => currency.exchangeId);
+    return this.selectedCurrencies.join(',');
   }
 
   private getColumns() {

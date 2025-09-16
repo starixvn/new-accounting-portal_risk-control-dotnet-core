@@ -64,7 +64,7 @@ export class AppComponent {
     this.removeCurrentComponent();
     this.modeContexts[this.modeContexts.length - 1].data = data;
     if (this.modeContexts.length === 1) {
-      this.modeContexts[this.modeContexts.length - 1].label = `Headline (${modeContext.label})`;
+      this.modeContexts[this.modeContexts.length - 1].label = `Daily (${modeContext.label})`;
     } else {
       this.modeContexts[this.modeContexts.length - 1].label = modeContext.label;
     }

@@ -60,7 +60,7 @@ export class TreeViewBuilderService {
         checked: true,
         children: group.map(sport => new TreeviewItem({
           text: sport.betTypeName,
-          value: `${sport.sportType}-${sport.sportName}`,
+          value: `${sport.sportType}-${sport.betType}`,
           checked: true
         }))
       }));
@@ -111,23 +111,26 @@ export class TreeViewBuilderService {
       text: siteName,
       value: siteId,
       checked: true,
-      children: this.CreateTree(sites)
+      children: this.CreateTree(sites, 0)
     });
     return tree;
   }
 
-  private CreateTree(siteGroups: CompanyModel[]): TreeviewItem[] {
+  private CreateTree(siteGroups: CompanyModel[], parentId: number): TreeviewItem[] {
     if (siteGroups === null || siteGroups.length === 0) {
       return [];
     }
-
-    var tree = siteGroups.map(siteGroup => {
-      const childGroups = siteGroups.filter(x => x.siteId === siteGroup.parentId);
+    var parentGroups = siteGroups.filter(x => x.parentId === parentId);
+    if (parentGroups.length === 0) {
+      return [];
+    }
+    var tree = parentGroups.map(p => {
+      const childGroups = siteGroups.filter(x => x.parentId === p.siteId);
       return new TreeviewItem({
-        text: siteGroup.siteName,
-        value: siteGroup.siteId,
+        text: p.siteName,
+        value: p.siteId,
         checked: true,
-        children: this.CreateTree(childGroups)
+        children: this.CreateTree(childGroups, p.siteId)
       });
     });
 

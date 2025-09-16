@@ -5,7 +5,7 @@
           <label>Sport</label>
           <div class="nap-control">
             <ngx-dropdown-treeview #sportDropdownTreeview [items]="sportTreeViewItems"
-              [config]="sportTreeviewConfig" (selectedChange)="onSportChange($event)">
+              [config]="sportTreeviewConfig" (selectedChange)="selectedSports = $event">
             </ngx-dropdown-treeview>
           </div>
         </div>
@@ -45,7 +45,8 @@
         <div class="nap-group">
           <label>League Group</label>
           <div class="nap-control">
-            <ngx-dropdown-treeview #leagueGroupTreeview [items]="leagueGroupTreeViewItems"></ngx-dropdown-treeview>
+            <ngx-dropdown-treeview #leagueGroupTreeview [items]="leagueGroupTreeViewItems"
+            [config]="leagueGroupTreeviewConfig" (selectedChange)="selectedLeagueGroups = $event"></ngx-dropdown-treeview>
           </div>
         </div>
       </div>
@@ -62,8 +63,7 @@
       <div class="nap-col nap-col-exact-matching ml-108">
         <div class="form-check nap-form-checkbox">
           <label class="form-check-label">
-            <input name="excludeTestCheckbox" type="checkbox" class="form-check-input" [(ngModel)]="isExcludeTest"
-              (change)="excludeTestChangeEvent(isExcludeTest)">
+            <input name="excludeTestCheckbox" type="checkbox" class="form-check-input" [(ngModel)]="exactMatching">
             Exact Matching
           </label>
         </div>
@@ -106,7 +106,7 @@
           <label>Device</label>
           <div class="nap-control">
             <ngx-dropdown-treeview [config]="deviceTreeviewConfig" [items]="deviceTreeViewItems"
-              (selectedChange)="onDeviceChange($event)">
+              (selectedChange)="selectedDevices = $event">
             </ngx-dropdown-treeview>
           </div>
         </div>
@@ -160,9 +160,12 @@
         <button type="button" class="btn btn-primary" (click)="onGenerateClick()">
           GENERATE
         </button>
-        <button type="button" class="btn btn-primary" (click)="onResetClick()">
-          Reset Filter
-        </button>
+        <button type="button" class="btn btn-primary" (click)="onDateClick(today, true)">
+        {{today | napMomentFormat}}
+      </button>
+      <button type="button" class="btn btn-primary" (click)="onDateClick(yesterday, false)">
+        {{yesterday | napMomentFormat}}
+      </button>
       </div>
     </div>
   </div>

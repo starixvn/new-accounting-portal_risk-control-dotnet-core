@@ -6,6 +6,7 @@ import { TitleService } from './title.service';
 import { DATE_CONFIG } from '../../common';
 import { ProductConstants } from 'app/common/constants';
 import { FilterModel } from '../../filter/filter.model';
+import { filter } from 'lodash';
 
 @Injectable()
 export class ModelService {
@@ -25,32 +26,25 @@ export class ModelService {
         const filterModel = this.modeContext.filterModel;
         const gridModel = this.modeContext.gridModel;
         const baseModel: QueryModel = {
-            productId: filterModel.productIds.join(','),
-            username: filterModel.userName,
-            site: filterModel.sites.join(','),
-            betType: filterModel.betTypes.join(','),
-            sportType: filterModel.sportTypes.join(','),
-            currency: filterModel.currency.join(','),
-            device: filterModel.devices.join(','),
-            excludeTest: filterModel.isExcludeTest,
-            removalColumns: filterModel.removalColumns,
+            currency: filterModel.currency,
             sortDirection: filterModel.sortDirection,
             sortColumnName: filterModel.sortColumnName,
             title: this.titleService.getTitle(),
             isDrillDown: gridModel.isDrillDownCurrency,
             isGrandTotal: false,
-            isBaseRM: filterModel.isBaseRM,
-            sportBettype: filterModel.sportBettypes.map(s => `${s.sportType}-${s.betType}`).join(','),
             isExactly: filterModel.isExactly,
             fromDate: filterModel.fromDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
             toDate: filterModel.toDate.format(DATE_CONFIG.dateFormatYYYY_MM_DD),
-            custId: filterModel.custId,
-            headline: filterModel.headline,
-            roleId: filterModel.roleId,
-            excludeNoData: filterModel.excludeNoData,
-            leagueId: '1',
-        
-            
+            site: filterModel.site,
+            excludeTest: filterModel.excludeTest,
+            device: filterModel.device,
+            userName: filterModel.userName,
+            sportBettype: filterModel.sportBettype,
+            leagueGroup: filterModel.leagueGroup,
+            reportBy: filterModel.reportType,
+            userNameDrillDown: false,
+            headerText: "Date",
+            removalColumns: filterModel.removalColumns
         };
         const model: QueryModel = Helper.extend(baseModel, this.createCriteria(filterModel));
         return model;

@@ -5,7 +5,7 @@ import { BreadcrumbModule } from 'nap-components/breadcrumb';
 import { GridModule } from 'components/grid';
 import { GridModalComponent } from 'components/grid-modal';
 import { ModeService } from './mode.service';;
-import { HeadlineComponent } from './headline/headline.component'
+import { DailyComponent } from './daily';
 
 @NgModule({
     imports: [
@@ -15,8 +15,7 @@ import { HeadlineComponent } from './headline/headline.component'
         GridModule
     ],
     declarations: [
-        GridModalComponent,
-        HeadlineComponent
+        GridModalComponent
     ],
     entryComponents: [
         GridModalComponent

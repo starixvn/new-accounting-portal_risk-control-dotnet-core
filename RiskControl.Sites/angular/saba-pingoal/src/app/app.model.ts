@@ -11,26 +11,21 @@ export interface BalanceUpModel {
 export interface QueryModel {
     fromDate: string;
     toDate: string;
-    productId: string;
-    username: string;
+    sportBettype: string;
+    userName: string;
+    excludeTest: boolean;
     site: string;
-    betType: string;
-    leagueId: string;
-    sportType: string;
+    leagueGroup: string;
     currency: string;
     device: string;
-    excludeTest: boolean;
-    removalColumns: string[];
+    isDrillDown: boolean;
+    userNameDrillDown: boolean;
+    isGrandTotal: boolean;
+    isExactly: boolean;
     sortDirection: string;
     sortColumnName: string;
+    reportBy: number;
     title: string;
-    isDrillDown: boolean;
-    isGrandTotal: boolean;
-    isBaseRM: boolean;
-    sportBettype: string;
-    isExactly: boolean;
-    custId: number;
-    headline: number;
-    roleId: number;
-    excludeNoData: boolean;
+    headerText: string;
+    removalColumns: string[];
 }
