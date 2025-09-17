@@ -4,9 +4,7 @@ import { QueryModel } from '../../app.model';
 import { ModeContext } from '../mode-context';
 import { TitleService } from './title.service';
 import { DATE_CONFIG } from '../../common';
-import { ProductConstants } from 'app/common/constants';
 import { FilterModel } from '../../filter/filter.model';
-import { filter } from 'lodash';
 
 @Injectable()
 export class ModelService {

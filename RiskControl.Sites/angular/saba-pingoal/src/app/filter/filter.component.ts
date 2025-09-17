@@ -9,11 +9,8 @@ import { FilterService } from './filter.service';
 import { ColumnService } from './column.service';
 import { ToastService } from 'nap-components/toast';
 import { TreeViewBuilderService } from './treeview-builder.service';
-import { ActionConstants, LocalStorageKey, ReportConstants } from '../common/constants';
 import * as _ from 'lodash';
-import { FilterHelper } from './filter-helper';
-import { GameTypeId, ProductId, RoleId } from '../common/model';
-import { forkJoin } from 'rxjs';
+import { RoleId } from '../common/model';
 
 class CurrencyHelper {
   private readonly currenciesWithoutAll: Currency[];

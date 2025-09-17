@@ -1,5 +1,4 @@
 ﻿import { Injectable } from '@angular/core';
-import {  ProductId } from '../../common';
 import { ModeContext } from '../mode-context';
 import { FilterConfig } from '../../filter/filter.config';
 

@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { SelectItem } from 'nap-components/dropdown-select';
-import { RoleId, CasinoType, ProductId, GameTypeId } from '../common';
+import { RoleId } from '../common';
 
 const roleSelectItems: SelectItem[] = [
   { text: 'Super', value: RoleId.Super },
