@@ -24,11 +24,11 @@ public class SortingServiceImp : SortingService
         reportModel.Statistics = isAsc ?
             reportModel
                 .Statistics
-                .OrderBy(s => propInfo.GetValue(s, null))
+                .OrderBy(s => propInfo.GetValue(s.DailyStatistics[0], null))
                 .ToList() :
             reportModel
                 .Statistics
-                .OrderByDescending(s => propInfo.GetValue(s, null))
+                .OrderByDescending(s => propInfo.GetValue(s.DailyStatistics[0], null))
                 .ToList();
     }
 }

@@ -9,7 +9,7 @@ export interface RowAttribute {
   custId: number;
   userName: string;
   roleId: number;
-  ReportBy : string;
+  groupName : string;
 }
 
 export class GridModel {

@@ -379,7 +379,7 @@ export class FilterComponent implements OnInit {
   }
 
   private get isValidCurrency(): boolean {
-    if (this.selectedCurrencies.length === 0) {
+    if (this.selectedCurrencies.length === 0 && !this.isBaseRM && !this.isBaseUSD) {
       this.toastService.activate(`Please select at least one currency!`);
       return false;
     }

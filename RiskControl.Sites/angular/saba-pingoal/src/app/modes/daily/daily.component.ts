@@ -152,7 +152,7 @@ export class DailyComponent implements OnInit, ModeGenerate {
       for (const column of row.columns) {
         if (column.name === currencyColumn.value) {
           const currency = column.customAttr;
-          const date = rowAttribute.ReportBy;
+          const date = rowAttribute.groupName;
           column.value = `<a href="javascript:;" drill-down-currency currency="${currency}" date="${date}">${column.value}</a>`;
           break;
         }

@@ -51,9 +51,9 @@ export class TitleService {
     const dateString = this.getDateString(titleDateFormat, false);
     const currencyName = this.getCurrencyName();
     if (gridModel.isDrillDownCurrency) {
-      return `${prefix} Game Statistics Report ${dateString} By Currency (${currencyName})`;
+      return `${prefix} SABA PinGoal Report ${dateString} By Currency (${currencyName})`;
     } else {
-      return `${prefix} Game Statistics Report ${dateString} (${currencyName})`;
+      return `${prefix} SABA PinGoal Report ${dateString} (${currencyName})`;
     }
   }
 
@@ -63,9 +63,9 @@ export class TitleService {
     const titleDateFormat = this.getTitleDateFormat();
     const dateString = this.getDateString(titleDateFormat, true);
     if (gridModel.isDrillDownCurrency) {
-      return `${reportName}_Game_Statistics_Report_${dateString}_By_Currency.${extension}`;
+      return `${reportName}_SABA_PinGoal_Report_${dateString}_By_Currency.${extension}`;
     } else {
-      return `${reportName}_Game_Statistics_Report_${dateString}.${extension}`;
+      return `${reportName}_SABA_PinGoal_Report_${dateString}.${extension}`;
     }
   }
 

@@ -2,7 +2,7 @@
 
 public class DailyReportModel
 {
-    public IEnumerable<BaseRawStatisticModel> Statistics { get; set; } = [];
+    public IEnumerable<DailyGroupModel> Statistics { get; set; } = [];
 
     public BaseRawStatisticModel GrandTotal { get; set; } = new();
 }

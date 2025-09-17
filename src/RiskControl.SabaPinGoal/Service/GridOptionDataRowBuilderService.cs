@@ -7,20 +7,15 @@ namespace RiskControl.SabaPinGoal.Service;
 
 public interface GridOptionDataRowBuilderService
 {
-    GridDataRow BuildBaseDataRow(BaseRawStatisticModel statistic, bool isGrandTotal);
+    GridDataRow BuildBaseDataRow(BaseRawStatisticModel statistic);
 }
 
 public class GridOptionDataRowBuilderServiceImp : GridOptionDataRowBuilderService
 {
-    public GridDataRow BuildBaseDataRow(BaseRawStatisticModel statistic, bool isGrandTotal)
+    public GridDataRow BuildBaseDataRow(BaseRawStatisticModel statistic)
     {
         var columns = new List<Columns>
         {
-            new()
-            {
-                Name = "ReportBy", Value = statistic.ReportBy,
-                CellAlignment = isGrandTotal ? HAlignment.Right : HAlignment.Left
-            },
             new()
             {
                 Name = "NoOfPlayers", Value = statistic.NoOfPlayers,

@@ -24,7 +24,7 @@ public class DailyServiceImp(IDynamicRepository repository,
         var rawData = await repository.FetchMultipleAsync<BaseRawStatisticModel, BaseRawStatisticModel>(criteria);
         var statistics = new DailyReportModel
         {
-            Statistics = rawData.Item1,
+            Statistics = GetGroupData(rawData.Item1),
             GrandTotal = rawData.Item2.FirstOrDefault()
         };
         if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
@@ -33,5 +33,17 @@ public class DailyServiceImp(IDynamicRepository repository,
         }
         var result = gridService.BuildGridOptions(statistics, queryModel);
         return result;
+    }
+
+    private IEnumerable<DailyGroupModel> GetGroupData(IEnumerable<BaseRawStatisticModel> data)
+    {
+        var result = data.GroupBy(g => g.ReportBy)
+            .Select(g => new DailyGroupModel
+            {
+                GroupName = g.Key,
+                DailyStatistics = g.ToList()
+            });
+        return result;
+
     }
 }

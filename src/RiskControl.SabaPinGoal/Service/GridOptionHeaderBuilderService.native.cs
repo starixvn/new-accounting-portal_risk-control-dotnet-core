@@ -85,7 +85,7 @@ public class GridOptionHeaderBuilderServiceImp : GridOptionHeaderBuilderService
 
             new HeaderColumns
             {
-                HeaderText = "Turnover", Width = HeaderColumnConstant.WIDTH_120, Name = "HouseTurnover",
+                HeaderText = "Real Turnover", Width = HeaderColumnConstant.WIDTH_120, Name = "HouseTurnover",
                 CustomCellType = ExcelCellType.Double,
                 Sort = true,
                 SortDirection = queryModel.SortColumnName == "HouseTurnover" ? queryModel.SortDirection : string.Empty
