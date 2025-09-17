@@ -5,20 +5,20 @@ using RiskControl.SabaPinGoal.Model;
 
 namespace RiskControl.SabaPinGoal.Service;
 
-public interface DailyGridOptionBuilderService
+public interface GridOptionBuilderService
 {
-    GridOptions BuildGridOptions(DailyReportModel statistics, QueryModel queryModel);
+    GridOptions BuildGridOptions(ReportModel statistics, QueryModel queryModel);
 }
 
 public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gridOptionDataRowBuilderService,
     GridOptionHeaderBuilderService headerBuilderService,
-    GridOptionRemoveColumnService gridOptionRemoveColumnService) : DailyGridOptionBuilderService
+    GridOptionRemoveColumnService gridOptionRemoveColumnService) : GridOptionBuilderService
 {
-    public GridOptions BuildGridOptions(DailyReportModel statistics, QueryModel queryModel)
+    public GridOptions BuildGridOptions(ReportModel statistics, QueryModel queryModel)
     {
         statistics.Statistics.ToList().ForEach(item =>
         {
-            item.DailyStatistics.ForEach(daily =>
+            item.Statistics.ForEach(daily =>
             {
                 if (queryModel.IsGrandTotal)
                 {
@@ -45,7 +45,7 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
         return gridOptions;
     }
 
-    private List<GridDataRow> BuildBodyRows(IEnumerable<DailyGroupModel> statistics)
+    private List<GridDataRow> BuildBodyRows(IEnumerable<GroupModel> statistics)
     {
         var dataRows = new List<GridDataRow>();
         var groupDataRows = statistics.Select(BuildDailyGroupDataRow);
@@ -70,13 +70,13 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
         return [dataRow];
     }
 
-    public List<GridDataRow> BuildDailyGroupDataRow(DailyGroupModel dailyStatistics)
+    public List<GridDataRow> BuildDailyGroupDataRow(GroupModel dailyStatistics)
     {
         var dataRows = new List<GridDataRow>();
-        var groupLength = dailyStatistics.DailyStatistics.Count;
+        var groupLength = dailyStatistics.Statistics.Count;
         for (var i = 0; i < groupLength; i++)
         {
-            var item = dailyStatistics.DailyStatistics[i];
+            var item = dailyStatistics.Statistics[i];
             var dataRow = gridOptionDataRowBuilderService.BuildBaseDataRow(item);
             var groupName = dailyStatistics.GroupName;
             var customGroupAttributes = new { groupName };
@@ -88,7 +88,7 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
                     new Columns
                     {
                         Name = "ReportBy",
-                        Value = groupName,
+                        Value = item.ReportBy,
                         CellAlignment = HAlignment.Left,
                         MergeRowNumber = groupLength
                     });

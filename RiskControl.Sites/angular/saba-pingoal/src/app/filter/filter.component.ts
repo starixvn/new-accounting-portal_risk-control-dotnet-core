@@ -213,6 +213,7 @@ export class FilterComponent implements OnInit {
       this.companyTreeViewItems = this.treeviewBuilderService.buildCompanyTreeViewItems(companies);
     });
     this.filterService.getSports().subscribe(sports => {
+      this.sports = sports;
       this.sportTreeViewItems = this.treeviewBuilderService.buildSportTreeViewItems(sports);
     });
     this.filterService.getLeagueGroups().subscribe(leagueGroups => {
@@ -415,7 +416,7 @@ export class FilterComponent implements OnInit {
         userName: this.username,
         sportBettype: this.selectedSports.join(','),
         leagueGroup: this.selectedLeagueGroups.join(','),
-        reportType: 0,
+        reportType: this.selectedReportType,
         isExactly: this.exactMatching,
         removalColumns: this.columnDropdownTreeview.items
           .filter(item => item.checked === false)
@@ -426,8 +427,9 @@ export class FilterComponent implements OnInit {
         excludeTest: this.isExcludeTest,
         sortDirection: this.sortDirection,
         sortColumnName: this.sortColumnName,
-        headerText: "Date",
-        currencyList: this.currencyHelper ? this.currencyHelper.getAllOfCurrencies() : []
+        headerText: this.selectedReportType === ReportType.Daily ? 'Date' : 'Sport',
+        currencyList: this.currencyHelper ? this.currencyHelper.getAllOfCurrencies() : [],
+        sportList: this.sports
       }
       return model;
     }

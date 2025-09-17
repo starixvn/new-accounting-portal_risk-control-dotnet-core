@@ -46,7 +46,7 @@ export class AppComponent {
   generate(filterModel: FilterModel) {
     this.gridService.resizeEvent.observers = [];
     this.removeCurrentComponent();
-    const component = this.modeService.getComponent();
+    const component = this.modeService.getComponent(filterModel.reportType);
     if (component) {
       const modeContext = ModeContext.create('', filterModel, false);
       this.modeContexts = [modeContext];
@@ -63,12 +63,8 @@ export class AppComponent {
   forward(data: object, modeContext: ModeContext) {
     this.removeCurrentComponent();
     this.modeContexts[this.modeContexts.length - 1].data = data;
-    if (this.modeContexts.length === 1) {
-      this.modeContexts[this.modeContexts.length - 1].label = `Daily (${modeContext.label})`;
-    } else {
-      this.modeContexts[this.modeContexts.length - 1].label = modeContext.label;
-    }
-    const component = this.modeService.getComponent();
+    this.modeContexts[this.modeContexts.length - 1].label = modeContext.label;
+    const component = this.modeService.getComponent(modeContext.filterModel.reportType);
     if (component) {
       this.modeContexts.push(modeContext);
       this.componentRef = this.createComponent(component, modeContext);
@@ -80,7 +76,7 @@ export class AppComponent {
     this.removeCurrentComponent();
     this.modeContexts = _.take(this.modeContexts, index + 1);
     const modeContext = this.modeContexts[this.modeContexts.length - 1];
-    const component = this.modeService.getComponent();
+    const component = this.modeService.getComponent(modeContext.filterModel.reportType);
     this.componentRef = this.createComponent(component, modeContext);
     this.instances = _.take(this.instances, index);
     this.instances.push(this.componentRef.instance);

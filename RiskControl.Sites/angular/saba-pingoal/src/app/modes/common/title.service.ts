@@ -21,22 +21,7 @@ export class TitleService {
       return this.getTitle();
     } else {
       const label = this.modeContext.label;
-      const reportName = this.getReportName();
-      return reportName;
-    }
-  }
-
-  getBreadcrumbTitleForReportProduct(isLast: boolean): string {
-    if (isLast) {
-      return this.getTitle();
-    } else {
-      const label = this.modeContext.label;
-      if (_.isNil(label)) {
-        const reportName = this.getReportName();
-        return reportName;
-      } else {
-        return label;
-      }
+      return label;
     }
   }
 
@@ -86,9 +71,11 @@ export class TitleService {
     const filterModel = this.modeContext.filterModel;
     switch (filterModel.reportType) {
       case ReportType.Daily:
-        return "Daily";
+        return ReportType[ReportType.Daily];
+      case ReportType.Product:
+        return "Sport";
       default:
-          return "Daily";
+          return ReportType[ReportType.Daily];
     }
   }
 

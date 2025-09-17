@@ -2,6 +2,8 @@
 
 public class BaseRawStatisticModel
 {
+    public int ReportById { get; set; }
+
     public string ReportBy { get; set; }
 
     public int NoOfPlayers { get; set; }

@@ -57,6 +57,7 @@ export interface FilterModel {
     removalColumns: string[];
     headerText: string;
     currencyList: Currency[];
+    sportList: SportModel[];
 }
 
 export interface UsernameValidationModel {

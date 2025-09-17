@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RiskControl.Results;
 using RiskControl.SabaPinGoal.Constants;
+using RiskControl.SabaPinGoal.Criteria;
 using RiskControl.SabaPinGoal.Model;
 using RiskControl.SabaPinGoal.Service;
 
@@ -8,14 +9,14 @@ namespace RiskControl.SabaPinGoal.Controller;
 
 [ApiController]
 [Route("api/saba-pingoal/daily")]
-public class DailyController(DailyService service) : ControllerBase
+public class DailyController(GridService service) : ControllerBase
 {
 
     [Route("data")]
     [HttpPost]
     public async Task<IActionResult> GetData(QueryModel queryModel)
     {
-        var data = await service.GetData(queryModel);
+        var data = await service.GetData<DailyCriteria>(queryModel);
         return Ok(data);
     }
 
@@ -23,7 +24,7 @@ public class DailyController(DailyService service) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Excel(QueryModel queryModel)
     {
-        var data = await service.GetData(queryModel);
+        var data = await service.GetData<DailyCriteria>(queryModel);
         return new FanexExcelResult(data, SheetNameConstant.SHEETNAME);
     }
 }

@@ -43,7 +43,7 @@ export class ModelService {
             leagueGroup: filterModel.leagueGroup,
             reportBy: filterModel.reportType,
             userNameDrillDown: false,
-            headerText: "Date",
+            headerText: filterModel.headerText,
             removalColumns: filterModel.removalColumns
         };
         const model: QueryModel = Helper.extend(baseModel, this.createCriteria(filterModel));
@@ -55,6 +55,7 @@ export class ModelService {
         queryModel.isGrandTotal = true;
         queryModel.sortColumnName = '';
         queryModel.sortDirection = '';
+        queryModel.headerText = 'Grand Total';
         queryModel.title = this.titleService.getGrandTotalByCurrencyTitle();
     }
 }

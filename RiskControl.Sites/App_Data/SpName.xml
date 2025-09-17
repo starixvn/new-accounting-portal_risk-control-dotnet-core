@@ -129,5 +129,6 @@
 		<Setting Key="Acc_Rpt_SabaPingoal_Daily" SpName="Acc_Rpt_SabaPingoal_Daily" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_SabaPingoal_LeagueGroupSel" SpName="Acc_Rpt_SabaPingoal_LeagueGroupSel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_SabaPingoal_SportType" SpName="Acc_Rpt_SabaPingoal_SportType" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_League" SpName="Acc_Rpt_SabaPingoal_League" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 	</Function>
 </Functions>

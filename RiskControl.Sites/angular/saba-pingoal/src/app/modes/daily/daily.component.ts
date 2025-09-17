@@ -59,7 +59,7 @@ export class DailyComponent implements OnInit, ModeGenerate {
       const currency = element.attr('currency')??'';
       const dateText = element.attr('date')??'';
       const date = DateHelper.convertDateStructToMoment(DateHelper.convertStringToDateStruct(dateText));
-      this.drillDownCurrency(dateText, currency, date);
+      this.drillDownCurrency("Daily", currency, date);
     });
 
     $(grid.nativeElement).find('a[grand-total]').on('click', () => {

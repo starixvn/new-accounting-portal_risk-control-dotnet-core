@@ -149,7 +149,7 @@
       <div class="nap-group">
         <label>Report by</label>
         <div class="nap-control">
-          <nap-dropdown-select [items]="reportTypeSelectItems" [value]="selectedReportType">
+          <nap-dropdown-select [items]="reportTypeSelectItems" [value]="selectedReportType" (valueChange)="selectedReportType = $event">
           </nap-dropdown-select>
         </div>
       </div>
