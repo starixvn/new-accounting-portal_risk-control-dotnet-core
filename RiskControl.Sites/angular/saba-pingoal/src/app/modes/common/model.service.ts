@@ -42,7 +42,8 @@ export class ModelService {
             reportBy: filterModel.reportType,
             userNameDrillDown: false,
             headerText: filterModel.headerText,
-            removalColumns: filterModel.removalColumns
+            removalColumns: filterModel.removalColumns,
+            leagueId: filterModel.leagueId
         };
         const model: QueryModel = Helper.extend(baseModel, this.createCriteria(filterModel));
         return model;

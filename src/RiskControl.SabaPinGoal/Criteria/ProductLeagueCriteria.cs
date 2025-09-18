@@ -18,6 +18,8 @@ public class ProductLeagueCriteria : CriteriaBase
 
     public string LeagueGroup { get; set; }
 
+    public string LeagueId { get; set; }
+
     public string Currency { get; set; }
 
     public string Device { get; set; }

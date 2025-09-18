@@ -426,7 +426,8 @@ export class FilterComponent implements OnInit {
         sortColumnName: this.sortColumnName,
         headerText: this.selectedReportType === ReportType.Daily ? 'Date' : 'Sport',
         currencyList: this.currencyHelper ? this.currencyHelper.getAllOfCurrencies() : [],
-        sportList: this.sports
+        sportList: this.sports,
+        leagueId: ''
       }
       return model;
     }

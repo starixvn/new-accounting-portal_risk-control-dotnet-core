@@ -58,6 +58,7 @@ export interface FilterModel {
     headerText: string;
     currencyList: Currency[];
     sportList: SportModel[];
+    leagueId: string;
 }
 
 export interface UsernameValidationModel {

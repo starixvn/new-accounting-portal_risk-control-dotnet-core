@@ -56,8 +56,8 @@ export class ProductComponent implements OnInit, ModeGenerate {
     $(grid.nativeElement).find('a[drill-down-currency]').on('click', (event) => {
       const element = $(event.target);
       const currency = element.attr('currency')??'';
-      const sportText = element.attr('sport')??'';
-      this.drillDownCurrency(currency, sportText);
+      const data = element.attr('data')??'';
+      this.drillDownCurrency(currency, data);
     });
 
     $(grid.nativeElement).find('a[grand-total]').on('click', () => {
@@ -66,8 +66,8 @@ export class ProductComponent implements OnInit, ModeGenerate {
 
     $(grid.nativeElement).find('a[drill-down-sport]').on('click', (event) => {
       const element = $(event.target);
-      const sportText = element.attr('sport')??'';
-      this.drillDownSport("Sport", sportText);
+      const league = element.attr('data')??'';
+      this.drillDownSport("Sport", league);
     });
 
     this.modeController.compileBreadcrumb(grid.nativeElement);
@@ -107,7 +107,7 @@ export class ProductComponent implements OnInit, ModeGenerate {
     });
   }
 
-  private drillDownCurrency(currency: string, sport: string) {
+  private drillDownCurrency(currency: string, data: string) {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
     filterModel.currency = currency;
 
@@ -118,8 +118,9 @@ export class ProductComponent implements OnInit, ModeGenerate {
     if (isDrillDownSport) {
       const sportType = filterModel.sportBettype.split('-')[0].split(',')[0];
       title = filterModel.sportList?.find(x => x.sportType.toString() === sportType)?.sportName ?? 'Sport';
+      filterModel.leagueId = data;
     } else {
-      filterModel.sportBettype = filterModel.sportBettype.split(',').filter(x => x.split('-')[0] === sport).join(',');
+      filterModel.sportBettype = filterModel.sportBettype.split(',').filter(x => x.split('-')[0] === data).join(',');
     }
     const modeContext = ModeContext.create(title, filterModel, new ProductGridModel(true, isDrillDownSport));
     this.modeController.forward(this.gridOptions, modeContext);
@@ -171,8 +172,8 @@ export class ProductComponent implements OnInit, ModeGenerate {
       const rowAttribute = JSON.parse(row.customAttr) as RowAttribute;
       for (const column of row.columns) {
         if (column.name === sportColumn.value) {
-          const sport = rowAttribute.groupName;
-          column.value = `<a href="javascript:;" drill-down-sport sport="${sport}">${column.value}</a>`;
+          const data = rowAttribute.groupName;
+          column.value = `<a href="javascript:;" drill-down-sport data="${data}">${column.value}</a>`;
           break;
         }
       }
@@ -186,8 +187,8 @@ export class ProductComponent implements OnInit, ModeGenerate {
       for (const column of row.columns) {
         if (column.name === currencyColumn.value) {
           const currency = column.customAttr;
-          const sport = rowAttribute.groupName;
-          column.value = `<a href="javascript:;" drill-down-currency currency="${currency}" sport="${sport}">${column.value}</a>`;
+          const data = rowAttribute.groupName;
+          column.value = `<a href="javascript:;" drill-down-currency currency="${currency}" data="${data}">${column.value}</a>`;
           break;
         }
       }
