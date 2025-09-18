@@ -12,5 +12,7 @@ public class SettingRuleModel
 
     public bool EnableLetstalk { get; set; }
 
+    public bool EnableAutoDisableProduct { get; set; }
+
     public bool IsTest { get; set; }
 }

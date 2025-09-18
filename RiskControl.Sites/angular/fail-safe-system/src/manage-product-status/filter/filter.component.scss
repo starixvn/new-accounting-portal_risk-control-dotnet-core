@@ -1,0 +1,15 @@
+@import '~nap-theme/scss/filter';
+.nap-filter {
+    .nap-col {
+        .nap-group {
+            &>label {
+                float: left;
+                width: 80px;
+            }
+            &>.nap-control {
+                float: left;
+                width: 200px;
+            }
+        }
+    }
+}

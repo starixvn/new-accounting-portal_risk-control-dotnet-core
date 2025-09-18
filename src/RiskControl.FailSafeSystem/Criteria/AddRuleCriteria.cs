@@ -12,9 +12,13 @@ public class AddRuleCriteria : CriteriaBase, INonQueryCommand
 
     public bool EnableLetstalk { get; set; }
 
+    public bool EnableAutoDisableProduct { get; set; }
+
     public string CriteriaList { get; set; }
 
     public bool IsTest { get; set; }
+
+    public int CreatedBy { get; set; }
 
     public override string GetSettingKey() => "fss_Rule_Add";
 

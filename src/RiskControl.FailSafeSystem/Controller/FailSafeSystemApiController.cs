@@ -74,4 +74,28 @@ public class FailSafeSystemApiController(FailSafeSystemService service, Authoriz
         var data = await service.GetMonitors(criteria);
         return Ok(data);
     }
+
+    [Route("manage-product-status/data")]
+    [HttpPost]
+    public async Task<IActionResult> GetManageProductStatus(ManageProductStatusCriteria criteria)
+    {
+        var data = await service.GetManageProductStatus(criteria);
+        return Ok(data);
+    }
+
+    [Route("manage-product-status/history-data")]
+    [HttpPost]
+    public async Task<IActionResult> GetProductStatusHistory(ProductStatusHistoryCriteria criteria)
+    {
+        var data = await service.GetProductStatusHistory(criteria);
+        return Ok(data);
+    }
+
+    [Route("manage-product-status/enable-sport")]
+    [HttpPost]
+    public async Task<IActionResult> EnableSport(EnableSportCriteria criteria)
+    {
+        var data = await service.EnableSport(criteria);
+        return Ok(data);
+    }
 }

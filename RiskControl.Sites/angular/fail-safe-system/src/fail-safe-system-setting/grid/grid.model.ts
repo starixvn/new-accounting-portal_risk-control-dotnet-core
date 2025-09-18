@@ -4,6 +4,7 @@ export interface GridModel {
     productCount: number;
     ruleMemberLimit: number;
     enableLetstalk: boolean;
+    enableAutoDisableProduct: boolean;
     gameIncome: string;
     gamePayout: string;
     productList: string[];

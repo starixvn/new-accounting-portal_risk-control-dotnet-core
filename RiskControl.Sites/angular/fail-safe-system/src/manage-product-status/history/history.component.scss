@@ -1,0 +1,23 @@
+@import '~nap-theme/scss/grid';
+div.nap-grid {
+    div.body {
+        overflow-x: hidden;
+        max-height: initial;
+        margin-bottom: 15px;
+        max-height: 500px;
+    }
+}
+
+::ng-deep .modal-history > .modal-dialog {
+    max-width: 902px;
+}
+
+.fail {
+    color: red;
+   font-size: 20px;
+}
+
+.success {
+    color: green;
+   font-size: 20px;
+}

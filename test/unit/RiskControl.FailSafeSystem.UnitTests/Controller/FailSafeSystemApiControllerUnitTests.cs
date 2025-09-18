@@ -1,4 +1,6 @@
 ﻿using Fanex.NAP.Client.Helpers.Business;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using RiskControl.FailSafeSystem.Controller;
 using RiskControl.FailSafeSystem.Criteria;
@@ -103,6 +105,45 @@ public class FailSafeSystemApiControllerUnitTests
 
         // Assert
         await service.Received().GetMonitors(Arg.Compat.Any<MonitorCriteria>());
+    }
+
+    [Fact]
+    public async Task GetManageProductStatus_Always_CallRightFunctionFromFailSafeSystemService()
+    {
+        // Arrange
+        var controller = new FailSafeSystemApiController(service, authorizationService);
+
+        // Act
+        await controller.GetManageProductStatus(new ManageProductStatusCriteria());
+
+        // Assert
+        await service.Received().GetManageProductStatus(Arg.Compat.Any<ManageProductStatusCriteria>());
+    }
+
+    [Fact]
+    public async Task GetProductStatusHistory_Always_CallRightFunctionFromFailSafeSystemService()
+    {
+        // Arrange
+        var controller = new FailSafeSystemApiController(service, authorizationService);
+
+        // Act
+        await controller.GetProductStatusHistory(new ProductStatusHistoryCriteria());
+
+        // Assert
+        await service.Received().GetProductStatusHistory(Arg.Compat.Any<ProductStatusHistoryCriteria>());
+    }
+
+    [Fact]
+    public async Task EnableSport_Always_CallRightFunction()
+    {
+        // Arrange  
+        var controller = new FailSafeSystemApiController(service, authorizationService);
+
+        // Act  
+        var expectedData = controller.EnableSport(new EnableSportCriteria());
+
+        // Assert  
+        await service.Received().EnableSport(Arg.Compat.Any<EnableSportCriteria>());
     }
 
     [Fact]

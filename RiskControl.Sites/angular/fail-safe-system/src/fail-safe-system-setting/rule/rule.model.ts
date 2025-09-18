@@ -5,6 +5,7 @@ export interface AddRuleCriteria {
     enableLetstalk: boolean;
     criteriaList: string;
     isTest: boolean;
+    enableAutoDisableProduct: boolean;
 }
 
 export interface EditRuleCriteria extends AddRuleCriteria {

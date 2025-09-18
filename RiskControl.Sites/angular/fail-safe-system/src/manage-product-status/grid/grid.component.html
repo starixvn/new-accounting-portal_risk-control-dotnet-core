@@ -1,0 +1,70 @@
+<ng-template #colgroup>
+    <colgroup>
+      <col style="width: 60px" />
+      <col style="width: 200px" />
+      <col style="width: 200px" />
+      <col style="width: 150px" />
+      <col style="width: 100px" />
+      <col style="width: 70px" />
+    </colgroup>
+  </ng-template>
+  <ng-template #thead>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product</th>
+        <th scope="col">Sport</th>
+        <th scope="col">Last Updated</th>
+        <th scope="col">Status</th>
+        <th scope="col">History</th>
+      </tr>
+    </thead>
+  </ng-template>
+  <ng-template #rowItem let-item="item" let-index="index">
+    <tr>
+        <td class="text-center">{{index}}</td>
+        <td>{{item.productName}}</td>
+        <td>{{item.sportName}}</td>
+        <td>{{item.lastUpdated | date: 'MM/dd/yyyy hh:mm:ss aa'}}</td>
+        <td *ngIf="item.status === 'Enabled'" class="text-center">Enabled</td>
+        <td *ngIf="item.status === 'Disabled' && hasHostPermission" class="text-center link" (click)="enableSport(item.sportType, item.productId)">Disabled</td>
+        <td *ngIf="item.status === 'Disabled' && !hasHostPermission" class="text-center">Disabled</td>
+        <td class="text-center">
+            <i class="fa fa-history fa-2x" title="View History" aria-hidden="true" (click)="onShowHistory(item)"></i>
+        </td>
+    </tr>
+  </ng-template>
+  <div *ngIf="gridData" [ngSwitch]="gridData.length > 0">
+    <div class="nap-grid">
+      <div style="width: 781px">
+        <div class="header">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <ng-template [ngTemplateOutlet]="thead"></ng-template>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+          <table class="table-striped mb-0">
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <tbody>
+              <ng-container *ngFor="let item of gridData; index as i">
+                <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item, index: i + 1 }">
+                </ng-template>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="false" class="body stretch">
+          <table>
+            <tbody>
+              <tr>
+                <th scope="col" class="no-data" colspan="5">
+                  There is no data
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

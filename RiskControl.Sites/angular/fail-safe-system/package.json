@@ -8,6 +8,9 @@
     "start:fss-monitor": "ng serve fail-safe-system-monitor --proxy-config proxy.conf.json",
     "build:fss-monitor": "ng build fail-safe-system-monitor --configuration production",
     "postbuild:fss-monitor": "gulp --path \"../../wwwroot/fail-safe-system-monitor\"",
+    "start:manage-product-status": "ng serve manage-product-status --proxy-config proxy.conf.json",
+    "build:manage-product-status": "ng build manage-product-status --configuration production",
+    "postbuild:manage-product-status": "gulp --path \"../../wwwroot/manage-product-status\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

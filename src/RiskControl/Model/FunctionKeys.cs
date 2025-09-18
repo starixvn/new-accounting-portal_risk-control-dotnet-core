@@ -63,4 +63,6 @@ public static class FunctionKeys
     public const string FailSafeSystemSetting = "Fail_SafeSystemSetting";
 
     public const string FailSafeSystemMonitor = "Fail_SafeSystemMonitor";
+
+    public const string UmSport = "UmSport";
 }

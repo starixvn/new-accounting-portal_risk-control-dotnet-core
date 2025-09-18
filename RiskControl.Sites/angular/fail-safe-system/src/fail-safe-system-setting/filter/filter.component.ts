@@ -65,6 +65,14 @@ export class FilterComponent implements OnInit {
     
   }
 
+  openManageAutoDisabledProductPage(): void {
+    const url = window.location.href.replace(
+      "FailSafeSystemSetting",
+      "FailSafeSystemManageProductStatus"
+    );
+    window.open(url);
+  }
+
   private updateRuleTitleFilter(): void {
     this.filterService.getRuleTitles().subscribe(rules => {
       if (this.ruleTitleItems.length === this.selectedRuleTitles.length) {

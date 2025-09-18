@@ -1,0 +1,12 @@
+<nap-navbar></nap-navbar>
+<div class="container-fluid" style="min-width: 1100px;">
+  <div class="nap-header">
+    <div class="title">
+      <span class="active">Manage Auto-Disabled Product</span>
+    </div>
+  </div>
+  <app-filter (valueChange)="generate($event)"></app-filter>
+  <nap-toast></nap-toast>
+  <app-grid [criteria]="criteria"></app-grid>
+</div>
+<nap-spinner></nap-spinner>

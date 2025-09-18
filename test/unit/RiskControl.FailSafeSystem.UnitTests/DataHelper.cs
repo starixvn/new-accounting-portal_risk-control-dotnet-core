@@ -139,4 +139,57 @@ public static class DataHelper
             PostFix = "%"
         }
     };
+
+    public static IEnumerable<ManageProductStatusModel> GetManageProductStatus => new List<ManageProductStatusModel>
+    {
+        new()
+        {
+            ProductId = 3,
+            ProductName = "Number Game",
+            Status = "Disable",
+            LastUpdated = new DateTime(2025, 08, 26),
+            LastActionType = "Enable",
+            LastAPIResponseMessage = "Data"
+        },
+        new()
+        {
+            ProductId = 4,
+            ProductName = "SLI Live Casino",
+            Status = "Disable",
+            LastUpdated = new DateTime(2025, 08, 26),
+            LastActionType = "Enable",
+            LastAPIResponseMessage = "Data"
+        }
+    };
+
+    public static IEnumerable<ProductStatusHistoryModel> GetProductStatusHistory => new List<ProductStatusHistoryModel>
+    {
+        new()
+        {
+            ProceededBy = "sa",
+            ActionType = "Disable",
+            InsertDate = new DateTime(2025, 08, 26),
+            Description = "Success",
+            IsSuccess = true,
+            ApiResponseMessage = "Data"
+        },
+        new()
+        {
+            ProceededBy = "starix1",
+            ActionType = "Disable",
+            InsertDate = new DateTime(2025, 08, 26),
+            Description = "HTTP request failed: No such host is known",
+            IsSuccess = false,
+            ApiResponseMessage = "Data"
+        }
+    };
+
+    public static ApiResultModel GetApiResultModel => new ApiResultModel
+    {
+        ErrorCode = 0,
+        ErrorDescription = "Success",
+        Seq = "161",
+        StatusCode = 200,
+        Timestamp = DateTime.Now
+    };
 }

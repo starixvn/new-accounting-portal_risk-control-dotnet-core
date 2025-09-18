@@ -92,6 +92,7 @@ export class GridComponent implements OnChanges, OnInit {
         component.gamePayout = Number(item.gamePayout);
       }
       component.enableLetstalk = item.enableLetstalk;
+      component.enableAutoDisableProduct = item.enableAutoDisableProduct;
       component.constantKey = item.constantKey;
       component.isEdit = true;
       component.isTest = item.isTest;

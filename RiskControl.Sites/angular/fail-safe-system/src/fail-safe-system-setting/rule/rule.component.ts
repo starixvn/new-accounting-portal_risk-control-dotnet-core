@@ -34,6 +34,7 @@ export class RuleComponent implements OnInit {
   alertMessage: string = '';
   alertClass = AlertType.Danger;
   isTest: boolean = false;
+  enableAutoDisableProduct: boolean = false;
 
   constructor(public readonly activeModal: NgbActiveModal,
     private readonly service: RuleService,
@@ -58,8 +59,9 @@ export class RuleComponent implements OnInit {
         ruleMemberLimit: this.ruleMemberLimit??0,
         enableLetstalk: this.enableLetstalk,
         criteriaList: this.getCriteriaList(),
-        isTest: this.isTest
-      }
+        isTest: this.isTest,
+        enableAutoDisableProduct: this.enableAutoDisableProduct
+      };
       if (this.isEdit) {
         const editCriteria = _.assign({ constantKey: this.constantKey}, criteria);
         this.service.editRule(editCriteria).subscribe(result => {
