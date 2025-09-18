@@ -8,7 +8,7 @@ const gridColumns = {
   totalWins: { text: 'Total Wins', value: 'TotalWins' } as Column,
   gameIncome: { text: 'Game Income', value: 'GameIncome' } as Column,
   gamePayout: { text: 'Game Payout', value: 'GamePayout' } as Column,
-  turnover: { text: 'Turnover', value: 'HouseTurnover' } as Column,
+  turnover: { text: 'Real Turnover', value: 'HouseTurnover' } as Column,
   grossIncome: { text: 'Gross Income', value: 'HouseGrossIncome' } as Column,
   commission: { text: 'Comm', value: 'HouseComm' } as Column,
   netIncome: { text: 'Net Income', value: 'HouseNetIncome' } as Column,
