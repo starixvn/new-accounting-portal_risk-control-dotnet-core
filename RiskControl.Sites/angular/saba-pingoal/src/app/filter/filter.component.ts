@@ -221,19 +221,15 @@ export class FilterComponent implements OnInit {
       this.deviceTreeViewItems = this.treeviewBuilderService.buildDeviceTreeViewItems(devices);
     });
     this.getColumns();
+    this.getCurrencies();
   }
 
   onSportChange(event: SportModel[]) {
     
   }
 
-  onCompanyChange(siteIds: number[]) {
-    if (siteIds.length === 0) {
-      this.currencies = [];
-    } else {
-      const uniqueSiteIds = _.uniq(siteIds);
-      const siteIdsValue = uniqueSiteIds.join(',');
-      this.filterService.getCurrencies(siteIdsValue).subscribe(currencies => {
+  getCurrencies() {
+    this.filterService.getCurrencies('All').subscribe(currencies => {
         this.currencyHelper = new CurrencyHelper(currencies);
         const currenciesWithoutAllAndBaseRM = this.currencyHelper.getCurrenciesWithoutAllAndBaseRM();
         const currenciesData = currenciesWithoutAllAndBaseRM.filter(x => !x.isTest || x.isTest === !this.isExcludeTest);
@@ -244,12 +240,6 @@ export class FilterComponent implements OnInit {
         this.currenciesTreeViewItems = this.treeviewBuilderService.buildCurrencyTreeViewItems(currenciesData);
         this.currencies = currenciesWithoutAllAndBaseRM;
       });
-    }
-    this.selectedCompanies = siteIds;
-  }
-
-  onCurrenciesChange($event: number[]) {
-    this.selectedCurrencies = $event;
   }
 
   onColumnChange($event: Column[]) {

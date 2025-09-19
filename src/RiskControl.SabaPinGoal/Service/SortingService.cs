@@ -12,8 +12,8 @@ public class SortingServiceImp : SortingService
 {
     public ReportModel SortData(ReportModel reportModel, string sortDirection, string sortColumnName)
     {
-        SortStatisticsForPerChildGroup(reportModel, sortDirection, sortColumnName);
         SortStatisticsForParentGroup(reportModel, sortDirection, sortColumnName);
+        SortStatisticsForPerChildGroup(reportModel, sortDirection, sortColumnName);
         return reportModel;
     }
 

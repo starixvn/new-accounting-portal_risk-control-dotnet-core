@@ -76,7 +76,7 @@
           <label>Company</label>
           <div class="nap-control">
             <ngx-dropdown-treeview #companyDropdownTreeview [items]="companyTreeViewItems" [config]="companyTreeviewConfig"
-              (selectedChange)="onCompanyChange($event)">
+              (selectedChange)="this.selectedCompanies = $event">
             </ngx-dropdown-treeview>
           </div>
         </div>
@@ -138,7 +138,7 @@
         <div class="nap-group">
           <div class="nap-control" [ngClass]="{ 'disabledfield': isBaseRM === true || isBaseUSD === true }">
             <ngx-dropdown-treeview [config]="currenciesTreeviewConfig" [items]="currenciesTreeViewItems"
-              (selectedChange)="onCurrenciesChange($event)">
+              (selectedChange)="this.selectedCurrencies = $event;">
             </ngx-dropdown-treeview>
           </div>
         </div>
