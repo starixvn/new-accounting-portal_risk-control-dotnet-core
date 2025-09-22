@@ -11,6 +11,7 @@ import { ToastService } from 'nap-components/toast';
 import { TreeViewBuilderService } from './treeview-builder.service';
 import * as _ from 'lodash';
 import { RoleId } from '../common/model';
+import { UserNameSuggestionTextboxComponent } from './user-name-suggestion';
 
 class CurrencyHelper {
   private readonly currenciesWithoutAll: Currency[];
@@ -56,6 +57,7 @@ export class FilterComponent implements OnInit {
   @ViewChild('siteDropdownTreeview') siteDropdownTreeview!: DropdownTreeviewComponent;
   @ViewChild('productDropdownTreeview') productDropdownTreeview!: DropdownTreeviewComponent;
   @ViewChild('columnDropdownTreeview') columnDropdownTreeview!: DropdownTreeviewComponent;
+  @ViewChild('userNameSuggestion') userNameSuggestion!: UserNameSuggestionTextboxComponent;
   @Output() generate = new EventEmitter<FilterModel>();
   @Output() reset = new EventEmitter();
   today = DATE_CONFIG.reportDate.today;
@@ -277,7 +279,11 @@ export class FilterComponent implements OnInit {
   }
 
   onGenerateClick() {
-    this.generateInternal();
+    if (this.userNameSuggestion.isOpen) {
+      this.isGenerate = true;
+    } else {
+      this.generateInternal();
+    }
   }
 
 
@@ -306,7 +312,7 @@ export class FilterComponent implements OnInit {
   }
 
   onResetClick() {
-    localStorage.clear();
+    this.userNameSuggestion.reset();
   }
 
   checkBaseRMValue(isCheck: boolean) {
