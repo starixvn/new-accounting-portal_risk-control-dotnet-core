@@ -105,14 +105,12 @@
 		<Setting Key="Acc_Rpt_NonSportsStatistics_Headline" SpName="Acc_Rpt_NonSportsStatistics_Headline" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSportsStatistics_SMA" SpName="Acc_Rpt_NonSportsStatistics_SMA" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 	</Function>
-
 	<Function Name="Dashboard">
 		<Setting Key="RiskControl_Dashboard_TopGameTypeWinning" SpName="Acc_Rpt_NonSports_Dashboard_TopGameTypeWinning" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="RiskControl_Dashboard_TopMemberWinning" SpName="Acc_Rpt_NonSports_Dashboard_TopMemberWinning" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSports_Dashboard_Weekly" SpName="Acc_Rpt_NonSports_Dashboard_Weekly" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_NonSports_Dashboard_PlayersByDevice" SpName="Acc_Rpt_NonSports_Dashboard_PlayersByDevice" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 	</Function>
-
 	<Function Name="Fail-Safe System">
 		<Setting Key="fss_Product" SpName="fss_Product" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="fss_Rule" SpName="fss_Rule" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
@@ -124,5 +122,13 @@
 		<Setting Key="fss_ManageProductStatus" SpName="fss_ManageProductStatus" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="fss_ManageProductStatus_ProductHistory" SpName="fss_ManageProductStatus_ProductHistory" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="fss_InsertProductActionLog" SpName="fss_InsertProductActionLog" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+	</Function>
+	<Function Name="Saba-PinGoal">
+		<Setting Key="Acc_Rpt_SabaPingoal_CompanySel" SpName="Acc_Rpt_SabaPingoal_CompanySel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_SportTypeSel" SpName="Acc_Rpt_SabaPingoal_SportTypeSel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_Daily" SpName="Acc_Rpt_SabaPingoal_Daily" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_LeagueGroupSel" SpName="Acc_Rpt_SabaPingoal_LeagueGroupSel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_SportType" SpName="Acc_Rpt_SabaPingoal_SportType" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_League" SpName="Acc_Rpt_SabaPingoal_League" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 	</Function>
 </Functions>

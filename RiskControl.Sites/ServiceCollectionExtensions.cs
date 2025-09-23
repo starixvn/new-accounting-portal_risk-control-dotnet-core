@@ -11,6 +11,7 @@ using RiskControl.Sites.AutoMapperProfiles.WinLossLimitControl;
 using RiskControl.Sites.DependencyInjections;
 using System;
 using System.Threading.Tasks;
+using RiskControl.Sites.AutoMapperProfiles.SabaPinGoal;
 
 namespace RiskControl.Sites;
 
@@ -51,6 +52,7 @@ public static class ServiceCollectionExtensions
                 mc.AddProfile(new SavedFilterProfile());
                 mc.AddProfile(new HeadlineProfile());
                 mc.AddProfile(new FailSafeSystemProfile());
+                mc.AddProfile(new SabaPinGoalProfile());
             });
 
             return mapperConfig.CreateMapper();
@@ -80,6 +82,7 @@ public static class ServiceCollectionExtensions
         services.RegisterProgressiveJackpotService();
         services.RegisterWinLimitControlServices();
         services.RegisterFailSafeSystemServices();
+        services.RegisterSabaPinGoalServices();
         services.AddSingleton(CreateMapper);
     }
 

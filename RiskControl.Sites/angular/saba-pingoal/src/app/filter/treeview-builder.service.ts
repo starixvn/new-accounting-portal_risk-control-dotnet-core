@@ -1,0 +1,139 @@
+import { Injectable } from '@angular/core';
+import * as _ from 'lodash';
+import { TreeviewItem } from 'ngx-treeview';
+import { CompanyModel, Currency, Device, LeagueGroupModel, SportModel } from './filter.model';
+
+@Injectable()
+export class TreeViewBuilderService {
+
+  buildCompanyTreeViewItems(companies: CompanyModel[]): TreeviewItem[] {
+    if (companies.length === 0) {
+      return [];
+    }
+    let result: TreeviewItem[] = [];
+    let tree: TreeviewItem;
+    const creditGroups = companies.filter(x => !x.isDeposit);
+    if (creditGroups.length > 0) {
+      tree = this.CreateSiteGroupTree(creditGroups, 'Credit Group', 0);
+      result.push(tree);
+    }
+    const licenseeGroups = companies.filter(x => x.isDeposit);
+    if (licenseeGroups.length > 0) {
+      tree = this.CreateSiteGroupTree(licenseeGroups, 'Licensee Group', 1);
+      result.push(tree);
+    }
+    return result;
+  }
+
+  buildCurrencyTreeViewItems(currenies: Currency[]): TreeviewItem[] {
+    if (currenies.length === 0) {
+      return [];
+    }
+    return currenies.map(currency => new TreeviewItem({
+      text: currency.currency,
+      value: currency.exchangeId,
+      checked: true
+    }));
+  }
+
+  buildLeagueGroupTreeViewItems(leagueGroups: LeagueGroupModel[]): TreeviewItem[] {
+    if (leagueGroups.length === 0) {
+      return [];
+    }
+    return leagueGroups.map(leagueGroup => new TreeviewItem({
+      text: leagueGroup.groupName,
+      value: leagueGroup.groupId,
+      checked: true
+    }));
+  }
+
+  buildSportTreeViewItems(sports: SportModel[]): TreeviewItem[] {
+    if (sports.length === 0) {
+      return [];
+    }
+    const grouped = _.groupBy(sports, sport => `${sport.sportType}*${sport.sportName}`);
+    const items: TreeviewItem[] = [];
+    for (const [sportType, group] of Object.entries(grouped)) {
+      items.push(new TreeviewItem({
+        text: sportType.split('*')[1],
+        value: sportType,
+        checked: true,
+        children: group.map(sport => new TreeviewItem({
+          text: sport.betTypeName,
+          value: `${sport.sportType}-${sport.betType}`,
+          checked: true
+        }))
+      }));
+    }
+    return items;
+  }
+
+  buildDeviceTreeViewItems(devices: Device[]): TreeviewItem[] {
+    if (_.isNil(devices)) {
+      return [];
+    }
+
+    const mobileTreeItem = new TreeviewItem({ text: 'Mobile', value: undefined });
+    const nonMobileTreeItem = new TreeviewItem({ text: 'Non-mobile', value: undefined });
+    const uncategorizedTreeItem = new TreeviewItem({ text: 'Uncategorized', value: undefined });
+    devices.forEach(device => {
+      const item = new TreeviewItem({ text: device.fullName, value: device, checked: true });
+      let groupTreeviewItem: TreeviewItem;
+      switch (device.groupName) {
+        case 'Mobile':
+          groupTreeviewItem = mobileTreeItem;
+          break;
+        case 'Non-mobile':
+          groupTreeviewItem = nonMobileTreeItem;
+          break;
+        default:
+          groupTreeviewItem = uncategorizedTreeItem;
+          break;
+      }
+
+      if (_.isNil(groupTreeviewItem.children)) {
+        groupTreeviewItem.children = [item];
+      } else {
+        groupTreeviewItem.children.push(item);
+      }
+    });
+
+    const treeItems = [
+      mobileTreeItem,
+      nonMobileTreeItem,
+      uncategorizedTreeItem
+    ];
+    return treeItems.filter(item => !_.isNil(item.children) && item.children.length > 0);
+  }
+
+  private CreateSiteGroupTree(sites: CompanyModel[], siteName: string, siteId: number): TreeviewItem {
+    var tree = new TreeviewItem({
+      text: siteName,
+      value: siteId,
+      checked: true,
+      children: this.CreateTree(sites, 0)
+    });
+    return tree;
+  }
+
+  private CreateTree(siteGroups: CompanyModel[], parentId: number): TreeviewItem[] {
+    if (siteGroups === null || siteGroups.length === 0) {
+      return [];
+    }
+    var parentGroups = siteGroups.filter(x => x.parentId === parentId);
+    if (parentGroups.length === 0) {
+      return [];
+    }
+    var tree = parentGroups.map(p => {
+      const childGroups = siteGroups.filter(x => x.parentId === p.siteId);
+      return new TreeviewItem({
+        text: p.siteName,
+        value: p.siteId,
+        checked: true,
+        children: this.CreateTree(childGroups, p.siteId)
+      });
+    });
+
+    return tree;
+  }
+}

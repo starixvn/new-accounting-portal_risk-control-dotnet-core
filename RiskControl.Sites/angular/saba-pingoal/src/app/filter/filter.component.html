@@ -1,0 +1,172 @@
+<div class="nap-filter">
+    <div class="row">
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>Sport</label>
+          <div class="nap-control">
+            <ngx-dropdown-treeview #sportDropdownTreeview [items]="sportTreeViewItems"
+              [config]="sportTreeviewConfig" (selectedChange)="selectedSports = $event">
+            </ngx-dropdown-treeview>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>Time period</label>
+          <div class="nap-control">
+            <nap-dropdown-select [items]="timePeriodSelectItems" [(value)]="timePeriod"
+              (valueChange)="onTimePeriodChange()">
+            </nap-dropdown-select>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>From Date</label>
+          <div class="nap-control">
+            <nap-date-picker [(date)]="startDate" [minDate]="minStartDate" [maxDate]="endDate"
+              (dateChange)="onDateChange()"></nap-date-picker>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>To Date</label>
+          <div class="nap-control">
+            <nap-date-picker [(date)]="endDate" [minDate]="startDate" [maxDate]="maxEndDate"
+              (dateChange)="onDateChange()"></nap-date-picker>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    <div class="row">
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>League Group</label>
+          <div class="nap-control">
+            <ngx-dropdown-treeview #leagueGroupTreeview [items]="leagueGroupTreeViewItems"
+            [config]="leagueGroupTreeviewConfig" (selectedChange)="selectedLeagueGroups = $event"></ngx-dropdown-treeview>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>Username</label>
+          <div class="nap-control">
+            <nap-user-name-suggestion-textbox #userNameSuggestion [roleId]="reportRoleId"
+              (complete)="onUserNameSuggestionComplete($event)">
+            </nap-user-name-suggestion-textbox>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col nap-col-exact-matching ml-108">
+        <div class="form-check nap-form-checkbox">
+          <label class="form-check-label">
+            <input name="excludeTestCheckbox" type="checkbox" class="form-check-input" [(ngModel)]="exactMatching">
+            Exact Matching
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>Company</label>
+          <div class="nap-control">
+            <ngx-dropdown-treeview #companyDropdownTreeview [items]="companyTreeViewItems" [config]="companyTreeviewConfig"
+              (selectedChange)="this.selectedCompanies = $event">
+            </ngx-dropdown-treeview>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>Show Column</label>
+          <div class="nap-control">
+            <ngx-dropdown-treeview #columnDropdownTreeview [items]="columnTreeViewItems"
+              (selectedChange)="onColumnChange($event)"></ngx-dropdown-treeview>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col nap-col-exclude-test ml-108">
+        <div class="form-check nap-form-checkbox">
+          <label class="form-check-label">
+            <input name="excludeTestCheckbox" type="checkbox" class="form-check-input" [(ngModel)]="isExcludeTest"
+              (change)="excludeTestChangeEvent(isExcludeTest)">
+            Exclude test data
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>Device</label>
+          <div class="nap-control">
+            <ngx-dropdown-treeview [config]="deviceTreeviewConfig" [items]="deviceTreeViewItems"
+              (selectedChange)="selectedDevices = $event">
+            </ngx-dropdown-treeview>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label class="mt-2">Currency</label>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="form-check nap-form-checkbox">
+          <label class="form-check-label">
+            <input name="basermcheckbox" type="checkbox" class="form-check-input" [(ngModel)]="isBaseUSD"
+              (change)="checkBaseUSDValue(isBaseUSD)">
+            Base USD
+          </label>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="form-check nap-form-checkbox">
+          <label class="form-check-label">
+            <input name="basermcheckbox" type="checkbox" class="form-check-input" [(ngModel)]="isBaseRM"
+              (change)="checkBaseRMValue(isBaseRM)">
+            Base RM
+          </label>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <div class="nap-control" [ngClass]="{ 'disabledfield': isBaseRM === true || isBaseUSD === true }">
+            <ngx-dropdown-treeview [config]="currenciesTreeviewConfig" [items]="currenciesTreeViewItems"
+              (selectedChange)="this.selectedCurrencies = $event;">
+            </ngx-dropdown-treeview>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="nap-col">
+      <div class="nap-group">
+        <label>Report by</label>
+        <div class="nap-control">
+          <nap-dropdown-select [items]="reportTypeSelectItems" [value]="selectedReportType" (valueChange)="selectedReportType = $event">
+          </nap-dropdown-select>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="nap-col col-buttons blocks">
+        <button type="button" class="btn btn-primary" (click)="onGenerateClick()">
+          GENERATE
+        </button>
+        <button type="button" class="btn btn-primary" (click)="onDateClick(today, true)">
+        {{today | napMomentFormat}}
+      </button>
+      <button type="button" class="btn btn-primary" (click)="onDateClick(yesterday, false)">
+        {{yesterday | napMomentFormat}}
+      </button>
+      </div>
+    </div>
+  </div>
+  
