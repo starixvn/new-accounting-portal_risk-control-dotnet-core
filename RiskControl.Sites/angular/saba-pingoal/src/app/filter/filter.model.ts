@@ -3,6 +3,7 @@
 export enum ReportType {
     Daily,
     Product,
+    Hourly
 }
 
 export interface Column {

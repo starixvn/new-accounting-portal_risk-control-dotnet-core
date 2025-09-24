@@ -14,5 +14,7 @@ public static class SabaPinGoalInjection
         services.AddTransient<SortingService, SortingServiceImp>();
         services.AddTransient<FilterService, FilterServiceImp>();
         services.AddTransient<GridService, GridServiceImp>();
+        services.AddTransient<HourlyService, HourlyServiceImp>();
+        services.AddTransient<ExcelReportBuilderService, ExcelReportBuilderServiceImp>();
     }
 }

@@ -48,7 +48,7 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
     private List<GridDataRow> BuildBodyRows(IEnumerable<GroupModel> statistics)
     {
         var dataRows = new List<GridDataRow>();
-        var groupDataRows = statistics.Select(BuildDailyGroupDataRow);
+        var groupDataRows = statistics.Select(BuildGroupDataRow);
         foreach (var groupDataRow in groupDataRows)
         {
             dataRows.AddRange(groupDataRow);
@@ -70,7 +70,7 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
         return [dataRow];
     }
 
-    public List<GridDataRow> BuildDailyGroupDataRow(GroupModel dailyStatistics)
+    public List<GridDataRow> BuildGroupDataRow(GroupModel dailyStatistics)
     {
         var dataRows = new List<GridDataRow>();
         var groupLength = dailyStatistics.Statistics.Count;
@@ -91,6 +91,7 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
                         Value = item.ReportBy,
                         CellAlignment = HAlignment.Left,
                         MergeRowNumber = groupLength
+                        
                     });
             }
 

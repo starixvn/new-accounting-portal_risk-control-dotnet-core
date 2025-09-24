@@ -22,4 +22,8 @@ export class GridService {
         const filterModel = this.modeContext.filterModel;
         return true;
     }
+
+    hasDrillDownHourly(): boolean {
+        return this.modeContext.filterModel.currency === '-1';
+    }
 }

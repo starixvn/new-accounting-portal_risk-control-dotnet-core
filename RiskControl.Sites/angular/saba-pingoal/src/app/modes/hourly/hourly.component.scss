@@ -1,0 +1,44 @@
+@import '~nap-theme/scss/breadcrumb';
+@import '~nap-theme/scss/table';
+@import '~nap-theme/scss/grid';
+table {
+    margin-bottom: 10px;
+}
+
+.time {
+    font-weight: bold;
+    background-color: #C1D99F;
+}
+
+.average {
+    font-weight: bold;
+    background-color: #FBC192;
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+.number {
+    &.number-negative,
+    &>.number-negative {
+        color: red;
+    }
+}
+
+.red {
+    color: red;
+}
+
+.fa-file-excel-o {
+    color: green;
+}
+.nap-grid {
+    .table-striped {
+       thead th {
+            background-color: #3c5ea5;
+            background: -webkit-linear-gradient(#3c5ea5, #3c5ea5) #3c5ea5;
+            color: #fff;
+        }
+    }
+}
