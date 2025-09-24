@@ -1,5 +1,5 @@
 import { Component, ComponentFactoryResolver, ComponentRef, Injector, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { FilterModel } from './filter/filter.model';
+import { FilterModel, ReportType } from './filter/filter.model';
 import { ModeContext, ModeController, ModeGenerate, ModeService } from './modes';
 import { GridService } from 'components/grid';
 import { BreadcrumbService } from './breadcrumb.service';
@@ -63,7 +63,12 @@ export class AppComponent {
   forward(data: object, modeContext: ModeContext) {
     this.removeCurrentComponent();
     this.modeContexts[this.modeContexts.length - 1].data = data;
-    this.modeContexts[this.modeContexts.length - 1].label = modeContext.label;
+    this.modeContexts[0].label = modeContext.label;
+    if (this.modeContexts.length > 2) {
+      const tempLabel = this.modeContexts[this.modeContexts.length - 2].label;
+      this.modeContexts[this.modeContexts.length - 2].label = this.modeContexts[this.modeContexts.length - 1].label;
+      this.modeContexts[this.modeContexts.length - 1].label = tempLabel;
+    }
     const component = this.modeService.getComponent(modeContext.filterModel.reportType);
     if (component) {
       this.modeContexts.push(modeContext);
@@ -73,6 +78,7 @@ export class AppComponent {
   }
 
   goBack(index: number) {
+    const tempModeContext = _.cloneDeep(this.modeContexts);
     this.removeCurrentComponent();
     this.modeContexts = _.take(this.modeContexts, index + 1);
     const modeContext = this.modeContexts[this.modeContexts.length - 1];
@@ -80,6 +86,14 @@ export class AppComponent {
     this.componentRef = this.createComponent(component, modeContext);
     this.instances = _.take(this.instances, index);
     this.instances.push(this.componentRef.instance);
+    if (tempModeContext.length > 3) {
+      this.modeContexts[0].label = tempModeContext[tempModeContext.length - index - 1].label;
+      this.modeContexts[1].label = this.modeContexts.length === 2 ?
+        this.modeContexts[0].label : tempModeContext[tempModeContext.length - index].label;
+      this.modeContexts[2].label = tempModeContext[tempModeContext.length - index - 1].label;
+    } else {
+      this.modeContexts[0].label = tempModeContext[1].label;
+    }
   }
 
   generateBreadcrumbItems(): string[] {
@@ -87,7 +101,11 @@ export class AppComponent {
     this.instances.forEach((instance, index) => {
       const isLast = index === this.instances.length - 1;
       const title = instance.generateTitle(isLast);
-      titles.push(title);
+      if (this.modeContexts[index].filterModel.reportType === ReportType.Sport) {
+        titles.unshift(title);
+      } else {
+        titles.push(title);
+      }
     });
     return titles;
   }

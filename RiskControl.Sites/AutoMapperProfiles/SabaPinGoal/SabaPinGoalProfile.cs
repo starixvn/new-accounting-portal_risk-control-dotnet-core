@@ -9,8 +9,9 @@ public class SabaPinGoalProfile : Profile
     public SabaPinGoalProfile()
     {
         CreateMap<QueryModel, DailyCriteria>();
-        CreateMap<QueryModel, ProductSportCriteria>();
-        CreateMap<QueryModel, ProductLeagueCriteria>();
+        CreateMap<QueryModel, SportDataCriteria>();
+        CreateMap<QueryModel, SportLeagueCriteria>();
+        CreateMap<QueryModel, SportBetTypeCriteria>();
         CreateMap<QueryModel, HourlyCriteria>();
         CreateMap<HourlyRawStatistics, HourlyStatistics>();
     }

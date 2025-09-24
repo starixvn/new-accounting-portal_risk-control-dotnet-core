@@ -95,7 +95,7 @@ export class DailyComponent implements OnInit, ModeGenerate {
       queryModel.isDrillDown = false;
     }
     queryModel.title = this.titleService.getGrandTotalByCurrencyTitle();
-    this.grandTotalService.query(filterModel.reportType as ReportType, queryModel).subscribe(gridOptions => {
+    this.grandTotalService.query('daily/data', queryModel).subscribe(gridOptions => {
       gridOptions.fullHeight = false;
       gridOptions.gridHeight = 500;
       gridOptions.titleInfo = {
@@ -202,7 +202,7 @@ export class DailyComponent implements OnInit, ModeGenerate {
 
   private excelGrandTotal(queryModel: DailyQueryModel) {
     const filterModel = this.modeContext.filterModel;
-    this.grandTotalService.excel(filterModel.reportType as ReportType, queryModel)
+    this.grandTotalService.excel('daily/excel', queryModel)
       .subscribe(response => {
         const fileName = this.titleService.getExcelGrandTotalFileName();
         Helper.downloadFile(response, fileName);

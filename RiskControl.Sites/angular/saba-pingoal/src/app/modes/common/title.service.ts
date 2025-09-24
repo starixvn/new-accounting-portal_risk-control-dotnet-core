@@ -72,8 +72,8 @@ export class TitleService {
     switch (filterModel.reportType) {
       case ReportType.Daily:
         return ReportType[ReportType.Daily];
-      case ReportType.Product:
-        return "Sport";
+      case ReportType.Sport:
+        return ReportType[ReportType.Sport];
       default:
           return ReportType[ReportType.Daily];
     }

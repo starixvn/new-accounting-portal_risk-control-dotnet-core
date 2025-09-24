@@ -2,7 +2,7 @@
 
 namespace RiskControl.SabaPinGoal.Criteria;
 
-public class ProductLeagueCriteria : CriteriaBase
+public class SportBetTypeCriteria : CriteriaBase
 {
     public DateTime FromDate { get; set; }
 
@@ -30,7 +30,7 @@ public class ProductLeagueCriteria : CriteriaBase
 
     public bool IsGrandTotal { get; set; }
 
-    public override string GetSettingKey() => "Acc_Rpt_SabaPingoal_League";
+    public override string GetSettingKey() => "Acc_Rpt_SabaPingoal_BetType";
 
     public override bool IsValid() => true;
 }

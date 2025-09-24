@@ -2,5 +2,5 @@
 
 public static class ReportByConstant
 {
-    public const byte Product = 1;
+    public const byte Sport = 1;
 }

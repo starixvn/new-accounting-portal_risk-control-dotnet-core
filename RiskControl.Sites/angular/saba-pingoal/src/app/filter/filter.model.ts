@@ -2,7 +2,7 @@
 
 export enum ReportType {
     Daily,
-    Product,
+    Sport,
     Hourly
 }
 

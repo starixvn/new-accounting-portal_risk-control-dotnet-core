@@ -8,14 +8,14 @@ using RiskControl.SabaPinGoal.Service;
 namespace RiskControl.SabaPinGoal.Controller;
 
 [ApiController]
-[Route("api/saba-pingoal/product")]
-public class ProductController(GridService service): ControllerBase
+[Route("api/saba-pingoal/sport")]
+public class SportController(GridService service): ControllerBase
 {
     [Route("data")]
     [HttpPost]
     public async Task<IActionResult> GetData(QueryModel queryModel)
     {
-        var data = await service.GetData<ProductSportCriteria>(queryModel);
+        var data = await service.GetData<SportDataCriteria>(queryModel);
         return Ok(data);
     }
 
@@ -23,7 +23,7 @@ public class ProductController(GridService service): ControllerBase
     [HttpPost]
     public async Task<IActionResult> Excel(QueryModel queryModel)
     {
-        var data = await service.GetData<ProductSportCriteria>(queryModel);
+        var data = await service.GetData<SportDataCriteria>(queryModel);
         return new FanexExcelResult(data, SheetNameConstant.SHEETNAME);
     }
 
@@ -31,7 +31,7 @@ public class ProductController(GridService service): ControllerBase
     [HttpPost]
     public async Task<IActionResult> GetLeagueData(QueryModel queryModel)
     {
-        var data = await service.GetData<ProductLeagueCriteria>(queryModel);
+        var data = await service.GetData<SportLeagueCriteria>(queryModel);
         return Ok(data);
     }
 
@@ -39,7 +39,23 @@ public class ProductController(GridService service): ControllerBase
     [HttpPost]
     public async Task<IActionResult> ExcelForLeague(QueryModel queryModel)
     {
-        var data = await service.GetData<ProductLeagueCriteria>(queryModel);
+        var data = await service.GetData<SportLeagueCriteria>(queryModel);
+        return new FanexExcelResult(data, SheetNameConstant.SHEETNAME);
+    }
+
+    [Route("bettype/data")]
+    [HttpPost]
+    public async Task<IActionResult> GetBetTypeData(QueryModel queryModel)
+    {
+        var data = await service.GetData<SportBetTypeCriteria>(queryModel);
+        return Ok(data);
+    }
+
+    [Route("bettype/excel")]
+    [HttpPost]
+    public async Task<IActionResult> ExcelForBetType(QueryModel queryModel)
+    {
+        var data = await service.GetData<SportBetTypeCriteria>(queryModel);
         return new FanexExcelResult(data, SheetNameConstant.SHEETNAME);
     }
 }

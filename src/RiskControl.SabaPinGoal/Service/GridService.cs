@@ -24,7 +24,7 @@ public class GridServiceImp(IDynamicRepository repository,
         var rawData = await repository.FetchMultipleAsync<BaseRawStatisticModel, BaseRawStatisticModel>(criteria);
         var statistics = new ReportModel
         {
-            Statistics = GetGroupData(rawData.Item1, queryModel.ReportBy == ReportByConstant.Product, queryModel.IsGrandTotal),
+            Statistics = GetGroupData(rawData.Item1, queryModel.ReportBy == ReportByConstant.Sport, queryModel.IsGrandTotal),
             GrandTotal = rawData.Item2.FirstOrDefault()
         };
         if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
@@ -35,10 +35,10 @@ public class GridServiceImp(IDynamicRepository repository,
         return result;
     }
 
-    private IEnumerable<GroupModel> GetGroupData(IEnumerable<BaseRawStatisticModel> data, bool isProduct, bool isGrandTotal)
+    private IEnumerable<GroupModel> GetGroupData(IEnumerable<BaseRawStatisticModel> data, bool isSport, bool isGrandTotal)
     {
         var result = data.GroupBy<BaseRawStatisticModel, object>(
-            g => isProduct && !isGrandTotal ? g.ReportById : g.ReportBy)
+            g => isSport && !isGrandTotal ? g.ReportById : g.ReportBy)
             .Select(g => new GroupModel
             {
                 GroupName = g.Key.ToString(),
