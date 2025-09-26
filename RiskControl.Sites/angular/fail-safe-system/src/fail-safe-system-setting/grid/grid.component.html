@@ -10,6 +10,8 @@
       <col style="width: 100px" />
       <col style="width: 70px" />
       <col style="width: 70px" />
+      <col style="width: 150px" />
+      <col style="width: 100px" />
     </colgroup>
   </ng-template>
   <ng-template #thead>
@@ -30,6 +32,8 @@
                 <span [ngClass]="{'disabled-button': !hasHostPermission }" (click)="deleteRule()" class="button-action delete-rule fa fa-trash-o ml-2"></span>
             </div>
         </th>
+        <th scope="col" rowspan="2">Last Updated</th>
+        <th scope="col" rowspan="2">Proceed by</th>
       </tr>
       <tr>
         <th scope="col">Game Income (RM)</th>
@@ -59,11 +63,13 @@
         <td class="text-center">
             <input type="checkbox" [(ngModel)]="item.isDelete"/>
         </td>
+        <td class="text-center">{{item.lastUpdateTime | date: 'M/dd/yyyy hh:mm:ss aa'}}</td>
+        <td class="text-center">{{item.proceededBy}}</td>
     </tr>
   </ng-template>
   <div *ngIf="displayedModels" [ngSwitch]="displayedModels.length > 0">
     <div class="nap-grid">
-      <div style="width: 1315px">
+      <div style="width: 1565px">
         <div class="header">
           <table>
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
@@ -97,7 +103,7 @@
                 <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
                 <tfoot>
                     <tr>
-                        <td colspan="10">
+                        <td colspan="12">
                             <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange()"></nap-pagination>
                         </td>
                     </tr>
