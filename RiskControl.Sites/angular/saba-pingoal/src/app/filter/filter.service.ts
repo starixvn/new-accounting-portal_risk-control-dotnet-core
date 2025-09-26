@@ -93,6 +93,7 @@ export class FilterService {
   getReportSelectItems(): VisibleSelectItem[] {
     const reportSelectItems: SelectItem[] = [
       { text: 'Daily', value: ReportType.Daily },
+      { text: 'Monthly', value: ReportType.Monthly },
       { text: 'Sport', value: ReportType.Sport },
     ];
     return reportSelectItems.map(item => {

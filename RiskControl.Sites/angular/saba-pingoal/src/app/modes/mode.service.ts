@@ -5,11 +5,13 @@ import { DailyComponent } from './daily';
 import { ReportType } from '../filter/filter.model';
 import { SportComponent } from './sport';
 import { HourlyComponent } from './hourly';
+import { MonthlyComponent } from './monthly';
 
 @Injectable()
 export class ModeService {
   private readonly componentListItems = [
     { reportType: ReportType.Daily, componentName: DailyComponent },
+    { reportType: ReportType.Monthly, componentName: MonthlyComponent },
     { reportType: ReportType.Sport, componentName: SportComponent },
     { reportType: ReportType.Hourly, componentName: HourlyComponent }
   ];

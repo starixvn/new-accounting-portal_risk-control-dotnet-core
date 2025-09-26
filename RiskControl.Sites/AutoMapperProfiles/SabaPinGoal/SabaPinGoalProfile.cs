@@ -13,6 +13,7 @@ public class SabaPinGoalProfile : Profile
         CreateMap<QueryModel, SportLeagueCriteria>();
         CreateMap<QueryModel, SportBetTypeCriteria>();
         CreateMap<QueryModel, HourlyCriteria>();
+        CreateMap<QueryModel, MonthlyCriteria>();
         CreateMap<HourlyRawStatistics, HourlyStatistics>();
     }
 }

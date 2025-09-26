@@ -21,7 +21,12 @@ export class TitleService {
       return this.getTitle();
     } else {
       const label = this.modeContext.label;
-      return label;
+      const extraLabel = this.modeContext.extraLabel;
+      if (_.isNil(extraLabel)) {
+        return label;
+      } else {
+        return `${label} (${extraLabel})`;
+      }
     }
   }
 
@@ -74,6 +79,8 @@ export class TitleService {
         return ReportType[ReportType.Daily];
       case ReportType.Sport:
         return ReportType[ReportType.Sport];
+      case ReportType.Monthly:
+        return ReportType[ReportType.Monthly];
       default:
           return ReportType[ReportType.Daily];
     }

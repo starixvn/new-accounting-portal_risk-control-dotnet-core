@@ -3,6 +3,7 @@
 export enum ReportType {
     Daily,
     Sport,
+    Monthly,
     Hourly
 }
 

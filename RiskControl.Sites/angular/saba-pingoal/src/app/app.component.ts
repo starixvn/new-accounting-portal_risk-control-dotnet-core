@@ -63,7 +63,11 @@ export class AppComponent {
   forward(data: object, modeContext: ModeContext) {
     this.removeCurrentComponent();
     this.modeContexts[this.modeContexts.length - 1].data = data;
-    this.modeContexts[0].label = modeContext.label;
+    if (modeContext.filterModel.reportType === ReportType.Sport) {
+      this.modeContexts[0].label = modeContext.label
+    } else {
+      this.modeContexts[this.modeContexts.length - 1].label = modeContext.label;
+    }
     if (this.modeContexts.length > 2) {
       const tempLabel = this.modeContexts[this.modeContexts.length - 2].label;
       this.modeContexts[this.modeContexts.length - 2].label = this.modeContexts[this.modeContexts.length - 1].label;
@@ -86,14 +90,17 @@ export class AppComponent {
     this.componentRef = this.createComponent(component, modeContext);
     this.instances = _.take(this.instances, index);
     this.instances.push(this.componentRef.instance);
-    if (tempModeContext.length > 3) {
+    if (this.modeContexts[index].filterModel.reportType === ReportType.Sport) { 
+      if (tempModeContext.length > 3) {
       this.modeContexts[0].label = tempModeContext[tempModeContext.length - index - 1].label;
       this.modeContexts[1].label = this.modeContexts.length === 2 ?
         this.modeContexts[0].label : tempModeContext[tempModeContext.length - index].label;
       this.modeContexts[2].label = tempModeContext[tempModeContext.length - index - 1].label;
-    } else {
-      this.modeContexts[0].label = tempModeContext[1].label;
+      } else {
+        this.modeContexts[0].label = tempModeContext[1].label;
+      }
     }
+
   }
 
   generateBreadcrumbItems(): string[] {

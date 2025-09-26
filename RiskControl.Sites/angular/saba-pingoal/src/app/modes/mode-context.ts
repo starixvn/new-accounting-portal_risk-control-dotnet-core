@@ -9,6 +9,7 @@ export class ModeContext {
     label!: string;
     filterModel!: FilterModel;
     gridModel!: GridModel;
+    extraLabel! : string;;
 
     static create(label: string, filterModel: FilterModel, param: boolean | GridModel): ModeContext {
         const modeContext = new ModeContext();

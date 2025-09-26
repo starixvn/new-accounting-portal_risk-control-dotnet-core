@@ -420,13 +420,25 @@ export class FilterComponent implements OnInit {
         excludeTest: this.isExcludeTest,
         sortDirection: this.sortDirection,
         sortColumnName: this.sortColumnName,
-        headerText: this.selectedReportType === ReportType.Daily ? 'Date' : 'Sport',
+        headerText: this.getHeaderText(),
         currencyList: this.currencyHelper ? this.currencyHelper.getAllOfCurrencies() : [],
         sportList: this.sports,
         leagueId: ''
       }
       return model;
     }
+
+  private getHeaderText(): string {
+    switch (this.selectedReportType) {
+      case ReportType.Daily:
+        return 'Date';
+      case ReportType.Sport:
+        return 'Sport';
+      case ReportType.Monthly:
+        return 'Month';
+    }
+    return 'Sport';
+  }
 
   private getCurrenciesModel(): string {
     if (this.isBaseRM) {
