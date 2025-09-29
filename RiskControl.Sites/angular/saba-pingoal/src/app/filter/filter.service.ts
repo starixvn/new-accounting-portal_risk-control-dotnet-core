@@ -95,6 +95,7 @@ export class FilterService {
       { text: 'Daily', value: ReportType.Daily },
       { text: 'Monthly', value: ReportType.Monthly },
       { text: 'Sport', value: ReportType.Sport },
+      { text: 'Company', value: ReportType.Company },
     ];
     return reportSelectItems.map(item => {
       return {

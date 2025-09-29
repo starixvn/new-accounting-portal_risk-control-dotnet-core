@@ -81,6 +81,8 @@ export class TitleService {
         return ReportType[ReportType.Sport];
       case ReportType.Monthly:
         return ReportType[ReportType.Monthly];
+      case ReportType.Company:
+        return ReportType[ReportType.Company];
       default:
           return ReportType[ReportType.Daily];
     }
@@ -89,7 +91,8 @@ export class TitleService {
   private getTitleDateFormat(): TitleDateFormat {
     const filterModel = this.modeContext.filterModel;
     const gridModel = this.modeContext.gridModel;
-    if (gridModel.isDrillDownCurrency) {
+    if (filterModel.reportType === ReportType.Hourly || 
+      (filterModel.reportType === ReportType.Daily && gridModel.isDrillDownCurrency)) {
       return TitleDateFormat.On;
     }
 

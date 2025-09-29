@@ -4,7 +4,8 @@ export enum ReportType {
     Daily,
     Sport,
     Monthly,
-    Hourly
+    Hourly,
+    Company
 }
 
 export interface Column {
@@ -60,6 +61,7 @@ export interface FilterModel {
     headerText: string;
     currencyList: Currency[];
     sportList: SportModel[];
+    companyList: CompanyModel[];
     leagueId: string;
 }
 
