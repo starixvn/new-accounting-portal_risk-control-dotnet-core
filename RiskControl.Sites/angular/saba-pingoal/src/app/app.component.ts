@@ -63,7 +63,7 @@ export class AppComponent {
   forward(data: object, modeContext: ModeContext) {
     this.removeCurrentComponent();
     this.modeContexts[this.modeContexts.length - 1].data = data;
-    if (modeContext.filterModel.reportType === ReportType.Sport) {
+    if (this.isReportBySport(modeContext.filterModel.reportType)) {
       this.modeContexts[0].label = modeContext.label
     } else {
       this.modeContexts[this.modeContexts.length - 1].label = modeContext.label;
@@ -90,7 +90,7 @@ export class AppComponent {
     this.componentRef = this.createComponent(component, modeContext);
     this.instances = _.take(this.instances, index);
     this.instances.push(this.componentRef.instance);
-    if (this.modeContexts[index].filterModel.reportType === ReportType.Sport) { 
+    if (this.isReportBySport(this.modeContexts[index].filterModel.reportType)) {
       if (tempModeContext.length > 3) {
       this.modeContexts[0].label = tempModeContext[tempModeContext.length - index - 1].label;
       this.modeContexts[1].label = this.modeContexts.length === 2 ?
@@ -108,7 +108,8 @@ export class AppComponent {
     this.instances.forEach((instance, index) => {
       const isLast = index === this.instances.length - 1;
       const title = instance.generateTitle(isLast);
-      if (this.modeContexts[index].filterModel.reportType === ReportType.Sport) {
+      const reportType = this.modeContexts[index].filterModel.reportType;
+      if (this.isReportBySport(reportType)) {
         titles.unshift(title);
       } else {
         titles.push(title);
@@ -145,5 +146,9 @@ export class AppComponent {
       this.container.remove(this.container.indexOf(this.componentRef.hostView));
       this.componentRef = undefined;
     }
+  }
+
+  private isReportBySport(reportType: ReportType): boolean {
+    return reportType === ReportType.Sport || reportType === ReportType.League || reportType === ReportType.BetType;
   }
 }

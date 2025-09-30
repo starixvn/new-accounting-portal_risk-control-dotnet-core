@@ -14,6 +14,8 @@ export class ModeService {
     { reportType: ReportType.Daily, componentName: DailyComponent },
     { reportType: ReportType.Monthly, componentName: MonthlyComponent },
     { reportType: ReportType.Sport, componentName: SportComponent },
+    { reportType: ReportType.League, componentName: SportComponent },
+    { reportType: ReportType.BetType, componentName: SportComponent },
     { reportType: ReportType.Hourly, componentName: HourlyComponent },
     { reportType: ReportType.Company, componentName: CompanyComponent }
   ];

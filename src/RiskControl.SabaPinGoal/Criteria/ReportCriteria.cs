@@ -1,8 +1,9 @@
-﻿using Fanex.Data.Repository;
+﻿using Fanex.Data;
+using Fanex.Data.Repository;
 
 namespace RiskControl.SabaPinGoal.Criteria;
 
-public class MonthlyCriteria : CriteriaBase
+public class ReportCriteria : CriteriaBase
 {
     public DateTime FromDate { get; set; }
 
@@ -28,7 +29,10 @@ public class MonthlyCriteria : CriteriaBase
 
     public bool IsGrandTotal { get; set; }
 
-    public override string GetSettingKey() => "Acc_Rpt_SabaPingoal_Monthly";
+    [SpParam(Ignored = true)]
+    public string ReportBy { get; set; }
+
+    public override string GetSettingKey() => $"Acc_Rpt_SabaPingoal_{ReportBy}";
 
     public override bool IsValid() => true;
 }

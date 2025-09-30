@@ -12,6 +12,7 @@ import { ModeContext } from '../mode-context';
 import { GrandTotalService } from '../common/grand-total.service';
 import { FilterConfig } from '../../filter/filter.config';
 import { DrillDownConstants } from '../../common/constants';
+import { ReportType } from '../../filter/filter.model';
 
 @Component({
   selector: 'nap-sport',
@@ -139,6 +140,7 @@ export class SportComponent implements OnInit, ModeGenerate {
     filterModel.sortColumnName = '';
     filterModel.sortDirection = '';
     filterModel.headerText = 'League';
+    filterModel.reportType = ReportType.League;
     const modeContext = ModeContext.create(title, filterModel, new SportGridModel(false, true, false));
     this.modeController.forward(this.gridOptions, modeContext);
   }
@@ -148,7 +150,8 @@ export class SportComponent implements OnInit, ModeGenerate {
     filterModel.leagueId = leagueId;
     filterModel.sortColumnName = '';
     filterModel.sortDirection = '';
-    filterModel.headerText = 'Bet Type'
+    filterModel.headerText = 'Bet Type';
+    filterModel.reportType = ReportType.BetType;
     const modeContext = ModeContext.create(title, filterModel, new SportGridModel(false, true, true));
     this.modeController.forward(this.gridOptions, modeContext);
   }

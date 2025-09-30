@@ -15,7 +15,7 @@ public class MonthlyController(GridService service) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> GetData(QueryModel queryModel)
     {
-        var data = await service.GetData<MonthlyCriteria>(queryModel);
+        var data = await service.GetData<ReportCriteria>(queryModel);
         return Ok(data);
     }
 
@@ -23,7 +23,7 @@ public class MonthlyController(GridService service) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Excel(QueryModel queryModel)
     {
-        var data = await service.GetData<MonthlyCriteria>(queryModel);
+        var data = await service.GetData<ReportCriteria>(queryModel);
         return new FanexExcelResult(data, SheetNameConstant.SHEETNAME);
     }
 }

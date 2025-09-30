@@ -2,7 +2,11 @@
 
 public static class ReportByConstant
 {
-    public const byte Sport = 1;
+    public const string League = "League";
+
+    public const string Sport = "Sport";
+
+    public const string BetType = "BetType";
 
     public const string CreditGroup = "Credit Group";
 

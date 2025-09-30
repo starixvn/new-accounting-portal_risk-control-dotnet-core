@@ -445,6 +445,10 @@ export class FilterComponent implements OnInit {
         return 'Date';
       case ReportType.Sport:
         return 'Sport';
+      case ReportType.League:
+        return 'Sport';
+      case ReportType.BetType:
+        return 'Sport';
       case ReportType.Monthly:
         return 'Month';
       case ReportType.Company:

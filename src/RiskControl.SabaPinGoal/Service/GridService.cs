@@ -26,7 +26,7 @@ public class GridServiceImp(IDynamicRepository repository,
         var rawData = await repository.FetchMultipleAsync<BaseRawStatisticModel, BaseRawStatisticModel>(criteria);
         var statistics = new ReportModel
         {
-            Statistics = GetGroupData(rawData.Item1, queryModel.ReportBy == ReportByConstant.Sport, queryModel.IsGrandTotal),
+            Statistics = GetGroupData(rawData.Item1, IsReportFromSport(queryModel.ReportBy), queryModel.IsGrandTotal),
             GrandTotal = rawData.Item2.FirstOrDefault()
         };
         if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
@@ -113,5 +113,10 @@ public class GridServiceImp(IDynamicRepository repository,
                 Statistics = g.ToList()
             });
         return result;
+    }
+
+    private bool IsReportFromSport(string reportBy)
+    {
+        return reportBy is ReportByConstant.League or ReportByConstant.BetType or ReportByConstant.Sport;
     }
 }

@@ -3,6 +3,8 @@
 export enum ReportType {
     Daily,
     Sport,
+    League,
+    BetType,
     Monthly,
     Hourly,
     Company

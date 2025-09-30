@@ -24,7 +24,7 @@ export interface QueryModel {
     isExactly: boolean;
     sortDirection: string;
     sortColumnName: string;
-    reportBy: number;
+    reportBy: string;
     title: string;
     headerText: string;
     removalColumns: string[];

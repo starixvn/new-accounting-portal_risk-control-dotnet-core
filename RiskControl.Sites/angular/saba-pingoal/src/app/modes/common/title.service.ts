@@ -79,6 +79,10 @@ export class TitleService {
         return ReportType[ReportType.Daily];
       case ReportType.Sport:
         return ReportType[ReportType.Sport];
+      case ReportType.League:
+        return ReportType[ReportType.Sport];
+      case ReportType.BetType:
+        return ReportType[ReportType.Sport];
       case ReportType.Monthly:
         return ReportType[ReportType.Monthly];
       case ReportType.Company:
