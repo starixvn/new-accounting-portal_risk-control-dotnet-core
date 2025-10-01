@@ -102,6 +102,7 @@ export class MonthlyComponent implements OnInit, ModeGenerate {
     filterModel.reportType = ReportType.Daily;
     filterModel.sortColumnName = '';
     filterModel.sortDirection = '';
+    filterModel.headerText = "Date";
     filterModel.fromDate = moment.max(moment.utc(date).startOf('month'), filterModel.fromDate);
     filterModel.toDate = moment.min(moment.utc(date).endOf('month'), filterModel.toDate);
     const modeContext = ModeContext.create(title, filterModel, false);
