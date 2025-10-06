@@ -12,6 +12,10 @@ public static class ReportByConstant
 
     public const string LicenseeGroup = "Licensee Group";
 
+    public const string Top20 = "Top 20";
+
+    public const string Bottom20 = "Bottom 20";
+
     public const string GrandTotalRM = "GrandTotalRM";
 
     public const string GrandTotalUSD = "GrandTotalUSD";

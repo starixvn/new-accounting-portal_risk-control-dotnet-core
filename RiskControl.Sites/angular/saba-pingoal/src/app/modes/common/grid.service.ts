@@ -26,4 +26,14 @@ export class GridService {
     hasDrillDownHourly(): boolean {
         return this.modeContext.filterModel.currency === '-1';
     }
+
+    hasShowAssociatedAccount() {
+        const filterModel = this.modeContext.filterModel;
+        return filterModel.removalColumns.indexOf(FilterConfig.gridColumns.associatedAccount.value) === -1;
+    }
+
+    hasShowHousePositionTaking() {
+        const filterModel = this.modeContext.filterModel;
+        return filterModel.removalColumns.indexOf(FilterConfig.gridColumns.housePositionTaking.value) === -1;
+    }
 }

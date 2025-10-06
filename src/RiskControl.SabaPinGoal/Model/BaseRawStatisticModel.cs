@@ -2,6 +2,10 @@
 
 public class BaseRawStatisticModel
 {
+    public string TopType { get; set; }
+
+    public byte RoleId { get; set; }
+
     public bool IsDeposit { get; set; }
 
     public int SiteId { get; set; }

@@ -7,7 +7,9 @@ export enum ReportType {
     BetType,
     Monthly,
     Hourly,
-    Company
+    Company,
+    Top20,
+    UserName
 }
 
 export interface Column {
@@ -65,6 +67,7 @@ export interface FilterModel {
     sportList: SportModel[];
     companyList: CompanyModel[];
     leagueId: string;
+    roleId: number;
 }
 
 export interface UsernameValidationModel {

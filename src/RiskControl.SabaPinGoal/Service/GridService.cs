@@ -45,7 +45,7 @@ public class GridServiceImp(IDynamicRepository repository,
         var rawData = await repository.FetchMultipleAsync<BaseRawStatisticModel, BaseRawStatisticModel>(criteria);
         var statistics = new ReportGroupModel
         {
-            Statistics = CalculateStatisticsGroup(rawData.Item1, rawData.Item2),
+            Statistics = CalculateStatisticsGroup(rawData.Item1, rawData.Item2, queryModel.ReportBy),
             GrandTotal = rawData.Item2.FirstOrDefault(x => x.ReportBy is ReportByConstant.GrandTotalRM or ReportByConstant.GrandTotalUSD)
         };
         if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
@@ -60,7 +60,7 @@ public class GridServiceImp(IDynamicRepository repository,
         return result;
     }
 
-    private IEnumerable<ReportModel> CalculateStatisticsGroup(IEnumerable<BaseRawStatisticModel> data, IEnumerable<BaseRawStatisticModel> total)
+    private IEnumerable<ReportModel> CalculateStatisticsGroup(IEnumerable<BaseRawStatisticModel> data, IEnumerable<BaseRawStatisticModel> total, string reportBy)
     {
         var groups = new List<ReportModel>();
 
@@ -68,21 +68,21 @@ public class GridServiceImp(IDynamicRepository repository,
         {
             return groups;
         }
+        
+        var firstTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.CreditGroup);
+        var firstRawData = data.Where(x => !x.IsDeposit);
+        var secondTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.LicenseeGroup);
+        var secondRawData =data.Where(x => x.IsDeposit);
 
-        var creditTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.CreditGroup);
-        var creditRawData = data.Where(x => !x.IsDeposit);
-        var depositTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.LicenseeGroup);
-        var depositRawData =data.Where(x => x.IsDeposit);
-
-        if (creditRawData.Any())
+        if (firstRawData.Any())
         {
-            var creditGroup = CalculateGroupStatisticWithTotal(creditRawData, creditTotal!);
+            var creditGroup = CalculateGroupStatisticWithTotal(firstRawData, firstTotal!);
             groups.Add(creditGroup);
         }
 
-        if (depositRawData.Any())
+        if (secondRawData.Any())
         {
-            var depositGroup = CalculateGroupStatisticWithTotal(depositRawData, depositTotal!);
+            var depositGroup = CalculateGroupStatisticWithTotal(secondRawData, secondTotal!);
             groups.Add(depositGroup);
         }
 
