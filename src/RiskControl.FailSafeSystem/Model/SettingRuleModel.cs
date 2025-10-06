@@ -15,4 +15,8 @@ public class SettingRuleModel
     public bool EnableAutoDisableProduct { get; set; }
 
     public bool IsTest { get; set; }
+
+    public DateTime? LastUpdateTime { get; set; }
+
+    public string ProceededBy { get; set; }
 }

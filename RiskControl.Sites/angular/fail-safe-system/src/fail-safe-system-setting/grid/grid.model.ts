@@ -10,6 +10,8 @@ export interface GridModel {
     productList: string[];
     isDelete: boolean;
     isTest: boolean;
+    lastUpdateTime: string;
+    proceededBy: string;
 }
 
 export interface DeleteRuleCriteria {
