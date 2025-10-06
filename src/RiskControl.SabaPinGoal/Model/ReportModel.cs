@@ -6,3 +6,10 @@ public class ReportModel
 
     public BaseRawStatisticModel GrandTotal { get; set; } = new();
 }
+
+public class ReportGroupModel
+{
+    public IEnumerable<ReportModel> Statistics { get; set; } = [];
+
+    public BaseRawStatisticModel GrandTotal { get; set; } = new();
+}

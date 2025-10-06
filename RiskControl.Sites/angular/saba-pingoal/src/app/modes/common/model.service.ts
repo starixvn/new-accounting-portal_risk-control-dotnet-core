@@ -4,7 +4,7 @@ import { QueryModel } from '../../app.model';
 import { ModeContext } from '../mode-context';
 import { TitleService } from './title.service';
 import { DATE_CONFIG } from '../../common';
-import { FilterModel } from '../../filter/filter.model';
+import { FilterModel, ReportType } from '../../filter/filter.model';
 
 @Injectable()
 export class ModelService {
@@ -39,7 +39,7 @@ export class ModelService {
             userName: filterModel.userName,
             sportBettype: filterModel.sportBettype,
             leagueGroup: filterModel.leagueGroup,
-            reportBy: filterModel.reportType,
+            reportBy: ReportType[filterModel.reportType],
             userNameDrillDown: false,
             headerText: filterModel.headerText,
             removalColumns: filterModel.removalColumns,

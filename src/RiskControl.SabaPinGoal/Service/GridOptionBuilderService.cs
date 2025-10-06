@@ -8,6 +8,8 @@ namespace RiskControl.SabaPinGoal.Service;
 public interface GridOptionBuilderService
 {
     GridOptions BuildGridOptions(ReportModel statistics, QueryModel queryModel);
+
+    GridOptions BuildGridOptionsWithGroup(ReportGroupModel statistics, QueryModel queryModel);
 }
 
 public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gridOptionDataRowBuilderService,
@@ -33,7 +35,7 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
             TitleType = TitleType.TwoLineBlue,
             TitleInfoText = queryModel.Title,
             BodyRows = BuildBodyRows(statistics.Statistics),
-            FooterRows = BuildFooter(statistics.GrandTotal),
+            FooterRows = BuildFooter(statistics.GrandTotal, $"Grand Total {statistics.GrandTotal.Currency}", HAlignment.Right),
             Columns = headerBuilderService.BuildHeaderColumns(queryModel),
             ShowFooter = true,
             ShowHighlightRow = false,
@@ -45,10 +47,50 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
         return gridOptions;
     }
 
+    public GridOptions BuildGridOptionsWithGroup(ReportGroupModel statistics, QueryModel queryModel)
+    {
+        var gridOptions = new GridOptions
+        {
+            ShowTitle = true,
+            TitleType = TitleType.TwoLineBlue,
+            TitleInfoText = queryModel.Title,
+            BodyRows = BuildBodyRowsWithGroup(statistics.Statistics),
+            FooterRows = BuildFooter(statistics.GrandTotal, $"Grand Total {statistics.GrandTotal.Currency}", HAlignment.Right),
+            Columns = headerBuilderService.BuildHeaderColumns(queryModel),
+            ShowFooter = true,
+            ShowHighlightRow = false,
+            ShowDistinctRow = false,
+            ShowTree = true
+        };
+
+        gridOptions = gridOptionRemoveColumnService.RemoveColumn(gridOptions, queryModel.RemovalColumns);
+
+        return gridOptions;
+    }
+
+    private List<GridDataRow> BuildBodyRowsWithGroup(IEnumerable<ReportModel> statistics)
+    {
+        var dataRows = new List<GridDataRow>();
+        foreach (var group in statistics)
+        {
+            var customGroupAttributes = new { groupId = group.GrandTotal.ReportById, groupName = group.GrandTotal.SiteId };
+            var totalRow = BuildFooter(group.GrandTotal, group.GrandTotal.ReportBy, HAlignment.Left).FirstOrDefault() ?? new GridDataRow();
+            totalRow.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
+            totalRow.RowType = RowType.ParentLevelOne;
+            totalRow.Columns.ForEach(x => x.Bold = true);
+            var groupDataRows = BuildBodyRows(group.Statistics);
+            totalRow.SubRows.AddRange(groupDataRows);
+
+            dataRows.Add(totalRow);
+        }
+
+        return dataRows;
+    }
+
     private List<GridDataRow> BuildBodyRows(IEnumerable<GroupModel> statistics)
     {
         var dataRows = new List<GridDataRow>();
-        var groupDataRows = statistics.Select(BuildDailyGroupDataRow);
+        var groupDataRows = statistics.Select(BuildGroupDataRow);
         foreach (var groupDataRow in groupDataRows)
         {
             dataRows.AddRange(groupDataRow);
@@ -57,20 +99,20 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
         return dataRows;
     }
 
-    private List<GridDataRow> BuildFooter(BaseRawStatisticModel grandTotal)
+    private List<GridDataRow> BuildFooter(BaseRawStatisticModel grandTotal, string totalText, HAlignment alignment)
     {
         var dataRow = gridOptionDataRowBuilderService.BuildBaseDataRow(grandTotal);
         dataRow.Columns.Insert(0,
             new Columns
             {
                 Name = "ReportBy",
-                Value = $"Grand Total {grandTotal.Currency}",
-                CellAlignment = HAlignment.Right
+                Value = totalText,
+                CellAlignment = alignment
             });
         return [dataRow];
     }
 
-    public List<GridDataRow> BuildDailyGroupDataRow(GroupModel dailyStatistics)
+    public List<GridDataRow> BuildGroupDataRow(GroupModel dailyStatistics)
     {
         var dataRows = new List<GridDataRow>();
         var groupLength = dailyStatistics.Statistics.Count;
@@ -91,6 +133,7 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
                         Value = item.ReportBy,
                         CellAlignment = HAlignment.Left,
                         MergeRowNumber = groupLength
+                        
                     });
             }
 

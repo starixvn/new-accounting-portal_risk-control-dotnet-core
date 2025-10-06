@@ -1,8 +1,9 @@
-﻿using Fanex.Data.Repository;
+﻿using Fanex.Data;
+using Fanex.Data.Repository;
 
 namespace RiskControl.SabaPinGoal.Criteria;
 
-public class ProductLeagueCriteria : CriteriaBase
+public class ReportCriteria : CriteriaBase
 {
     public DateTime FromDate { get; set; }
 
@@ -18,8 +19,6 @@ public class ProductLeagueCriteria : CriteriaBase
 
     public string LeagueGroup { get; set; }
 
-    public string LeagueId { get; set; }
-
     public string Currency { get; set; }
 
     public string Device { get; set; }
@@ -30,7 +29,10 @@ public class ProductLeagueCriteria : CriteriaBase
 
     public bool IsGrandTotal { get; set; }
 
-    public override string GetSettingKey() => "Acc_Rpt_SabaPingoal_League";
+    [SpParam(Ignored = true)]
+    public string ReportBy { get; set; }
+
+    public override string GetSettingKey() => $"Acc_Rpt_SabaPingoal_{ReportBy}";
 
     public override bool IsValid() => true;
 }

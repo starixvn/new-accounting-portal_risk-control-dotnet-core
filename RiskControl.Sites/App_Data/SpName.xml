@@ -128,7 +128,11 @@
 		<Setting Key="Acc_Rpt_SabaPingoal_SportTypeSel" SpName="Acc_Rpt_SabaPingoal_SportTypeSel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_SabaPingoal_Daily" SpName="Acc_Rpt_SabaPingoal_Daily" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_SabaPingoal_LeagueGroupSel" SpName="Acc_Rpt_SabaPingoal_LeagueGroupSel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
-		<Setting Key="Acc_Rpt_SabaPingoal_SportType" SpName="Acc_Rpt_SabaPingoal_SportType" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_Sport" SpName="Acc_Rpt_SabaPingoal_SportType" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_SabaPingoal_League" SpName="Acc_Rpt_SabaPingoal_League" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_Hourly" SpName="Acc_Rpt_SabaPingoal_Hourly" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_BetType" SpName="Acc_Rpt_SabaPingoal_Bettype" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_Company" SpName="Acc_Rpt_SabaPingoal_Company" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_Monthly" SpName="Acc_Rpt_SabaPingoal_Monthly" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 	</Function>
 </Functions>

@@ -21,7 +21,12 @@ export class TitleService {
       return this.getTitle();
     } else {
       const label = this.modeContext.label;
-      return label;
+      const extraLabel = this.modeContext.extraLabel;
+      if (_.isNil(extraLabel)) {
+        return label;
+      } else {
+        return `${label} (${extraLabel})`;
+      }
     }
   }
 
@@ -72,8 +77,16 @@ export class TitleService {
     switch (filterModel.reportType) {
       case ReportType.Daily:
         return ReportType[ReportType.Daily];
-      case ReportType.Product:
-        return "Sport";
+      case ReportType.Sport:
+        return ReportType[ReportType.Sport];
+      case ReportType.League:
+        return ReportType[ReportType.Sport];
+      case ReportType.BetType:
+        return ReportType[ReportType.Sport];
+      case ReportType.Monthly:
+        return ReportType[ReportType.Monthly];
+      case ReportType.Company:
+        return ReportType[ReportType.Company];
       default:
           return ReportType[ReportType.Daily];
     }
@@ -82,7 +95,8 @@ export class TitleService {
   private getTitleDateFormat(): TitleDateFormat {
     const filterModel = this.modeContext.filterModel;
     const gridModel = this.modeContext.gridModel;
-    if (gridModel.isDrillDownCurrency) {
+    if (filterModel.reportType === ReportType.Hourly || 
+      (filterModel.reportType === ReportType.Daily && gridModel.isDrillDownCurrency)) {
       return TitleDateFormat.On;
     }
 

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpModule } from 'nap-components/http';
 import { ModalModule } from 'components/modal';
 import { GridModule } from 'components/grid';
-import { ProductComponent } from './product.component';
+import { CompanyComponent } from './company.component';
 
 @NgModule({
     imports: [
@@ -15,14 +15,14 @@ import { ProductComponent } from './product.component';
         GridModule
     ],
     exports: [
-        ProductComponent
+        CompanyComponent
     ],
     declarations: [
-        ProductComponent
+        CompanyComponent
     ],
     entryComponents: [
-        ProductComponent
+        CompanyComponent
     ],
     providers: []
 })
-export class ProductModule { }
+export class CompanyModule { }

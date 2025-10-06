@@ -14,6 +14,7 @@ import { ModeContext } from '../mode-context';
 import { GrandTotalService } from '../common/grand-total.service';
 import { ReportType } from '../../filter/filter.model';
 import { FilterConfig } from '../../filter/filter.config';
+import { HourlyGridModel } from '../hourly';
 
 @Component({
   selector: 'nap-daily',
@@ -62,6 +63,13 @@ export class DailyComponent implements OnInit, ModeGenerate {
       this.drillDownCurrency("Daily", currency, date);
     });
 
+    $(grid.nativeElement).find('a[drill-down-hourly]').on('click', (event) => {
+      const element = $(event.target);
+      const dateText = element.attr('date')??'';
+      const date = DateHelper.convertDateStructToMoment(DateHelper.convertStringToDateStruct(dateText));
+      this.drillDownHourly("Daily", date);
+    });
+
     $(grid.nativeElement).find('a[grand-total]').on('click', () => {
       this.showGrandTotal();
     });
@@ -74,9 +82,7 @@ export class DailyComponent implements OnInit, ModeGenerate {
   }
 
   private createQueryModel(): DailyQueryModel {
-
     const queryModel = this.modelService.createQueryModel();
-
     return queryModel;
   }
 
@@ -89,7 +95,7 @@ export class DailyComponent implements OnInit, ModeGenerate {
       queryModel.isDrillDown = false;
     }
     queryModel.title = this.titleService.getGrandTotalByCurrencyTitle();
-    this.grandTotalService.query(filterModel.reportType as ReportType, queryModel).subscribe(gridOptions => {
+    this.grandTotalService.query('daily/data', queryModel).subscribe(gridOptions => {
       gridOptions.fullHeight = false;
       gridOptions.gridHeight = 500;
       gridOptions.titleInfo = {
@@ -117,12 +123,30 @@ export class DailyComponent implements OnInit, ModeGenerate {
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
+  private drillDownHourly(title: string, date: moment.Moment) {
+    const filterModel = _.cloneDeep(this.modeContext.filterModel);
+    filterModel.fromDate = date;
+    filterModel.toDate = date;
+    filterModel.reportType = ReportType.Hourly;
+    let isDrillDownFromUserName = false;
+    if (this.modeContext.gridModel instanceof DailyGridModel) {
+      isDrillDownFromUserName = this.modeContext.gridModel.isDrillDownFromUserName;
+    }
+    const gridModel = new HourlyGridModel(false, isDrillDownFromUserName);
+    const modeContext = ModeContext.create(title, filterModel, gridModel);
+    this.modeController.forward(this.gridOptions, modeContext);
+  }
+
   private updateGridOptions(gridOptions: GridOptions, queryModel: DailyQueryModel, isBack: boolean) {
     if (!isBack && gridOptions.bodyRows.length > 0 && !this.gridService.isDrilldown()) {
 
       this.updateGrandTotalCell(gridOptions);
       if (this.gridService.hasCurrencyColumn()) {
         this.updateCurrencyColumn(gridOptions);
+      }
+
+      if (this.gridService.hasDrillDownHourly()) {
+        this.updateDateColumn(gridOptions);
       }
     }
 
@@ -160,6 +184,14 @@ export class DailyComponent implements OnInit, ModeGenerate {
     });
   }
 
+  private updateDateColumn(gridOptions: GridOptions) {
+    gridOptions.bodyRows.forEach(row => {
+        const dateColumn = row.columns[0];
+        const date = dateColumn.value;
+        dateColumn.value = `<a href="javascript:;" drill-down-hourly date='${date}'>${date}</a>`;
+      });
+  }
+
   private excel(queryModel: DailyQueryModel) {
     this.dailyService.excel(queryModel)
       .subscribe(response => {
@@ -170,7 +202,7 @@ export class DailyComponent implements OnInit, ModeGenerate {
 
   private excelGrandTotal(queryModel: DailyQueryModel) {
     const filterModel = this.modeContext.filterModel;
-    this.grandTotalService.excel(filterModel.reportType as ReportType, queryModel)
+    this.grandTotalService.excel('daily/excel', queryModel)
       .subscribe(response => {
         const fileName = this.titleService.getExcelGrandTotalFileName();
         Helper.downloadFile(response, fileName);

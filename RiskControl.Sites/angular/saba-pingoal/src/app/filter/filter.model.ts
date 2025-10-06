@@ -2,7 +2,12 @@
 
 export enum ReportType {
     Daily,
-    Product,
+    Sport,
+    League,
+    BetType,
+    Monthly,
+    Hourly,
+    Company
 }
 
 export interface Column {
@@ -58,6 +63,7 @@ export interface FilterModel {
     headerText: string;
     currencyList: Currency[];
     sportList: SportModel[];
+    companyList: CompanyModel[];
     leagueId: string;
 }
 

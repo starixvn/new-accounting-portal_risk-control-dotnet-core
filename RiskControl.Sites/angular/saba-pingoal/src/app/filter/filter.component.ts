@@ -126,6 +126,7 @@ export class FilterComponent implements OnInit {
   exactMatching = true;
   sortColumnName = '';
   sortDirection = '';
+  companies: CompanyModel[] = [];
   companyTreeViewItems: TreeviewItem[] = [];
   selectedCompanies: number[] = [];
   companyTreeviewConfig = TreeviewConfig.create({
@@ -209,6 +210,7 @@ export class FilterComponent implements OnInit {
 
   ngOnInit() {
     this.filterService.getCompanies().subscribe(companies => {
+      this.companies = companies;
       this.companyTreeViewItems = this.treeviewBuilderService.buildCompanyTreeViewItems(companies);
     });
     this.filterService.getSports().subscribe(sports => {
@@ -293,6 +295,14 @@ export class FilterComponent implements OnInit {
     this.startDate = this.date;
     this.endDate = this.date;
     this.generateInternal();
+  }
+
+  onReportTypeChange(newReportType: ReportType) {
+    if (newReportType === ReportType.Monthly) {
+      this.timePeriod = TimePeriod.CurrentMonth;
+      this.onTimePeriodChange();
+    }
+    this.selectedReportType = newReportType;
   }
 
   onTimePeriodChange() {
@@ -420,13 +430,32 @@ export class FilterComponent implements OnInit {
         excludeTest: this.isExcludeTest,
         sortDirection: this.sortDirection,
         sortColumnName: this.sortColumnName,
-        headerText: this.selectedReportType === ReportType.Daily ? 'Date' : 'Sport',
+        headerText: this.getHeaderText(),
         currencyList: this.currencyHelper ? this.currencyHelper.getAllOfCurrencies() : [],
         sportList: this.sports,
+        companyList: this.companies,
         leagueId: ''
       }
       return model;
     }
+
+  private getHeaderText(): string {
+    switch (this.selectedReportType) {
+      case ReportType.Daily:
+        return 'Date';
+      case ReportType.Sport:
+        return 'Sport';
+      case ReportType.League:
+        return 'Sport';
+      case ReportType.BetType:
+        return 'Sport';
+      case ReportType.Monthly:
+        return 'Month';
+      case ReportType.Company:
+        return 'Company';
+    }
+    return 'Sport';
+  }
 
   private getCurrenciesModel(): string {
     if (this.isBaseRM) {

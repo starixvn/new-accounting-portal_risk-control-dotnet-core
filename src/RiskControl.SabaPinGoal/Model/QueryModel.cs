@@ -33,7 +33,7 @@ public class QueryModel
     public string SortColumnName { get; set; }
 
     [DisplayFormat(ConvertEmptyStringToNull = false)]
-    public int ReportBy { get; set; }
+    public string ReportBy { get; set; }
 
     [DisplayFormat(ConvertEmptyStringToNull = false)]
     public string Title { get; set; }
