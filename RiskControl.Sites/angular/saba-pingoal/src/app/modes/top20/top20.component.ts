@@ -19,11 +19,10 @@ import { Top20Service } from './top20.service';
 import { Top20BaseQueryModel, TopType, Top20GridModel } from './top20.model';
 import { ReportType } from '../../filter/filter.model';
 import { FilterConfig } from '../../filter/filter.config';
+import { FilterHelper } from '../../filter/filter-helper';
 
 interface SubRowCustomAttribute {
-  ReportBy: string;
-  ReportById: number;
-  SiteName: string;
+  groupName: string;
 }
 
 @Component({
@@ -128,7 +127,9 @@ export class Top20Component implements OnInit, ModeGenerate {
     filterModel.isDrillDown = true;
     filterModel.sortColumnName = '';
     filterModel.sortDirection = '';
-    const modeContext = ModeContext.create(userName, filterModel, new Top20GridModel(false, true));
+    const label = `Top 20 ${FilterHelper.getRoleName(filterModel.roleId)}`;
+    const modeContext = ModeContext.create(label, filterModel, new Top20GridModel(false, true));
+    modeContext.extraLabel = userName;
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
@@ -139,18 +140,9 @@ export class Top20Component implements OnInit, ModeGenerate {
     filterModel.sortColumnName = '';
     filterModel.sortDirection = '';
     const gridModel = new DailyGridModel(false, true);
-    const modeContext = ModeContext.create(userName, filterModel, gridModel);
-    this.modeController.forward(this.gridOptions, modeContext);
-  }
-
-  private drillDownHourly(userName: string) {
-    const filterModel = _.cloneDeep(this.modeContext.filterModel);
-    filterModel.reportType = ReportType.Hourly;
-    filterModel.userName = userName;
-    filterModel.sortColumnName = '';
-    filterModel.sortDirection = '';
-    const gridModel = new HourlyGridModel(false, true);
-    const modeContext = ModeContext.create(userName, filterModel, gridModel);
+    const label = `Top 20 ${FilterHelper.getRoleName(filterModel.roleId)}`;
+    const modeContext = ModeContext.create(label, filterModel, gridModel);
+    modeContext.extraLabel = userName;
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
@@ -159,7 +151,8 @@ export class Top20Component implements OnInit, ModeGenerate {
     filterModel.currency = currency;
     filterModel.sortColumnName = '';
     filterModel.sortDirection = '';
-    const modeContext = ModeContext.create(title, filterModel, new Top20GridModel(true, false, topType));
+    const label = `Top 20 ${FilterHelper.getRoleName(filterModel.roleId)}`;
+    const modeContext = ModeContext.create(label, filterModel, new Top20GridModel(true, false, topType));
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
@@ -204,7 +197,7 @@ export class Top20Component implements OnInit, ModeGenerate {
         for (const column of subRow.columns) {
           if (column.name === reportByColumn.value) {
             const rowAttribute = JSON.parse(subRow.customAttr) as SubRowCustomAttribute;
-            const userName = rowAttribute.ReportBy;
+            const userName = rowAttribute.groupName.split('-')[0];
             column.value = `<a href="javascript:;" drill-down-user-name user-name="${userName}">${userName}</a>`;
             break;
           }

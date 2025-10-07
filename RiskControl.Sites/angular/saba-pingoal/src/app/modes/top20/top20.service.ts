@@ -11,20 +11,16 @@ export class Top20Service {
     ) { }
 
     query(model: Top20BaseQueryModel): Observable<GridOptions> {
-        const url = this.getUrl(model) + 'data';
+        const url = model.topType === TopType.All ?
+            `${ApiConstants.REPORT}top20/data` :
+            `${ApiConstants.REPORT}top20/data-with-drilldown`;
         return this.httpService.post<GridOptions>(url, model);
     }
 
-    private getUrl(model: Top20BaseQueryModel): string {
-        if (model.topType === TopType.All) {
-            return `${ApiConstants.REPORT}top20/`;
-        } else {
-            return `${ApiConstants.REPORT}top20/statistics/`
-        }
-    }
-
     excel(model: Top20BaseQueryModel): Observable<Blob> {
-        const url = this.getUrl(model) + 'excel';
+        const url = model.topType === TopType.All ?
+            `${ApiConstants.REPORT}top20/excel` :
+            `${ApiConstants.REPORT}top20/excel-with-drilldown`;
         return this.httpService.download(url, model);
     }
 }

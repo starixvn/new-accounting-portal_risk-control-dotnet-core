@@ -42,10 +42,11 @@ public class GridServiceImp(IDynamicRepository repository,
         var criteria = mapper.Map<TCriteria>(queryModel);
         var sortDirection = queryModel.SortDirection;
         var sortColumnName = queryModel.SortColumnName;
+        var isReportByTop20 = queryModel.ReportBy == ReportByConstant.Top20;
         var rawData = await repository.FetchMultipleAsync<BaseRawStatisticModel, BaseRawStatisticModel>(criteria);
         var statistics = new ReportGroupModel
         {
-            Statistics = CalculateStatisticsGroup(rawData.Item1, rawData.Item2, queryModel.ReportBy),
+            Statistics = CalculateStatisticsGroup(rawData.Item1, rawData.Item2, isReportByTop20),
             GrandTotal = rawData.Item2.FirstOrDefault(x => x.ReportBy is ReportByConstant.GrandTotalRM or ReportByConstant.GrandTotalUSD)
         };
         if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
@@ -60,7 +61,7 @@ public class GridServiceImp(IDynamicRepository repository,
         return result;
     }
 
-    private IEnumerable<ReportModel> CalculateStatisticsGroup(IEnumerable<BaseRawStatisticModel> data, IEnumerable<BaseRawStatisticModel> total, string reportBy)
+    private IEnumerable<ReportModel> CalculateStatisticsGroup(IEnumerable<BaseRawStatisticModel> data, IEnumerable<BaseRawStatisticModel> total, bool isReportByTop20)
     {
         var groups = new List<ReportModel>();
 
@@ -68,39 +69,49 @@ public class GridServiceImp(IDynamicRepository repository,
         {
             return groups;
         }
-        
-        var firstTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.CreditGroup);
-        var firstRawData = data.Where(x => !x.IsDeposit);
-        var secondTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.LicenseeGroup);
-        var secondRawData =data.Where(x => x.IsDeposit);
+
+        var firstTotal = total.FirstOrDefault(x => x.ReportBy == (isReportByTop20 ? ReportByConstant.Top20Text : ReportByConstant.CreditGroup));
+        var firstRawData = data.Where(x => (isReportByTop20 ? x.TopType == ReportByConstant.Top20Text : !x.IsDeposit));
+        var secondTotal = total.FirstOrDefault(x => x.ReportBy == (isReportByTop20 ? ReportByConstant.Bottom20Text : ReportByConstant.LicenseeGroup));
+        var secondRawData =data.Where(x => (isReportByTop20 ? x.TopType == ReportByConstant.Bottom20Text : x.IsDeposit));
 
         if (firstRawData.Any())
         {
-            var creditGroup = CalculateGroupStatisticWithTotal(firstRawData, firstTotal!);
-            groups.Add(creditGroup);
+            var firstGroup = CalculateGroupStatisticWithTotal(firstRawData, firstTotal!, isReportByTop20);
+            groups.Add(firstGroup);
         }
 
         if (secondRawData.Any())
         {
-            var depositGroup = CalculateGroupStatisticWithTotal(secondRawData, secondTotal!);
-            groups.Add(depositGroup);
+            var secondGroup = CalculateGroupStatisticWithTotal(secondRawData, secondTotal!, isReportByTop20);
+            groups.Add(secondGroup);
         }
 
         return groups;
     }
 
     private ReportModel CalculateGroupStatisticWithTotal(
-        IEnumerable<BaseRawStatisticModel> rawData, BaseRawStatisticModel total)
+        IEnumerable<BaseRawStatisticModel> rawData, BaseRawStatisticModel total, bool isReportByTop20)
     {
-        return new ReportModel
-        {
-            Statistics = rawData.GroupBy(g => g.SiteId).Select(g => new GroupModel
+        return isReportByTop20
+            ? new ReportModel
             {
-                GroupName = g.Key.ToString(),
-                Statistics = g.ToList()
-            }),
-            GrandTotal = total
-        };
+                Statistics = rawData.GroupBy(g => new { g.ReportBy, g.ReportById }).Select(g => new GroupModel
+                {
+                    GroupName = $"{g.Key.ReportBy}-{g.Key.ReportById}",
+                    Statistics = g.ToList()
+                }),
+                GrandTotal = total
+            }
+            : new ReportModel
+            {
+                Statistics = rawData.GroupBy(g => g.SiteId).Select(g => new GroupModel
+                {
+                    GroupName = g.Key.ToString(),
+                    Statistics = g.ToList()
+                }),
+                GrandTotal = total
+            };
     }
 
     private IEnumerable<GroupModel> GetGroupData(IEnumerable<BaseRawStatisticModel> data, bool isSport, bool isGrandTotal)

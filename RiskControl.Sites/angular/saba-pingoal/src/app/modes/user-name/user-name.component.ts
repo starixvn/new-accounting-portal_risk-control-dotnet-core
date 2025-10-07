@@ -18,12 +18,10 @@ import {
 } from './user-name.model';
 import { FilterConfig } from '../../filter/filter.config';
 import { ReportType } from '../../filter/filter.model';
+import { FilterHelper } from '../../filter/filter-helper';
 
 interface RowCustomAttribute {
-  ReportBy: string;
-  ReportById: number;
-  SiteName: string;
-  CurrencyId: number;
+  groupName: string;
 }
 
 @Component({
@@ -102,7 +100,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
       gridModel.isDrillDownFromUserName :
       gridModel.isDrillDownCurrency;
 
-    this.userNameService.queryGrandTotal(queryModel).subscribe(gridOptions => {
+    this.userNameService.query(queryModel).subscribe(gridOptions => {
       gridOptions.fullHeight = false;
       gridOptions.gridHeight = 500;
       gridOptions.titleInfo = {
@@ -118,7 +116,9 @@ export class UserNameComponent implements OnInit, ModeGenerate {
     const filterModel = _.cloneDeep(this.modeContext.filterModel);
     filterModel.roleId = roleId;
     filterModel.userName = userName;
-    const modeContext = ModeContext.create(userName, filterModel, new UserNameGridModel(false, true));
+    const label = `${FilterHelper.getRoleName(filterModel.roleId + 1)}`;
+    const modeContext = ModeContext.create(label, filterModel, new UserNameGridModel(false, true));
+    modeContext.extraLabel = userName;
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
@@ -129,7 +129,9 @@ export class UserNameComponent implements OnInit, ModeGenerate {
 
     filterModel.userName = userName;
     const gridModel = new DailyGridModel(false, true);
-    const modeContext = ModeContext.create(userName, filterModel, gridModel);
+    const label = `${FilterHelper.getRoleName(filterModel.roleId)}`;
+    const modeContext = ModeContext.create(label, filterModel, gridModel);
+    modeContext.extraLabel = userName;
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
@@ -232,7 +234,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
       for (const column of row.columns) {
         if (column.name === reportByColumn.value) {
           const customAttribute = JSON.parse(row.customAttr) as RowCustomAttribute;
-          const userName = customAttribute.ReportBy;
+          const userName = customAttribute.groupName;;
           column.value = `<a href="javascript:;" drill-down-user-name user-name='${userName}'>${userName}</a>`;
         }
       }
@@ -257,7 +259,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
   }
 
   private excelGrandTotal(queryModel: UserNameBaseQueryModel) {
-    this.userNameService.excelGrandTotal(queryModel)
+    this.userNameService.excel(queryModel)
       .subscribe(response => {
         const fileName = this.titleService.getExcelGrandTotalFileName();
         Helper.downloadFile(response, fileName);

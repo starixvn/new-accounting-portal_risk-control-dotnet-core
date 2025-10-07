@@ -48,4 +48,10 @@ public class QueryModel
     public bool IsGrandTotal { get; set; }
 
     public bool UsernameDrillDown { get; set; }
+
+    public byte TopType { get; set; }
+
+    public byte RoleId { get; set; }
+
+    public int CustId { get; set; }
 }
