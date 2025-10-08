@@ -197,7 +197,7 @@ export class Top20Component implements OnInit, ModeGenerate {
         for (const column of subRow.columns) {
           if (column.name === reportByColumn.value) {
             const rowAttribute = JSON.parse(subRow.customAttr) as SubRowCustomAttribute;
-            const userName = rowAttribute.groupName.split('-')[0];
+            const userName = rowAttribute.groupName;
             column.value = `<a href="javascript:;" drill-down-user-name user-name="${userName}">${userName}</a>`;
             break;
           }

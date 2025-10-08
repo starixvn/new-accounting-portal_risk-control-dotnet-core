@@ -98,7 +98,7 @@ public class GridServiceImp(IDynamicRepository repository,
             {
                 Statistics = rawData.GroupBy(g => new { g.ReportBy, g.ReportById }).Select(g => new GroupModel
                 {
-                    GroupName = $"{g.Key.ReportBy}-{g.Key.ReportById}",
+                    GroupName = g.Key.ReportBy,
                     Statistics = g.ToList()
                 }),
                 GrandTotal = total

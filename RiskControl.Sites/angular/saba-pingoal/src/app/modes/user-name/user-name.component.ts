@@ -234,7 +234,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
       for (const column of row.columns) {
         if (column.name === reportByColumn.value) {
           const customAttribute = JSON.parse(row.customAttr) as RowCustomAttribute;
-          const userName = customAttribute.groupName;;
+          const userName = customAttribute.groupName;
           column.value = `<a href="javascript:;" drill-down-user-name user-name='${userName}'>${userName}</a>`;
         }
       }
