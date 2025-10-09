@@ -19,20 +19,20 @@ public class DeviceController(GridService service): ControllerBase
         return Ok(data);
     }
 
-    [Route("data-with-drilldown")]
-    [HttpPost]
-    public async Task<IActionResult> GetDataWithDrillDown(QueryModel queryModel)
-    {
-        var data = await service.GetData<ReportCriteria>(queryModel);
-        return Ok(data);
-    }
-
     [Route("excel")]
     [HttpPost]
     public async Task<IActionResult> Excel(QueryModel queryModel)
     {
         var data = await service.GetDataWithGroup<ReportCriteria>(queryModel);
         return new FanexExcelResult(data, SheetNameConstant.SHEETNAME);
+    }
+
+    [Route("data-with-drilldown")]
+    [HttpPost]
+    public async Task<IActionResult> GetDataWithDrillDown(QueryModel queryModel)
+    {
+        var data = await service.GetData<ReportCriteria>(queryModel);
+        return Ok(data);
     }
 
     [Route("excel-with-drilldown")]

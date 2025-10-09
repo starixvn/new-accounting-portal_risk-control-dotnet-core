@@ -65,34 +65,38 @@ public class GridServiceImp(IDynamicRepository repository,
 
     private IEnumerable<ReportModel> CalculateStatisticsGroup(IEnumerable<BaseRawStatisticModel> data, IEnumerable<BaseRawStatisticModel> total, bool isReportByTop20)
     {
-        var groups = new List<ReportModel>();
+        var groupFilters = isReportByTop20
+            ?
+            [
+                new GroupFilterModel(x => x.ReportBy == ReportByConstant.Top20Text, x => x.TopType == ReportByConstant.Top20Text),
+                new GroupFilterModel(x => x.ReportBy == ReportByConstant.Bottom20Text, x => x.TopType == ReportByConstant.Bottom20Text)
+            ]
+            : new List<GroupFilterModel>
+            {
+                new(x => x.ReportBy == ReportByConstant.CreditGroup, x => !x.IsDeposit),
+                new(x => x.ReportBy == ReportByConstant.LicenseeGroup, x => x.IsDeposit)
+            };
 
-        if (!data.Any())
-        {
-            return groups;
-        }
-
-        var firstTotal = total.FirstOrDefault(x => x.ReportBy == (isReportByTop20 ? ReportByConstant.Top20Text : ReportByConstant.CreditGroup));
-        var firstRawData = data.Where(x => (isReportByTop20 ? x.TopType == ReportByConstant.Top20Text : !x.IsDeposit));
-        var secondTotal = total.FirstOrDefault(x => x.ReportBy == (isReportByTop20 ? ReportByConstant.Bottom20Text : ReportByConstant.LicenseeGroup));
-        var secondRawData = data.Where(x => (isReportByTop20 ? x.TopType == ReportByConstant.Bottom20Text : x.IsDeposit));
-
-        if (firstRawData.Any())
-        {
-            var firstGroup = CalculateGroupStatisticWithTotal(firstRawData, firstTotal!, isReportByTop20);
-            groups.Add(firstGroup);
-        }
-
-        if (secondRawData.Any())
-        {
-            var secondGroup = CalculateGroupStatisticWithTotal(secondRawData, secondTotal!, isReportByTop20);
-            groups.Add(secondGroup);
-        }
-
-        return groups;
+        return ProcessGroupsWithFilters(data, total, groupFilters, isReportByTop20);
     }
 
     private IEnumerable<ReportModel> CalculateThreeStatisticsGroup(IEnumerable<BaseRawStatisticModel> data, IEnumerable<BaseRawStatisticModel> total)
+    {
+        var groupFilters = new List<GroupFilterModel>
+        {
+            new(x => x.ReportBy == ReportByConstant.Mobile, x => x.ReportById == ReportByConstant.Mobile),
+            new(x => x.ReportBy == ReportByConstant.NonMobile, x => x.ReportById == ReportByConstant.NonMobile),
+            new(x => x.ReportBy == ReportByConstant.Uncategorized, x => x.ReportById == ReportByConstant.Uncategorized)
+        };
+
+        return ProcessGroupsWithFilters(data, total, groupFilters, isGroupByReportBy: true);
+    }
+
+    private IEnumerable<ReportModel> ProcessGroupsWithFilters(
+        IEnumerable<BaseRawStatisticModel> data,
+        IEnumerable<BaseRawStatisticModel> total,
+        List<GroupFilterModel> groupFilters,
+        bool isGroupByReportBy)
     {
         var groups = new List<ReportModel>();
 
@@ -101,29 +105,16 @@ public class GridServiceImp(IDynamicRepository repository,
             return groups;
         }
 
-        var firstTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.Mobile);
-        var firstRawData = data.Where(x => x.ReportById == ReportByConstant.Mobile);
-        var secondTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.NonMobile);
-        var secondRawData = data.Where(x => x.ReportById == ReportByConstant.NonMobile);
-        var thirdTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.Uncategorized);
-        var thirdRawData = data.Where(x => x.ReportById == ReportByConstant.Uncategorized);
-
-        if (firstRawData.Any())
+        foreach (var filter in groupFilters)
         {
-            var firstGroup = CalculateGroupStatisticWithTotal(firstRawData, firstTotal!, true);
-            groups.Add(firstGroup);
-        }
+            var groupTotal = total.FirstOrDefault(filter.TotalFilter);
+            var groupRawData = data.Where(filter.DataFilter);
 
-        if (secondRawData.Any())
-        {
-            var secondGroup = CalculateGroupStatisticWithTotal(secondRawData, secondTotal!, true);
-            groups.Add(secondGroup);
-        }
-
-        if (thirdRawData.Any())
-        {
-            var thirdGroup = CalculateGroupStatisticWithTotal(thirdRawData, thirdTotal!, true);
-            groups.Add(thirdGroup);
+            if (groupRawData.Any() && groupTotal != null)
+            {
+                var group = CalculateGroupStatisticWithTotal(groupRawData, groupTotal, isGroupByReportBy);
+                groups.Add(group);
+            }
         }
 
         return groups;
