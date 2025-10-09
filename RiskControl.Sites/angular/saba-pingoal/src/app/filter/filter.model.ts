@@ -9,7 +9,8 @@ export enum ReportType {
     Hourly,
     Company,
     Top20,
-    UserName
+    UserName,
+    Device
 }
 
 export interface Column {

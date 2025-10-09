@@ -25,7 +25,7 @@ public class GridOptionDataRowBuilderServiceImp : GridOptionDataRowBuilderServic
             : new Columns
             {
                 Name = "ReportById",
-                Value = statistic.ReportById.ToString(),
+                Value = statistic.ReportById,
                 CellAlignment = HAlignment.Center,
             };
 

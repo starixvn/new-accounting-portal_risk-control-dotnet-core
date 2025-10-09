@@ -79,7 +79,7 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
         foreach (var group in statistics)
         {
             var customGroupAttributes = new { groupId = group.GrandTotal.ReportById, groupName = isReportTop20 ?
-                group.GrandTotal.ReportById : group.GrandTotal.SiteId };
+                group.GrandTotal.ReportById : group.GrandTotal.SiteId.ToString() };
             var totalRow = BuildFooter(group.GrandTotal, group.GrandTotal.ReportBy, HAlignment.Left, !isReportTop20).FirstOrDefault() ?? new GridDataRow();
             totalRow.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
             totalRow.RowType = RowType.ParentLevelOne;

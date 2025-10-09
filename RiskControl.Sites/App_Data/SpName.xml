@@ -136,5 +136,7 @@
 		<Setting Key="Acc_Rpt_SabaPingoal_Monthly" SpName="Acc_Rpt_SabaPingoal_Monthly" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_SabaPingoal_Top20" SpName="Acc_Rpt_SabaPingoal_Top20" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="Acc_Rpt_SabaPingoal_Username" SpName="Acc_Rpt_SabaPingoal_Username" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_Device" SpName="Acc_Rpt_SabaPingoal_Device" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="Acc_Rpt_SabaPingoal_Currency" SpName="Acc_Rpt_SabaPingoal_Currency" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 	</Function>
 </Functions>

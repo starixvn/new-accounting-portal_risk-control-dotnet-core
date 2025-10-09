@@ -10,7 +10,7 @@ public class BaseRawStatisticModel
 
     public int SiteId { get; set; }
 
-    public int ReportById { get; set; }
+    public string ReportById { get; set; }
 
     public string ReportBy { get; set; }
 

@@ -91,6 +91,8 @@ export class TitleService {
         return `Top 20 ${FilterHelper.getRoleName(filterModel.roleId)}`;
       case ReportType.UserName:
         return `${FilterHelper.getRoleName(filterModel.roleId)}`;
+      case ReportType.Device:
+        return ReportType[ReportType.Device];
       default:
           return ReportType[ReportType.Daily];
     }

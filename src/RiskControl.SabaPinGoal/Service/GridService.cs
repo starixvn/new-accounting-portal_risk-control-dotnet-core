@@ -46,7 +46,9 @@ public class GridServiceImp(IDynamicRepository repository,
         var rawData = await repository.FetchMultipleAsync<BaseRawStatisticModel, BaseRawStatisticModel>(criteria);
         var statistics = new ReportGroupModel
         {
-            Statistics = CalculateStatisticsGroup(rawData.Item1, rawData.Item2, isReportByTop20),
+            Statistics = queryModel.ReportBy == ReportByConstant.Device ? 
+                CalculateThreeStatisticsGroup(rawData.Item1, rawData.Item2)
+                : CalculateStatisticsGroup(rawData.Item1, rawData.Item2, isReportByTop20),
             GrandTotal = rawData.Item2.FirstOrDefault(x => x.ReportBy is ReportByConstant.GrandTotalRM or ReportByConstant.GrandTotalUSD)
         };
         if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
@@ -73,7 +75,7 @@ public class GridServiceImp(IDynamicRepository repository,
         var firstTotal = total.FirstOrDefault(x => x.ReportBy == (isReportByTop20 ? ReportByConstant.Top20Text : ReportByConstant.CreditGroup));
         var firstRawData = data.Where(x => (isReportByTop20 ? x.TopType == ReportByConstant.Top20Text : !x.IsDeposit));
         var secondTotal = total.FirstOrDefault(x => x.ReportBy == (isReportByTop20 ? ReportByConstant.Bottom20Text : ReportByConstant.LicenseeGroup));
-        var secondRawData =data.Where(x => (isReportByTop20 ? x.TopType == ReportByConstant.Bottom20Text : x.IsDeposit));
+        var secondRawData = data.Where(x => (isReportByTop20 ? x.TopType == ReportByConstant.Bottom20Text : x.IsDeposit));
 
         if (firstRawData.Any())
         {
@@ -90,10 +92,47 @@ public class GridServiceImp(IDynamicRepository repository,
         return groups;
     }
 
-    private ReportModel CalculateGroupStatisticWithTotal(
-        IEnumerable<BaseRawStatisticModel> rawData, BaseRawStatisticModel total, bool isReportByTop20)
+    private IEnumerable<ReportModel> CalculateThreeStatisticsGroup(IEnumerable<BaseRawStatisticModel> data, IEnumerable<BaseRawStatisticModel> total)
     {
-        return isReportByTop20
+        var groups = new List<ReportModel>();
+
+        if (!data.Any())
+        {
+            return groups;
+        }
+
+        var firstTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.Mobile);
+        var firstRawData = data.Where(x => x.ReportById == ReportByConstant.Mobile);
+        var secondTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.NonMobile);
+        var secondRawData = data.Where(x => x.ReportById == ReportByConstant.NonMobile);
+        var thirdTotal = total.FirstOrDefault(x => x.ReportBy == ReportByConstant.Uncategorized);
+        var thirdRawData = data.Where(x => x.ReportById == ReportByConstant.Uncategorized);
+
+        if (firstRawData.Any())
+        {
+            var firstGroup = CalculateGroupStatisticWithTotal(firstRawData, firstTotal!, true);
+            groups.Add(firstGroup);
+        }
+
+        if (secondRawData.Any())
+        {
+            var secondGroup = CalculateGroupStatisticWithTotal(secondRawData, secondTotal!, true);
+            groups.Add(secondGroup);
+        }
+
+        if (thirdRawData.Any())
+        {
+            var thirdGroup = CalculateGroupStatisticWithTotal(thirdRawData, thirdTotal!, true);
+            groups.Add(thirdGroup);
+        }
+
+        return groups;
+    }
+
+    private ReportModel CalculateGroupStatisticWithTotal(
+        IEnumerable<BaseRawStatisticModel> rawData, BaseRawStatisticModel total, bool isGroupByReportBy)
+    {
+        return isGroupByReportBy
             ? new ReportModel
             {
                 Statistics = rawData.GroupBy(g => new { g.ReportBy, g.ReportById }).Select(g => new GroupModel

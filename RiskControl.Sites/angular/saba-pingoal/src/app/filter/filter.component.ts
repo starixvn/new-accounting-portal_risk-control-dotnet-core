@@ -469,6 +469,8 @@ export class FilterComponent implements OnInit {
         return 'Company';
       case ReportType.Top20:
         return 'Username';
+      case ReportType.Device:
+        return 'Device';
     }
     return 'Sport';
   }
