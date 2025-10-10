@@ -93,6 +93,8 @@ export class TitleService {
         return `${FilterHelper.getRoleName(filterModel.roleId)}`;
       case ReportType.Device:
         return ReportType[ReportType.Device];
+      case ReportType.Currency:
+        return ReportType[ReportType.Currency];
       default:
           return ReportType[ReportType.Daily];
     }

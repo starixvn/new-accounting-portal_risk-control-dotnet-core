@@ -3,7 +3,7 @@ using Fanex.Data.Repository;
 
 namespace RiskControl.SabaPinGoal.Criteria;
 
-public class ReportCriteria : CriteriaBase
+public class BaseStatisticCriteria: CriteriaBase
 {
     public DateTime FromDate { get; set; }
 
@@ -24,10 +24,6 @@ public class ReportCriteria : CriteriaBase
     public string Device { get; set; }
 
     public bool IsExactly { get; set; }
-
-    public bool IsDrillDown { get; set; }
-
-    public bool IsGrandTotal { get; set; }
 
     [SpParam(Ignored = true)]
     public string ReportBy { get; set; }

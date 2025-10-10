@@ -471,6 +471,8 @@ export class FilterComponent implements OnInit {
         return 'Username';
       case ReportType.Device:
         return 'Device';
+      case ReportType.Currency:
+        return 'Currency';
     }
     return 'Sport';
   }

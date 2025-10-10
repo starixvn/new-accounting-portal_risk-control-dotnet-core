@@ -54,4 +54,6 @@ public class QueryModel
     public byte RoleId { get; set; }
 
     public int CustId { get; set; }
+
+    public bool DrillDownCurrency { get; set; }
 }
