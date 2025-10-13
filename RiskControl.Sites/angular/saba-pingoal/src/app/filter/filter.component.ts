@@ -423,6 +423,10 @@ export class FilterComponent implements OnInit {
   }
 
   private createModel() {
+    let reportType = this.selectedReportType;
+    if (reportType === ReportType.Top20 && this.username !== '') {
+      reportType = ReportType.UserName;
+    }
     const model: FilterModel = {
         fromDate: DateHelper.convertDateStructToMoment(this.startDate),
         toDate: DateHelper.convertDateStructToMoment(this.endDate),
@@ -432,7 +436,7 @@ export class FilterComponent implements OnInit {
         userName: this.username,
         sportBettype: this.selectedSports.join(','),
         leagueGroup: this.selectedLeagueGroups.join(','),
-        reportType: this.selectedReportType,
+        reportType: reportType,
         isExactly: this.exactMatching,
         removalColumns: this.columnDropdownTreeview.items
           .filter(item => item.checked === false)
