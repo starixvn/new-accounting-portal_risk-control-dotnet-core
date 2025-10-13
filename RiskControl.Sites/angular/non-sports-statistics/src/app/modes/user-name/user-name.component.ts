@@ -29,6 +29,7 @@ interface RowCustomAttribute {
   ReportById: number;
   SiteName: string;
   CurrencyId: number;
+  RoleId: number;
 }
 
 @Component({
@@ -82,7 +83,8 @@ export class UserNameComponent implements OnInit, ModeGenerate {
     $(gridElement).find('a[drill-down-user-name]').on('click', (event) => {
       const element = $(event.target);
       const userName = element.attr('user-name');
-      this.drillDownByUserName(userName);
+      const roleId = parseInt(element.attr('role-id'), 10);
+      this.drillDownByUserName(userName, roleId);
     });
 
     $(gridElement).find('a[house-position-taking]').on('click', (event) => {
@@ -248,34 +250,11 @@ export class UserNameComponent implements OnInit, ModeGenerate {
     this.modeController.forward(this.gridOptions, modeContext);
   }
 
-  private drillDownByUserName(userName: string) {
-    const filterModel = this.modeContext.filterModel;
-    const gridModel = this.modeContext.gridModel as UserNameGridModel;
-    switch (filterModel.roleId) {
-      case RoleId.Super:
-        if (gridModel.isDrillDownFromUserName) {
-          this.drillDownUserName(userName, RoleId.Master);
-        } else {
-          this.drillDownUserName(userName, RoleId.Super);
-        }
-        break;
-      case RoleId.Master:
-        if (gridModel.isDrillDownFromUserName) {
-          this.drillDownUserName(userName, RoleId.Agent);
-        } else {
-          this.drillDownUserName(userName, RoleId.Master);
-        }
-        break;
-      case RoleId.Agent:
-        if (gridModel.isDrillDownFromUserName) {
-          this.drillDownByMember(userName);
-        } else {
-          this.drillDownUserName(userName, RoleId.Agent);
-        }
-        break;
-      case RoleId.Member:
-        this.drillDownByMember(userName);
-        break;
+  private drillDownByUserName(userName: string, roleId: number) {
+    if (roleId === RoleId.Member) {
+      this.drillDownByMember(userName);
+    } else {
+      this.drillDownUserName(userName, roleId);
     }
   }
 
@@ -382,7 +361,8 @@ export class UserNameComponent implements OnInit, ModeGenerate {
         if (column.name === reportByColumn.value) {
           const customAttribute = JSON.parse(row.customAttr) as RowCustomAttribute;
           const userName = customAttribute.ReportBy;
-          column.value = `<a href="javascript:;" drill-down-user-name user-name='${userName}'>${userName}</a>`;
+          const roleId = customAttribute.RoleId;
+          column.value = `<a href="javascript:;" drill-down-user-name user-name='${userName}' role-id='${roleId}'>${userName}</a>`;
         }
       }
     });
