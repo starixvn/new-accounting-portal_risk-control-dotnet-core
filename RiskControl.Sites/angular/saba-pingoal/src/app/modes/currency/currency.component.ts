@@ -8,7 +8,7 @@ import { CurrencyService } from './currency.service';
 import { CurrencyQueryModel, CurrencyGridModel } from './currency.model';
 import { ModeContext } from '../mode-context';
 import { ModeController } from '../mode-controller';
-import { ModeGenerate } from '../mode.model';
+import { ModeGenerate, RowAttribute } from '../mode.model';
 import { GrandTotalService } from '../common/grand-total.service';
 import { ReportType } from '../../filter/filter.model';
 
@@ -107,6 +107,7 @@ export class CurrencyComponent implements OnInit, ModeGenerate {
     filterModel.sortColumnName = '';
     filterModel.sortDirection = '';
     filterModel.headerText = "Company";
+    filterModel.currency = currency.toString();
     filterModel.reportType = ReportType.Company;
     const modeContext = ModeContext.create(title, filterModel, new CurrencyGridModel(true, currency));
     this.modeController.forward(this.gridOptions, modeContext);
@@ -145,7 +146,8 @@ export class CurrencyComponent implements OnInit, ModeGenerate {
   private updateCurrencyColumn(gridOptions: GridOptions) {
     gridOptions.bodyRows.forEach(row => {
       const column = row.columns[0];
-      const currency = column.customAttr;
+      const customAttribute = JSON.parse(row.customAttr) as RowAttribute;
+      const currency = customAttribute.currencyId;
       column.value = `<a href="javascript:;" drill-down-company currency="${currency}">${column.value}</a>`;
     });
   }

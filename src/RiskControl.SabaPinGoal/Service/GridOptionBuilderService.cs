@@ -132,7 +132,8 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
             var dataRow = gridOptionDataRowBuilderService.BuildBaseDataRow(item, isOfPlayersColumn);
             var groupName = dailyStatistics.GroupName;
             var roleId = item.RoleId;
-            var customGroupAttributes = new { groupName, roleId };
+            var currencyId = item.CurrencyId;
+            var customGroupAttributes = new { groupName, roleId, currencyId };
             dataRow.CustomAttr = JsonConvert.SerializeObject(customGroupAttributes);
 
             if (i == 0)
