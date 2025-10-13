@@ -106,7 +106,7 @@ namespace RiskControl.NonSportsGamesStatistics.UserNameView.Main
                     CellAlignment = HAlignment.Center
                 });
 
-            dataRow.CustomAttr = JsonConvert.SerializeObject(new { statistic.ReportBy, statistic.ReportById, statistic.SiteName, statistic.CurrencyId });
+            dataRow.CustomAttr = JsonConvert.SerializeObject(new { statistic.ReportBy, statistic.ReportById, statistic.SiteName, statistic.CurrencyId, statistic.RoleId });
             return dataRow;
         }
 
