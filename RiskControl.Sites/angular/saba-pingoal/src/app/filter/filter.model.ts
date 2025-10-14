@@ -70,6 +70,7 @@ export interface FilterModel {
     companyList: CompanyModel[];
     leagueId: string;
     roleId: number;
+    drillDownCurrency: string;
 }
 
 export interface UsernameValidationModel {

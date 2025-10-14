@@ -158,9 +158,7 @@ export class Top20Component implements OnInit, ModeGenerate {
 
   private updateGridOptions(gridOptions: GridOptions, queryModel: Top20BaseQueryModel, isBack: boolean) {
     if (!isBack && gridOptions.bodyRows.length > 0 && !this.gridService.isDrilldown()) {
-      if (this.hasDrillDownOnUserName()) {
-        this.updateUserNameColumn(gridOptions);
-      }
+      this.updateUserNameColumn(gridOptions);
       if (this.gridService.hasCurrencyColumn()) {
         this.updateCurrencyColumn(gridOptions);
       }
@@ -176,18 +174,6 @@ export class Top20Component implements OnInit, ModeGenerate {
         (sortColumnName: string, sortDirection: string) => this.sort(queryModel, sortColumnName, sortDirection)
     };
     this.gridOptions = gridOptions;
-  }
-
-  private hasDrillDownOnUserName(): boolean {
-    const filterModel = this.modeContext.filterModel;
-    const gridModel = this.modeContext.gridModel as UserNameGridModel;
-    const isViewMember = filterModel.roleId === RoleId.Member
-      || (filterModel.roleId === RoleId.Agent && gridModel.isDrillDownFromUserName);
-    if (isViewMember) {
-      return this.gridService.hasDrillDownHourly();
-    }
-
-    return true;
   }
 
   private updateUserNameColumn(gridOptions: GridOptions) {

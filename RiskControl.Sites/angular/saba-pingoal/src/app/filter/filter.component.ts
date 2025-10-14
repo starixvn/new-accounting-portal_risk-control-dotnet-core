@@ -452,7 +452,8 @@ export class FilterComponent implements OnInit {
         sportList: this.sports,
         companyList: this.companies,
         leagueId: '',
-        roleId: this.roleId
+        roleId: this.roleId,
+        drillDownCurrency: ''
       }
       return model;
     }

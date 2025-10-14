@@ -32,15 +32,15 @@ public class DailyGridOptionBuilderServiceImp(GridOptionDataRowBuilderService gr
             });
             
         });
-        var isReportByUserName = queryModel.ReportBy == ReportByConstant.UserName;
+        var isDisplayedNoOfPlayersColumn = queryModel.ReportBy != ReportByConstant.UserName || queryModel.IsGrandTotal;
         var gridOptions = new GridOptions
         {
             ShowTitle = true,
             TitleType = TitleType.TwoLineBlue,
             TitleInfoText = queryModel.Title,
-            BodyRows = BuildBodyRows(statistics.Statistics, !isReportByUserName),
-            FooterRows = BuildFooter(statistics.GrandTotal, $"Grand Total {statistics.GrandTotal.Currency}", HAlignment.Right, !isReportByUserName),
-            Columns = headerBuilderService.BuildHeaderColumns(queryModel, !isReportByUserName),
+            BodyRows = BuildBodyRows(statistics.Statistics, isDisplayedNoOfPlayersColumn),
+            FooterRows = BuildFooter(statistics.GrandTotal, $"Grand Total {statistics.GrandTotal.Currency}", HAlignment.Right, isDisplayedNoOfPlayersColumn),
+            Columns = headerBuilderService.BuildHeaderColumns(queryModel, isDisplayedNoOfPlayersColumn),
             ShowFooter = true,
             ShowHighlightRow = false,
             ShowDistinctRow = false

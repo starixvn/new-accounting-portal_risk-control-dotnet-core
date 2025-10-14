@@ -160,10 +160,7 @@ export class UserNameComponent implements OnInit, ModeGenerate {
 
   private updateGridOptions(gridOptions: GridOptions, queryModel: UserNameBaseQueryModel, isBack: boolean) {
     if (!isBack && gridOptions.bodyRows.length > 0 && !this.gridService.isDrilldown()) {
-      if (this.hasDrillDownOnUserName()) {
-        this.updateUserNameColumn(gridOptions);
-      }
-
+      this.updateUserNameColumn(gridOptions);
       this.updateGrandTotalCell(gridOptions);
     }
 
@@ -189,18 +186,6 @@ export class UserNameComponent implements OnInit, ModeGenerate {
         (sortColumnName: string, sortDirection: string) => this.sort(queryModel, sortColumnName, sortDirection)
     };
     this.gridOptions = gridOptions;
-  }
-
-  private hasDrillDownOnUserName(): boolean {
-    const filterModel = this.modeContext.filterModel;
-    const gridModel = this.modeContext.gridModel as UserNameGridModel;
-    const isViewMember = filterModel.roleId === RoleId.Member
-      || (filterModel.roleId === RoleId.Agent && gridModel.isDrillDownFromUserName);
-    if (isViewMember) {
-      return this.gridService.hasDrillDownHourly();
-    }
-
-    return true;
   }
 
   private afterPaged() {

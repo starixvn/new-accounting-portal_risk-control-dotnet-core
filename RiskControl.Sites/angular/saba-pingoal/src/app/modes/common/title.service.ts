@@ -113,11 +113,13 @@ export class TitleService {
 
   private getCurrencyName() {
     const filterModel = this.modeContext.filterModel;
-    if (filterModel.currency.split(',').length > 1) {
+    const currency = filterModel.drillDownCurrency !== '' ? filterModel.drillDownCurrency : filterModel.currency;
+    if (currency.split(',').length > 1) {
       return 'Original currency';
     } else {
       const filterModelWrapper = new FilterModelWrapper(filterModel);
-      return filterModelWrapper.getCurrencyName(parseInt(filterModel.currency));
+      
+      return filterModelWrapper.getCurrencyName(parseInt(currency));
     }
     return '';
   }

@@ -27,7 +27,7 @@ public class GridServiceImp(IDynamicRepository repository,
         var statistics = new ReportModel
         {
             Statistics = GetGroupData(rawData.Item1, IsReportFromSport(queryModel.ReportBy), queryModel.IsGrandTotal),
-            GrandTotal = rawData.Item2.FirstOrDefault()
+            GrandTotal = rawData.Item2.FirstOrDefault() ?? new BaseRawStatisticModel()
         };
         if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
         {
@@ -50,6 +50,7 @@ public class GridServiceImp(IDynamicRepository repository,
                 CalculateThreeStatisticsGroup(rawData.Item1, rawData.Item2)
                 : CalculateStatisticsGroup(rawData.Item1, rawData.Item2, isReportByTop20),
             GrandTotal = rawData.Item2.FirstOrDefault(x => x.ReportBy is ReportByConstant.GrandTotalRM or ReportByConstant.GrandTotalUSD)
+                         ?? new BaseRawStatisticModel()
         };
         if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
         {
