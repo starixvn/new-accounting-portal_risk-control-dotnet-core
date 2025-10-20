@@ -29,4 +29,5 @@ export interface QueryModel {
     headerText: string;
     removalColumns: string[];
     leagueId: string;
+    drillDownCurrency: number;
 }

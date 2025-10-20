@@ -7,6 +7,10 @@ import { SportComponent } from './sport';
 import { HourlyComponent } from './hourly';
 import { MonthlyComponent } from './monthly';
 import { CompanyComponent } from './company';
+import { Top20Component } from './top20';
+import { UserNameComponent } from './user-name';
+import { DeviceComponent } from './device';
+import { CurrencyComponent } from './currency';
 
 @Injectable()
 export class ModeService {
@@ -17,7 +21,11 @@ export class ModeService {
     { reportType: ReportType.League, componentName: SportComponent },
     { reportType: ReportType.BetType, componentName: SportComponent },
     { reportType: ReportType.Hourly, componentName: HourlyComponent },
-    { reportType: ReportType.Company, componentName: CompanyComponent }
+    { reportType: ReportType.Company, componentName: CompanyComponent },
+    { reportType: ReportType.Device, componentName: DeviceComponent },
+    { reportType: ReportType.Top20, componentName: Top20Component },
+    { reportType: ReportType.UserName, componentName: UserNameComponent },
+    { reportType: ReportType.Currency, componentName: CurrencyComponent }
   ];
   getComponent(reportType: ReportType): Type<ModeGenerate> {
     const component = _.find(this.componentListItems, function (componentItem) {

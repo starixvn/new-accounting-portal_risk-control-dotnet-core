@@ -11,6 +11,8 @@ export interface RowAttribute {
   roleId: number;
   groupName : string;
   siteId: string;
+  groupId : string;
+  currencyId: number;
 }
 
 export class GridModel {

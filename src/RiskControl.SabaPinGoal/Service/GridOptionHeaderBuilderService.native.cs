@@ -7,15 +7,32 @@ namespace RiskControl.SabaPinGoal.Service;
 
 public interface GridOptionHeaderBuilderService
 {
-    List<HeaderColumns> BuildHeaderColumns(QueryModel queryModel);
+    List<HeaderColumns> BuildHeaderColumns(QueryModel queryModel, bool isNoOfPlayersColumn);
 
     List<HeaderColumns> BuildGrandTotalHeaderColumns(bool viewByInteger);
 }
 
 public class GridOptionHeaderBuilderServiceImp : GridOptionHeaderBuilderService
 {
-    public List<HeaderColumns> BuildHeaderColumns(QueryModel queryModel)
+    public List<HeaderColumns> BuildHeaderColumns(QueryModel queryModel, bool isNoOfPlayersColumn)
     {
+        var secondHeaderColumn = isNoOfPlayersColumn ?
+            new HeaderColumns
+            {
+                HeaderText = "No. Players",
+                Width = HeaderColumnConstant.WIDTH_100,
+                Name = "NoOfPlayers",
+                CustomCellType = ExcelCellType.Integer,
+                Sort = true,
+                SortDirection = queryModel.SortColumnName == "NoOfPlayers" ? queryModel.SortDirection : string.Empty
+            }
+            :
+            new HeaderColumns
+            {
+                HeaderText = "CustID",
+                Width = HeaderColumnConstant.WIDTH_100,
+                Name = "ReportById"
+            };
         return
         [
             new HeaderColumns
@@ -25,13 +42,7 @@ public class GridOptionHeaderBuilderServiceImp : GridOptionHeaderBuilderService
                 ShowCollapseExpand = true
             },
 
-            new HeaderColumns
-            {
-                HeaderText = "No. Players", Width = HeaderColumnConstant.WIDTH_100, Name = "NoOfPlayers",
-                CustomCellType = ExcelCellType.Integer,
-                Sort = true,
-                SortDirection = queryModel.SortColumnName == "NoOfPlayers" ? queryModel.SortDirection : string.Empty
-            },
+            secondHeaderColumn,
 
             new HeaderColumns
             {

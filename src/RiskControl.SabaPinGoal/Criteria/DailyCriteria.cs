@@ -1,6 +1,6 @@
 ﻿namespace RiskControl.SabaPinGoal.Criteria;
 
-public class DailyCriteria : ReportCriteria
+public class DailyCriteria : StatisticCriteria
 {
     public bool UsernameDrillDown { get; set; }
 }

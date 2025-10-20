@@ -7,20 +7,31 @@ namespace RiskControl.SabaPinGoal.Service;
 
 public interface GridOptionDataRowBuilderService
 {
-    GridDataRow BuildBaseDataRow(BaseRawStatisticModel statistic);
+    GridDataRow BuildBaseDataRow(BaseRawStatisticModel statistic, bool isOfPlayersColumn);
 }
 
 public class GridOptionDataRowBuilderServiceImp : GridOptionDataRowBuilderService
 {
-    public GridDataRow BuildBaseDataRow(BaseRawStatisticModel statistic)
+    public GridDataRow BuildBaseDataRow(BaseRawStatisticModel statistic, bool isOfPlayersColumn)
     {
+        var firstColumn = isOfPlayersColumn
+            ? new Columns
+            {
+                Name = "NoOfPlayers",
+                Value = statistic.NoOfPlayers,
+                CellAlignment = HAlignment.Right,
+                CustomCellType = ExcelCellType.Integer
+            }
+            : new Columns
+            {
+                Name = "ReportById",
+                Value = statistic.ReportById,
+                CellAlignment = HAlignment.Center,
+            };
+
         var columns = new List<Columns>
         {
-            new()
-            {
-                Name = "NoOfPlayers", Value = statistic.NoOfPlayers,
-                CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Integer
-            },
+            firstColumn,
             new()
             {
                 Name = "BetCount", Value = statistic.BetCount,

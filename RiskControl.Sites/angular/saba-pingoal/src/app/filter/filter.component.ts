@@ -12,6 +12,7 @@ import { TreeViewBuilderService } from './treeview-builder.service';
 import * as _ from 'lodash';
 import { RoleId } from '../common/model';
 import { UserNameSuggestionTextboxComponent } from './user-name-suggestion';
+import { FilterHelper } from './filter-helper';
 
 class CurrencyHelper {
   private readonly currenciesWithoutAll: Currency[];
@@ -137,7 +138,9 @@ export class FilterComponent implements OnInit {
   });
   reportTypeSelectItems = this.filterService.getReportSelectItems().filter(x => x.visible);
   selectedReportType: ReportType = ReportType.Daily;
-  reportRoleId!: RoleId.Member;
+  reportRoleId = RoleId.Member;
+  roleId = RoleId.Member;
+  top20RoleSelectItems = FilterHelper.getRoleSelectItems();
   private currencyHelper!: CurrencyHelper;
   private isGenerate!: boolean;
   private readonly valueRequired = 'Value is required!';
@@ -230,6 +233,12 @@ export class FilterComponent implements OnInit {
 
   onSportChange(event: SportModel[]) {
     
+  }
+
+  onTop20RoleIdChange(roleId: RoleId) {
+    this.roleId = roleId;
+    this.reportRoleId = roleId ?? RoleId.Member;
+    this.userNameSuggestion.reset();
   }
 
   getCurrencies() {
@@ -345,6 +354,10 @@ export class FilterComponent implements OnInit {
     this.generate.emit(model);
   }
 
+  get isSelectedTop20Report(): boolean {
+    return this.selectedReportType === ReportType.Top20;
+  }
+
   private get isValidSport(): boolean {
     if (this.selectedSports.length === 0) {
       this.toastService.activate(`Please select at least one sport!`);
@@ -410,6 +423,10 @@ export class FilterComponent implements OnInit {
   }
 
   private createModel() {
+    let reportType = this.selectedReportType;
+    if (reportType === ReportType.Top20 && this.username !== '') {
+      reportType = ReportType.UserName;
+    }
     const model: FilterModel = {
         fromDate: DateHelper.convertDateStructToMoment(this.startDate),
         toDate: DateHelper.convertDateStructToMoment(this.endDate),
@@ -419,7 +436,7 @@ export class FilterComponent implements OnInit {
         userName: this.username,
         sportBettype: this.selectedSports.join(','),
         leagueGroup: this.selectedLeagueGroups.join(','),
-        reportType: this.selectedReportType,
+        reportType: reportType,
         isExactly: this.exactMatching,
         removalColumns: this.columnDropdownTreeview.items
           .filter(item => item.checked === false)
@@ -434,7 +451,9 @@ export class FilterComponent implements OnInit {
         currencyList: this.currencyHelper ? this.currencyHelper.getAllOfCurrencies() : [],
         sportList: this.sports,
         companyList: this.companies,
-        leagueId: ''
+        leagueId: '',
+        roleId: this.roleId,
+        drillDownCurrency: ''
       }
       return model;
     }
@@ -453,6 +472,12 @@ export class FilterComponent implements OnInit {
         return 'Month';
       case ReportType.Company:
         return 'Company';
+      case ReportType.Top20:
+        return 'Username';
+      case ReportType.Device:
+        return 'Device';
+      case ReportType.Currency:
+        return 'Currency';
     }
     return 'Sport';
   }

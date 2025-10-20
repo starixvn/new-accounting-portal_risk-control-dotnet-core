@@ -87,6 +87,14 @@ export class TitleService {
         return ReportType[ReportType.Monthly];
       case ReportType.Company:
         return ReportType[ReportType.Company];
+      case ReportType.Top20:
+        return `Top 20 ${FilterHelper.getRoleName(filterModel.roleId)}`;
+      case ReportType.UserName:
+        return `${FilterHelper.getRoleName(filterModel.roleId)}`;
+      case ReportType.Device:
+        return ReportType[ReportType.Device];
+      case ReportType.Currency:
+        return ReportType[ReportType.Currency];
       default:
           return ReportType[ReportType.Daily];
     }
@@ -105,11 +113,13 @@ export class TitleService {
 
   private getCurrencyName() {
     const filterModel = this.modeContext.filterModel;
-    if (filterModel.currency.split(',').length > 1) {
+    const currency = filterModel.drillDownCurrency !== '' ? filterModel.drillDownCurrency : filterModel.currency;
+    if (currency.split(',').length > 1) {
       return 'Original currency';
     } else {
       const filterModelWrapper = new FilterModelWrapper(filterModel);
-      return filterModelWrapper.getCurrencyName(parseInt(filterModel.currency));
+      
+      return filterModelWrapper.getCurrencyName(parseInt(currency));
     }
     return '';
   }

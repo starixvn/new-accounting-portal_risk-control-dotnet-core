@@ -68,7 +68,7 @@ export class AppComponent {
     } else {
       this.modeContexts[this.modeContexts.length - 1].label = modeContext.label;
     }
-    if (this.modeContexts.length > 2) {
+    if (this.modeContexts.length > 2 && this.isReportBySport(modeContext.filterModel.reportType)) {
       const tempLabel = this.modeContexts[this.modeContexts.length - 2].label;
       this.modeContexts[this.modeContexts.length - 2].label = this.modeContexts[this.modeContexts.length - 1].label;
       this.modeContexts[this.modeContexts.length - 1].label = tempLabel;

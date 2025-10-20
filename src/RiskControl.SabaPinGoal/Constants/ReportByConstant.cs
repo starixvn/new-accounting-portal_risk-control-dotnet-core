@@ -8,9 +8,27 @@ public static class ReportByConstant
 
     public const string BetType = "BetType";
 
+    public const string UserName = "UserName";
+
+    public const string Company = "Company";
+
+    public const string Device = "Device";
+
     public const string CreditGroup = "Credit Group";
 
     public const string LicenseeGroup = "Licensee Group";
+
+    public const string Top20 = "Top20";
+
+    public const string Top20Text = "Top 20";
+
+    public const string Bottom20Text = "Bottom 20";
+
+    public const string NonMobile = "Non-mobile";
+
+    public const string Mobile = "Mobile";
+
+    public const string Uncategorized = "Uncategorized";
 
     public const string GrandTotalRM = "GrandTotalRM";
 

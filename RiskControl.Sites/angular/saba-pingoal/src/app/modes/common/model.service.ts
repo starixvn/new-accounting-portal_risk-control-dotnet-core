@@ -43,7 +43,8 @@ export class ModelService {
             userNameDrillDown: false,
             headerText: filterModel.headerText,
             removalColumns: filterModel.removalColumns,
-            leagueId: filterModel.leagueId
+            leagueId: filterModel.leagueId,
+            drillDownCurrency: filterModel.drillDownCurrency == '' ? 0 : parseInt(filterModel.drillDownCurrency, 10)
         };
         const model: QueryModel = Helper.extend(baseModel, this.createCriteria(filterModel));
         return model;
