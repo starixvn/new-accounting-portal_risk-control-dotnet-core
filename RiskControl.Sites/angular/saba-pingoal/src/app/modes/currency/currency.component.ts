@@ -107,9 +107,8 @@ export class CurrencyComponent implements OnInit, ModeGenerate {
     filterModel.sortColumnName = '';
     filterModel.sortDirection = '';
     filterModel.headerText = "Company";
-    filterModel.reportType = ReportType.Company;
-    filterModel.drillDownCurrency = filterModel.currency;
-    filterModel.currency = currency.toString();
+    filterModel.reportType = ReportType.Currency;
+    filterModel.drillDownCurrency = currency.toString();
     const modeContext = ModeContext.create(title, filterModel, new CurrencyGridModel(true, currency));
     this.modeController.forward(this.gridOptions, modeContext);
   }

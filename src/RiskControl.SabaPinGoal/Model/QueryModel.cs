@@ -55,5 +55,5 @@ public class QueryModel
 
     public int CustId { get; set; }
 
-    public bool DrillDownCurrency { get; set; }
+    public int DrillDownCurrency { get; set; }
 }

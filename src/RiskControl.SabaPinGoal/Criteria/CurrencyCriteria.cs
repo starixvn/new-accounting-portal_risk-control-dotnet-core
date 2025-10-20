@@ -2,7 +2,7 @@
 
 public class CurrencyCriteria: BaseStatisticCriteria
 {
-    public bool DrillDownCurrency { get; set; }
+    public int DrillDownCurrency { get; set; }
 
     public bool IsGrandTotal { get; set; }
 }
