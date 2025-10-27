@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FilterModel, Product, RuleTitle } from './filter.model';
 import { FilterService } from './filter.service';
 import { TreeviewConfig } from 'ngx-treeview';
-import { ToastService } from 'nap-components/toast';
+import { MessageType, ToastService } from 'nap-components/toast';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RuleComponent } from '../rule/rule.component';
 import { SharedDataService } from '../../common/shared-data.service';
@@ -89,6 +89,9 @@ export class FilterComponent implements OnInit {
       }
       if (isSearched) {
         this.search(rule);
+      }
+      else {
+        this.toastService.activate('The Rule has been added successfully!!!', MessageType.Success);
       }
     });
   }
