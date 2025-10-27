@@ -1,3 +1,5 @@
+import { RuleAction } from "../../common/constants";
+
 export interface RuleTitle {
     constantKey: number;
     ruleTitle: string;
@@ -13,4 +15,10 @@ export interface Product {
 export interface SettingCriteria {
     productIdList: string;
     constantKeyList: string;
+}
+
+export interface FilterModel {
+    productIdList: string;
+    constantKeyList: string;
+    action: RuleAction;
 }

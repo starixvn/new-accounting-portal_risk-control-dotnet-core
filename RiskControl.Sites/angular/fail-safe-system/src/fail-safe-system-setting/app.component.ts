@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SettingCriteria } from './filter/filter.model';
+import { FilterModel } from './filter/filter.model';
 import { AppService } from './app.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  settingCriteria: SettingCriteria | undefined;
+  filterModel: FilterModel | undefined;
   hasHostPermission: boolean = false;
 
   constructor(private readonly appService: AppService){}
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     this.appService.getHostPermission().subscribe(hostPermission => this.hasHostPermission = hostPermission);
   }
 
-  generate(settingCriteria: SettingCriteria): void {
-    this.settingCriteria = settingCriteria;
+  generate(filterModel: FilterModel): void {
+    this.filterModel = filterModel;
   }
 }

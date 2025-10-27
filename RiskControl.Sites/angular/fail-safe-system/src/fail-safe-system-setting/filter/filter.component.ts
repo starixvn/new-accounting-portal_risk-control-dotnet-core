@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Product, RuleTitle, SettingCriteria } from './filter.model';
+import { FilterModel, Product, RuleTitle } from './filter.model';
 import { FilterService } from './filter.service';
 import { TreeviewConfig } from 'ngx-treeview';
 import { ToastService } from 'nap-components/toast';
@@ -14,10 +14,11 @@ import { RuleAction } from '../../common/constants';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
-  @Output() valueChange = new EventEmitter<SettingCriteria>();
+  @Output() valueChange = new EventEmitter<FilterModel>();
   @Input() hasHostPermission: boolean = false;
   ruleTitleItems: RuleTitle[] = [];
   selectedRuleTitles: number[] = [];
+  isSearched: boolean = false;
 
   productItems: Product[] = [];
   selectedProducts: number[] = [];
@@ -40,18 +41,20 @@ export class FilterComponent implements OnInit {
     this.filterService.getProducts().subscribe(products => this.productItems = products);
     this.sharedDataService.selectedRuleData$.subscribe( rule => {
       if (rule !== RuleAction.None) {
-        this.updateRuleTitleFilter();
+        this.updateRuleTitleFilter(rule, this.isSearched);
       }
     })
   }
 
-  search(): void {
+  search(ruleAction: RuleAction): void {
     if (this.isValid()) {
-      const criteria: SettingCriteria = {
+      const filterModel: FilterModel = {
         productIdList: this.selectedProducts.join(','),
-        constantKeyList: this.selectedRuleTitles.join(',')
+        constantKeyList: this.selectedRuleTitles.join(','),
+        action: ruleAction
       };
-      this.valueChange.emit(criteria);
+      this.valueChange.emit(filterModel);
+      this.isSearched = true;
     }
   }
 
@@ -73,15 +76,19 @@ export class FilterComponent implements OnInit {
     window.open(url);
   }
 
-  private updateRuleTitleFilter(): void {
+  private updateRuleTitleFilter(rule: RuleAction, isSearched: boolean): void {
     this.filterService.getRuleTitles().subscribe(rules => {
       if (this.ruleTitleItems.length === this.selectedRuleTitles.length) {
         this.ruleTitleItems = rules;
+        this.selectedRuleTitles = rules.map(r => r.constantKey);
       } else {
         rules.forEach(r => {
            r.checked = this.selectedRuleTitles.indexOf(r.constantKey) > -1;
         });
         this.ruleTitleItems = rules;
+      }
+      if (isSearched) {
+        this.search(rule);
       }
     });
   }
