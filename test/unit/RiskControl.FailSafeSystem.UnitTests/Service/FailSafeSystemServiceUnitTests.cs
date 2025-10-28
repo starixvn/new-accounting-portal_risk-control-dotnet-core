@@ -157,9 +157,9 @@ public class FailSafeSystemServiceUnitTests
         var actualResults = await service.GetManageProductStatus(new ManageProductStatusCriteria());
 
         // Assert
-        Assert.Equal(2, actualResults.Count());
-        Assert.Equal("Number Game", actualResults.First().ProductName);
-        Assert.Equal(4, actualResults.ElementAt(1).ProductId);
+        Assert.Equal(3, actualResults.Count());
+        Assert.Equal(1, actualResults.First().Items.Count());
+        Assert.Equal(3, actualResults.ElementAt(1).ProductId);
     }
 
     [Fact]

@@ -27,7 +27,7 @@ public interface FailSafeSystemService
 
     Task<IEnumerable<MonitorModel>> GetMonitors(MonitorCriteria criteria);
 
-    Task<IEnumerable<ManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria);
+    Task<IEnumerable<GroupedManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria);
 
     Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria);
 
@@ -99,18 +99,25 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
         return data;
     }
 
-    public async Task<IEnumerable<ManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria)
+    public async Task<IEnumerable<GroupedManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria)
     {
-        var result = await repository.FetchAsync<ManageProductStatusModel>(criteria);
-        result.ToList().ForEach(item =>
+        var rawData = await repository.FetchAsync<ManageProductStatusModel>(criteria);
+        rawData.ToList().ForEach(item =>
         {
             var apiResult = SafeDeserialize(item.LastAPIResponseMessage, DefaultApiResult);
             item.Status = GetStatus(apiResult, item.LastActionType);
         });
+        var groups = rawData.GroupBy(g => g.ProductId);
+        var result = groups.Select(group => new GroupedManageProductStatusModel
+        {
+            ProductId = group.Key, 
+            Items = group.OrderBy(o => o.Status)
+                .ThenByDescending(o => o.LastUpdated)
+                .ThenBy(o => o.SportType)
+        }).ToList();
         return result.OrderBy(o => o.Status)
             .ThenByDescending(o => o.LastUpdated)
-            .ThenBy(o => o.ProductId)
-            .ThenBy(o => o.SportType);
+            .ThenBy(o => o.ProductId);
     }
 
     public async Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria)
@@ -159,10 +166,10 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
     {
         if (actionType == "Enable")
         {
-            return model is { ErrorCode: 0 or 1012 } ? "Enabled" : "Disabled";
+            return model is { ErrorCode: 0 or 1012 } ? StatusConstants.Enabled : StatusConstants.Disabled;
         }
 
-        return model is { ErrorCode: 0 or 1011 } ? "Disabled" : "Enabled";
+        return model is { ErrorCode: 0 or 1011 } ? StatusConstants.Disabled : StatusConstants.Enabled;
     }
 
     private static string GetReachedRule(IEnumerable<MonitorCriteriaModel> criterias, int ruleId)

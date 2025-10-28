@@ -7,6 +7,12 @@ export interface GridModel {
     status: string;
 }
 
+export interface GroupedGridModel {
+    productId: number;
+    status: string;
+    items: GridModel[];
+}
+
 export interface ApiResultModel {
     statusCode: number;
     errorCode: number;

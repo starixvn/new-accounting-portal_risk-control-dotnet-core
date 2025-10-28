@@ -20,19 +20,36 @@
       </tr>
     </thead>
   </ng-template>
-  <ng-template #rowItem let-item="item" let-index="index">
-    <tr>
-        <td class="text-center">{{index}}</td>
-        <td>{{item.productName}}</td>
-        <td>{{item.sportName}}</td>
-        <td>{{item.lastUpdated | date: 'MM/dd/yyyy hh:mm:ss aa'}}</td>
-        <td *ngIf="item.status === 'Enabled'" class="text-center">Enabled</td>
-        <td *ngIf="item.status === 'Disabled' && hasHostPermission" class="text-center link" (click)="enableSport(item.sportType, item.productId)">Disabled</td>
-        <td *ngIf="item.status === 'Disabled' && !hasHostPermission" class="text-center">Disabled</td>
-        <td class="text-center">
-            <i class="fa fa-history fa-2x" title="View History" aria-hidden="true" (click)="onShowHistory(item)"></i>
-        </td>
+  <ng-template #rowGroup let-item="item" let-total="totalItems" let-index="index">
+    <tr [ngClass]="{'striped': index % 2 === 0}">
+        <td class="text-center" [attr.rowspan]="total">{{index}}</td>
+        <td [attr.rowspan]="total">{{item[0].productName}}</td>
+        <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item[0] }">
+        </ng-template>
     </tr>
+    <ng-container *ngIf="total > 1">
+          <ng-container *ngFor="let subItem of item.slice(1)">
+            <tr [ngClass]="{'striped': index % 2 === 0}">
+              <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: subItem }">
+              </ng-template>
+            </tr>
+          </ng-container>
+      </ng-container>
+  </ng-template>
+  <ng-template #rowItem let-item="item">
+      <td>{{item.sportName}}</td>
+      <td>{{item.lastUpdated | date: 'MM/dd/yyyy hh:mm:ss aa'}}</td>
+      <td *ngIf="item.status === 'Enabled'" class="text-center">Enabled</td>
+      <td *ngIf="item.status === 'Disabled' && hasHostPermission"
+        title="Click to enable the sport"
+        class="text-center link"
+        (click)="enableSport(item.sportType, item.productId)">
+        Disabled
+      </td>
+      <td *ngIf="item.status === 'Disabled' && !hasHostPermission" class="text-center">Disabled</td>
+      <td class="text-center">
+          <i class="fa fa-history fa-2x" title="View History" aria-hidden="true" (click)="onShowHistory(item)"></i>
+      </td>
   </ng-template>
   <div *ngIf="gridData" [ngSwitch]="gridData.length > 0">
     <div class="nap-grid">
@@ -44,11 +61,15 @@
           </table>
         </div>
         <div *ngSwitchCase="true" class="body">
-          <table class="table-striped mb-0">
+          <table class="mb-0">
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
             <tbody>
               <ng-container *ngFor="let item of gridData; index as i">
-                <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item, index: i + 1 }">
+                <ng-template [ngTemplateOutlet]="rowGroup" [ngTemplateOutletContext]="{ 
+                  item: item.items,
+                  index: i + 1,
+                  totalItems: item.items.length
+                }">
                 </ng-template>
               </ng-container>
             </tbody>

@@ -9,8 +9,13 @@ div.nap-grid {
     }
     .link {
         cursor: pointer;
-        color: #0876b7;
-        font-weight: bold;
+        color: #00f;
+    }
+    .link:hover {
+        text-decoration: underline;
+    }
+    tr.striped {
+        background-color: #E4F2FD;
     }
 }
 

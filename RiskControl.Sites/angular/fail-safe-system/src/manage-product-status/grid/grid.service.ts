@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from 'nap-components/http';
 import { ManageProductStatusCriteria } from '../filter/filter.model';
 import { Observable } from 'rxjs';
-import { ApiResultModel, GridModel } from './grid.model';
+import { ApiResultModel, GroupedGridModel } from './grid.model';
 import { CommonConstants } from '../../common/constants';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class GridService {
 
   constructor(private readonly httpService: HttpService) { }
 
-  getData(criteria: ManageProductStatusCriteria): Observable<GridModel[]> {
+  getData(criteria: ManageProductStatusCriteria): Observable<GroupedGridModel[]> {
     return this.httpService.post(`${CommonConstants.API}manage-product-status/data`, criteria);
   }
 

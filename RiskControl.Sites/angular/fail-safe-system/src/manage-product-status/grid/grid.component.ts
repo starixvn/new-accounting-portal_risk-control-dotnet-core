@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ManageProductStatusCriteria } from '../filter/filter.model';
-import { GridModel } from './grid.model';
+import { GridModel, GroupedGridModel } from './grid.model';
 import { GridService } from './grid.service';
 import { HistoryService } from '../history/history.service';
 import { ConfirmationService } from 'nap-components/confirmation';
@@ -13,7 +13,7 @@ import { MessageType, ToastService } from 'nap-components/toast';
 })
 export class GridComponent implements OnChanges, OnInit {
   @Input() criteria: ManageProductStatusCriteria | undefined;
-  gridData: GridModel[] | undefined;
+  gridData: GroupedGridModel[] | undefined;
   hasHostPermission: boolean = false;
 
   constructor(private readonly gridService: GridService,
@@ -40,9 +40,11 @@ export class GridComponent implements OnChanges, OnInit {
         if (result.errorCode === 0 || result.errorCode === 1012) {
           this.toastService.activate('The Sport has been enabled successfully!!!', MessageType.Success);
           this.gridData?.forEach(item => {
-            if (item.productId === productId && item.sportType === sport) {
-              item.status = 'Enabled';
-            }
+            item.items.forEach(subItem => {
+              if (subItem.productId === productId && subItem.sportType === sport) {
+                subItem.status = 'Enabled';
+              }
+            });
           });
         }
         else {
