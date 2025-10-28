@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from '../filter/filter.model';
 import { TreeviewConfig } from 'ngx-treeview';
-import { AddRuleCriteria, AlertType } from './rule.model';
+import { AddRuleCriteria, AlertType, EditRuleCriteria } from './rule.model';
 import { RuleService } from './rule.service';
 import * as _ from 'lodash';
 import { SharedDataService } from '../../common/shared-data.service';
@@ -35,6 +35,7 @@ export class RuleComponent implements OnInit {
   alertClass = AlertType.Danger;
   isTest: boolean = false;
   enableAutoDisableProduct: boolean = false;
+  originalEditRuleCriteria: AddRuleCriteria | undefined;
 
   constructor(public readonly activeModal: NgbActiveModal,
     private readonly service: RuleService,
@@ -54,7 +55,7 @@ export class RuleComponent implements OnInit {
   save(): void {
     if (this.isValid()) {
       const criteria: AddRuleCriteria = {
-        ruleTitle: this.ruleTitle,
+        ruleTitle: this.ruleTitle.trim(),
         productIdList: this.selectedProducts.join(','),
         ruleMemberLimit: this.ruleMemberLimit??0,
         enableLetstalk: this.enableLetstalk,
@@ -63,18 +64,22 @@ export class RuleComponent implements OnInit {
         enableAutoDisableProduct: this.enableAutoDisableProduct
       };
       if (this.isEdit) {
-        const editCriteria = _.assign({ constantKey: this.constantKey}, criteria);
-        this.service.editRule(editCriteria).subscribe(result => {
-          if (result) {
-            this.activeModal.close();
-            this.sharedDataService.setRuleData(RuleAction.Edit);
-          }
-        });
+        if (_.isEqual(this.originalEditRuleCriteria, criteria)) { 
+          this.alertMessage = 'There are no changes to save.';
+          this.alertClass = AlertType.Danger;
+        } else {
+          const editCriteria = _.assign({ constantKey: this.constantKey}, criteria);
+          this.service.editRule(editCriteria).subscribe(result => {
+            if (result) {
+              this.activeModal.close();
+              this.sharedDataService.setRuleData(RuleAction.Edit);
+            }
+          });
+        }
       } else {
         this.service.addRule(criteria).subscribe(result => {
           if (result) {
-            this.alertMessage = 'The Rule has been added successfully!!!';
-            this.alertClass = AlertType.Success;
+            this.activeModal.close();
             this.sharedDataService.setRuleData(RuleAction.Add);
           }
         });
@@ -99,6 +104,16 @@ export class RuleComponent implements OnInit {
     }
     if (_.isNil(this.ruleMemberLimit)) {
       this.alertMessage = 'Number of Members reach Rule is required!';
+      this.alertClass = AlertType.Danger;
+      return false;
+    }
+    if (this.gameIncomeCheckBox && _.isNil(this.gameIncome)) {
+      this.alertMessage = 'Game Income is required!';
+      this.alertClass = AlertType.Danger;
+      return false;
+    }
+    if (this.gamePayoutCheckBox && _.isNil(this.gamePayout)) {
+      this.alertMessage = 'Game Payout is required!';
       this.alertClass = AlertType.Danger;
       return false;
     }

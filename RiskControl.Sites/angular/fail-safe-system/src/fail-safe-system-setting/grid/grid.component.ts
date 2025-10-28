@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { SettingCriteria } from '../filter/filter.model';
+import { FilterModel, SettingCriteria } from '../filter/filter.model';
 import { GridModel } from './grid.model';
 import { GridService } from './grid.service';
 import { PaginationService as NgxPaginationService, PaginatePipe } from 'ngx-pagination';
@@ -19,8 +19,8 @@ import { RuleAction } from '../../common/constants';
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnChanges, OnInit {
-  @Input() settingCriteria: SettingCriteria | undefined;
+export class GridComponent implements OnChanges {
+  @Input() filterModel: FilterModel | undefined;
   @Input() hasHostPermission: boolean = false;
   gridData: GridModel[] = [];
   displayedModels: GridModel[] | undefined;
@@ -39,18 +39,6 @@ export class GridComponent implements OnChanges, OnInit {
   ) { 
     this.paginatePipe = new PaginatePipe(this.ngxPaginationService);
   }
-  ngOnInit(): void {
-    this.sharedDataService.selectedRuleData$.subscribe(rule => {
-      if (rule === RuleAction.Edit) {
-        this.getGridData();
-        this.toastService.activate('The Rule has been edited successfully!!!', MessageType.Success);
-      }
-      if (rule === RuleAction.Delete) {
-        this.getGridData();
-        this.toastService.activate('The Rule(s) has been deleted successfully!!!', MessageType.Success);
-      }
-    })
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getGridData();
@@ -62,12 +50,17 @@ export class GridComponent implements OnChanges, OnInit {
   }
 
   private getGridData(): void {
-    if (this.settingCriteria !== undefined) {
-      this.gridService.getSettings(this.settingCriteria).subscribe(data => {
+    if (this.filterModel !== undefined) {
+      var settingCriteria = {
+        productIdList: this.filterModel.productIdList,
+        constantKeyList: this.filterModel.constantKeyList
+      };
+      this.gridService.getSettings(settingCriteria).subscribe(data => {
         this.gridData = data;
         this.paginationInstance = this.paginationService.createPaginationInstance(this.gridData.length);
         this.onPageChange();
       });
+      this.displayToast(this.filterModel.action);
     }
   }
 
@@ -96,6 +89,18 @@ export class GridComponent implements OnChanges, OnInit {
       component.constantKey = item.constantKey;
       component.isEdit = true;
       component.isTest = item.isTest;
+      component.originalEditRuleCriteria = {
+        ruleTitle: item.ruleTitle,
+        productIdList: products.filter(p => p.checked).map(p => p.productId).join(','),
+        ruleMemberLimit: item.ruleMemberLimit,
+        enableLetstalk: item.enableLetstalk,
+        enableAutoDisableProduct: item.enableAutoDisableProduct,
+        isTest: item.isTest,
+        criteriaList: [
+          item.gameIncome?.length > 0 ? `1_${item.gameIncome}` : '',
+          item.gamePayout?.length > 0 ? `2_${item.gamePayout}` : ''
+        ].filter(c => c !== '').join(','),
+      };
     });
   }
 
@@ -122,4 +127,22 @@ export class GridComponent implements OnChanges, OnInit {
       component.products = productList;
       component.title = `${ruleTitle} - Products`;
   }
+
+  private displayToast(rule: RuleAction): void {
+      let message = '';
+      switch (rule) {
+        case RuleAction.Add:
+          message = 'The Rule has been added successfully!!!';
+          break;
+        case RuleAction.Edit:
+          message = 'The Rule has been edited successfully!!!';
+          break;
+        case RuleAction.Delete:
+          message = 'The Rule(s) has been deleted successfully!!!';
+          break;
+        default:
+          break;
+      }
+      this.toastService.activate(message, MessageType.Success);
+    }
 }

@@ -16,9 +16,9 @@
         <div class="row">
             <div class="nap-col">
                 <div class="nap-group">
-                    <label>Rule title <span class="text-danger">*</span></label>
-                    <div class="nap-control">
-                        <input type="text" class="width-180" [(ngModel)]="ruleTitle" />
+                    <label class="width-140">Rule title <span class="text-danger">*</span></label>
+                    <div class="nap-control width-300">
+                        <input type="text" class="width-300" [(ngModel)]="ruleTitle" />
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="nap-col">
                 <div class="nap-group">
-                    <label>Product <span class="text-danger">*</span></label>
+                    <label class="width-140">Product <span class="text-danger">*</span></label>
                     <div class="nap-control width-200">
                         <ngx-dropdown-treeview [items]="productItems | productTreeview" [config]="itemConfig"
                           (selectedChange)="selectedProducts = $event"></ngx-dropdown-treeview>
@@ -37,7 +37,7 @@
         <div class="row">
             <div class="nap-col">
                 <div class="nap-group">
-                    <label>Number of Members reach Rule<span class="text-danger">*</span></label>
+                    <label class="width-140">Number of Members reach Rule<span class="text-danger">*</span></label>
                     <div class="nap-control align-top width-200">
                         <nap-ngx-numeric-textbox
                             [min]="0"
@@ -55,13 +55,13 @@
         <div class="row">
             <fieldset class="criteria-border">
                 <legend class="criteria-border"><span>Criteria (on Member)</span><span class="text-danger">*</span></legend>
-                <div class="nap-col">
+                <div class="nap-col mb-3">
                     <div class="nap-group">
                         <div class="nap-control width-40">
-                            <input type="checkbox" class="width-180" [(ngModel)]="gameIncomeCheckBox" />
+                            <input type="checkbox" class="width-180 d-block" [(ngModel)]="gameIncomeCheckBox" />
                         </div>
-                        <label>Game Income</label>
-                        <div class="nap-control align-top width-200" [ngClass]="{'border border-danger' : gameIncomeCheckBox && !gameIncome}">
+                        <div class="label-criteria">Game Income</div>
+                        <div class="nap-control align-top width-138" [ngClass]="{'border border-danger' : gameIncomeCheckBox && !gameIncome}">
                             <nap-ngx-numeric-textbox
                                 [min]="0"
                                 [max]="1000000000"
@@ -73,16 +73,16 @@
                             >
                             </nap-ngx-numeric-textbox>
                         </div>
-                        <span class="ml-5">RM</span>
+                        <div class="ml-5">RM</div>
                     </div>
                 </div>
                 <div class="nap-col">
                     <div class="nap-group">
                         <div class="nap-control width-40">
-                            <input type="checkbox" class="width-180" [(ngModel)]="gamePayoutCheckBox" />
+                            <input type="checkbox" class="width-180 d-block" [(ngModel)]="gamePayoutCheckBox" />
                         </div>
-                        <label>Game Payout</label>
-                        <div class="nap-control align-top width-200" [ngClass]="{'border border-danger' : gamePayoutCheckBox && !gamePayout}">
+                        <div class="label-criteria">Game Payout</div>
+                        <div class="nap-control align-top width-138" [ngClass]="{'border border-danger' : gamePayoutCheckBox && !gamePayout}">
                             <nap-ngx-numeric-textbox
                                 [min]="0"
                                 [max]="1000000000"
@@ -94,24 +94,24 @@
                             >
                             </nap-ngx-numeric-textbox>
                         </div>
-                        <span class="ml-5">%</span>
+                        <div class="ml-5">%</div>
                     </div>
                 </div>
             </fieldset>
         </div>
         <div class="row">
             <div class="nap-col">
-                <div class="nap-group">
+                <div class="nap-group d-inline-flex align-items-center">
                     Send Letstalk notification
-                    <input type="checkbox" [(ngModel)]="enableLetstalk"/>
+                    <input type="checkbox" class="ml-3" [(ngModel)]="enableLetstalk"/>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="nap-col ml-24">
-                <div class="nap-group">
+                <div class="nap-group d-inline-flex align-items-center">
                     Auto-Disable Product
-                    <input type="checkbox" [(ngModel)]="enableAutoDisableProduct"/>
+                    <input type="checkbox" class="ml-3" [(ngModel)]="enableAutoDisableProduct"/>
                 </div>
             </div>
         </div>
