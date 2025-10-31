@@ -37,4 +37,7 @@ export class LocalStorageKey {
 
 export class ProductConstants {
     static readonly VIRTUAL_SPORT_5 = 88;
+    static readonly VIRTUAL_SPORT_6 = "Virtual Sports 6";
+    static readonly ALL_PRODUCTS = 'All';
+    static readonly ALL_PRODUCTS_WITHOUT_VS6 = 'All without VS6';
 }

@@ -22,8 +22,8 @@ import { ModalService } from 'components/modal';
 import { SaveFilterComponent } from './save-filter/save-filter.component';
 import { SavedFilterGridComponent } from 'components/saved-filter-grid/saved-filter-grid.component';
 import { SavedFilterService } from './save-filter/saved-filter.service';
-import { ActionConstants, LocalStorageKey, ReportConstants } from 'app/common/constants';
-import { DataService } from 'app/common/data.service';
+import { ActionConstants, LocalStorageKey, ProductConstants, ReportConstants } from '../common/constants';
+import { DataService } from '../common/data.service';
 
 class CurrencyHelper {
   private readonly currenciesWithoutAll: Currency[];
@@ -984,10 +984,10 @@ export class FilterComponent implements OnInit {
         this.reportTypeSelectItems = this.reportTypeSelectItems.filter(x => x.value !== ReportType.Monthly);
       }
       const products = data[1];
-      const isHasAll = permission.products.filter(product => product === 'All').length > 0;
+      const isHasAll = permission.products.filter(product => product === ProductConstants.ALL_PRODUCTS || product === ProductConstants.ALL_PRODUCTS_WITHOUT_VS6).length > 0;
+      const isHasVirtualSport6 = permission.products.findIndex(product => product === ProductConstants.VIRTUAL_SPORT_6) > -1;
       if (isHasAll) {
-        this.products = products;
-
+        this.products = isHasVirtualSport6 ? products : products.filter(product => product.productName !== ProductConstants.VIRTUAL_SPORT_6);
       } else {
         const productsHasPermission = products.filter(product => permission.products.indexOf(product.productName) !== -1);
         this.products = productsHasPermission;
