@@ -151,6 +151,8 @@ public class FailSafeSystemServiceUnitTests
         // Arrange
         repository.FetchAsync<ManageProductStatusModel>(Arg.Any<ManageProductStatusCriteria>())
             .Returns((DataHelper.GetManageProductStatus));
+        richHttpClient.PostJsonWithOption<ApiResultModel>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<Dictionary<string, string>>())
+            .Returns((DataHelper.GetApiResultModel));
         var service = new FailSafeSystemServiceImp(repository, mapper, napSession, logDataService, richHttpClient, configuration);
 
         // Act

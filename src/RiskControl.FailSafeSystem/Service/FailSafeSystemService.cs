@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
+using Fanex.Logging;
 using Fanex.NAP.Client;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -102,11 +103,12 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
     public async Task<IEnumerable<GroupedManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria)
     {
         var rawData = await repository.FetchAsync<ManageProductStatusModel>(criteria);
-        rawData.ToList().ForEach(item =>
+        foreach (var item in rawData)
         {
             var apiResult = SafeDeserialize(item.LastAPIResponseMessage, DefaultApiResult);
             item.Status = GetStatus(apiResult, item.LastActionType);
-        });
+            item.UmStatus = await GetUmStatus(item.SportType);
+        }
         var groups = rawData.GroupBy(g => g.ProductId);
         var result = groups.Select(group => new GroupedManageProductStatusModel
         {
@@ -145,7 +147,8 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
         {
             { "Authentication", configuration.GetSection("UmSportApiKey").Value ?? string.Empty }
         };
-        var result = await richHttpClient.PostJsonWithOption<ApiResultModel>(configuration.GetSection("UmSportApi").Value, request,
+        var api = $"{configuration.GetSection("UmSportApi").Value}/{UmConstants.RemoveUm}";
+        var result = await richHttpClient.PostJsonWithOption<ApiResultModel>(api, request,
             options);
         var logCommand = new InsertProductActionLogCommand
         {
@@ -160,6 +163,31 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
         };
         await repository.ExecuteAsync(logCommand);
         return result;
+    }
+
+    private async Task<string> GetUmStatus(int sportId)
+    {
+        try
+        {
+            var request = new UmSportRequest
+            {
+                SportTypeId = sportId,
+                Seq = sportId.ToString()
+            };
+            var options = new Dictionary<string, string>
+            {
+                { "Authentication", configuration.GetSection("UmSportApiKey").Value ?? string.Empty }
+            };
+            var api = $"{configuration.GetSection("UmSportApi").Value}/{UmConstants.GetUm}";
+            var result = await richHttpClient.PostJsonWithOption<ApiResultModel>(api, request,
+                options);
+            return result.ErrorCode == 0 ? StatusConstants.Enabled : StatusConstants.Disabled;
+        }
+        catch (Exception ex)
+        {
+            await LogService.InfoAsync(ex.Message);
+            return StatusConstants.NotAvailable;
+        }
     }
 
     private static string GetStatus(ApiResultModel model, string actionType)

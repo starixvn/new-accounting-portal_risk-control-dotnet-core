@@ -5,6 +5,7 @@ export interface GridModel {
     sportName: string;
     lastUpdated: Date;
     status: string;
+    umStatus: string;
 }
 
 export interface GroupedGridModel {

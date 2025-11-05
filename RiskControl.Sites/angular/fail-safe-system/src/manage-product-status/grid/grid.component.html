@@ -5,6 +5,7 @@
       <col style="width: 200px" />
       <col style="width: 150px" />
       <col style="width: 100px" />
+      <col style="width: 100px" />
       <col style="width: 70px" />
     </colgroup>
   </ng-template>
@@ -16,6 +17,7 @@
         <th scope="col">Sport</th>
         <th scope="col">Last Updated</th>
         <th scope="col">Status</th>
+        <th scope="col">Um Status</th>
         <th scope="col">History</th>
       </tr>
     </thead>
@@ -47,13 +49,14 @@
         Disabled
       </td>
       <td *ngIf="item.status === 'Disabled' && !hasHostPermission" class="text-center">Disabled</td>
+      <td class="text-center">{{item.umStatus}}</td>
       <td class="text-center">
           <i class="fa fa-history fa-2x" title="View History" aria-hidden="true" (click)="onShowHistory(item)"></i>
       </td>
   </ng-template>
   <div *ngIf="gridData" [ngSwitch]="gridData.length > 0">
     <div class="nap-grid">
-      <div style="width: 781px">
+      <div style="width: 881px">
         <div class="header">
           <table>
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
@@ -79,7 +82,7 @@
           <table>
             <tbody>
               <tr>
-                <th scope="col" class="no-data" colspan="5">
+                <th scope="col" class="no-data" colspan="7">
                   There is no data
                 </th>
               </tr>

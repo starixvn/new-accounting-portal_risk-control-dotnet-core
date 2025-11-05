@@ -19,6 +19,8 @@ public class ManageProductStatusModel
     public string LastAPIResponseMessage { get; set; }
 
     public string Status { get; set; }
+
+    public string UmStatus { get; set; }
 }
 
 public class GroupedManageProductStatusModel
