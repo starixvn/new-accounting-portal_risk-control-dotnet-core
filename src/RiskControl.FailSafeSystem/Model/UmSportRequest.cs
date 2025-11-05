@@ -8,7 +8,7 @@ public class UmSportRequest
 
     public int SportTypeId { get; set; }
 
-    public string StartTime { get; } = DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss");
+    public string StartTime { get; } = DateTime.UtcNow.ToString("2025-01-01 12:12:00");
 
-    public string EndTime { get; } = DateTime.MaxValue.ToString("yyyy-MM-dd HH:mm:ss");
+    public string EndTime { get; } = DateTime.UtcNow.ToString("2099-01-01 12:12:00");
 }
