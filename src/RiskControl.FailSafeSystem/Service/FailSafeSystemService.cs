@@ -181,7 +181,12 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
             var api = $"{configuration.GetSection("UmSportApi").Value}/{UmConstants.GetUm}";
             var result = await richHttpClient.PostJsonWithOption<ApiResultModel>(api, request,
                 options);
-            return result.ErrorCode == 0 ? StatusConstants.Enabled : StatusConstants.Disabled;
+            return result.ErrorCode switch
+            {
+                0 => StatusConstants.Enabled,
+                5003 => StatusConstants.Disabled,
+                _ => StatusConstants.NotAvailable
+            };
         }
         catch (Exception ex)
         {
