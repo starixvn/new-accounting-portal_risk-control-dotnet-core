@@ -11,6 +11,7 @@ import { FloorModule } from '../../common/floor';
 import { HistoryService } from './history.service';
 import { HistoryComponent } from './history.component';
 import { HistoryLimitPipe } from './history-limit.pipe';
+import { ToastModule } from 'nap-components/toast';
 
 @NgModule({
     imports: [
@@ -20,6 +21,7 @@ import { HistoryLimitPipe } from './history-limit.pipe';
         HttpModule.forRoot(),
         NgbModalModule,
         TreeviewModule.forRoot(),
+        ToastModule.forRoot(),
         NumberFormatModule,
         FlagModule,
         FloorModule

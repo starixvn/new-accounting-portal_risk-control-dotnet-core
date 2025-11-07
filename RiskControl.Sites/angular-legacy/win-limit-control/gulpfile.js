@@ -21,7 +21,7 @@ function transform(transformFolder) {
 function getOutputFolder() {
     let content = fs.readFileSync(path.resolve('./angular.json'), encoding);
     let json = JSON.parse(content);
-    return path.resolve(json.projects['manage-setting-group'].architect["build"].options["outputPath"]);
+    return path.resolve(json.projects['monitor'].architect["build"].options["outputPath"]);
 }
 
 function changeFileNames(outputFolder, transformFolder) {

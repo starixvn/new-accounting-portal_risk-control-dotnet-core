@@ -6,6 +6,7 @@ import { MonitorModel } from '../grid';
 import { HistoryModel } from './history.model';
 import { HistoryComponent } from './history.component';
 import { CommandResult } from '../../common/model';
+import { HttpResponse } from '@angular/common/http';
 
 @Injectable()
 export class HistoryService {
@@ -20,6 +21,10 @@ export class HistoryService {
             const componentInstance: HistoryComponent = modalRef.componentInstance;
             componentInstance.show(historyModels, monitorModel.userName, monitorModel.productName, monitorModel.custId, hasHostPermission);
         });
+    }
+
+    downloadFile(fileName: string): Observable<HttpResponse<Blob>> {
+            return this.httpService.get(`api/win-limit-control/download/excel-web?fileName=${fileName}`, { noSpinner: true, responseType: 'blob' });
     }
 
     private query(custId: number, productId: number): Observable<HistoryModel[]> {

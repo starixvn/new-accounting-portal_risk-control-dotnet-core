@@ -49,11 +49,19 @@ public class FileDownloadController(ConfigurationService configurationService, R
     }
 
     [HttpGet("excel-web")]
-    public FileStreamResult ExcelWeb(string fileName)
+    public ActionResult ExcelWeb(string fileName)
     {
-        var path = $"{configurationService.CwlFileServerDirectory}/{fileName.Replace("/Excel/", "")}";
-        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous);
-        return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));
+        try
+        {
+            var path = $"{configurationService.CwlFileServerDirectory}/{fileName.Replace("/Excel/", "")}";
+            var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096,
+                FileOptions.Asynchronous);
+            return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));
+        }
+        catch
+        {
+            return Ok("File not found");
+        }
     }
 
     [Route("guid-member-wl-file")]

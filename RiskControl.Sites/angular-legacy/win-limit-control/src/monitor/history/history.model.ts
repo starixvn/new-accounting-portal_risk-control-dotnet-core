@@ -44,6 +44,7 @@ export const Columns: InsertColumns = {
     winningLosingAmountInPlayerCurrency: new TableColumn('Winning/Losing<br>Amount<br>in Player Currency', 130),
     reachedLimitLevel: new TableColumn('Reached Limit Level', 70),
     action: new TableColumn('Action', 100),
+    winLossAnalysis: new TableColumn('Win Loss Analysis', 70),
     proceededBy: new TableColumn('Proceeded By', 100),
     isNotified: new TableColumn("IsNotified", 90, false, false),
     logID: new TableColumn("LogID", 100, false, false),
