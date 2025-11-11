@@ -72,9 +72,10 @@ export class HistoryComponent {
       .subscribe(response => {
         if (response.type.toString() === 'text/plain') {
           this.toastService.activate('File not found!');
-          return;
+        } else {
+          Helper.downloadFile(response, fileName);
         }
-        Helper.downloadFile(response, fileName);
+        
       });
   }
 

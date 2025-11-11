@@ -81,15 +81,15 @@ export class MemberWlAnalysisReportComponent {
                     } else {
                       this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(response => {
                         if (response.type.toString() === 'text/plain') {
-                          this.spinnerService.hide();
                           this.warningMessage = 'File not found!';
-                          return;
-                        }
-                        if (result.invalidUsernames != null && result.invalidUsernames.length > 0) {
+                        } else {
+                          if (result.invalidUsernames != null && result.invalidUsernames.length > 0) {
                           this.warningMessage = `Invalid member(s): ${result.invalidUsernames}`;
+                          }
+                          var fileNameInfo = result.fileName.split('/');
+                          Helper.downloadFile(response, fileNameInfo[fileNameInfo.length-1]);
+                          
                         }
-                        var fileNameInfo = result.fileName.split('/');
-                        Helper.downloadFile(response, fileNameInfo[fileNameInfo.length-1]);
                         this.spinnerService.hide();
                       });
                     }

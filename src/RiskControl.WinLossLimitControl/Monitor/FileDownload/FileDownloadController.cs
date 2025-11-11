@@ -58,7 +58,7 @@ public class FileDownloadController(ConfigurationService configurationService, R
         {
             var file = fileName.Replace("/Files/cwl-investigation/excel/", "")
                 .Replace("/Excel/", "");
-            var path = $"{configurationService.FileServerDirectory}/{file}";
+            var path = $"{configurationService.CwlFileServerDirectory}/{file}";
             var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096,
                 FileOptions.Asynchronous);
             return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));
