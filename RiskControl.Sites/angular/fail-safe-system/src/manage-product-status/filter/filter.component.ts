@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ManageProductStatusCriteria, Product } from './filter.model';
 import { TreeviewConfig } from 'ngx-treeview';
 import { FilterService } from './filter.service';
-import { ToastService } from 'nap-components/toast';
+import { ToastService } from '../toast/toast.service';
 
 @Component({
   selector: 'app-filter',

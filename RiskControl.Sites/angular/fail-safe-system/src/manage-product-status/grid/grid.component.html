@@ -17,7 +17,7 @@
         <th scope="col">Sport</th>
         <th scope="col">Last Updated</th>
         <th scope="col">System Status</th>
-        <th scope="col">Latest Status</th>
+        <th scope="col">Current Status</th>
         <th scope="col">History</th>
       </tr>
     </thead>
@@ -25,27 +25,33 @@
   <ng-template #rowGroup let-item="item" let-total="totalItems" let-index="index">
     <tr [ngClass]="{'striped': index % 2 === 0}">
         <td class="text-center" [attr.rowspan]="total">{{index}}</td>
-        <td [attr.rowspan]="total">{{item[0].productName}}</td>
-        <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item[0] }">
-        </ng-template>
+        <td [attr.rowspan]="total">{{item.items[0].productName}}</td>
+        <td [attr.colspan]="2" class="text-right"><b>Overall:</b></td>
+        <td *ngIf="item.status === 'Enabled'" class="text-center">Enabled</td>
+        <td *ngIf="item.status === 'Disabled' && hasHostPermission"
+          title="Click to enable all sports under this product"
+          class="text-center link"
+          (click)="enableSports(item.disabledSports, item.productId)">
+          Disabled
+        </td>
+        <td class="text-center">-</td>
+        <td class="text-center">-</td>
     </tr>
-    <ng-container *ngIf="total > 1">
-          <ng-container *ngFor="let subItem of item.slice(1)">
-            <tr [ngClass]="{'striped': index % 2 === 0}">
-              <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: subItem }">
-              </ng-template>
-            </tr>
-          </ng-container>
-      </ng-container>
+    <ng-container *ngFor="let subItem of item.items">
+      <tr [ngClass]="{'striped': index % 2 === 0}">
+        <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: subItem }">
+        </ng-template>
+      </tr>
+    </ng-container>
   </ng-template>
   <ng-template #rowItem let-item="item">
       <td>{{item.sportName}}</td>
       <td>{{item.lastUpdated | date: 'MM/dd/yyyy hh:mm:ss aa'}}</td>
       <td *ngIf="item.status === 'Enabled'" class="text-center">Enabled</td>
       <td *ngIf="item.status === 'Disabled' && hasHostPermission"
-        title="Click to enable the sport"
+        title="Click to enable this sport"
         class="text-center link"
-        (click)="enableSport(item.sportType, item.productId)">
+        (click)="enableSport(item.sportType, item.productId, item.sportName)">
         Disabled
       </td>
       <td *ngIf="item.status === 'Disabled' && !hasHostPermission" class="text-center">Disabled</td>
@@ -68,12 +74,22 @@
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
             <tbody>
               <ng-container *ngFor="let item of gridData; index as i">
-                <ng-template [ngTemplateOutlet]="rowGroup" [ngTemplateOutletContext]="{ 
-                  item: item.items,
+                <ng-template *ngIf="item.items.length > 1" [ngTemplateOutlet]="rowGroup" [ngTemplateOutletContext]="{ 
+                  item: item,
                   index: i + 1,
-                  totalItems: item.items.length
+                  totalItems: item.items.length + 1
                 }">
                 </ng-template>
+                <ng-container *ngIf="item.items.length <= 1">
+                  <tr [ngClass]="{'striped': i + 1 % 2 === 0}">
+                    <td class="text-center">{{i + 1}}</td>
+                    <td>{{item.items[0].productName}}</td>
+                    <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ 
+                      item: item.items[0]
+                    }">
+                    </ng-template>
+                  </tr>
+                </ng-container>
               </ng-container>
             </tbody>
           </table>

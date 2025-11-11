@@ -12,10 +12,12 @@ export interface GroupedGridModel {
     productId: number;
     status: string;
     items: GridModel[];
+    disabledSports: number[];
 }
 
 export interface ApiResultModel {
     statusCode: number;
     errorCode: number;
     errorDescription: string;
+    seq: string;
 }

@@ -29,7 +29,10 @@ public class GroupedManageProductStatusModel
 
     public IEnumerable<ManageProductStatusModel> Items { get; set; }
 
-    public string Status => Items.Any(x => x.Status == StatusConstants.Disabled)
+    public IEnumerable<int> DisabledSports =>
+        Items.Where(x => x.Status == StatusConstants.Disabled).Select(x => x.SportType);
+
+    public string Status => DisabledSports.Any()
         ? StatusConstants.Disabled
         : StatusConstants.Enabled;
 
