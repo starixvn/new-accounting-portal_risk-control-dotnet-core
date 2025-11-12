@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
+using Fanex.Logging;
 using Fanex.NAP.Client;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -27,11 +28,13 @@ public interface FailSafeSystemService
 
     Task<IEnumerable<MonitorModel>> GetMonitors(MonitorCriteria criteria);
 
-    Task<IEnumerable<ManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria);
+    Task<IEnumerable<GroupedManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria);
 
     Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria);
 
     Task<ApiResultModel> EnableSport(EnableSportCriteria criteria);
+
+    Task<IEnumerable<ApiResultModel>> EnableSports(EnableSportsCriteria criteria);
 }
 
 public class FailSafeSystemServiceImp(IDynamicRepository repository,
@@ -99,18 +102,26 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
         return data;
     }
 
-    public async Task<IEnumerable<ManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria)
+    public async Task<IEnumerable<GroupedManageProductStatusModel>> GetManageProductStatus(ManageProductStatusCriteria criteria)
     {
-        var result = await repository.FetchAsync<ManageProductStatusModel>(criteria);
-        result.ToList().ForEach(item =>
+        var rawData = await repository.FetchAsync<ManageProductStatusModel>(criteria);
+        foreach (var item in rawData)
         {
             var apiResult = SafeDeserialize(item.LastAPIResponseMessage, DefaultApiResult);
             item.Status = GetStatus(apiResult, item.LastActionType);
-        });
+            item.UmStatus = await GetUmStatus(item.SportType);
+        }
+        var groups = rawData.GroupBy(g => g.ProductId);
+        var result = groups.Select(group => new GroupedManageProductStatusModel
+        {
+            ProductId = group.Key, 
+            Items = group.OrderBy(o => o.Status)
+                .ThenByDescending(o => o.LastUpdated)
+                .ThenBy(o => o.SportType)
+        }).ToList();
         return result.OrderBy(o => o.Status)
             .ThenByDescending(o => o.LastUpdated)
-            .ThenBy(o => o.ProductId)
-            .ThenBy(o => o.SportType);
+            .ThenBy(o => o.ProductId);
     }
 
     public async Task<IEnumerable<ProductStatusHistoryModel>> GetProductStatusHistory(ProductStatusHistoryCriteria criteria)
@@ -129,40 +140,101 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
 
     public async Task<ApiResultModel> EnableSport(EnableSportCriteria criteria)
     {
-        var request = new UmSportRequest
+        try
         {
-            SportTypeId = criteria.SportType,
-            Seq = criteria.SportType.ToString()
-        };
-        var options = new Dictionary<string, string>
+            var request = new UmSportRequest
+            {
+                SportTypeId = criteria.SportType,
+                Seq = criteria.SportType.ToString()
+            };
+            var options = new Dictionary<string, string>
+            {
+                { "Authentication", configuration.GetSection("UmSportApiKey").Value ?? string.Empty }
+            };
+            var api = $"{configuration.GetSection("UmSportApi").Value}/{UmConstants.RemoveUm}";
+            var result = await richHttpClient.PostJsonWithOption<ApiResultModel>(api, request,
+                options);
+            var logCommand = new InsertProductActionLogCommand
+            {
+                ApiResponseMessage = JsonConvert.SerializeObject(result),
+                InsertTime = DateTime.Now,
+                ApiJsonBodyInfo = JsonConvert.SerializeObject(request),
+                ApiResponseStatusCode = result.StatusCode,
+                SportType = criteria.SportType,
+                ProductId = criteria.ProductId,
+                CreatedBy = napSession.UserId,
+                ActionType = result is { ErrorCode: 0 or 1012 } ? "Enable" : "Disable"
+            };
+            await repository.ExecuteAsync(logCommand);
+            return result;
+        }
+        catch (Exception ex)
         {
-            { "Authentication", configuration.GetSection("UmSportApiKey").Value ?? string.Empty }
-        };
-        var result = await richHttpClient.PostJsonWithOption<ApiResultModel>(configuration.GetSection("UmSportApi").Value, request,
-            options);
-        var logCommand = new InsertProductActionLogCommand
+            await LogService.InfoAsync(ex.Message);
+            return new ApiResultModel
+            {
+                ErrorCode = 9999,
+                ErrorDescription = ex.Message,
+                Seq = criteria.SportType.ToString(),
+                Timestamp = DateTime.Now
+            };
+        }
+    }
+
+    public async Task<IEnumerable<ApiResultModel>> EnableSports(EnableSportsCriteria criteria)
+    {
+        var result = new List<ApiResultModel>();
+        foreach (var sportId in criteria.SportTypes)
         {
-            ApiResponseMessage = JsonConvert.SerializeObject(result),
-            InsertTime = DateTime.Now,
-            ApiJsonBodyInfo = JsonConvert.SerializeObject(request),
-            ApiResponseStatusCode = result.StatusCode,
-            SportType = criteria.SportType,
-            ProductId = criteria.ProductId,
-            CreatedBy = napSession.UserId,
-            ActionType = result is { ErrorCode: 0 or 1012 } ? "Enable" : "Disable"
-        };
-        await repository.ExecuteAsync(logCommand);
+            var queryModel = new EnableSportCriteria
+            {
+                ProductId = criteria.ProductId,
+                SportType = sportId,
+            };
+            var apiResult = await EnableSport(queryModel);
+            result.Add(apiResult);
+        }
         return result;
+    }
+
+    private async Task<string> GetUmStatus(int sportId)
+    {
+        try
+        {
+            var request = new UmSportRequest
+            {
+                SportTypeId = sportId,
+                Seq = sportId.ToString()
+            };
+            var options = new Dictionary<string, string>
+            {
+                { "Authentication", configuration.GetSection("UmSportApiKey").Value ?? string.Empty }
+            };
+            var api = $"{configuration.GetSection("UmSportApi").Value}/{UmConstants.GetUm}";
+            var result = await richHttpClient.PostJsonWithOption<ApiResultModel>(api, request,
+                options);
+            return result.ErrorCode switch
+            {
+                0 => StatusConstants.Enabled,
+                5003 => StatusConstants.Disabled,
+                _ => StatusConstants.NotAvailable
+            };
+        }
+        catch (Exception ex)
+        {
+            await LogService.InfoAsync(ex.Message);
+            return StatusConstants.NotAvailable;
+        }
     }
 
     private static string GetStatus(ApiResultModel model, string actionType)
     {
         if (actionType == "Enable")
         {
-            return model is { ErrorCode: 0 or 1012 } ? "Enabled" : "Disabled";
+            return model is { ErrorCode: 0 or 1012 } ? StatusConstants.Enabled : StatusConstants.Disabled;
         }
 
-        return model is { ErrorCode: 0 or 1011 } ? "Disabled" : "Enabled";
+        return model is { ErrorCode: 0 or 1011 } ? StatusConstants.Disabled : StatusConstants.Enabled;
     }
 
     private static string GetReachedRule(IEnumerable<MonitorCriteriaModel> criterias, int ruleId)

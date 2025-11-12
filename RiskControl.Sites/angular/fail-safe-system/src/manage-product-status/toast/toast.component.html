@@ -1,0 +1,8 @@
+﻿<div #toast class="toast-container" [hidden]="!message">
+    <div class="alert" [ngClass]="alertClass" role="alert">
+        <button type="button" class="close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <span [innerHTML]="message"></span>
+    </div>
+</div>

@@ -98,4 +98,12 @@ public class FailSafeSystemApiController(FailSafeSystemService service, Authoriz
         var data = await service.EnableSport(criteria);
         return Ok(data);
     }
+
+    [Route("manage-product-status/enable-sports")]
+    [HttpPost]
+    public async Task<IActionResult> EnableSports(EnableSportsCriteria criteria)
+    {
+        var data = await service.EnableSports(criteria);
+        return Ok(data);
+    }
 }

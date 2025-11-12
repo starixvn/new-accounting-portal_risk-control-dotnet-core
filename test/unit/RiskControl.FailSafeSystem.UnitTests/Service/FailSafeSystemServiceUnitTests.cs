@@ -151,15 +151,17 @@ public class FailSafeSystemServiceUnitTests
         // Arrange
         repository.FetchAsync<ManageProductStatusModel>(Arg.Any<ManageProductStatusCriteria>())
             .Returns((DataHelper.GetManageProductStatus));
+        richHttpClient.PostJsonWithOption<ApiResultModel>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<Dictionary<string, string>>())
+            .Returns((DataHelper.GetApiResultModel));
         var service = new FailSafeSystemServiceImp(repository, mapper, napSession, logDataService, richHttpClient, configuration);
 
         // Act
         var actualResults = await service.GetManageProductStatus(new ManageProductStatusCriteria());
 
         // Assert
-        Assert.Equal(2, actualResults.Count());
-        Assert.Equal("Number Game", actualResults.First().ProductName);
-        Assert.Equal(4, actualResults.ElementAt(1).ProductId);
+        Assert.Equal(3, actualResults.Count());
+        Assert.Equal(1, actualResults.First().Items.Count());
+        Assert.Equal(3, actualResults.ElementAt(1).ProductId);
     }
 
     [Fact]
@@ -194,5 +196,22 @@ public class FailSafeSystemServiceUnitTests
         // Assert
         Assert.Equal("Success", actualResult.ErrorDescription);
         Assert.Equal(200, actualResult.StatusCode);
+    }
+
+    [Fact]
+    public async Task EnableSports_Always_ReturnExpectedList()
+    {
+        // Arrange
+        richHttpClient.PostJsonWithOption<ApiResultModel>(Arg.Any<string>(), Arg.Any<object>(), Arg.Any<Dictionary<string, string>>())
+            .Returns((DataHelper.GetApiResultModel));
+        var service = new FailSafeSystemServiceImp(repository, mapper, napSession, logDataService, richHttpClient, configuration);
+        repository.ExecuteAsync(Arg.Any<InsertProductActionLogCommand>()).Returns(1);
+
+        // Act
+        var actualResult = await service.EnableSports(new EnableSportsCriteria { SportTypes = [161] });
+
+        // Assert
+        Assert.Equal("Success", actualResult.First().ErrorDescription);
+        Assert.Equal(200, actualResult.First().StatusCode);
     }
 }

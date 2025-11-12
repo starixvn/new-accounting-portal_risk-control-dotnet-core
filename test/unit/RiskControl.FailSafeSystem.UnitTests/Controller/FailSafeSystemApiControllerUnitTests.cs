@@ -147,6 +147,19 @@ public class FailSafeSystemApiControllerUnitTests
     }
 
     [Fact]
+    public async Task EnableSports_Always_CallRightFunction()
+    {
+        // Arrange  
+        var controller = new FailSafeSystemApiController(service, authorizationService);
+
+        // Act  
+        var expectedData = controller.EnableSports(new EnableSportsCriteria());
+
+        // Assert  
+        await service.Received().EnableSports(Arg.Compat.Any<EnableSportsCriteria>());
+    }
+
+    [Fact]
     public void HasPermission_Always_CallRightFunctionFromAuthorizationService()
     {
         // Arrange
