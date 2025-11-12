@@ -1,0 +1,63 @@
+<ng-template #colgroup>
+    <colgroup>
+      <col style="width: 50px" />
+      <col style="width: 100px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 300px" />
+    </colgroup>
+  </ng-template>
+  <ng-template #thead>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Action Date</th>
+        <th scope="col">Auto-Disable Product</th>
+        <th scope="col">Change Reason</th>
+      </tr>
+    </thead>
+  </ng-template>
+  <ng-template #rowItem let-item="item" let-index="index">
+    <tr [ngClass]="{ 'bg-warning bg-gradient': index === 1 }">
+        <td class="text-center">{{index}}</td>
+        <td class="text-center">{{item.userName}}</td>
+        <td class="text-center">{{item.actionDate | date: 'dd/MM/yyyy hh:mm:ss aa'}}</td>
+        <td class="text-center">{{item.isAutoDisableProduct ? 'ON' : 'OFF'}}</td>
+        <td class="text-center">{{item.description}}</td>
+    </tr>
+  </ng-template>
+  <div *ngIf="data" [ngSwitch]="data.length > 0">
+    <div class="nap-grid">
+      <div style="width: 770px">
+        <div class="header">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <ng-template [ngTemplateOutlet]="thead"></ng-template>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <tbody>
+              <ng-container *ngFor="let item of data; index as i">
+                <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item, index: i + 1 }">
+                </ng-template>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="false" class="body stretch">
+          <table>
+            <tbody>
+              <tr>
+                <th scope="col" class="no-data" colspan="5">
+                  There is no data
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

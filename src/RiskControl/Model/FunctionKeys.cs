@@ -64,6 +64,9 @@ public static class FunctionKeys
 
     public const string FailSafeSystemMonitor = "Fail_SafeSystemMonitor";
 
+    public const string AutoDisableProduct = "Auto_DisableProduct";
+
     public const string UmSport = "UmSport";
+
     public const string SabaPinGoal = "SabaPinGoal";
 }

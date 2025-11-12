@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using RiskControl.FailSafeSystem.Controller;
 using RiskControl.FailSafeSystem.Criteria;
+using RiskControl.FailSafeSystem.Model;
 using RiskControl.FailSafeSystem.Service;
 using RiskControl.Model;
 using RiskControl.WinLossLimitControl.Services;
@@ -170,5 +171,44 @@ public class FailSafeSystemApiControllerUnitTests
 
         // Assert
         authorizationService.Received().HasPermission(FunctionKeys.FailSafeSystemSetting, Constant.Policy.Host);
+    }
+
+    [Fact]
+    public async Task GetCurrentStatusForAutoDisableProduct_Always_CallRightFunctionFromAuthorizationService()
+    {
+        // Arrange  
+        var controller = new FailSafeSystemApiController(service, authorizationService);
+
+        // Act  
+        var expectedData = controller.GetCurrentStatusForAutoDisableProduct();
+
+        // Assert  
+        await service.Received().GetCurrentStatusForAutoDisableProduct();
+    }
+
+    [Fact]
+    public async Task ViewLogsForAutoDisableProduct_Always_CallRightFunctionFromAuthorizationService()
+    {
+        // Arrange  
+        var controller = new FailSafeSystemApiController(service, authorizationService);
+
+        // Act  
+        var expectedData = controller.ViewLogsForAutoDisableProduct();
+
+        // Assert  
+        await service.Received().ViewLogsForAutoDisableProduct();
+    }
+
+    [Fact]
+    public async Task SaveAutoDisableProduct_Always_CallRightFunctionFromAuthorizationService()
+    {
+        // Arrange  
+        var controller = new FailSafeSystemApiController(service, authorizationService);
+
+        // Act  
+        var expectedData = controller.SaveAutoDisableProduct(new AutoDisableProductInsertRequest());
+
+        // Assert  
+        await service.Received().SaveStatusForAutoDisableProduct(Arg.Compat.Any<AutoDisableProductInsertRequest>());
     }
 }

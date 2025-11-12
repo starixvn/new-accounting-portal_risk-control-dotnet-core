@@ -35,6 +35,12 @@ public interface FailSafeSystemService
     Task<ApiResultModel> EnableSport(EnableSportCriteria criteria);
 
     Task<IEnumerable<ApiResultModel>> EnableSports(EnableSportsCriteria criteria);
+
+    Task<IEnumerable<AutoDisableProductModel>> ViewLogsForAutoDisableProduct();
+
+    Task<AutoDisableProductModel> GetCurrentStatusForAutoDisableProduct();
+
+    Task<int> SaveStatusForAutoDisableProduct(AutoDisableProductInsertRequest request);
 }
 
 public class FailSafeSystemServiceImp(IDynamicRepository repository,
@@ -195,6 +201,28 @@ public class FailSafeSystemServiceImp(IDynamicRepository repository,
             result.Add(apiResult);
         }
         return result;
+    }
+
+    public Task<IEnumerable<AutoDisableProductModel>> ViewLogsForAutoDisableProduct()
+    {
+        return repository.FetchAsync<AutoDisableProductModel>(new AutoDisableProductSelectAllCriteria());
+    }
+
+    public Task<AutoDisableProductModel> GetCurrentStatusForAutoDisableProduct()
+    {
+        return repository.GetAsync<AutoDisableProductModel>(new AutoDisableProductSelectCurrentCriteria());
+    }
+
+    public Task<int> SaveStatusForAutoDisableProduct(AutoDisableProductInsertRequest request)
+    {
+        var criteria = new AutoDisableProductInsertCriteria
+        {
+            UserId = napSession.UserId,
+            UserName = napSession.UserName,
+            Description = request.Description,
+            IsAutoDisableProduct = request.IsAutoDisableProduct
+        };
+        return repository.ExecuteAsync(criteria);
     }
 
     private async Task<string> GetUmStatus(int sportId)

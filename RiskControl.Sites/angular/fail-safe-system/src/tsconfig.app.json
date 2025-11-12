@@ -20,7 +20,7 @@
     }
   },
   "files": [
-    "manage-product-status.ts",
+    "auto-disable-product-control.ts",
     "polyfills.ts"
   ],
   "include": [

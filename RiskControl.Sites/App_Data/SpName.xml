@@ -122,6 +122,9 @@
 		<Setting Key="fss_ManageProductStatus" SpName="fss_ManageProductStatus" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="fss_ManageProductStatus_ProductHistory" SpName="fss_ManageProductStatus_ProductHistory" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
 		<Setting Key="fss_InsertProductActionLog" SpName="fss_InsertProductActionLog" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />
+		<Setting Key="FailSafeSystemControl_Insert" SpName="FailSafeSystemControl_Insert" DbName="DBMA.bodb_Maintenance.wsv_nap" TimeOut="300" />
+		<Setting Key="FailSafeSystemControl_SelectAll" SpName="FailSafeSystemControl_SelectAll" DbName="DBMA.bodb_Maintenance.wsv_nap" TimeOut="300" />
+		<Setting Key="FailSafeSystemControl_SelectCurrent" SpName="FailSafeSystemControl_SelectCurrent" DbName="DBMA.bodb_Maintenance.wsv_nap" TimeOut="300" />
 	</Function>
 	<Function Name="Saba-PinGoal">
 		<Setting Key="Acc_Rpt_SabaPingoal_CompanySel" SpName="Acc_Rpt_SabaPingoal_CompanySel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="300" />

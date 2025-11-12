@@ -111,7 +111,14 @@ public class HomeController : Controller
     {
     	return View("~/wwwroot/manage-product-status/index.cshtml");
     }
-    
+
+    [Route("FailSafeSystem/AutoDisableProduct/Index")]
+    [NapAuth(FunctionKey = FunctionKeys.AutoDisableProduct, Policy = Constant.Policy.Read)]
+    public ActionResult FailSafeSystemAutoDisableProduct()
+    {
+        return View("~/wwwroot/auto-disable-product-control/index.cshtml");
+    }
+
     [Route("SabaPinGoal/Main/Index")]
     [NapAuth(FunctionKey = FunctionKeys.SabaPinGoal, Policy = Constant.Policy.Read)]
     public ActionResult SabaPinGoal()

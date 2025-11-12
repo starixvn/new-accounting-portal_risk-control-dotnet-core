@@ -193,7 +193,7 @@ public static class DataHelper
         }
     };
 
-    public static ApiResultModel GetApiResultModel => new ApiResultModel
+    public static ApiResultModel GetApiResultModel => new()
     {
         ErrorCode = 0,
         ErrorDescription = "Success",
@@ -201,4 +201,15 @@ public static class DataHelper
         StatusCode = 200,
         Timestamp = DateTime.Now
     };
+
+    public static IEnumerable<AutoDisableProductModel> GetAutoDisableProductModel =>
+    [
+        new AutoDisableProductModel
+        {
+            Description = "Monitor sports",
+            ActionDate = DateTime.Now,
+            IsAutoDisableProduct = true,
+            UserName = "sa"
+        }
+    ];
 }

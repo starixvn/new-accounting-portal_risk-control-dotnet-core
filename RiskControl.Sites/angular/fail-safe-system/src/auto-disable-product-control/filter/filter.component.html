@@ -1,0 +1,39 @@
+<div class="nap-filter">
+    <div class="row">
+      <div class="nap-col">
+        <div class="nap-group">
+          <label for="autoDisableSwitch" class="form-label">Auto-Disable Product</label>
+          <div class="nap-control ml-2">
+            <div class="toggle-switch-container">
+              <label class="toggle-switch">
+                <input 
+                  type="checkbox" 
+                  id="autoDisableSwitch"
+                  [(ngModel)]="autoDisable" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label id="lblDescription" for="txtDescription">Change Reason (<span class="text-danger">*</span>)</label>
+          <div class="nap-control">
+              <input type="text" class="form-control" id="txtDescription" [(ngModel)]="description" />
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="nap-col ml-30">
+        <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+      </div>
+      <div class="nap-col">
+        <button type="button" class="btn btn-primary" (click)="viewLogs()">View Logs</button>
+      </div>
+    </div>
+  </div>
+  
