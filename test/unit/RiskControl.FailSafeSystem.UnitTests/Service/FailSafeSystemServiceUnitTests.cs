@@ -214,4 +214,46 @@ public class FailSafeSystemServiceUnitTests
         Assert.Equal("Success", actualResult.First().ErrorDescription);
         Assert.Equal(200, actualResult.First().StatusCode);
     }
+
+    [Fact]
+    public async Task GetCurrentStatusForAutoDisableProduct_Always_ReturnExpectedList()
+    {
+        // Arrange
+        repository.GetAsync<AutoDisableProductModel>(Arg.Any<AutoDisableProductSelectCurrentCriteria>()).Returns(DataHelper.GetAutoDisableProductModel.First());
+        var service = new FailSafeSystemServiceImp(repository, mapper, napSession, logDataService, richHttpClient, configuration);
+
+        // Act
+        var actualResult = await service.GetCurrentStatusForAutoDisableProduct();
+
+        // Assert
+        Assert.Equal("sa", actualResult.UserName);
+    }
+
+    [Fact]
+    public async Task ViewLogsForAutoDisableProduct_Always_ReturnExpectedList()
+    {
+        // Arrange
+        repository.FetchAsync<AutoDisableProductModel>(Arg.Any<AutoDisableProductSelectAllCriteria>()).Returns(DataHelper.GetAutoDisableProductModel);
+        var service = new FailSafeSystemServiceImp(repository, mapper, napSession, logDataService, richHttpClient, configuration);
+
+        // Act
+        var actualResults = await service.ViewLogsForAutoDisableProduct();
+
+        // Assert
+        Assert.Equal(1, actualResults.Count());
+    }
+
+    [Fact]
+    public async Task SaveStatusForAutoDisableProduct_Always_SaveSuccessfully()
+    {
+        // Arrange
+        repository.ExecuteAsync(Arg.Any<AutoDisableProductInsertCriteria>()).Returns(1);
+        var service = new FailSafeSystemServiceImp(repository, mapper, napSession, logDataService, richHttpClient, configuration);
+
+        // Act
+        var actualResult = await service.SaveStatusForAutoDisableProduct(new AutoDisableProductInsertRequest());
+
+        // Assert
+        Assert.Equal(1, actualResult);
+    }
 }

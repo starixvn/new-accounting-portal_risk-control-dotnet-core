@@ -1,0 +1,36 @@
+@import '~nap-theme/scss/breadcrumb';
+@import '~nap-theme/scss/grid';
+div.nap-grid {
+    div.body {
+        overflow-x: hidden;
+    }
+}
+
+.button-action {
+    font-size: 15px;
+    cursor: pointer;
+    &.delete-rule {
+        display: block;
+        margin-top: -19px;
+        padding-left: 10px;
+    }
+}
+
+.disabled-button {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.breadcrumb-toolbox {
+    .toolbox-item {
+        nap-countdown-timer {
+            display: block;
+            background: #fff;
+        }
+    }
+}
+
+:host ::ng-deep nap-countdown-timer .fa-refresh {
+    color: #0876B7;
+    padding-right: 10px;
+}

@@ -1,6 +1,7 @@
 ﻿using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 using RiskControl.FailSafeSystem.Criteria;
+using RiskControl.FailSafeSystem.Model;
 using RiskControl.FailSafeSystem.Service;
 using RiskControl.Model;
 using RiskControl.WinLossLimitControl.Services;
@@ -104,6 +105,30 @@ public class FailSafeSystemApiController(FailSafeSystemService service, Authoriz
     public async Task<IActionResult> EnableSports(EnableSportsCriteria criteria)
     {
         var data = await service.EnableSports(criteria);
+        return Ok(data);
+    }
+
+    [Route("auto-disable-product/current-status")]
+    [HttpPost]
+    public async Task<IActionResult> GetCurrentStatusForAutoDisableProduct()
+    {
+        var data = await service.GetCurrentStatusForAutoDisableProduct();
+        return Ok(data);
+    }
+
+    [Route("auto-disable-product/view-logs")]
+    [HttpPost]
+    public async Task<IActionResult> ViewLogsForAutoDisableProduct()
+    {
+        var data = await service.ViewLogsForAutoDisableProduct();
+        return Ok(data);
+    }
+
+    [Route("auto-disable-product/save")]
+    [HttpPost]
+    public async Task<IActionResult> SaveAutoDisableProduct(AutoDisableProductInsertRequest request)
+    {
+        var data = await service.SaveStatusForAutoDisableProduct(request);
         return Ok(data);
     }
 }
