@@ -32,3 +32,11 @@
 .selected-product{
   width: 145px;
 }
+
+::ng-deep.ngx-dropdown-container {
+    button {
+        span.nsdicon-angle-down:before {
+            top: 4px !important;
+        }
+    }
+}
