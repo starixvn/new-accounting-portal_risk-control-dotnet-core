@@ -13,6 +13,7 @@
         />
         <col *ngIf="columns.reachedLimitLevel.checked" [ngStyle]="{'width.px': columns.reachedLimitLevel.width}" />
         <col *ngIf="columns.action.checked" [ngStyle]="{'width.px': columns.action.width}" />
+        <col *ngIf="columns.winLossAnalysis.checked" [ngStyle]="{'width.px': columns.winLossAnalysis.width}" />
         <col *ngIf="columns.proceededBy.checked" [ngStyle]="{'width.px': columns.proceededBy.width}" />
         <col *ngIf="columns.isNotified.checked" [ngStyle]="{'width.px': columns.isNotified.width}" />
         <col *ngIf="columns.logID.checked" [ngStyle]="{'width.px': columns.logID.width}" />
@@ -37,6 +38,7 @@
             </div>
         </div>
     </div>
+    <nap-toast></nap-toast>
     <div class="nap-grid" [ngSwitch]="historyModels.length > 0">
         <div [ngStyle]="{'width.px': width}">
             <div class="header">
@@ -53,6 +55,7 @@
                             <th *ngIf="columns.winningLosingAmountInPlayerCurrency.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.winningLosingAmountInPlayerCurrency.text"></th>
                             <th *ngIf="columns.reachedLimitLevel.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.reachedLimitLevel.text"></th>
                             <th *ngIf="columns.action.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.action.text"></th>
+                            <th *ngIf="columns.winLossAnalysis.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.winLossAnalysis.text"></th>
                             <th *ngIf="columns.proceededBy.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.proceededBy.text"></th>
                             <th *ngIf="columns.isNotified.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.isNotified.text"></th>
                             <th *ngIf="columns.logID.checked" [attr.rowspan]="rowspan" [innerHTML]="columns.logID.text"></th>
@@ -102,6 +105,9 @@
                                 <i class="fa fa-flag fa-lg" [ngClass]="item.reachedLimitLevel | napFlagPipe" aria-hidden="true"></i>
                             </td>
                             <td *ngIf="columns.action.checked" class="word-break-all">{{item.actionName}}</td>
+                            <td *ngIf="columns.winLossAnalysis.checked"class="text-center">
+                                <input *ngIf="isRedOrYellowLimitLevel(item.reachedLimitLevel)" type="button" class="btnExcel" (click)="exportExcel(item)">
+                            </td>
                             <td *ngIf="columns.proceededBy.checked" class="word-break-all">{{item.proceededBy}}</td>
                             <td *ngIf="columns.isNotified.checked" class="text-center">
                                 <input class="test-unblock-transfer" type="checkbox" [disabled]="!hasHostPermission || !item.isNotified"

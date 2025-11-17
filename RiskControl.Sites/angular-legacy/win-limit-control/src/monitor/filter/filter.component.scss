@@ -38,3 +38,11 @@
 .nap-col-5 {
     margin-left: 20px;
 }
+
+::ng-deep.ngx-dropdown-container {
+    button {
+        span.nsdicon-angle-down:before {
+            top: 4px !important;
+        }
+    }
+}

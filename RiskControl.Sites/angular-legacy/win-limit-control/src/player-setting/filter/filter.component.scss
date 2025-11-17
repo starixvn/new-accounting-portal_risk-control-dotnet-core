@@ -16,3 +16,11 @@
         width: 200px;
     }
 }
+
+::ng-deep.ngx-dropdown-container {
+    button {
+        span.nsdicon-angle-down:before {
+            top: 4px !important;
+        }
+    }
+}

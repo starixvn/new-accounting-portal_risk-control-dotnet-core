@@ -1,10 +1,14 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationService } from 'nap-components/confirmation';
-import { TreeviewItem } from 'ngx-treeview';
 import { TableColumn, ColumnHelper } from '../common/column';
 import { GridService } from '../grid/grid.service';
 import { HistoryModel, Columns } from './history.model';
+import { Helper } from 'nap-components/helper';
+import * as moment from 'moment';
+import { LimitLevel } from '../../common/filter';
+import { HttpEventType } from '@angular/common/http';
+import { ToastService } from 'nap-components/toast';
 
 const scrollWidth = 20;
 
@@ -33,7 +37,8 @@ export class HistoryComponent {
   constructor(
     public activeModal: NgbActiveModal,
     private confirmationService: ConfirmationService,
-    private gridService: GridService
+    private gridService: GridService,
+    private toastService: ToastService
   ) { }
 
   onColumnChange(selectedColumns: TableColumn[]) {
@@ -59,6 +64,24 @@ export class HistoryComponent {
     );
     return false;
   }
+
+  exportExcel(historyModel: HistoryModel) {
+    const formattedDate = moment(historyModel.modifiedDate).format('YYYYMMDD');
+    const fileName = `${formattedDate}/${this.username}_${formattedDate}_${historyModel.logID}.xlsx`;
+    this.gridService.downloadFile(fileName)
+      .subscribe(response => {
+        if (response.type.toString() === 'text/plain') {
+          this.toastService.activate('File not found!');
+        } else {
+          Helper.downloadFile(response, fileName);
+        }
+        
+      });
+  }
+
+  isRedOrYellowLimitLevel(level: number): boolean {
+          return level === LimitLevel.Red || level === LimitLevel.Yellow;
+    }
 
   private internalUnCheckNotification(historyModel: HistoryModel) {
     this.gridService.unCheckNotification(historyModel.logID, this.custId).subscribe(commandResult => {

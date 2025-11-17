@@ -4,7 +4,6 @@ import { TreeviewConfig } from 'ngx-treeview';
 import { DownLoadFileModel, Product } from './member-wl-analysis-report.model';
 import { MemberWlAnalysisReportService } from './member-wl-analysis-report.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MessageType } from 'nap-components/toast';
 import { Helper } from 'nap-components/helper';
 import { SharedDataService } from '../../common/services/shared-data.service';
 import { SpinnerService } from 'nap-components/spinner';
@@ -81,11 +80,16 @@ export class MemberWlAnalysisReportComponent {
                       this.spinnerService.hide();
                     } else {
                       this.memberWlAnalysisReportService.downloadFile(result.fileName).subscribe(response => {
-                        if (result.invalidUsernames != null && result.invalidUsernames.length > 0) {
+                        if (response.type.toString() === 'text/plain') {
+                          this.warningMessage = 'File not found!';
+                        } else {
+                          if (result.invalidUsernames != null && result.invalidUsernames.length > 0) {
                           this.warningMessage = `Invalid member(s): ${result.invalidUsernames}`;
+                          }
+                          var fileNameInfo = result.fileName.split('/');
+                          Helper.downloadFile(response, fileNameInfo[fileNameInfo.length-1]);
+                          
                         }
-                        var fileNameInfo = result.fileName.split('/');
-                        Helper.downloadFile(response, fileNameInfo[fileNameInfo.length-1]);
                         this.spinnerService.hide();
                       });
                     }

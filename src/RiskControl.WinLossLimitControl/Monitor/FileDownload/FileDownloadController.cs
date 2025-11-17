@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using RiskControl.Configuration;
 using RiskControl.WebApiClient;
 using System.IO;
@@ -43,17 +44,29 @@ public class FileDownloadController(ConfigurationService configurationService, R
     [HttpGet("excel")]
     public FileStreamResult Excel(string fileName)
     {
-        var path = $"{configurationService.FileServerDirectory}/{fileName.Replace("/Excel/", "")}";
+        var file = fileName.Replace("/Files/cwl-investigation/excel/", "")
+            .Replace("/Excel/", "");
+        var path = $"{configurationService.FileServerDirectory}/{file}";
         var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous);
         return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));
     }
 
     [HttpGet("excel-web")]
-    public FileStreamResult ExcelWeb(string fileName)
+    public ActionResult ExcelWeb(string fileName)
     {
-        var path = $"{configurationService.CwlFileServerDirectory}/{fileName.Replace("/Excel/", "")}";
-        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous);
-        return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));
+        try
+        {
+            var file = fileName.Replace("/Files/cwl-investigation/excel/", "")
+                .Replace("/Excel/", "");
+            var path = $"{configurationService.CwlFileServerDirectory}/{file}";
+            var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096,
+                FileOptions.Asynchronous);
+            return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));
+        }
+        catch
+        {
+            return Ok("File not found");
+        }
     }
 
     [Route("guid-member-wl-file")]
@@ -79,10 +92,20 @@ public class FileDownloadController(ConfigurationService configurationService, R
     }
 
     [HttpGet("download-member-wl-file")]
-    public FileStreamResult DownloadMemberWLFile(string fileName)
+    public ActionResult DownloadMemberWLFile(string fileName)
     {
-        var path = $"{configurationService.MemberWinLossFileServerDirectory}/{fileName.Replace("/Excel/", "")}";
-        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous);
-        return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));
+        try
+        {
+            var file = fileName.Replace("/Files/cwl-analysis/excel/", "")
+                .Replace("/Excel/", "");
+            var path = $"{configurationService.MemberWinLossFileServerDirectory}/{file}";
+            var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous);
+            return File(fileStream, "application/vnd.ms-excel", Path.GetFileName(path));
+        }
+        catch (Exception e)
+        {
+            return Ok("File not found");
+        }
+        
     }
 }
