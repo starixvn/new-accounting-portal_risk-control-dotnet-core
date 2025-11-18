@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { Helper } from 'nap-components/helper';
 import { GridModalComponent } from 'components/grid-modal';
 import { ModalService } from 'components/modal';
-import { FilterConfig } from '../../filter';
+import { FilterConfig, ReportType } from '../../filter';
 import { BaseQueryModel } from '../../app.model';
 import { GrandTotalService, ModelService, TitleService, GridService } from '../common';
 import { CompanyService } from './company.service';
@@ -11,6 +11,7 @@ import { ModeGenerate, RowAttribute } from '../mode.model';
 import { ModeContext } from '../mode-context';
 import { ModeController } from '../mode-controller';
 import { LocalStorageKey } from 'app/common/constants';
+import { HourlyGridModel } from '../hourly';
 
 @Component({
   selector: 'nap-company',
@@ -57,6 +58,12 @@ export class CompanyComponent implements OnInit, ModeGenerate {
       const currency = parseInt(element.attr('currency'), 10);
       const company = element.attr('company');
       this.drillDownCurrency(currency, company);
+    });
+
+    $(grid.nativeElement).find('a[drill-down-hourly]').on('click', (event) => {
+      const element = $(event.target);
+      const company = element.attr('company');
+      this.drillDownHourly(company);
     });
 
     $(grid.nativeElement).find('a[grand-total]').on('click', () => {
@@ -107,6 +114,7 @@ export class CompanyComponent implements OnInit, ModeGenerate {
       if (this.gridService.hasCurrencyColumn()) {
         this.updateCurrencyColumn(gridOptions);
       }
+      this.updateCompanyColumn(gridOptions);
     }
 
     gridOptions.titleInfo = {
@@ -119,6 +127,16 @@ export class CompanyComponent implements OnInit, ModeGenerate {
         (sortColumnName: string, sortDirection: string) => this.sort(queryModel, sortColumnName, sortDirection)
     };
     this.gridOptions = gridOptions;
+  }
+
+  private updateCompanyColumn(gridOptions: GridOptions) {
+    gridOptions.bodyRows.forEach(row => {
+        row.subRows.forEach(subRow => {
+          const companyColumn = subRow.columns[0];
+          const company = companyColumn.value;
+          companyColumn.value = `<a href="javascript:;" drill-down-hourly company='${company}'>${company}</a>`;
+        });
+      });
   }
 
   private updateGrandTotalCell(gridOptions: GridOptions) {
@@ -153,6 +171,14 @@ export class CompanyComponent implements OnInit, ModeGenerate {
       }
     });
   }
+
+  private drillDownHourly(title: string) {
+      const filterModel = _.cloneDeep(this.modeContext.filterModel);
+      filterModel.reportType = ReportType.Hourly;
+      const gridModel = new HourlyGridModel(false, true);
+      const modeContext = ModeContext.create(title, filterModel, gridModel);
+      this.modeController.forward(this.gridOptions, modeContext);
+    }
 
   private excel(queryModel: BaseQueryModel) {
     const gridModel = this.modeContext.gridModel;
