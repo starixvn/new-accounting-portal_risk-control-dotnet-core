@@ -114,7 +114,9 @@ export class CompanyComponent implements OnInit, ModeGenerate {
       if (this.gridService.hasCurrencyColumn()) {
         this.updateCurrencyColumn(gridOptions);
       }
-      this.updateCompanyColumn(gridOptions);
+      if (this.gridService.hasDrillDownHourly()) {
+        this.updateCompanyColumn(gridOptions);
+      }
     }
 
     gridOptions.titleInfo = {
@@ -172,11 +174,12 @@ export class CompanyComponent implements OnInit, ModeGenerate {
     });
   }
 
-  private drillDownHourly(title: string) {
+  private drillDownHourly(company: string) {
       const filterModel = _.cloneDeep(this.modeContext.filterModel);
       filterModel.reportType = ReportType.Hourly;
+      filterModel.sites = [company];
       const gridModel = new HourlyGridModel(false, true);
-      const modeContext = ModeContext.create(title, filterModel, gridModel);
+      const modeContext = ModeContext.create(company, filterModel, gridModel);
       this.modeController.forward(this.gridOptions, modeContext);
     }
 
