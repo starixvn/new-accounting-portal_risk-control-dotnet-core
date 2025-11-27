@@ -49,8 +49,8 @@
     <td *ngIf="isShowColumn(7)" class="number" [napNumberFormat]="item.houseTurnover" [format]="numberFormat"></td>
     <td *ngIf="isShowColumn(8)" class="number" [napNumberFormat]="item.houseGrossIncome" [format]="numberFormat"></td>
     <td *ngIf="isShowColumn(9)" class="text-right red" [napNumberFormat]="item.houseComm" [format]="numberFormat"></td>
-    <td *ngIf="isShowColumn(10)" class="text-right" [napNumberFormat]="item.extraPT" [format]="numberFormat"></td>
-    <td *ngIf="isShowColumn(11)" class="text-right" [napNumberFormat]="item.houseNetIncome" [format]="numberFormat">
+    <td *ngIf="isShowColumn(10)" class="text-right number" [napNumberFormat]="item.extraPT" [format]="numberFormat"></td>
+    <td *ngIf="isShowColumn(11)" class="text-right number" [napNumberFormat]="item.houseNetIncome" [format]="numberFormat">
     </td>
 </ng-template>
 <ng-template #empty let-item="item">
